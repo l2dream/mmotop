@@ -40,14 +40,26 @@ const games: Game[] = [
   { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x500' }
 ]
 
+// Upcoming servers: mostly this year, a couple spilling into the next one.
+const soonDates = [
+  '2026-10-05', '2026-10-18', '2026-11-02', '2026-11-20', '2026-12-01',
+  '2026-12-15', '2026-12-28', '2027-01-10', '2027-01-24', '2027-02-07'
+]
+
+// Servers already running: recent ones through to a few long-lived projects.
+const startedDates = [
+  '2026-09-01', '2026-08-12', '2026-06-30', '2026-04-17', '2026-02-05',
+  '2025-11-20', '2025-07-08', '2024-12-23', '2023-05-14', '2021-03-08'
+]
+
 const soon = Array.from({ length: 10 }, (_, i) => ({
   ...games[i % games.length],
-  date: '2024-12-23'
+  date: soonDates[i]
 }))
 
 const started = Array.from({ length: 10 }, (_, i) => ({
   ...games[(i + 1) % games.length],
-  date: '2024-12-23'
+  date: startedDates[i]
 }))
 
 const newGames = games.slice(0, 3)
@@ -113,9 +125,22 @@ function formatDayMonth(iso?: string) {
   return parsed ? `${parsed.day} ${MONTHS[parsed.month - 1]}` : iso ?? ''
 }
 
+// Null until the browser reports the year. A static build can't know it, and
+// baking it in at build time would go stale on 1 January; starting null also
+// keeps the first client render identical to the prerendered one.
+const currentYear = ref<number | null>(null)
+onMounted(() => {
+  currentYear.value = new Date().getFullYear()
+})
+
+// The year is dropped only when it's the current one, where it reads as noise.
+// Anything older or further ahead keeps it, so an established server is never
+// mistaken for a fresh one and a January date isn't ambiguous.
 function formatYear(iso?: string) {
   const parsed = parseISODate(iso)
-  return parsed ? String(parsed.year) : ''
+  if (!parsed) return ''
+  if (currentYear.value !== null && parsed.year === currentYear.value) return ''
+  return String(parsed.year)
 }
 
 const filters = reactive({
@@ -653,7 +678,7 @@ function gameIcon(game: Game) {
             </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
-              <small class="date-year">{{ formatYear(game.date) }}</small>
+              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
           <div v-if="filteredSoon.length === 0" class="empty-state">No games match the selected filters.</div>
@@ -697,7 +722,7 @@ function gameIcon(game: Game) {
             </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
-              <small class="date-year">{{ formatYear(game.date) }}</small>
+              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
           <div v-if="filteredStarted.length === 0" class="empty-state">No games match the selected filters.</div>
