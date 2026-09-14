@@ -718,13 +718,6 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .game-row.compact .rating { display: none; }
 
-/* Only the compact panels centre it — there the freed rating width made the
-   column wide enough for centring to mean anything. */
-.game-row.compact .version {
-  align-items: center;
-  text-align: center;
-}
-
 /* The date stacks like the chronicle: "23 Dec" over the year, which keeps the
    column narrow enough to leave the name its full width even at 320px. */
 .game-row.compact .date {
@@ -823,6 +816,8 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 1px;
   line-height: 1.2;
   color: #e4e7f5;
