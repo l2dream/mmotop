@@ -618,7 +618,6 @@ function gameIcon(game: Game) {
                 </svg>
                 {{ game.stars }}
               </span>
-              <small>{{ game.players }}</small>
             </span>
           </div>
           <div v-if="filteredGames.length === 0" class="empty-state">No games match the selected filters.</div>
@@ -674,7 +673,6 @@ function gameIcon(game: Game) {
                 </svg>
                 {{ game.stars }}
               </span>
-              <small>{{ game.players }}</small>
             </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
@@ -718,7 +716,6 @@ function gameIcon(game: Game) {
                 </svg>
                 {{ game.stars }}
               </span>
-              <small>{{ game.players }}</small>
             </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
@@ -767,7 +764,6 @@ function gameIcon(game: Game) {
                 </svg>
                 {{ game.stars }}
               </span>
-              <small>{{ game.players }}</small>
             </span>
           </div>
           <div v-if="filteredNewGames.length === 0" class="empty-state">No games match the selected filters.</div>
@@ -810,7 +806,6 @@ function gameIcon(game: Game) {
                 </svg>
                 {{ game.stars }}
               </span>
-              <small>{{ game.players }}</small>
             </span>
           </div>
           <div v-if="filteredAllGames.length === 0" class="empty-state">No games match the selected filters.</div>

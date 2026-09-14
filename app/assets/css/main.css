@@ -718,29 +718,12 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .game-row.compact .rating { display: none; }
 
+/* Only the compact panels centre it — there the freed rating width made the
+   column wide enough for centring to mean anything. */
 .game-row.compact .version {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 1px;
-  line-height: 1.2;
 }
-
-.game-row.compact .version-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.game-row.compact .version-rate {
-  display: block;
-  color: #8b90a7;
-  font-size: 10px;
-}
-
-.is-light .game-row.compact .version-rate { color: #898da2; }
 
 /* The date stacks like the chronicle: "23 Dec" over the year, which keeps the
    column narrow enough to leave the name its full width even at 320px. */
@@ -834,18 +817,35 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .is-light .game-name small { color: #797d92; }
 
+/* Every panel stacks the rate under its chronicle, so this is a column rather
+   than a line of text and the ellipsis lives on .version-name. */
 .version {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1.2;
   color: #e4e7f5;
   font-size: 11px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .is-light .version { color: #3c3f55; }
 
-/* The rate under the chronicle is a mobile-only stack; desktop keeps its own rate column. */
-.version-rate { display: none; }
+.version-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.version-rate {
+  display: block;
+  color: #8b90a7;
+  font-size: 10px;
+}
+
+.is-light .version-rate { color: #898da2; }
 
 .rating {
   display: flex;
@@ -865,14 +865,6 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 }
 
 .star-icon { display: block; }
-
-.rating small {
-  color: #8b90a7;
-  font-size: 10px;
-  padding-left: 13px;
-}
-
-.is-light .rating small { color: #898da2; }
 
 .date {
   color: #9ca1b7;
@@ -1007,7 +999,6 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   }
   .game-row .date { display: none; }
   .game-logo { width: 30px; height: 30px; }
-  .version { overflow: hidden; text-overflow: ellipsis; }
 
   /* The two .compact panels keep their rate-under-chronicle layout from the
      base rules; here they just get mobile column widths and their date back. */
