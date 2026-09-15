@@ -631,7 +631,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 0 17px;
+  padding: 0 20px;
   border-bottom: 1px solid rgba(104, 105, 161, .16);
 }
 
@@ -681,7 +681,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 26px 37px minmax(120px, 1fr) 82px 72px;
   align-items: center;
   gap: 8px;
-  padding: 0 17px;
+  padding: 0 20px;
   border-bottom: 1px solid rgba(89, 94, 143, .13);
   background: rgba(255, 255, 255, .025);
   backdrop-filter: blur(8px);
