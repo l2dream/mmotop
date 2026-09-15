@@ -332,7 +332,7 @@ function gameIcon(game: Game) {
   <div class="site-shell" :class="{ 'is-light': !dark }">
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
-        <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="voteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FFEA9E" />
           <stop offset="50%" stop-color="#FFD64A" />
           <stop offset="100%" stop-color="#F5A300" />
@@ -610,10 +610,10 @@ function gameIcon(game: Game) {
             </span>
             <span class="rating">
               <span class="rating-value">
-                <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
                   <path
-                    d="M12 3 14.12 9.09 20.56 9.22 15.42 13.11 17.29 19.28 12 15.6 6.71 19.28 8.58 13.11 3.44 9.22 9.88 9.09Z"
-                    fill="url(#starGrad)"
+                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                    fill="url(#voteGrad)"
                   />
                 </svg>
                 {{ game.stars }}
@@ -665,10 +665,10 @@ function gameIcon(game: Game) {
             </span>
             <span class="rating">
               <span class="rating-value">
-                <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
                   <path
-                    d="M12 3 14.12 9.09 20.56 9.22 15.42 13.11 17.29 19.28 12 15.6 6.71 19.28 8.58 13.11 3.44 9.22 9.88 9.09Z"
-                    fill="url(#starGrad)"
+                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                    fill="url(#voteGrad)"
                   />
                 </svg>
                 {{ game.stars }}
@@ -708,10 +708,10 @@ function gameIcon(game: Game) {
             </span>
             <span class="rating">
               <span class="rating-value">
-                <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
                   <path
-                    d="M12 3 14.12 9.09 20.56 9.22 15.42 13.11 17.29 19.28 12 15.6 6.71 19.28 8.58 13.11 3.44 9.22 9.88 9.09Z"
-                    fill="url(#starGrad)"
+                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                    fill="url(#voteGrad)"
                   />
                 </svg>
                 {{ game.stars }}
@@ -756,10 +756,10 @@ function gameIcon(game: Game) {
             </span>
             <span class="rating">
               <span class="rating-value">
-                <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
                   <path
-                    d="M12 3 14.12 9.09 20.56 9.22 15.42 13.11 17.29 19.28 12 15.6 6.71 19.28 8.58 13.11 3.44 9.22 9.88 9.09Z"
-                    fill="url(#starGrad)"
+                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                    fill="url(#voteGrad)"
                   />
                 </svg>
                 {{ game.stars }}
@@ -798,10 +798,10 @@ function gameIcon(game: Game) {
             </span>
             <span class="rating">
               <span class="rating-value">
-                <svg class="star-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
                   <path
-                    d="M12 3 14.12 9.09 20.56 9.22 15.42 13.11 17.29 19.28 12 15.6 6.71 19.28 8.58 13.11 3.44 9.22 9.88 9.09Z"
-                    fill="url(#starGrad)"
+                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                    fill="url(#voteGrad)"
                   />
                 </svg>
                 {{ game.stars }}
