@@ -755,11 +755,13 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     rgba(255, 255, 255, .35);
 }
 
-/* Left-aligned rather than centred so the digit starts at the card's padding,
-   matching the logo in the panels that have no rank column. */
+/* Left-aligned, but nudged in a few pixels: a thin digit at the same offset as
+   the solid logo box in the other panels reads as closer to the edge than it
+   measures, so this is an optical correction rather than a layout one. */
 .rank {
   color: #eef0f9;
   text-align: left;
+  padding-left: 3px;
   font-size: 13px;
 }
 
