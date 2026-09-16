@@ -616,7 +616,7 @@ function gameIcon(game: Game) {
             </svg>
           </template>
           <div v-for="(game, index) in filteredGames.slice(0, 10)" :key="`top-${index}`" class="game-row">
-            <span class="rank">{{ index + 1 }}</span>
+            <span class="rank" :class="index < 3 ? `rank-${index + 1}` : undefined">{{ index + 1 }}</span>
             <span class="game-logo">{{ gameIcon(game) }}</span>
             <span class="game-name">
               <strong>{{ game.title }}</strong>

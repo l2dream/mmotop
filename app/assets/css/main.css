@@ -806,14 +806,34 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 /* Left-aligned, but nudged in a few pixels: a thin digit at the same offset as
    the solid logo box in the other panels reads as closer to the edge than it
    measures, so this is an optical correction rather than a layout one. */
+/* The rank sits in a container of its own so the row starts with a shape, not
+   a bare glyph. That's what makes the edges line up honestly: this box aligns
+   with the card padding exactly as the logo box does in the panels without a
+   rank, instead of a thin digit needing a nudge to look equally inset.
+   The transparent border keeps every place the same size as the medalled ones. */
 .rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid transparent;
+  border-radius: 50%;
   color: #eef0f9;
-  text-align: left;
-  padding-left: 3px;
   font-size: 13px;
 }
 
+/* Only the top three are marked, in medal order. A ring rather than a fill:
+   the rows already carry zebra shading and an accent hover, and three filled
+   discs would compete with both. */
+.rank-1 { border-color: rgba(255, 203, 77, .55); color: #ffd76a; }
+.rank-2 { border-color: rgba(200, 205, 218, .5); color: #d9deea; }
+.rank-3 { border-color: rgba(201, 139, 84, .55); color: #d89a63; }
+
 .is-light .rank { color: #4a4e68; }
+.is-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #b07c0a; }
+.is-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #6b7280; }
+.is-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #a8622f; }
 
 .game-logo {
   width: 34px;
@@ -1052,6 +1072,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   }
   .game-row .date { display: none; }
   .game-logo { width: 30px; height: 30px; }
+  .rank { width: 22px; height: 22px; font-size: 12px; }
 
   /* The two .compact panels keep their rate-under-chronicle layout from the
      base rules; here they just get mobile column widths and their date back. */
