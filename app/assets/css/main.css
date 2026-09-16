@@ -742,8 +742,12 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 /* No trailing column: this panel's rows carry neither votes nor a date, so the
    chronicle closes the row. A max-content track lets it end at the card's
    padding, keeping both edges level as in every other panel. */
+/* No trailing column: the chronicle closes the row. It keeps the same fixed
+   82px as everywhere else rather than shrinking to its text — a content-sized
+   track would be a different width in each row, since "High-Five" and
+   "Interlude" differ, and the column would wander from row to row. */
 .game-row.no-rank.no-trail {
-  grid-template-columns: 37px minmax(120px, 1fr) max-content;
+  grid-template-columns: 37px minmax(120px, 1fr) 82px;
 }
 
 /* The date panels carry no rating column: the rate sits under the chronicle
@@ -1044,7 +1048,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     grid-template-columns: 32px minmax(100px, 1fr) 58px 59px;
   }
   .game-row.no-rank.no-trail {
-    grid-template-columns: 32px minmax(100px, 1fr) max-content;
+    grid-template-columns: 32px minmax(100px, 1fr) 58px;
   }
   .game-row .date { display: none; }
   .game-logo { width: 30px; height: 30px; }
