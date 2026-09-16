@@ -716,8 +716,6 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, max-content) 1fr 52px;
 }
 
-.game-row.compact .rating { display: none; }
-
 /* The date stacks like the chronicle: "23 Dec" over the year, which keeps the
    column narrow enough to leave the name its full width even at 320px. */
 .game-row.compact .date {

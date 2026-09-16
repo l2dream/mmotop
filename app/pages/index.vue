@@ -667,17 +667,6 @@ function gameIcon(game: Game) {
               <span class="version-name">{{ game.version }}</span>
               <small class="version-rate">{{ game.players }}</small>
             </span>
-            <span class="rating">
-              <span class="rating-value">
-                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-                  <path
-                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
-                    fill="url(#voteGrad)"
-                  />
-                </svg>
-                {{ game.stars }}
-              </span>
-            </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
               <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
@@ -709,17 +698,6 @@ function gameIcon(game: Game) {
             <span class="version">
               <span class="version-name">{{ game.version }}</span>
               <small class="version-rate">{{ game.players }}</small>
-            </span>
-            <span class="rating">
-              <span class="rating-value">
-                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-                  <path
-                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
-                    fill="url(#voteGrad)"
-                  />
-                </svg>
-                {{ game.stars }}
-              </span>
             </span>
             <span class="date">
               <span class="date-day">{{ formatDayMonth(game.date) }}</span>
