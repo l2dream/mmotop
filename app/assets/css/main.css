@@ -746,15 +746,20 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, 1fr) max-content;
 }
 
-/* COMING SOON and ALREADY STARTED (the two .compact panels) carry no rating
-   column: the rate sits under the chronicle and the date takes its place.
-   Applies at every width; the mobile block only resizes the columns. */
+/* The date panels carry no rating column: the rate sits under the chronicle
+   and the date takes its place. Applies at every width; the mobile block only
+   resizes the columns.
+
+   The spare width always goes to the name, never to the chronicle. That keeps
+   the chronicle a fixed 82px sitting directly before whatever ends the row, so
+   it lands in the same place in every panel, and the trailing columns share
+   one 72px width so votes and dates line up too. */
 .game-row.compact {
-  grid-template-columns: 26px 37px minmax(120px, 1fr) 82px 84px;
+  grid-template-columns: 26px 37px minmax(120px, 1fr) 82px 72px;
 }
 
 .game-row.compact.no-rank {
-  grid-template-columns: 37px minmax(120px, max-content) 1fr 52px;
+  grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
 }
 
 /* The date stacks like the chronicle: "23 Dec" over the year, which keeps the
