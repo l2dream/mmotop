@@ -664,12 +664,46 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-weight: 700;
 }
 
-.panel-arrow {
+/* Holds the header's controls together at the right: any panel action sits
+   beside the arrow rather than each pushing itself over separately. */
+.panel-tools {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-arrow {
   color: #c37aff;
   font-size: 27px;
   line-height: 1;
 }
+
+/* Quiet by default, picking up the panel's own accent on hover. The icon is
+   wordless on purpose — nothing here needs translating. */
+.shuffle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #858aa6;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, transform .35s ease;
+}
+
+.shuffle-button:hover {
+  color: var(--panel-glow, #c37aff);
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 14%, transparent);
+}
+
+.is-light .shuffle-button { color: #9296ad; }
+
+.shuffle-icon { display: block; }
 
 .is-light .panel-arrow { color: #8b5cf6; }
 
@@ -703,6 +737,13 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .game-row.no-rank {
   grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
+}
+
+/* No trailing column: this panel's rows carry neither votes nor a date, so the
+   chronicle closes the row. A max-content track lets it end at the card's
+   padding, keeping both edges level as in every other panel. */
+.game-row.no-rank.no-trail {
+  grid-template-columns: 37px minmax(120px, 1fr) max-content;
 }
 
 /* COMING SOON and ALREADY STARTED (the two .compact panels) carry no rating
@@ -996,6 +1037,9 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   }
   .game-row.no-rank {
     grid-template-columns: 32px minmax(100px, 1fr) 58px 59px;
+  }
+  .game-row.no-rank.no-trail {
+    grid-template-columns: 32px minmax(100px, 1fr) max-content;
   }
   .game-row .date { display: none; }
   .game-logo { width: 30px; height: 30px; }

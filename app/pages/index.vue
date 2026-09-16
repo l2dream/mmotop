@@ -67,11 +67,23 @@ const started = Array.from({ length: 10 }, (_, i) => ({
 // new. Two launches are still ahead, one has already happened.
 const newGameDates = ['2026-10-12', '2026-11-05', '2026-08-20']
 const newGames = games.slice(0, 3).map((game, i) => ({ ...game, date: newGameDates[i] }))
-const allGames = [
-  { ...games[1], stars: 1923, players: 'x50' },
-  { ...games[0] },
-  { ...games[1], stars: 1923, players: 'x50' }
-]
+// A random pick, so the panel can surface servers that hold no place in the
+// vote ranking and have no launch date to show. Drawn in the browser rather
+// than at build time: a static build would freeze one "random" set into the
+// HTML and every visitor would see it until the next deploy.
+const RANDOM_PICK = 3
+const allGames = ref<Game[]>(games.slice(0, RANDOM_PICK))
+const shuffleTurns = ref(0)
+
+function shuffleGames() {
+  const pool = [...games]
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  allGames.value = pool.slice(0, RANDOM_PICK)
+  shuffleTurns.value++
+}
 
 const activeCategory = ref('All')
 const query = ref('')
@@ -81,7 +93,7 @@ const searchInput = ref<HTMLInputElement | null>(null)
 const moreWrap = ref<HTMLElement | null>(null)
 const dropdownPos = ref({ top: 0, right: 0 })
 
-const allGameEntries = [...games, ...soon, ...started, ...newGames, ...allGames]
+const allGameEntries = [...games, ...soon, ...started, ...newGames]
 const allVersions = Array.from(new Set(allGameEntries.map((game) => game.version)))
 const allTitles = Array.from(new Set(allGameEntries.map((game) => game.title)))
 
@@ -135,6 +147,8 @@ function formatDayMonth(iso?: string) {
 const currentYear = ref<number | null>(null)
 onMounted(() => {
   currentYear.value = new Date().getFullYear()
+  // Re-drawn after hydration, so each visit gets its own pick.
+  shuffleGames()
 })
 
 // The year is dropped only when it's the current one, where it reads as noise.
@@ -233,7 +247,7 @@ const filteredGames = computed(() => {
 const filteredSoon = computed(() => soon.filter(matchesFilters))
 const filteredStarted = computed(() => started.filter(matchesFilters))
 const filteredNewGames = computed(() => newGames.filter(matchesFilters))
-const filteredAllGames = computed(() => allGames.filter(matchesFilters))
+const filteredAllGames = computed(() => allGames.value.filter(matchesFilters))
 
 useSeoMeta({
   title: 'MMOTOP — Game Server Rankings',
@@ -761,7 +775,24 @@ function gameIcon(game: Game) {
               <rect x="13" y="13" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredAllGames" :key="`all-${index}`" class="game-row no-rank">
+          <template #actions>
+            <button
+              class="shuffle-button"
+              type="button"
+              aria-label="Shuffle"
+              :style="{ transform: `rotate(${shuffleTurns * 180}deg)` }"
+              @click="shuffleGames"
+            >
+              <svg class="shuffle-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 3h5v5" />
+                <path d="M4 20 21 3" />
+                <path d="M21 16v5h-5" />
+                <path d="M15 15l6 6" />
+                <path d="M3 4l5 5" />
+              </svg>
+            </button>
+          </template>
+          <div v-for="(game, index) in filteredAllGames" :key="`all-${index}`" class="game-row no-rank no-trail">
             <span class="game-logo">{{ gameIcon(game) }}</span>
             <span class="game-name">
               <strong>{{ game.title }}</strong>
@@ -770,17 +801,6 @@ function gameIcon(game: Game) {
             <span class="version">
               <span class="version-name">{{ game.version }}</span>
               <small class="version-rate">{{ game.players }}</small>
-            </span>
-            <span class="rating">
-              <span class="rating-value">
-                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-                  <path
-                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
-                    fill="url(#voteGrad)"
-                  />
-                </svg>
-                {{ game.stars }}
-              </span>
             </span>
           </div>
           <div v-if="filteredAllGames.length === 0" class="empty-state">No games match the selected filters.</div>
