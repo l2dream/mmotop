@@ -62,7 +62,11 @@ const started = Array.from({ length: 10 }, (_, i) => ({
   date: startedDates[i]
 }))
 
-const newGames = games.slice(0, 3)
+// Newly listed games show their launch date rather than a vote count: a fresh
+// entry has no votes yet, and an empty counter reads as unpopular rather than
+// new. Two launches are still ahead, one has already happened.
+const newGameDates = ['2026-10-12', '2026-11-05', '2026-08-20']
+const newGames = games.slice(0, 3).map((game, i) => ({ ...game, date: newGameDates[i] }))
 const allGames = [
   { ...games[1], stars: 1923, players: 'x50' },
   { ...games[0] },
@@ -744,7 +748,7 @@ function gameIcon(game: Game) {
               />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredNewGames" :key="`new-${index}`" class="game-row no-rank">
+          <div v-for="(game, index) in filteredNewGames" :key="`new-${index}`" class="game-row compact no-rank">
             <span class="game-logo">{{ gameIcon(game) }}</span>
             <span class="game-name">
               <strong>{{ game.title }}</strong>
@@ -754,16 +758,9 @@ function gameIcon(game: Game) {
               <span class="version-name">{{ game.version }}</span>
               <small class="version-rate">{{ game.players }}</small>
             </span>
-            <span class="rating">
-              <span class="rating-value">
-                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-                  <path
-                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
-                    fill="url(#voteGrad)"
-                  />
-                </svg>
-                {{ game.stars }}
-              </span>
+            <span class="date">
+              <span class="date-day">{{ formatDayMonth(game.date) }}</span>
+              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
           <div v-if="filteredNewGames.length === 0" class="empty-state">No games match the selected filters.</div>
