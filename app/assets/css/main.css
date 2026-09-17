@@ -185,7 +185,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .search-icon {
   position: absolute;
-  right: 10px;
+  inset-inline-end: 10px;
   top: 6px;
   width: 30px;
   height: 30px;
@@ -194,7 +194,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   padding: 0;
   border: 0;
-  border-left: 1px solid rgba(255, 255, 255, .1);
+  border-inline-start: 1px solid rgba(255, 255, 255, .1);
   background: transparent;
   color: #9095ad;
   font-family: inherit;
@@ -212,7 +212,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 }
 
 .is-light .search-icon {
-  border-left-color: rgba(31, 41, 102, .14);
+  border-inline-start-color: rgba(31, 41, 102, .14);
 }
 
 .is-light .search-icon:hover,
@@ -222,7 +222,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .filter-button {
   position: absolute;
-  left: 8px;
+  inset-inline-start: 8px;
   top: 6px;
   width: 30px;
   height: 30px;
@@ -231,7 +231,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   padding: 0;
   border: 0;
-  border-right: 1px solid rgba(255, 255, 255, .1);
+  border-inline-end: 1px solid rgba(255, 255, 255, .1);
   background: transparent;
   color: #9095ad;
   cursor: pointer;
@@ -239,7 +239,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .is-light .filter-button {
   color: #8b8fa3;
-  border-right-color: rgba(31, 41, 102, .14);
+  border-inline-end-color: rgba(31, 41, 102, .14);
 }
 
 .filter-icon { display: block; }
@@ -250,7 +250,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 .filter-badge {
   position: absolute;
   top: 2px;
-  right: 2px;
+  inset-inline-end: 2px;
   min-width: 14px;
   height: 14px;
   padding: 0 3px;
@@ -493,12 +493,12 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .category-more-wrap {
   position: relative;
-  margin-left: auto;
+  margin-inline-start: auto;
   flex: 0 0 auto;
 }
 
 .category.more { display: flex; align-items: center; }
-.category.more .more-chevron { padding-left: 8px; color: #858aa6; display: flex; }
+.category.more .more-chevron { padding-inline-start: 8px; color: #858aa6; display: flex; }
 .category.more .more-chevron svg { display: block; transition: transform .18s ease; }
 .category.more .more-chevron.open svg { transform: rotate(180deg); }
 .category.more.active { color: #fff; }
@@ -534,7 +534,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   background: transparent;
   color: #a7aac0;
   font-size: 14px;
-  text-align: left;
+  text-align: start;
   padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -664,10 +664,10 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-weight: 700;
 }
 
-/* Holds the header's controls together at the right: any panel action sits
-   beside the arrow rather than each pushing itself over separately. */
+/* Holds the header's controls together at the trailing edge: any panel action
+   sits beside the arrow rather than each pushing itself over separately. */
 .panel-tools {
-  margin-left: auto;
+  margin-inline-start: auto;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -939,7 +939,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 .date {
   color: #9ca1b7;
   font-size: 11px;
-  text-align: right;
+  text-align: end;
   white-space: nowrap;
 }
 
@@ -1015,12 +1015,12 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   .search-box { flex: 1 1 auto; min-width: 0; }
   .search-box input {
     height: 32px;
-    padding: 0 26px 0 28px;
+    padding-inline: 28px 26px;
     font-size: 11px;
     border-radius: 9px;
   }
   .search-icon {
-    right: 2px;
+    inset-inline-end: 2px;
     top: 5px;
     width: 22px;
     height: 22px;
@@ -1030,7 +1030,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     height: 12px;
   }
   .filter-button {
-    left: 4px;
+    inset-inline-start: 4px;
     top: 5px;
     width: 22px;
     height: 22px;
@@ -1080,4 +1080,17 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     grid-template-columns: 32px minmax(0, 1fr) 58px 46px;
   }
   .game-row.compact .date { display: flex; }
+}
+
+/* Right-to-left readiness.
+
+   Everything positional in this sheet is written with logical properties, so a
+   `dir="rtl"` on <html> mirrors the layout on its own. What it cannot mirror is
+   a glyph drawn to point somewhere: the two chevrons mean "onward", and onward
+   runs the other way in Arabic or Hebrew. Flipping them here keeps the meaning
+   rather than the direction. Symmetric marks (search, filter) and the shuffle
+   arrows read the same either way, so they stay untouched. */
+[dir="rtl"] .panel-arrow svg,
+[dir="rtl"] .panel-footer span svg {
+  transform: scaleX(-1);
 }
