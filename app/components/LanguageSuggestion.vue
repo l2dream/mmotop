@@ -5,19 +5,8 @@ import { SUGGESTIONS, fontUrl } from '~/i18n/suggestions'
 const { locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
-const stored = useCookie<string | undefined>('mmotop_lang', {
-  maxAge: 60 * 60 * 24 * 365,
-  sameSite: 'lax',
-  path: '/'
-})
-
-/** Set once the banner is closed, and never unset. Asking a second time after
- *  someone has said no is not a suggestion, it is nagging. */
-const dismissed = useCookie<string | undefined>('mmotop_lang_hint', {
-  maxAge: 60 * 60 * 24 * 365,
-  sameSite: 'lax',
-  path: '/'
-})
+const stored = useStoredLocale()
+const dismissed = useSuggestionDismissed()
 
 /**
  * Null until the browser has spoken.

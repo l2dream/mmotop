@@ -34,13 +34,10 @@ const empty = computed(() => groups.value.length === 0)
 /**
  * Remembers the choice so a later visit can offer it. Deliberately only
  * written on an actual click: a cookie set by merely looking at the page would
- * be a guess dressed up as a preference.
+ * be a guess dressed up as a preference. See useLanguagePreference for what it
+ * does and does not control.
  */
-const stored = useCookie<string>('mmotop_lang', {
-  maxAge: 60 * 60 * 24 * 365,
-  sameSite: 'lax',
-  path: '/'
-})
+const stored = useStoredLocale()
 
 function choose(code: string) {
   stored.value = code
