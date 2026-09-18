@@ -10,6 +10,10 @@
     "language": "Язык",
     "login": "ВОЙТИ"
   },
+  "language": {
+    "search": "Поиск языка",
+    "nothing": "Ничего не найдено"
+  },
   "search": {
     "label": "Поиск игр",
     "placeholder": "Поиск игр..."

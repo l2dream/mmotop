@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* The language selector shows all twenty-six names at once, in seven scripts,
+   whatever language the page is in — so it needs glyphs Inter does not have.
+   Loading six full Noto families for that would cost megabytes, most of it
+   CJK, to render eleven characters. These requests are subset with `text=` to
+   exactly the characters the names use. The full family for a script loads
+   only when someone actually switches to that language. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;700&text=%D4%B1%D4%B5%D5%80%D5%85%D5%86%D5%90&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&text=%D8%A7%D8%A8%D8%A9%D8%B1%D8%B9%D9%84%D9%8A&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;700&text=%D7%91%D7%99%D7%A2%D7%A8%D7%AA&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&text=%E4%B8%AD%E4%BD%93%E6%96%87%E7%AE%80&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&text=%E6%97%A5%E6%9C%AC%E8%AA%9E&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&text=%EA%B5%AD%EC%96%B4%ED%95%9C&display=swap');
+
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: dark;
@@ -438,24 +451,182 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   gap: 10px;
 }
 
+.lang-wrap { position: relative; display: flex; }
+
 .lang-button {
-  width: 40px;
   height: 40px;
-  display: grid;
-  place-items: center;
+  padding-inline: 11px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
   border: 1px solid rgba(142, 76, 255, .38);
   border-radius: 11px;
   background: rgba(20, 23, 50, .78);
+  color: #d7d9f2;
+  font-family: inherit;
   cursor: pointer;
+}
+
+.lang-button:hover { border-color: rgba(164, 83, 255, .6); color: #fff; }
+
+.lang-globe { display: block; opacity: .8; }
+
+/* The code carries the weight here, so it is set in the interface's own
+   letterforms rather than a monospace face that would read as data. */
+.lang-code {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
 }
 
 .is-light .lang-button {
   background: #ffffff;
   border-color: rgba(142, 76, 255, .32);
+  color: #4a4e66;
   box-shadow: 0 8px 20px rgba(31, 41, 102, .06);
 }
 
-.flag { font-size: 20px; }
+.is-light .lang-button:hover { color: #5b21c4; border-color: rgba(142, 76, 255, .5); }
+
+.lang-panel {
+  position: fixed;
+  z-index: 70;
+  width: min(640px, calc(100vw - 20px));
+  max-height: min(60vh, 460px);
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid rgba(103, 104, 173, .25);
+  border-radius: 13px;
+  background: linear-gradient(180deg, rgba(22, 25, 52, .98), rgba(15, 19, 42, .97));
+  box-shadow: 0 18px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.02);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 92, 255, .45) transparent;
+}
+
+.is-light .lang-panel {
+  border-color: rgba(103, 104, 173, .18);
+  background: linear-gradient(180deg, #ffffff, #f8f8fd);
+  box-shadow: 0 18px 50px rgba(31, 41, 102, .14);
+}
+
+.lang-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding-inline: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(103, 104, 173, .25);
+  border-radius: 9px;
+  background: rgba(16, 20, 44, .72);
+  color: #7e839d;
+}
+
+.is-light .lang-search {
+  background: #fff;
+  border-color: rgba(103, 104, 173, .2);
+  color: #9296ad;
+}
+
+.lang-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #e8e9f8;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.is-light .lang-search-input { color: #23263d; }
+.lang-search-input::placeholder { color: #7e839d; }
+
+/* The field takes focus the moment the panel opens, so the global focus ring
+   would be lit every single time and shout louder than the list it sits above.
+   The frame lights up instead — same signal, quieter. */
+.lang-search:focus-within {
+  border-color: rgba(156, 92, 255, .55);
+  box-shadow: 0 0 0 3px rgba(156, 92, 255, .12);
+}
+.lang-search-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Three columns rather than one long list: twenty-six names in a single
+   column is a scroll, and the whole point of grouping was to let someone find
+   their script without reading. Rows are kept whole, and a heading never ends
+   up stranded at the foot of a column away from its group. */
+.lang-columns { column-count: 3; column-gap: 14px; }
+
+.lang-group { margin-bottom: 6px; }
+
+.lang-group-title {
+  break-after: avoid;
+  padding-inline-start: 8px;
+  margin-bottom: 3px;
+  color: #6f748f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.is-light .lang-group-title { color: #9296ad; }
+
+.lang-item {
+  break-inside: avoid;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: #a7aac0;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.lang-item:hover { background: rgba(148, 92, 255, .14); color: #fff; }
+.lang-item.active { background: rgba(148, 92, 255, .2); color: #fff; }
+
+.is-light .lang-item { color: #4a4e66; }
+.is-light .lang-item:hover { background: rgba(124, 58, 237, .1); color: #2a1a52; }
+.is-light .lang-item.active { background: rgba(124, 58, 237, .14); color: #2a1a52; }
+
+/* Fixed width, so the names start on one line down the column. This is the
+   slot a flag would have occupied, doing the same job of giving the eye
+   something to aim at — without standing for a country. */
+.lang-item-code {
+  flex: 0 0 auto;
+  width: 26px;
+  text-align: center;
+  color: #7e83a0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.lang-item.active .lang-item-code,
+.lang-item:hover .lang-item-code { color: #c4a6ff; }
+.is-light .lang-item.active .lang-item-code,
+.is-light .lang-item:hover .lang-item-code { color: #7c3aed; }
+
+.lang-item-name {
+  font-family: Inter, 'Noto Sans Armenian', 'Noto Sans Arabic', 'Noto Sans Hebrew',
+    'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lang-empty {
+  padding: 14px 8px;
+  color: #7e839d;
+  font-size: 13px;
+  text-align: center;
+}
 
 .category-bar {
   max-width: 1480px;
@@ -990,6 +1161,19 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 700px) {
   .site-shell { padding: 12px; }
+
+  /* Two columns, not three. At phone width three columns leave about a
+     hundred pixels a name, and ENGLISH arrives as ENGLI… — which defeats the
+     entire point of writing names in their own script. Two columns fit every
+     name but PORTUGUÊS (BRASIL), and that one has its BR chip to lean on. */
+  .lang-panel {
+    width: calc(100vw - 16px);
+    max-height: min(70vh, 460px);
+    padding: 10px;
+  }
+  .lang-columns { column-count: 2; column-gap: 10px; }
+  .lang-item { padding: 7px 6px; gap: 7px; }
+  .lang-item-code { width: 22px; }
   .topbar {
     display: flex;
     align-items: center;

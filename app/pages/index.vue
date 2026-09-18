@@ -520,9 +520,7 @@ function gameIcon(game: Game) {
       </div>
 
       <div class="account-actions">
-        <button class="lang-button" type="button" :aria-label="$t('nav.language')">
-          <span class="flag">🇺🇸</span>
-        </button>
+        <LanguageSwitcher />
 
         <button class="login-button" type="button">
           <span>{{ $t('nav.login') }}</span>

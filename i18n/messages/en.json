@@ -10,6 +10,10 @@
     "language": "Language",
     "login": "LOGIN"
   },
+  "language": {
+    "search": "Search language",
+    "nothing": "No matches"
+  },
   "search": {
     "label": "Search games",
     "placeholder": "Search games..."
