@@ -705,6 +705,17 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 }
 
 .lang-hint-close:hover { color: #e8e9f8; background: rgba(148, 92, 255, .14); }
+
+/* Darker than the dark theme's equivalent, because the light strip is nearly
+   white and the grey that reads as "quiet" against #1c1f3e reads as "barely
+   there" against #fff — it was sitting at 3.5:1.
+
+   Picked by measurement rather than eye. The banner's own text runs 6.3:1 on
+   this background, so anything past about 5.5:1 makes the cross as loud as the
+   sentence it dismisses; anything under 4.5:1 is back below the readable
+   floor. 4.95:1 is the middle of that window: findable, and still the quieter
+   of the two. This is the only way out of the banner, so it cannot be faint. */
+.is-light .lang-hint-close { color: #666a85; }
 .is-light .lang-hint-close:hover { color: #2a1a52; background: rgba(124, 58, 237, .1); }
 
 .category-bar {
