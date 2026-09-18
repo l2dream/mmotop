@@ -16,7 +16,7 @@
  * regional variants of English and Portuguese, and appear as such.
  */
 
-export type Script = 'latin' | 'cyrillic' | 'greek' | 'armenian' | 'east-asian'
+export type Script = 'latin' | 'cyrillic' | 'greek' | 'armenian' | 'arabic' | 'hebrew' | 'east-asian'
 
 export interface Locale {
   /** Goes into the URL: /de/, /pt-br/. Also the <html lang> value. */
@@ -32,7 +32,11 @@ export interface Locale {
    */
   chip: string
   script: Script
-  /** Reserved. Nothing here is right-to-left yet; the CSS already is. */
+  /**
+   * Writing direction. Read twice: once to set `dir` on <html> for the whole
+   * page, and once on the selector row itself, so an Arabic or Hebrew name
+   * lays out correctly even while sitting in a left-to-right list.
+   */
   dir: 'ltr' | 'rtl'
   /**
    * Extra font family this locale needs on top of Inter, or null when Inter
@@ -84,6 +88,11 @@ export const LOCALES: Locale[] = [
   // H in front of Armenian letters, which looks fine until the font changes.
   { code: 'hy',    endonym: 'ՀԱՅԵՐԵՆ',            name: 'Armenian',               chip: 'HY', script: 'armenian', dir: 'ltr', font: 'Noto Sans Armenian' },
 
+  // Right to left. The stylesheet already mirrors on `dir="rtl"`, so these two
+  // need no layout of their own — only their fonts, which Inter does not have.
+  { code: 'ar',    endonym: 'العربية',              name: 'Arabic',                 chip: 'AR', script: 'arabic', dir: 'rtl', font: 'Noto Sans Arabic' },
+  { code: 'he',    endonym: 'עברית',                name: 'Hebrew',                 chip: 'HE', script: 'hebrew', dir: 'rtl', font: 'Noto Sans Hebrew' },
+
   // East Asian — each needs its own multi-megabyte font.
   // Traditional Chinese would join as 'zh-hant' / 繁體中文 if the traffic asks
   // for it; it is a different text and a different font, not a toggle.
@@ -96,15 +105,21 @@ export const LOCALES: Locale[] = [
 export const DEFAULT_LOCALE = 'en'
 
 /** Headings for the selector, in the order the groups appear. */
-export const SCRIPT_ORDER: Script[] = ['latin', 'cyrillic', 'greek', 'armenian', 'east-asian']
+export const SCRIPT_ORDER: Script[] = ['latin', 'cyrillic', 'greek', 'armenian', 'arabic', 'hebrew', 'east-asian']
 
 export const SCRIPT_LABELS: Record<Script, string> = {
   latin: 'Latin',
   cyrillic: 'Cyrillic',
   greek: 'Greek',
   armenian: 'Armenian',
+  arabic: 'Arabic',
+  hebrew: 'Hebrew',
   'east-asian': 'East Asian'
 }
+
+/** True once any right-to-left language exists, which is what the mirrored
+ *  stylesheet and the <html dir> switch were built for. */
+export const HAS_RTL = LOCALES.some(l => l.dir === 'rtl')
 
 export function localeByCode(code: string): Locale | undefined {
   return LOCALES.find(l => l.code === code)
