@@ -473,7 +473,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .lang-button:hover { border-color: rgba(164, 83, 255, .6); color: #fff; }
 
-.lang-globe { display: block; opacity: .8; }
+.lang-globe { flex: 0 0 auto; display: block; opacity: .8; }
 
 /* The code carries the weight here, so it is set in the interface's own
    letterforms rather than a monospace face that would read as data. */
@@ -1303,12 +1303,19 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     height: 12px;
   }
   .account-actions { display: contents; }
+  /* Sized to its contents rather than to a square, which is what it was when
+     the button held a single flag glyph. The search field is the flexible one
+     in this row, so the width the button takes comes out of the search field —
+     which can afford it, having nothing to show but a placeholder. */
   .lang-button {
     flex: 0 0 auto;
-    width: 30px;
-    height: 30px;
+    height: 32px;
+    padding-inline: 8px;
+    gap: 5px;
     border-radius: 9px;
   }
+  .lang-globe { width: 14px; height: 14px; }
+  .lang-code { font-size: 11px; }
   .login-button {
     flex: 0 0 auto;
     height: 32px;
@@ -1316,7 +1323,6 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     font-size: 10px;
     border-radius: 9px;
   }
-  .flag { font-size: 14px; }
   .category-bar { margin-bottom: 12px; }
   .category { padding-inline: 15px; }
   .more-dropdown { min-width: 170px; }
@@ -1343,6 +1349,15 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     grid-template-columns: 32px minmax(0, 1fr) 58px 46px;
   }
   .game-row.compact .date { display: flex; }
+}
+
+/* Below about 380px the row runs out of room, and the search field is the one
+   that pays: at 320 it was down to nine pixels of usable width. The language
+   code is the cheapest thing in the row to give up — the globe still opens the
+   selector, and the selector says which language is active anyway. */
+@media (max-width: 380px) {
+  .lang-code { display: none; }
+  .lang-button { padding-inline: 7px; gap: 0; }
 }
 
 /* Right-to-left readiness.
