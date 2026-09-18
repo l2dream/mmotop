@@ -528,6 +528,8 @@ function gameIcon(game: Game) {
       </div>
     </header>
 
+    <LanguageSuggestion />
+
     <nav class="category-bar" aria-label="Game categories">
       <button
         v-for="category in visibleCategories"

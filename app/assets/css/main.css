@@ -632,6 +632,81 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   text-align: center;
 }
 
+/* The suggestion strip. Sits between the header and the categories, where it
+   pushes the page down a little rather than covering any of it — a bar that
+   hides content in order to offer a translation has made the page worse for
+   the majority who did not need the offer.
+
+   Deliberately quiet: one line, one link, one way out. It is a suggestion, and
+   it should not look like an error or a cookie wall. */
+.lang-hint {
+  max-width: 1480px;
+  margin: 0 auto 12px;
+  min-height: 38px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(103, 104, 173, .22);
+  border-radius: 11px;
+  background: linear-gradient(90deg, rgba(28, 31, 62, .72), rgba(20, 23, 50, .6));
+  color: #b9bcd4;
+  font-size: 13px;
+}
+
+.is-light .lang-hint {
+  border-color: rgba(103, 104, 173, .16);
+  background: linear-gradient(90deg, #ffffff, #f8f8fd);
+  color: #565a75;
+  box-shadow: 0 6px 18px rgba(31, 41, 102, .05);
+}
+
+.lang-hint-globe { flex: 0 0 auto; opacity: .7; }
+
+/* The offer is written in the language being offered, so the strip may need a
+   face the rest of the page does not use. The component sets --hint-font when
+   that is so; otherwise this resolves to Inter and nothing changes. */
+.lang-hint-text,
+.lang-hint-action {
+  font-family: Inter, var(--hint-font, Inter), sans-serif;
+}
+
+.lang-hint-text { flex: 1 1 auto; min-width: 0; }
+
+.lang-hint-action {
+  flex: 0 0 auto;
+  padding: 5px 12px;
+  border: 1px solid rgba(142, 76, 255, .38);
+  border-radius: 8px;
+  color: #d6c4ff;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lang-hint-action:hover { border-color: rgba(164, 83, 255, .65); color: #fff; }
+
+.is-light .lang-hint-action { color: #5b21c4; border-color: rgba(142, 76, 255, .3); }
+.is-light .lang-hint-action:hover { color: #3f1191; border-color: rgba(142, 76, 255, .5); }
+
+.lang-hint-close {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #7e839d;
+  cursor: pointer;
+}
+
+.lang-hint-close:hover { color: #e8e9f8; background: rgba(148, 92, 255, .14); }
+.is-light .lang-hint-close:hover { color: #2a1a52; background: rgba(124, 58, 237, .1); }
+
 .category-bar {
   max-width: 1480px;
   height: 48px;
