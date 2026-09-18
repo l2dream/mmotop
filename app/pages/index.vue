@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 type Game = {
   title: string
   genre: string
@@ -22,6 +24,10 @@ const categories = [
   'Rappelz',
   'Tibia'
 ]
+
+function categoryLabel(category: string) {
+  return category === 'All' ? t('categories.all') : category
+}
 
 const VISIBLE_CATEGORIES = 6
 const visibleCategories = computed(() => categories.slice(0, VISIBLE_CATEGORIES))
@@ -97,13 +103,13 @@ const allGameEntries = [...games, ...soon, ...started, ...newGames]
 const allVersions = Array.from(new Set(allGameEntries.map((game) => game.version)))
 const allTitles = Array.from(new Set(allGameEntries.map((game) => game.title)))
 
-const ratingThresholds = [
-  { label: 'Any', value: 0 },
+const ratingThresholds = computed(() => [
+  { label: t('filter.any'), value: 0 },
   { label: '500+', value: 500 },
   { label: '1000+', value: 1000 },
   { label: '1500+', value: 1500 },
   { label: '2000+', value: 2000 }
-]
+])
 
 const rateTiers = [
   { label: 'x1–x5', min: 1, max: 5 },
@@ -123,7 +129,8 @@ function getRate(game: Game) {
 // stored value stays unambiguous and a future language switch only changes MONTHS.
 // Rendering the month as a word avoids the 05.06 trap, where a numeric date reads
 // as two different days depending on the reader's convention.
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const MONTH_KEYS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+const MONTHS = computed(() => MONTH_KEYS.map((key) => t(`months.${key}`)))
 
 // Parsed by hand rather than through Date: `new Date('2024-12-23')` is UTC midnight,
 // so getDate() would report the 22nd for anyone west of Greenwich.
@@ -138,7 +145,7 @@ function parseISODate(iso?: string) {
 // carry the meaning, the year sits under them as the quieter half.
 function formatDayMonth(iso?: string) {
   const parsed = parseISODate(iso)
-  return parsed ? `${parsed.day} ${MONTHS[parsed.month - 1]}` : iso ?? ''
+  return parsed ? `${parsed.day} ${MONTHS.value[parsed.month - 1]}` : iso ?? ''
 }
 
 // Null until the browser reports the year. A static build can't know it, and
@@ -249,11 +256,13 @@ const filteredStarted = computed(() => started.filter(matchesFilters))
 const filteredNewGames = computed(() => newGames.filter(matchesFilters))
 const filteredAllGames = computed(() => allGames.value.filter(matchesFilters))
 
+// Getters rather than values: the tags have to follow the language, not be
+// frozen at whatever it was when the component first ran.
 useSeoMeta({
-  title: 'MMOTOP — Game Server Rankings',
-  description: 'MMOTOP gaming server directory with top games, upcoming servers and recently started servers.',
-  ogTitle: 'MMOTOP — Game Server Rankings',
-  ogDescription: 'Discover and compare game servers.',
+  title: () => t('meta.title'),
+  description: () => t('meta.description'),
+  ogTitle: () => t('meta.title'),
+  ogDescription: () => t('meta.ogDescription'),
   twitterCard: 'summary_large_image'
 })
 
@@ -359,9 +368,9 @@ function gameIcon(game: Game) {
     </svg>
 
     <header class="topbar">
-      <NuxtLink to="/" class="brand" aria-label="MMOTOP home">MMOTOP</NuxtLink>
+      <NuxtLink to="/" class="brand" :aria-label="$t('nav.home')">MMOTOP</NuxtLink>
 
-      <button class="theme-button" type="button" aria-label="Toggle theme" @click="toggleTheme">
+      <button class="theme-button" type="button" :aria-label="$t('nav.theme')" @click="toggleTheme">
         <svg
           v-if="dark"
           class="theme-icon"
@@ -397,17 +406,17 @@ function gameIcon(game: Game) {
       </button>
 
       <label class="search-box">
-        <span class="sr-only">Search games</span>
+        <span class="sr-only">{{ $t('search.label') }}</span>
         <input
           ref="searchInput"
           v-model="query"
-          placeholder="Search games..."
+          :placeholder="$t('search.placeholder')"
           @keydown.enter="submitSearch"
         />
         <button
           class="filter-button"
           type="button"
-          aria-label="Filter"
+          :aria-label="$t('filter.open')"
           aria-haspopup="true"
           :aria-expanded="filterOpen"
           ref="filterButtonEl"
@@ -439,15 +448,15 @@ function gameIcon(game: Game) {
         :style="{ top: filterPos.top + 'px', left: filterPos.left + 'px' }"
       >
         <div class="filter-popup-section">
-          <span class="filter-popup-label">Version</span>
+          <span class="filter-popup-label">{{ $t('filter.version') }}</span>
           <select class="filter-select" v-model="filters.version">
-            <option value="">All versions</option>
+            <option value="">{{ $t('filter.allVersions') }}</option>
             <option v-for="version in allVersions" :key="version" :value="version">{{ version }}</option>
           </select>
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">Min rating</span>
+          <span class="filter-popup-label">{{ $t('filter.minRating') }}</span>
           <select class="filter-select" v-model.number="filters.minRating">
             <option v-for="threshold in ratingThresholds" :key="threshold.value" :value="threshold.value">
               {{ threshold.label }}
@@ -456,15 +465,15 @@ function gameIcon(game: Game) {
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">Game</span>
+          <span class="filter-popup-label">{{ $t('filter.game') }}</span>
           <select class="filter-select" v-model="filters.title">
-            <option value="">All games</option>
+            <option value="">{{ $t('filter.allGames') }}</option>
             <option v-for="title in allTitles" :key="title" :value="title">{{ title }}</option>
           </select>
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">Rate</span>
+          <span class="filter-popup-label">{{ $t('filter.rate') }}</span>
           <div class="filter-chip-row">
             <button
               v-for="tier in rateTiers"
@@ -482,7 +491,7 @@ function gameIcon(game: Game) {
               :class="{ active: customRateActive }"
               @click="toggleCustomRate"
             >
-              Custom
+              {{ $t('filter.custom') }}
             </button>
           </div>
           <div v-if="customRateActive" class="filter-custom-rate">
@@ -490,7 +499,7 @@ function gameIcon(game: Game) {
               v-model="customRateMin"
               type="number"
               min="0"
-              placeholder="From"
+              :placeholder="$t('filter.from')"
               class="filter-custom-input"
             />
             <span class="filter-custom-sep">–</span>
@@ -498,25 +507,25 @@ function gameIcon(game: Game) {
               v-model="customRateMax"
               type="number"
               min="0"
-              placeholder="To"
+              :placeholder="$t('filter.to')"
               class="filter-custom-input"
             />
           </div>
         </div>
 
         <div class="filter-popup-actions">
-          <button type="button" class="filter-reset" @click="resetFilters">Reset</button>
-          <button type="button" class="filter-apply" @click="filterOpen = false">Apply</button>
+          <button type="button" class="filter-reset" @click="resetFilters">{{ $t('filter.reset') }}</button>
+          <button type="button" class="filter-apply" @click="filterOpen = false">{{ $t('filter.apply') }}</button>
         </div>
       </div>
 
       <div class="account-actions">
-        <button class="lang-button" type="button" aria-label="Language">
+        <button class="lang-button" type="button" :aria-label="$t('nav.language')">
           <span class="flag">🇺🇸</span>
         </button>
 
         <button class="login-button" type="button">
-          <span>LOGIN</span>
+          <span>{{ $t('nav.login') }}</span>
         </button>
       </div>
     </header>
@@ -530,7 +539,7 @@ function gameIcon(game: Game) {
         type="button"
         @click="selectCategory(category)"
       >
-        {{ category }}
+        {{ categoryLabel(category) }}
       </button>
 
       <div class="category-more-wrap" ref="moreWrap">
@@ -542,7 +551,7 @@ function gameIcon(game: Game) {
           :aria-expanded="showMore"
           @click="showMore = !showMore"
         >
-          More
+          {{ $t('categories.more') }}
           <span class="more-chevron" :class="{ open: showMore }">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 9l6 6 6-6" />
@@ -565,7 +574,7 @@ function gameIcon(game: Game) {
             role="menuitem"
             @click="selectCategory(category)"
           >
-            {{ category }}
+            {{ categoryLabel(category) }}
           </button>
         </div>
       </div>
@@ -573,7 +582,7 @@ function gameIcon(game: Game) {
 
     <main class="dashboard">
       <section class="top-grid">
-        <GamePanel title="TOP GAME" class="accent-gold">
+        <GamePanel :title="$t('panels.top')" class="accent-gold">
           <template #icon>
             <svg class="trophy-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -642,7 +651,7 @@ function gameIcon(game: Game) {
           <PanelFooter />
         </GamePanel>
 
-        <GamePanel title="COMING SOON" class="accent-blue">
+        <GamePanel :title="$t('panels.soon')" class="accent-blue">
           <template #icon>
             <svg class="clock-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -690,7 +699,7 @@ function gameIcon(game: Game) {
           <PanelFooter />
         </GamePanel>
 
-        <GamePanel title="ALREADY STARTED" class="accent-amber">
+        <GamePanel :title="$t('panels.started')" class="accent-amber">
           <template #icon>
             <svg class="bolt-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -724,7 +733,7 @@ function gameIcon(game: Game) {
       </section>
 
       <section class="bottom-grid">
-        <GamePanel title="NEW GAMES" :rows="3" class="accent-violet">
+        <GamePanel :title="$t('panels.new')" :rows="3" class="accent-violet">
           <template #icon>
             <svg class="sparkle-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -759,7 +768,7 @@ function gameIcon(game: Game) {
           <PanelFooter />
         </GamePanel>
 
-        <GamePanel title="ALL GAMES" :rows="3" class="accent-teal">
+        <GamePanel :title="$t('panels.all')" :rows="3" class="accent-teal">
           <template #icon>
             <svg class="grid-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -779,7 +788,7 @@ function gameIcon(game: Game) {
             <button
               class="shuffle-button"
               type="button"
-              aria-label="Shuffle"
+              :aria-label="$t('panels.shuffle')"
               :style="{ transform: `rotate(${shuffleTurns * 180}deg)` }"
               @click="shuffleGames"
             >

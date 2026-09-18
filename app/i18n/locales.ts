@@ -104,6 +104,21 @@ export const LOCALES: Locale[] = [
 /** What `/` serves, and what a missing translation falls back to. */
 export const DEFAULT_LOCALE = 'en'
 
+/**
+ * Which of the twenty-six actually have a message file today.
+ *
+ * The list above is the plan; this is the state. They are kept apart on
+ * purpose: a language only becomes a real URL, a real hreflang tag and a real
+ * row in the selector once there is something to read there. Publishing
+ * twenty-six addresses that all serve English would earn us twenty-six pages
+ * of duplicate content and a selector that lies to the person clicking it.
+ *
+ * Translating a language means adding its code here and dropping in the file.
+ */
+export const READY_CODES = ['en', 'ru']
+
+export const READY_LOCALES: Locale[] = LOCALES.filter(l => READY_CODES.includes(l.code))
+
 /** Headings for the selector, in the order the groups appear. */
 export const SCRIPT_ORDER: Script[] = ['latin', 'cyrillic', 'greek', 'armenian', 'arabic', 'hebrew', 'east-asian']
 
@@ -125,13 +140,26 @@ export function localeByCode(code: string): Locale | undefined {
   return LOCALES.find(l => l.code === code)
 }
 
-/** The selector's groups, built from the list so the two cannot drift apart. */
-export function groupedLocales(): { script: Script, label: string, locales: Locale[] }[] {
+/**
+ * The BCP 47 form, for <html lang> and hreflang. URLs stay lowercase because
+ * addresses are typed and shared by people; tags are read by machines that
+ * expect PORTUGUÊS (BRASIL) at /pt-br/ to announce itself as "pt-BR".
+ */
+export function bcp47(code: string): string {
+  const [language, region] = code.split('-')
+  return region ? `${language}-${region.toUpperCase()}` : language!
+}
+
+/**
+ * The selector's groups, built from the list so the two cannot drift apart.
+ * Defaults to what is translated; pass LOCALES to see the whole plan.
+ */
+export function groupedLocales(from: Locale[] = READY_LOCALES): { script: Script, label: string, locales: Locale[] }[] {
   return SCRIPT_ORDER
     .map(script => ({
       script,
       label: SCRIPT_LABELS[script],
-      locales: LOCALES.filter(l => l.script === script)
+      locales: from.filter(l => l.script === script)
     }))
     .filter(group => group.locales.length > 0)
 }

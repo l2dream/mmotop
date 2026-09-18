@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "MMOTOP — Game Server Rankings",
+    "description": "MMOTOP gaming server directory with top games, upcoming servers and recently started servers.",
+    "ogDescription": "Discover and compare game servers."
+  },
+  "nav": {
+    "home": "MMOTOP home",
+    "theme": "Toggle theme",
+    "language": "Language",
+    "login": "LOGIN"
+  },
+  "search": {
+    "label": "Search games",
+    "placeholder": "Search games..."
+  },
+  "categories": {
+    "all": "All",
+    "more": "More"
+  },
+  "panels": {
+    "top": "TOP GAME",
+    "soon": "COMING SOON",
+    "started": "ALREADY STARTED",
+    "new": "NEW GAMES",
+    "all": "ALL GAMES",
+    "viewMore": "View more",
+    "shuffle": "Shuffle"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Version",
+    "allVersions": "All versions",
+    "minRating": "Min rating",
+    "any": "Any",
+    "game": "Game",
+    "allGames": "All games",
+    "rate": "Rate",
+    "from": "From",
+    "to": "To",
+    "reset": "Reset",
+    "apply": "Apply",
+    "custom": "Custom"
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec"
+  }
+}
