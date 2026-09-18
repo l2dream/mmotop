@@ -115,7 +115,7 @@ export const DEFAULT_LOCALE = 'en'
  *
  * Translating a language means adding its code here and dropping in the file.
  */
-export const READY_CODES = ['en', 'ru']
+export const READY_CODES = LOCALES.map(l => l.code)
 
 export const READY_LOCALES: Locale[] = LOCALES.filter(l => READY_CODES.includes(l.code))
 

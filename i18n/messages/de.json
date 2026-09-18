@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Rangliste der Spieleserver",
+    "description": "MMOTOP-Verzeichnis für Spieleserver: Topspiele, kommende und kürzlich gestartete Server.",
+    "ogDescription": "Spieleserver entdecken und vergleichen."
+  },
+  "nav": {
+    "home": "MMOTOP Startseite",
+    "theme": "Design wechseln",
+    "language": "Sprache",
+    "login": "ANMELDEN"
+  },
+  "language": {
+    "search": "Sprache suchen",
+    "nothing": "Keine Treffer"
+  },
+  "search": {
+    "label": "Spiele suchen",
+    "placeholder": "Spiele suchen..."
+  },
+  "categories": {
+    "all": "Alle",
+    "more": "Mehr"
+  },
+  "panels": {
+    "top": "TOP-SPIELE",
+    "soon": "DEMNÄCHST",
+    "started": "BEREITS GESTARTET",
+    "new": "NEUE SPIELE",
+    "all": "ALLE SPIELE",
+    "viewMore": "Mehr anzeigen",
+    "shuffle": "Mischen"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Version",
+    "allVersions": "Alle Versionen",
+    "minRating": "Min. Wertung",
+    "any": "Beliebig",
+    "game": "Spiel",
+    "allGames": "Alle Spiele",
+    "rate": "Rate",
+    "from": "Von",
+    "to": "Bis",
+    "reset": "Zurücksetzen",
+    "apply": "Anwenden",
+    "custom": "Eigene"
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mär",
+    "apr": "Apr",
+    "may": "Mai",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Okt",
+    "nov": "Nov",
+    "dec": "Dez"
+  }
+}

@@ -38,8 +38,10 @@ useHead(() => ({
      * carries its own Latin letters, and put first it would quietly redraw
      * every Latin word on the page in them — the interface would change
      * typeface for a visitor who only changed language.
+     *
+     * Spread rather than set to undefined, which still renders style="".
      */
-    style: scriptFont.value ? `--script-font: "${scriptFont.value}";` : undefined
+    ...(scriptFont.value ? { style: `--script-font: "${scriptFont.value}";` } : {})
   },
   link: [
     ...(localeHead.value.link ?? []),

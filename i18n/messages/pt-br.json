@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Ranking de servidores de jogos",
+    "description": "Diretório de servidores de jogos MMOTOP: melhores jogos, servidores futuros e recém-abertos.",
+    "ogDescription": "Descubra e compare servidores de jogos."
+  },
+  "nav": {
+    "home": "Início do MMOTOP",
+    "theme": "Mudar tema",
+    "language": "Idioma",
+    "login": "ENTRAR"
+  },
+  "language": {
+    "search": "Buscar idioma",
+    "nothing": "Nenhum resultado"
+  },
+  "search": {
+    "label": "Buscar jogos",
+    "placeholder": "Buscar jogos..."
+  },
+  "categories": {
+    "all": "Todos",
+    "more": "Mais"
+  },
+  "panels": {
+    "top": "MELHORES JOGOS",
+    "soon": "EM BREVE",
+    "started": "JÁ INICIADOS",
+    "new": "JOGOS NOVOS",
+    "all": "TODOS OS JOGOS",
+    "viewMore": "Ver mais",
+    "shuffle": "Embaralhar"
+  },
+  "filter": {
+    "open": "Filtro",
+    "version": "Versão",
+    "allVersions": "Todas as versões",
+    "minRating": "Avaliação mín.",
+    "any": "Qualquer",
+    "game": "Jogo",
+    "allGames": "Todos os jogos",
+    "rate": "Rate",
+    "from": "De",
+    "to": "Até",
+    "reset": "Redefinir",
+    "apply": "Aplicar",
+    "custom": "Personalizado"
+  },
+  "months": {
+    "jan": "jan",
+    "feb": "fev",
+    "mar": "mar",
+    "apr": "abr",
+    "may": "mai",
+    "jun": "jun",
+    "jul": "jul",
+    "aug": "ago",
+    "sep": "set",
+    "oct": "out",
+    "nov": "nov",
+    "dec": "dez"
+  }
+}

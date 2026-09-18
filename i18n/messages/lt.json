@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Žaidimų serverių reitingas",
+    "description": "MMOTOP žaidimų serverių katalogas: geriausi žaidimai, būsimi ir neseniai atidaryti serveriai.",
+    "ogDescription": "Atrask ir palygink žaidimų serverius."
+  },
+  "nav": {
+    "home": "MMOTOP pradžia",
+    "theme": "Keisti temą",
+    "language": "Kalba",
+    "login": "PRISIJUNGTI"
+  },
+  "language": {
+    "search": "Ieškoti kalbos",
+    "nothing": "Nieko nerasta"
+  },
+  "search": {
+    "label": "Ieškoti žaidimų",
+    "placeholder": "Ieškoti žaidimų..."
+  },
+  "categories": {
+    "all": "Visi",
+    "more": "Daugiau"
+  },
+  "panels": {
+    "top": "GERIAUSI ŽAIDIMAI",
+    "soon": "NETRUKUS",
+    "started": "JAU PRADĖTI",
+    "new": "NAUJI ŽAIDIMAI",
+    "all": "VISI ŽAIDIMAI",
+    "viewMore": "Rodyti daugiau",
+    "shuffle": "Sumaišyti"
+  },
+  "filter": {
+    "open": "Filtras",
+    "version": "Versija",
+    "allVersions": "Visos versijos",
+    "minRating": "Min. įvertinimas",
+    "any": "Bet koks",
+    "game": "Žaidimas",
+    "allGames": "Visi žaidimai",
+    "rate": "Rate",
+    "from": "Nuo",
+    "to": "Iki",
+    "reset": "Atstatyti",
+    "apply": "Taikyti",
+    "custom": "Pasirinktinis"
+  },
+  "months": {
+    "jan": "saus",
+    "feb": "vas",
+    "mar": "kov",
+    "apr": "bal",
+    "may": "geg",
+    "jun": "birž",
+    "jul": "liep",
+    "aug": "rugp",
+    "sep": "rugs",
+    "oct": "spal",
+    "nov": "lapkr",
+    "dec": "gruod"
+  }
+}

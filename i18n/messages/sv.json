@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Rankning av spelservrar",
+    "description": "MMOTOP-katalog över spelservrar: toppspel, kommande och nyligen startade servrar.",
+    "ogDescription": "Upptäck och jämför spelservrar."
+  },
+  "nav": {
+    "home": "MMOTOP startsida",
+    "theme": "Byt tema",
+    "language": "Språk",
+    "login": "LOGGA IN"
+  },
+  "language": {
+    "search": "Sök språk",
+    "nothing": "Inga träffar"
+  },
+  "search": {
+    "label": "Sök spel",
+    "placeholder": "Sök spel..."
+  },
+  "categories": {
+    "all": "Alla",
+    "more": "Mer"
+  },
+  "panels": {
+    "top": "TOPPSPEL",
+    "soon": "KOMMER SNART",
+    "started": "REDAN STARTADE",
+    "new": "NYA SPEL",
+    "all": "ALLA SPEL",
+    "viewMore": "Visa mer",
+    "shuffle": "Blanda"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Version",
+    "allVersions": "Alla versioner",
+    "minRating": "Min. betyg",
+    "any": "Alla",
+    "game": "Spel",
+    "allGames": "Alla spel",
+    "rate": "Rate",
+    "from": "Från",
+    "to": "Till",
+    "reset": "Återställ",
+    "apply": "Tillämpa",
+    "custom": "Anpassad"
+  },
+  "months": {
+    "jan": "jan",
+    "feb": "feb",
+    "mar": "mar",
+    "apr": "apr",
+    "may": "maj",
+    "jun": "jun",
+    "jul": "jul",
+    "aug": "aug",
+    "sep": "sep",
+    "oct": "okt",
+    "nov": "nov",
+    "dec": "dec"
+  }
+}

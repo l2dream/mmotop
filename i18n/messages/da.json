@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Rangliste over spilservere",
+    "description": "MMOTOP-katalog over spilservere: topspil, kommende og nyligt startede servere.",
+    "ogDescription": "Find og sammenlign spilservere."
+  },
+  "nav": {
+    "home": "MMOTOP forside",
+    "theme": "Skift tema",
+    "language": "Sprog",
+    "login": "LOG IND"
+  },
+  "language": {
+    "search": "Søg sprog",
+    "nothing": "Ingen resultater"
+  },
+  "search": {
+    "label": "Søg spil",
+    "placeholder": "Søg spil..."
+  },
+  "categories": {
+    "all": "Alle",
+    "more": "Mere"
+  },
+  "panels": {
+    "top": "TOPSPIL",
+    "soon": "KOMMER SNART",
+    "started": "ALLEREDE STARTET",
+    "new": "NYE SPIL",
+    "all": "ALLE SPIL",
+    "viewMore": "Vis mere",
+    "shuffle": "Bland"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Version",
+    "allVersions": "Alle versioner",
+    "minRating": "Min. rating",
+    "any": "Alle",
+    "game": "Spil",
+    "allGames": "Alle spil",
+    "rate": "Rate",
+    "from": "Fra",
+    "to": "Til",
+    "reset": "Nulstil",
+    "apply": "Anvend",
+    "custom": "Tilpasset"
+  },
+  "months": {
+    "jan": "jan",
+    "feb": "feb",
+    "mar": "mar",
+    "apr": "apr",
+    "may": "maj",
+    "jun": "jun",
+    "jul": "jul",
+    "aug": "aug",
+    "sep": "sep",
+    "oct": "okt",
+    "nov": "nov",
+    "dec": "dec"
+  }
+}

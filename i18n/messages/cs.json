@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Žebříček herních serverů",
+    "description": "Katalog herních serverů MMOTOP: nejlepší hry, připravované a nedávno spuštěné servery.",
+    "ogDescription": "Objevujte a porovnávejte herní servery."
+  },
+  "nav": {
+    "home": "MMOTOP – domů",
+    "theme": "Přepnout motiv",
+    "language": "Jazyk",
+    "login": "PŘIHLÁSIT"
+  },
+  "language": {
+    "search": "Hledat jazyk",
+    "nothing": "Nic nenalezeno"
+  },
+  "search": {
+    "label": "Hledat hry",
+    "placeholder": "Hledat hry..."
+  },
+  "categories": {
+    "all": "Vše",
+    "more": "Více"
+  },
+  "panels": {
+    "top": "NEJLEPŠÍ HRY",
+    "soon": "PŘIPRAVUJEME",
+    "started": "JIŽ SPUŠTĚNO",
+    "new": "NOVÉ HRY",
+    "all": "VŠECHNY HRY",
+    "viewMore": "Zobrazit více",
+    "shuffle": "Zamíchat"
+  },
+  "filter": {
+    "open": "Filtr",
+    "version": "Verze",
+    "allVersions": "Všechny verze",
+    "minRating": "Min. hodnocení",
+    "any": "Libovolné",
+    "game": "Hra",
+    "allGames": "Všechny hry",
+    "rate": "Rate",
+    "from": "Od",
+    "to": "Do",
+    "reset": "Resetovat",
+    "apply": "Použít",
+    "custom": "Vlastní"
+  },
+  "months": {
+    "jan": "led",
+    "feb": "úno",
+    "mar": "bře",
+    "apr": "dub",
+    "may": "kvě",
+    "jun": "čvn",
+    "jul": "čvc",
+    "aug": "srp",
+    "sep": "zář",
+    "oct": "říj",
+    "nov": "lis",
+    "dec": "pro"
+  }
+}

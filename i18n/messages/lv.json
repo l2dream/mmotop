@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Spēļu serveru reitings",
+    "description": "MMOTOP spēļu serveru katalogs: labākās spēles, gaidāmie un nesen atvērtie serveri.",
+    "ogDescription": "Atklāj un salīdzini spēļu serverus."
+  },
+  "nav": {
+    "home": "MMOTOP sākumlapa",
+    "theme": "Mainīt tēmu",
+    "language": "Valoda",
+    "login": "PIETEIKTIES"
+  },
+  "language": {
+    "search": "Meklēt valodu",
+    "nothing": "Nav rezultātu"
+  },
+  "search": {
+    "label": "Meklēt spēles",
+    "placeholder": "Meklēt spēles..."
+  },
+  "categories": {
+    "all": "Visas",
+    "more": "Vairāk"
+  },
+  "panels": {
+    "top": "LABĀKĀS SPĒLES",
+    "soon": "DRĪZUMĀ",
+    "started": "JAU SĀKUŠĀS",
+    "new": "JAUNAS SPĒLES",
+    "all": "VISAS SPĒLES",
+    "viewMore": "Rādīt vairāk",
+    "shuffle": "Sajaukt"
+  },
+  "filter": {
+    "open": "Filtrs",
+    "version": "Versija",
+    "allVersions": "Visas versijas",
+    "minRating": "Min. vērtējums",
+    "any": "Jebkurš",
+    "game": "Spēle",
+    "allGames": "Visas spēles",
+    "rate": "Rate",
+    "from": "No",
+    "to": "Līdz",
+    "reset": "Atiestatīt",
+    "apply": "Lietot",
+    "custom": "Pielāgots"
+  },
+  "months": {
+    "jan": "janv",
+    "feb": "febr",
+    "mar": "marts",
+    "apr": "apr",
+    "may": "maijs",
+    "jun": "jūn",
+    "jul": "jūl",
+    "aug": "aug",
+    "sep": "sept",
+    "oct": "okt",
+    "nov": "nov",
+    "dec": "dec"
+  }
+}

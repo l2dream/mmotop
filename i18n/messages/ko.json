@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — 게임 서버 랭킹",
+    "description": "MMOTOP 게임 서버 디렉터리: 인기 게임, 오픈 예정 및 최근 오픈한 서버.",
+    "ogDescription": "게임 서버를 찾고 비교하세요."
+  },
+  "nav": {
+    "home": "MMOTOP 홈",
+    "theme": "테마 전환",
+    "language": "언어",
+    "login": "로그인"
+  },
+  "language": {
+    "search": "언어 검색",
+    "nothing": "결과 없음"
+  },
+  "search": {
+    "label": "게임 검색",
+    "placeholder": "게임 검색..."
+  },
+  "categories": {
+    "all": "전체",
+    "more": "더 보기"
+  },
+  "panels": {
+    "top": "인기 게임",
+    "soon": "오픈 예정",
+    "started": "오픈 완료",
+    "new": "신규 게임",
+    "all": "전체 게임",
+    "viewMore": "더 보기",
+    "shuffle": "섞기"
+  },
+  "filter": {
+    "open": "필터",
+    "version": "버전",
+    "allVersions": "전체 버전",
+    "minRating": "최소 평점",
+    "any": "제한 없음",
+    "game": "게임",
+    "allGames": "전체 게임",
+    "rate": "Rate",
+    "from": "부터",
+    "to": "까지",
+    "reset": "초기화",
+    "apply": "적용",
+    "custom": "직접 입력"
+  },
+  "months": {
+    "jan": "1月",
+    "feb": "2月",
+    "mar": "3月",
+    "apr": "4月",
+    "may": "5月",
+    "jun": "6月",
+    "jul": "7月",
+    "aug": "8月",
+    "sep": "9月",
+    "oct": "10月",
+    "nov": "11月",
+    "dec": "12月"
+  }
+}

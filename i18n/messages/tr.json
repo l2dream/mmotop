@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Oyun Sunucuları Sıralaması",
+    "description": "MMOTOP oyun sunucu rehberi: en iyi oyunlar, yakında açılacak ve yeni açılmış sunucular.",
+    "ogDescription": "Oyun sunucularını keşfedin ve karşılaştırın."
+  },
+  "nav": {
+    "home": "MMOTOP ana sayfa",
+    "theme": "Temayı değiştir",
+    "language": "Dil",
+    "login": "GİRİŞ"
+  },
+  "language": {
+    "search": "Dil ara",
+    "nothing": "Sonuç yok"
+  },
+  "search": {
+    "label": "Oyun ara",
+    "placeholder": "Oyun ara..."
+  },
+  "categories": {
+    "all": "Tümü",
+    "more": "Daha fazla"
+  },
+  "panels": {
+    "top": "EN İYİ OYUNLAR",
+    "soon": "YAKINDA",
+    "started": "ZATEN BAŞLADI",
+    "new": "YENİ OYUNLAR",
+    "all": "TÜM OYUNLAR",
+    "viewMore": "Daha fazla göster",
+    "shuffle": "Karıştır"
+  },
+  "filter": {
+    "open": "Filtre",
+    "version": "Sürüm",
+    "allVersions": "Tüm sürümler",
+    "minRating": "Min. puan",
+    "any": "Herhangi",
+    "game": "Oyun",
+    "allGames": "Tüm oyunlar",
+    "rate": "Rate",
+    "from": "Min",
+    "to": "Maks",
+    "reset": "Sıfırla",
+    "apply": "Uygula",
+    "custom": "Özel"
+  },
+  "months": {
+    "jan": "Oca",
+    "feb": "Şub",
+    "mar": "Mar",
+    "apr": "Nis",
+    "may": "May",
+    "jun": "Haz",
+    "jul": "Tem",
+    "aug": "Ağu",
+    "sep": "Eyl",
+    "oct": "Eki",
+    "nov": "Kas",
+    "dec": "Ara"
+  }
+}

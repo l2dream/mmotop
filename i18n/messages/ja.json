@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — ゲームサーバーランキング",
+    "description": "MMOTOPゲームサーバーディレクトリ：人気ゲーム、公開予定・最近公開されたサーバー。",
+    "ogDescription": "ゲームサーバーを探して比較。"
+  },
+  "nav": {
+    "home": "MMOTOP ホーム",
+    "theme": "テーマ切替",
+    "language": "言語",
+    "login": "ログイン"
+  },
+  "language": {
+    "search": "言語を検索",
+    "nothing": "該当なし"
+  },
+  "search": {
+    "label": "ゲームを検索",
+    "placeholder": "ゲームを検索..."
+  },
+  "categories": {
+    "all": "すべて",
+    "more": "もっと"
+  },
+  "panels": {
+    "top": "人気ゲーム",
+    "soon": "公開予定",
+    "started": "公開済み",
+    "new": "新着ゲーム",
+    "all": "すべてのゲーム",
+    "viewMore": "もっと見る",
+    "shuffle": "シャッフル"
+  },
+  "filter": {
+    "open": "絞り込み",
+    "version": "バージョン",
+    "allVersions": "すべてのバージョン",
+    "minRating": "最低評価",
+    "any": "指定なし",
+    "game": "ゲーム",
+    "allGames": "すべてのゲーム",
+    "rate": "Rate",
+    "from": "開始",
+    "to": "終了",
+    "reset": "リセット",
+    "apply": "適用",
+    "custom": "カスタム"
+  },
+  "months": {
+    "jan": "1月",
+    "feb": "2月",
+    "mar": "3月",
+    "apr": "4月",
+    "may": "5月",
+    "jun": "6月",
+    "jul": "7月",
+    "aug": "8月",
+    "sep": "9月",
+    "oct": "10月",
+    "nov": "11月",
+    "dec": "12月"
+  }
+}

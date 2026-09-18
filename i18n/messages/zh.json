@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — 游戏服务器排行榜",
+    "description": "MMOTOP 游戏服务器目录：热门游戏、即将开放和近期开放的服务器。",
+    "ogDescription": "发现并比较游戏服务器。"
+  },
+  "nav": {
+    "home": "MMOTOP 首页",
+    "theme": "切换主题",
+    "language": "语言",
+    "login": "登录"
+  },
+  "language": {
+    "search": "搜索语言",
+    "nothing": "无结果"
+  },
+  "search": {
+    "label": "搜索游戏",
+    "placeholder": "搜索游戏..."
+  },
+  "categories": {
+    "all": "全部",
+    "more": "更多"
+  },
+  "panels": {
+    "top": "热门游戏",
+    "soon": "即将开服",
+    "started": "已开服",
+    "new": "新游戏",
+    "all": "全部游戏",
+    "viewMore": "查看更多",
+    "shuffle": "随机"
+  },
+  "filter": {
+    "open": "筛选",
+    "version": "版本",
+    "allVersions": "全部版本",
+    "minRating": "最低评分",
+    "any": "不限",
+    "game": "游戏",
+    "allGames": "全部游戏",
+    "rate": "Rate",
+    "from": "从",
+    "to": "到",
+    "reset": "重置",
+    "apply": "应用",
+    "custom": "自定义"
+  },
+  "months": {
+    "jan": "1月",
+    "feb": "2月",
+    "mar": "3月",
+    "apr": "4月",
+    "may": "5月",
+    "jun": "6月",
+    "jul": "7月",
+    "aug": "8月",
+    "sep": "9月",
+    "oct": "10月",
+    "nov": "11月",
+    "dec": "12月"
+  }
+}

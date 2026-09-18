@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Mänguserverite edetabel",
+    "description": "MMOTOP mänguserverite kataloog: parimad mängud, tulevased ja hiljuti avatud serverid.",
+    "ogDescription": "Avasta ja võrdle mänguservereid."
+  },
+  "nav": {
+    "home": "MMOTOP avaleht",
+    "theme": "Vaheta teema",
+    "language": "Keel",
+    "login": "LOGI SISSE"
+  },
+  "language": {
+    "search": "Otsi keelt",
+    "nothing": "Vasteid ei leitud"
+  },
+  "search": {
+    "label": "Otsi mänge",
+    "placeholder": "Otsi mänge..."
+  },
+  "categories": {
+    "all": "Kõik",
+    "more": "Rohkem"
+  },
+  "panels": {
+    "top": "PARIMAD MÄNGUD",
+    "soon": "PEAGI",
+    "started": "JUBA ALANUD",
+    "new": "UUED MÄNGUD",
+    "all": "KÕIK MÄNGUD",
+    "viewMore": "Näita rohkem",
+    "shuffle": "Sega"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Versioon",
+    "allVersions": "Kõik versioonid",
+    "minRating": "Min. hinnang",
+    "any": "Ükskõik",
+    "game": "Mäng",
+    "allGames": "Kõik mängud",
+    "rate": "Rate",
+    "from": "Alates",
+    "to": "Kuni",
+    "reset": "Lähtesta",
+    "apply": "Rakenda",
+    "custom": "Kohandatud"
+  },
+  "months": {
+    "jan": "jaan",
+    "feb": "veebr",
+    "mar": "märts",
+    "apr": "apr",
+    "may": "mai",
+    "jun": "juuni",
+    "jul": "juuli",
+    "aug": "aug",
+    "sep": "sept",
+    "oct": "okt",
+    "nov": "nov",
+    "dec": "dets"
+  }
+}

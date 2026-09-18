@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "MMOTOP — Rangering av spillservere",
+    "description": "MMOTOP-katalog over spillservere: toppspill, kommende og nylig startede servere.",
+    "ogDescription": "Oppdag og sammenlign spillservere."
+  },
+  "nav": {
+    "home": "MMOTOP hjem",
+    "theme": "Bytt tema",
+    "language": "Språk",
+    "login": "LOGG INN"
+  },
+  "language": {
+    "search": "Søk språk",
+    "nothing": "Ingen treff"
+  },
+  "search": {
+    "label": "Søk spill",
+    "placeholder": "Søk spill..."
+  },
+  "categories": {
+    "all": "Alle",
+    "more": "Mer"
+  },
+  "panels": {
+    "top": "TOPPSPILL",
+    "soon": "KOMMER SNART",
+    "started": "ALLEREDE STARTET",
+    "new": "NYE SPILL",
+    "all": "ALLE SPILL",
+    "viewMore": "Vis mer",
+    "shuffle": "Bland"
+  },
+  "filter": {
+    "open": "Filter",
+    "version": "Versjon",
+    "allVersions": "Alle versjoner",
+    "minRating": "Min. vurdering",
+    "any": "Alle",
+    "game": "Spill",
+    "allGames": "Alle spill",
+    "rate": "Rate",
+    "from": "Fra",
+    "to": "Til",
+    "reset": "Nullstill",
+    "apply": "Bruk",
+    "custom": "Egendefinert"
+  },
+  "months": {
+    "jan": "jan",
+    "feb": "feb",
+    "mar": "mar",
+    "apr": "apr",
+    "may": "mai",
+    "jun": "jun",
+    "jul": "jul",
+    "aug": "aug",
+    "sep": "sep",
+    "oct": "okt",
+    "nov": "nov",
+    "dec": "des"
+  }
+}
