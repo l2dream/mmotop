@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { t } = useI18n()
+import { bcp47 } from '~/i18n/locales'
+
+const { t, locale } = useI18n()
 
 type Game = {
   title: string
@@ -160,10 +162,11 @@ function formatDayMonth(iso?: string) {
   })
 }
 
-// Null until the browser reports the year. A static build can't know it, and
-// baking it in at build time would go stale on 1 January; starting null also
-// keeps the first client render identical to the prerendered one.
-const currentYear = ref<number | null>(null)
+// Starts at the build year rather than null, so the prerendered HTML already
+// carries the right year labels and nothing has to be deleted after hydration.
+// The browser still reports the real year on mount, which matters for exactly
+// one window a year: between 1 January and the next deploy.
+const currentYear = ref<number | null>(useRuntimeConfig().public.buildYear as number)
 onMounted(() => {
   currentYear.value = new Date().getFullYear()
   // Re-drawn after hydration, so each visit gets its own pick.
@@ -275,7 +278,17 @@ useSeoMeta({
   description: () => t('meta.description'),
   ogTitle: () => t('meta.title'),
   ogDescription: () => t('meta.ogDescription'),
-  twitterCard: 'summary_large_image'
+  ogType: 'website',
+  ogSiteName: 'MMOTOP',
+  // og:locale wants en_US, not the en-US of an hreflang tag.
+  ogLocale: () => bcp47(locale.value).replace('-', '_'),
+  /**
+   * `summary`, not `summary_large_image`. The large card is a promise of a
+   * 1200x630 image and there is no image anywhere in this project, so the
+   * card rendered as a wide empty box. Worth upgrading once there is real
+   * artwork to put in it; until then this declares what actually exists.
+   */
+  twitterCard: 'summary'
 })
 
 function selectCategory(category: string) {
@@ -304,12 +317,23 @@ function onDocumentKeydown(event: KeyboardEvent) {
   }
 }
 
+// Matches .more-dropdown's min-width in the stylesheet.
+const MORE_DROPDOWN_WIDTH = 200
+
 function positionDropdown() {
   const rect = moreWrap.value?.getBoundingClientRect()
   if (!rect) return
+  // Clamped at both ends, which the filter popup already did and this did not.
+  // It matters most in Arabic and Hebrew: the More button mirrors to the left
+  // edge there, so the unclamped `right` put the menu's left edge off-screen
+  // and cut the first eighty pixels off every category name.
+  const right = Math.min(
+    window.innerWidth - rect.right,
+    window.innerWidth - MORE_DROPDOWN_WIDTH - 10
+  )
   dropdownPos.value = {
     top: rect.bottom + 8,
-    right: window.innerWidth - rect.right
+    right: Math.max(10, right)
   }
 }
 
@@ -381,6 +405,10 @@ function gameIcon(game: Game) {
 
     <header class="topbar">
       <NuxtLink to="/" class="brand" :aria-label="$t('nav.home')">MMOTOP</NuxtLink>
+      <!-- The visible wordmark is a link home, not a heading, so the page had
+           five h2s and no h1 at all. This states the subject once, for crawlers
+           and for anyone listing the headings. -->
+      <h1 class="sr-only">{{ $t('meta.title') }}</h1>
 
       <button class="theme-button" type="button" :aria-label="$t('nav.theme')" @click="toggleTheme">
         <svg

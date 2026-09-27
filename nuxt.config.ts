@@ -13,6 +13,20 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  runtimeConfig: {
+    public: {
+      /**
+       * The year the site was built, baked in so the prerendered HTML already
+       * knows which dates count as "this year" and can leave their year label
+       * off. Without it every page shipped fifteen year labels that were
+       * deleted one frame after hydration — a visible reflow on every load in
+       * every language. The browser still corrects this on mount, so the only
+       * stale window is between New Year and the next deploy.
+       */
+      buildYear: new Date().getFullYear()
+    }
+  },
+
   nitro: {
     prerender: {
       crawlLinks: true
