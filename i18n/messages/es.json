@@ -8,7 +8,8 @@
     "home": "Inicio de MMOTOP",
     "theme": "Cambiar tema",
     "language": "Idioma",
-    "login": "ENTRAR"
+    "login": "ENTRAR",
+    "categories": "Categorías de juegos"
   },
   "language": {
     "search": "Buscar idioma",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Buscar juegos",
-    "placeholder": "Buscar juegos..."
+    "placeholder": "Buscar juegos...",
+    "action": "Buscar"
   },
   "categories": {
     "all": "Todos",
@@ -29,7 +31,8 @@
     "new": "JUEGOS NUEVOS",
     "all": "TODOS LOS JUEGOS",
     "viewMore": "Ver más",
-    "shuffle": "Mezclar"
+    "shuffle": "Mezclar",
+    "empty": "Ningún juego coincide con los filtros seleccionados."
   },
   "filter": {
     "open": "Filtro",
@@ -59,5 +62,6 @@
     "oct": "oct",
     "nov": "nov",
     "dec": "dic"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

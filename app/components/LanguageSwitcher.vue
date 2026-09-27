@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { READY_LOCALES, SCRIPT_LABELS, SCRIPT_ORDER, matchesQuery, type Locale } from '~/i18n/locales'
+import { READY_LOCALES, SCRIPT_LABELS, SCRIPT_ORDER, bcp47, matchesQuery, type Locale } from '~/i18n/locales'
 
 const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
@@ -153,13 +153,16 @@ onBeforeUnmount(() => {
             class="lang-item"
             :class="{ active: item.code === locale }"
             :to="switchLocalePath(item.code)"
-            :hreflang="item.code"
+            :hreflang="bcp47(item.code)"
             @click="choose(item.code)"
           >
             <span class="lang-item-code">{{ item.chip }}</span>
-            <!-- dir on the name itself, so العربية sits right inside a list
-                 that is otherwise running left to right. -->
-            <span class="lang-item-name" :dir="item.dir">{{ item.endonym }}</span>
+            <!-- lang and dir on the name itself. dir so العربية sits right
+                 inside a left-to-right list; lang so a screen reader says
+                 日本語 in Japanese rather than spelling it out in English —
+                 this list exists for people who cannot read the interface
+                 around it, and without lang it is unusable by them. -->
+            <span class="lang-item-name" :lang="bcp47(item.code)" :dir="item.dir">{{ item.endonym }}</span>
           </NuxtLink>
         </div>
       </div>

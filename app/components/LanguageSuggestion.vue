@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { READY_LOCALES, type Locale } from '~/i18n/locales'
+import { READY_LOCALES, bcp47, type Locale } from '~/i18n/locales'
 import { SUGGESTIONS, fontUrl } from '~/i18n/suggestions'
 
 const { locale } = useI18n()
@@ -18,21 +18,46 @@ const dismissed = useSuggestionDismissed()
  */
 const suggestion = ref<Locale | null>(null)
 
+/** One preference tag to one of our locales. The full tag first, so pt-BR
+ *  does not collapse into pt, then the bare language. */
+function resolve(preference: string): Locale | undefined {
+  const wanted = preference.toLowerCase()
+  return READY_LOCALES.find(l => l.code === wanted)
+    ?? READY_LOCALES.find(l => l.code === wanted.split('-')[0])
+}
+
+/** "en-us" and "en" are the same language; "pt-br" and "pt" are the same
+ *  language. Two locales that share this are regional siblings. */
+function baseLanguage(code: string): string {
+  return code.split('-')[0]!
+}
+
 /**
  * A stored choice outranks the browser: someone who picked Russian last week
  * meant it, while Accept-Language is only what their operating system was
- * installed with. Falls back to the browser list in preference order, trying
- * the full tag before the bare language so pt-BR does not collapse into pt.
+ * installed with. An unrecognised stored value falls through to the browser
+ * list rather than silencing the banner for a year.
+ *
+ * Nothing is offered to someone already reading their own language, including
+ * a regional sibling of it. A browser sending en-US on the English page used
+ * to be handed "This page is also available in English (US)" — a different
+ * address for the same sentences, aimed at the largest slice of traffic there
+ * is. Which regional flavour someone gets is a detail for the selector, not a
+ * reason to interrupt them.
  */
 function pick(): Locale | null {
-  const preferences = stored.value ? [stored.value] : [...(navigator.languages ?? [navigator.language])]
+  const current = baseLanguage(locale.value)
+  const preferences = [
+    ...(stored.value ? [stored.value] : []),
+    // Not `?? [navigator.language]`: privacy-hardened browsers report an empty
+    // array rather than nothing at all, and ?? would pass it straight through.
+    ...(navigator.languages?.length ? navigator.languages : [navigator.language])
+  ]
   for (const preference of preferences) {
-    const wanted = preference.toLowerCase()
-    const exact = READY_LOCALES.find(l => l.code === wanted)
-    if (exact) return exact
-    const base = wanted.split('-')[0]
-    const loose = READY_LOCALES.find(l => l.code === base)
-    if (loose) return loose
+    const found = resolve(preference)
+    if (!found) continue
+    if (baseLanguage(found.code) === current) return null
+    return found
   }
   return null
 }
@@ -40,8 +65,7 @@ function pick(): Locale | null {
 onMounted(() => {
   if (dismissed.value) return
   const found = pick()
-  // Nothing to offer someone who is already reading it.
-  if (found && found.code !== locale.value && SUGGESTIONS[found.code]) {
+  if (found && SUGGESTIONS[found.code]) {
     suggestion.value = found
   }
 })
@@ -78,11 +102,14 @@ function dismiss() {
 </script>
 
 <template>
-  <!-- dir on the strip, so an Arabic offer reads correctly while the page
-       around it is still running left to right. -->
+  <!-- lang and dir both, and lang is the one that was missing. The whole strip
+       is written in a language the page is not in, and it carries role="status",
+       so a screen reader will read it — in the page's voice unless told
+       otherwise. That covers the dismiss button's label too, which inherits. -->
   <div
     v-if="suggestion && words"
     class="lang-hint"
+    :lang="bcp47(suggestion.code)"
     :dir="suggestion.dir"
     :style="hintStyle"
     role="status"
@@ -98,7 +125,7 @@ function dismiss() {
     <NuxtLink
       class="lang-hint-action"
       :to="switchLocalePath(suggestion.code)"
-      :hreflang="suggestion.code"
+      :hreflang="bcp47(suggestion.code)"
       @click="accept"
     >
       {{ words.action }}

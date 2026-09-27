@@ -165,15 +165,43 @@ export function groupedLocales(from: Locale[] = READY_LOCALES): { script: Script
 }
 
 /**
+ * Letters that carry no combining mark to strip, so NFD leaves them alone.
+ * Each is a letter someone typing on a foreign keyboard will replace with the
+ * one on the right.
+ */
+const STANDALONE: Record<string, string> = {
+  'ə': 'e', 'ł': 'l', 'đ': 'd', 'ø': 'o', 'æ': 'ae', 'œ': 'oe',
+  'ß': 'ss', 'ı': 'i', 'ð': 'd', 'þ': 'th', 'ħ': 'h', 'ŋ': 'n'
+}
+
+/**
+ * Lowercases and drops diacritics, so a query typed on a keyboard that has
+ * none still matches.
+ *
+ * This is the part that makes the search do what it was built for. Without it
+ * "espanol" found nothing at all, because the endonym is ESPAÑOL — and the
+ * person typing without the tilde is exactly the person who most needs to find
+ * their own language in a list of twenty-six. Same for turkce, cestina,
+ * latviesu and azerbaycanca.
+ */
+export function fold(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[əłđøæœßıðþħŋ]/g, ch => STANDALONE[ch] ?? ch)
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+}
+
+/**
  * Matches a typed query against the endonym, the English name and the code, so
  * the list can be narrowed without switching keyboard layouts — "korean",
- * "한국", and "ko" all find the same row.
+ * "한국", "ko" and "espanol" all find their row.
  */
 export function matchesQuery(locale: Locale, query: string): boolean {
-  const q = query.trim().toLowerCase()
+  const q = fold(query.trim())
   if (!q) return true
-  return locale.endonym.toLowerCase().includes(q)
-    || locale.name.toLowerCase().includes(q)
-    || locale.code.toLowerCase().includes(q)
-    || locale.chip.toLowerCase().includes(q)
+  return fold(locale.endonym).includes(q)
+    || fold(locale.name).includes(q)
+    || fold(locale.code).includes(q)
+    || fold(locale.chip).includes(q)
 }

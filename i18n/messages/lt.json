@@ -8,7 +8,8 @@
     "home": "MMOTOP pradžia",
     "theme": "Keisti temą",
     "language": "Kalba",
-    "login": "PRISIJUNGTI"
+    "login": "PRISIJUNGTI",
+    "categories": "Žaidimų kategorijos"
   },
   "language": {
     "search": "Ieškoti kalbos",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Ieškoti žaidimų",
-    "placeholder": "Ieškoti žaidimų..."
+    "placeholder": "Ieškoti žaidimų...",
+    "action": "Ieškoti"
   },
   "categories": {
     "all": "Visi",
@@ -29,7 +31,8 @@
     "new": "NAUJI ŽAIDIMAI",
     "all": "VISI ŽAIDIMAI",
     "viewMore": "Rodyti daugiau",
-    "shuffle": "Sumaišyti"
+    "shuffle": "Sumaišyti",
+    "empty": "Nė vienas žaidimas neatitinka pasirinktų filtrų."
   },
   "filter": {
     "open": "Filtras",
@@ -59,5 +62,6 @@
     "oct": "spal",
     "nov": "lapkr",
     "dec": "gruod"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

@@ -8,7 +8,8 @@
     "home": "MMOTOP 首页",
     "theme": "切换主题",
     "language": "语言",
-    "login": "登录"
+    "login": "登录",
+    "categories": "游戏分类"
   },
   "language": {
     "search": "搜索语言",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "搜索游戏",
-    "placeholder": "搜索游戏..."
+    "placeholder": "搜索游戏...",
+    "action": "搜索"
   },
   "categories": {
     "all": "全部",
@@ -29,7 +31,8 @@
     "new": "新游戏",
     "all": "全部游戏",
     "viewMore": "查看更多",
-    "shuffle": "随机"
+    "shuffle": "随机",
+    "empty": "没有符合所选筛选条件的游戏。"
   },
   "filter": {
     "open": "筛选",
@@ -59,5 +62,6 @@
     "oct": "10月",
     "nov": "11月",
     "dec": "12月"
-  }
+  },
+  "dateFormat": "{month}{day}日"
 }

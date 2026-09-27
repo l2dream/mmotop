@@ -8,7 +8,8 @@
     "home": "MMOTOP forside",
     "theme": "Skift tema",
     "language": "Sprog",
-    "login": "LOG IND"
+    "login": "LOG IND",
+    "categories": "Spilkategorier"
   },
   "language": {
     "search": "Søg sprog",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Søg spil",
-    "placeholder": "Søg spil..."
+    "placeholder": "Søg spil...",
+    "action": "Søg"
   },
   "categories": {
     "all": "Alle",
@@ -29,7 +31,8 @@
     "new": "NYE SPIL",
     "all": "ALLE SPIL",
     "viewMore": "Vis mere",
-    "shuffle": "Bland"
+    "shuffle": "Bland",
+    "empty": "Ingen spil matcher de valgte filtre."
   },
   "filter": {
     "open": "Filter",
@@ -59,5 +62,6 @@
     "oct": "okt",
     "nov": "nov",
     "dec": "dec"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

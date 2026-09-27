@@ -8,7 +8,8 @@
     "home": "MMOTOP avaleht",
     "theme": "Vaheta teema",
     "language": "Keel",
-    "login": "LOGI SISSE"
+    "login": "LOGI SISSE",
+    "categories": "Mängukategooriad"
   },
   "language": {
     "search": "Otsi keelt",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Otsi mänge",
-    "placeholder": "Otsi mänge..."
+    "placeholder": "Otsi mänge...",
+    "action": "Otsi"
   },
   "categories": {
     "all": "Kõik",
@@ -29,7 +31,8 @@
     "new": "UUED MÄNGUD",
     "all": "KÕIK MÄNGUD",
     "viewMore": "Näita rohkem",
-    "shuffle": "Sega"
+    "shuffle": "Sega",
+    "empty": "Ükski mäng ei vasta valitud filtritele."
   },
   "filter": {
     "open": "Filter",
@@ -59,5 +62,6 @@
     "oct": "okt",
     "nov": "nov",
     "dec": "dets"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

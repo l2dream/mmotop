@@ -143,9 +143,21 @@ function parseISODate(iso?: string) {
 
 // Split across two lines in the card, so the column stays narrow: day and month
 // carry the meaning, the year sits under them as the quieter half.
+//
+// The order comes from the locale rather than being hard-coded, because it is
+// the one thing that genuinely differs between English and American English:
+// everyone else writes 5 Oct, the United States writes Oct 5. Getting that
+// wrong is exactly the confusion the worded month was adopted to avoid.
 function formatDayMonth(iso?: string) {
   const parsed = parseISODate(iso)
-  return parsed ? `${parsed.day} ${MONTHS.value[parsed.month - 1]}` : iso ?? ''
+  if (!parsed) return iso ?? ''
+  // Handed to vue-i18n as parameters rather than patched in with .replace():
+  // {day} and {month} are its own interpolation syntax, and a plain t() call
+  // resolves them against nothing and returns a bare space.
+  return t('dateFormat', {
+    day: parsed.day,
+    month: MONTHS.value[parsed.month - 1] ?? ''
+  })
 }
 
 // Null until the browser reports the year. A static build can't know it, and
@@ -433,7 +445,7 @@ function gameIcon(game: Game) {
           </svg>
           <span v-if="activeFilterCount > 0" class="filter-badge">{{ activeFilterCount }}</span>
         </button>
-        <button class="search-icon" type="button" aria-label="Search" @click="submitSearch">
+        <button class="search-icon" type="button" :aria-label="$t('search.action')" @click="submitSearch">
           <svg class="search-svg" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <circle cx="8.5" cy="8.5" r="5.5" />
             <line x1="12.7" y1="12.7" x2="17" y2="17" />
@@ -530,7 +542,7 @@ function gameIcon(game: Game) {
 
     <LanguageSuggestion />
 
-    <nav class="category-bar" aria-label="Game categories">
+    <nav class="category-bar" :aria-label="$t('nav.categories')">
       <button
         v-for="category in visibleCategories"
         :key="category"
@@ -647,7 +659,7 @@ function gameIcon(game: Game) {
               </span>
             </span>
           </div>
-          <div v-if="filteredGames.length === 0" class="empty-state">No games match the selected filters.</div>
+          <div v-if="filteredGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
 
@@ -695,7 +707,7 @@ function gameIcon(game: Game) {
               <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
-          <div v-if="filteredSoon.length === 0" class="empty-state">No games match the selected filters.</div>
+          <div v-if="filteredSoon.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
 
@@ -727,7 +739,7 @@ function gameIcon(game: Game) {
               <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
-          <div v-if="filteredStarted.length === 0" class="empty-state">No games match the selected filters.</div>
+          <div v-if="filteredStarted.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
       </section>
@@ -764,7 +776,7 @@ function gameIcon(game: Game) {
               <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
             </span>
           </div>
-          <div v-if="filteredNewGames.length === 0" class="empty-state">No games match the selected filters.</div>
+          <div v-if="filteredNewGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
 
@@ -812,7 +824,7 @@ function gameIcon(game: Game) {
               <small class="version-rate">{{ game.players }}</small>
             </span>
           </div>
-          <div v-if="filteredAllGames.length === 0" class="empty-state">No games match the selected filters.</div>
+          <div v-if="filteredAllGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
       </section>

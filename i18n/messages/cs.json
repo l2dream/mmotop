@@ -8,7 +8,8 @@
     "home": "MMOTOP – domů",
     "theme": "Přepnout motiv",
     "language": "Jazyk",
-    "login": "PŘIHLÁSIT"
+    "login": "PŘIHLÁSIT",
+    "categories": "Kategorie her"
   },
   "language": {
     "search": "Hledat jazyk",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Hledat hry",
-    "placeholder": "Hledat hry..."
+    "placeholder": "Hledat hry...",
+    "action": "Hledat"
   },
   "categories": {
     "all": "Vše",
@@ -29,7 +31,8 @@
     "new": "NOVÉ HRY",
     "all": "VŠECHNY HRY",
     "viewMore": "Zobrazit více",
-    "shuffle": "Zamíchat"
+    "shuffle": "Zamíchat",
+    "empty": "Žádná hra neodpovídá zvoleným filtrům."
   },
   "filter": {
     "open": "Filtr",
@@ -59,5 +62,6 @@
     "oct": "říj",
     "nov": "lis",
     "dec": "pro"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

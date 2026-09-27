@@ -8,7 +8,8 @@
     "home": "MMOTOP – strona główna",
     "theme": "Zmień motyw",
     "language": "Język",
-    "login": "ZALOGUJ"
+    "login": "ZALOGUJ",
+    "categories": "Kategorie gier"
   },
   "language": {
     "search": "Szukaj języka",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Szukaj gier",
-    "placeholder": "Szukaj gier..."
+    "placeholder": "Szukaj gier...",
+    "action": "Szukaj"
   },
   "categories": {
     "all": "Wszystkie",
@@ -29,7 +31,8 @@
     "new": "NOWE GRY",
     "all": "WSZYSTKIE GRY",
     "viewMore": "Pokaż więcej",
-    "shuffle": "Wymieszaj"
+    "shuffle": "Wymieszaj",
+    "empty": "Żadna gra nie pasuje do wybranych filtrów."
   },
   "filter": {
     "open": "Filtr",
@@ -59,5 +62,6 @@
     "oct": "paź",
     "nov": "lis",
     "dec": "gru"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

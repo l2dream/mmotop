@@ -8,7 +8,8 @@
     "home": "MMOTOP home",
     "theme": "Toggle theme",
     "language": "Language",
-    "login": "LOGIN"
+    "login": "LOGIN",
+    "categories": "Game categories"
   },
   "language": {
     "search": "Search language",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Search games",
-    "placeholder": "Search games..."
+    "placeholder": "Search games...",
+    "action": "Search"
   },
   "categories": {
     "all": "All",
@@ -29,7 +31,8 @@
     "new": "NEW GAMES",
     "all": "ALL GAMES",
     "viewMore": "View more",
-    "shuffle": "Shuffle"
+    "shuffle": "Shuffle",
+    "empty": "No games match the selected filters."
   },
   "filter": {
     "open": "Filter",
@@ -59,5 +62,6 @@
     "oct": "Oct",
     "nov": "Nov",
     "dec": "Dec"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

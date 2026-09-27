@@ -8,7 +8,8 @@
     "home": "MMOTOP hjem",
     "theme": "Bytt tema",
     "language": "Språk",
-    "login": "LOGG INN"
+    "login": "LOGG INN",
+    "categories": "Spillkategorier"
   },
   "language": {
     "search": "Søk språk",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Søk spill",
-    "placeholder": "Søk spill..."
+    "placeholder": "Søk spill...",
+    "action": "Søk"
   },
   "categories": {
     "all": "Alle",
@@ -29,7 +31,8 @@
     "new": "NYE SPILL",
     "all": "ALLE SPILL",
     "viewMore": "Vis mer",
-    "shuffle": "Bland"
+    "shuffle": "Bland",
+    "empty": "Ingen spill samsvarer med de valgte filtrene."
   },
   "filter": {
     "open": "Filter",
@@ -59,5 +62,6 @@
     "oct": "okt",
     "nov": "nov",
     "dec": "des"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

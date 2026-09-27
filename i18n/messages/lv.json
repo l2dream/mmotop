@@ -8,7 +8,8 @@
     "home": "MMOTOP sākumlapa",
     "theme": "Mainīt tēmu",
     "language": "Valoda",
-    "login": "PIETEIKTIES"
+    "login": "PIETEIKTIES",
+    "categories": "Spēļu kategorijas"
   },
   "language": {
     "search": "Meklēt valodu",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Meklēt spēles",
-    "placeholder": "Meklēt spēles..."
+    "placeholder": "Meklēt spēles...",
+    "action": "Meklēt"
   },
   "categories": {
     "all": "Visas",
@@ -29,7 +31,8 @@
     "new": "JAUNAS SPĒLES",
     "all": "VISAS SPĒLES",
     "viewMore": "Rādīt vairāk",
-    "shuffle": "Sajaukt"
+    "shuffle": "Sajaukt",
+    "empty": "Neviena spēle neatbilst izvēlētajiem filtriem."
   },
   "filter": {
     "open": "Filtrs",
@@ -59,5 +62,6 @@
     "oct": "okt",
     "nov": "nov",
     "dec": "dec"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }

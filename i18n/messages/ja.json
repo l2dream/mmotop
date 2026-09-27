@@ -8,7 +8,8 @@
     "home": "MMOTOP ホーム",
     "theme": "テーマ切替",
     "language": "言語",
-    "login": "ログイン"
+    "login": "ログイン",
+    "categories": "ゲームカテゴリ"
   },
   "language": {
     "search": "言語を検索",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "ゲームを検索",
-    "placeholder": "ゲームを検索..."
+    "placeholder": "ゲームを検索...",
+    "action": "検索"
   },
   "categories": {
     "all": "すべて",
@@ -29,7 +31,8 @@
     "new": "新着ゲーム",
     "all": "すべてのゲーム",
     "viewMore": "もっと見る",
-    "shuffle": "シャッフル"
+    "shuffle": "シャッフル",
+    "empty": "選択した条件に一致するゲームはありません。"
   },
   "filter": {
     "open": "絞り込み",
@@ -59,5 +62,6 @@
     "oct": "10月",
     "nov": "11月",
     "dec": "12月"
-  }
+  },
+  "dateFormat": "{month}{day}日"
 }

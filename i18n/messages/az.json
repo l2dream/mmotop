@@ -8,7 +8,8 @@
     "home": "MMOTOP ana səhifə",
     "theme": "Mövzunu dəyiş",
     "language": "Dil",
-    "login": "GİRİŞ"
+    "login": "GİRİŞ",
+    "categories": "Oyun kateqoriyaları"
   },
   "language": {
     "search": "Dil axtar",
@@ -16,7 +17,8 @@
   },
   "search": {
     "label": "Oyun axtar",
-    "placeholder": "Oyun axtar..."
+    "placeholder": "Oyun axtar...",
+    "action": "Axtar"
   },
   "categories": {
     "all": "Hamısı",
@@ -29,7 +31,8 @@
     "new": "YENİ OYUNLAR",
     "all": "BÜTÜN OYUNLAR",
     "viewMore": "Daha çox göstər",
-    "shuffle": "Qarışdır"
+    "shuffle": "Qarışdır",
+    "empty": "Seçilmiş filtrlərə uyğun oyun yoxdur."
   },
   "filter": {
     "open": "Filtr",
@@ -59,5 +62,6 @@
     "oct": "okt",
     "nov": "noy",
     "dec": "dek"
-  }
+  },
+  "dateFormat": "{day} {month}"
 }
