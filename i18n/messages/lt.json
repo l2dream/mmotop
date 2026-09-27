@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Ieškoti kalbos",
-    "nothing": "Nieko nerasta"
+    "nothing": "Nieko nerasta",
+    "results": "Rasta: {count}"
   },
   "search": {
     "label": "Ieškoti žaidimų",

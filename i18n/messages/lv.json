@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Meklēt valodu",
-    "nothing": "Nav rezultātu"
+    "nothing": "Nav rezultātu",
+    "results": "Atrasts: {count}"
   },
   "search": {
     "label": "Meklēt spēles",

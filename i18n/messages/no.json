@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Søk språk",
-    "nothing": "Ingen treff"
+    "nothing": "Ingen treff",
+    "results": "Funnet: {count}"
   },
   "search": {
     "label": "Søk spill",

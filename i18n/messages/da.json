@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Søg sprog",
-    "nothing": "Ingen resultater"
+    "nothing": "Ingen resultater",
+    "results": "Fundet: {count}"
   },
   "search": {
     "label": "Søg spil",

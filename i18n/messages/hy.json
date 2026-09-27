@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Որոնել լեզու",
-    "nothing": "Ոչինչ չի գտնվել"
+    "nothing": "Ոչինչ չի գտնվել",
+    "results": "Գտնվել է՝ {count}"
   },
   "search": {
     "label": "Որոնել խաղեր",

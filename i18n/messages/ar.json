@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "البحث عن لغة",
-    "nothing": "لا توجد نتائج"
+    "nothing": "لا توجد نتائج",
+    "results": "النتائج: {count}"
   },
   "search": {
     "label": "البحث عن ألعاب",

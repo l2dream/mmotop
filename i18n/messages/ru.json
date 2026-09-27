@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Поиск языка",
-    "nothing": "Ничего не найдено"
+    "nothing": "Ничего не найдено",
+    "results": "Найдено: {count}"
   },
   "search": {
     "label": "Поиск игр",

@@ -8,6 +8,7 @@ const open = ref(false)
 const query = ref('')
 const wrap = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
+const trigger = ref<HTMLButtonElement | null>(null)
 const searchEl = ref<HTMLInputElement | null>(null)
 const pos = ref({ top: 0, right: 0 })
 
@@ -31,6 +32,8 @@ const groups = computed(() =>
 
 const empty = computed(() => groups.value.length === 0)
 
+const matchCount = computed(() => groups.value.reduce((n, g) => n + g.locales.length, 0))
+
 /**
  * Remembers the choice so a later visit can offer it. Deliberately only
  * written on an actual click: a cookie set by merely looking at the page would
@@ -41,8 +44,8 @@ const stored = useStoredLocale()
 
 function choose(code: string) {
   stored.value = code
-  open.value = false
-  query.value = ''
+  // No focus return here: the click navigates, and the new page decides.
+  close(false)
 }
 
 // Sized so PORTUGUÊS (BRASIL), the longest name on the list, fits its column
@@ -60,9 +63,25 @@ function position() {
   pos.value = { top: rect.bottom + 10, right: Math.max(10, right) }
 }
 
-async function toggle() {
-  open.value = !open.value
+/**
+ * Closes, and puts focus back where it came from.
+ *
+ * Without the second half a keyboard user pressed Escape and landed nowhere:
+ * focus was on a node that had just been removed, so the browser reset them to
+ * the top of the document and they had to tab past the wordmark, the theme
+ * button, the search field, the filter and the whole category bar to get back
+ * to where they already were.
+ */
+function close(returnFocus = true) {
   if (!open.value) return
+  open.value = false
+  query.value = ''
+  if (returnFocus) trigger.value?.focus()
+}
+
+async function toggle() {
+  if (open.value) return close()
+  open.value = true
   position()
   await nextTick()
   // Twenty-six names is more than anyone wants to read through, so the caret
@@ -70,18 +89,43 @@ async function toggle() {
   searchEl.value?.focus()
 }
 
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled])'
+
+/**
+ * Keeps Tab inside the panel while it is open.
+ *
+ * It claims role="dialog", and a dialog that lets Tab wander onto the LOGIN
+ * button behind it is lying to whoever is listening. Wrapping in both
+ * directions is the whole of it.
+ */
+function trapTab(event: KeyboardEvent) {
+  if (event.key !== 'Tab' || !panel.value) return
+  const items = [...panel.value.querySelectorAll<HTMLElement>(FOCUSABLE)]
+  if (items.length === 0) return
+  const first = items[0]!
+  const last = items[items.length - 1]!
+  const active = document.activeElement
+  if (event.shiftKey && (active === first || !panel.value.contains(active))) {
+    event.preventDefault()
+    last.focus()
+  } else if (!event.shiftKey && active === last) {
+    event.preventDefault()
+    first.focus()
+  }
+}
+
 function onPointerDown(event: MouseEvent) {
   if (!open.value) return
   const target = event.target as Node
   if (wrap.value?.contains(target) || panel.value?.contains(target)) return
-  open.value = false
+  // Clicked elsewhere on purpose, so leave focus where the click put it.
+  close(false)
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (event.key === 'Escape' && open.value) {
-    open.value = false
-    query.value = ''
-  }
+  if (!open.value) return
+  if (event.key === 'Escape') return close()
+  trapTab(event)
 }
 
 onMounted(() => {
@@ -102,10 +146,11 @@ onBeforeUnmount(() => {
 <template>
   <div class="lang-wrap" ref="wrap">
     <button
+      ref="trigger"
       class="lang-button"
       type="button"
       :aria-label="t('nav.language')"
-      aria-haspopup="true"
+      aria-haspopup="dialog"
       :aria-expanded="open"
       @click="toggle"
     >
@@ -124,6 +169,7 @@ onBeforeUnmount(() => {
       ref="panel"
       class="lang-panel"
       role="dialog"
+      aria-modal="true"
       :aria-label="t('nav.language')"
       :style="{ top: pos.top + 'px', right: pos.right + 'px' }"
     >
@@ -142,6 +188,12 @@ onBeforeUnmount(() => {
         />
       </div>
 
+      <!-- Typing narrows the list silently otherwise: a screen reader user gets
+           no signal that anything happened, including when everything vanished. -->
+      <p class="sr-only" role="status" aria-live="polite">
+        {{ empty ? t('language.nothing') : t('language.results', { count: matchCount }) }}
+      </p>
+
       <div v-if="empty" class="lang-empty">{{ t('language.nothing') }}</div>
 
       <div v-else class="lang-columns">
@@ -152,6 +204,7 @@ onBeforeUnmount(() => {
             :key="item.code"
             class="lang-item"
             :class="{ active: item.code === locale }"
+            :aria-current="item.code === locale ? 'true' : undefined"
             :to="switchLocalePath(item.code)"
             :hreflang="bcp47(item.code)"
             @click="choose(item.code)"

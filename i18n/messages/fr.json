@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Rechercher une langue",
-    "nothing": "Aucun résultat"
+    "nothing": "Aucun résultat",
+    "results": "Trouvés : {count}"
   },
   "search": {
     "label": "Rechercher des jeux",

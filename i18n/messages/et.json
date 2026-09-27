@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Otsi keelt",
-    "nothing": "Vasteid ei leitud"
+    "nothing": "Vasteid ei leitud",
+    "results": "Leitud: {count}"
   },
   "search": {
     "label": "Otsi mänge",

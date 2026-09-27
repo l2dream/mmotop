@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Dil axtar",
-    "nothing": "Nəticə yoxdur"
+    "nothing": "Nəticə yoxdur",
+    "results": "Tapıldı: {count}"
   },
   "search": {
     "label": "Oyun axtar",

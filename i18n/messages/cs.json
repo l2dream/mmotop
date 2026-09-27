@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Hledat jazyk",
-    "nothing": "Nic nenalezeno"
+    "nothing": "Nic nenalezeno",
+    "results": "Nalezeno: {count}"
   },
   "search": {
     "label": "Hledat hry",

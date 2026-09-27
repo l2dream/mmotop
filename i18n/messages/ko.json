@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "언어 검색",
-    "nothing": "결과 없음"
+    "nothing": "결과 없음",
+    "results": "{count}개"
   },
   "search": {
     "label": "게임 검색",

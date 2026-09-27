@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "搜索语言",
-    "nothing": "无结果"
+    "nothing": "无结果",
+    "results": "找到 {count} 个"
   },
   "search": {
     "label": "搜索游戏",

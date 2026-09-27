@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "חיפוש שפה",
-    "nothing": "אין תוצאות"
+    "nothing": "אין תוצאות",
+    "results": "נמצאו: {count}"
   },
   "search": {
     "label": "חיפוש משחקים",

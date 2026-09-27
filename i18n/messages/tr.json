@@ -13,7 +13,8 @@
   },
   "language": {
     "search": "Dil ara",
-    "nothing": "Sonuç yok"
+    "nothing": "Sonuç yok",
+    "results": "Bulundu: {count}"
   },
   "search": {
     "label": "Oyun ara",
