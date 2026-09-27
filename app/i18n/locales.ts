@@ -105,19 +105,35 @@ export const LOCALES: Locale[] = [
 export const DEFAULT_LOCALE = 'en'
 
 /**
- * Which of the twenty-six actually have a message file today.
+ * Which of the languages above actually have a message file today.
  *
- * The list above is the plan; this is the state. They are kept apart on
- * purpose: a language only becomes a real URL, a real hreflang tag and a real
- * row in the selector once there is something to read there. Publishing
- * twenty-six addresses that all serve English would earn us twenty-six pages
- * of duplicate content and a selector that lies to the person clicking it.
+ * Written out by hand, and that is the whole point. It was briefly
+ * `LOCALES.map(l => l.code)`, which made the filter below a no-op and turned
+ * the paragraph you are reading into a promise the code did not keep: a
+ * twenty-seventh entry in LOCALES would have been routed, put in the hreflang
+ * cluster on every page and listed in the selector before anyone had written
+ * a word of it.
  *
- * Translating a language means adding its code here and dropping in the file.
+ * The list above is the plan; this is the state. A language becomes a real
+ * URL, a real hreflang tag and a real row in the selector only once there is
+ * something to read there. Adding one means a line here and a file in
+ * i18n/messages — and the check below fails the build if you do one without
+ * the other.
  */
-export const READY_CODES = LOCALES.map(l => l.code)
+export const READY_CODES = [
+  'az', 'cs', 'da', 'de', 'et', 'en', 'en-us', 'es', 'fr', 'lv', 'lt', 'no',
+  'pl', 'pt', 'pt-br', 'sv', 'tr', 'ru', 'uk', 'el', 'hy', 'ar', 'he',
+  'zh', 'ja', 'ko'
+]
 
 export const READY_LOCALES: Locale[] = LOCALES.filter(l => READY_CODES.includes(l.code))
+
+/** A code in READY_CODES that names no language is the other way to get this
+ *  wrong, and it fails quietly — the locale simply never appears. */
+const UNKNOWN = READY_CODES.filter(code => !LOCALES.some(l => l.code === code))
+if (UNKNOWN.length > 0) {
+  throw new Error(`READY_CODES names languages that do not exist: ${UNKNOWN.join(', ')}`)
+}
 
 /** Headings for the selector, in the order the groups appear. */
 export const SCRIPT_ORDER: Script[] = ['latin', 'cyrillic', 'greek', 'armenian', 'arabic', 'hebrew', 'east-asian']
@@ -132,9 +148,6 @@ export const SCRIPT_LABELS: Record<Script, string> = {
   'east-asian': 'East Asian'
 }
 
-/** True once any right-to-left language exists, which is what the mirrored
- *  stylesheet and the <html dir> switch were built for. */
-export const HAS_RTL = LOCALES.some(l => l.dir === 'rtl')
 
 export function localeByCode(code: string): Locale | undefined {
   return LOCALES.find(l => l.code === code)
@@ -150,16 +163,29 @@ export function bcp47(code: string): string {
   return region ? `${language}-${region.toUpperCase()}` : language!
 }
 
+export interface LocaleGroup {
+  script: Script
+  label: string
+  locales: Locale[]
+}
+
 /**
  * The selector's groups, built from the list so the two cannot drift apart.
- * Defaults to what is translated; pass LOCALES to see the whole plan.
+ *
+ * The selector used to rebuild this inline — which is exactly the drift this
+ * docblock claimed to prevent, happening inside the file that claimed it. It
+ * takes the filter as an argument now, which is the only reason the copy
+ * existed.
  */
-export function groupedLocales(from: Locale[] = READY_LOCALES): { script: Script, label: string, locales: Locale[] }[] {
+export function groupedLocales(
+  keep: (locale: Locale) => boolean = () => true,
+  from: Locale[] = READY_LOCALES
+): LocaleGroup[] {
   return SCRIPT_ORDER
     .map(script => ({
       script,
       label: SCRIPT_LABELS[script],
-      locales: from.filter(l => l.script === script)
+      locales: from.filter(l => l.script === script && keep(l))
     }))
     .filter(group => group.locales.length > 0)
 }

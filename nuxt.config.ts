@@ -64,10 +64,14 @@ export default defineNuxtConfig({
      *  twenty-six languages, bundling them all would be absurd. */
     lazy: true,
 
-    /** Anything not yet translated shows the English string rather than the
-     *  key. A half-translated page beats `panels.top` on screen. */
-    defaultLocaleRouteNameSuffix: 'default',
-    bundle: { optimizeTranslationDirective: false },
+    /**
+     * Translation fallback is NOT configured here — it is `fallbackLocale` in
+     * i18n/i18n.config.ts. Two options used to sit at this spot under a
+     * comment describing it: `defaultLocaleRouteNameSuffix: 'default'`, which
+     * merely repeated the module's own default, and `optimizeTranslationDirective`,
+     * which is not a v10 option at all and was ignored. Anyone coming here to
+     * fix the fallback would have edited neither of the lines that matter.
+     */
 
     /**
      * No automatic redirect by browser language. Google asks for this

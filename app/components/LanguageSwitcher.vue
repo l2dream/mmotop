@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { READY_LOCALES, SCRIPT_LABELS, SCRIPT_ORDER, bcp47, matchesQuery, type Locale } from '~/i18n/locales'
+import { DEFAULT_LOCALE, READY_LOCALES, bcp47, groupedLocales, localeByCode, matchesQuery, type Locale } from '~/i18n/locales'
 
 const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
@@ -12,23 +12,23 @@ const trigger = ref<HTMLButtonElement | null>(null)
 const searchEl = ref<HTMLInputElement | null>(null)
 const pos = ref({ top: 0, right: 0 })
 
+/**
+ * Falls back to the default language, not to the first row of the list.
+ *
+ * READY_LOCALES is sorted by endonym, so AZƏRBAYCANCA is index zero — and any
+ * state where the current locale is not in the registry used to show an AZ
+ * chip to someone who is not reading Azerbaijani. Failing to the wrong thing
+ * quietly is worse than failing to English.
+ */
 const current = computed<Locale>(
-  () => READY_LOCALES.find(l => l.code === locale.value) ?? READY_LOCALES[0]!
+  () => localeByCode(locale.value) ?? localeByCode(DEFAULT_LOCALE) ?? READY_LOCALES[0]!
 )
 
 /**
  * The groups, narrowed by whatever is typed. Empty groups drop out, so a
  * search for "kor" leaves one heading rather than seven, six of them bare.
  */
-const groups = computed(() =>
-  SCRIPT_ORDER
-    .map(script => ({
-      script,
-      label: SCRIPT_LABELS[script],
-      locales: READY_LOCALES.filter(l => l.script === script && matchesQuery(l, query.value))
-    }))
-    .filter(group => group.locales.length > 0)
-)
+const groups = computed(() => groupedLocales(l => matchesQuery(l, query.value)))
 
 const empty = computed(() => groups.value.length === 0)
 
