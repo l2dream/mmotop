@@ -28,7 +28,32 @@ const current = computed<Locale>(
  * The groups, narrowed by whatever is typed. Empty groups drop out, so a
  * search for "kor" leaves one heading rather than seven, six of them bare.
  */
-const groups = computed(() => groupedLocales(l => matchesQuery(l, query.value)))
+/**
+ * True while an input method is mid-word: Hangul assembling a syllable, or
+ * pinyin and romaji still spelled out in Latin before they commit.
+ */
+const composing = ref(false)
+
+/**
+ * What the list actually filters on.
+ *
+ * During composition the field holds something provisional, and narrowing on
+ * it cuts both ways. Korean builds up real text — ㅎ, 하, 한 — and each step is
+ * worth filtering by. Pinyin and romaji do not: "zhongwen" matches nothing
+ * until it becomes 中文, so filtering on it would flash "No matches" at
+ * someone in the middle of typing their own language's name.
+ *
+ * So a composing query narrows the list when it finds something and is
+ * ignored when it does not. Nothing provisional is ever allowed to empty the
+ * list.
+ */
+const effectiveQuery = computed(() => {
+  if (!composing.value) return query.value
+  const hits = READY_LOCALES.some(l => matchesQuery(l, query.value))
+  return hits ? query.value : ''
+})
+
+const groups = computed(() => groupedLocales(l => matchesQuery(l, effectiveQuery.value)))
 
 const empty = computed(() => groups.value.length === 0)
 
@@ -178,13 +203,25 @@ onBeforeUnmount(() => {
           <circle cx="11" cy="11" r="7" />
           <path d="M20 20l-3.5-3.5" stroke-linecap="round" />
         </svg>
+        <!-- Bound by hand rather than with v-model, which is the whole fix.
+             v-model installs a composition guard and drops every `input` event
+             fired while an input method is composing, so a Korean visitor
+             typing 한국 saw all twenty-six rows sit there until they committed.
+             A plain @input listener receives those events. -->
         <input
           ref="searchEl"
-          v-model="query"
+          :value="query"
           type="text"
           class="lang-search-input"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
           :placeholder="t('language.search')"
           :aria-label="t('language.search')"
+          @input="query = ($event.target as HTMLInputElement).value"
+          @compositionstart="composing = true"
+          @compositionend="composing = false"
         />
       </div>
 
