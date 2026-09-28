@@ -81,10 +81,24 @@ function position() {
   const rect = wrap.value?.getBoundingClientRect()
   if (!rect) return
   const width = Math.min(PANEL_WIDTH, window.innerWidth - 20)
-  const right = Math.min(
-    window.innerWidth - rect.right,
-    window.innerWidth - width - 10
-  )
+
+  /**
+   * The panel hangs from the button's trailing edge — its right in a
+   * left-to-right page, its left in a right-to-left one.
+   *
+   * Mirroring this was missed when the rest of the layout went logical. The
+   * anchor stayed physical, so on /ar the button sat near the left of the bar
+   * while the panel still measured from the right, and the clamp then slid it
+   * to the viewport edge: a 640px panel floating five hundred pixels away from
+   * the control that opened it. Positions computed in JavaScript do not
+   * inherit anything from the stylesheet's logical properties.
+   */
+  const rtl = document.documentElement.dir === 'rtl'
+  const anchored = rtl
+    ? window.innerWidth - rect.left - width
+    : window.innerWidth - rect.right
+
+  const right = Math.min(anchored, window.innerWidth - width - 10)
   pos.value = { top: rect.bottom + 10, right: Math.max(10, right) }
 }
 
