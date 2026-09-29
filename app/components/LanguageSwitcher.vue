@@ -67,9 +67,20 @@ const matchCount = computed(() => groups.value.reduce((n, g) => n + g.locales.le
  */
 const stored = useStoredLocale()
 
+/**
+ * Survives the remount, which is the whole trick.
+ *
+ * Choosing a language is a client-side route change, and index.vue — this
+ * component's parent — is destroyed and rebuilt by it. Focusing the trigger
+ * inside choose() therefore focused an element that was about to be thrown
+ * away, and the visitor still landed on <body>. The flag is set before
+ * navigating and read by the new instance once it exists.
+ */
+const focusAfterSwitch = useState('lang-focus-after-switch', () => false)
+
 function choose(code: string) {
   stored.value = code
-  // No focus return here: the click navigates, and the new page decides.
+  focusAfterSwitch.value = true
   close(false)
 }
 
@@ -115,6 +126,14 @@ function close(returnFocus = true) {
   if (!open.value) return
   open.value = false
   query.value = ''
+  /**
+   * Cleared here as well as on compositionend, because closing mid-composition
+   * removes the input before that event can fire. Left true, it stuck for the
+   * rest of the session: every fruitless query was then treated as no query,
+   * so typing nonsense listed all twenty-six languages and "No matches" became
+   * unreachable.
+   */
+  composing.value = false
   if (returnFocus) trigger.value?.focus()
 }
 
@@ -144,10 +163,14 @@ function trapTab(event: KeyboardEvent) {
   const first = items[0]!
   const last = items[items.length - 1]!
   const active = document.activeElement
-  if (event.shiftKey && (active === first || !panel.value.contains(active))) {
+  // Focus can sit outside the panel while it is open — clicking a group
+  // heading or the padding blurs the field onto <body> without closing
+  // anything. Both directions pull it back in rather than only shift+Tab.
+  const outside = !panel.value.contains(active)
+  if (event.shiftKey && (active === first || outside)) {
     event.preventDefault()
     last.focus()
-  } else if (!event.shiftKey && active === last) {
+  } else if (!event.shiftKey && (active === last || outside)) {
     event.preventDefault()
     first.focus()
   }
@@ -168,6 +191,11 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 onMounted(() => {
+  if (focusAfterSwitch.value) {
+    focusAfterSwitch.value = false
+    // Back on the control they used, rather than at the top of the document.
+    trigger.value?.focus()
+  }
   document.addEventListener('mousedown', onPointerDown)
   document.addEventListener('keydown', onKeydown)
   window.addEventListener('resize', position)

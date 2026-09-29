@@ -93,9 +93,14 @@ function shuffleGames() {
   shuffleTurns.value++
 }
 
-const activeCategory = ref('All')
-const query = ref('')
-const dark = ref(true)
+// Held outside the component: switching language rebuilds this page, and
+// everything the visitor deliberately set would be thrown away with it.
+// See useDashboardState for the full reasoning.
+const {
+  dark, query, activeCategory,
+  filters, customRateActive, customRateMin, customRateMax
+} = useDashboardState()
+
 const showMore = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
 const moreWrap = ref<HTMLElement | null>(null)
@@ -183,16 +188,6 @@ function formatYear(iso?: string) {
   return String(parsed.year)
 }
 
-const filters = reactive({
-  version: '',
-  minRating: 0,
-  title: '',
-  rates: [] as string[]
-})
-
-const customRateActive = ref(false)
-const customRateMin = ref('')
-const customRateMax = ref('')
 
 const customMin = computed(() => {
   const n = parseInt(customRateMin.value, 10)
@@ -203,7 +198,7 @@ const customMax = computed(() => {
   return Number.isFinite(n) ? n : null
 })
 const customRateSet = computed(() => customMin.value != null || customMax.value != null)
-const rateFilterActive = computed(() => filters.rates.length > 0 || (customRateActive.value && customRateSet.value))
+const rateFilterActive = computed(() => filters.value.rates.length > 0 || (customRateActive.value && customRateSet.value))
 
 const filterOpen = ref(false)
 const filterButtonEl = ref<HTMLElement | null>(null)
@@ -212,19 +207,19 @@ const filterPos = ref({ top: 0, left: 0 })
 
 const activeFilterCount = computed(
   () =>
-    (filters.version ? 1 : 0) +
-    (filters.minRating ? 1 : 0) +
-    (filters.title ? 1 : 0) +
+    (filters.value.version ? 1 : 0) +
+    (filters.value.minRating ? 1 : 0) +
+    (filters.value.title ? 1 : 0) +
     (rateFilterActive.value ? 1 : 0)
 )
 
 function matchesFilters(game: Game) {
-  if (filters.version && game.version !== filters.version) return false
-  if (filters.minRating && game.stars < filters.minRating) return false
-  if (filters.title && game.title !== filters.title) return false
+  if (filters.value.version && game.version !== filters.value.version) return false
+  if (filters.value.minRating && game.stars < filters.value.minRating) return false
+  if (filters.value.title && game.title !== filters.value.title) return false
   if (rateFilterActive.value) {
     const rate = getRate(game)
-    const inPreset = filters.rates.some((label) => {
+    const inPreset = filters.value.rates.some((label) => {
       const tier = rateTiers.find((t) => t.label === label)
       return tier && rate >= tier.min && rate <= tier.max
     })
@@ -239,9 +234,9 @@ function matchesFilters(game: Game) {
 }
 
 function toggleRateFilter(label: string) {
-  const idx = filters.rates.indexOf(label)
-  if (idx === -1) filters.rates.push(label)
-  else filters.rates.splice(idx, 1)
+  const idx = filters.value.rates.indexOf(label)
+  if (idx === -1) filters.value.rates.push(label)
+  else filters.value.rates.splice(idx, 1)
 }
 
 function toggleCustomRate() {
@@ -249,10 +244,10 @@ function toggleCustomRate() {
 }
 
 function resetFilters() {
-  filters.version = ''
-  filters.minRating = 0
-  filters.title = ''
-  filters.rates = []
+  filters.value.version = ''
+  filters.value.minRating = 0
+  filters.value.title = ''
+  filters.value.rates = []
   customRateActive.value = false
   customRateMin.value = ''
   customRateMax.value = ''

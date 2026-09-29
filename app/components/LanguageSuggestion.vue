@@ -18,12 +18,45 @@ const dismissed = useSuggestionDismissed()
  */
 const suggestion = ref<Locale | null>(null)
 
+/**
+ * Language tags a browser sends that are not the code we route under.
+ *
+ * Norwegian is the one that bit: NORSK lives at /no/ because that is what a
+ * reader expects in the address bar, but no browser has ever sent "no" — a
+ * Norwegian system sends nb-NO, nb, or nn. Neither the full tag nor its base
+ * matched anything, so the banner silently never offered Norwegian to
+ * Norwegians, which is the entire audience it exists for.
+ *
+ * Also handles the script subtags: someone reading Traditional Chinese should
+ * not be handed Simplified, so zh-Hant is left unmatched until 繁體中文 exists
+ * as its own locale.
+ */
+const ALIASES: Record<string, string> = {
+  nb: 'no',
+  nn: 'no',
+  'zh-hans': 'zh',
+  'zh-cn': 'zh',
+  'zh-sg': 'zh',
+  iw: 'he',   // the old ISO code for Hebrew, still sent by some systems
+  in: 'id',   // and for Indonesian, so it does not fall through to anything
+  ji: 'yi'
+}
+
+const UNMATCHABLE = ['zh-hant', 'zh-tw', 'zh-hk', 'zh-mo']
+
 /** One preference tag to one of our locales. The full tag first, so pt-BR
- *  does not collapse into pt, then the bare language. */
+ *  does not collapse into pt, then an alias, then the bare language. */
 function resolve(preference: string): Locale | undefined {
   const wanted = preference.toLowerCase()
-  return READY_LOCALES.find(l => l.code === wanted)
-    ?? READY_LOCALES.find(l => l.code === wanted.split('-')[0])
+  const find = (code: string) => READY_LOCALES.find(l => l.code === code)
+
+  if (UNMATCHABLE.some(tag => wanted.startsWith(tag))) return undefined
+
+  return find(wanted)
+    ?? find(ALIASES[wanted] ?? '')
+    ?? find(ALIASES[wanted.split('-').slice(0, 2).join('-')] ?? '')
+    ?? find(ALIASES[wanted.split('-')[0]!] ?? '')
+    ?? find(wanted.split('-')[0]!)
 }
 
 /** "en-us" and "en" are the same language; "pt-br" and "pt" are the same
