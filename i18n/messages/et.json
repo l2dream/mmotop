@@ -6,7 +6,7 @@
   },
   "nav": {
     "home": "MMOTOP avaleht",
-    "theme": "Vaheta teema",
+    "theme": "Vaheta teemat",
     "language": "Keel",
     "login": "LOGI SISSE",
     "categories": "Mängukategooriad"
@@ -64,7 +64,7 @@
     "nov": "nov",
     "dec": "dets"
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{day}. {month}",
   "scripts": {
     "latin": "Ladina",
     "cyrillic": "Kirillitsa",

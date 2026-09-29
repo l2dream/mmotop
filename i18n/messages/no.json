@@ -51,20 +51,20 @@
     "custom": "Egendefinert"
   },
   "months": {
-    "jan": "jan",
-    "feb": "feb",
-    "mar": "mar",
-    "apr": "apr",
+    "jan": "jan.",
+    "feb": "feb.",
+    "mar": "mar.",
+    "apr": "apr.",
     "may": "mai",
-    "jun": "jun",
-    "jul": "jul",
-    "aug": "aug",
-    "sep": "sep",
-    "oct": "okt",
-    "nov": "nov",
-    "dec": "des"
+    "jun": "jun.",
+    "jul": "jul.",
+    "aug": "aug.",
+    "sep": "sep.",
+    "oct": "okt.",
+    "nov": "nov.",
+    "dec": "des."
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{day}. {month}",
   "scripts": {
     "latin": "Latinsk",
     "cyrillic": "Kyrillisk",

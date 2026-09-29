@@ -39,6 +39,16 @@ export interface Locale {
    */
   dir: 'ltr' | 'rtl'
   /**
+   * The Open Graph locale, which insists on language_TERRITORY and will drop
+   * the tag entirely for a bare "ko" or "ru". Held here rather than derived,
+   * because there is no deriving Portugal from "pt" — someone has to choose.
+   *
+   * Note en → en_GB rather than en_US: en-us exists separately and writes its
+   * dates month-first, so the generic English here is the day-first,
+   * international one, and en_GB is the honest label for that.
+   */
+  ogLocale: string
+  /**
    * Extra font family this locale needs on top of Inter, or null when Inter
    * already covers the script. These files are megabytes apiece, so they load
    * for the locale that needs them and for nobody else.
@@ -56,49 +66,49 @@ export interface Locale {
  */
 export const LOCALES: Locale[] = [
   // Latin — Inter covers all of these.
-  { code: 'az',    endonym: 'AZƏRBAYCANCA',       name: 'Azerbaijani',            chip: 'AZ', script: 'latin', dir: 'ltr', font: null },
-  { code: 'cs',    endonym: 'ČEŠTINA',            name: 'Czech',                  chip: 'CS', script: 'latin', dir: 'ltr', font: null },
-  { code: 'da',    endonym: 'DANSK',              name: 'Danish',                 chip: 'DA', script: 'latin', dir: 'ltr', font: null },
-  { code: 'de',    endonym: 'DEUTSCH',            name: 'German',                 chip: 'DE', script: 'latin', dir: 'ltr', font: null },
-  { code: 'et',    endonym: 'EESTI',              name: 'Estonian',               chip: 'ET', script: 'latin', dir: 'ltr', font: null },
-  { code: 'en',    endonym: 'ENGLISH',            name: 'English',                chip: 'EN', script: 'latin', dir: 'ltr', font: null },
-  { code: 'en-us', endonym: 'ENGLISH (US)',       name: 'English (United States)', chip: 'US', script: 'latin', dir: 'ltr', font: null },
-  { code: 'es',    endonym: 'ESPAÑOL',            name: 'Spanish',                chip: 'ES', script: 'latin', dir: 'ltr', font: null },
-  { code: 'fr',    endonym: 'FRANÇAIS',           name: 'French',                 chip: 'FR', script: 'latin', dir: 'ltr', font: null },
-  { code: 'lv',    endonym: 'LATVIEŠU',           name: 'Latvian',                chip: 'LV', script: 'latin', dir: 'ltr', font: null },
-  { code: 'lt',    endonym: 'LIETUVIŲ',           name: 'Lithuanian',             chip: 'LT', script: 'latin', dir: 'ltr', font: null },
+  { code: 'az',    endonym: 'AZƏRBAYCANCA',       name: 'Azerbaijani',            chip: 'AZ', ogLocale: 'az_AZ', script: 'latin', dir: 'ltr', font: null },
+  { code: 'cs',    endonym: 'ČEŠTINA',            name: 'Czech',                  chip: 'CS', ogLocale: 'cs_CZ', script: 'latin', dir: 'ltr', font: null },
+  { code: 'da',    endonym: 'DANSK',              name: 'Danish',                 chip: 'DA', ogLocale: 'da_DK', script: 'latin', dir: 'ltr', font: null },
+  { code: 'de',    endonym: 'DEUTSCH',            name: 'German',                 chip: 'DE', ogLocale: 'de_DE', script: 'latin', dir: 'ltr', font: null },
+  { code: 'et',    endonym: 'EESTI',              name: 'Estonian',               chip: 'ET', ogLocale: 'et_EE', script: 'latin', dir: 'ltr', font: null },
+  { code: 'en',    endonym: 'ENGLISH',            name: 'English',                chip: 'EN', ogLocale: 'en_GB', script: 'latin', dir: 'ltr', font: null },
+  { code: 'en-us', endonym: 'ENGLISH (US)',       name: 'English (United States)', chip: 'US', ogLocale: 'en_US', script: 'latin', dir: 'ltr', font: null },
+  { code: 'es',    endonym: 'ESPAÑOL',            name: 'Spanish',                chip: 'ES', ogLocale: 'es_ES', script: 'latin', dir: 'ltr', font: null },
+  { code: 'fr',    endonym: 'FRANÇAIS',           name: 'French',                 chip: 'FR', ogLocale: 'fr_FR', script: 'latin', dir: 'ltr', font: null },
+  { code: 'lv',    endonym: 'LATVIEŠU',           name: 'Latvian',                chip: 'LV', ogLocale: 'lv_LV', script: 'latin', dir: 'ltr', font: null },
+  { code: 'lt',    endonym: 'LIETUVIŲ',           name: 'Lithuanian',             chip: 'LT', ogLocale: 'lt_LT', script: 'latin', dir: 'ltr', font: null },
   // 'no' rather than 'nb': NORSK is what the reader expects to see, and /no/
   // is what they expect in the address bar.
-  { code: 'no',    endonym: 'NORSK',              name: 'Norwegian',              chip: 'NO', script: 'latin', dir: 'ltr', font: null },
-  { code: 'pl',    endonym: 'POLSKI',             name: 'Polish',                 chip: 'PL', script: 'latin', dir: 'ltr', font: null },
-  { code: 'pt',    endonym: 'PORTUGUÊS',          name: 'Portuguese',             chip: 'PT', script: 'latin', dir: 'ltr', font: null },
-  { code: 'pt-br', endonym: 'PORTUGUÊS (BRASIL)', name: 'Portuguese (Brazil)',    chip: 'BR', script: 'latin', dir: 'ltr', font: null },
-  { code: 'sv',    endonym: 'SVENSKA',            name: 'Swedish',                chip: 'SV', script: 'latin', dir: 'ltr', font: null },
-  { code: 'tr',    endonym: 'TÜRKÇE',             name: 'Turkish',                chip: 'TR', script: 'latin', dir: 'ltr', font: null },
+  { code: 'no',    endonym: 'NORSK',              name: 'Norwegian',              chip: 'NO', ogLocale: 'nb_NO', script: 'latin', dir: 'ltr', font: null },
+  { code: 'pl',    endonym: 'POLSKI',             name: 'Polish',                 chip: 'PL', ogLocale: 'pl_PL', script: 'latin', dir: 'ltr', font: null },
+  { code: 'pt',    endonym: 'PORTUGUÊS',          name: 'Portuguese',             chip: 'PT', ogLocale: 'pt_PT', script: 'latin', dir: 'ltr', font: null },
+  { code: 'pt-br', endonym: 'PORTUGUÊS (BRASIL)', name: 'Portuguese (Brazil)',    chip: 'BR', ogLocale: 'pt_BR', script: 'latin', dir: 'ltr', font: null },
+  { code: 'sv',    endonym: 'SVENSKA',            name: 'Swedish',                chip: 'SV', ogLocale: 'sv_SE', script: 'latin', dir: 'ltr', font: null },
+  { code: 'tr',    endonym: 'TÜRKÇE',             name: 'Turkish',                chip: 'TR', ogLocale: 'tr_TR', script: 'latin', dir: 'ltr', font: null },
 
   // Cyrillic — Inter covers these too.
-  { code: 'ru',    endonym: 'РУССКИЙ',            name: 'Russian',                chip: 'RU', script: 'cyrillic', dir: 'ltr', font: null },
-  { code: 'uk',    endonym: 'УКРАЇНСЬКА',         name: 'Ukrainian',              chip: 'UK', script: 'cyrillic', dir: 'ltr', font: null },
+  { code: 'ru',    endonym: 'РУССКИЙ',            name: 'Russian',                chip: 'RU', ogLocale: 'ru_RU', script: 'cyrillic', dir: 'ltr', font: null },
+  { code: 'uk',    endonym: 'УКРАЇНСЬКА',         name: 'Ukrainian',              chip: 'UK', ogLocale: 'uk_UA', script: 'cyrillic', dir: 'ltr', font: null },
 
   // Greek — Inter covers it. Uppercase Greek drops its accents, so this is
   // ΕΛΛΗΝΙΚΑ and not ΕΛΛΗΝΙΚΆ.
-  { code: 'el',    endonym: 'ΕΛΛΗΝΙΚΑ',           name: 'Greek',                  chip: 'EL', script: 'greek', dir: 'ltr', font: null },
+  { code: 'el',    endonym: 'ΕΛΛΗΝΙΚΑ',           name: 'Greek',                  chip: 'EL', ogLocale: 'el_GR', script: 'greek', dir: 'ltr', font: null },
 
   // Armenian — Inter has no Armenian. The old list spelled this with a Latin
   // H in front of Armenian letters, which looks fine until the font changes.
-  { code: 'hy',    endonym: 'ՀԱՅԵՐԵՆ',            name: 'Armenian',               chip: 'HY', script: 'armenian', dir: 'ltr', font: 'Noto Sans Armenian' },
+  { code: 'hy',    endonym: 'ՀԱՅԵՐԵՆ',            name: 'Armenian',               chip: 'HY', ogLocale: 'hy_AM', script: 'armenian', dir: 'ltr', font: 'Noto Sans Armenian' },
 
   // Right to left. The stylesheet already mirrors on `dir="rtl"`, so these two
   // need no layout of their own — only their fonts, which Inter does not have.
-  { code: 'ar',    endonym: 'العربية',              name: 'Arabic',                 chip: 'AR', script: 'arabic', dir: 'rtl', font: 'Noto Sans Arabic' },
-  { code: 'he',    endonym: 'עברית',                name: 'Hebrew',                 chip: 'HE', script: 'hebrew', dir: 'rtl', font: 'Noto Sans Hebrew' },
+  { code: 'ar',    endonym: 'العربية',              name: 'Arabic',                 chip: 'AR', ogLocale: 'ar_AR', script: 'arabic', dir: 'rtl', font: 'Noto Sans Arabic' },
+  { code: 'he',    endonym: 'עברית',                name: 'Hebrew',                 chip: 'HE', ogLocale: 'he_IL', script: 'hebrew', dir: 'rtl', font: 'Noto Sans Hebrew' },
 
   // East Asian — each needs its own multi-megabyte font.
   // Traditional Chinese would join as 'zh-hant' / 繁體中文 if the traffic asks
   // for it; it is a different text and a different font, not a toggle.
-  { code: 'zh',    endonym: '简体中文',              name: 'Chinese (Simplified)',   chip: 'ZH', script: 'east-asian', dir: 'ltr', font: 'Noto Sans SC' },
-  { code: 'ja',    endonym: '日本語',               name: 'Japanese',               chip: 'JA', script: 'east-asian', dir: 'ltr', font: 'Noto Sans JP' },
-  { code: 'ko',    endonym: '한국어',               name: 'Korean',                 chip: 'KO', script: 'east-asian', dir: 'ltr', font: 'Noto Sans KR' }
+  { code: 'zh',    endonym: '简体中文',              name: 'Chinese (Simplified)',   chip: 'ZH', ogLocale: 'zh_CN', script: 'east-asian', dir: 'ltr', font: 'Noto Sans SC' },
+  { code: 'ja',    endonym: '日本語',               name: 'Japanese',               chip: 'JA', ogLocale: 'ja_JP', script: 'east-asian', dir: 'ltr', font: 'Noto Sans JP' },
+  { code: 'ko',    endonym: '한국어',               name: 'Korean',                 chip: 'KO', ogLocale: 'ko_KR', script: 'east-asian', dir: 'ltr', font: 'Noto Sans KR' }
 ]
 
 /** What `/` serves, and what a missing translation falls back to. */

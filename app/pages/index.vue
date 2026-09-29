@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { bcp47 } from '~/i18n/locales'
+import { localeByCode } from '~/i18n/locales'
 
 const { t, locale } = useI18n()
 
@@ -275,8 +275,13 @@ useSeoMeta({
   ogDescription: () => t('meta.ogDescription'),
   ogType: 'website',
   ogSiteName: 'MMOTOP',
-  // og:locale wants en_US, not the en-US of an hreflang tag.
-  ogLocale: () => bcp47(locale.value).replace('-', '_'),
+  /**
+   * Read from the registry rather than derived from the URL code. Open Graph
+   * requires language_TERRITORY, and deriving gave a bare "ko" or "ru" for
+   * twenty-four of the twenty-six — which consumers simply drop, so every
+   * shared link carried no locale signal at all.
+   */
+  ogLocale: () => localeByCode(locale.value)?.ogLocale,
   /**
    * `summary`, not `summary_large_image`. The large card is a promise of a
    * 1200x630 image and there is no image anywhere in this project, so the

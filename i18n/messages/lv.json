@@ -51,20 +51,20 @@
     "custom": "Pielāgots"
   },
   "months": {
-    "jan": "janv",
-    "feb": "febr",
+    "jan": "janv.",
+    "feb": "febr.",
     "mar": "marts",
-    "apr": "apr",
+    "apr": "apr.",
     "may": "maijs",
-    "jun": "jūn",
-    "jul": "jūl",
-    "aug": "aug",
-    "sep": "sept",
-    "oct": "okt",
-    "nov": "nov",
-    "dec": "dec"
+    "jun": "jūn.",
+    "jul": "jūl.",
+    "aug": "aug.",
+    "sep": "sept.",
+    "oct": "okt.",
+    "nov": "nov.",
+    "dec": "dec."
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{day}. {month}",
   "scripts": {
     "latin": "Latīņu",
     "cyrillic": "Kirilica",

@@ -22,11 +22,27 @@ export default defineNuxtModule({
   meta: { name: 'mmotop-sitemap' },
 
   setup(_options, nuxt) {
+    // The dev server calls nuxt.close() on shutdown and on every config
+    // change, which would otherwise rewrite robots.txt and log a production
+    // sitemap each time you restart.
+    if (nuxt.options.dev) return
+
     nuxt.hook('nitro:init', (nitro) => {
       nitro.hooks.hook('close', async () => {
         const origin = (process.env.NUXT_PUBLIC_SITE_URL || 'https://l2dream.github.io').replace(/\/$/, '')
-        // The deploy sets this to /<repo>/ on Pages; locally it is just /.
-        const base = (process.env.NUXT_APP_BASE_URL || '/').replace(/\/$/, '')
+        /**
+         * The deploy sets this to /<repo>/ on Pages; locally it is just /.
+         * Normalised at both ends: the trailing slash was already stripped,
+         * but a value without a leading one ("mmotop") silently produced
+         * "https://l2dream.github.iommotop/de" in every URL, and the build
+         * still reported success.
+         */
+        const raw = process.env.NUXT_APP_BASE_URL || '/'
+        const base = raw === '/' ? '' : `/${raw.replace(/^\/+|\/+$/g, '')}`
+        // Belt and braces only: Nuxt's own prerender already dies on a base
+        // path with no leading slash, so this normalisation is never the thing
+        // that saves the build — it just means the sitemap cannot be the one
+        // component quietly emitting "https://example.commmotop/de".
         const root = `${origin}${base}`
 
         // The default locale sits on the bare path, every other one on a prefix.
@@ -63,6 +79,23 @@ ${entries}
           'utf8'
         )
         console.log(`[sitemap] ${READY_LOCALES.length} URLs → ${root}/sitemap.xml`)
+
+        /**
+         * robots.txt is only read at the origin root. On a GitHub project page
+         * the site lives under /<repo>/, so the file we just wrote sits at
+         * /<repo>/robots.txt where no crawler will look for it, and the
+         * Sitemap line in it is never seen. The file is still written — it
+         * becomes correct the moment a custom domain puts the site at the root
+         * — but pretending the discovery hole is closed would be worse than
+         * saying so at build time.
+         */
+        if (base !== '') {
+          console.warn(
+            `[sitemap] base path is "${base}", so robots.txt lands at ${root}/robots.txt `
+            + 'and will not be read — crawlers only fetch it from the origin root. '
+            + `Submit ${root}/sitemap.xml in Search Console, or move the site to a custom domain.`
+          )
+        }
       })
     })
   }

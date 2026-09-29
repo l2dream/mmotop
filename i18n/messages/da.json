@@ -51,20 +51,20 @@
     "custom": "Tilpasset"
   },
   "months": {
-    "jan": "jan",
-    "feb": "feb",
-    "mar": "mar",
-    "apr": "apr",
+    "jan": "jan.",
+    "feb": "feb.",
+    "mar": "mar.",
+    "apr": "apr.",
     "may": "maj",
-    "jun": "jun",
-    "jul": "jul",
-    "aug": "aug",
-    "sep": "sep",
-    "oct": "okt",
-    "nov": "nov",
-    "dec": "dec"
+    "jun": "jun.",
+    "jul": "jul.",
+    "aug": "aug.",
+    "sep": "sep.",
+    "oct": "okt.",
+    "nov": "nov.",
+    "dec": "dec."
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{day}. {month}",
   "scripts": {
     "latin": "Latinsk",
     "cyrillic": "Kyrillisk",

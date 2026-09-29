@@ -64,7 +64,7 @@
     "nov": "lis",
     "dec": "pro"
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{day}. {month}",
   "scripts": {
     "latin": "Latinka",
     "cyrillic": "Cyrilice",

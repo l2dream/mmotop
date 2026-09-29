@@ -14,7 +14,7 @@
   "language": {
     "search": "Rechercher une langue",
     "nothing": "Aucun résultat",
-    "results": "Trouvés : {count}"
+    "results": "Trouvés : {count}"
   },
   "search": {
     "label": "Rechercher des jeux",
@@ -51,18 +51,18 @@
     "custom": "Personnalisé"
   },
   "months": {
-    "jan": "janv",
-    "feb": "févr",
+    "jan": "janv.",
+    "feb": "févr.",
     "mar": "mars",
-    "apr": "avr",
+    "apr": "avr.",
     "may": "mai",
     "jun": "juin",
-    "jul": "juil",
+    "jul": "juil.",
     "aug": "août",
-    "sep": "sept",
-    "oct": "oct",
-    "nov": "nov",
-    "dec": "déc"
+    "sep": "sept.",
+    "oct": "oct.",
+    "nov": "nov.",
+    "dec": "déc."
   },
   "dateFormat": "{day} {month}",
   "scripts": {
