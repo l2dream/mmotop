@@ -20,19 +20,17 @@
 export interface RateFilters {
   version: string
   minRating: number
-  title: string
   rates: string[]
 }
 
 export function useDashboardState() {
   const dark = useState('dash-dark', () => true)
   const query = useState('dash-query', () => '')
-  const activeCategory = useState('dash-category', () => 'All')
+  const activeCategory = useState('dash-category', () => 'all')
 
   const filters = useState<RateFilters>('dash-filters', () => ({
     version: '',
     minRating: 0,
-    title: '',
     rates: []
   }))
 

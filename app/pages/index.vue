@@ -1,34 +1,17 @@
 <script setup lang="ts">
 import { localeByCode } from '~/i18n/locales'
+import { GAMES, gameById, chronicleBadge, chronicleShort } from '~/data/games'
+import { SERVERS, type Server } from '~/data/servers'
 
 const { t, locale } = useI18n()
 
-type Game = {
-  title: string
-  genre: string
-  version: string
-  stars: number
-  players: string
-  /** Start date in ISO form, "YYYY-MM-DD". Formatted for display by formatDate(). */
-  date?: string
-}
+// Every row on the page comes from app/data/servers.ts; the games, their
+// chronicles and the category bar come from app/data/games.ts.
 
-const categories = [
-  'All',
-  'World of Warcraft',
-  'Lineage II',
-  'MuOnline',
-  'AION',
-  'Perfect World',
-  'RF Online',
-  'Silkroad Online',
-  'Metin2',
-  'Rappelz',
-  'Tibia'
-]
+const categories = ['all', ...GAMES.map((g) => g.id)]
 
 function categoryLabel(category: string) {
-  return category === 'All' ? t('categories.all') : category
+  return category === 'all' ? t('categories.all') : gameById(category)?.name ?? category
 }
 
 const VISIBLE_CATEGORIES = 6
@@ -42,46 +25,34 @@ const hiddenCategories = computed(() => categories.slice(VISIBLE_CATEGORIES))
  */
 const activeHidden = computed(() => hiddenCategories.value.includes(activeCategory.value))
 
-const games: Game[] = [
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x500' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'High-Five', stars: 500, players: 'x500' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x200' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x250' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'High-Five', stars: 500, players: 'x50' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x50' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x100' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'High-Five', stars: 500, players: 'x500' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x500' },
-  { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x500' }
-]
+const SERVER_BY_ID = new Map(SERVERS.map((server) => [server.id, server]))
 
-// Upcoming servers: mostly this year, a couple spilling into the next one.
-const soonDates = [
-  '2026-10-05', '2026-10-18', '2026-11-02', '2026-11-20', '2026-12-01',
-  '2026-12-15', '2026-12-28', '2027-01-10', '2027-01-24', '2027-02-07'
-]
+/** "MMORPG / Lineage II" — the line under the server name. */
+function serverSubtitle(server: Server) {
+  const game = gameById(server.game)
+  return game ? `${game.genre} / ${game.name}` : ''
+}
 
-// Servers already running: recent ones through to a few long-lived projects.
-const startedDates = [
-  '2026-09-01', '2026-08-12', '2026-06-30', '2026-04-17', '2026-02-05',
-  '2025-11-20', '2025-07-08', '2024-12-23', '2023-05-14', '2021-03-08'
-]
+function rateLabel(server: Server) {
+  return `x${server.rate}`
+}
 
-const soon: Game[] = Array.from({ length: 10 }, (_, i) => ({
-  ...games[i % games.length]!,
-  date: soonDates[i]
-}))
+function serverBadge(server: Server) {
+  return chronicleBadge(server.game, server.chronicle)
+}
 
-const started: Game[] = Array.from({ length: 10 }, (_, i) => ({
-  ...games[(i + 1) % games.length]!,
-  date: startedDates[i]
-}))
+/**
+ * Today's date, for splitting COMING SOON from ALREADY STARTED. It starts as
+ * the build date so the prerendered HTML and the first client render agree,
+ * then becomes the visitor's own date on mount — otherwise a server would
+ * stay "coming soon" until the next deploy, however long ago it opened.
+ */
+const today = ref(useRuntimeConfig().public.buildDate as string)
+function localISODate(d = new Date()) {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
+}
 
-// Newly listed games show their launch date rather than a vote count: a fresh
-// entry has no votes yet, and an empty counter reads as unpopular rather than
-// new. Two launches are still ahead, one has already happened.
-const newGameDates = ['2026-10-12', '2026-11-05', '2026-08-20']
-const newGames: Game[] = games.slice(0, 3).map((game, i) => ({ ...game, date: newGameDates[i] }))
 // A random pick, so the panel can surface servers that hold no place in the
 // vote ranking and have no launch date to show. Drawn in the browser rather
 // than at build time: a static build would freeze one "random" set into the
@@ -95,14 +66,16 @@ const newGames: Game[] = games.slice(0, 3).map((game, i) => ({ ...game, date: ne
 // Kept in useState so the pick survives a language switch rather than being
 // redrawn — a visitor comparing two languages should see the same servers.
 const RANDOM_PICK = 3
-const shuffledPool = useState<Game[]>('dash-shuffled-pool', () => [...games])
+// Ids rather than the servers themselves: useState is serialised into the
+// page payload, and there is no reason to ship every server twice.
+const shuffledPool = useState<string[]>('dash-shuffled-pool', () => SERVERS.map((s) => s.id))
 const hasShuffled = useState('dash-has-shuffled', () => false)
 // Counts deliberate shuffles only, so the button's half-turn answers a click
 // and not every page load and every language change.
 const shuffleTurns = useState('dash-shuffle-turns', () => 0)
 
 function shufflePool() {
-  const pool = [...games]
+  const pool = SERVERS.map((s) => s.id)
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[pool[i], pool[j]] = [pool[j]!, pool[i]!]
@@ -131,9 +104,25 @@ const moreButton = ref<HTMLButtonElement | null>(null)
 const moreDropdownEl = ref<HTMLElement | null>(null)
 const dropdownPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 360 })
 
-const allGameEntries = [...games, ...soon, ...started, ...newGames]
-const allVersions = Array.from(new Set(allGameEntries.map((game) => game.version)))
-const allTitles = Array.from(new Set(allGameEntries.map((game) => game.title)))
+/**
+ * The Version list, grouped by game — "Classic" alone would not say which
+ * game's. With a category chosen it narrows to that game's chronicles, and the
+ * value carries the game too, so two games can share a chronicle name.
+ */
+const versionGroups = computed(() =>
+  GAMES.filter((g) => activeCategory.value === 'all' || g.id === activeCategory.value)
+    .map((g) => ({ id: g.id, name: g.name, chronicles: g.chronicles.map((c) => c.name) }))
+)
+function versionKey(gameId: string, chronicle: string) {
+  return `${gameId}:${chronicle}`
+}
+
+// A chronicle of another game no longer means anything once the category
+// changes; left set, it would silently empty every panel.
+watch(activeCategory, (category) => {
+  const v = filters.value.version
+  if (v && category !== 'all' && !v.startsWith(`${category}:`)) filters.value.version = ''
+})
 
 const ratingThresholds = computed(() => [
   { label: t('filter.any'), value: 0 },
@@ -151,14 +140,6 @@ const rateTiers = [
   { label: 'x1000+', min: 1000, max: Infinity }
 ]
 
-// The rate is the "x"-prefixed number already shown under the star rating (game.players),
-// e.g. "x500" -> 500. There's no separate rate field — this parses the existing one.
-// It reads the first number after the x, decimal point included: stripping every
-// non-digit, as it used to, would have turned "x1.5" into 15.
-function getRate(game: Game) {
-  const match = game.players.match(/\d+(?:\.\d+)?/)
-  return match ? parseFloat(match[0]) : 0
-}
 
 // Dates are stored as ISO ("2024-12-23") and only formatted for display, so the
 // stored value stays unambiguous and a future language switch only changes MONTHS.
@@ -202,6 +183,7 @@ function formatDayMonth(iso?: string) {
 const currentYear = ref<number | null>(useRuntimeConfig().public.buildYear as number)
 onMounted(() => {
   currentYear.value = new Date().getFullYear()
+  today.value = localISODate()
   // Drawn after hydration, so each visit gets its own pick — and only once per
   // visit, so switching language keeps it.
   if (!hasShuffled.value) shufflePool()
@@ -219,11 +201,11 @@ function formatYear(iso?: string) {
 
 
 const customMin = computed(() => {
-  const n = parseInt(customRateMin.value, 10)
+  const n = parseFloat(customRateMin.value)
   return Number.isFinite(n) ? n : null
 })
 const customMax = computed(() => {
-  const n = parseInt(customRateMax.value, 10)
+  const n = parseFloat(customRateMax.value)
   return Number.isFinite(n) ? n : null
 })
 const customRateSet = computed(() => customMin.value != null || customMax.value != null)
@@ -250,16 +232,14 @@ const activeFilterCount = computed(
   () =>
     (filters.value.version ? 1 : 0) +
     (filters.value.minRating ? 1 : 0) +
-    (filters.value.title ? 1 : 0) +
     (rateFilterActive.value ? 1 : 0)
 )
 
-function matchesFilters(game: Game) {
-  if (filters.value.version && game.version !== filters.value.version) return false
-  if (filters.value.minRating && game.stars < filters.value.minRating) return false
-  if (filters.value.title && game.title !== filters.value.title) return false
+function matchesFilters(server: Server) {
+  if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
+  if (filters.value.minRating && server.votes < filters.value.minRating) return false
   if (rateFilterActive.value) {
-    const rate = getRate(game)
+    const rate = server.rate
     const inPreset = filters.value.rates.some((label) => {
       const tier = rateTiers.find((t) => t.label === label)
       return tier && rate >= tier.min && rate <= tier.max
@@ -287,22 +267,15 @@ function toggleCustomRate() {
 function resetFilters() {
   filters.value.version = ''
   filters.value.minRating = 0
-  filters.value.title = ''
   filters.value.rates = []
   customRateActive.value = false
   customRateMin.value = ''
   customRateMax.value = ''
 }
 
-/**
- * The category bar used to move its highlight and filter nothing: every panel
- * kept listing the same servers whichever game was selected. A category now
- * matches a game whose genre or title names it; "All" matches everything.
- */
-function matchesCategory(game: Game) {
-  const category = activeCategory.value
-  if (category === 'All') return true
-  return game.genre.includes(category) || game.title === category
+/** A category is a game; "all" matches everything. */
+function matchesCategory(server: Server) {
+  return activeCategory.value === 'all' || server.game === activeCategory.value
 }
 
 /**
@@ -310,14 +283,14 @@ function matchesCategory(game: Game) {
  * applied to all five — so typing "High-Five" narrowed one panel and left four
  * untouched. It applies everywhere now, like the filters beside it.
  */
-function matchesSearch(game: Game) {
+function matchesSearch(server: Server) {
   const q = query.value.trim().toLowerCase()
   if (!q) return true
-  return `${game.title} ${game.genre} ${game.version} ${game.players}`.toLowerCase().includes(q)
+  return `${server.name} ${serverSubtitle(server)} ${server.chronicle} ${chronicleShort(server.game, server.chronicle)} ${rateLabel(server)}`.toLowerCase().includes(q)
 }
 
-function matchesAll(game: Game) {
-  return matchesCategory(game) && matchesSearch(game) && matchesFilters(game)
+function matchesAll(server: Server) {
+  return matchesCategory(server) && matchesSearch(server) && matchesFilters(server)
 }
 
 /**
@@ -326,15 +299,31 @@ function matchesAll(game: Game) {
  * silver and bronze to whichever three happened to be left: filter to
  * High-Five and the servers ranked 2, 5 and 8 wore the medals for 1, 2 and 3.
  */
-const rankedGames = [...games]
-  .sort((a, b) => b.stars - a.stars)
-  .map((game, i) => ({ game, rank: i + 1 }))
+const rankedServers = [...SERVERS]
+  .sort((a, b) => b.votes - a.votes || a.name.localeCompare(b.name))
+  .map((server, i) => ({ server, rank: i + 1 }))
 
-const filteredGames = computed(() => rankedGames.filter(({ game }) => matchesAll(game)))
-const filteredSoon = computed(() => soon.filter(matchesAll))
-const filteredStarted = computed(() => started.filter(matchesAll))
-const filteredNewGames = computed(() => newGames.filter(matchesAll))
-const filteredAllGames = computed(() => shuffledPool.value.filter(matchesAll).slice(0, RANDOM_PICK))
+const PANEL_ROWS = 10
+const NEW_ROWS = 3
+
+// Opening dates decide the two date panels, measured against `today`: the
+// nearest opening first in one, the most recent in the other.
+const upcoming = computed(() =>
+  SERVERS.filter((s) => s.openDate > today.value).sort((a, b) => a.openDate.localeCompare(b.openDate)))
+const opened = computed(() =>
+  SERVERS.filter((s) => s.openDate <= today.value).sort((a, b) => b.openDate.localeCompare(a.openDate)))
+// Newest additions to MMOTOP, whether they have opened yet or not.
+const recentlyListed = [...SERVERS].sort((a, b) => b.listedAt.localeCompare(a.listedAt))
+
+const filteredTop = computed(() => rankedServers.filter(({ server }) => matchesAll(server)))
+const filteredSoon = computed(() => upcoming.value.filter(matchesAll).slice(0, PANEL_ROWS))
+const filteredStarted = computed(() => opened.value.filter(matchesAll).slice(0, PANEL_ROWS))
+const filteredNew = computed(() => recentlyListed.filter(matchesAll).slice(0, NEW_ROWS))
+const filteredRandom = computed(() =>
+  shuffledPool.value
+    .map((id) => SERVER_BY_ID.get(id))
+    .filter((s): s is Server => !!s && matchesAll(s))
+    .slice(0, RANDOM_PICK))
 
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
@@ -481,9 +470,6 @@ function submitSearch() {
   searchInput.value?.focus()
 }
 
-function gameIcon(game: Game) {
-  return game.version === 'High-Five' ? 'HF' : 'II'
-}
 </script>
 
 <template>
@@ -602,7 +588,13 @@ function gameIcon(game: Game) {
           <label class="filter-popup-label" for="filter-version">{{ $t('filter.version') }}</label>
           <select id="filter-version" class="filter-select" v-model="filters.version">
             <option value="">{{ $t('filter.allVersions') }}</option>
-            <option v-for="version in allVersions" :key="version" :value="version">{{ version }}</option>
+            <optgroup v-for="group in versionGroups" :key="group.id" :label="group.name">
+              <option
+                v-for="chronicle in group.chronicles"
+                :key="chronicle"
+                :value="versionKey(group.id, chronicle)"
+              >{{ chronicle }}</option>
+            </optgroup>
           </select>
         </div>
 
@@ -617,9 +609,11 @@ function gameIcon(game: Game) {
 
         <div class="filter-popup-section">
           <label class="filter-popup-label" for="filter-game">{{ $t('filter.game') }}</label>
-          <select id="filter-game" class="filter-select" v-model="filters.title">
-            <option value="">{{ $t('filter.allGames') }}</option>
-            <option v-for="title in allTitles" :key="title" :value="title">{{ title }}</option>
+          <!-- The same choice as the category bar, not a second one that
+               could contradict it: both edit activeCategory. -->
+          <select id="filter-game" class="filter-select" v-model="activeCategory">
+            <option value="all">{{ $t('filter.allGames') }}</option>
+            <option v-for="game in GAMES" :key="game.id" :value="game.id">{{ game.name }}</option>
           </select>
         </div>
 
@@ -799,16 +793,16 @@ function gameIcon(game: Game) {
               />
             </svg>
           </template>
-          <div v-for="{ game, rank } in filteredGames.slice(0, 10)" :key="`top-${rank}`" class="game-row">
+          <div v-for="{ server, rank } in filteredTop.slice(0, PANEL_ROWS)" :key="`top-${server.id}`" class="game-row">
             <span class="rank" :class="rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
-            <span class="game-logo">{{ gameIcon(game) }}</span>
+            <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
-              <strong>{{ game.title }}</strong>
-              <small>{{ game.genre }}</small>
+              <strong>{{ server.name }}</strong>
+              <small>{{ serverSubtitle(server) }}</small>
             </span>
             <span class="version">
-              <span class="version-name">{{ game.version }}</span>
-              <small class="version-rate">{{ game.players }}</small>
+              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+              <small class="version-rate">{{ rateLabel(server) }}</small>
             </span>
             <span class="rating">
               <span class="rating-value">
@@ -818,11 +812,11 @@ function gameIcon(game: Game) {
                     fill="url(#voteGrad)"
                   />
                 </svg>
-                {{ game.stars }}
+                {{ server.votes }}
               </span>
             </span>
           </div>
-          <div v-if="filteredGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
+          <div v-if="filteredTop.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
 
@@ -855,19 +849,19 @@ function gameIcon(game: Game) {
               />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredSoon" :key="`soon-${index}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ gameIcon(game) }}</span>
+          <div v-for="server in filteredSoon" :key="`soon-${server.id}`" class="game-row compact no-rank">
+            <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
-              <strong>{{ game.title }}</strong>
-              <small>{{ game.genre }}</small>
+              <strong>{{ server.name }}</strong>
+              <small>{{ serverSubtitle(server) }}</small>
             </span>
             <span class="version">
-              <span class="version-name">{{ game.version }}</span>
-              <small class="version-rate">{{ game.players }}</small>
+              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+              <small class="version-rate">{{ rateLabel(server) }}</small>
             </span>
             <span class="date">
-              <span class="date-day">{{ formatDayMonth(game.date) }}</span>
-              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
+              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
             </span>
           </div>
           <div v-if="filteredSoon.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
@@ -887,19 +881,19 @@ function gameIcon(game: Game) {
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#boltGrad)" />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredStarted" :key="`started-${index}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ gameIcon(game) }}</span>
+          <div v-for="server in filteredStarted" :key="`started-${server.id}`" class="game-row compact no-rank">
+            <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
-              <strong>{{ game.title }}</strong>
-              <small>{{ game.genre }}</small>
+              <strong>{{ server.name }}</strong>
+              <small>{{ serverSubtitle(server) }}</small>
             </span>
             <span class="version">
-              <span class="version-name">{{ game.version }}</span>
-              <small class="version-rate">{{ game.players }}</small>
+              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+              <small class="version-rate">{{ rateLabel(server) }}</small>
             </span>
             <span class="date">
-              <span class="date-day">{{ formatDayMonth(game.date) }}</span>
-              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
+              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
             </span>
           </div>
           <div v-if="filteredStarted.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
@@ -924,22 +918,22 @@ function gameIcon(game: Game) {
               />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredNewGames" :key="`new-${index}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ gameIcon(game) }}</span>
+          <div v-for="server in filteredNew" :key="`new-${server.id}`" class="game-row compact no-rank">
+            <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
-              <strong>{{ game.title }}</strong>
-              <small>{{ game.genre }}</small>
+              <strong>{{ server.name }}</strong>
+              <small>{{ serverSubtitle(server) }}</small>
             </span>
             <span class="version">
-              <span class="version-name">{{ game.version }}</span>
-              <small class="version-rate">{{ game.players }}</small>
+              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+              <small class="version-rate">{{ rateLabel(server) }}</small>
             </span>
             <span class="date">
-              <span class="date-day">{{ formatDayMonth(game.date) }}</span>
-              <small v-if="formatYear(game.date)" class="date-year">{{ formatYear(game.date) }}</small>
+              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
             </span>
           </div>
-          <div v-if="filteredNewGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
+          <div v-if="filteredNew.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
 
@@ -976,18 +970,18 @@ function gameIcon(game: Game) {
               </svg>
             </button>
           </template>
-          <div v-for="(game, index) in filteredAllGames" :key="`all-${index}`" class="game-row no-rank no-trail">
-            <span class="game-logo">{{ gameIcon(game) }}</span>
+          <div v-for="server in filteredRandom" :key="`all-${server.id}`" class="game-row no-rank no-trail">
+            <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
-              <strong>{{ game.title }}</strong>
-              <small>{{ game.genre }}</small>
+              <strong>{{ server.name }}</strong>
+              <small>{{ serverSubtitle(server) }}</small>
             </span>
             <span class="version">
-              <span class="version-name">{{ game.version }}</span>
-              <small class="version-rate">{{ game.players }}</small>
+              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+              <small class="version-rate">{{ rateLabel(server) }}</small>
             </span>
           </div>
-          <div v-if="filteredAllGames.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
+          <div v-if="filteredRandom.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
           <PanelFooter />
         </GamePanel>
       </section>

@@ -1231,7 +1231,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .theme-light .version { color: #3c3f55; }
 
+/* max-width, or the ellipsis never happens: as a centred flex item the name
+   grew past its column and was clipped on both sides instead. */
 .version-name {
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

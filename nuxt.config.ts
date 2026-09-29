@@ -23,7 +23,13 @@ export default defineNuxtConfig({
        * every language. The browser still corrects this on mount, so the only
        * stale window is between New Year and the next deploy.
        */
-      buildYear: new Date().getFullYear()
+      buildYear: new Date().getFullYear(),
+      /**
+       * The same idea for the date panels: which servers are "coming soon" and
+       * which "already started" is worked out against this in the prerendered
+       * HTML, then against the visitor's own date once the page is running.
+       */
+      buildDate: new Date().toISOString().slice(0, 10)
     }
   },
 
