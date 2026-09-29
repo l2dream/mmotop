@@ -390,6 +390,20 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   color: #edf0ff;
   font: inherit;
   font-size: 13px;
+  /*
+   * No stepper arrows. Firefox draws them permanently and Safari as soon as
+   * the field has focus, and in a field this narrow they take a third of the
+   * width for something nobody uses to type "500". Chromium only showed them
+   * on hover, which is why they went unnoticed.
+   */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.filter-custom-input::-webkit-inner-spin-button,
+.filter-custom-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .filter-custom-sep { color: #858aa6; font-size: 12px; flex: 0 0 auto; }
@@ -604,10 +618,22 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .lang-group { margin-bottom: 6px; }
 
+/*
+ * The heading must never sit alone at the foot of a column. `break-after:
+ * avoid` says so, but Firefox ignores it inside columns, and there the Greek
+ * heading was left at the bottom of the first column with its language at the
+ * top of the next — in every locale. So the heading also reserves room for one
+ * row beneath it: the padding makes its box a row taller, the negative margin
+ * gives that space straight back, and `break-inside: avoid` means the box, and
+ * so the heading, only goes where a row fits after it. Laid out, nothing moves.
+ */
 .lang-group-title {
   break-after: avoid;
+  break-inside: avoid;
+  padding-bottom: 34px;
+  margin-bottom: -31px;
+  pointer-events: none;
   padding-inline-start: 8px;
-  margin-bottom: 3px;
   color: #7f839b;
   font-size: 10px;
   font-weight: 700;
@@ -898,8 +924,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--panel-glow, #ffffff) 20%, transparent), transparent 45%),
     linear-gradient(180deg, rgba(17, 22, 48, .62), rgba(13, 18, 41, .58));
-  backdrop-filter: blur(16px);
+  /* Prefixed first, standard last — everywhere in this file. The other way
+     round, the build's minifier kept only the prefixed line, so the published
+     site had no blur at all in Chrome or Firefox, only in Safari. */
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   box-shadow: 0 14px 45px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.02);
 }
 
@@ -908,8 +937,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--panel-glow, #ffffff) 28%, transparent), transparent 45%),
     rgba(255, 255, 255, .55);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   box-shadow: 0 14px 38px rgba(31, 41, 102, .07), inset 0 1px 0 #fff;
 }
 
@@ -1024,8 +1053,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   padding: 0 17px;
   border-bottom: 1px solid rgba(89, 94, 143, .13);
   background: rgba(255, 255, 255, .025);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   transition: background .18s ease;
 }
 
@@ -1087,8 +1116,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .game-row {
   border-bottom-color: rgba(103, 104, 173, .1);
   background: rgba(255, 255, 255, .35);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .theme-light .game-row:nth-child(even) {

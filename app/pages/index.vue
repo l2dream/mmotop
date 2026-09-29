@@ -646,6 +646,7 @@ function gameIcon(game: Game) {
             <input
               v-model="customRateMin"
               type="number"
+              inputmode="decimal"
               min="0"
               :placeholder="$t('filter.from')"
               :aria-label="`${$t('filter.rate')}: ${$t('filter.from')}`"
@@ -655,6 +656,7 @@ function gameIcon(game: Game) {
             <input
               v-model="customRateMax"
               type="number"
+              inputmode="decimal"
               min="0"
               :placeholder="$t('filter.to')"
               :aria-label="`${$t('filter.rate')}: ${$t('filter.to')}`"
