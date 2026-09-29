@@ -4,6 +4,12 @@ import { DEFAULT_LOCALE, READY_LOCALES, bcp47, groupedLocales, localeByCode, mat
 const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
+/** The registry types codes as plain strings; the router wants its own union.
+ *  Every registry code is a routed locale (READY_CODES is checked at build),
+ *  so the narrowing here is safe rather than a way of silencing the checker. */
+type RoutedLocale = Parameters<typeof switchLocalePath>[0]
+const pathFor = (code: string) => switchLocalePath(code as RoutedLocale)
+
 const open = ref(false)
 const query = ref('')
 const wrap = ref<HTMLElement | null>(null)
@@ -276,7 +282,7 @@ onBeforeUnmount(() => {
             class="lang-item"
             :class="{ active: item.code === locale }"
             :aria-current="item.code === locale ? 'true' : undefined"
-            :to="switchLocalePath(item.code)"
+            :to="pathFor(item.code)"
             :hreflang="bcp47(item.code)"
             @click="choose(item.code)"
           >

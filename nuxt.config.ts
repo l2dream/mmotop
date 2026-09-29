@@ -60,9 +60,11 @@ export default defineNuxtConfig({
      */
     strategy: 'prefix_except_default',
 
-    /** One file per language, fetched when that language is opened. At
-     *  twenty-six languages, bundling them all would be absurd. */
-    lazy: true,
+    /*
+     * No `lazy` option: @nuxtjs/i18n v10 removed it and loads every locale's
+     * messages on demand anyway. It sat here as the third silently ignored
+     * option in this block, and only surfaced once the project was type-checked.
+     */
 
     /**
      * Translation fallback is NOT configured here — it is `fallbackLocale` in

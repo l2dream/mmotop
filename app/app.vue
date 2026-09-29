@@ -73,10 +73,10 @@ useHead(() => ({
   link: [
     ...(localeHead.value.link ?? []),
     ...(fontHref.value
-      ? [{ rel: 'stylesheet', href: fontHref.value, key: 'script-font' }]
+      ? [{ rel: 'stylesheet' as const, href: fontHref.value, key: 'script-font' }]
       : []),
     ...pickerHrefs.value.map((href, i) => ({
-      rel: 'stylesheet', href, key: `picker-font-${i}`
+      rel: 'stylesheet' as const, href, key: `picker-font-${i}`
     }))
   ],
   meta: localeHead.value.meta

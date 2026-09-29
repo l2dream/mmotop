@@ -5,6 +5,12 @@ import { SUGGESTIONS, fontUrl } from '~/i18n/suggestions'
 const { locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
+/** The registry types codes as plain strings; the router wants its own union.
+ *  Every registry code is a routed locale (READY_CODES is checked at build),
+ *  so the narrowing here is safe rather than a way of silencing the checker. */
+type RoutedLocale = Parameters<typeof switchLocalePath>[0]
+const pathFor = (code: string) => switchLocalePath(code as RoutedLocale)
+
 const stored = useStoredLocale()
 const dismissed = useSuggestionDismissed()
 
@@ -157,7 +163,7 @@ function dismiss() {
 
     <NuxtLink
       class="lang-hint-action"
-      :to="switchLocalePath(suggestion.code)"
+      :to="pathFor(suggestion.code)"
       :hreflang="bcp47(suggestion.code)"
       @click="accept"
     >

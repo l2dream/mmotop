@@ -25,7 +25,11 @@ export default defineNuxtModule({
     // The dev server calls nuxt.close() on shutdown and on every config
     // change, which would otherwise rewrite robots.txt and log a production
     // sitemap each time you restart.
-    if (nuxt.options.dev) return
+    //
+    // Nor during `nuxt prepare` / `nuxt typecheck`, which set _prepare and
+    // still initialise Nitro — the type-check step in CI was writing a sitemap
+    // and robots.txt into .output before anything had been built.
+    if (nuxt.options.dev || nuxt.options._prepare) return
 
     nuxt.hook('nitro:init', (nitro) => {
       nitro.hooks.hook('close', async () => {
