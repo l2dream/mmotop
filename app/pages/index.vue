@@ -153,8 +153,11 @@ const rateTiers = [
 
 // The rate is the "x"-prefixed number already shown under the star rating (game.players),
 // e.g. "x500" -> 500. There's no separate rate field — this parses the existing one.
+// It reads the first number after the x, decimal point included: stripping every
+// non-digit, as it used to, would have turned "x1.5" into 15.
 function getRate(game: Game) {
-  return parseInt(game.players.replace(/[^0-9]/g, ''), 10) || 0
+  const match = game.players.match(/\d+(?:\.\d+)?/)
+  return match ? parseFloat(match[0]) : 0
 }
 
 // Dates are stored as ISO ("2024-12-23") and only formatted for display, so the

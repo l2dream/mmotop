@@ -29,7 +29,19 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      crawlLinks: true
+      crawlLinks: true,
+      /**
+       * Every locale's page, listed outright. They were already being
+       * generated — but by the i18n module's own route registration, and
+       * nothing in the page links to them for the crawler to find (the
+       * language links only exist once the selector is opened). Relying on a
+       * module's internal behaviour for twenty-five of twenty-six pages meant
+       * an upgrade could drop them all silently; now the list comes from the
+       * same registry as everything else.
+       */
+      routes: READY_LOCALES
+        .filter(l => l.code !== DEFAULT_LOCALE)
+        .map(l => `/${l.code}`)
     }
   },
 
