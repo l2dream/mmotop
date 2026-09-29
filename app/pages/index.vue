@@ -127,7 +127,9 @@ const {
 const showMore = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
 const moreWrap = ref<HTMLElement | null>(null)
-const dropdownPos = ref({ top: 0, right: 0 })
+const moreButton = ref<HTMLButtonElement | null>(null)
+const moreDropdownEl = ref<HTMLElement | null>(null)
+const dropdownPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 360 })
 
 const allGameEntries = [...games, ...soon, ...started, ...newGames]
 const allVersions = Array.from(new Set(allGameEntries.map((game) => game.version)))
@@ -239,7 +241,7 @@ const rateFilterActive = computed(() => filters.value.rates.length > 0 || (custo
 const filterOpen = ref(false)
 const filterButtonEl = ref<HTMLElement | null>(null)
 const filterPopupEl = ref<HTMLElement | null>(null)
-const filterPos = ref({ top: 0, left: 0 })
+const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
 
 const activeFilterCount = computed(
   () =>
@@ -356,12 +358,21 @@ useSeoMeta({
   twitterCard: 'summary'
 })
 
-function selectCategory(category: string) {
+function selectCategory(category: string, fromMore = false) {
   activeCategory.value = category
+  if (!fromMore) return
+  // The chosen item is removed with the menu, so focus goes back to the
+  // button that opened it rather than falling to <body>.
   showMore.value = false
+  moreButton.value?.focus()
 }
 
-function onDocumentClick(event: MouseEvent) {
+function closeFilter() {
+  filterOpen.value = false
+  filterButtonEl.value?.focus()
+}
+
+function onDocumentPointer(event: PointerEvent) {
   const target = event.target as Node
 
   if (showMore.value && moreWrap.value && !moreWrap.value.contains(target)) {
@@ -375,43 +386,32 @@ function onDocumentClick(event: MouseEvent) {
   }
 }
 
+/**
+ * Escape closes whichever popup is open and returns focus to the button that
+ * opened it. It used to close both and leave focus on the element that had
+ * just been removed, which drops a keyboard user at the top of the document.
+ */
 function onDocumentKeydown(event: KeyboardEvent) {
-  if (event.key === 'Escape') {
+  if (event.key !== 'Escape') return
+  if (filterOpen.value) closeFilter()
+  if (showMore.value) {
     showMore.value = false
-    filterOpen.value = false
+    moreButton.value?.focus()
   }
 }
 
-// Matches .more-dropdown's min-width in the stylesheet.
-const MORE_DROPDOWN_WIDTH = 200
-
+// Both popups go through placePopup — see app/utils/popup.ts for why one
+// shared function rather than one per popup.
 function positionDropdown() {
   const rect = moreWrap.value?.getBoundingClientRect()
   if (!rect) return
-  // Clamped at both ends, which the filter popup already did and this did not.
-  // It matters most in Arabic and Hebrew: the More button mirrors to the left
-  // edge there, so the unclamped `right` put the menu's left edge off-screen
-  // and cut the first eighty pixels off every category name.
-  const right = Math.min(
-    window.innerWidth - rect.right,
-    window.innerWidth - MORE_DROPDOWN_WIDTH - 10
-  )
-  dropdownPos.value = {
-    top: rect.bottom + 8,
-    right: Math.max(10, right)
-  }
+  dropdownPos.value = placePopup(rect, moreDropdownEl.value?.offsetWidth ?? 200, 'end')
 }
-
-const FILTER_POPUP_WIDTH = 270
 
 function positionFilterPopup() {
   const rect = filterButtonEl.value?.getBoundingClientRect()
   if (!rect) return
-  const left = Math.min(rect.left, window.innerWidth - FILTER_POPUP_WIDTH - 10)
-  filterPos.value = {
-    top: rect.bottom + 10,
-    left: Math.max(10, left)
-  }
+  filterPos.value = placePopup(rect, filterPopupEl.value?.offsetWidth ?? 270, 'start', 10)
 }
 
 function repositionOpenPanels() {
@@ -432,15 +432,22 @@ watch(filterOpen, async (open) => {
 })
 
 onMounted(() => {
-  document.addEventListener('click', onDocumentClick)
+  // pointerdown, not click: iOS Safari does not reliably fire click for taps
+  // on non-interactive areas, so tapping outside might never close a popup.
+  document.addEventListener('pointerdown', onDocumentPointer)
   document.addEventListener('keydown', onDocumentKeydown)
   window.addEventListener('resize', repositionOpenPanels)
+  // Scroll too, and in the capture phase so the category bar's own horizontal
+  // scroll counts. Both popups are position: fixed, and they used to stay put
+  // while the page — and the button they belong to — scrolled away under them.
+  window.addEventListener('scroll', repositionOpenPanels, true)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', onDocumentClick)
+  document.removeEventListener('pointerdown', onDocumentPointer)
   document.removeEventListener('keydown', onDocumentKeydown)
   window.removeEventListener('resize', repositionOpenPanels)
+  window.removeEventListener('scroll', repositionOpenPanels, true)
 })
 
 const THEME_KEY = 'mmotop-theme'
@@ -532,19 +539,24 @@ function gameIcon(game: Game) {
         </svg>
       </button>
 
-      <label class="search-box">
-        <span class="sr-only">{{ $t('search.label') }}</span>
+      <!-- A div, not a <label>: the label wrapped the filter and search buttons
+           too, so their names were folded into the field's and a screen reader
+           announced it as "Search games Filter Search". -->
+      <div class="search-box">
         <input
           ref="searchInput"
           v-model="query"
+          type="search"
+          :aria-label="$t('search.label')"
           :placeholder="$t('search.placeholder')"
           @keydown.enter="submitSearch"
         />
         <button
           class="filter-button"
           type="button"
-          :aria-label="$t('filter.open')"
-          aria-haspopup="true"
+          :aria-label="activeFilterCount ? `${$t('filter.open')} (${activeFilterCount})` : $t('filter.open')"
+          aria-haspopup="dialog"
+          aria-controls="filter-popup"
           :aria-expanded="filterOpen"
           ref="filterButtonEl"
           :class="{ active: filterOpen || activeFilterCount > 0 }"
@@ -558,7 +570,8 @@ function gameIcon(game: Game) {
             <line x1="3" y1="15" x2="17" y2="15" />
             <circle cx="9" cy="15" r="1.6" fill="currentColor" stroke="none" />
           </svg>
-          <span v-if="activeFilterCount > 0" class="filter-badge">{{ activeFilterCount }}</span>
+          <!-- The count is in the button's name above; the badge is for eyes. -->
+          <span v-if="activeFilterCount > 0" class="filter-badge" aria-hidden="true">{{ activeFilterCount }}</span>
         </button>
         <button class="search-icon" type="button" :aria-label="$t('search.action')" @click="submitSearch">
           <svg class="search-svg" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
@@ -566,25 +579,28 @@ function gameIcon(game: Game) {
             <line x1="12.7" y1="12.7" x2="17" y2="17" />
           </svg>
         </button>
-      </label>
+      </div>
 
       <div
         v-if="filterOpen"
+        id="filter-popup"
         class="filter-popup"
         ref="filterPopupEl"
-        :style="{ top: filterPos.top + 'px', left: filterPos.left + 'px' }"
+        role="dialog"
+        :aria-label="$t('filter.open')"
+        :style="{ top: filterPos.top + 'px', left: filterPos.left + 'px', maxHeight: filterPos.maxHeight + 'px' }"
       >
         <div class="filter-popup-section">
-          <span class="filter-popup-label">{{ $t('filter.version') }}</span>
-          <select class="filter-select" v-model="filters.version">
+          <label class="filter-popup-label" for="filter-version">{{ $t('filter.version') }}</label>
+          <select id="filter-version" class="filter-select" v-model="filters.version">
             <option value="">{{ $t('filter.allVersions') }}</option>
             <option v-for="version in allVersions" :key="version" :value="version">{{ version }}</option>
           </select>
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">{{ $t('filter.minRating') }}</span>
-          <select class="filter-select" v-model.number="filters.minRating">
+          <label class="filter-popup-label" for="filter-rating">{{ $t('filter.minRating') }}</label>
+          <select id="filter-rating" class="filter-select" v-model.number="filters.minRating">
             <option v-for="threshold in ratingThresholds" :key="threshold.value" :value="threshold.value">
               {{ threshold.label }}
             </option>
@@ -592,22 +608,23 @@ function gameIcon(game: Game) {
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">{{ $t('filter.game') }}</span>
-          <select class="filter-select" v-model="filters.title">
+          <label class="filter-popup-label" for="filter-game">{{ $t('filter.game') }}</label>
+          <select id="filter-game" class="filter-select" v-model="filters.title">
             <option value="">{{ $t('filter.allGames') }}</option>
             <option v-for="title in allTitles" :key="title" :value="title">{{ title }}</option>
           </select>
         </div>
 
         <div class="filter-popup-section">
-          <span class="filter-popup-label">{{ $t('filter.rate') }}</span>
-          <div class="filter-chip-row">
+          <span id="filter-rate-label" class="filter-popup-label">{{ $t('filter.rate') }}</span>
+          <div class="filter-chip-row" role="group" aria-labelledby="filter-rate-label">
             <button
               v-for="tier in rateTiers"
               :key="tier.label"
               type="button"
               class="filter-chip"
               :class="{ active: filters.rates.includes(tier.label) }"
+              :aria-pressed="filters.rates.includes(tier.label)"
               @click="toggleRateFilter(tier.label)"
             >
               {{ tier.label }}
@@ -616,6 +633,7 @@ function gameIcon(game: Game) {
               type="button"
               class="filter-chip"
               :class="{ active: customRateActive }"
+              :aria-pressed="customRateActive"
               @click="toggleCustomRate"
             >
               {{ $t('filter.custom') }}
@@ -627,14 +645,16 @@ function gameIcon(game: Game) {
               type="number"
               min="0"
               :placeholder="$t('filter.from')"
+              :aria-label="`${$t('filter.rate')}: ${$t('filter.from')}`"
               class="filter-custom-input"
             />
-            <span class="filter-custom-sep">–</span>
+            <span class="filter-custom-sep" aria-hidden="true">–</span>
             <input
               v-model="customRateMax"
               type="number"
               min="0"
               :placeholder="$t('filter.to')"
+              :aria-label="`${$t('filter.rate')}: ${$t('filter.to')}`"
               class="filter-custom-input"
             />
           </div>
@@ -642,7 +662,7 @@ function gameIcon(game: Game) {
 
         <div class="filter-popup-actions">
           <button type="button" class="filter-reset" @click="resetFilters">{{ $t('filter.reset') }}</button>
-          <button type="button" class="filter-apply" @click="filterOpen = false">{{ $t('filter.apply') }}</button>
+          <button type="button" class="filter-apply" @click="closeFilter">{{ $t('filter.apply') }}</button>
         </div>
       </div>
 
@@ -676,7 +696,7 @@ function gameIcon(game: Game) {
           class="category more"
           :class="{ active: showMore || activeHidden }"
           type="button"
-          aria-haspopup="true"
+          aria-controls="more-categories"
           :aria-expanded="showMore"
           @click="showMore = !showMore"
         >
@@ -688,11 +708,15 @@ function gameIcon(game: Game) {
           </span>
         </button>
 
+        <!-- A plain disclosure. role="menu" promised arrow-key navigation and
+             focus-on-open, and neither existed — a screen reader user was told
+             to use keys that did nothing. -->
         <div
           v-if="showMore"
+          id="more-categories"
+          ref="moreDropdownEl"
           class="more-dropdown"
-          role="menu"
-          :style="{ top: dropdownPos.top + 'px', right: dropdownPos.right + 'px' }"
+          :style="{ top: dropdownPos.top + 'px', left: dropdownPos.left + 'px', maxHeight: Math.min(360, dropdownPos.maxHeight) + 'px' }"
         >
           <button
             v-for="category in hiddenCategories"
@@ -700,8 +724,8 @@ function gameIcon(game: Game) {
             class="more-dropdown-item"
             :class="{ active: activeCategory === category }"
             type="button"
-            role="menuitem"
-            @click="selectCategory(category)"
+            :aria-pressed="activeCategory === category"
+            @click="selectCategory(category, true)"
           >
             {{ categoryLabel(category) }}
           </button>

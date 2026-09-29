@@ -211,6 +211,16 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .search-box input::placeholder { color: #7e839d; }
 
+/* type="search" brings the right mobile keyboard, and also the browser's own
+   rounded field styling and clear button — which would sit on top of the
+   search icon. Both switched off; the field looks exactly as it did. */
+.search-box input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-box input::-webkit-search-cancel-button,
+.search-box input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+
 .search-icon {
   position: absolute;
   inset-inline-end: 10px;
@@ -303,6 +313,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border-radius: 11px;
   background: linear-gradient(180deg, rgba(22, 25, 52, .98), rgba(15, 19, 42, .97));
   box-shadow: 0 14px 45px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.02);
+  /* placePopup caps the height to the room below the button; this lets the
+     rest scroll instead of running off the bottom of a landscape phone. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .filter-popup-section {
@@ -1309,9 +1323,15 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .search-box input {
     height: 32px;
     padding-inline: 28px 26px;
-    font-size: 11px;
+    /* 16px, not 11: iOS Safari zooms the page into any focused field under
+       16px and leaves it zoomed after. The placeholder truncates sooner at
+       narrow widths; it did at 320px already. */
+    font-size: 16px;
     border-radius: 9px;
   }
+  .filter-select,
+  .filter-custom-input,
+  .lang-search-input { font-size: 16px; }
   .search-icon {
     inset-inline-end: 2px;
     top: 5px;

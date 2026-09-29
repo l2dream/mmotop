@@ -10,7 +10,7 @@ const wrap = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLButtonElement | null>(null)
 const searchEl = ref<HTMLInputElement | null>(null)
-const pos = ref({ top: 0, right: 0 })
+const pos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 460 })
 
 /**
  * Falls back to the default language, not to the first row of the list.
@@ -80,37 +80,25 @@ const focusAfterSwitch = useState('lang-focus-after-switch', () => false)
 
 function choose(code: string) {
   stored.value = code
+  // Choosing the language already in use navigates nowhere, so no new
+  // instance will mount to pick the flag up — and a flag left set would steal
+  // focus on some unrelated remount later. Close in place instead.
+  if (code === locale.value) return close()
   focusAfterSwitch.value = true
   close(false)
 }
 
-// Sized so PORTUGUÊS (BRASIL), the longest name on the list, fits its column
-// whole. Three columns of 192px is what it measured at.
-const PANEL_WIDTH = 640
-
+/**
+ * Hangs from the button's trailing edge, mirrored in right-to-left pages — see
+ * placePopup for the arithmetic shared with the page's other two popups.
+ *
+ * Guarded on `open`: this runs on every scroll event anywhere on the page, and
+ * it used to measure the button each time even while the panel was closed.
+ */
 function position() {
-  const rect = wrap.value?.getBoundingClientRect()
-  if (!rect) return
-  const width = Math.min(PANEL_WIDTH, window.innerWidth - 20)
-
-  /**
-   * The panel hangs from the button's trailing edge — its right in a
-   * left-to-right page, its left in a right-to-left one.
-   *
-   * Mirroring this was missed when the rest of the layout went logical. The
-   * anchor stayed physical, so on /ar the button sat near the left of the bar
-   * while the panel still measured from the right, and the clamp then slid it
-   * to the viewport edge: a 640px panel floating five hundred pixels away from
-   * the control that opened it. Positions computed in JavaScript do not
-   * inherit anything from the stylesheet's logical properties.
-   */
-  const rtl = document.documentElement.dir === 'rtl'
-  const anchored = rtl
-    ? window.innerWidth - rect.left - width
-    : window.innerWidth - rect.right
-
-  const right = Math.min(anchored, window.innerWidth - width - 10)
-  pos.value = { top: rect.bottom + 10, right: Math.max(10, right) }
+  if (!open.value || !wrap.value) return
+  const width = panel.value?.offsetWidth ?? 640
+  pos.value = placePopup(wrap.value.getBoundingClientRect(), width, 'end', 10)
 }
 
 /**
@@ -140,8 +128,9 @@ function close(returnFocus = true) {
 async function toggle() {
   if (open.value) return close()
   open.value = true
-  position()
+  // After the panel exists, so its real width is what gets measured.
   await nextTick()
+  position()
   // Twenty-six names is more than anyone wants to read through, so the caret
   // lands in the search field and typing narrows immediately.
   searchEl.value?.focus()
@@ -176,7 +165,7 @@ function trapTab(event: KeyboardEvent) {
   }
 }
 
-function onPointerDown(event: MouseEvent) {
+function onPointerDown(event: PointerEvent) {
   if (!open.value) return
   const target = event.target as Node
   if (wrap.value?.contains(target) || panel.value?.contains(target)) return
@@ -196,14 +185,17 @@ onMounted(() => {
     // Back on the control they used, rather than at the top of the document.
     trigger.value?.focus()
   }
-  document.addEventListener('mousedown', onPointerDown)
+  // pointerdown rather than mousedown: iOS Safari does not reliably fire mouse
+  // events for taps on non-interactive areas, so tapping outside might never
+  // have closed the panel on an iPhone.
+  document.addEventListener('pointerdown', onPointerDown)
   document.addEventListener('keydown', onKeydown)
   window.addEventListener('resize', position)
   window.addEventListener('scroll', position, true)
 })
 
 onBeforeUnmount(() => {
-  document.removeEventListener('mousedown', onPointerDown)
+  document.removeEventListener('pointerdown', onPointerDown)
   document.removeEventListener('keydown', onKeydown)
   window.removeEventListener('resize', position)
   window.removeEventListener('scroll', position, true)
@@ -238,7 +230,7 @@ onBeforeUnmount(() => {
       role="dialog"
       aria-modal="true"
       :aria-label="t('nav.language')"
-      :style="{ top: pos.top + 'px', right: pos.right + 'px' }"
+      :style="{ top: pos.top + 'px', left: pos.left + 'px', maxHeight: Math.min(460, pos.maxHeight) + 'px' }"
     >
       <div class="lang-search">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
