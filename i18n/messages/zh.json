@@ -32,7 +32,7 @@
     "new": "新游戏",
     "all": "全部游戏",
     "viewMore": "查看更多",
-    "shuffle": "随机",
+    "shuffle": "换一批",
     "empty": "没有符合所选筛选条件的游戏。"
   },
   "filter": {
@@ -44,8 +44,8 @@
     "game": "游戏",
     "allGames": "全部游戏",
     "rate": "Rate",
-    "from": "从",
-    "to": "到",
+    "from": "最低",
+    "to": "最高",
     "reset": "重置",
     "apply": "应用",
     "custom": "自定义"

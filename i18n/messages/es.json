@@ -14,7 +14,7 @@
   "language": {
     "search": "Buscar idioma",
     "nothing": "Sin resultados",
-    "results": "Encontrados: {count}"
+    "results": "Resultados: {count}"
   },
   "search": {
     "label": "Buscar juegos",

@@ -5,7 +5,7 @@
     "ogDescription": "Upptäck och jämför spelservrar."
   },
   "nav": {
-    "home": "MMOTOP startsida",
+    "home": "MMOTOP-startsida",
     "theme": "Byt tema",
     "language": "Språk",
     "login": "LOGGA IN",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Sök språk",
     "nothing": "Inga träffar",
-    "results": "Hittade: {count}"
+    "results": "Träffar: {count}"
   },
   "search": {
     "label": "Sök spel",

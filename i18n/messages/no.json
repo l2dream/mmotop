@@ -5,7 +5,7 @@
     "ogDescription": "Oppdag og sammenlign spillservere."
   },
   "nav": {
-    "home": "MMOTOP hjem",
+    "home": "MMOTOP-forside",
     "theme": "Bytt tema",
     "language": "Språk",
     "login": "LOGG INN",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Søk språk",
     "nothing": "Ingen treff",
-    "results": "Funnet: {count}"
+    "results": "Treff: {count}"
   },
   "search": {
     "label": "Søk spill",

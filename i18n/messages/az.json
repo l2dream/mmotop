@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": "MMOTOP — Oyun Serverlərinin Reytinqi",
-    "description": "MMOTOP oyun server kataloqu: ən yaxşı oyunlar, gözlənilən və yeni başlamış serverlər.",
+    "description": "MMOTOP oyun serverləri kataloqu: ən yaxşı oyunlar, gözlənilən və yeni başlamış serverlər.",
     "ogDescription": "Oyun serverlərini kəşf edin və müqayisə edin."
   },
   "nav": {
-    "home": "MMOTOP ana səhifə",
+    "home": "MMOTOP ana səhifəsi",
     "theme": "Mövzunu dəyiş",
     "language": "Dil",
     "login": "GİRİŞ",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Dil axtar",
     "nothing": "Nəticə yoxdur",
-    "results": "Tapıldı: {count}"
+    "results": "Nəticə: {count}"
   },
   "search": {
     "label": "Oyun axtar",

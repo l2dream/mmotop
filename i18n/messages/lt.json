@@ -28,7 +28,7 @@
   "panels": {
     "top": "GERIAUSI ŽAIDIMAI",
     "soon": "NETRUKUS",
-    "started": "JAU PRADĖTI",
+    "started": "JAU VEIKIA",
     "new": "NAUJI ŽAIDIMAI",
     "all": "VISI ŽAIDIMAI",
     "viewMore": "Rodyti daugiau",
@@ -51,20 +51,20 @@
     "custom": "Pasirinktinis"
   },
   "months": {
-    "jan": "saus",
-    "feb": "vas",
-    "mar": "kov",
-    "apr": "bal",
-    "may": "geg",
-    "jun": "birž",
-    "jul": "liep",
-    "aug": "rugp",
-    "sep": "rugs",
-    "oct": "spal",
-    "nov": "lapkr",
-    "dec": "gruod"
+    "jan": "saus.",
+    "feb": "vas.",
+    "mar": "kov.",
+    "apr": "bal.",
+    "may": "geg.",
+    "jun": "birž.",
+    "jul": "liep.",
+    "aug": "rugp.",
+    "sep": "rugs.",
+    "oct": "spal.",
+    "nov": "lapkr.",
+    "dec": "gruod."
   },
-  "dateFormat": "{day} {month}",
+  "dateFormat": "{month} {day}",
   "scripts": {
     "latin": "Lotynų",
     "cyrillic": "Kirilica",

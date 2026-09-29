@@ -1427,9 +1427,15 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .rank { width: 22px; height: 22px; font-size: 12px; }
 
   /* The two .compact panels keep their rate-under-chronicle layout from the
-     base rules; here they just get mobile column widths. */
+     base rules; here they just get mobile column widths.
+
+     The date column is sized for the longest date any language can produce,
+     not for "28 Sep": at 46px, "28 أغسطس", "10월 28일", "28. märts" and
+     "gruod. 28" ran out of it and into the chronicle beside them. 60px holds
+     the widest (Arabic, 59px) and costs only the name column, which already
+     truncates. */
   .game-row.compact.no-rank {
-    grid-template-columns: 32px minmax(0, 1fr) 58px 46px;
+    grid-template-columns: 32px minmax(0, 1fr) 58px 60px;
   }
 }
 

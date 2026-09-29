@@ -5,7 +5,7 @@
     "ogDescription": "Spieleserver entdecken und vergleichen."
   },
   "nav": {
-    "home": "MMOTOP Startseite",
+    "home": "MMOTOP-Startseite",
     "theme": "Design wechseln",
     "language": "Sprache",
     "login": "ANMELDEN",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Sprache suchen",
     "nothing": "Keine Treffer",
-    "results": "Gefunden: {count}"
+    "results": "Treffer: {count}"
   },
   "search": {
     "label": "Spiele suchen",

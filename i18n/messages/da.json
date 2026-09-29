@@ -5,7 +5,7 @@
     "ogDescription": "Find og sammenlign spilservere."
   },
   "nav": {
-    "home": "MMOTOP forside",
+    "home": "MMOTOP-forside",
     "theme": "Skift tema",
     "language": "Sprog",
     "login": "LOG IND",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Søg sprog",
     "nothing": "Ingen resultater",
-    "results": "Fundet: {count}"
+    "results": "Resultater: {count}"
   },
   "search": {
     "label": "Søg spil",

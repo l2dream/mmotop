@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": "MMOTOP — Oyun Sunucuları Sıralaması",
-    "description": "MMOTOP oyun sunucu rehberi: en iyi oyunlar, yakında açılacak ve yeni açılmış sunucular.",
+    "description": "MMOTOP oyun sunucusu rehberi: en iyi oyunlar, yakında açılacak ve yeni açılmış sunucular.",
     "ogDescription": "Oyun sunucularını keşfedin ve karşılaştırın."
   },
   "nav": {
-    "home": "MMOTOP ana sayfa",
+    "home": "MMOTOP ana sayfası",
     "theme": "Temayı değiştir",
     "language": "Dil",
     "login": "GİRİŞ",
@@ -14,7 +14,7 @@
   "language": {
     "search": "Dil ara",
     "nothing": "Sonuç yok",
-    "results": "Bulundu: {count}"
+    "results": "Sonuç: {count}"
   },
   "search": {
     "label": "Oyun ara",
@@ -28,7 +28,7 @@
   "panels": {
     "top": "EN İYİ OYUNLAR",
     "soon": "YAKINDA",
-    "started": "ZATEN BAŞLADI",
+    "started": "ZATEN AÇIK",
     "new": "YENİ OYUNLAR",
     "all": "TÜM OYUNLAR",
     "viewMore": "Daha fazla göster",
@@ -40,7 +40,7 @@
     "version": "Sürüm",
     "allVersions": "Tüm sürümler",
     "minRating": "Min. puan",
-    "any": "Herhangi",
+    "any": "Tümü",
     "game": "Oyun",
     "allGames": "Tüm oyunlar",
     "rate": "Rate",

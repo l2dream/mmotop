@@ -14,7 +14,7 @@
   "language": {
     "search": "Meklēt valodu",
     "nothing": "Nav rezultātu",
-    "results": "Atrasts: {count}"
+    "results": "Rezultāti: {count}"
   },
   "search": {
     "label": "Meklēt spēles",
@@ -28,7 +28,7 @@
   "panels": {
     "top": "LABĀKĀS SPĒLES",
     "soon": "DRĪZUMĀ",
-    "started": "JAU SĀKUŠĀS",
+    "started": "JAU DARBOJAS",
     "new": "JAUNAS SPĒLES",
     "all": "VISAS SPĒLES",
     "viewMore": "Rādīt vairāk",
@@ -71,7 +71,7 @@
     "greek": "Grieķu",
     "armenian": "Armēņu",
     "arabic": "Arābu",
-    "hebrew": "Ivrits",
+    "hebrew": "Ebreju",
     "eastAsian": "Austrumāzijas"
   }
 }

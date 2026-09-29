@@ -14,7 +14,7 @@
   "language": {
     "search": "言語を検索",
     "nothing": "該当なし",
-    "results": "{count} 件"
+    "results": "{count}件"
   },
   "search": {
     "label": "ゲームを検索",
@@ -23,7 +23,7 @@
   },
   "categories": {
     "all": "すべて",
-    "more": "もっと"
+    "more": "その他"
   },
   "panels": {
     "top": "人気ゲーム",
