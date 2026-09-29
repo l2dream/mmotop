@@ -10,9 +10,12 @@ permissions:
   pages: write
   id-token: write
 
+# Queue rather than cancel. With cancel-in-progress a quick second push could
+# abort a deployment midway; GitHub's own Pages template sets this to false so
+# a production deploy always runs to completion.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -29,6 +32,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Before the build, so a type error stops the deploy instead of shipping.
+      # The build itself does not type-check: a refactor once deleted a local
+      # close() and every call quietly became window.close(), which browsers
+      # ignore. The page built fine; the checker would have refused it.
+      - name: Type-check
+        run: npm run typecheck
 
       - name: Generate static site
         run: npm run generate
