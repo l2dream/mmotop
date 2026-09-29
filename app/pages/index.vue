@@ -35,6 +35,13 @@ const VISIBLE_CATEGORIES = 6
 const visibleCategories = computed(() => categories.slice(0, VISIBLE_CATEGORIES))
 const hiddenCategories = computed(() => categories.slice(VISIBLE_CATEGORIES))
 
+/**
+ * A category picked from the More menu used to leave no trace in the bar: the
+ * menu closed and nothing visible said which game was selected. The More
+ * button takes the category's name instead, and stays highlighted.
+ */
+const activeHidden = computed(() => hiddenCategories.value.includes(activeCategory.value))
+
 const games: Game[] = [
   { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'Interlude', stars: 500, players: 'x500' },
   { title: 'LA2DREAM', genre: 'MMORPG / Lineage II', version: 'High-Five', stars: 500, players: 'x500' },
@@ -60,13 +67,13 @@ const startedDates = [
   '2025-11-20', '2025-07-08', '2024-12-23', '2023-05-14', '2021-03-08'
 ]
 
-const soon = Array.from({ length: 10 }, (_, i) => ({
-  ...games[i % games.length],
+const soon: Game[] = Array.from({ length: 10 }, (_, i) => ({
+  ...games[i % games.length]!,
   date: soonDates[i]
 }))
 
-const started = Array.from({ length: 10 }, (_, i) => ({
-  ...games[(i + 1) % games.length],
+const started: Game[] = Array.from({ length: 10 }, (_, i) => ({
+  ...games[(i + 1) % games.length]!,
   date: startedDates[i]
 }))
 
@@ -74,22 +81,38 @@ const started = Array.from({ length: 10 }, (_, i) => ({
 // entry has no votes yet, and an empty counter reads as unpopular rather than
 // new. Two launches are still ahead, one has already happened.
 const newGameDates = ['2026-10-12', '2026-11-05', '2026-08-20']
-const newGames = games.slice(0, 3).map((game, i) => ({ ...game, date: newGameDates[i] }))
+const newGames: Game[] = games.slice(0, 3).map((game, i) => ({ ...game, date: newGameDates[i] }))
 // A random pick, so the panel can surface servers that hold no place in the
 // vote ranking and have no launch date to show. Drawn in the browser rather
 // than at build time: a static build would freeze one "random" set into the
 // HTML and every visitor would see it until the next deploy.
+//
+// The whole pool is shuffled and kept, and the panel takes the first three
+// that pass the filters. It used to pick three and filter afterwards, so with
+// Version = High-Five (three servers of ten) roughly three loads in ten showed
+// "No games match" while three matching servers sat unpicked in the pool.
+//
+// Kept in useState so the pick survives a language switch rather than being
+// redrawn — a visitor comparing two languages should see the same servers.
 const RANDOM_PICK = 3
-const allGames = ref<Game[]>(games.slice(0, RANDOM_PICK))
-const shuffleTurns = ref(0)
+const shuffledPool = useState<Game[]>('dash-shuffled-pool', () => [...games])
+const hasShuffled = useState('dash-has-shuffled', () => false)
+// Counts deliberate shuffles only, so the button's half-turn answers a click
+// and not every page load and every language change.
+const shuffleTurns = useState('dash-shuffle-turns', () => 0)
 
-function shuffleGames() {
+function shufflePool() {
   const pool = [...games]
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+    ;[pool[i], pool[j]] = [pool[j]!, pool[i]!]
   }
-  allGames.value = pool.slice(0, RANDOM_PICK)
+  shuffledPool.value = pool
+  hasShuffled.value = true
+}
+
+function shuffleGames() {
+  shufflePool()
   shuffleTurns.value++
 }
 
@@ -174,8 +197,9 @@ function formatDayMonth(iso?: string) {
 const currentYear = ref<number | null>(useRuntimeConfig().public.buildYear as number)
 onMounted(() => {
   currentYear.value = new Date().getFullYear()
-  // Re-drawn after hydration, so each visit gets its own pick.
-  shuffleGames()
+  // Drawn after hydration, so each visit gets its own pick — and only once per
+  // visit, so switching language keeps it.
+  if (!hasShuffled.value) shufflePool()
 })
 
 // The year is dropped only when it's the current one, where it reads as noise.
@@ -198,6 +222,18 @@ const customMax = computed(() => {
   return Number.isFinite(n) ? n : null
 })
 const customRateSet = computed(() => customMin.value != null || customMax.value != null)
+
+/**
+ * The range in the order it means, whichever box each number went into.
+ * Typed as 500 – 100 it used to be read literally, match nothing, and empty
+ * every panel with no hint as to why.
+ */
+const customRange = computed(() => {
+  const lo = customMin.value
+  const hi = customMax.value
+  if (lo != null && hi != null && lo > hi) return { lo: hi, hi: lo }
+  return { lo, hi }
+})
 const rateFilterActive = computed(() => filters.value.rates.length > 0 || (customRateActive.value && customRateSet.value))
 
 const filterOpen = ref(false)
@@ -226,8 +262,8 @@ function matchesFilters(game: Game) {
     const inCustom =
       customRateActive.value &&
       customRateSet.value &&
-      (customMin.value == null || rate >= customMin.value) &&
-      (customMax.value == null || rate <= customMax.value)
+      (customRange.value.lo == null || rate >= customRange.value.lo) &&
+      (customRange.value.hi == null || rate <= customRange.value.hi)
     if (!inPreset && !inCustom) return false
   }
   return true
@@ -253,18 +289,47 @@ function resetFilters() {
   customRateMax.value = ''
 }
 
-const filteredGames = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  return games.filter((game) => {
-    if (q && !`${game.title} ${game.genre} ${game.version}`.toLowerCase().includes(q)) return false
-    return matchesFilters(game)
-  })
-})
+/**
+ * The category bar used to move its highlight and filter nothing: every panel
+ * kept listing the same servers whichever game was selected. A category now
+ * matches a game whose genre or title names it; "All" matches everything.
+ */
+function matchesCategory(game: Game) {
+  const category = activeCategory.value
+  if (category === 'All') return true
+  return game.genre.includes(category) || game.title === category
+}
 
-const filteredSoon = computed(() => soon.filter(matchesFilters))
-const filteredStarted = computed(() => started.filter(matchesFilters))
-const filteredNewGames = computed(() => newGames.filter(matchesFilters))
-const filteredAllGames = computed(() => allGames.value.filter(matchesFilters))
+/**
+ * The search box used to apply to the TOP panel only, while the filter popup
+ * applied to all five — so typing "High-Five" narrowed one panel and left four
+ * untouched. It applies everywhere now, like the filters beside it.
+ */
+function matchesSearch(game: Game) {
+  const q = query.value.trim().toLowerCase()
+  if (!q) return true
+  return `${game.title} ${game.genre} ${game.version} ${game.players}`.toLowerCase().includes(q)
+}
+
+function matchesAll(game: Game) {
+  return matchesCategory(game) && matchesSearch(game) && matchesFilters(game)
+}
+
+/**
+ * Ranked once, by votes, before anything is filtered — so a server keeps its
+ * own place. Filtering used to renumber the survivors from one, handing gold,
+ * silver and bronze to whichever three happened to be left: filter to
+ * High-Five and the servers ranked 2, 5 and 8 wore the medals for 1, 2 and 3.
+ */
+const rankedGames = [...games]
+  .sort((a, b) => b.stars - a.stars)
+  .map((game, i) => ({ game, rank: i + 1 }))
+
+const filteredGames = computed(() => rankedGames.filter(({ game }) => matchesAll(game)))
+const filteredSoon = computed(() => soon.filter(matchesAll))
+const filteredStarted = computed(() => started.filter(matchesAll))
+const filteredNewGames = computed(() => newGames.filter(matchesAll))
+const filteredAllGames = computed(() => shuffledPool.value.filter(matchesAll).slice(0, RANDOM_PICK))
 
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
@@ -576,6 +641,7 @@ function gameIcon(game: Game) {
         :key="category"
         class="category"
         :class="{ active: activeCategory === category }"
+        :aria-pressed="activeCategory === category"
         type="button"
         @click="selectCategory(category)"
       >
@@ -584,14 +650,15 @@ function gameIcon(game: Game) {
 
       <div class="category-more-wrap" ref="moreWrap">
         <button
+          ref="moreButton"
           class="category more"
-          :class="{ active: showMore }"
+          :class="{ active: showMore || activeHidden }"
           type="button"
           aria-haspopup="true"
           :aria-expanded="showMore"
           @click="showMore = !showMore"
         >
-          {{ $t('categories.more') }}
+          {{ activeHidden ? categoryLabel(activeCategory) : $t('categories.more') }}
           <span class="more-chevron" :class="{ open: showMore }">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 9l6 6 6-6" />
@@ -664,8 +731,8 @@ function gameIcon(game: Game) {
               />
             </svg>
           </template>
-          <div v-for="(game, index) in filteredGames.slice(0, 10)" :key="`top-${index}`" class="game-row">
-            <span class="rank" :class="index < 3 ? `rank-${index + 1}` : undefined">{{ index + 1 }}</span>
+          <div v-for="{ game, rank } in filteredGames.slice(0, 10)" :key="`top-${rank}`" class="game-row">
+            <span class="rank" :class="rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
             <span class="game-logo">{{ gameIcon(game) }}</span>
             <span class="game-name">
               <strong>{{ game.title }}</strong>
