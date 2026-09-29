@@ -669,8 +669,20 @@ function gameIcon(game: Game) {
       <div class="account-actions">
         <LanguageSwitcher />
 
-        <button class="login-button" type="button">
-          <span>{{ $t('nav.login') }}</span>
+        <!-- aria-disabled until there is an account to sign in to: it is a real
+             button, and without this a screen reader announced it as one and
+             nothing happened when it was pressed. It keeps its look; only the
+             cursor stops promising a click.
+
+             Below 380px the label gives way to an icon, the way the language
+             code does beside it — in Lithuanian and Latvian the word alone
+             left the search field no room to type at 320px. -->
+        <button class="login-button" type="button" aria-disabled="true" :aria-label="$t('nav.login')">
+          <svg class="login-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" />
+          </svg>
+          <span class="login-label" aria-hidden="true">{{ $t('nav.login') }}</span>
         </button>
       </div>
     </header>

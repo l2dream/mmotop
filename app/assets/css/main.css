@@ -118,7 +118,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .topbar {
   height: 54px;
   display: grid;
-  grid-template-columns: max-content 42px minmax(280px, 438px) auto;
+  /* The search field may shrink to 140px, not 280. Between 701px — where the
+     phone layout ends — and about 760px, 280 plus a long login label (lt, lv,
+     de, el) was wider than the viewport, and the whole page scrolled sideways
+     by up to 27px. */
+  grid-template-columns: max-content 42px minmax(140px, 438px) auto;
   align-items: center;
   gap: 22px;
   max-width: 1480px;
@@ -476,6 +480,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   font-weight: 700;
   cursor: pointer;
 }
+
+/* Shown only where the label is hidden — see the 380px breakpoint. */
+.login-icon { display: none; flex: 0 0 auto; }
+.login-button[aria-disabled="true"] { cursor: default; }
 
 .account-actions {
   justify-self: end;
@@ -1404,6 +1412,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 @media (max-width: 380px) {
   .lang-code { display: none; }
   .lang-button { padding-inline: 7px; gap: 0; }
+  .login-label { display: none; }
+  .login-icon { display: block; }
+  .login-button { width: 32px; padding: 0; justify-content: center; }
 }
 
 /* Right-to-left readiness.
