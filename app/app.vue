@@ -34,6 +34,29 @@ const fontHref = computed(() => (scriptFont.value ? fontUrl(scriptFont.value) : 
  */
 const pickerHrefs = computed(() => pickerFontUrls(scriptFont.value))
 
+/**
+ * Puts the saved theme on <html> before the first paint.
+ *
+ * The page is prerendered once and served to everyone, so it ships in the
+ * default dark theme. Restoring a light choice after hydration would flash the
+ * whole page dark first; applying it from Vue state during hydration would
+ * mismatch the prerendered markup. A few bytes of inline script in the head
+ * run before anything is drawn and avoid both. Everything themed in the
+ * stylesheet keys off this one class.
+ *
+ * localStorage rather than a cookie: nothing on a static host could read a
+ * cookie server-side anyway, and this way the value is never sent with a
+ * request. The key is namespaced because every project page under
+ * l2dream.github.io shares the same origin, and so the same storage.
+ */
+useHead({
+  script: [{
+    key: 'theme-boot',
+    tagPriority: 'critical',
+    innerHTML: "try{if(localStorage.getItem('mmotop-theme')==='light')document.documentElement.classList.add('theme-light')}catch(e){}"
+  }]
+})
+
 useHead(() => ({
   htmlAttrs: {
     ...localeHead.value.htmlAttrs,

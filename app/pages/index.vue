@@ -443,9 +443,29 @@ onUnmounted(() => {
   window.removeEventListener('resize', repositionOpenPanels)
 })
 
-function toggleTheme() {
-  dark.value = !dark.value
+const THEME_KEY = 'mmotop-theme'
+
+/**
+ * Applies the theme where the stylesheet looks for it — a class on <html> —
+ * and remembers it. The theme used to live only in page state, so every reload
+ * went back to dark whatever the visitor had chosen.
+ */
+function applyTheme(isDark: boolean, remember: boolean) {
+  dark.value = isDark
+  document.documentElement.classList.toggle('theme-light', !isDark)
+  if (!remember) return
+  try { localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light') } catch { /* private mode */ }
 }
+
+function toggleTheme() {
+  applyTheme(!dark.value, true)
+}
+
+onMounted(() => {
+  // The head script already painted the right theme; this brings the page's
+  // own state (and so the sun/moon icon) into line with it.
+  applyTheme(!document.documentElement.classList.contains('theme-light'), false)
+})
 
 function submitSearch() {
   searchInput.value?.focus()
@@ -457,7 +477,9 @@ function gameIcon(game: Game) {
 </script>
 
 <template>
-  <div class="site-shell" :class="{ 'is-light': !dark }">
+  <!-- The theme class lives on <html> now (see app.vue), so it is in place
+       before the first paint rather than after hydration. -->
+  <div class="site-shell">
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
         <linearGradient id="voteGrad" x1="0%" y1="0%" x2="100%" y2="100%">

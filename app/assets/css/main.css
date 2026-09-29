@@ -20,6 +20,21 @@
   font-synthesis: none;
 }
 
+/* The light theme lives on <html> now, set by a script in the head before the
+   first paint (see app.vue), so a reload no longer flashes dark first. Two
+   things it had never reached, because they sit outside .site-shell:
+
+   color-scheme stayed "dark", so in the light theme the browser still drew
+   the <select> dropdown lists, number-input spinners and scrollbars dark.
+
+   <html> and <body> kept their dark background, so overscrolling on iOS or
+   Safari showed dark bands above and below a light page. */
+:root.theme-light {
+  color-scheme: light;
+  background: #f6f7fc;
+}
+.theme-light body { background: #f6f7fc; }
+
 * { box-sizing: border-box; }
 html, body, #__nuxt { min-height: 100%; margin: 0; }
 body {
@@ -55,14 +70,14 @@ html::-webkit-scrollbar-thumb {
 }
 html::-webkit-scrollbar-thumb:hover { background: rgba(156, 92, 255, .55); }
 
-html:has(.site-shell.is-light) {
+html.theme-light {
   scrollbar-color: rgba(124, 58, 237, .3) transparent;
 }
-html:has(.site-shell.is-light)::-webkit-scrollbar-thumb {
+html.theme-light::-webkit-scrollbar-thumb {
   background: rgba(124, 58, 237, .28);
   border-color: #f6f7fc;
 }
-html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
+html.theme-light::-webkit-scrollbar-thumb:hover {
   background: rgba(124, 58, 237, .45);
 }
 
@@ -90,7 +105,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
     border-color .25s ease, box-shadow .25s ease, color .25s ease;
 }
 
-.site-shell.is-light {
+.theme-light .site-shell {
   color: #16182b;
   background-color: #f6f7fc;
   background-image:
@@ -122,42 +137,42 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   letter-spacing: -1.5px;
 }
 
-.is-light .brand { color: #131525; }
+.theme-light .brand { color: #131525; }
 
-.is-light .theme-button { color: #3c3f55; }
+.theme-light .theme-button { color: #3c3f55; }
 
-.is-light .search-box input {
+.theme-light .search-box input {
   background: #ffffff;
   border-color: rgba(103, 104, 173, .22);
   color: #1c1e33;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 8px 24px rgba(31, 41, 102, .07);
 }
 
-.is-light .search-box input::placeholder { color: #8b8fa3; }
-.is-light .search-icon { color: #9296ad; }
+.theme-light .search-box input::placeholder { color: #8b8fa3; }
+.theme-light .search-icon { color: #83889f; }
 
-.is-light .login-button {
+.theme-light .login-button {
   background: #ffffff;
   border-color: rgba(142, 76, 255, .32);
   color: #5b21c4;
   box-shadow: 0 8px 20px rgba(31, 41, 102, .06);
 }
 
-.is-light .category-bar {
+.theme-light .category-bar {
   background: linear-gradient(90deg, #ffffff, #f8f8fd);
   border: 1px solid rgba(103, 104, 173, .12);
   box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(31, 41, 102, .05);
 }
 
-.is-light .category { color: #62667c; }
+.theme-light .category { color: #62667c; }
 
-.is-light .category.active {
+.theme-light .category.active {
   color: #fff;
-  background: linear-gradient(180deg, #9c5cff, #7c3aed);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   box-shadow: inset 0 -2px 0 #6d28d9;
 }
 
-.is-light .category.more .more-chevron { color: #9296ad; }
+.theme-light .category.more .more-chevron { color: #83889f; }
 
 .theme-button {
   width: 40px;
@@ -224,12 +239,12 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   color: #cfd2ff;
 }
 
-.is-light .search-icon {
+.theme-light .search-icon {
   border-inline-start-color: rgba(31, 41, 102, .14);
 }
 
-.is-light .search-icon:hover,
-.is-light .search-icon:focus-visible {
+.theme-light .search-icon:hover,
+.theme-light .search-icon:focus-visible {
   color: #5b21c4;
 }
 
@@ -250,7 +265,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
 }
 
-.is-light .filter-button {
+.theme-light .filter-button {
   color: #8b8fa3;
   border-inline-end-color: rgba(31, 41, 102, .14);
 }
@@ -258,7 +273,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 .filter-icon { display: block; }
 
 .filter-button.active { color: #b98bff; }
-.is-light .filter-button.active { color: #7c3aed; }
+.theme-light .filter-button.active { color: #7c3aed; }
 
 .filter-badge {
   position: absolute;
@@ -268,7 +283,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   height: 14px;
   padding: 0 3px;
   border-radius: 7px;
-  background: #9c5cff;
+  background: #9048ff;
   color: #fff;
   font-size: 9px;
   font-weight: 700;
@@ -383,10 +398,18 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .filter-reset:hover { color: #cfd2ff; }
 
+/* Light counterparts for text that only ever had a dark-theme colour. */
+.theme-light .filter-popup-label,
+.theme-light .filter-custom-sep,
+.theme-light .filter-reset,
+.theme-light .empty-state { color: #6d7395; }
+.theme-light .filter-reset:hover { color: #5b21c4; }
+.theme-light .lang-item-code { color: #6e7394; }
+
 .filter-apply {
   border: 0;
   border-radius: 8px;
-  background: linear-gradient(180deg, #9c5cff, #7c3aed);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   color: #fff;
   font-size: 12px;
   font-weight: 600;
@@ -394,34 +417,34 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
 }
 
-.is-light .filter-popup {
+.theme-light .filter-popup {
   background: #ffffff;
   border-color: rgba(103, 104, 173, .14);
   box-shadow: 0 14px 38px rgba(31, 41, 102, .12), inset 0 1px 0 #fff;
 }
 
-.is-light .filter-select {
+.theme-light .filter-select {
   background: #ffffff;
   color: #1c1e33;
   border-color: rgba(103, 104, 173, .2);
 }
 
-.is-light .filter-chip { color: #62667c; border-color: rgba(103, 104, 173, .2); }
-.is-light .filter-chip:hover { color: #16182b; }
+.theme-light .filter-chip { color: #62667c; border-color: rgba(103, 104, 173, .2); }
+.theme-light .filter-chip:hover { color: #16182b; }
 
-.is-light .filter-chip.active {
+.theme-light .filter-chip.active {
   color: #fff;
-  background: linear-gradient(180deg, #9c5cff, #7c3aed);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   box-shadow: inset 0 -2px 0 #6d28d9;
 }
 
-.is-light .filter-custom-input {
+.theme-light .filter-custom-input {
   background: #ffffff;
   color: #1c1e33;
   border-color: rgba(103, 104, 173, .2);
 }
 
-.is-light .filter-popup-actions { border-top-color: rgba(103, 104, 173, .14); }
+.theme-light .filter-popup-actions { border-top-color: rgba(103, 104, 173, .14); }
 
 .empty-state {
   padding: 30px 17px;
@@ -479,14 +502,14 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   letter-spacing: .06em;
 }
 
-.is-light .lang-button {
+.theme-light .lang-button {
   background: #ffffff;
   border-color: rgba(142, 76, 255, .32);
   color: #4a4e66;
   box-shadow: 0 8px 20px rgba(31, 41, 102, .06);
 }
 
-.is-light .lang-button:hover { color: #5b21c4; border-color: rgba(142, 76, 255, .5); }
+.theme-light .lang-button:hover { color: #5b21c4; border-color: rgba(142, 76, 255, .5); }
 
 .lang-panel {
   position: fixed;
@@ -503,7 +526,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   scrollbar-color: rgba(156, 92, 255, .45) transparent;
 }
 
-.is-light .lang-panel {
+.theme-light .lang-panel {
   border-color: rgba(103, 104, 173, .18);
   background: linear-gradient(180deg, #ffffff, #f8f8fd);
   box-shadow: 0 18px 50px rgba(31, 41, 102, .14);
@@ -522,7 +545,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   color: #7e839d;
 }
 
-.is-light .lang-search {
+.theme-light .lang-search {
   background: #fff;
   border-color: rgba(103, 104, 173, .2);
   color: #9296ad;
@@ -539,7 +562,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   outline: none;
 }
 
-.is-light .lang-search-input { color: #23263d; }
+.theme-light .lang-search-input { color: #23263d; }
 .lang-search-input::placeholder { color: #7e839d; }
 
 /* The field takes focus the moment the panel opens, so the global focus ring
@@ -566,14 +589,14 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   break-after: avoid;
   padding-inline-start: 8px;
   margin-bottom: 3px;
-  color: #6f748f;
+  color: #7f839b;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
 
-.is-light .lang-group-title { color: #9296ad; }
+.theme-light .lang-group-title { color: #6e7392; }
 
 .lang-item {
   break-inside: avoid;
@@ -590,9 +613,9 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 .lang-item:hover { background: rgba(148, 92, 255, .14); color: #fff; }
 .lang-item.active { background: rgba(148, 92, 255, .2); color: #fff; }
 
-.is-light .lang-item { color: #4a4e66; }
-.is-light .lang-item:hover { background: rgba(124, 58, 237, .1); color: #2a1a52; }
-.is-light .lang-item.active { background: rgba(124, 58, 237, .14); color: #2a1a52; }
+.theme-light .lang-item { color: #4a4e66; }
+.theme-light .lang-item:hover { background: rgba(124, 58, 237, .1); color: #2a1a52; }
+.theme-light .lang-item.active { background: rgba(124, 58, 237, .14); color: #2a1a52; }
 
 /* Fixed width, so the names start on one line down the column. This is the
    slot a flag would have occupied, doing the same job of giving the eye
@@ -609,8 +632,8 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .lang-item.active .lang-item-code,
 .lang-item:hover .lang-item-code { color: #c4a6ff; }
-.is-light .lang-item.active .lang-item-code,
-.is-light .lang-item:hover .lang-item-code { color: #7c3aed; }
+.theme-light .lang-item.active .lang-item-code,
+.theme-light .lang-item:hover .lang-item-code { color: #7c3aed; }
 
 .lang-item-name {
   font-family: Inter, 'Noto Sans Armenian', 'Noto Sans Arabic', 'Noto Sans Hebrew',
@@ -651,7 +674,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-size: 13px;
 }
 
-.is-light .lang-hint {
+.theme-light .lang-hint {
   border-color: rgba(103, 104, 173, .16);
   background: linear-gradient(90deg, #ffffff, #f8f8fd);
   color: #565a75;
@@ -683,8 +706,8 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 
 .lang-hint-action:hover { border-color: rgba(164, 83, 255, .65); color: #fff; }
 
-.is-light .lang-hint-action { color: #5b21c4; border-color: rgba(142, 76, 255, .3); }
-.is-light .lang-hint-action:hover { color: #3f1191; border-color: rgba(142, 76, 255, .5); }
+.theme-light .lang-hint-action { color: #5b21c4; border-color: rgba(142, 76, 255, .3); }
+.theme-light .lang-hint-action:hover { color: #3f1191; border-color: rgba(142, 76, 255, .5); }
 
 .lang-hint-close {
   flex: 0 0 auto;
@@ -711,8 +734,8 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
    sentence it dismisses; anything under 4.5:1 is back below the readable
    floor. 4.95:1 is the middle of that window: findable, and still the quieter
    of the two. This is the only way out of the banner, so it cannot be faint. */
-.is-light .lang-hint-close { color: #666a85; }
-.is-light .lang-hint-close:hover { color: #2a1a52; background: rgba(124, 58, 237, .1); }
+.theme-light .lang-hint-close { color: #666a85; }
+.theme-light .lang-hint-close:hover { color: #2a1a52; background: rgba(124, 58, 237, .1); }
 
 .category-bar {
   max-width: 1480px;
@@ -805,21 +828,21 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 0 -2px 0 #a453ff;
 }
 
-.is-light .more-dropdown {
+.theme-light .more-dropdown {
   background: #ffffff;
   border-color: rgba(103, 104, 173, .14);
   box-shadow: 0 14px 38px rgba(31, 41, 102, .12), inset 0 1px 0 #fff;
   scrollbar-color: rgba(124, 58, 237, .35) transparent;
 }
-.is-light .more-dropdown::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, .3); }
-.is-light .more-dropdown::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, .5); }
+.theme-light .more-dropdown::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, .3); }
+.theme-light .more-dropdown::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, .5); }
 
-.is-light .more-dropdown-item { color: #62667c; }
-.is-light .more-dropdown-item:hover { background: rgba(124, 58, 237, .08); color: #16182b; }
+.theme-light .more-dropdown-item { color: #62667c; }
+.theme-light .more-dropdown-item:hover { background: rgba(124, 58, 237, .08); color: #16182b; }
 
-.is-light .more-dropdown-item.active {
+.theme-light .more-dropdown-item.active {
   color: #fff;
-  background: linear-gradient(180deg, #9c5cff, #7c3aed);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   box-shadow: inset 0 -2px 0 #6d28d9;
 }
 
@@ -854,7 +877,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 14px 45px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.02);
 }
 
-.is-light .panel {
+.theme-light .panel {
   border-color: rgba(103, 104, 173, .14);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--panel-glow, #ffffff) 28%, transparent), transparent 45%),
@@ -911,8 +934,8 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   filter: drop-shadow(0 0 7px var(--panel-glow, transparent));
 }
 
-.is-light .panel-head { border-bottom-color: rgba(103, 104, 173, .12); }
-.is-light .panel-icon { color: #7c3aed; }
+.theme-light .panel-head { border-bottom-color: rgba(103, 104, 173, .12); }
+.theme-light .panel-icon { color: #7c3aed; }
 
 .panel h2 {
   margin: 0;
@@ -958,11 +981,11 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--panel-glow, #9c5cff) 14%, transparent);
 }
 
-.is-light .shuffle-button { color: #9296ad; }
+.theme-light .shuffle-button { color: #83889f; }
 
 .shuffle-icon { display: block; }
 
-.is-light .panel-arrow { color: #8b5cf6; }
+.theme-light .panel-arrow { color: #8b5cf6; }
 
 .panel-body { min-height: 0; }
 
@@ -1039,22 +1062,22 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-size: 10px;
 }
 
-.is-light .game-row.compact .date-year { color: #898da2; }
+.theme-light .game-row.compact .date-year { color: #6c7189; }
 
-.is-light .game-row {
+.theme-light .game-row {
   border-bottom-color: rgba(103, 104, 173, .1);
   background: rgba(255, 255, 255, .35);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-.is-light .game-row:nth-child(even) {
+.theme-light .game-row:nth-child(even) {
   background:
     linear-gradient(color-mix(in srgb, var(--panel-glow, #9c5cff) 7%, transparent), color-mix(in srgb, var(--panel-glow, #9c5cff) 7%, transparent)),
     rgba(255, 255, 255, .35);
 }
 
-.is-light .game-row:hover {
+.theme-light .game-row:hover {
   background:
     linear-gradient(color-mix(in srgb, var(--panel-glow, #9c5cff) 16%, transparent), color-mix(in srgb, var(--panel-glow, #9c5cff) 16%, transparent)),
     rgba(255, 255, 255, .35);
@@ -1087,10 +1110,10 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
 .rank-2 { border-color: rgba(200, 205, 218, .5); color: #d9deea; }
 .rank-3 { border-color: rgba(201, 139, 84, .55); color: #d89a63; }
 
-.is-light .rank { color: #4a4e68; }
-.is-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #b07c0a; }
-.is-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #6b7280; }
-.is-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #a8622f; }
+.theme-light .rank { color: #4a4e68; }
+.theme-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #956908; }
+.theme-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #6b7280; }
+.theme-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #a8622f; }
 
 .game-logo {
   width: 34px;
@@ -1107,7 +1130,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
 
-.is-light .game-logo {
+.theme-light .game-logo {
   background: linear-gradient(135deg, #f2f3fa, #e5e7f6);
   border-color: rgba(103, 104, 173, .25);
   color: #4a4e68;
@@ -1137,7 +1160,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-size: 10px;
 }
 
-.is-light .game-name small { color: #797d92; }
+.theme-light .game-name small { color: #6d7187; }
 
 /* Every panel stacks the rate under its chronicle, so this is a column rather
    than a line of text and the ellipsis lives on .version-name. */
@@ -1155,7 +1178,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
 }
 
-.is-light .version { color: #3c3f55; }
+.theme-light .version { color: #3c3f55; }
 
 .version-name {
   overflow: hidden;
@@ -1169,7 +1192,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-size: 10px;
 }
 
-.is-light .version-rate { color: #898da2; }
+.theme-light .version-rate { color: #6c7189; }
 
 /* Pinned to the right edge of its column so the votes end the same distance
    from the card edge as the rank or logo begins on the left. */
@@ -1183,7 +1206,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   white-space: nowrap;
 }
 
-.is-light .rating { color: #d69e00; }
+.theme-light .rating { color: #916b00; }
 
 .rating-value {
   display: flex;
@@ -1200,7 +1223,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   white-space: nowrap;
 }
 
-.is-light .date { color: #797d92; }
+.theme-light .date { color: #6d7187; }
 
 .panel-footer {
   height: 35px;
@@ -1213,7 +1236,7 @@ html:has(.site-shell.is-light)::-webkit-scrollbar-thumb:hover {
   font-size: 12px;
 }
 
-.is-light .panel-footer {
+.theme-light .panel-footer {
   color: #7c3aed;
   border-top-color: rgba(103, 104, 173, .12);
 }
