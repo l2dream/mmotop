@@ -294,14 +294,13 @@ function matchesAll(server: Server) {
 }
 
 /**
- * Ranked once, by votes, before anything is filtered — so a server keeps its
- * own place. Filtering used to renumber the survivors from one, handing gold,
- * silver and bronze to whichever three happened to be left: filter to
- * High-Five and the servers ranked 2, 5 and 8 wore the medals for 1, 2 and 3.
+ * Sorted by votes once; ranked after filtering. The places — and so the gold,
+ * silver and bronze — are counted within whatever the filters leave: choose
+ * Interlude and the best Interlude server is 1st, whatever its overall place.
+ * The TOP answers "which is best among what I am looking at".
  */
-const rankedServers = [...SERVERS]
+const serversByVotes = [...SERVERS]
   .sort((a, b) => b.votes - a.votes || a.name.localeCompare(b.name))
-  .map((server, i) => ({ server, rank: i + 1 }))
 
 const PANEL_ROWS = 10
 const NEW_ROWS = 3
@@ -315,7 +314,8 @@ const opened = computed(() =>
 // Newest additions to MMOTOP, whether they have opened yet or not.
 const recentlyListed = [...SERVERS].sort((a, b) => b.listedAt.localeCompare(a.listedAt))
 
-const filteredTop = computed(() => rankedServers.filter(({ server }) => matchesAll(server)))
+const filteredTop = computed(() =>
+  serversByVotes.filter(matchesAll).map((server, i) => ({ server, rank: i + 1 })))
 const filteredSoon = computed(() => upcoming.value.filter(matchesAll).slice(0, PANEL_ROWS))
 const filteredStarted = computed(() => opened.value.filter(matchesAll).slice(0, PANEL_ROWS))
 const filteredNew = computed(() => recentlyListed.filter(matchesAll).slice(0, NEW_ROWS))
