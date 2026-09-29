@@ -2,7 +2,6 @@
 defineProps<{
   title?: string
   icon?: string
-  rows?: number
 }>()
 </script>
 

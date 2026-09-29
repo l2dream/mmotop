@@ -46,10 +46,12 @@ body {
 button, input { font: inherit; }
 button { color: inherit; }
 button:focus-visible, input:focus-visible {
+  /* No border-radius here: it used to force every focused button to 4px
+     corners, so the 11px login and language buttons changed shape when
+     tabbed to. The ring now follows each control's own radius. */
   outline: 2px solid #9c5cff;
   outline-offset: 2px;
   box-shadow: 0 0 0 5px rgba(156, 92, 255, .18);
-  border-radius: 4px;
 }
 
 html {
@@ -85,7 +87,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     linear-gradient(rgba(255,255,255,.008) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.008) 1px, transparent 1px);
   background-size: 44px 44px;
-  transition: background-color .25s ease, color .25s ease;
 }
 
 .site-shell,
@@ -789,6 +790,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 0 -2px 0 #a453ff;
 }
 
+.category:focus-visible {
+  /* Inside the button, not around it: the bar scrolls sideways, and its
+     overflow cut the outside ring off at top and bottom. */
+  outline-offset: -3px;
+  box-shadow: none;
+}
+
 .category-more-wrap {
   position: relative;
   margin-inline-start: auto;
@@ -1037,9 +1045,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
 }
 
-/* No trailing column: this panel's rows carry neither votes nor a date, so the
-   chronicle closes the row. A max-content track lets it end at the card's
-   padding, keeping both edges level as in every other panel. */
 /* No trailing column: the chronicle closes the row. It keeps the same fixed
    82px as everywhere else rather than shrinking to its text — a content-sized
    track would be a different width in each row, since "High-Five" and
@@ -1055,14 +1060,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    The spare width always goes to the name, never to the chronicle. That keeps
    the chronicle a fixed 82px sitting directly before whatever ends the row, so
    it lands in the same place in every panel, and the trailing columns share
-   one 72px width so votes and dates line up too. */
-.game-row.compact {
-  grid-template-columns: 26px 37px minmax(120px, 1fr) 82px 72px;
-}
+   one 72px width so votes and dates line up too.
 
-.game-row.compact.no-rank {
-  grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
-}
+   These rows are always also .no-rank, and .game-row.no-rank above already
+   gives them exactly this grid; the two .compact grid rules that used to sit
+   here repeated it, and one could never apply. */
 
 /* The date stacks like the chronicle: "23 Dec" over the year, which keeps the
    column narrow enough to leave the name its full width even at 320px. */
@@ -1381,8 +1383,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .category { padding-inline: 15px; }
   .more-dropdown { min-width: 170px; }
   .filter-popup { width: calc(100vw - 20px); max-width: 270px; }
-  .game-row,
-  .game-row.compact {
+  .game-row {
     grid-template-columns: 22px 32px minmax(0, 1fr) 58px 59px;
     gap: 5px;
     padding-inline: 10px;
@@ -1393,16 +1394,14 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .game-row.no-rank.no-trail {
     grid-template-columns: 32px minmax(0, 1fr) 58px;
   }
-  .game-row .date { display: none; }
   .game-logo { width: 30px; height: 30px; }
   .rank { width: 22px; height: 22px; font-size: 12px; }
 
   /* The two .compact panels keep their rate-under-chronicle layout from the
-     base rules; here they just get mobile column widths and their date back. */
+     base rules; here they just get mobile column widths. */
   .game-row.compact.no-rank {
     grid-template-columns: 32px minmax(0, 1fr) 58px 46px;
   }
-  .game-row.compact .date { display: flex; }
 }
 
 /* Below about 380px the row runs out of room, and the search field is the one

@@ -898,7 +898,7 @@ function gameIcon(game: Game) {
       </section>
 
       <section class="bottom-grid">
-        <GamePanel :title="$t('panels.new')" :rows="3" class="accent-violet">
+        <GamePanel :title="$t('panels.new')" class="accent-violet">
           <template #icon>
             <svg class="sparkle-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>
@@ -933,7 +933,7 @@ function gameIcon(game: Game) {
           <PanelFooter />
         </GamePanel>
 
-        <GamePanel :title="$t('panels.all')" :rows="3" class="accent-teal">
+        <GamePanel :title="$t('panels.all')" class="accent-teal">
           <template #icon>
             <svg class="grid-icon" viewBox="0 0 24 24" width="24" height="24">
               <defs>

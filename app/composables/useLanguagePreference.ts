@@ -25,19 +25,27 @@
  */
 const YEAR = 60 * 60 * 24 * 365
 
-const OPTIONS = {
-  maxAge: YEAR,
-  sameSite: 'lax',
-  path: '/'
-} as const
+/**
+ * Scoped to the site's own path. With path '/', on l2dream.github.io these
+ * cookies were sent to — and could be overwritten by — every other project
+ * page under the same account, all of which share that origin.
+ */
+function options() {
+  return {
+    maxAge: YEAR,
+    sameSite: 'lax' as const,
+    path: useRuntimeConfig().app.baseURL || '/',
+    secure: import.meta.client ? location.protocol === 'https:' : false
+  }
+}
 
 /** The language the visitor picked, by code. Written only on a real click. */
 export function useStoredLocale() {
-  return useCookie<string | undefined>('mmotop_lang', OPTIONS)
+  return useCookie<string | undefined>('mmotop_lang', options())
 }
 
 /** Set once the suggestion banner is closed, and never unset: asking again
  *  after someone has said no is not a suggestion. */
 export function useSuggestionDismissed() {
-  return useCookie<string | undefined>('mmotop_lang_hint', OPTIONS)
+  return useCookie<string | undefined>('mmotop_lang_hint', options())
 }
