@@ -277,7 +277,7 @@ onBeforeUnmount(() => {
 
       <div v-else class="lang-columns">
         <div v-for="group in groups" :key="group.script" class="lang-group">
-          <div class="lang-group-title">{{ group.label }}</div>
+          <div class="lang-group-title">{{ t(group.labelKey) }}</div>
           <NuxtLink
             v-for="item in group.locales"
             :key="item.code"

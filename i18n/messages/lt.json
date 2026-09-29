@@ -64,5 +64,14 @@
     "nov": "lapkr",
     "dec": "gruod"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "Lotynų",
+    "cyrillic": "Kirilica",
+    "greek": "Graikų",
+    "armenian": "Armėnų",
+    "arabic": "Arabų",
+    "hebrew": "Hebrajų",
+    "eastAsian": "Rytų Azijos"
+  }
 }

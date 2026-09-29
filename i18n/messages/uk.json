@@ -64,5 +64,14 @@
     "nov": "лис",
     "dec": "гру"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "Латиниця",
+    "cyrillic": "Кирилиця",
+    "greek": "Грецька",
+    "armenian": "Вірменська",
+    "arabic": "Арабська",
+    "hebrew": "Іврит",
+    "eastAsian": "Східноазійські"
+  }
 }

@@ -64,5 +64,14 @@
     "nov": "նոյ",
     "dec": "դեկ"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "Լատինական",
+    "cyrillic": "Կիրիլյան",
+    "greek": "Հունական",
+    "armenian": "Հայկական",
+    "arabic": "Արաբական",
+    "hebrew": "Եբրայական",
+    "eastAsian": "Արևելյան Ասիա"
+  }
 }

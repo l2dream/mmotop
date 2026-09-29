@@ -64,5 +64,14 @@
     "nov": "נוב",
     "dec": "דצמ"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "לטינית",
+    "cyrillic": "קירילית",
+    "greek": "יוונית",
+    "armenian": "ארמנית",
+    "arabic": "ערבית",
+    "hebrew": "עברית",
+    "eastAsian": "מזרח אסיה"
+  }
 }

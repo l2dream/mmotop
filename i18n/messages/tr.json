@@ -64,5 +64,14 @@
     "nov": "Kas",
     "dec": "Ara"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "Latin",
+    "cyrillic": "Kiril",
+    "greek": "Yunan",
+    "armenian": "Ermeni",
+    "arabic": "Arap",
+    "hebrew": "İbrani",
+    "eastAsian": "Doğu Asya"
+  }
 }

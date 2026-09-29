@@ -64,5 +64,14 @@
     "nov": "11月",
     "dec": "12月"
   },
-  "dateFormat": "{month}{day}日"
+  "dateFormat": "{month}{day}日",
+  "scripts": {
+    "latin": "ラテン文字",
+    "cyrillic": "キリル文字",
+    "greek": "ギリシャ文字",
+    "armenian": "アルメニア文字",
+    "arabic": "アラビア文字",
+    "hebrew": "ヘブライ文字",
+    "eastAsian": "東アジア"
+  }
 }

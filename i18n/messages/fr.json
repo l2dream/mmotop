@@ -64,5 +64,14 @@
     "nov": "nov",
     "dec": "déc"
   },
-  "dateFormat": "{day} {month}"
+  "dateFormat": "{day} {month}",
+  "scripts": {
+    "latin": "Latin",
+    "cyrillic": "Cyrillique",
+    "greek": "Grec",
+    "armenian": "Arménien",
+    "arabic": "Arabe",
+    "hebrew": "Hébreu",
+    "eastAsian": "Asie de l’Est"
+  }
 }

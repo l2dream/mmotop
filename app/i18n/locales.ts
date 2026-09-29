@@ -138,14 +138,22 @@ if (UNKNOWN.length > 0) {
 /** Headings for the selector, in the order the groups appear. */
 export const SCRIPT_ORDER: Script[] = ['latin', 'cyrillic', 'greek', 'armenian', 'arabic', 'hebrew', 'east-asian']
 
-export const SCRIPT_LABELS: Record<Script, string> = {
-  latin: 'Latin',
-  cyrillic: 'Cyrillic',
-  greek: 'Greek',
-  armenian: 'Armenian',
-  arabic: 'Arabic',
-  hebrew: 'Hebrew',
-  'east-asian': 'East Asian'
+/**
+ * The message key each script group's heading is translated under.
+ *
+ * These used to be English strings rendered straight into the selector, which
+ * meant LATIN / CYRILLIC / ARABIC in English on all twenty-six locales — in
+ * the one control built specifically for people who cannot read the interface
+ * around it.
+ */
+export const SCRIPT_LABEL_KEYS: Record<Script, string> = {
+  latin: 'scripts.latin',
+  cyrillic: 'scripts.cyrillic',
+  greek: 'scripts.greek',
+  armenian: 'scripts.armenian',
+  arabic: 'scripts.arabic',
+  hebrew: 'scripts.hebrew',
+  'east-asian': 'scripts.eastAsian'
 }
 
 
@@ -165,7 +173,7 @@ export function bcp47(code: string): string {
 
 export interface LocaleGroup {
   script: Script
-  label: string
+  labelKey: string
   locales: Locale[]
 }
 
@@ -184,7 +192,7 @@ export function groupedLocales(
   return SCRIPT_ORDER
     .map(script => ({
       script,
-      label: SCRIPT_LABELS[script],
+      labelKey: SCRIPT_LABEL_KEYS[script],
       locales: from.filter(l => l.script === script && keep(l))
     }))
     .filter(group => group.locales.length > 0)
