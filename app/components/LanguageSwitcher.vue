@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47, groupedLocales, localeByCode, matchesQuery, type Locale } from '~/i18n/locales'
+import { pickerFontUrls } from '~/i18n/suggestions'
 
 const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
@@ -62,6 +63,35 @@ const effectiveQuery = computed(() => {
 const groups = computed(() => groupedLocales(l => matchesQuery(l, effectiveQuery.value)))
 
 const empty = computed(() => groups.value.length === 0)
+
+/**
+ * The subset fonts that let the list print twenty-six names in seven scripts.
+ *
+ * They used to be stylesheet links in every page's head: six requests, each
+ * render-blocking, on all twenty-six pages, for a panel that starts closed and
+ * that most visitors never open. They are requested now on the first sign of
+ * intent — the pointer arriving on the button, or keyboard focus reaching it —
+ * which is usually a few hundred milliseconds before the click, enough for
+ * the tiny files to arrive before the list is drawn.
+ *
+ * useState, so once wanted they stay wanted across a language switch rather
+ * than being unlinked and fetched again. The family this page already loads
+ * in full is left out, as before, so the two cannot collide.
+ */
+const pickerFontsWanted = useState('lang-picker-fonts', () => false)
+const pageScriptFont = computed(() => localeByCode(locale.value)?.font ?? null)
+
+function wantPickerFonts() {
+  pickerFontsWanted.value = true
+}
+
+useHead(() => ({
+  link: pickerFontsWanted.value
+    ? pickerFontUrls(pageScriptFont.value).map((href, i) => ({
+        rel: 'stylesheet' as const, href, key: `picker-font-${i}`
+      }))
+    : []
+}))
 
 const matchCount = computed(() => groups.value.reduce((n, g) => n + g.locales.length, 0))
 
@@ -133,6 +163,7 @@ function close(returnFocus = true) {
 
 async function toggle() {
   if (open.value) return close()
+  wantPickerFonts()
   open.value = true
   // After the panel exists, so its real width is what gets measured.
   await nextTick()
@@ -217,6 +248,8 @@ onBeforeUnmount(() => {
       :aria-label="t('nav.language')"
       aria-haspopup="dialog"
       :aria-expanded="open"
+      @pointerenter="wantPickerFonts"
+      @focus="wantPickerFonts"
       @click="toggle"
     >
       <!-- A globe rather than a flag: a flag names a country, and the subject

@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Inter is requested from app.vue's head now, not @import-ed here: an
+   @import is only discovered after this file arrives, which put the font
+   three round trips deep. */
 
-/* The selector's six subset font requests used to live here as @import. They
-   are emitted per page from app.vue now, because a page that also loads one of
-   these families in full must not ask for its three-glyph subset as well —
-   same family name, no unicode-range to separate them, and the later
-   declaration wins. See pickerFontUrls in app/i18n/suggestions.ts.
-
-   Moving them also takes six render-blocking requests out of a queue behind
-   this stylesheet and lets them start in parallel with it. */
+/* The selector's subset fonts are requested by LanguageSwitcher.vue itself,
+   the first time someone points at or focuses the language button. */
 
 :root {
   /* Replaced per page by app.vue when the language needs a script Inter has

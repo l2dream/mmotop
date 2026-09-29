@@ -50,7 +50,10 @@ export default defineNuxtModule({
         const root = `${origin}${base}`
 
         // The default locale sits on the bare path, every other one on a prefix.
-        const urlFor = (code: string) => (code === DEFAULT_LOCALE ? root || '/' : `${root}/${code}`)
+        // With a trailing slash: each page is a directory on Pages, and the
+        // address without one answers with a 301. A sitemap should list the
+        // URL a crawler lands on, not the one it is redirected away from.
+        const urlFor = (code: string) => (code === DEFAULT_LOCALE ? `${root}/` : `${root}/${code}/`)
 
         const alternates = [
           `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(DEFAULT_LOCALE)}"/>`,
