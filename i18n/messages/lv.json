@@ -19,6 +19,7 @@
   "search": {
     "label": "Meklēt spēles",
     "placeholder": "Meklēt spēles...",
+    "short": "Meklēt",
     "action": "Meklēt"
   },
   "categories": {

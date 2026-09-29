@@ -19,6 +19,7 @@
   "search": {
     "label": "ゲームを検索",
     "placeholder": "ゲームを検索...",
+    "short": "検索",
     "action": "検索"
   },
   "categories": {

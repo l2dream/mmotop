@@ -554,6 +554,11 @@ function gameIcon(game: Game) {
           :placeholder="$t('search.placeholder')"
           @keydown.enter="submitSearch"
         />
+        <!-- The phone-width placeholder. The real one stays the full phrase and
+             is hidden there by CSS; this one-word stand-in shows only while the
+             field is empty. Pure CSS, so the prerendered page is already right
+             and nothing swaps after hydration. -->
+        <span class="search-hint" aria-hidden="true">{{ $t('search.short') }}</span>
         <button
           class="filter-button"
           type="button"

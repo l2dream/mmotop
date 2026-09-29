@@ -19,6 +19,7 @@
   "search": {
     "label": "Søk spill",
     "placeholder": "Søk spill...",
+    "short": "Søk",
     "action": "Søk"
   },
   "categories": {

@@ -19,6 +19,7 @@
   "search": {
     "label": "Otsi mänge",
     "placeholder": "Otsi mänge...",
+    "short": "Otsi",
     "action": "Otsi"
   },
   "categories": {

@@ -19,6 +19,7 @@
   "search": {
     "label": "Пошук ігор",
     "placeholder": "Пошук ігор...",
+    "short": "Пошук",
     "action": "Знайти"
   },
   "categories": {

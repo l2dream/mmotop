@@ -19,6 +19,7 @@
   "search": {
     "label": "Поиск игр",
     "placeholder": "Поиск игр...",
+    "short": "Поиск",
     "action": "Найти"
   },
   "categories": {

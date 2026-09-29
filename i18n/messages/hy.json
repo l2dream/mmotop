@@ -19,6 +19,7 @@
   "search": {
     "label": "Որոնել խաղեր",
     "placeholder": "Որոնել խաղեր...",
+    "short": "Որոնել",
     "action": "Որոնել"
   },
   "categories": {

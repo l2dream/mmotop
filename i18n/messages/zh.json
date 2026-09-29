@@ -19,6 +19,7 @@
   "search": {
     "label": "搜索游戏",
     "placeholder": "搜索游戏...",
+    "short": "搜索",
     "action": "搜索"
   },
   "categories": {

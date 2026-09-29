@@ -19,6 +19,7 @@
   "search": {
     "label": "Rechercher des jeux",
     "placeholder": "Rechercher des jeux...",
+    "short": "Chercher",
     "action": "Rechercher"
   },
   "categories": {

@@ -19,6 +19,7 @@
   "search": {
     "label": "Sök spel",
     "placeholder": "Sök spel...",
+    "short": "Sök",
     "action": "Sök"
   },
   "categories": {

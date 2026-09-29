@@ -19,6 +19,7 @@
   "search": {
     "label": "Søg spil",
     "placeholder": "Søg spil...",
+    "short": "Søg",
     "action": "Søg"
   },
   "categories": {

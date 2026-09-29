@@ -19,6 +19,7 @@
   "search": {
     "label": "Ieškoti žaidimų",
     "placeholder": "Ieškoti žaidimų...",
+    "short": "Ieškoti",
     "action": "Ieškoti"
   },
   "categories": {

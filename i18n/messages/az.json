@@ -19,6 +19,7 @@
   "search": {
     "label": "Oyun axtar",
     "placeholder": "Oyun axtar...",
+    "short": "Axtar",
     "action": "Axtar"
   },
   "categories": {

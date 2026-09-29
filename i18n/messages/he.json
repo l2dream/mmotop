@@ -19,6 +19,7 @@
   "search": {
     "label": "חיפוש משחקים",
     "placeholder": "חיפוש משחקים...",
+    "short": "חיפוש",
     "action": "חיפוש"
   },
   "categories": {
