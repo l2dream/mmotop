@@ -52,3 +52,38 @@ export const SUGGESTIONS: Record<string, Suggestion> = {
 export function fontUrl(family: string): string {
   return `https://fonts.googleapis.com/css2?family=${family.replace(/ /g, '+')}:wght@400;500;600;700;800&display=swap`
 }
+
+/**
+ * Exactly the characters each script contributes to the selector, so the
+ * subset request carries nothing else. Six families in full would be
+ * megabytes, most of it CJK, to draw eleven glyphs.
+ */
+const PICKER_GLYPHS: Record<string, string> = {
+  'Noto Sans Armenian': 'ՀԱՅԵՐԵՆ',
+  'Noto Sans Arabic': 'العربية',
+  'Noto Sans Hebrew': 'עברית',
+  'Noto Sans SC': '简体中文',
+  'Noto Sans JP': '日本語',
+  'Noto Sans KR': '한국어'
+}
+
+/**
+ * The subset requests for the selector, minus whichever family this page
+ * already loads in full.
+ *
+ * That exclusion is the point. Both requests declare @font-face for the same
+ * family name, and the `text=` response carries no unicode-range to keep them
+ * apart — so on /ko the three-glyph subset, declared later in the cascade,
+ * would win for weights 400 and 700 and the body text would fall through to a
+ * system font at exactly those weights while 500, 600 and 800 rendered in real
+ * Noto. A page cannot collide with itself if it never asks for both.
+ */
+export function pickerFontUrls(exclude?: string | null): string[] {
+  return Object.entries(PICKER_GLYPHS)
+    .filter(([family]) => family !== exclude)
+    .map(([family, glyphs]) => {
+      const chars = [...new Set(glyphs)].sort().join('')
+      return `https://fonts.googleapis.com/css2?family=${family.replace(/ /g, '+')}`
+        + `:wght@400;700&text=${encodeURIComponent(chars)}&display=swap`
+    })
+}

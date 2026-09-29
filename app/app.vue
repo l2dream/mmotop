@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { localeByCode } from '~/i18n/locales'
+import { fontUrl, pickerFontUrls } from '~/i18n/suggestions'
 
 /**
  * Writes the per-page language tags: `lang` and `dir` on <html>, plus one
@@ -19,16 +20,19 @@ const { locale } = useI18n()
  * It loads here, in the page's own head, rather than in the stylesheet, so
  * each prerendered page asks only for the font it will actually draw with. A
  * Russian visitor never fetches the Korean font; a Korean visitor fetches it
- * once and never sees Armenian or Arabic. The selector's own glyphs come from
- * the subset requests in main.css and are a separate, tiny thing.
+ * once and never sees Armenian or Arabic. The selector's own glyphs are a
+ * separate, tiny thing — see pickerHrefs below.
  */
 const scriptFont = computed(() => localeByCode(locale.value)?.font ?? null)
 
-const fontHref = computed(() =>
-  scriptFont.value
-    ? `https://fonts.googleapis.com/css2?family=${scriptFont.value.replace(/ /g, '+')}:wght@400;500;600;700;800&display=swap`
-    : null
-)
+const fontHref = computed(() => (scriptFont.value ? fontUrl(scriptFont.value) : null))
+
+/**
+ * The tiny subsets that let the language selector print twenty-six names in
+ * seven scripts, whatever language this page is in — minus the one family
+ * this page already loads in full, which would otherwise collide with it.
+ */
+const pickerHrefs = computed(() => pickerFontUrls(scriptFont.value))
 
 useHead(() => ({
   htmlAttrs: {
@@ -47,7 +51,10 @@ useHead(() => ({
     ...(localeHead.value.link ?? []),
     ...(fontHref.value
       ? [{ rel: 'stylesheet', href: fontHref.value, key: 'script-font' }]
-      : [])
+      : []),
+    ...pickerHrefs.value.map((href, i) => ({
+      rel: 'stylesheet', href, key: `picker-font-${i}`
+    }))
   ],
   meta: localeHead.value.meta
 }))
