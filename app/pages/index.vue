@@ -117,11 +117,17 @@ function versionKey(gameId: string, chronicle: string) {
   return `${gameId}:${chronicle}`
 }
 
-// A chronicle of another game no longer means anything once the category
-// changes; left set, it would silently empty every panel.
+// Game and Version stay in step both ways. A version belongs to one game, so
+// choosing it first sets the game to match; the game used to stay on "All
+// games" beside it. Changing the game away from that version — to another
+// game or to all of them — drops the version, which would otherwise silently
+// empty every panel or contradict the game shown.
+watch(() => filters.value.version, (v) => {
+  if (v) activeCategory.value = v.slice(0, v.indexOf(':'))
+})
 watch(activeCategory, (category) => {
   const v = filters.value.version
-  if (v && category !== 'all' && !v.startsWith(`${category}:`)) filters.value.version = ''
+  if (v && !v.startsWith(`${category}:`)) filters.value.version = ''
 })
 
 /**
@@ -229,11 +235,11 @@ const filterPopupEl = ref<HTMLElement | null>(null)
 const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
 
 // The game counts too: the popup has a Game field, and a narrowed game with
-// no badge looked like no filter at all.
+// no badge looked like no filter at all. A version already implies its game,
+// so the two together count once.
 const activeFilterCount = computed(
   () =>
-    (activeCategory.value !== 'all' ? 1 : 0) +
-    (filters.value.version ? 1 : 0) +
+    (filters.value.version || activeCategory.value !== 'all' ? 1 : 0) +
     (rateFilterActive.value ? 1 : 0)
 )
 
