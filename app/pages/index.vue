@@ -124,12 +124,17 @@ watch(activeCategory, (category) => {
   if (v && category !== 'all' && !v.startsWith(`${category}:`)) filters.value.version = ''
 })
 
+/**
+ * Each tier holds the rates above its min up to and including its max, so a
+ * shared boundary belongs to the lower one: x5 is in x0–x5, not x5–x10. The
+ * old tiers ran 1–5, 6–10 and so on, which left a decimal rate such as x5.5
+ * in none of them.
+ */
 const rateTiers = [
-  { label: 'x1–x5', min: 1, max: 5 },
-  { label: 'x6–x10', min: 6, max: 10 },
-  { label: 'x11–x100', min: 11, max: 100 },
-  { label: 'x101–x999', min: 101, max: 999 },
-  { label: 'x1000+', min: 1000, max: Infinity }
+  { label: 'x0–x5', min: 0, max: 5 },
+  { label: 'x5–x10', min: 5, max: 10 },
+  { label: 'x10–x100', min: 10, max: 100 },
+  { label: 'x100–x1000', min: 100, max: 1000 }
 ]
 
 
@@ -232,7 +237,7 @@ function matchesFilters(server: Server) {
     const rate = server.rate
     const inPreset = filters.value.rates.some((label) => {
       const tier = rateTiers.find((t) => t.label === label)
-      return tier && rate >= tier.min && rate <= tier.max
+      return tier && rate > tier.min && rate <= tier.max
     })
     const inCustom =
       customRateActive.value &&
