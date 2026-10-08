@@ -124,14 +124,6 @@ watch(activeCategory, (category) => {
   if (v && category !== 'all' && !v.startsWith(`${category}:`)) filters.value.version = ''
 })
 
-const ratingThresholds = computed(() => [
-  { label: t('filter.any'), value: 0 },
-  { label: '500+', value: 500 },
-  { label: '1000+', value: 1000 },
-  { label: '1500+', value: 1500 },
-  { label: '2000+', value: 2000 }
-])
-
 const rateTiers = [
   { label: 'x1–x5', min: 1, max: 5 },
   { label: 'x6–x10', min: 6, max: 10 },
@@ -231,13 +223,11 @@ const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
 const activeFilterCount = computed(
   () =>
     (filters.value.version ? 1 : 0) +
-    (filters.value.minRating ? 1 : 0) +
     (rateFilterActive.value ? 1 : 0)
 )
 
 function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
-  if (filters.value.minRating && server.votes < filters.value.minRating) return false
   if (rateFilterActive.value) {
     const rate = server.rate
     const inPreset = filters.value.rates.some((label) => {
@@ -266,7 +256,6 @@ function toggleCustomRate() {
 
 function resetFilters() {
   filters.value.version = ''
-  filters.value.minRating = 0
   filters.value.rates = []
   customRateActive.value = false
   customRateMin.value = ''
@@ -595,15 +584,6 @@ function submitSearch() {
                 :value="versionKey(group.id, chronicle)"
               >{{ chronicle }}</option>
             </optgroup>
-          </select>
-        </div>
-
-        <div class="filter-popup-section">
-          <label class="filter-popup-label" for="filter-rating">{{ $t('filter.minRating') }}</label>
-          <select id="filter-rating" class="filter-select" v-model.number="filters.minRating">
-            <option v-for="threshold in ratingThresholds" :key="threshold.value" :value="threshold.value">
-              {{ threshold.label }}
-            </option>
           </select>
         </div>
 
