@@ -47,7 +47,8 @@
     "to": "Kuni",
     "reset": "Lähtesta",
     "apply": "Rakenda",
-    "custom": "Kohandatud"
+    "custom": "Kohandatud",
+    "noRates": "Ilma rate’ita"
   },
   "months": {
     "jan": "jaan",

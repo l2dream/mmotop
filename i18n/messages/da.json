@@ -47,7 +47,8 @@
     "to": "Til",
     "reset": "Nulstil",
     "apply": "Anvend",
-    "custom": "Tilpasset"
+    "custom": "Tilpasset",
+    "noRates": "Uden rate"
   },
   "months": {
     "jan": "jan.",

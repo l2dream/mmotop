@@ -47,7 +47,8 @@
     "to": "Até",
     "reset": "Repor",
     "apply": "Aplicar",
-    "custom": "Personalizado"
+    "custom": "Personalizado",
+    "noRates": "Sem rate"
   },
   "months": {
     "jan": "jan",

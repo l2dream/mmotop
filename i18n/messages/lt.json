@@ -47,7 +47,8 @@
     "to": "Iki",
     "reset": "Atstatyti",
     "apply": "Taikyti",
-    "custom": "Pasirinktinis"
+    "custom": "Pasirinktinis",
+    "noRates": "Be rate"
   },
   "months": {
     "jan": "saus.",

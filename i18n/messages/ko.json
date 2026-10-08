@@ -47,7 +47,8 @@
     "to": "최대",
     "reset": "초기화",
     "apply": "적용",
-    "custom": "직접 입력"
+    "custom": "직접 입력",
+    "noRates": "Rate 없음"
   },
   "months": {
     "jan": "1월",

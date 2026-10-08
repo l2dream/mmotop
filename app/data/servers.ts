@@ -14,8 +14,12 @@ export interface Server {
   game: GameId
   /** Must be one of the game's chronicles in games.ts. Jargon, never translated. */
   chronicle: string
-  /** The single headline rate: 500 means x500. Decimals allowed (1.5). */
-  rate: number
+  /**
+   * The single headline rate: 500 means x500. Decimals allowed (1.5).
+   * Left out for a server that advertises no rate (some list a mode such as
+   * RvR or GvE instead); the filter's "No rates" chip finds those.
+   */
+  rate?: number
   url: string
   /** Opening date, "YYYY-MM-DD". */
   openDate: string

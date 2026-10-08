@@ -47,7 +47,8 @@
     "to": "Bis",
     "reset": "Zurücksetzen",
     "apply": "Anwenden",
-    "custom": "Eigene"
+    "custom": "Eigene",
+    "noRates": "Ohne Rate"
   },
   "months": {
     "jan": "Jan.",

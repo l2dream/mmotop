@@ -34,7 +34,7 @@ function serverSubtitle(server: Server) {
 }
 
 function rateLabel(server: Server) {
-  return `x${server.rate}`
+  return server.rate == null ? '' : `x${server.rate}`
 }
 
 function serverBadge(server: Server) {
@@ -137,6 +137,8 @@ const rateTiers = [
   { label: 'x100–x1000', min: 100, max: 1000 },
   { label: 'x1000+', min: 1000, max: Infinity }
 ]
+/** Kept in filters.rates beside the tier labels; matches servers with no rate. */
+const NO_RATE = 'none'
 
 
 // Dates are stored as ISO ("2024-12-23") and only formatted for display, so the
@@ -236,6 +238,7 @@ function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
   if (rateFilterActive.value) {
     const rate = server.rate
+    if (rate == null) return filters.value.rates.includes(NO_RATE)
     const inPreset = filters.value.rates.some((label) => {
       const tier = rateTiers.find((t) => t.label === label)
       return tier && rate > tier.min && rate <= tier.max
@@ -642,6 +645,15 @@ function submitSearch() {
               @click="toggleRateFilter(tier.label)"
             >
               {{ tier.label }}
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              :class="{ active: filters.rates.includes(NO_RATE) }"
+              :aria-pressed="filters.rates.includes(NO_RATE)"
+              @click="toggleRateFilter(NO_RATE)"
+            >
+              {{ $t('filter.noRates') }}
             </button>
             <button
               type="button"

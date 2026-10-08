@@ -47,7 +47,8 @@
     "to": "إلى",
     "reset": "إعادة تعيين",
     "apply": "تطبيق",
-    "custom": "مخصص"
+    "custom": "مخصص",
+    "noRates": "بدون Rate"
   },
   "months": {
     "jan": "يناير",

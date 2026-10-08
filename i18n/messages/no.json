@@ -47,7 +47,8 @@
     "to": "Til",
     "reset": "Nullstill",
     "apply": "Bruk",
-    "custom": "Egendefinert"
+    "custom": "Egendefinert",
+    "noRates": "Uten rate"
   },
   "months": {
     "jan": "jan.",
