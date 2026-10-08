@@ -574,6 +574,16 @@ function submitSearch() {
         :style="{ top: filterPos.top + 'px', left: filterPos.left + 'px', maxHeight: filterPos.maxHeight + 'px' }"
       >
         <div class="filter-popup-section">
+          <label class="filter-popup-label" for="filter-game">{{ $t('filter.game') }}</label>
+          <!-- The same choice as the category bar, not a second one that
+               could contradict it: both edit activeCategory. -->
+          <select id="filter-game" class="filter-select" v-model="activeCategory">
+            <option value="all">{{ $t('filter.allGames') }}</option>
+            <option v-for="game in GAMES" :key="game.id" :value="game.id">{{ game.name }}</option>
+          </select>
+        </div>
+
+        <div class="filter-popup-section">
           <label class="filter-popup-label" for="filter-version">{{ $t('filter.version') }}</label>
           <select id="filter-version" class="filter-select" v-model="filters.version">
             <option value="">{{ $t('filter.allVersions') }}</option>
@@ -584,16 +594,6 @@ function submitSearch() {
                 :value="versionKey(group.id, chronicle)"
               >{{ chronicle }}</option>
             </optgroup>
-          </select>
-        </div>
-
-        <div class="filter-popup-section">
-          <label class="filter-popup-label" for="filter-game">{{ $t('filter.game') }}</label>
-          <!-- The same choice as the category bar, not a second one that
-               could contradict it: both edit activeCategory. -->
-          <select id="filter-game" class="filter-select" v-model="activeCategory">
-            <option value="all">{{ $t('filter.allGames') }}</option>
-            <option v-for="game in GAMES" :key="game.id" :value="game.id">{{ game.name }}</option>
           </select>
         </div>
 
