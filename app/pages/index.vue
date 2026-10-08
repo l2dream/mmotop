@@ -348,6 +348,31 @@ function selectCategory(category: string, fromMore = false) {
   moreButton.value?.focus()
 }
 
+/**
+ * Catches a tap on the filter button made before the page has hydrated.
+ *
+ * The button is in the prerendered HTML from the first paint, but it does
+ * nothing until the JavaScript has loaded — on a slow phone that was a couple
+ * of seconds in which the tap was simply lost. This bit of inline script runs
+ * with the HTML, notes the tap, and onMounted below opens the popup from it.
+ */
+const FILTER_EARLY_TAP = 'mmotopEarlyFilter'
+useHead({
+  script: [{
+    key: 'filter-early-tap',
+    innerHTML: `(function(){var h=function(e){var t=e.target;if(t&&t.closest&&t.closest('.filter-button'))window.${FILTER_EARLY_TAP}=!window.${FILTER_EARLY_TAP}};window.${FILTER_EARLY_TAP}Off=function(){document.removeEventListener('click',h,true)};document.addEventListener('click',h,true)})()`
+  }]
+})
+
+function takeEarlyFilterTap() {
+  const w = window as unknown as Record<string, unknown>
+  ;(w[`${FILTER_EARLY_TAP}Off`] as (() => void) | undefined)?.()
+  const tapped = w[FILTER_EARLY_TAP] === true
+  delete w[FILTER_EARLY_TAP]
+  delete w[`${FILTER_EARLY_TAP}Off`]
+  if (tapped) filterOpen.value = true
+}
+
 function closeFilter() {
   filterOpen.value = false
   filterButtonEl.value?.focus()
@@ -422,6 +447,7 @@ onMounted(() => {
   // scroll counts. Both popups are position: fixed, and they used to stay put
   // while the page — and the button they belong to — scrolled away under them.
   window.addEventListener('scroll', repositionOpenPanels, true)
+  takeEarlyFilterTap()
 })
 
 onUnmounted(() => {

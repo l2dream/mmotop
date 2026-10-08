@@ -1409,6 +1409,16 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     width: 22px;
     height: 22px;
   }
+  /* 22px is too small to hit with a thumb, and a near miss landed in the
+     search field and opened the keyboard instead. The tap area grows to about
+     40px without the button looking any different; it reaches only 2px
+     towards the text, so the field itself stays as easy to tap as before. */
+  .filter-button::before {
+    content: '';
+    position: absolute;
+    inset-block: -9px;
+    inset-inline: -9px -2px;
+  }
   .filter-icon {
     width: 12px;
     height: 12px;
