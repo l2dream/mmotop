@@ -47,7 +47,8 @@
     "to": "À",
     "reset": "Réinitialiser",
     "apply": "Appliquer",
-    "custom": "Personnalisé"
+    "custom": "Personnalisé",
+    "noRates": "Sans rate"
   },
   "months": {
     "jan": "janv.",

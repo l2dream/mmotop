@@ -47,7 +47,8 @@
     "to": "Do",
     "reset": "Resetovat",
     "apply": "Použít",
-    "custom": "Vlastní"
+    "custom": "Vlastní",
+    "noRates": "Bez rate"
   },
   "months": {
     "jan": "led",

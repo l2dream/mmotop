@@ -47,7 +47,8 @@
     "to": "最高",
     "reset": "重置",
     "apply": "应用",
-    "custom": "自定义"
+    "custom": "自定义",
+    "noRates": "无 Rate"
   },
   "months": {
     "jan": "1月",

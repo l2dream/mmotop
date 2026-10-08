@@ -47,7 +47,8 @@
     "to": "Hasta",
     "reset": "Restablecer",
     "apply": "Aplicar",
-    "custom": "Personalizado"
+    "custom": "Personalizado",
+    "noRates": "Sin rate"
   },
   "months": {
     "jan": "ene",

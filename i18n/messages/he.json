@@ -47,7 +47,8 @@
     "to": "מקסימום",
     "reset": "איפוס",
     "apply": "החל",
-    "custom": "מותאם"
+    "custom": "מותאם",
+    "noRates": "ללא Rate"
   },
   "months": {
     "jan": "ינו׳",

@@ -47,7 +47,8 @@
     "to": "Līdz",
     "reset": "Atiestatīt",
     "apply": "Lietot",
-    "custom": "Pielāgots"
+    "custom": "Pielāgots",
+    "noRates": "Bez rate"
   },
   "months": {
     "jan": "janv.",

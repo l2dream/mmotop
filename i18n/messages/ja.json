@@ -47,7 +47,8 @@
     "to": "最大",
     "reset": "リセット",
     "apply": "適用",
-    "custom": "カスタム"
+    "custom": "カスタム",
+    "noRates": "Rateなし"
   },
   "months": {
     "jan": "1月",

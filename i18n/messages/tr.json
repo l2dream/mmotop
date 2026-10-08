@@ -47,7 +47,8 @@
     "to": "Maks",
     "reset": "Sıfırla",
     "apply": "Uygula",
-    "custom": "Özel"
+    "custom": "Özel",
+    "noRates": "Rate yok"
   },
   "months": {
     "jan": "Oca",

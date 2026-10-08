@@ -47,7 +47,8 @@
     "to": "Maks",
     "reset": "Sıfırla",
     "apply": "Tətbiq et",
-    "custom": "Fərdi"
+    "custom": "Fərdi",
+    "noRates": "Rate yoxdur"
   },
   "months": {
     "jan": "yan",
