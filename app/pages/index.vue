@@ -134,7 +134,8 @@ const rateTiers = [
   { label: 'x0–x5', min: 0, max: 5 },
   { label: 'x5–x10', min: 5, max: 10 },
   { label: 'x10–x100', min: 10, max: 100 },
-  { label: 'x100–x1000', min: 100, max: 1000 }
+  { label: 'x100–x1000', min: 100, max: 1000 },
+  { label: 'x1000+', min: 1000, max: Infinity }
 ]
 
 
