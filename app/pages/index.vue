@@ -228,8 +228,11 @@ const filterButtonEl = ref<HTMLElement | null>(null)
 const filterPopupEl = ref<HTMLElement | null>(null)
 const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
 
+// The game counts too: the popup has a Game field, and a narrowed game with
+// no badge looked like no filter at all.
 const activeFilterCount = computed(
   () =>
+    (activeCategory.value !== 'all' ? 1 : 0) +
     (filters.value.version ? 1 : 0) +
     (rateFilterActive.value ? 1 : 0)
 )
@@ -263,7 +266,10 @@ function toggleCustomRate() {
   customRateActive.value = !customRateActive.value
 }
 
+// Clears the game as well — it is a field in this popup like the others. The
+// category bar shares the same state, so it goes back to "All" with it.
 function resetFilters() {
+  activeCategory.value = 'all'
   filters.value.version = ''
   filters.value.rates = []
   customRateActive.value = false
