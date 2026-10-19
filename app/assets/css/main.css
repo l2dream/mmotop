@@ -1331,6 +1331,17 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 /* Pinned to the right edge of its column so the votes end the same distance
    from the card edge as the rank or logo begins on the left. */
+/* Figures in columns are set tabular, every digit the same width. Inter's
+   default digits are proportional — a 1 is narrower than a 0 — so right-
+   aligned votes like 1610 and 2950 ended at the same edge but started at
+   different ones, and the vote arrows beside them zigzagged down the column. */
+.rank,
+.rating,
+.date,
+.version-rate {
+  font-variant-numeric: tabular-nums;
+}
+
 .rating {
   display: flex;
   flex-direction: column;
