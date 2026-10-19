@@ -1409,8 +1409,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .vote-icon { display: block; }
 /* The gold gradient is drawn for a dark row; on white it all but vanished.
-   The light theme paints the arrow in the figure's own darker gold instead. */
-.theme-light .vote-icon path { fill: currentColor; }
+   The light theme swaps in its own gradient, the same sweep in deeper golds
+   (voteGradLight in index.vue). */
+.theme-light .vote-icon path { fill: url(#voteGradLight); }
 
 .date {
   color: #9ca1b7;
