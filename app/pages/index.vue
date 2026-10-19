@@ -292,36 +292,21 @@ function matchesCategory(server: Server) {
  * The search box used to apply to the TOP panel only, while the filter popup
  * applied to all five — so typing "High-Five" narrowed one panel and left four
  * untouched. It applies everywhere now, like the filters beside it.
- */
-function matchesQuery(server: Server, query: string) {
-  const q = query.trim().toLowerCase()
-  if (!q) return true
-  return `${server.name} ${serverSubtitle(server)} ${server.chronicle} ${chronicleShort(server.game, server.chronicle)} ${rateLabel(server)}`.toLowerCase().includes(q)
-}
-
-/**
- * True while an input method is mid-word: an Android keyboard with
- * suggestions underlining the word being typed, Hangul assembling a syllable,
- * pinyin and romaji before they commit.
- */
-const composing = ref(false)
-
-/**
- * What the panels actually filter on — the same rule as the language search.
  *
- * The field used v-model, which drops every `input` event fired during
- * composition, so on most Android keyboards nothing narrowed until a space or
- * Enter. Bound by hand now, the panels see every keystroke. A composing query
- * narrows them when it finds something and is ignored when it does not, so
- * half-spelled pinyin never flashes "nothing found" at someone mid-word.
+ * Filters on exactly what is in the field, on every keystroke. The field is
+ * bound by hand rather than with v-model, which drops `input` events while an
+ * input method is composing — and on most Android keyboards every Latin word
+ * is composed, so nothing narrowed until a space or Enter.
+ *
+ * Unlike the language list, a composing query that matches nothing is NOT
+ * ignored: on those same keyboards it is simply what the visitor typed, and
+ * ignoring it put every server back on screen for "wow".
  */
-const effectiveQuery = computed(() => {
-  if (!composing.value) return query.value
-  return SERVERS.some(s => matchesQuery(s, query.value)) ? query.value : ''
-})
-
 function matchesSearch(server: Server) {
-  return matchesQuery(server, effectiveQuery.value)
+  const q = query.value.trim().toLowerCase()
+  if (!q) return true
+  const aliases = gameById(server.game)?.aliases?.join(' ') ?? ''
+  return `${server.name} ${serverSubtitle(server)} ${aliases} ${server.chronicle} ${chronicleShort(server.game, server.chronicle)} ${rateLabel(server)}`.toLowerCase().includes(q)
 }
 
 function matchesAll(server: Server) {
@@ -600,8 +585,6 @@ function submitSearch() {
           :aria-label="$t('search.label')"
           :placeholder="$t('search.placeholder')"
           @input="query = ($event.target as HTMLInputElement).value"
-          @compositionstart="composing = true"
-          @compositionend="composing = false"
           @keydown.enter="submitSearch"
         />
         <!-- The phone-width placeholder. The real one stays the full phrase and
