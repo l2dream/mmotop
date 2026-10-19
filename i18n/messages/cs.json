@@ -74,5 +74,8 @@
     "arabic": "Arabština",
     "hebrew": "Hebrejština",
     "eastAsian": "Východní Asie"
+  },
+  "footer": {
+    "disclaimer": "MMOTOP není spojen s vývojáři ani vydavateli her. Všechny ochranné známky patří jejich vlastníkům."
   }
 }

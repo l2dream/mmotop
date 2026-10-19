@@ -971,6 +971,35 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin: 0 auto;
 }
 
+.site-footer {
+  max-width: 1480px;
+  margin: 34px auto 0;
+  padding: 18px 2px 4px;
+  border-top: 1px solid rgba(117, 109, 179, .16);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  color: #6f7390;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.site-footer-copy {
+  flex: 0 0 auto;
+  color: #9095ad;
+  font-weight: 600;
+}
+
+.site-footer-note { text-align: end; }
+
+.theme-light .site-footer {
+  border-top-color: rgba(31, 41, 102, .1);
+  color: #7a7f98;
+}
+
+.theme-light .site-footer-copy { color: #565b75; }
+
 .top-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1389,6 +1418,14 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 @media (max-width: 700px) {
+  .site-footer {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 11px;
+  }
+  .site-footer-note { text-align: center; }
   .site-shell { padding: 12px; }
 
   /* Two columns, not three. At phone width three columns leave about a

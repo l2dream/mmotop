@@ -1052,5 +1052,13 @@ function clearSearch() {
         </GamePanel>
       </section>
     </main>
+
+    <!-- Deliberately bare: no links yet, because there is nothing to link to.
+         The year follows the same build-year-then-browser rule as the date
+         labels, so the prerendered page is already right. -->
+    <footer class="site-footer">
+      <span class="site-footer-copy" dir="ltr">© {{ currentYear }} MMOTOP</span>
+      <span class="site-footer-note">{{ $t('footer.disclaimer') }}</span>
+    </footer>
   </div>
 </template>

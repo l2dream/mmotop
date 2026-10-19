@@ -74,5 +74,8 @@
     "arabic": "Arabiska",
     "hebrew": "Hebreiska",
     "eastAsian": "Östasiatiska"
+  },
+  "footer": {
+    "disclaimer": "MMOTOP är inte anknutet till spelutvecklare eller utgivare. Alla varumärken tillhör sina respektive ägare."
   }
 }

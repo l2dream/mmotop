@@ -74,5 +74,8 @@
     "arabic": "Araabia",
     "hebrew": "Heebrea",
     "eastAsian": "Ida-Aasia"
+  },
+  "footer": {
+    "disclaimer": "MMOTOP ei ole seotud mänguarendajate ega -kirjastajatega. Kõik kaubamärgid kuuluvad nende omanikele."
   }
 }
