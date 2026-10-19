@@ -161,6 +161,13 @@ function close(returnFocus = true) {
   if (returnFocus) trigger.value?.focus()
 }
 
+/** Back to all twenty-six, with the caret left in the field. */
+function clearQuery() {
+  query.value = ''
+  composing.value = false
+  searchEl.value?.focus()
+}
+
 async function toggle() {
   if (open.value) return close()
   wantPickerFonts()
@@ -296,6 +303,18 @@ onBeforeUnmount(() => {
           @compositionstart="composing = true"
           @compositionend="composing = false"
         />
+        <button
+          v-if="query"
+          class="lang-search-clear"
+          type="button"
+          :aria-label="t('search.clear')"
+          @click="clearQuery"
+        >
+          <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <line x1="5" y1="5" x2="15" y2="15" />
+            <line x1="15" y1="5" x2="5" y2="15" />
+          </svg>
+        </button>
       </div>
 
       <!-- Typing narrows the list silently otherwise: a screen reader user gets
