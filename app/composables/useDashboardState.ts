@@ -12,9 +12,9 @@
  * and would be annoyed to lose; anything the page can recompute belongs in
  * the component as before.
  *
- * This is per-visit on its own. The game, version and rate filters also live in
- * the address (see "The filters live in the address" in index.vue), so those
- * survive a reload; the search text does not.
+ * This is per-visit on its own. The game, version and rate filters and the
+ * search text also live in the address (see "The filters live in the address"
+ * in index.vue), so those survive a reload.
  */
 export interface RateFilters {
   version: string
