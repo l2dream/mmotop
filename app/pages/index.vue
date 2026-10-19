@@ -103,6 +103,27 @@ const {
 const showMore = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
 const moreWrap = ref<HTMLElement | null>(null)
+const categoryBar = ref<HTMLElement | null>(null)
+
+/**
+ * Which ends of the category bar have more games past them. On a phone the
+ * bar shows two or three games and simply stopped mid-word, with nothing to
+ * say it scrolls. Each end now fades while there is more beyond it, and only
+ * then: a bar that fits, as on a wide screen, has no fade at all.
+ *
+ * Math.abs because in a right-to-left page scrollLeft counts down from zero.
+ */
+const barFade = ref({ start: false, end: false })
+function updateBarFade() {
+  const bar = categoryBar.value
+  if (!bar) return
+  const pos = Math.abs(bar.scrollLeft)
+  const max = bar.scrollWidth - bar.clientWidth
+  barFade.value = { start: pos > 1, end: pos < max - 1 }
+}
+// Picking a game from More writes its name on the button, which changes the
+// bar's width.
+watch(activeCategory, () => nextTick(updateBarFade))
 const moreButton = ref<HTMLButtonElement | null>(null)
 const moreDropdownEl = ref<HTMLElement | null>(null)
 const dropdownPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 360 })
@@ -482,6 +503,11 @@ onMounted(() => {
   // scroll counts. Both popups are position: fixed, and they used to stay put
   // while the page — and the button they belong to — scrolled away under them.
   window.addEventListener('scroll', repositionOpenPanels, true)
+  window.addEventListener('resize', updateBarFade)
+  updateBarFade()
+  // Measured again once Inter arrives: the fallback face sets the names at a
+  // different width.
+  document.fonts?.ready.then(updateBarFade)
   takeEarlyFilterTap()
 })
 
@@ -490,6 +516,7 @@ onUnmounted(() => {
   document.removeEventListener('keydown', onDocumentKeydown)
   window.removeEventListener('resize', repositionOpenPanels)
   window.removeEventListener('scroll', repositionOpenPanels, true)
+  window.removeEventListener('resize', updateBarFade)
 })
 
 const THEME_KEY = 'mmotop-theme'
@@ -762,7 +789,13 @@ function clearSearch() {
 
     <LanguageSuggestion />
 
-    <nav class="category-bar" :aria-label="$t('nav.categories')">
+    <nav
+      ref="categoryBar"
+      class="category-bar"
+      :class="{ 'fade-start': barFade.start, 'fade-end': barFade.end }"
+      :aria-label="$t('nav.categories')"
+      @scroll.passive="updateBarFade"
+    >
       <button
         v-for="category in visibleCategories"
         :key="category"
