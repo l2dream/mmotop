@@ -633,6 +633,37 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .theme-light .lang-search-input { color: #23263d; }
+
+/* The same clear button as the main search field, at this field's size. */
+.lang-search-clear {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-inline-end: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #9095ad;
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease;
+}
+
+.lang-search-clear:hover,
+.lang-search-clear:focus-visible {
+  color: #cfd2ff;
+  background: rgba(255, 255, 255, .06);
+}
+
+.theme-light .lang-search-clear { color: #8b8fa3; }
+.theme-light .lang-search-clear:hover,
+.theme-light .lang-search-clear:focus-visible {
+  color: #5b21c4;
+  background: rgba(31, 41, 102, .06);
+}
 .lang-search-input::placeholder { color: #7e839d; }
 
 /* The field takes focus the moment the panel opens, so the global focus ring
