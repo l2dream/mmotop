@@ -566,6 +566,12 @@ function clearSearch() {
           <stop offset="50%" stop-color="#FFD64A" />
           <stop offset="100%" stop-color="#F5A300" />
         </linearGradient>
+        <!-- The same light-to-amber sweep, a few shades deeper, for white rows. -->
+        <linearGradient id="voteGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8B21C" />
+          <stop offset="50%" stop-color="#C48A00" />
+          <stop offset="100%" stop-color="#966200" />
+        </linearGradient>
       </defs>
     </svg>
 
