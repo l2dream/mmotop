@@ -1561,6 +1561,28 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     width: 12px;
     height: 12px;
   }
+  /* The same trick for the rest of the small controls: each tap area is grown
+     to 44px tall — there is room above and below the header row — but only
+     halfway into the 6px (8px in a panel head) gap beside it, so neighbouring
+     areas meet without overlapping. Nothing visible changes. */
+  .theme-button,
+  .lang-button,
+  .login-button,
+  .shuffle-button { position: relative; }
+  .theme-button::after,
+  .lang-button::after,
+  .login-button::after,
+  .shuffle-button::after,
+  .search-clear::after {
+    content: '';
+    position: absolute;
+  }
+  .theme-button::after { inset: -9px -3px; }
+  .lang-button::after,
+  .login-button::after { inset: -7px -4px; }
+  .shuffle-button::after { inset: -9px -4px; }
+  /* Grows towards the text only, never into the filter button's own area. */
+  .search-clear::after { inset-block: -5px; inset-inline: -3px 0; }
   .account-actions { display: contents; }
   /* Sized to its contents rather than to a square, which is what it was when
      the button held a single flag glyph. The search field is the flexible one
