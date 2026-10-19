@@ -20,7 +20,8 @@
     "label": "Hledat hry",
     "placeholder": "Hledat hry...",
     "short": "Hledat",
-    "action": "Hledat"
+    "action": "Hledat",
+    "clear": "Vymazat hledání"
   },
   "categories": {
     "all": "Vše",

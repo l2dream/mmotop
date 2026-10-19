@@ -20,7 +20,8 @@
     "label": "Søg spil",
     "placeholder": "Søg spil...",
     "short": "Søg",
-    "action": "Søg"
+    "action": "Søg",
+    "clear": "Ryd søgning"
   },
   "categories": {
     "all": "Alle",

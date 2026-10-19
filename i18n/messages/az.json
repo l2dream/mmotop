@@ -20,7 +20,8 @@
     "label": "Oyun axtar",
     "placeholder": "Oyun axtar...",
     "short": "Axtar",
-    "action": "Axtar"
+    "action": "Axtar",
+    "clear": "Axtarışı təmizlə"
   },
   "categories": {
     "all": "Hamısı",

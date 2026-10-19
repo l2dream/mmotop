@@ -20,7 +20,8 @@
     "label": "ゲームを検索",
     "placeholder": "ゲームを検索...",
     "short": "検索",
-    "action": "検索"
+    "action": "検索",
+    "clear": "検索をクリア"
   },
   "categories": {
     "all": "すべて",

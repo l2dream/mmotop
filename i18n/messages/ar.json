@@ -20,7 +20,8 @@
     "label": "البحث عن ألعاب",
     "placeholder": "البحث عن ألعاب...",
     "short": "بحث",
-    "action": "بحث"
+    "action": "بحث",
+    "clear": "مسح البحث"
   },
   "categories": {
     "all": "الكل",
