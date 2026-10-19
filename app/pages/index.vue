@@ -306,7 +306,8 @@ function matchesSearch(server: Server) {
   const q = query.value.trim().toLowerCase()
   if (!q) return true
   const aliases = gameById(server.game)?.aliases?.join(' ') ?? ''
-  return `${server.name} ${serverSubtitle(server)} ${aliases} ${server.chronicle} ${chronicleShort(server.game, server.chronicle)} ${rateLabel(server)}`.toLowerCase().includes(q)
+  // Aliases last: in the middle they split "World of Warcraft Classic".
+  return `${server.name} ${serverSubtitle(server)} ${server.chronicle} ${chronicleShort(server.game, server.chronicle)} ${rateLabel(server)} ${aliases}`.toLowerCase().includes(q)
 }
 
 function matchesAll(server: Server) {
@@ -516,6 +517,12 @@ function submitSearch() {
   searchInput.value?.focus()
 }
 
+/** Back to everything, with the cursor left in the field to type again. */
+function clearSearch() {
+  query.value = ''
+  searchInput.value?.focus()
+}
+
 </script>
 
 <template>
@@ -577,7 +584,7 @@ function submitSearch() {
       <!-- A div, not a <label>: the label wrapped the filter and search buttons
            too, so their names were folded into the field's and a screen reader
            announced it as "Search games Filter Search". -->
-      <div class="search-box">
+      <div class="search-box" :class="{ 'has-query': query }">
         <input
           ref="searchInput"
           :value="query"
@@ -596,6 +603,18 @@ function submitSearch() {
           <svg class="search-svg" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <circle cx="8.5" cy="8.5" r="5.5" />
             <line x1="12.7" y1="12.7" x2="17" y2="17" />
+          </svg>
+        </button>
+        <button
+          v-if="query"
+          class="search-clear"
+          type="button"
+          :aria-label="$t('search.clear')"
+          @click="clearSearch"
+        >
+          <svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <line x1="5" y1="5" x2="15" y2="15" />
+            <line x1="15" y1="5" x2="5" y2="15" />
           </svg>
         </button>
         <button

@@ -20,7 +20,8 @@
     "label": "Пошук ігор",
     "placeholder": "Пошук ігор...",
     "short": "Пошук",
-    "action": "Знайти"
+    "action": "Знайти",
+    "clear": "Очистити пошук"
   },
   "categories": {
     "all": "Усі",

@@ -20,7 +20,8 @@
     "label": "Meklēt spēles",
     "placeholder": "Meklēt spēles...",
     "short": "Meklēt",
-    "action": "Meklēt"
+    "action": "Meklēt",
+    "clear": "Notīrīt meklēšanu"
   },
   "categories": {
     "all": "Visas",

@@ -20,7 +20,8 @@
     "label": "Sök spel",
     "placeholder": "Sök spel...",
     "short": "Sök",
-    "action": "Sök"
+    "action": "Sök",
+    "clear": "Rensa sökning"
   },
   "categories": {
     "all": "Alla",

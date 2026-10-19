@@ -20,7 +20,8 @@
     "label": "Otsi mänge",
     "placeholder": "Otsi mänge...",
     "short": "Otsi",
-    "action": "Otsi"
+    "action": "Otsi",
+    "clear": "Tühjenda otsing"
   },
   "categories": {
     "all": "Kõik",

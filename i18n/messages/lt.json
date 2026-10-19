@@ -20,7 +20,8 @@
     "label": "Ieškoti žaidimų",
     "placeholder": "Ieškoti žaidimų...",
     "short": "Ieškoti",
-    "action": "Ieškoti"
+    "action": "Ieškoti",
+    "clear": "Išvalyti paiešką"
   },
   "categories": {
     "all": "Visi",

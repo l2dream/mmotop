@@ -20,7 +20,8 @@
     "label": "Oyun ara",
     "placeholder": "Oyun ara...",
     "short": "Ara",
-    "action": "Ara"
+    "action": "Ara",
+    "clear": "Aramayı temizle"
   },
   "categories": {
     "all": "Tümü",

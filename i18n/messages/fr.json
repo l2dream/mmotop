@@ -20,7 +20,8 @@
     "label": "Rechercher des jeux",
     "placeholder": "Rechercher des jeux...",
     "short": "Chercher",
-    "action": "Rechercher"
+    "action": "Rechercher",
+    "clear": "Effacer la recherche"
   },
   "categories": {
     "all": "Tous",

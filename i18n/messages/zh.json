@@ -20,7 +20,8 @@
     "label": "搜索游戏",
     "placeholder": "搜索游戏...",
     "short": "搜索",
-    "action": "搜索"
+    "action": "搜索",
+    "clear": "清除搜索"
   },
   "categories": {
     "all": "全部",

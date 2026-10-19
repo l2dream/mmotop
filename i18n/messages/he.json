@@ -20,7 +20,8 @@
     "label": "חיפוש משחקים",
     "placeholder": "חיפוש משחקים...",
     "short": "חיפוש",
-    "action": "חיפוש"
+    "action": "חיפוש",
+    "clear": "ניקוי החיפוש"
   },
   "categories": {
     "all": "הכל",
