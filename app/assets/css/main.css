@@ -974,8 +974,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .site-footer {
   max-width: 1480px;
   margin: 34px auto 0;
-  padding: 18px 2px 4px;
-  border-top: 1px solid rgba(117, 109, 179, .16);
+  padding: 0 2px 4px;
   font-size: 12px;
   line-height: 1.5;
 }
@@ -983,10 +982,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .site-footer-copy {
   color: #9095ad;
   font-weight: 600;
-}
-
-.theme-light .site-footer {
-  border-top-color: rgba(31, 41, 102, .1);
 }
 
 .theme-light .site-footer-copy { color: #565b75; }
