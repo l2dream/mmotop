@@ -383,6 +383,21 @@ onNuxtReady(() => {
   watch([activeCategory, filters, customRateActive, customRateMin, customRateMax], writeFiltersToUrl, { deep: true })
 })
 
+/**
+ * The wordmark goes to this language's home page — `to="/"` used to send a
+ * German visitor to the English one — and back to its starting state: no
+ * filters, no game, no search, scrolled to the top. Already on the home page
+ * with filters set, the link alone changed nothing visible, since the filters
+ * live in shared state and were written straight back into the address.
+ * A plain link still, so a middle-click opens a fresh tab as expected.
+ */
+const localePath = useLocalePath()
+function goHome() {
+  resetFilters()
+  query.value = ''
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 /** A category is a game; "all" matches everything. */
 function matchesCategory(server: Server) {
   return activeCategory.value === 'all' || server.game === activeCategory.value
@@ -652,7 +667,7 @@ function clearSearch() {
     </svg>
 
     <header class="topbar">
-      <NuxtLink to="/" class="brand" :aria-label="$t('nav.home')">MMOTOP</NuxtLink>
+      <NuxtLink :to="localePath('/')" class="brand" :aria-label="$t('nav.home')" @click="goHome">MMOTOP</NuxtLink>
       <!-- The visible wordmark is a link home, not a heading, so the page had
            five h2s and no h1 at all. This states the subject once, for crawlers
            and for anyone listing the headings. -->
