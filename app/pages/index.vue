@@ -307,6 +307,82 @@ function resetFilters() {
   customRateMax.value = ''
 }
 
+/**
+ * The filters live in the address as well, so a reload — or a link someone
+ * was sent — comes back with them set:
+ *
+ *   ?game=wow&version=WotLK 3.3.5a&rate=0-5,none&min=2&max=50
+ *
+ * The address rather than localStorage, so the site still opens unfiltered
+ * when someone simply comes back to it, and a filtered view can be shared.
+ * Rate tiers go in as "0-5" rather than their "x0–x5" labels, which would
+ * travel as %E2%80%93. Anything unknown in the address is ignored.
+ *
+ * Read once on mount, then written back with router.replace on every change,
+ * so the back button is not filled with one entry per click. The prerendered
+ * page has no filters, so a filtered reload shows everything for the moment
+ * before the script runs; a static host cannot do better without rendering
+ * each combination ahead of time.
+ */
+const route = useRoute()
+const router = useRouter()
+
+const rateSlug = (label: string) => label === NO_RATE ? 'none' : label.replace(/x/g, '').replace('–', '-')
+const RATE_BY_SLUG = new Map([...rateTiers.map((r) => r.label), NO_RATE].map((label) => [rateSlug(label), label]))
+
+function firstParam(v: unknown): string {
+  const x = Array.isArray(v) ? v[0] : v
+  return typeof x === 'string' ? x : ''
+}
+
+function restoreFiltersFromUrl() {
+  const q = route.query
+  const game = firstParam(q.game)
+  const chronicle = firstParam(q.version)
+  const rates = firstParam(q.rate).split(',').map((r) => RATE_BY_SLUG.get(r)).filter((r): r is string => !!r)
+  const min = firstParam(q.min), max = firstParam(q.max)
+  // An address with no filter in it — the bare page, or a language switch,
+  // whose links carry no query — leaves the state as it is.
+  if (!game && !chronicle && !rates.length && !min && !max) return
+
+  const g = gameById(game)
+  activeCategory.value = g ? g.id : 'all'
+  filters.value.version = g?.chronicles.some((c) => c.name === chronicle) ? versionKey(g.id, chronicle) : ''
+  filters.value.rates = rates
+  customRateActive.value = !!(min || max)
+  customRateMin.value = min
+  customRateMax.value = max
+}
+
+function filtersToQuery() {
+  const query: Record<string, string> = {}
+  if (activeCategory.value !== 'all') query.game = activeCategory.value
+  const v = filters.value.version
+  if (v) query.version = v.slice(v.indexOf(':') + 1)
+  if (filters.value.rates.length) query.rate = filters.value.rates.map(rateSlug).join(',')
+  if (customRateActive.value) {
+    if (customRateMin.value) query.min = customRateMin.value
+    if (customRateMax.value) query.max = customRateMax.value
+  }
+  return query
+}
+
+// Other parameters in the address (utm tags and the like) are kept as found.
+function writeFiltersToUrl() {
+  const { game: _g, version: _v, rate: _r, min: _n, max: _x, ...rest } = route.query
+  router.replace({ query: { ...rest, ...filtersToQuery() }, hash: route.hash })
+}
+
+// onNuxtReady, not onMounted. A prerendered page hydrates under the path it
+// was rendered at, query-less, and Nuxt only puts the real address back once
+// the app has fully loaded. Read at mount, the query wasn't there yet; written
+// at mount, Nuxt's restore then overwrote it, so a second reload lost them.
+onNuxtReady(() => {
+  restoreFiltersFromUrl()
+  writeFiltersToUrl()
+  watch([activeCategory, filters, customRateActive, customRateMin, customRateMax], writeFiltersToUrl, { deep: true })
+})
+
 /** A category is a game; "all" matches everything. */
 function matchesCategory(server: Server) {
   return activeCategory.value === 'all' || server.game === activeCategory.value
