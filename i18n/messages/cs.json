@@ -74,5 +74,10 @@
     "arabic": "Arabština",
     "hebrew": "Hebrejština",
     "eastAsian": "Východní Asie"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "text": "Tato stránka neexistuje nebo byla přesunuta.",
+    "home": "Na hlavní stránku"
   }
 }

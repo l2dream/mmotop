@@ -74,5 +74,10 @@
     "arabic": "Arabiska",
     "hebrew": "Hebreiska",
     "eastAsian": "Östasiatiska"
+  },
+  "notFound": {
+    "title": "Sidan hittades inte",
+    "text": "Sidan finns inte eller har flyttats.",
+    "home": "Till startsidan"
   }
 }

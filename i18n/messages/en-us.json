@@ -74,5 +74,10 @@
     "arabic": "Arabic",
     "hebrew": "Hebrew",
     "eastAsian": "East Asian"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page doesn’t exist or has been moved.",
+    "home": "Back to the home page"
   }
 }

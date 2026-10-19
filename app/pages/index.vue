@@ -402,10 +402,22 @@ function writeFiltersToUrl() {
 // was rendered at, query-less, and Nuxt only puts the real address back once
 // the app has fully loaded. Read at mount, the query wasn't there yet; written
 // at mount, Nuxt's restore then overwrote it, so a second reload lost them.
+//
+// The watcher is created here in setup, gated on urlReady, rather than inside
+// the onNuxtReady callback: that callback runs outside the component, so a
+// watcher made there was never stopped, and every language switch — which
+// remounts this page — left one more behind, all writing the same address.
+const urlReady = ref(false)
+let unmounted = false
+onUnmounted(() => { unmounted = true })
+watch([activeCategory, filters, customRateActive, customRateMin, customRateMax, query], () => {
+  if (urlReady.value) writeFiltersToUrl()
+}, { deep: true })
 onNuxtReady(() => {
+  if (unmounted) return
   restoreFiltersFromUrl()
   writeFiltersToUrl()
-  watch([activeCategory, filters, customRateActive, customRateMin, customRateMax, query], writeFiltersToUrl, { deep: true })
+  urlReady.value = true
 })
 
 /**
@@ -663,6 +675,16 @@ function submitSearch() {
   searchInput.value?.focus()
 }
 
+/**
+ * Enter in the field — the Search key on a phone's keyboard. The panels have
+ * already narrowed as each letter went in, so on a touch screen it puts the
+ * keyboard away, which otherwise kept half the results hidden under it. With a
+ * mouse and keyboard there is nothing to dismiss, so the cursor stays.
+ */
+function onSearchEnter(event: KeyboardEvent) {
+  if (window.matchMedia('(pointer: coarse)').matches) (event.target as HTMLInputElement).blur()
+}
+
 /** Back to everything, with the cursor left in the field to type again. */
 function clearSearch() {
   query.value = ''
@@ -744,7 +766,7 @@ function clearSearch() {
           :aria-label="$t('search.label')"
           :placeholder="$t('search.placeholder')"
           @input="query = ($event.target as HTMLInputElement).value"
-          @keydown.enter="submitSearch"
+          @keydown.enter="onSearchEnter"
         />
         <!-- The phone-width placeholder. The real one stays the full phrase and
              is hidden there by CSS; this one-word stand-in shows only while the

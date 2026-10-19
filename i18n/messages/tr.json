@@ -74,5 +74,10 @@
     "arabic": "Arap",
     "hebrew": "İbrani",
     "eastAsian": "Doğu Asya"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "text": "Bu sayfa yok veya taşınmış.",
+    "home": "Ana sayfaya dön"
   }
 }

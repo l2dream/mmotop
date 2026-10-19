@@ -74,5 +74,10 @@
     "arabic": "Ərəb",
     "hebrew": "İvrit",
     "eastAsian": "Şərqi Asiya"
+  },
+  "notFound": {
+    "title": "Səhifə tapılmadı",
+    "text": "Belə səhifə yoxdur və ya köçürülüb.",
+    "home": "Ana səhifəyə"
   }
 }

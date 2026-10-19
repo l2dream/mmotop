@@ -74,5 +74,10 @@
     "arabic": "Arabisk",
     "hebrew": "Hebraisk",
     "eastAsian": "Østasiatisk"
+  },
+  "notFound": {
+    "title": "Fant ikke siden",
+    "text": "Denne siden finnes ikke eller er flyttet.",
+    "home": "Til forsiden"
   }
 }
