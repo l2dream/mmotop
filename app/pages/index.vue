@@ -331,7 +331,9 @@ function resetFilters() {
  * The filters live in the address as well, so a reload — or a link someone
  * was sent — comes back with them set:
  *
- *   ?game=wow&version=WotLK 3.3.5a&rate=0-5,none&min=2&max=50
+ *   ?game=wow&version=WotLK 3.3.5a&rate=0-5,none&min=2&max=50&q=frost
+ *
+ * The search text rides along as q, so a reload keeps what was typed too.
  *
  * The address rather than localStorage, so the site still opens unfiltered
  * when someone simply comes back to it, and a filtered view can be shared.
@@ -361,9 +363,10 @@ function restoreFiltersFromUrl() {
   const chronicle = firstParam(q.version)
   const rates = firstParam(q.rate).split(',').map((r) => RATE_BY_SLUG.get(r)).filter((r): r is string => !!r)
   const min = firstParam(q.min), max = firstParam(q.max)
+  const text = firstParam(q.q)
   // An address with no filter in it — the bare page, or a language switch,
   // whose links carry no query — leaves the state as it is.
-  if (!game && !chronicle && !rates.length && !min && !max) return
+  if (!game && !chronicle && !rates.length && !min && !max && !text) return
 
   const g = gameById(game)
   activeCategory.value = g ? g.id : 'all'
@@ -372,24 +375,26 @@ function restoreFiltersFromUrl() {
   customRateActive.value = !!(min || max)
   customRateMin.value = min
   customRateMax.value = max
+  query.value = text
 }
 
 function filtersToQuery() {
-  const query: Record<string, string> = {}
-  if (activeCategory.value !== 'all') query.game = activeCategory.value
+  const params: Record<string, string> = {}
+  if (activeCategory.value !== 'all') params.game = activeCategory.value
   const v = filters.value.version
-  if (v) query.version = v.slice(v.indexOf(':') + 1)
-  if (filters.value.rates.length) query.rate = filters.value.rates.map(rateSlug).join(',')
+  if (v) params.version = v.slice(v.indexOf(':') + 1)
+  if (filters.value.rates.length) params.rate = filters.value.rates.map(rateSlug).join(',')
   if (customRateActive.value) {
-    if (customRateMin.value) query.min = customRateMin.value
-    if (customRateMax.value) query.max = customRateMax.value
+    if (customRateMin.value) params.min = customRateMin.value
+    if (customRateMax.value) params.max = customRateMax.value
   }
-  return query
+  if (query.value.trim()) params.q = query.value
+  return params
 }
 
 // Other parameters in the address (utm tags and the like) are kept as found.
 function writeFiltersToUrl() {
-  const { game: _g, version: _v, rate: _r, min: _n, max: _x, ...rest } = route.query
+  const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
   router.replace({ query: { ...rest, ...filtersToQuery() }, hash: route.hash })
 }
 
@@ -400,7 +405,7 @@ function writeFiltersToUrl() {
 onNuxtReady(() => {
   restoreFiltersFromUrl()
   writeFiltersToUrl()
-  watch([activeCategory, filters, customRateActive, customRateMin, customRateMax], writeFiltersToUrl, { deep: true })
+  watch([activeCategory, filters, customRateActive, customRateMin, customRateMax, query], writeFiltersToUrl, { deep: true })
 })
 
 /**
