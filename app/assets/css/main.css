@@ -199,9 +199,12 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   width: 100%;
 }
 
+/* 14px like the category bar under it; at the 16px it inherited, the
+   placeholder outweighed the menu. Phones keep 16px (see the mobile block). */
 .search-box input {
   width: 100%;
   height: 42px;
+  font-size: 14px;
   border: 1px solid rgba(117, 109, 179, .19);
   border-radius: 13px;
   background: rgba(16, 20, 44, .72);
@@ -529,7 +532,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background: rgba(20, 23, 50, .78);
   color: #f3f4ff;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -568,7 +571,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    letterforms rather than a monospace face that would read as data. */
 .lang-code {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: .06em;
 }
 
@@ -1082,7 +1085,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin: 0;
   font-size: 14px;
   letter-spacing: .2px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* Holds the header's controls together at the trailing edge: any panel action
@@ -1191,7 +1194,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .game-row.compact .date-year {
   color: #8b90a7;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .theme-light .game-row.compact .date-year { color: #6c7189; }
@@ -1257,7 +1260,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     linear-gradient(135deg, #222733, #0d1018);
   border: 1px solid #343846;
   color: #d5d9e3;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
@@ -1289,7 +1292,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #7d829a;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .theme-light .game-name small { color: #6d7187; }
@@ -1305,7 +1308,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 1px;
   line-height: 1.2;
   color: #e4e7f5;
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1324,7 +1327,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .version-rate {
   display: block;
   color: #8b90a7;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .theme-light .version-rate { color: #6c7189; }
@@ -1364,7 +1367,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .date {
   color: #9ca1b7;
-  font-size: 11px;
+  font-size: 12px;
   text-align: end;
   white-space: nowrap;
 }
@@ -1563,6 +1566,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   }
   .game-logo { width: 30px; height: 30px; }
   .rank { width: 22px; height: 22px; font-size: 12px; }
+  /* 11px, not the desktop 12: in the 58px column "Newschool" at 12px gets cut. */
+  .version { font-size: 11px; }
 
 }
 
