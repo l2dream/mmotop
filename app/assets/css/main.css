@@ -881,29 +881,41 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   max-width: 1480px;
   height: 48px;
   margin: 0 auto 21px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(22, 25, 52, .82), rgba(15, 19, 42, .76));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+/*
+ * The part of the bar that scrolls, inside the bar that carries the
+ * background. They were one element until the fade below went on: a mask
+ * clips everything it covers, the More menu included, so the menu opened
+ * invisible and clicks fell through it to the panel underneath. The menu now
+ * sits beside this strip in the bar, not inside it, and the fade touches only
+ * the names — the bar's own background no longer fades out at the ends either.
+ */
+.category-scroll {
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 3px;
   padding: 0 5px;
   overflow-x: auto;
   scrollbar-width: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg, rgba(22, 25, 52, .82), rgba(15, 19, 42, .76));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
 }
-.category-bar::-webkit-scrollbar { display: none; }
+.category-scroll::-webkit-scrollbar { display: none; }
 
 /* The fade that says "more this way" — see barFade in index.vue. A mask
    rather than an overlay, so it fades whatever is under it, in either theme. */
-.category-bar {
+.category-scroll {
   --fade-s: 0px;
   --fade-e: 0px;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
   mask-image: linear-gradient(to right, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
 }
-.category-bar.fade-start { --fade-s: 32px; }
-.category-bar.fade-end { --fade-e: 32px; }
-[dir="rtl"] .category-bar {
+.category-scroll.fade-start { --fade-s: 32px; }
+.category-scroll.fade-end { --fade-e: 32px; }
+[dir="rtl"] .category-scroll {
   -webkit-mask-image: linear-gradient(to left, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
   mask-image: linear-gradient(to left, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
 }
