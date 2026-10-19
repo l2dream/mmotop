@@ -528,7 +528,7 @@ function closeFilter() {
 function onDocumentPointer(event: PointerEvent) {
   const target = event.target as Node
 
-  if (showMore.value && moreWrap.value && !moreWrap.value.contains(target)) {
+  if (showMore.value && !moreWrap.value?.contains(target) && !moreDropdownEl.value?.contains(target)) {
     showMore.value = false
   }
 
@@ -886,65 +886,68 @@ function clearSearch() {
 
     <LanguageSuggestion />
 
-    <nav
-      ref="categoryBar"
-      class="category-bar"
-      :class="{ 'fade-start': barFade.start, 'fade-end': barFade.end }"
-      :aria-label="$t('nav.categories')"
-      @scroll.passive="updateBarFade"
-    >
-      <button
-        v-for="category in visibleCategories"
-        :key="category"
-        class="category"
-        :class="{ active: activeCategory === category }"
-        :aria-pressed="activeCategory === category"
-        type="button"
-        @click="selectCategory(category)"
+    <nav class="category-bar" :aria-label="$t('nav.categories')">
+      <div
+        ref="categoryBar"
+        class="category-scroll"
+        :class="{ 'fade-start': barFade.start, 'fade-end': barFade.end }"
+        @scroll.passive="updateBarFade"
       >
-        {{ categoryLabel(category) }}
-      </button>
-
-      <div class="category-more-wrap" ref="moreWrap">
         <button
-          ref="moreButton"
-          class="category more"
-          :class="{ active: showMore || activeHidden }"
+          v-for="category in visibleCategories"
+          :key="category"
+          class="category"
+          :class="{ active: activeCategory === category }"
+          :aria-pressed="activeCategory === category"
           type="button"
-          aria-controls="more-categories"
-          :aria-expanded="showMore"
-          @click="showMore = !showMore"
+          @click="selectCategory(category)"
         >
-          {{ activeHidden ? categoryLabel(activeCategory) : $t('categories.more') }}
-          <span class="more-chevron" :class="{ open: showMore }">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </span>
+          {{ categoryLabel(category) }}
         </button>
 
-        <!-- A plain disclosure. role="menu" promised arrow-key navigation and
-             focus-on-open, and neither existed — a screen reader user was told
-             to use keys that did nothing. -->
-        <div
-          v-if="showMore"
-          id="more-categories"
-          ref="moreDropdownEl"
-          class="more-dropdown"
-          :style="{ top: dropdownPos.top + 'px', left: dropdownPos.left + 'px', maxHeight: Math.min(360, dropdownPos.maxHeight) + 'px' }"
-        >
+        <div class="category-more-wrap" ref="moreWrap">
           <button
-            v-for="category in hiddenCategories"
-            :key="category"
-            class="more-dropdown-item"
-            :class="{ active: activeCategory === category }"
+            ref="moreButton"
+            class="category more"
+            :class="{ active: showMore || activeHidden }"
             type="button"
-            :aria-pressed="activeCategory === category"
-            @click="selectCategory(category, true)"
+            aria-controls="more-categories"
+            :aria-expanded="showMore"
+            @click="showMore = !showMore"
           >
-            {{ categoryLabel(category) }}
+            {{ activeHidden ? categoryLabel(activeCategory) : $t('categories.more') }}
+            <span class="more-chevron" :class="{ open: showMore }">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </span>
           </button>
         </div>
+      </div>
+
+      <!-- A plain disclosure. role="menu" promised arrow-key navigation and
+           focus-on-open, and neither existed — a screen reader user was told
+           to use keys that did nothing. Beside the scrolling strip rather
+           than inside it, where the strip's fade mask clipped it away; still
+           straight after the More button in the DOM, so Tab reaches it. -->
+      <div
+        v-if="showMore"
+        id="more-categories"
+        ref="moreDropdownEl"
+        class="more-dropdown"
+        :style="{ top: dropdownPos.top + 'px', left: dropdownPos.left + 'px', maxHeight: Math.min(360, dropdownPos.maxHeight) + 'px' }"
+      >
+        <button
+          v-for="category in hiddenCategories"
+          :key="category"
+          class="more-dropdown-item"
+          :class="{ active: activeCategory === category }"
+          type="button"
+          :aria-pressed="activeCategory === category"
+          @click="selectCategory(category, true)"
+        >
+          {{ categoryLabel(category) }}
+        </button>
       </div>
     </nav>
 
