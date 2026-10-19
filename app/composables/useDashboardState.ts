@@ -12,10 +12,9 @@
  * and would be annoyed to lose; anything the page can recompute belongs in
  * the component as before.
  *
- * Note this is per-visit, not per-visitor: a reload still starts fresh. The
- * theme in particular would be better in a cookie, but reading one on a
- * prerendered site means either a flash of the wrong theme or a hydration
- * mismatch, and that is its own piece of work.
+ * This is per-visit on its own. The game, version and rate filters also live in
+ * the address (see "The filters live in the address" in index.vue), so those
+ * survive a reload; the search text does not.
  */
 export interface RateFilters {
   version: string
