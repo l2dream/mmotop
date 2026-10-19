@@ -686,9 +686,18 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    column is a scroll, and the whole point of grouping was to let someone find
    their script without reading. Rows are kept whole, and a heading never ends
    up stranded at the foot of a column away from its group. */
-.lang-columns { column-count: 3; column-gap: 14px; }
+.lang-columns { column-count: 3; column-gap: 14px; --lang-row: 28px; }
 
-.lang-group { margin-bottom: 6px; }
+/*
+ * Everything in the list sits on one grid of --lang-row slots: each language
+ * is exactly one slot tall and so is each group heading, with nothing between
+ * groups. A column can begin with a heading or mid-group — the second column
+ * opens partway through LATIN — and its rows still line up with the rows
+ * beside it. Before, the heading's own height plus a 6px gap pushed one
+ * column 15px out of step with the next, and the Arabic, Armenian and CJK
+ * rows grew to their fonts' taller line heights (30–40px), spacing the third
+ * column unevenly.
+ */
 
 /*
  * The heading must never sit alone at the foot of a column. `break-after:
@@ -702,13 +711,17 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .lang-group-title {
   break-after: avoid;
   break-inside: avoid;
-  padding-bottom: 34px;
-  margin-bottom: -31px;
+  display: flex;
+  align-items: flex-end;
+  height: calc(var(--lang-row) * 2);
+  padding-bottom: calc(var(--lang-row) + 6px);
+  margin-bottom: calc(var(--lang-row) * -1);
   pointer-events: none;
   padding-inline-start: 8px;
   color: #7f839b;
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -720,7 +733,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 6px 8px;
+  height: var(--lang-row);
+  padding: 0 8px;
   border-radius: 8px;
   color: #a7aac0;
   font-size: 13px;
@@ -742,8 +756,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   width: 26px;
   text-align: center;
   color: #7e83a0;
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: .04em;
 }
 
@@ -756,6 +770,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   font-family: Inter, 'Noto Sans Armenian', 'Noto Sans Arabic', 'Noto Sans Hebrew',
     'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
   min-width: 0;
+  /* One slot tall, whatever the script: the Noto faces' own line heights are
+     what made those rows taller, and overflow: hidden clips to this box. */
+  line-height: var(--lang-row);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1434,8 +1451,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     max-height: min(70vh, 460px);
     padding: 10px;
   }
-  .lang-columns { column-count: 2; column-gap: 10px; }
-  .lang-item { padding: 7px 6px; gap: 7px; }
+  .lang-columns { column-count: 2; column-gap: 10px; --lang-row: 30px; }
+  .lang-item { padding: 0 6px; gap: 7px; }
   .lang-item-code { width: 22px; }
   .topbar {
     display: flex;
