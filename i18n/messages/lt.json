@@ -74,5 +74,10 @@
     "arabic": "Arabų",
     "hebrew": "Hebrajų",
     "eastAsian": "Rytų Azijos"
+  },
+  "notFound": {
+    "title": "Puslapis nerastas",
+    "text": "Šio puslapio nėra arba jis perkeltas.",
+    "home": "Į pradžią"
   }
 }

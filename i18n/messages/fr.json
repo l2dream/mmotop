@@ -74,5 +74,10 @@
     "arabic": "Arabe",
     "hebrew": "Hébreu",
     "eastAsian": "Asie de l’Est"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "Cette page n’existe pas ou a été déplacée.",
+    "home": "Retour à l’accueil"
   }
 }

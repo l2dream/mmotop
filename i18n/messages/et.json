@@ -74,5 +74,10 @@
     "arabic": "Araabia",
     "hebrew": "Heebrea",
     "eastAsian": "Ida-Aasia"
+  },
+  "notFound": {
+    "title": "Lehte ei leitud",
+    "text": "Seda lehte pole olemas või see on teisaldatud.",
+    "home": "Avalehele"
   }
 }

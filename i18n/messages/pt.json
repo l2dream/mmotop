@@ -74,5 +74,10 @@
     "arabic": "Árabe",
     "hebrew": "Hebraico",
     "eastAsian": "Ásia Oriental"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "text": "Esta página não existe ou foi movida.",
+    "home": "Voltar ao início"
   }
 }

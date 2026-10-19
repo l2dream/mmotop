@@ -74,5 +74,10 @@
     "arabic": "Arābu",
     "hebrew": "Ebreju",
     "eastAsian": "Austrumāzijas"
+  },
+  "notFound": {
+    "title": "Lapa nav atrasta",
+    "text": "Šīs lapas nav vai tā ir pārvietota.",
+    "home": "Uz sākumlapu"
   }
 }

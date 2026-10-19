@@ -1723,3 +1723,70 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 [dir="rtl"] .panel-footer span svg {
   transform: scaleX(-1);
 }
+
+/* The not-found page (app/error.vue): one card in the middle of the page,
+   built from the same pieces as the dashboard. */
+.not-found {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.not-found-card {
+  width: min(420px, 100%);
+  padding: 36px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(103, 104, 173, .25);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(22, 25, 52, .9), rgba(15, 19, 42, .86));
+  box-shadow: 0 14px 45px rgba(0, 0, 0, .3);
+}
+
+.not-found-brand { margin-bottom: 22px; }
+
+.not-found-code {
+  margin: 0;
+  color: #b98bff;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.not-found-title {
+  margin: 12px 0 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.not-found-text {
+  margin: 8px 0 0;
+  color: #959ab2;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.not-found-home {
+  margin-top: 24px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.not-found-home:hover,
+.not-found-home:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
+
+.theme-light .not-found-card {
+  border-color: rgba(103, 104, 173, .14);
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(31, 41, 102, .1);
+}
+.theme-light .not-found-code { color: #7c3aed; }
+.theme-light .not-found-text { color: #5d6177; }
