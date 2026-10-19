@@ -451,12 +451,23 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .filter-custom-sep { color: #858aa6; font-size: 12px; flex: 0 0 auto; }
 
+/* Pinned to the bottom of the popup. When the popup is taller than the room
+   below the button — a phone held sideways — its content scrolls, and Reset
+   and Apply used to scroll away with it, out of sight under RATE. Sticky, they
+   stay put while the fields scroll behind them. The negative margins take the
+   bar out to the popup's edges and down over its bottom padding, so its own
+   background covers whatever scrolls underneath; when nothing scrolls it sits
+   exactly where it did. */
 .filter-popup-actions {
+  position: sticky;
+  bottom: -16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 4px;
+  margin: 0 -16px -16px;
+  padding: 4px 16px 16px;
   border-top: 1px solid rgba(104, 105, 161, .16);
+  background: #0f132a;
 }
 
 .filter-reset {
@@ -516,7 +527,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border-color: rgba(103, 104, 173, .2);
 }
 
-.theme-light .filter-popup-actions { border-top-color: rgba(103, 104, 173, .14); }
+.theme-light .filter-popup-actions { border-top-color: rgba(103, 104, 173, .14); background: #ffffff; }
 
 .empty-state {
   padding: 30px 17px;
