@@ -23,12 +23,17 @@ export interface GameInfo {
   /** The game's own name; a proper noun, not translated. */
   name: string
   genre: string
+  /**
+   * What players type instead of the full name: "wow", "l2". Only for the
+   * search box; never shown.
+   */
+  aliases?: string[]
   chronicles: Chronicle[]
 }
 
 export const GAMES = [
   {
-    id: 'lineage2', name: 'Lineage II', genre: 'MMORPG',
+    id: 'lineage2', name: 'Lineage II', genre: 'MMORPG', aliases: ['L2', 'Lineage 2', 'La2'],
     chronicles: [
       { name: 'Interlude', badge: 'IL' },
       { name: 'Gracia Final', badge: 'GF', short: 'Gracia' },
@@ -38,7 +43,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'wow', name: 'World of Warcraft', genre: 'MMORPG',
+    id: 'wow', name: 'World of Warcraft', genre: 'MMORPG', aliases: ['WoW', 'Warcraft'],
     chronicles: [
       { name: 'Classic 1.12.1', badge: 'CL', short: 'Classic' },
       { name: 'WotLK 3.3.5a', badge: 'WL', short: 'WotLK' },
@@ -48,7 +53,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'mu', name: 'MuOnline', genre: 'MMORPG',
+    id: 'mu', name: 'MuOnline', genre: 'MMORPG', aliases: ['Mu Online'],
     chronicles: [
       { name: '0.97d', badge: '97' },
       { name: 'Season 6', badge: 'S6' },
@@ -65,7 +70,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'pw', name: 'Perfect World', genre: 'MMORPG',
+    id: 'pw', name: 'Perfect World', genre: 'MMORPG', aliases: ['PW'],
     chronicles: [
       { name: '1.3.6', badge: '136' },
       { name: '1.4.6', badge: '146' },
@@ -73,14 +78,14 @@ export const GAMES = [
     ]
   },
   {
-    id: 'rf', name: 'RF Online', genre: 'MMORPG',
+    id: 'rf', name: 'RF Online', genre: 'MMORPG', aliases: ['RF'],
     chronicles: [
       { name: '2.2.3', badge: '223' },
       { name: 'Giga 4', badge: 'G4' }
     ]
   },
   {
-    id: 'sro', name: 'Silkroad Online', genre: 'MMORPG',
+    id: 'sro', name: 'Silkroad Online', genre: 'MMORPG', aliases: ['SRO', 'Silkroad'],
     chronicles: [
       { name: 'Cap 90', badge: '90' },
       { name: 'Cap 110', badge: '110' },
@@ -88,7 +93,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'metin2', name: 'Metin2', genre: 'MMORPG',
+    id: 'metin2', name: 'Metin2', genre: 'MMORPG', aliases: ['Metin 2', 'MT2'],
     chronicles: [
       { name: 'Old School', badge: 'OS', short: 'Oldschool' },
       { name: 'Middle School', badge: 'MS', short: 'Midschool' },
