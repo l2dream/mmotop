@@ -292,8 +292,28 @@ function toggleRateFilter(label: string) {
   else filters.value.rates.splice(idx, 1)
 }
 
-function toggleCustomRate() {
+/**
+ * The From/To fields appear under the chips, and on a phone held sideways
+ * that is below the bottom of the popup — or just under the pinned
+ * Reset/Apply bar: tapping Custom seemed to do nothing until you scrolled.
+ * The popup now scrolls just far enough to show them above that bar.
+ *
+ * By hand rather than scrollIntoView: the fields are technically inside the
+ * popup's box while hidden under the sticky bar, so "nearest" did nothing.
+ * Only the popup moves, never the page, and nothing is focused, which on a
+ * phone would put the keyboard over everything.
+ */
+const customRateEl = ref<HTMLElement | null>(null)
+async function toggleCustomRate() {
   customRateActive.value = !customRateActive.value
+  if (!customRateActive.value) return
+  await nextTick()
+  const popup = filterPopupEl.value
+  const fields = customRateEl.value
+  const bar = popup?.querySelector('.filter-popup-actions')
+  if (!popup || !fields || !bar) return
+  const overlap = fields.getBoundingClientRect().bottom - bar.getBoundingClientRect().top + 8
+  if (overlap > 0) popup.scrollBy({ top: overlap, behavior: 'smooth' })
 }
 
 // Clears the game as well — it is a field in this popup like the others. The
@@ -834,7 +854,7 @@ function clearSearch() {
               {{ $t('filter.custom') }}
             </button>
           </div>
-          <div v-if="customRateActive" class="filter-custom-rate">
+          <div v-if="customRateActive" ref="customRateEl" class="filter-custom-rate">
             <input
               v-model="customRateMin"
               type="number"
