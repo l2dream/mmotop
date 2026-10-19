@@ -748,8 +748,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .lang-item.active { background: rgba(148, 92, 255, .2); color: #fff; }
 
 .theme-light .lang-item { color: #4a4e66; }
-.theme-light .lang-item:hover { background: rgba(124, 58, 237, .1); color: #2a1a52; }
-.theme-light .lang-item.active { background: rgba(124, 58, 237, .14); color: #2a1a52; }
+/* Hover and the current language were 10% and 14% of the same violet, which on
+   white reads as one colour: pointing at DEUTSCH looked like choosing it. A
+   lighter hover and a firmer current row keep the two apart, as in dark. */
+.theme-light .lang-item:hover { background: rgba(124, 58, 237, .07); color: #2a1a52; }
+.theme-light .lang-item.active { background: rgba(124, 58, 237, .2); color: #2a1a52; }
 
 /* Fixed width, so the names start on one line down the column. This is the
    slot a flag would have occupied, doing the same job of giving the eye
