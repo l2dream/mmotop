@@ -1284,9 +1284,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .rank-3 { border-color: rgba(201, 139, 84, .55); color: #d89a63; }
 
 .theme-light .rank { color: #4a4e68; }
-.theme-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #956908; }
-.theme-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #6b7280; }
-.theme-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #a8622f; }
+.theme-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #7a5604; }
+.theme-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #555c6c; }
+.theme-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #8c4c1f; }
 
 .game-logo {
   width: 34px;
@@ -1330,11 +1330,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #7d829a;
+  /* The faintest text on the page, and it read 3.6:1 against the dark rows —
+     under the 4.5 small text needs. Still the quietest line in the row. */
+  color: #959ab2;
   font-size: 11px;
 }
 
-.theme-light .game-name small { color: #6d7187; }
+.theme-light .game-name small { color: #5d6177; }
 
 /* Every panel stacks the rate under its chronicle, so this is a column rather
    than a line of text and the ellipsis lives on .version-name. */
@@ -1403,6 +1405,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .vote-icon { display: block; }
+/* The gold gradient is drawn for a dark row; on white it all but vanished.
+   The light theme paints the arrow in the figure's own darker gold instead. */
+.theme-light .vote-icon path { fill: currentColor; }
 
 .date {
   color: #9ca1b7;
