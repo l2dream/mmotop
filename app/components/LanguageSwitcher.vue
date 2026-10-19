@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47, groupedLocales, localeByCode, matchesQuery, type Locale } from '~/i18n/locales'
-import { pickerFontUrls } from '~/i18n/suggestions'
+import { pickerFontUrls } from '~/i18n/fonts'
 
 const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
@@ -78,6 +78,7 @@ const empty = computed(() => groups.value.length === 0)
  * than being unlinked and fetched again. The family this page already loads
  * in full is left out, as before, so the two cannot collide.
  */
+const base = useRuntimeConfig().app.baseURL
 const pickerFontsWanted = useState('lang-picker-fonts', () => false)
 const pageScriptFont = computed(() => localeByCode(locale.value)?.font ?? null)
 
@@ -87,7 +88,7 @@ function wantPickerFonts() {
 
 useHead(() => ({
   link: pickerFontsWanted.value
-    ? pickerFontUrls(pageScriptFont.value).map((href, i) => ({
+    ? pickerFontUrls(base, pageScriptFont.value).map((href, i) => ({
         rel: 'stylesheet' as const, href, key: `picker-font-${i}`
       }))
     : []

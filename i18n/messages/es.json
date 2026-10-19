@@ -74,5 +74,8 @@
     "arabic": "Árabe",
     "hebrew": "Hebreo",
     "eastAsian": "Asia oriental"
+  },
+  "footer": {
+    "disclaimer": "MMOTOP no está afiliado a desarrolladores ni editores de juegos. Todas las marcas pertenecen a sus respectivos propietarios."
   }
 }

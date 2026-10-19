@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { READY_LOCALES, bcp47, type Locale } from '~/i18n/locales'
-import { SUGGESTIONS, fontUrl } from '~/i18n/suggestions'
+import { SUGGESTIONS } from '~/i18n/suggestions'
+import { fontUrl } from '~/i18n/fonts'
 
 const { locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
@@ -123,9 +124,11 @@ const hintStyle = computed(() =>
  * comes down with the banner, which is also the face the visitor is one click
  * away from needing anyway.
  */
+const base = useRuntimeConfig().app.baseURL
+
 useHead(() => ({
   link: suggestion.value?.font
-    ? [{ rel: 'stylesheet', href: fontUrl(suggestion.value.font), key: 'suggestion-font' }]
+    ? [{ rel: 'stylesheet', href: fontUrl(base, suggestion.value.font), key: 'suggestion-font' }]
     : []
 }))
 

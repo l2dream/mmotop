@@ -51,7 +51,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['@nuxtjs/i18n', '~~/modules/sitemap'],
+  modules: ['@nuxtjs/i18n', '~~/modules/sitemap', '~~/modules/fonts'],
 
   i18n: {
     /**

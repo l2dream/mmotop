@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localeByCode } from '~/i18n/locales'
-import { fontUrl } from '~/i18n/suggestions'
+import { fontUrl } from '~/i18n/fonts'
 
 /**
  * Writes the per-page language tags: `lang` and `dir` on <html>, plus one
@@ -26,7 +26,8 @@ const { locale } = useI18n()
  */
 const scriptFont = computed(() => localeByCode(locale.value)?.font ?? null)
 
-const fontHref = computed(() => (scriptFont.value ? fontUrl(scriptFont.value) : null))
+const base = useRuntimeConfig().app.baseURL
+const fontHref = computed(() => (scriptFont.value ? fontUrl(base, scriptFont.value) : null))
 
 /**
  * Pages are directories on GitHub Pages — /mmotop/de is served from
@@ -51,18 +52,16 @@ const pageMeta = computed(() =>
     meta.property === 'og:url' ? { ...meta, content: withSlash(String(meta.content)) as string } : meta))
 
 /**
- * Font requests, and the connections they need.
+ * Inter, from the site itself (see modules/fonts.ts).
  *
- * Inter was an @import at the top of main.css, which made a chain: the HTML
- * names the stylesheet, the stylesheet names Google's CSS, Google's CSS names
- * the font file — three round trips in series before any text could be drawn
- * in it. As a link in the head it is fetched alongside the stylesheet
- * instead of after it. The preconnects open both Google hosts while the HTML
- * is still arriving; fonts.gstatic.com needs `crossorigin` because font files
- * are always fetched in CORS mode, and a connection opened without it would be
- * thrown away and made again.
+ * A link in the head rather than an @import in main.css, which would make a
+ * chain — the HTML names the stylesheet, the stylesheet names the font CSS,
+ * that names the font file. As a link it is fetched alongside the stylesheet
+ * instead of after it. It used to come from Google, with preconnects to both
+ * of its hosts; same origin now, so there is no connection to open early and
+ * no visitor's address goes to anyone but the host serving the page.
  */
-const INTER = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'
+const INTER = fontUrl(base, 'Inter')
 
 /**
  * Puts the saved theme on <html> before the first paint.
@@ -101,8 +100,6 @@ useHead(() => ({
     ...(scriptFont.value ? { style: `--script-font: "${scriptFont.value}";` } : {})
   },
   link: [
-    { rel: 'preconnect' as const, href: 'https://fonts.googleapis.com', key: 'pc-fonts-css' },
-    { rel: 'preconnect' as const, href: 'https://fonts.gstatic.com', crossorigin: '', key: 'pc-fonts-files' },
     { rel: 'stylesheet' as const, href: INTER, key: 'font-inter' },
     ...pageLinks.value,
     ...(fontHref.value
