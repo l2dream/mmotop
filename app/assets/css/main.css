@@ -1204,16 +1204,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
 }
 
-/* ALL GAMES has nothing after the chronicle, so the chronicle closes the row
-   and sits against the right edge, aligned to it the way the dates are in the
-   other panels: same inset, text set flush to the end. Its track stays the
-   fixed 82px so the name column truncates the same as elsewhere. */
+/* ALL GAMES has nothing after the chronicle, so the chronicle closes the row:
+   its track sits against the right edge with the same inset as the dates in
+   the other panels, and its text stays centred in it like every chronicle.
+   The track stays the fixed 82px so the name column truncates the same as
+   elsewhere. */
 .game-row.chronicle-last {
   grid-template-columns: 37px minmax(120px, 1fr) 82px;
-}
-.game-row.chronicle-last .version {
-  align-items: flex-end;
-  text-align: end;
 }
 
 /* The date panels carry no rating column: the rate sits under the chronicle
