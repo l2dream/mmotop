@@ -1204,10 +1204,17 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
 }
 
-/* ALL GAMES has nothing after the chronicle, and uses the .no-rank grid all
-   the same: its fourth track simply stays empty. Closing the row on the
-   chronicle instead pushed that column 80px further right than in NEW GAMES
-   beside it, so the same column sat in two different places side by side. */
+/* ALL GAMES has nothing after the chronicle, so the chronicle closes the row
+   and sits against the right edge, aligned to it the way the dates are in the
+   other panels: same inset, text set flush to the end. Its track stays the
+   fixed 82px so the name column truncates the same as elsewhere. */
+.game-row.chronicle-last {
+  grid-template-columns: 37px minmax(120px, 1fr) 82px;
+}
+.game-row.chronicle-last .version {
+  align-items: flex-end;
+  text-align: end;
+}
 
 /* The date panels carry no rating column: the rate sits under the chronicle
    and the date takes its place. Applies at every width; the mobile block only
@@ -1650,6 +1657,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
      (Arabic, 59px) and costs only the name column, which already truncates. */
   .game-row.no-rank {
     grid-template-columns: 32px minmax(0, 1fr) 58px 60px;
+  }
+  .game-row.chronicle-last {
+    grid-template-columns: 32px minmax(0, 1fr) 58px;
   }
   .game-logo { width: 30px; height: 30px; }
   .rank { width: 22px; height: 22px; font-size: 12px; }

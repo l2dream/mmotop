@@ -1078,7 +1078,7 @@ function clearSearch() {
               </svg>
             </button>
           </template>
-          <div v-for="server in filteredRandom" :key="`all-${server.id}`" class="game-row no-rank">
+          <div v-for="server in filteredRandom" :key="`all-${server.id}`" class="game-row no-rank chronicle-last">
             <span class="game-logo">{{ serverBadge(server) }}</span>
             <span class="game-name">
               <strong>{{ server.name }}</strong>
