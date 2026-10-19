@@ -22,7 +22,6 @@ export interface GameInfo {
   id: string
   /** The game's own name; a proper noun, not translated. */
   name: string
-  genre: string
   /**
    * What players type instead of the full name: "wow", "l2". Only for the
    * search box; never shown.
@@ -33,7 +32,7 @@ export interface GameInfo {
 
 export const GAMES = [
   {
-    id: 'lineage2', name: 'Lineage II', genre: 'MMORPG', aliases: ['L2', 'Lineage 2', 'La2'],
+    id: 'lineage2', name: 'Lineage II', aliases: ['L2', 'Lineage 2', 'La2'],
     chronicles: [
       { name: 'Interlude', badge: 'IL' },
       { name: 'Gracia Final', badge: 'GF', short: 'Gracia' },
@@ -43,7 +42,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'wow', name: 'World of Warcraft', genre: 'MMORPG', aliases: ['WoW', 'Warcraft'],
+    id: 'wow', name: 'World of Warcraft', aliases: ['WoW', 'Warcraft'],
     chronicles: [
       { name: 'Classic 1.12.1', badge: 'CL', short: 'Classic' },
       { name: 'WotLK 3.3.5a', badge: 'WL', short: 'WotLK' },
@@ -53,7 +52,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'mu', name: 'MuOnline', genre: 'MMORPG', aliases: ['Mu Online'],
+    id: 'mu', name: 'MuOnline', aliases: ['Mu Online'],
     chronicles: [
       { name: '0.97d', badge: '97' },
       { name: 'Season 6', badge: 'S6' },
@@ -62,7 +61,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'aion', name: 'AION', genre: 'MMORPG',
+    id: 'aion', name: 'AION',
     chronicles: [
       { name: '2.7', badge: '2.7' },
       { name: '4.8', badge: '4.8' },
@@ -70,7 +69,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'pw', name: 'Perfect World', genre: 'MMORPG', aliases: ['PW'],
+    id: 'pw', name: 'Perfect World', aliases: ['PW'],
     chronicles: [
       { name: '1.3.6', badge: '136' },
       { name: '1.4.6', badge: '146' },
@@ -78,14 +77,14 @@ export const GAMES = [
     ]
   },
   {
-    id: 'rf', name: 'RF Online', genre: 'MMORPG', aliases: ['RF'],
+    id: 'rf', name: 'RF Online', aliases: ['RF'],
     chronicles: [
       { name: '2.2.3', badge: '223' },
       { name: 'Giga 4', badge: 'G4' }
     ]
   },
   {
-    id: 'sro', name: 'Silkroad Online', genre: 'MMORPG', aliases: ['SRO', 'Silkroad'],
+    id: 'sro', name: 'Silkroad Online', aliases: ['SRO', 'Silkroad'],
     chronicles: [
       { name: 'Cap 90', badge: '90' },
       { name: 'Cap 110', badge: '110' },
@@ -93,7 +92,7 @@ export const GAMES = [
     ]
   },
   {
-    id: 'metin2', name: 'Metin2', genre: 'MMORPG', aliases: ['Metin 2', 'MT2'],
+    id: 'metin2', name: 'Metin2', aliases: ['Metin 2', 'MT2'],
     chronicles: [
       { name: 'Old School', badge: 'OS', short: 'Oldschool' },
       { name: 'Middle School', badge: 'MS', short: 'Midschool' },
@@ -101,14 +100,14 @@ export const GAMES = [
     ]
   },
   {
-    id: 'rappelz', name: 'Rappelz', genre: 'MMORPG',
+    id: 'rappelz', name: 'Rappelz',
     chronicles: [
       { name: 'Epic 7.4', badge: 'E7' },
       { name: 'Epic 9.5', badge: 'E9' }
     ]
   },
   {
-    id: 'tibia', name: 'Tibia', genre: 'MMORPG',
+    id: 'tibia', name: 'Tibia',
     chronicles: [
       { name: '7.4', badge: '7.4' },
       { name: '8.60', badge: '8.6' },

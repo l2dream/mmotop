@@ -27,10 +27,13 @@ const activeHidden = computed(() => hiddenCategories.value.includes(activeCatego
 
 const SERVER_BY_ID = new Map(SERVERS.map((server) => [server.id, server]))
 
-/** "MMORPG / Lineage II" — the line under the server name. */
+/**
+ * "Lineage II" — the line under the server name. It used to read
+ * "MMORPG / Lineage II", but every game listed is an MMORPG, and the genre
+ * took half the line: on a phone the game itself was cut to "W…".
+ */
 function serverSubtitle(server: Server) {
-  const game = gameById(server.game)
-  return game ? `${game.genre} / ${game.name}` : ''
+  return gameById(server.game)?.name ?? ''
 }
 
 function rateLabel(server: Server) {
