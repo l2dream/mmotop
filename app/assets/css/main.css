@@ -992,11 +992,14 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 14px;
 }
 
+/* The same gap as the row above, and two equal halves: at 1.03fr / 1fr with a
+   30px gap the two panels differed by twenty pixels and the gap between them
+   lined up with nothing above it. */
 .bottom-grid {
   display: grid;
-  grid-template-columns: 1.03fr 1fr;
-  gap: 30px;
-  margin-top: 15px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .panel {
@@ -1157,13 +1160,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 37px minmax(120px, 1fr) 82px 72px;
 }
 
-/* No trailing column: the chronicle closes the row. It keeps the same fixed
-   82px as everywhere else rather than shrinking to its text — a content-sized
-   track would be a different width in each row, since "High-Five" and
-   "Interlude" differ, and the column would wander from row to row. */
-.game-row.no-rank.no-trail {
-  grid-template-columns: 37px minmax(120px, 1fr) 82px;
-}
+/* ALL GAMES has nothing after the chronicle, and uses the .no-rank grid all
+   the same: its fourth track simply stays empty. Closing the row on the
+   chronicle instead pushed that column 80px further right than in NEW GAMES
+   beside it, so the same column sat in two different places side by side. */
 
 /* The date panels carry no rating column: the rate sits under the chronicle
    and the date takes its place. Applies at every width; the mobile block only
@@ -1381,10 +1381,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   line-height: 0;
 }
 
-.bottom-grid .game-row {
-  min-height: 58px;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1400,7 +1396,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 @media (max-width: 1100px) {
   .site-shell { padding-inline: 24px; }
   .top-grid { grid-template-columns: 1fr; }
-  .bottom-grid { grid-template-columns: 1fr; gap: 15px; }
+  .bottom-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
@@ -1542,30 +1538,21 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .more-dropdown { min-width: 170px; }
   .filter-popup { width: calc(100vw - 20px); max-width: 270px; }
   .game-row {
-    grid-template-columns: 22px 32px minmax(0, 1fr) 58px 59px;
+    grid-template-columns: 22px 32px minmax(0, 1fr) 58px 60px;
     gap: 5px;
     padding-inline: 10px;
   }
+  /* One 60px trailing column for votes and dates alike, so they line up
+     across the stacked panels. It is sized for the longest date any language
+     produces, not for "28 Sep": at 46px, "28 أغسطس", "10월 28일", "28. märts"
+     and "gruod. 28" ran into the chronicle beside them. 60px holds the widest
+     (Arabic, 59px) and costs only the name column, which already truncates. */
   .game-row.no-rank {
-    grid-template-columns: 32px minmax(0, 1fr) 58px 59px;
-  }
-  .game-row.no-rank.no-trail {
-    grid-template-columns: 32px minmax(0, 1fr) 58px;
+    grid-template-columns: 32px minmax(0, 1fr) 58px 60px;
   }
   .game-logo { width: 30px; height: 30px; }
   .rank { width: 22px; height: 22px; font-size: 12px; }
 
-  /* The two .compact panels keep their rate-under-chronicle layout from the
-     base rules; here they just get mobile column widths.
-
-     The date column is sized for the longest date any language can produce,
-     not for "28 Sep": at 46px, "28 أغسطس", "10월 28일", "28. märts" and
-     "gruod. 28" ran out of it and into the chronicle beside them. 60px holds
-     the widest (Arabic, 59px) and costs only the name column, which already
-     truncates. */
-  .game-row.compact.no-rank {
-    grid-template-columns: 32px minmax(0, 1fr) 58px 60px;
-  }
 }
 
 /* Below about 380px the row runs out of room, and the search field is the one
