@@ -1161,11 +1161,16 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 8px;
 }
 
+/* Flex, so the icon is centred in the head rather than sitting on a text
+   baseline a pixel low. The chevron is drawn in the middle third of its 24-unit
+   box, leaving a third of it empty on the outer side; the negative margin hands
+   that back, so the visible arrow ends on the same line as the rows' last
+   column — and mirrors the panel icon's inset on the other side. */
 .panel-arrow {
+  display: flex;
   color: #c37aff;
-  font-size: 27px;
-  line-height: 1;
 }
+.panel-arrow svg { margin-inline-end: -5.33px; }
 
 /* Quiet by default, picking up the panel's own accent on hover. The icon is
    wordless on purpose — nothing here needs translating. */
@@ -1465,10 +1470,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border-top-color: rgba(103, 104, 173, .12);
 }
 
-.panel-footer span {
-  font-size: 20px;
-  line-height: 0;
-}
+.panel-footer span { display: flex; }
 
 .sr-only {
   position: absolute;
@@ -1665,6 +1667,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
      filter button's edge and left 17px on one side of the screen and 88px on
      the other. */
   .filter-popup { width: calc(100vw - 20px); }
+  /* The same inset as the rows under it, so the icon and arrow line up with
+     their first and last columns, as they do at full width. */
+  .panel-head { padding-inline: 10px; }
   .game-row {
     grid-template-columns: 22px 32px minmax(0, 1fr) 58px 60px;
     gap: 5px;
