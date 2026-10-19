@@ -28,16 +28,6 @@ export interface GameInfo {
 
 export const GAMES = [
   {
-    id: 'wow', name: 'World of Warcraft', genre: 'MMORPG',
-    chronicles: [
-      { name: 'Classic 1.12.1', badge: 'CL', short: 'Classic' },
-      { name: 'WotLK 3.3.5a', badge: 'WL', short: 'WotLK' },
-      { name: 'Cataclysm 4.3.4', badge: 'CT', short: 'Cata' },
-      { name: 'MoP 5.4.8', badge: 'MP', short: 'MoP' },
-      { name: 'Legion 7.3.5', badge: 'LG', short: 'Legion' }
-    ]
-  },
-  {
     id: 'lineage2', name: 'Lineage II', genre: 'MMORPG',
     chronicles: [
       { name: 'Interlude', badge: 'IL' },
@@ -45,6 +35,16 @@ export const GAMES = [
       { name: 'High-Five', badge: 'HF' },
       { name: 'Classic', badge: 'CL' },
       { name: 'Essence', badge: 'ES' }
+    ]
+  },
+  {
+    id: 'wow', name: 'World of Warcraft', genre: 'MMORPG',
+    chronicles: [
+      { name: 'Classic 1.12.1', badge: 'CL', short: 'Classic' },
+      { name: 'WotLK 3.3.5a', badge: 'WL', short: 'WotLK' },
+      { name: 'Cataclysm 4.3.4', badge: 'CT', short: 'Cata' },
+      { name: 'MoP 5.4.8', badge: 'MP', short: 'MoP' },
+      { name: 'Legion 7.3.5', badge: 'LG', short: 'Legion' }
     ]
   },
   {
