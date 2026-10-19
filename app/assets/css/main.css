@@ -328,17 +328,20 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .filter-badge {
   position: absolute;
-  top: 2px;
-  inset-inline-end: 2px;
-  min-width: 14px;
-  height: 14px;
-  padding: 0 3px;
-  border-radius: 7px;
+  top: 1px;
+  inset-inline-end: 1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
   background: #9048ff;
   color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 14px;
+  /* 10px, up from 9, the smallest text on the site; the pill grows by 2px to
+     hold it. 800 like the other labels set in a box (the chronicle badges). */
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
   text-align: center;
 }
 
@@ -368,7 +371,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .filter-popup-label {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: #858aa6;
@@ -1532,6 +1535,17 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     top: 5px;
     width: 22px;
     height: 22px;
+  }
+  /* On the 22px button a 16px badge hid the icon it counts for; smaller here
+     and pushed out to the corner, where badges usually sit. */
+  .filter-badge {
+    top: -4px;
+    inset-inline-end: -4px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 7px;
+    line-height: 14px;
   }
   /* 22px is too small to hit with a thumb, and a near miss landed in the
      search field and opened the keyboard instead. The tap area grows to about
