@@ -226,7 +226,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .search-icon {
   position: absolute;
-  inset-inline-end: 10px;
+  inset-inline-start: 8px;
   top: 6px;
   width: 30px;
   height: 30px;
@@ -235,7 +235,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   padding: 0;
   border: 0;
-  border-inline-start: 1px solid rgba(255, 255, 255, .1);
+  border-inline-end: 1px solid rgba(255, 255, 255, .1);
   background: transparent;
   color: #9095ad;
   font-family: inherit;
@@ -253,7 +253,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .theme-light .search-icon {
-  border-inline-start-color: rgba(31, 41, 102, .14);
+  border-inline-end-color: rgba(31, 41, 102, .14);
 }
 
 .theme-light .search-icon:hover,
@@ -263,7 +263,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .filter-button {
   position: absolute;
-  inset-inline-start: 8px;
+  inset-inline-end: 10px;
   top: 6px;
   width: 30px;
   height: 30px;
@@ -272,7 +272,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   padding: 0;
   border: 0;
-  border-inline-end: 1px solid rgba(255, 255, 255, .1);
+  border-inline-start: 1px solid rgba(255, 255, 255, .1);
   background: transparent;
   color: #9095ad;
   cursor: pointer;
@@ -280,7 +280,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .theme-light .filter-button {
   color: #8b8fa3;
-  border-inline-end-color: rgba(31, 41, 102, .14);
+  border-inline-start-color: rgba(31, 41, 102, .14);
 }
 
 .filter-icon { display: block; }
@@ -1394,7 +1394,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .filter-custom-input,
   .lang-search-input { font-size: 16px; }
   .search-icon {
-    inset-inline-end: 2px;
+    inset-inline-start: 4px;
     top: 5px;
     width: 22px;
     height: 22px;
@@ -1404,7 +1404,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     height: 12px;
   }
   .filter-button {
-    inset-inline-start: 4px;
+    inset-inline-end: 2px;
     top: 5px;
     width: 22px;
     height: 22px;
@@ -1417,7 +1417,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     content: '';
     position: absolute;
     inset-block: -9px;
-    inset-inline: -9px -2px;
+    inset-inline: -2px -9px;
   }
   .filter-icon {
     width: 12px;

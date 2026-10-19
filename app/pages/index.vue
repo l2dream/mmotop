@@ -438,7 +438,7 @@ function positionDropdown() {
 function positionFilterPopup() {
   const rect = filterButtonEl.value?.getBoundingClientRect()
   if (!rect) return
-  filterPos.value = placePopup(rect, filterPopupEl.value?.offsetWidth ?? 270, 'start', 10)
+  filterPos.value = placePopup(rect, filterPopupEl.value?.offsetWidth ?? 270, 'end', 10)
 }
 
 function repositionOpenPanels() {
@@ -581,6 +581,12 @@ function submitSearch() {
              field is empty. Pure CSS, so the prerendered page is already right
              and nothing swaps after hydration. -->
         <span class="search-hint" aria-hidden="true">{{ $t('search.short') }}</span>
+        <button class="search-icon" type="button" :aria-label="$t('search.action')" @click="submitSearch">
+          <svg class="search-svg" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="8.5" cy="8.5" r="5.5" />
+            <line x1="12.7" y1="12.7" x2="17" y2="17" />
+          </svg>
+        </button>
         <button
           class="filter-button"
           type="button"
@@ -602,12 +608,6 @@ function submitSearch() {
           </svg>
           <!-- The count is in the button's name above; the badge is for eyes. -->
           <span v-if="activeFilterCount > 0" class="filter-badge" aria-hidden="true">{{ activeFilterCount }}</span>
-        </button>
-        <button class="search-icon" type="button" :aria-label="$t('search.action')" @click="submitSearch">
-          <svg class="search-svg" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-            <circle cx="8.5" cy="8.5" r="5.5" />
-            <line x1="12.7" y1="12.7" x2="17" y2="17" />
-          </svg>
         </button>
       </div>
 
