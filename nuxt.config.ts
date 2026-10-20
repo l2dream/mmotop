@@ -1,4 +1,5 @@
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from './app/i18n/locales'
+import { SECTIONS } from './app/data/sections'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-07',
@@ -70,9 +71,12 @@ export default defineNuxtConfig({
        * an upgrade could drop them all silently; now the list comes from the
        * same registry as everything else.
        */
-      routes: READY_LOCALES
-        .filter(l => l.code !== DEFAULT_LOCALE)
-        .map(l => `/${l.code}`)
+      routes: READY_LOCALES.flatMap((l) => {
+        const prefix = l.code === DEFAULT_LOCALE ? '' : `/${l.code}`
+        // Each language's section pages too: they are linked from its home
+        // page, but listed outright for the same reason as the pages above.
+        return [...(prefix ? [prefix] : []), ...SECTIONS.map(id => `${prefix}/${id}`)]
+      })
     }
   },
 

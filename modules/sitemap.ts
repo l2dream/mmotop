@@ -2,10 +2,12 @@ import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { defineNuxtModule } from 'nuxt/kit'
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from '../app/i18n/locales'
+import { SECTIONS } from '../app/data/sections'
 
 /**
  * Writes sitemap.xml and appends its address to robots.txt after the static
- * build, listing all twenty-six locale URLs with their alternates.
+ * build, listing every page — home and the five sections — in all twenty-six
+ * languages, with their alternates.
  *
  * This is not the usual "nice to have" sitemap. The links to the other
  * twenty-five languages live inside the selector popup, which is `v-if="open"`
@@ -53,23 +55,29 @@ export default defineNuxtModule({
         // With a trailing slash: each page is a directory on Pages, and the
         // address without one answers with a 301. A sitemap should list the
         // URL a crawler lands on, not the one it is redirected away from.
-        const urlFor = (code: string) => (code === DEFAULT_LOCALE ? `${root}/` : `${root}/${code}/`)
+        // `page` is '' for the home page or a section id such as 'top'.
+        const urlFor = (code: string, page = '') => {
+          const path = [code === DEFAULT_LOCALE ? '' : code, page].filter(Boolean).join('/')
+          return path ? `${root}/${path}/` : `${root}/`
+        }
 
-        const alternates = [
-          `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(DEFAULT_LOCALE)}"/>`,
+        const alternatesFor = (page: string) => [
+          `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(DEFAULT_LOCALE, page)}"/>`,
           ...READY_LOCALES.map(
-            l => `    <xhtml:link rel="alternate" hreflang="${bcp47(l.code)}" href="${urlFor(l.code)}"/>`
+            l => `    <xhtml:link rel="alternate" hreflang="${bcp47(l.code)}" href="${urlFor(l.code, page)}"/>`
           )
         ].join('\n')
 
         // Every entry carries the full alternate set, which is what makes the
         // cluster reciprocal — the half of hreflang that is easy to get wrong.
-        const entries = READY_LOCALES.map(l => `  <url>
-    <loc>${urlFor(l.code)}</loc>
-${alternates}
+        // One cluster per page: the home page, then each section page.
+        const pages = ['', ...SECTIONS]
+        const entries = pages.flatMap(page => READY_LOCALES.map(l => `  <url>
+    <loc>${urlFor(l.code, page)}</loc>
+${alternatesFor(page)}
     <changefreq>daily</changefreq>
-    <priority>${l.code === DEFAULT_LOCALE ? '1.0' : '0.8'}</priority>
-  </url>`).join('\n')
+    <priority>${page ? '0.6' : l.code === DEFAULT_LOCALE ? '1.0' : '0.8'}</priority>
+  </url>`)).join('\n')
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -85,7 +93,7 @@ ${entries}
           `User-agent: *\nAllow: /\n\nSitemap: ${root}/sitemap.xml\n`,
           'utf8'
         )
-        console.log(`[sitemap] ${READY_LOCALES.length} URLs → ${root}/sitemap.xml`)
+        console.log(`[sitemap] ${pages.length * READY_LOCALES.length} URLs → ${root}/sitemap.xml`)
 
         /**
          * robots.txt is only read at the origin root. On a GitHub project page
