@@ -25,8 +25,11 @@ const props = defineProps<{
     title: string
     end: 'votes' | 'date' | 'chronicle'
     link?: RouteLocationRaw
+    /** Deliberate shuffles so far, for the button's half-turn. */
+    turns: number
   }
 }>()
+defineEmits<{ shuffle: [] }>()
 
 const { locale } = useI18n()
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
@@ -110,6 +113,9 @@ function fullDate(iso: string) {
 
   <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="others.title">
     <template v-if="others.origin" #icon><PanelIcon :id="others.origin" /></template>
+    <template #actions>
+      <ShuffleButton :turns="others.turns" @shuffle="$emit('shuffle')" />
+    </template>
     <ServerRow
       v-for="row in others.rows"
       :key="row.server.id"

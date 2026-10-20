@@ -595,6 +595,28 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
  * by votes, as before.
  */
 const SERVER_OTHERS = 5
+
+/**
+ * The panel's pick is random: each server page draws its own on mount, and
+ * its Shuffle button draws again. A random key per server rather than a
+ * shuffled array, so the pick survives the list itself changing under it —
+ * today's date moving from the build's to the visitor's, the ALL GAMES pool
+ * being drawn. Until mount there are no keys and the list's own order is
+ * used, so the prerendered page and the first render agree.
+ */
+const othersKeys = ref<Map<string, number> | null>(null)
+const othersTurns = ref(0)
+function drawOthers() {
+  othersKeys.value = new Map(SERVERS.map((s) => [s.id, Math.random()]))
+}
+function shuffleOthers() {
+  drawOthers()
+  othersTurns.value++
+}
+onMounted(() => {
+  if (server.value) drawOthers()
+})
+
 const serverOthers = computed(() => {
   if (!server.value) return null
   const current = server.value
@@ -606,8 +628,10 @@ const serverOthers = computed(() => {
   const fromOrigin = serverOrigin.value ? others(listOrder.value[serverOrigin.value]) : []
   const origin = fromOrigin.length ? serverOrigin.value : null
   const sameGame = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
-  const rows = sameGame
-    .filter((s) => s.id !== current.id)
+  const keys = othersKeys.value
+  const candidates = sameGame.filter((s) => s.id !== current.id)
+  if (keys) candidates.sort((a, b) => keys.get(a.id)! - keys.get(b.id)!)
+  const rows = candidates
     .slice(0, SERVER_OTHERS)
     // A place in TOP counts within the game, as the TOP page shows it with
     // this game chosen.
@@ -616,6 +640,7 @@ const serverOthers = computed(() => {
     rows,
     origin,
     title: origin ? `${t(`panels.${origin}`)} · ${game}` : t('server.others', { game }),
+    turns: othersTurns.value,
     end: origin ? ROW_END[origin] : 'chronicle' as const,
     link: origin ? { path: localePath(`/${origin}`), query: { game: current.game } } : undefined
   }
@@ -1200,7 +1225,7 @@ function clearSearch() {
 
       <div v-else-if="server" class="section-view">
         <BackLink :to="{ path: localePath('/'), query: filtersToQuery() }" />
-        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" />
+        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" @shuffle="shuffleOthers" />
       </div>
 
       <template v-else-if="!section">

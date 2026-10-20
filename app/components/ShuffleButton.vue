@@ -1,8 +1,9 @@
 <script setup lang="ts">
 /**
- * Draws ALL GAMES again, on the home panel and on its own page. `turns`
- * counts deliberate shuffles, so the half-turn answers a click and not every
- * page load and every language change.
+ * Draws a random list again: ALL GAMES, on the home panel and its own page,
+ * and the more-servers panel on a server's page. `turns` counts deliberate
+ * shuffles, so the half-turn answers a click and not every page load and
+ * every language change.
  */
 defineProps<{ turns: number }>()
 defineEmits<{ shuffle: [] }>()
