@@ -21,7 +21,8 @@
     "placeholder": "Oyun axtar...",
     "short": "Axtar",
     "action": "Axtar",
-    "clear": "Axtarışı təmizlə"
+    "clear": "Axtarışı təmizlə",
+    "nothing": "“{query}” üzrə heç nə tapılmadı"
   },
   "categories": {
     "all": "Hamısı",
@@ -35,7 +36,8 @@
     "all": "BÜTÜN OYUNLAR",
     "viewMore": "Daha çox göstər",
     "shuffle": "Qarışdır",
-    "empty": "Seçilmiş filtrlərə uyğun oyun yoxdur."
+    "empty": "Seçilmiş filtrlərə uyğun oyun yoxdur.",
+    "none": "Uyğun oyun yoxdur."
   },
   "filter": {
     "open": "Filtr",

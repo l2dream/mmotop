@@ -21,7 +21,8 @@
     "placeholder": "Søg spil...",
     "short": "Søg",
     "action": "Søg",
-    "clear": "Ryd søgning"
+    "clear": "Ryd søgning",
+    "nothing": "Ingen resultater for “{query}”"
   },
   "categories": {
     "all": "Alle",
@@ -35,7 +36,8 @@
     "all": "ALLE SPIL",
     "viewMore": "Vis mere",
     "shuffle": "Bland",
-    "empty": "Ingen spil matcher de valgte filtre."
+    "empty": "Ingen spil matcher de valgte filtre.",
+    "none": "Ingen matchende spil."
   },
   "filter": {
     "open": "Filter",

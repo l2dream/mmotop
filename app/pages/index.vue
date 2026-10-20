@@ -544,6 +544,11 @@ const filteredRandom = computed(() =>
     .filter((s): s is Server => !!s && matchesAll(s))
     .slice(0, RANDOM_PICK))
 
+// Every panel draws from the servers that pass the filters and the search, and
+// TOP GAMES shows all of them — so it being empty means every panel is.
+const nothingFound = computed(() => filteredTop.value.length === 0)
+const searchText = computed(() => query.value.trim())
+
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
 useSeoMeta({
@@ -1050,241 +1055,258 @@ function clearSearch() {
     </nav>
 
     <main ref="dashboardEl" class="dashboard">
-      <section class="top-grid">
-        <GamePanel :title="$t('panels.top')" class="accent-gold">
-          <template #icon>
-            <svg class="trophy-icon" viewBox="0 0 24 24" width="24" height="24">
-              <defs>
-                <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFF1C2" />
-                  <stop offset="35%" stop-color="#FFCB4D" />
-                  <stop offset="75%" stop-color="#F5A623" />
-                  <stop offset="100%" stop-color="#D6820A" />
-                </linearGradient>
-                <linearGradient id="trophyBase" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#C97A3D" />
-                  <stop offset="100%" stop-color="#7A431E" />
-                </linearGradient>
-              </defs>
-              <path d="M5 2h14v6a7 7 0 0 1-14 0V2z" fill="url(#trophyGold)" />
-              <path
-                d="M5 3C2 3 1 5 1 7.5S2 12 5 11.6"
-                fill="none"
-                stroke="url(#trophyGold)"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M19 3C22 3 23 5 23 7.5S22 12 19 11.6"
-                fill="none"
-                stroke="url(#trophyGold)"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-              <rect x="10.5" y="13" width="3" height="4" fill="url(#trophyBase)" />
-              <path d="M8 17 L16 17 L18.5 20 L5.5 20 Z" fill="url(#trophyBase)" />
-              <path
-                d="M7.5 3.2C6.6 5 6.8 7 8 8.3"
-                stroke="#FFFDF3"
-                stroke-width="1.1"
-                stroke-linecap="round"
-                fill="none"
-                opacity="0.55"
-              />
-            </svg>
-          </template>
-          <div v-for="{ server, rank } in filteredTop.slice(0, PANEL_ROWS)" :key="`top-${server.id}`" class="game-row">
-            <span class="rank" :class="rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
-            <span class="game-logo">{{ serverBadge(server) }}</span>
-            <span class="game-name">
-              <strong>{{ server.name }}</strong>
-              <small>{{ serverSubtitle(server) }}</small>
-            </span>
-            <span class="version">
-              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-              <small class="version-rate">{{ rateLabel(server) }}</small>
-            </span>
-            <span class="rating">
-              <span class="rating-value">
-                <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-                  <path
-                    d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
-                    fill="url(#voteGrad)"
-                  />
-                </svg>
-                {{ server.votes }}
-              </span>
-            </span>
-          </div>
-          <div v-if="filteredTop.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
-          <PanelFooter />
-        </GamePanel>
+      <!-- When nothing matches at all, one card says so and offers the way
+           back, instead of five empty panels each repeating it. -->
+      <div v-if="nothingFound" class="no-results" role="status">
+        <svg class="no-results-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-3.5-3.5" />
+        </svg>
+        <i18n-t v-if="searchText" keypath="search.nothing" tag="p" class="no-results-text" scope="global">
+          <template #query><bdi class="no-results-query">{{ searchText }}</bdi></template>
+        </i18n-t>
+        <p v-else class="no-results-text">{{ $t('panels.empty') }}</p>
+        <button v-if="searchText" type="button" class="no-results-action" @click="clearSearch">{{ $t('search.clear') }}</button>
+        <button v-else type="button" class="no-results-action" @click="resetFilters">{{ $t('filter.reset') }}</button>
+      </div>
 
-        <GamePanel :title="$t('panels.soon')" class="accent-blue">
-          <template #icon>
-            <svg class="clock-icon" viewBox="0 0 24 24" width="24" height="24">
-              <defs>
-                <linearGradient id="clockFace" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#CDEBFF" />
-                  <stop offset="45%" stop-color="#5EC2FF" />
-                  <stop offset="100%" stop-color="#2F7FE0" />
-                </linearGradient>
-              </defs>
-              <circle cx="12" cy="12" r="9" fill="url(#clockFace)" />
-              <path
-                d="M12 6.5v5.5l4 2.3"
-                stroke="#0B2A55"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="none"
-              />
-              <path
-                d="M8.3 4.2C6 5.6 4.6 8 4.3 10.7"
-                stroke="#EAF6FF"
-                stroke-width="1"
-                stroke-linecap="round"
-                fill="none"
-                opacity="0.55"
-              />
-            </svg>
-          </template>
-          <div v-for="server in filteredSoon" :key="`soon-${server.id}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ serverBadge(server) }}</span>
-            <span class="game-name">
-              <strong>{{ server.name }}</strong>
-              <small>{{ serverSubtitle(server) }}</small>
-            </span>
-            <span class="version">
-              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-              <small class="version-rate">{{ rateLabel(server) }}</small>
-            </span>
-            <span class="date">
-              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
-              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
-            </span>
-          </div>
-          <div v-if="filteredSoon.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
-          <PanelFooter />
-        </GamePanel>
-
-        <GamePanel :title="$t('panels.started')" class="accent-amber">
-          <template #icon>
-            <svg class="bolt-icon" viewBox="0 0 24 24" width="24" height="24">
-              <defs>
-                <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFF3B0" />
-                  <stop offset="45%" stop-color="#FFD23F" />
-                  <stop offset="100%" stop-color="#F5850B" />
-                </linearGradient>
-              </defs>
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#boltGrad)" />
-            </svg>
-          </template>
-          <div v-for="server in filteredStarted" :key="`started-${server.id}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ serverBadge(server) }}</span>
-            <span class="game-name">
-              <strong>{{ server.name }}</strong>
-              <small>{{ serverSubtitle(server) }}</small>
-            </span>
-            <span class="version">
-              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-              <small class="version-rate">{{ rateLabel(server) }}</small>
-            </span>
-            <span class="date">
-              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
-              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
-            </span>
-          </div>
-          <div v-if="filteredStarted.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
-          <PanelFooter />
-        </GamePanel>
-      </section>
-
-      <section class="bottom-grid">
-        <GamePanel :title="$t('panels.new')" class="accent-violet">
-          <template #icon>
-            <svg class="sparkle-icon" viewBox="0 0 24 24" width="24" height="24">
-              <defs>
-                <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFC2F0" />
-                  <stop offset="50%" stop-color="#D06BFF" />
-                  <stop offset="100%" stop-color="#7C3AED" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
-                fill="url(#sparkleGrad)"
-              />
-            </svg>
-          </template>
-          <div v-for="server in filteredNew" :key="`new-${server.id}`" class="game-row compact no-rank">
-            <span class="game-logo">{{ serverBadge(server) }}</span>
-            <span class="game-name">
-              <strong>{{ server.name }}</strong>
-              <small>{{ serverSubtitle(server) }}</small>
-            </span>
-            <span class="version">
-              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-              <small class="version-rate">{{ rateLabel(server) }}</small>
-            </span>
-            <span class="date">
-              <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
-              <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
-            </span>
-          </div>
-          <div v-if="filteredNew.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
-          <PanelFooter />
-        </GamePanel>
-
-        <GamePanel :title="$t('panels.all')" class="accent-teal">
-          <template #icon>
-            <svg class="grid-icon" viewBox="0 0 24 24" width="24" height="24">
-              <defs>
-                <linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#8FF5D6" />
-                  <stop offset="50%" stop-color="#10B981" />
-                  <stop offset="100%" stop-color="#0891B2" />
-                </linearGradient>
-              </defs>
-              <rect x="4" y="4" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
-              <rect x="13" y="4" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
-              <rect x="4" y="13" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
-              <rect x="13" y="13" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
-            </svg>
-          </template>
-          <template #actions>
-            <button
-              class="shuffle-button"
-              type="button"
-              :aria-label="$t('panels.shuffle')"
-              :style="{ transform: `rotate(${shuffleTurns * 180}deg)` }"
-              @click="shuffleGames"
-            >
-              <svg class="shuffle-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M16 3h5v5" />
-                <path d="M4 20 21 3" />
-                <path d="M21 16v5h-5" />
-                <path d="M15 15l6 6" />
-                <path d="M3 4l5 5" />
+      <template v-else>
+        <section class="top-grid">
+          <GamePanel :title="$t('panels.top')" class="accent-gold">
+            <template #icon>
+              <svg class="trophy-icon" viewBox="0 0 24 24" width="24" height="24">
+                <defs>
+                  <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFF1C2" />
+                    <stop offset="35%" stop-color="#FFCB4D" />
+                    <stop offset="75%" stop-color="#F5A623" />
+                    <stop offset="100%" stop-color="#D6820A" />
+                  </linearGradient>
+                  <linearGradient id="trophyBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#C97A3D" />
+                    <stop offset="100%" stop-color="#7A431E" />
+                  </linearGradient>
+                </defs>
+                <path d="M5 2h14v6a7 7 0 0 1-14 0V2z" fill="url(#trophyGold)" />
+                <path
+                  d="M5 3C2 3 1 5 1 7.5S2 12 5 11.6"
+                  fill="none"
+                  stroke="url(#trophyGold)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M19 3C22 3 23 5 23 7.5S22 12 19 11.6"
+                  fill="none"
+                  stroke="url(#trophyGold)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <rect x="10.5" y="13" width="3" height="4" fill="url(#trophyBase)" />
+                <path d="M8 17 L16 17 L18.5 20 L5.5 20 Z" fill="url(#trophyBase)" />
+                <path
+                  d="M7.5 3.2C6.6 5 6.8 7 8 8.3"
+                  stroke="#FFFDF3"
+                  stroke-width="1.1"
+                  stroke-linecap="round"
+                  fill="none"
+                  opacity="0.55"
+                />
               </svg>
-            </button>
-          </template>
-          <div v-for="server in filteredRandom" :key="`all-${server.id}`" class="game-row no-rank chronicle-last">
-            <span class="game-logo">{{ serverBadge(server) }}</span>
-            <span class="game-name">
-              <strong>{{ server.name }}</strong>
-              <small>{{ serverSubtitle(server) }}</small>
-            </span>
-            <span class="version">
-              <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-              <small class="version-rate">{{ rateLabel(server) }}</small>
-            </span>
-          </div>
-          <div v-if="filteredRandom.length === 0" class="empty-state">{{ $t('panels.empty') }}</div>
-          <PanelFooter />
-        </GamePanel>
-      </section>
+            </template>
+            <div v-for="{ server, rank } in filteredTop.slice(0, PANEL_ROWS)" :key="`top-${server.id}`" class="game-row">
+              <span class="rank" :class="rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+              <span class="game-logo">{{ serverBadge(server) }}</span>
+              <span class="game-name">
+                <strong>{{ server.name }}</strong>
+                <small>{{ serverSubtitle(server) }}</small>
+              </span>
+              <span class="version">
+                <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+                <small class="version-rate">{{ rateLabel(server) }}</small>
+              </span>
+              <span class="rating">
+                <span class="rating-value">
+                  <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                    <path
+                      d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z"
+                      fill="url(#voteGrad)"
+                    />
+                  </svg>
+                  {{ server.votes }}
+                </span>
+              </span>
+            </div>
+            <div v-if="filteredTop.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
+            <PanelFooter v-else />
+          </GamePanel>
+
+          <GamePanel :title="$t('panels.soon')" class="accent-blue">
+            <template #icon>
+              <svg class="clock-icon" viewBox="0 0 24 24" width="24" height="24">
+                <defs>
+                  <linearGradient id="clockFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#CDEBFF" />
+                    <stop offset="45%" stop-color="#5EC2FF" />
+                    <stop offset="100%" stop-color="#2F7FE0" />
+                  </linearGradient>
+                </defs>
+                <circle cx="12" cy="12" r="9" fill="url(#clockFace)" />
+                <path
+                  d="M12 6.5v5.5l4 2.3"
+                  stroke="#0B2A55"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                />
+                <path
+                  d="M8.3 4.2C6 5.6 4.6 8 4.3 10.7"
+                  stroke="#EAF6FF"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  fill="none"
+                  opacity="0.55"
+                />
+              </svg>
+            </template>
+            <div v-for="server in filteredSoon" :key="`soon-${server.id}`" class="game-row compact no-rank">
+              <span class="game-logo">{{ serverBadge(server) }}</span>
+              <span class="game-name">
+                <strong>{{ server.name }}</strong>
+                <small>{{ serverSubtitle(server) }}</small>
+              </span>
+              <span class="version">
+                <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+                <small class="version-rate">{{ rateLabel(server) }}</small>
+              </span>
+              <span class="date">
+                <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+                <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
+              </span>
+            </div>
+            <div v-if="filteredSoon.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
+            <PanelFooter v-else />
+          </GamePanel>
+
+          <GamePanel :title="$t('panels.started')" class="accent-amber">
+            <template #icon>
+              <svg class="bolt-icon" viewBox="0 0 24 24" width="24" height="24">
+                <defs>
+                  <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFF3B0" />
+                    <stop offset="45%" stop-color="#FFD23F" />
+                    <stop offset="100%" stop-color="#F5850B" />
+                  </linearGradient>
+                </defs>
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#boltGrad)" />
+              </svg>
+            </template>
+            <div v-for="server in filteredStarted" :key="`started-${server.id}`" class="game-row compact no-rank">
+              <span class="game-logo">{{ serverBadge(server) }}</span>
+              <span class="game-name">
+                <strong>{{ server.name }}</strong>
+                <small>{{ serverSubtitle(server) }}</small>
+              </span>
+              <span class="version">
+                <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+                <small class="version-rate">{{ rateLabel(server) }}</small>
+              </span>
+              <span class="date">
+                <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+                <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
+              </span>
+            </div>
+            <div v-if="filteredStarted.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
+            <PanelFooter v-else />
+          </GamePanel>
+        </section>
+
+        <section class="bottom-grid">
+          <GamePanel :title="$t('panels.new')" class="accent-violet">
+            <template #icon>
+              <svg class="sparkle-icon" viewBox="0 0 24 24" width="24" height="24">
+                <defs>
+                  <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFC2F0" />
+                    <stop offset="50%" stop-color="#D06BFF" />
+                    <stop offset="100%" stop-color="#7C3AED" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                  fill="url(#sparkleGrad)"
+                />
+              </svg>
+            </template>
+            <div v-for="server in filteredNew" :key="`new-${server.id}`" class="game-row compact no-rank">
+              <span class="game-logo">{{ serverBadge(server) }}</span>
+              <span class="game-name">
+                <strong>{{ server.name }}</strong>
+                <small>{{ serverSubtitle(server) }}</small>
+              </span>
+              <span class="version">
+                <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+                <small class="version-rate">{{ rateLabel(server) }}</small>
+              </span>
+              <span class="date">
+                <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
+                <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
+              </span>
+            </div>
+            <div v-if="filteredNew.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
+            <PanelFooter v-else />
+          </GamePanel>
+
+          <GamePanel :title="$t('panels.all')" class="accent-teal">
+            <template #icon>
+              <svg class="grid-icon" viewBox="0 0 24 24" width="24" height="24">
+                <defs>
+                  <linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8FF5D6" />
+                    <stop offset="50%" stop-color="#10B981" />
+                    <stop offset="100%" stop-color="#0891B2" />
+                  </linearGradient>
+                </defs>
+                <rect x="4" y="4" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
+                <rect x="13" y="4" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
+                <rect x="4" y="13" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
+                <rect x="13" y="13" width="7" height="7" rx="1.8" fill="url(#gridGrad)" />
+              </svg>
+            </template>
+            <template #actions>
+              <button
+                class="shuffle-button"
+                type="button"
+                :aria-label="$t('panels.shuffle')"
+                :style="{ transform: `rotate(${shuffleTurns * 180}deg)` }"
+                @click="shuffleGames"
+              >
+                <svg class="shuffle-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 3h5v5" />
+                  <path d="M4 20 21 3" />
+                  <path d="M21 16v5h-5" />
+                  <path d="M15 15l6 6" />
+                  <path d="M3 4l5 5" />
+                </svg>
+              </button>
+            </template>
+            <div v-for="server in filteredRandom" :key="`all-${server.id}`" class="game-row no-rank chronicle-last">
+              <span class="game-logo">{{ serverBadge(server) }}</span>
+              <span class="game-name">
+                <strong>{{ server.name }}</strong>
+                <small>{{ serverSubtitle(server) }}</small>
+              </span>
+              <span class="version">
+                <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
+                <small class="version-rate">{{ rateLabel(server) }}</small>
+              </span>
+            </div>
+            <div v-if="filteredRandom.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
+            <PanelFooter v-else />
+          </GamePanel>
+        </section>
+      </template>
     </main>
 
     <!-- Deliberately bare for now: just the copyright, until the rest of the

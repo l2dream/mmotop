@@ -21,7 +21,8 @@
     "placeholder": "搜索游戏...",
     "short": "搜索",
     "action": "搜索",
-    "clear": "清除搜索"
+    "clear": "清除搜索",
+    "nothing": "未找到与“{query}”相关的结果"
   },
   "categories": {
     "all": "全部",
@@ -35,7 +36,8 @@
     "all": "全部游戏",
     "viewMore": "查看更多",
     "shuffle": "换一批",
-    "empty": "没有符合所选筛选条件的游戏。"
+    "empty": "没有符合所选筛选条件的游戏。",
+    "none": "没有符合条件的游戏。"
   },
   "filter": {
     "open": "筛选",

@@ -21,7 +21,8 @@
     "placeholder": "Spiele suchen...",
     "short": "Suchen",
     "action": "Suchen",
-    "clear": "Suche löschen"
+    "clear": "Suche löschen",
+    "nothing": "Keine Ergebnisse für „{query}“"
   },
   "categories": {
     "all": "Alle",
@@ -35,7 +36,8 @@
     "all": "ALLE SPIELE",
     "viewMore": "Mehr anzeigen",
     "shuffle": "Mischen",
-    "empty": "Keine Spiele entsprechen den gewählten Filtern."
+    "empty": "Keine Spiele entsprechen den gewählten Filtern.",
+    "none": "Keine passenden Spiele."
   },
   "filter": {
     "open": "Filter",

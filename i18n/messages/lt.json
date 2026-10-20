@@ -21,7 +21,8 @@
     "placeholder": "Ieškoti žaidimų...",
     "short": "Ieškoti",
     "action": "Ieškoti",
-    "clear": "Išvalyti paiešką"
+    "clear": "Išvalyti paiešką",
+    "nothing": "Pagal „{query}“ nieko nerasta"
   },
   "categories": {
     "all": "Visi",
@@ -35,7 +36,8 @@
     "all": "VISI ŽAIDIMAI",
     "viewMore": "Rodyti daugiau",
     "shuffle": "Sumaišyti",
-    "empty": "Nė vienas žaidimas neatitinka pasirinktų filtrų."
+    "empty": "Nė vienas žaidimas neatitinka pasirinktų filtrų.",
+    "none": "Atitinkančių žaidimų nėra."
   },
   "filter": {
     "open": "Filtras",

@@ -21,7 +21,8 @@
     "placeholder": "Buscar juegos...",
     "short": "Buscar",
     "action": "Buscar",
-    "clear": "Borrar búsqueda"
+    "clear": "Borrar búsqueda",
+    "nothing": "No hay resultados para «{query}»"
   },
   "categories": {
     "all": "Todos",
@@ -35,7 +36,8 @@
     "all": "TODOS LOS JUEGOS",
     "viewMore": "Ver más",
     "shuffle": "Mezclar",
-    "empty": "Ningún juego coincide con los filtros seleccionados."
+    "empty": "Ningún juego coincide con los filtros seleccionados.",
+    "none": "No hay juegos que coincidan."
   },
   "filter": {
     "open": "Filtro",

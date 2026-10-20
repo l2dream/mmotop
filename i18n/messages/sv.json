@@ -21,7 +21,8 @@
     "placeholder": "Sök spel...",
     "short": "Sök",
     "action": "Sök",
-    "clear": "Rensa sökning"
+    "clear": "Rensa sökning",
+    "nothing": "Inga resultat för ”{query}”"
   },
   "categories": {
     "all": "Alla",
@@ -35,7 +36,8 @@
     "all": "ALLA SPEL",
     "viewMore": "Visa mer",
     "shuffle": "Blanda",
-    "empty": "Inga spel matchar de valda filtren."
+    "empty": "Inga spel matchar de valda filtren.",
+    "none": "Inga matchande spel."
   },
   "filter": {
     "open": "Filter",
