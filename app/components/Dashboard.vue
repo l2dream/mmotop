@@ -655,19 +655,20 @@ const serverOthers = computed(() => {
   const origin = serverOrigin.value
 
   /**
-   * A weighted draw from a pool: the most alike are the likeliest picks, the
-   * pick shown most alike first. Each point of likeness makes a server about
-   * three times as likely to be drawn.
+   * A pick from a pool, in steps: the same chronicle first, then close rates,
+   * then the rest (see likenessStep), each step used up before the next is
+   * touched. Within a step the pick is a draw weighted by the remaining
+   * likeness — opening dates, votes — so each visit and each Shuffle differ.
+   * Shown in that same order.
    */
   const keys = othersKeys.value
   const draw = (pool: Server[], count: number) => pool
     .map((s) => {
       const score = serverSimilarity(current, s)
-      return { s, score, key: keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score }
+      return { s, step: likenessStep(current, s), key: keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score }
     })
-    .sort((a, b) => b.key - a.key)
+    .sort((a, b) => a.step - b.step || b.key - a.key)
     .slice(0, Math.max(0, count))
-    .sort((a, b) => b.score - a.score)
     .map(({ s }) => s)
 
   // Filled in three steps, each only if the one before leaves room:
@@ -675,8 +676,8 @@ const serverOthers = computed(() => {
   //      came through (none when the page was opened directly);
   //   2. the rest of this game's servers;
   //   3. servers of the other games, so the panel is never thin or empty.
-  // Likeness weighs every step; across games only rates, dates and votes
-  // can match, a chronicle cannot.
+  // Inside each, the same chronicle comes first, then close rates, then the
+  // rest; across games a chronicle cannot match, so rates lead there.
   const notCurrent = (s: Server) => s.id !== current.id
   const recommended = draw(
     origin ? listOrder.value[origin].filter((s) => s.game === current.game && notCurrent(s)) : [],
