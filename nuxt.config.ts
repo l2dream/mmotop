@@ -1,5 +1,6 @@
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from './app/i18n/locales'
 import { SECTIONS } from './app/data/sections'
+import { SERVERS } from './app/data/servers'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-07',
@@ -73,9 +74,14 @@ export default defineNuxtConfig({
        */
       routes: READY_LOCALES.flatMap((l) => {
         const prefix = l.code === DEFAULT_LOCALE ? '' : `/${l.code}`
-        // Each language's section pages too: they are linked from its home
-        // page, but listed outright for the same reason as the pages above.
-        return [...(prefix ? [prefix] : []), ...SECTIONS.map(id => `${prefix}/${id}`)]
+        // Each language's section and server pages too. They are linked from
+        // its home page, but a section page shows only its first 25 rows, so
+        // the crawler would miss servers further down; all are listed outright.
+        return [
+          ...(prefix ? [prefix] : []),
+          ...SECTIONS.map(id => `${prefix}/${id}`),
+          ...SERVERS.map(s => `${prefix}/server/${s.id}`)
+        ]
       })
     }
   },

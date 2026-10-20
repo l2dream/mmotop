@@ -77,6 +77,15 @@
     "hebrew": "히브리 문자",
     "eastAsian": "동아시아"
   },
+  "server": {
+    "opens": "오픈일",
+    "votes": "이번 달 투표",
+    "rank": "랭킹 {rank}위",
+    "listed": "MMOTOP 등록일",
+    "visit": "웹사이트 방문",
+    "others": "다른 {game} 서버",
+    "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요."
+  },
   "notFound": {
     "title": "페이지를 찾을 수 없습니다",
     "text": "이 페이지는 존재하지 않거나 이동되었습니다.",

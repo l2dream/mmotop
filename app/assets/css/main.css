@@ -1600,6 +1600,131 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin-inline: auto;
 }
 
+/* A server's page: its card, then more servers of its game. */
+.server-card { padding: 22px 24px 24px; }
+
+.server-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.server-logo {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.server-title { min-width: 0; }
+.server-title h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  overflow-wrap: anywhere;
+}
+.server-title p {
+  margin: 3px 0 0;
+  color: #8b90a7;
+  font-size: 13px;
+}
+
+/* Says which list the server is in today: the same date splits them. */
+.server-status {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+.server-status.is-soon { color: #8fd3ff; background: rgba(94, 194, 255, .12); }
+.server-status.is-started { color: #ffd76a; background: rgba(255, 203, 77, .12); }
+
+/* Three across, so the five facts read as two even rows: what the server is
+   and when it opens, then how it stands on MMOTOP. */
+.server-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 0;
+}
+.server-facts > div {
+  padding: 12px 14px;
+  border: 1px solid rgba(103, 104, 173, .18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .025);
+}
+.server-facts dt {
+  color: #8b90a7;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.server-facts dd {
+  margin: 5px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.server-facts small {
+  display: block;
+  margin-top: 2px;
+  color: #b98bff;
+  font-size: 12px;
+  font-weight: 500;
+}
+.server-votes { color: #ffd76a; }
+
+.server-actions { margin-top: 22px; display: flex; }
+
+.server-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.server-visit:hover,
+.server-visit:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
+
+.server-others { margin-top: 14px; }
+/* The other panel titles are written in capitals; this one is built from
+   the game's name, so it is set in capitals here instead. */
+.server-others h2 { text-transform: uppercase; }
+
+.theme-light .server-title p,
+.theme-light .server-facts dt { color: #5d6177; }
+.theme-light .server-facts > div {
+  border-color: rgba(103, 104, 173, .14);
+  background: rgba(255, 255, 255, .6);
+}
+.theme-light .server-facts small { color: #6d28d9; }
+.theme-light .server-votes { color: #a16207; }
+.theme-light .server-status.is-soon { color: #0369a1; background: rgba(14, 165, 233, .12); }
+.theme-light .server-status.is-started { color: #a16207; background: rgba(245, 158, 11, .14); }
+
+@media (max-width: 700px) {
+  .server-card { padding: 16px; }
+  .server-head { flex-wrap: wrap; gap: 12px; }
+  .server-logo { width: 44px; height: 44px; font-size: 13px; }
+  .server-title h1 { font-size: 18px; }
+  .server-facts { grid-template-columns: 1fr 1fr; }
+  /* Five in two columns leaves one over; it takes the whole last row. */
+  .server-facts > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .server-visit { flex: 1; justify-content: center; }
+}
+
 /* A section page: the way back above its one panel. */
 .section-back {
   display: inline-flex;

@@ -77,6 +77,15 @@
     "hebrew": "希伯来字母",
     "eastAsian": "东亚文字"
   },
+  "server": {
+    "opens": "开服日期",
+    "votes": "本月票数",
+    "rank": "排行第 {rank} 名",
+    "listed": "收录于 MMOTOP",
+    "visit": "访问官网",
+    "others": "更多 {game} 服务器",
+    "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。"
+  },
   "notFound": {
     "title": "页面未找到",
     "text": "此页面不存在或已被移动。",

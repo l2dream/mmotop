@@ -77,6 +77,15 @@
     "hebrew": "İbrani",
     "eastAsian": "Doğu Asya"
   },
+  "server": {
+    "opens": "Açılış tarihi",
+    "votes": "Bu ayki oylar",
+    "rank": "Sıralamada {rank}.",
+    "listed": "MMOTOP’a eklenme",
+    "visit": "Siteyi ziyaret et",
+    "others": "Diğer {game} sunucuları",
+    "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta."
+  },
   "notFound": {
     "title": "Sayfa bulunamadı",
     "text": "Bu sayfa yok veya taşınmış.",

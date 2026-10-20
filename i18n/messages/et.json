@@ -77,6 +77,15 @@
     "hebrew": "Heebrea",
     "eastAsian": "Ida-Aasia"
   },
+  "server": {
+    "opens": "Avamise kuupäev",
+    "votes": "Hääli sel kuul",
+    "rank": "Edetabelis {rank}. koht",
+    "listed": "MMOTOP-is alates",
+    "visit": "Ava veebisait",
+    "others": "Veel {game} servereid",
+    "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is."
+  },
   "notFound": {
     "title": "Lehte ei leitud",
     "text": "Seda lehte pole olemas või see on teisaldatud.",

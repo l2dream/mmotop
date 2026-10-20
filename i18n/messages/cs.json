@@ -77,6 +77,15 @@
     "hebrew": "Hebrejština",
     "eastAsian": "Východní Asie"
   },
+  "server": {
+    "opens": "Datum otevření",
+    "votes": "Hlasy tento měsíc",
+    "rank": "{rank}. místo v žebříčku",
+    "listed": "Na MMOTOP od",
+    "visit": "Navštívit web",
+    "others": "Další servery {game}",
+    "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP."
+  },
   "notFound": {
     "title": "Stránka nenalezena",
     "text": "Tato stránka neexistuje nebo byla přesunuta.",

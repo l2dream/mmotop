@@ -77,6 +77,15 @@
     "hebrew": "Hebrew",
     "eastAsian": "East Asian"
   },
+  "server": {
+    "opens": "Opening date",
+    "votes": "Votes this month",
+    "rank": "#{rank} in the ranking",
+    "listed": "Listed on MMOTOP",
+    "visit": "Visit website",
+    "others": "More {game} servers",
+    "description": "{name}: a {game} server ({chronicle}). Rates, opening date and votes on MMOTOP."
+  },
   "notFound": {
     "title": "Page not found",
     "text": "This page doesn’t exist or has been moved.",

@@ -77,6 +77,15 @@
     "hebrew": "Hebraisk",
     "eastAsian": "Østasiatisk"
   },
+  "server": {
+    "opens": "Åbningsdato",
+    "votes": "Stemmer denne måned",
+    "rank": "Nr. {rank} på ranglisten",
+    "listed": "På MMOTOP siden",
+    "visit": "Besøg hjemmesiden",
+    "others": "Flere {game}-servere",
+    "description": "{name}: en {game}-server ({chronicle}). Rates, åbningsdato og stemmer på MMOTOP."
+  },
   "notFound": {
     "title": "Siden blev ikke fundet",
     "text": "Siden findes ikke eller er blevet flyttet.",

@@ -77,6 +77,15 @@
     "hebrew": "Hebrajskie",
     "eastAsian": "Wschodnioazjatyckie"
   },
+  "server": {
+    "opens": "Data otwarcia",
+    "votes": "Głosy w tym miesiącu",
+    "rank": "Miejsce {rank} w rankingu",
+    "listed": "Na MMOTOP od",
+    "visit": "Przejdź na stronę",
+    "others": "Więcej serwerów {game}",
+    "description": "{name}: serwer {game} ({chronicle}). Rates, data otwarcia i głosy na MMOTOP."
+  },
   "notFound": {
     "title": "Nie znaleziono strony",
     "text": "Ta strona nie istnieje lub została przeniesiona.",
