@@ -628,13 +628,7 @@ const serverOthers = computed(() => {
   if (!server.value) return null
   const current = server.value
   const game = serverSubtitle(current)
-  const others = (list: Server[]) => list.filter((s) => s.game === current.game && s.id !== current.id)
-  // A list with no other server of this game — the only Silkroad server
-  // opening soon — would leave the page with nothing under the card; the
-  // game's best by votes stand in.
-  const fromOrigin = serverOrigin.value ? others(listOrder.value[serverOrigin.value]) : []
-  const gameOrigin = fromOrigin.length ? serverOrigin.value : null
-  const sameGame = others(gameOrigin ? listOrder.value[gameOrigin] : serversByVotes)
+  const origin = serverOrigin.value
 
   /**
    * A weighted draw from a pool: the most alike are the likeliest picks, the
@@ -648,41 +642,56 @@ const serverOthers = computed(() => {
       return { s, score, key: keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score }
     })
     .sort((a, b) => b.key - a.key)
-    .slice(0, count)
+    .slice(0, Math.max(0, count))
     .sort((a, b) => b.score - a.score)
     .map(({ s }) => s)
 
-  // The game's own servers first; when it has fewer than five, servers of
-  // the other games make up the rest, so the panel is never thin or empty —
-  // from the list the visitor came through, or from ALL GAMES. Likeness
-  // still weighs that draw: rates and dates mean something across games, a
-  // chronicle does not.
-  const picked = draw(sameGame, SERVER_OTHERS)
-  const mixed = picked.length < SERVER_OTHERS
-  const origin = mixed ? (serverOrigin.value ?? 'all') : gameOrigin
-  if (mixed) {
-    const rest = listOrder.value[origin!].filter((s) => s.game !== current.game)
-    picked.push(...draw(rest, SERVER_OTHERS - picked.length))
-  }
+  // Filled in three steps, each only if the one before leaves room:
+  //   1. the recommendations — this game's servers from the list the visitor
+  //      came through (none when the page was opened directly);
+  //   2. the rest of this game's servers;
+  //   3. servers of the other games, so the panel is never thin or empty.
+  // Likeness weighs every step; across games only rates, dates and votes
+  // can match, a chronicle cannot.
+  const notCurrent = (s: Server) => s.id !== current.id
+  const recommended = draw(
+    origin ? listOrder.value[origin].filter((s) => s.game === current.game && notCurrent(s)) : [],
+    SERVER_OTHERS
+  )
+  const sameGame = draw(
+    serversByVotes.filter((s) => s.game === current.game && notCurrent(s) && !recommended.includes(s)),
+    SERVER_OTHERS - recommended.length
+  )
+  const otherGames = draw(
+    listOrder.value.all.filter((s) => s.game !== current.game),
+    SERVER_OTHERS - recommended.length - sameGame.length
+  )
 
-  // A place in TOP counts within the game when the panel is the game's own,
-  // as the TOP page shows it with the game chosen; among every game when the
-  // panel mixes them.
-  const ranking = mixed ? serversByVotes : serversByVotes.filter((s) => s.game === current.game)
-  const rows = picked.map((s) => ({ server: s, rank: origin === 'top' ? ranking.indexOf(s) + 1 : undefined }))
+  // The title says what the panel holds. Recommendations alone keep their
+  // list's look — its icon, its way of ending a row, TOP's places within the
+  // game — and its View more; anything mixed is plainer.
+  const onlyRecommended = !!origin && recommended.length > 0 && !sameGame.length && !otherGames.length
+  const gameOnly = !otherGames.length
+  const ranking = serversByVotes.filter((s) => s.game === current.game)
+  const rows = [...recommended, ...sameGame, ...otherGames].map((s) => ({
+    server: s,
+    rank: onlyRecommended && origin === 'top' ? ranking.indexOf(s) + 1 : undefined
+  }))
 
-  const title = !origin
-    ? t('server.others', { game })
-    : mixed ? t(`panels.${origin}`) : `${t(`panels.${origin}`)} · ${game}`
   return {
     rows,
     origin,
-    title,
+    icon: onlyRecommended ? origin : gameOnly ? null : 'all' as SectionId,
+    title: onlyRecommended
+      ? `${t(`panels.${origin}`)} · ${game}`
+      : gameOnly ? t('server.others', { game }) : t('panels.all'),
     turns: othersTurns.value,
-    end: origin ? ROW_END[origin] : 'chronicle' as const,
-    link: origin
-      ? { path: localePath(`/${origin}`), query: mixed ? {} : { game: current.game } }
-      : undefined
+    end: onlyRecommended ? ROW_END[origin!] : 'chronicle' as const,
+    link: onlyRecommended
+      ? { path: localePath(`/${origin}`), query: { game: current.game } }
+      : gameOnly
+        ? { path: localePath('/all'), query: { game: current.game } }
+        : { path: localePath('/all'), query: {} }
   }
 })
 
