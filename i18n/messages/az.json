@@ -77,6 +77,15 @@
     "hebrew": "İvrit",
     "eastAsian": "Şərqi Asiya"
   },
+  "server": {
+    "opens": "Açılış tarixi",
+    "votes": "Bu ayın səsləri",
+    "rank": "Reytinqdə № {rank}",
+    "listed": "MMOTOP-a əlavə edilib",
+    "visit": "Sayta keçid",
+    "others": "Digər {game} serverləri",
+    "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da."
+  },
   "notFound": {
     "title": "Səhifə tapılmadı",
     "text": "Belə səhifə yoxdur və ya köçürülüb.",

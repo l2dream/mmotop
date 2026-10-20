@@ -10,9 +10,8 @@ import type { Server } from '~/data/servers'
  * GAMES ends with the chronicle. The grid for each is in main.css under
  * .game-row.
  *
- * The whole row is a link to the server's own site, in a new tab: the
- * visitor is comparing servers here and should not lose the list. nofollow,
- * because the listing is not an endorsement the site vouches for.
+ * The whole row is a link to the server's page on MMOTOP, which carries the
+ * details and the way out to the server's own site.
  */
 const props = defineProps<{
   server: Server
@@ -21,6 +20,7 @@ const props = defineProps<{
 }>()
 
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+const localePath = useLocalePath()
 
 const rowClass = computed(() => ({
   'no-rank': props.end !== 'votes',
@@ -30,7 +30,7 @@ const rowClass = computed(() => ({
 </script>
 
 <template>
-  <a class="game-row" :class="rowClass" :href="server.url" target="_blank" rel="noopener nofollow">
+  <NuxtLink class="game-row" :class="rowClass" :to="localePath(`/server/${server.id}`)">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">
@@ -56,5 +56,5 @@ const rowClass = computed(() => ({
       <span class="date-day">{{ formatDayMonth(server.openDate) }}</span>
       <small v-if="formatYear(server.openDate)" class="date-year">{{ formatYear(server.openDate) }}</small>
     </span>
-  </a>
+  </NuxtLink>
 </template>

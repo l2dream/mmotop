@@ -77,6 +77,15 @@
     "hebrew": "עברית",
     "eastAsian": "מזרח אסיה"
   },
+  "server": {
+    "opens": "תאריך פתיחה",
+    "votes": "הצבעות החודש",
+    "rank": "מקום {rank} בדירוג",
+    "listed": "ב-MMOTOP מאז",
+    "visit": "לאתר השרת",
+    "others": "עוד שרתי {game}",
+    "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP."
+  },
   "notFound": {
     "title": "הדף לא נמצא",
     "text": "הדף הזה לא קיים או שהועבר.",

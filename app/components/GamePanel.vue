@@ -17,7 +17,7 @@ defineProps<{
 <template>
   <section class="panel">
     <div class="panel-head">
-      <span class="panel-icon"><slot name="icon" /></span>
+      <span v-if="$slots.icon" class="panel-icon"><slot name="icon" /></span>
       <h2>{{ title }}</h2>
       <span class="panel-tools">
         <slot name="actions" />

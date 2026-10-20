@@ -5,12 +5,12 @@ import { SERVERS, type Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
 
 /**
- * The whole site: the home page with its five panels, or — given `section` —
- * one of those lists on its own page, in full. Both share the header, search,
- * filters and category bar, so a filter set on the home page still applies
- * after View more, and the other way round.
+ * The whole site: the home page with its five panels; given `section`, one of
+ * those lists on its own page, in full; given `serverId`, one server's page.
+ * All share the header, search, filters and category bar, so a filter set on
+ * the home page still applies after View more, and the other way round.
  */
-const props = defineProps<{ section?: SectionId }>()
+const props = defineProps<{ section?: SectionId, serverId?: string }>()
 
 const { t, locale } = useI18n()
 const { currentYear, serverSubtitle, rateLabel } = useServerFormat()
@@ -36,6 +36,7 @@ const hiddenCategories = computed(() => categories.slice(VISIBLE_CATEGORIES))
 const activeHidden = computed(() => hiddenCategories.value.includes(activeCategory.value))
 
 const SERVER_BY_ID = new Map(SERVERS.map((server) => [server.id, server]))
+const server = computed(() => (props.serverId ? SERVER_BY_ID.get(props.serverId) : undefined))
 
 /**
  * Today's date, for splitting COMING SOON from ALREADY STARTED. It starts as
@@ -339,7 +340,15 @@ function filtersToQuery() {
 }
 
 // Other parameters in the address (utm tags and the like) are kept as found.
+//
+// A server's page has no list for the filters to narrow, so there a change to
+// them — a category picked, filters applied, a search sent — goes to the home
+// page with the filters set, which is where they have something to show.
 function writeFiltersToUrl() {
+  if (server.value) {
+    router.push({ path: localePath('/'), query: filtersToQuery() })
+    return
+  }
   const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
   router.replace({ query: { ...rest, ...filtersToQuery() }, hash: route.hash })
 }
@@ -377,13 +386,15 @@ watch([activeCategory, filters, customRateActive, customRateMin, customRateMax],
  */
 let searchUrlTimer: ReturnType<typeof setTimeout> | undefined
 watch(query, () => {
-  if (!urlReady.value) return
+  // On a server's page the search is sent with Enter or the search button;
+  // leaving for the home page mid-word would take the field away while typing.
+  if (!urlReady.value || server.value) return
   clearTimeout(searchUrlTimer)
   searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
 })
 function onSearchBlur() {
   releaseDashboardHeight()
-  if (!urlReady.value) return
+  if (!urlReady.value || server.value) return
   clearTimeout(searchUrlTimer)
   writeFiltersToUrl()
 }
@@ -407,6 +418,12 @@ function releaseDashboardHeight() {
 onUnmounted(() => clearTimeout(searchUrlTimer))
 onNuxtReady(() => {
   if (unmounted) return
+  // A server's address carries no filters, and writing them into it would
+  // send the visitor straight back to the home page.
+  if (server.value) {
+    urlReady.value = true
+    return
+  }
   restoreFiltersFromUrl()
   writeFiltersToUrl()
   urlReady.value = true
@@ -537,14 +554,30 @@ const searchText = computed(() => query.value.trim())
 
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
-const pageTitle = computed(() =>
-  props.section ? `${t(`panels.${props.section}`)} — MMOTOP` : t('meta.title'))
+const pageTitle = computed(() => {
+  if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} — MMOTOP`
+  return props.section ? `${t(`panels.${props.section}`)} — MMOTOP` : t('meta.title')
+})
+const pageDescription = computed(() => (server.value
+  ? t('server.description', {
+    name: server.value.name,
+    game: serverSubtitle(server.value),
+    chronicle: server.value.chronicle
+  })
+  : t('meta.description')))
+
+/** A server's place among all servers by votes, and more of its game. */
+const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))
+const SERVER_OTHERS = 5
+const serverOthers = computed(() => (server.value
+  ? serversByVotes.filter((s) => s.game === server.value!.game && s.id !== server.value!.id).slice(0, SERVER_OTHERS)
+  : []))
 
 useSeoMeta({
   title: () => pageTitle.value,
-  description: () => t('meta.description'),
+  description: () => pageDescription.value,
   ogTitle: () => pageTitle.value,
-  ogDescription: () => t('meta.ogDescription'),
+  ogDescription: () => (server.value ? pageDescription.value : t('meta.ogDescription')),
   ogType: 'website',
   ogSiteName: 'MMOTOP',
   /**
@@ -712,6 +745,7 @@ onMounted(() => {
 })
 
 function submitSearch() {
+  if (server.value && query.value.trim()) return writeFiltersToUrl()
   searchInput.value?.focus()
 }
 
@@ -722,6 +756,7 @@ function submitSearch() {
  * mouse and keyboard there is nothing to dismiss, so the cursor stays.
  */
 function onSearchEnter(event: KeyboardEvent) {
+  if (server.value && query.value.trim()) return writeFiltersToUrl()
   if (window.matchMedia('(pointer: coarse)').matches) (event.target as HTMLInputElement).blur()
 }
 
@@ -761,7 +796,8 @@ function clearSearch() {
       <!-- The visible wordmark is a link home, not a heading, so the page had
            five h2s and no h1 at all. This states the subject once, for crawlers
            and for anyone listing the headings. -->
-      <h1 class="sr-only">{{ pageTitle }}</h1>
+      <!-- A server's page shows its own h1, the server's name. -->
+      <h1 v-if="!server" class="sr-only">{{ pageTitle }}</h1>
 
       <button class="theme-button" type="button" :aria-label="$t('nav.theme')" @click="toggleTheme">
         <svg
@@ -1046,7 +1082,7 @@ function clearSearch() {
     <main ref="dashboardEl" class="dashboard">
       <!-- When nothing matches at all, one card says so and offers the way
            back, instead of five empty panels each repeating it. -->
-      <div v-if="nothingFound" class="no-results" role="status">
+      <div v-if="!server && nothingFound" class="no-results" role="status">
         <svg class="no-results-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
           <path d="M20 20l-3.5-3.5" />
@@ -1057,6 +1093,16 @@ function clearSearch() {
         <p v-else class="no-results-text">{{ $t('panels.empty') }}</p>
         <button v-if="searchText" type="button" class="no-results-action" @click="clearSearch">{{ $t('search.clear') }}</button>
         <button v-else type="button" class="no-results-action" @click="resetFilters">{{ $t('filter.reset') }}</button>
+      </div>
+
+      <div v-else-if="server" class="section-view">
+        <NuxtLink class="section-back" :to="{ path: localePath('/'), query: filtersToQuery() }">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 5l-7 7 7 7" />
+          </svg>
+          {{ $t('notFound.home') }}
+        </NuxtLink>
+        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers" />
       </div>
 
       <template v-else-if="!section">

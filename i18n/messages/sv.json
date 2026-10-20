@@ -77,6 +77,15 @@
     "hebrew": "Hebreiska",
     "eastAsian": "Östasiatiska"
   },
+  "server": {
+    "opens": "Öppningsdatum",
+    "votes": "Röster denna månad",
+    "rank": "Plats {rank} på topplistan",
+    "listed": "På MMOTOP sedan",
+    "visit": "Besök webbplatsen",
+    "others": "Fler {game}-servrar",
+    "description": "{name}: en {game}-server ({chronicle}). Rates, öppningsdatum och röster på MMOTOP."
+  },
   "notFound": {
     "title": "Sidan hittades inte",
     "text": "Sidan finns inte eller har flyttats.",

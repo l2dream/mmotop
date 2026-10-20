@@ -77,6 +77,15 @@
     "hebrew": "Ebreju",
     "eastAsian": "Austrumāzijas"
   },
+  "server": {
+    "opens": "Atvēršanas datums",
+    "votes": "Balsis šomēnes",
+    "rank": "{rank}. vieta reitingā",
+    "listed": "MMOTOP kopš",
+    "visit": "Apmeklēt vietni",
+    "others": "Vairāk {game} serveru",
+    "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP."
+  },
   "notFound": {
     "title": "Lapa nav atrasta",
     "text": "Šīs lapas nav vai tā ir pārvietota.",
