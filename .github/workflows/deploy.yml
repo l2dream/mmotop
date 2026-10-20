@@ -48,11 +48,16 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      # Pages reports the origin as http:// until "Enforce HTTPS" is ticked,
+      # and that went straight into the canonical, hreflang and sitemap. The
+      # site is served over HTTPS either way, so the address always says so.
       - name: Generate static site
-        run: npm run generate
+        run: |
+          export NUXT_PUBLIC_SITE_URL="${PAGES_ORIGIN/#http:/https:}"
+          npm run generate
         env:
           NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
-          NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.origin }}
+          PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
