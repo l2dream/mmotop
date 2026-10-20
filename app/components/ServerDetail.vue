@@ -2,6 +2,8 @@
 import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
 import { bcp47 } from '~/i18n/locales'
+import type { RouteLocationRaw } from 'vue-router'
+import type { SectionId } from '~/data/sections'
 
 /**
  * One server's own page: what it is, when it opens, how it stands, and the
@@ -16,7 +18,14 @@ const props = defineProps<{
   server: Server
   rank: number
   today: string
-  others: Server[]
+  /** The panel under the card, worked out by the dashboard. */
+  others: {
+    rows: { server: Server, rank?: number }[]
+    origin: SectionId | null
+    title: string
+    end: 'votes' | 'date' | 'chronicle'
+    link?: RouteLocationRaw
+  }
 }>()
 
 const { locale } = useI18n()
@@ -99,7 +108,16 @@ function fullDate(iso: string) {
     </div>
   </article>
 
-  <GamePanel v-if="others.length" class="server-others accent-violet" :title="$t('server.others', { game: serverSubtitle(server) })">
-    <ServerRow v-for="other in others" :key="other.id" :server="other" end="chronicle" />
+  <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="others.title">
+    <template v-if="others.origin" #icon><PanelIcon :id="others.origin" /></template>
+    <ServerRow
+      v-for="row in others.rows"
+      :key="row.server.id"
+      :server="row.server"
+      :rank="row.rank"
+      :end="others.end"
+      :origin="others.origin"
+    />
+    <PanelFooter v-if="others.link" :to="others.link" :title="others.title" />
   </GamePanel>
 </template>

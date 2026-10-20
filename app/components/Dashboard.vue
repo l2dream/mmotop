@@ -567,12 +567,59 @@ const pageDescription = computed(() => (server.value
   })
   : props.section ? t(`seo.${props.section}.description`) : t('meta.description')))
 
-/** A server's place among all servers by votes, and more of its game. */
+/** A server's place among all servers by votes. */
 const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))
+
+/**
+ * The list a server was last opened from — a home panel, a section page —
+ * set by the row that was clicked (see ServerRow). Held for the visit, so
+ * moving from server to server keeps it; a server page opened directly has
+ * none.
+ */
+const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
+
+/** Each list in its own order, before any filter or search. */
+const listOrder = computed<Record<SectionId, Server[]>>(() => ({
+  top: serversByVotes,
+  soon: upcoming.value,
+  started: opened.value,
+  new: recentlyListed,
+  all: shuffledPool.value.map((id) => SERVER_BY_ID.get(id)).filter((s): s is Server => !!s)
+}))
+
+/**
+ * The panel under a server's card: more servers of the same game from the
+ * list the visitor came through — came from COMING SOON, more Lineage II
+ * servers opening soon — in that list's order, with its way to the full list.
+ * Opened directly, there is no list to follow, and it shows the game's best
+ * by votes, as before.
+ */
 const SERVER_OTHERS = 5
-const serverOthers = computed(() => (server.value
-  ? serversByVotes.filter((s) => s.game === server.value!.game && s.id !== server.value!.id).slice(0, SERVER_OTHERS)
-  : []))
+const serverOthers = computed(() => {
+  if (!server.value) return null
+  const current = server.value
+  const game = serverSubtitle(current)
+  const others = (list: Server[]) => list.filter((s) => s.game === current.game && s.id !== current.id)
+  // A list with no other server of this game — the only Silkroad server
+  // opening soon — would leave the page with nothing under the card; the
+  // game's best by votes stand in.
+  const fromOrigin = serverOrigin.value ? others(listOrder.value[serverOrigin.value]) : []
+  const origin = fromOrigin.length ? serverOrigin.value : null
+  const sameGame = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
+  const rows = sameGame
+    .filter((s) => s.id !== current.id)
+    .slice(0, SERVER_OTHERS)
+    // A place in TOP counts within the game, as the TOP page shows it with
+    // this game chosen.
+    .map((s) => ({ server: s, rank: origin === 'top' ? sameGame.indexOf(s) + 1 : undefined }))
+  return {
+    rows,
+    origin,
+    title: origin ? `${t(`panels.${origin}`)} · ${game}` : t('server.others', { game }),
+    end: origin ? ROW_END[origin] : 'chronicle' as const,
+    link: origin ? { path: localePath(`/${origin}`), query: { game: current.game } } : undefined
+  }
+})
 
 useSeoMeta({
   title: () => pageTitle.value,
@@ -1153,7 +1200,7 @@ function clearSearch() {
 
       <div v-else-if="server" class="section-view">
         <BackLink :to="{ path: localePath('/'), query: filtersToQuery() }" />
-        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers" />
+        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" />
       </div>
 
       <template v-else-if="!section">
@@ -1169,6 +1216,7 @@ function clearSearch() {
               :server="row.server"
               :rank="row.rank"
               :end="ROW_END[id]"
+              :origin="id"
             />
             <div v-if="homeLists[id].length === 0" class="empty-state">{{ $t('panels.none') }}</div>
             <PanelFooter v-else :to="sectionLink(id)" :title="$t(`panels.${id}`)" />
@@ -1192,6 +1240,7 @@ function clearSearch() {
             :server="row.server"
             :rank="row.rank"
             :end="ROW_END[section]"
+            :origin="section"
           />
           <div v-if="sectionList.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
           <button v-if="sectionList.length > sectionShown" type="button" class="panel-footer section-more" @click="sectionShown += SECTION_PAGE">

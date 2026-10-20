@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
+import type { SectionId } from '~/data/sections'
 
 /**
  * One server, as it appears in every list on the site.
@@ -17,10 +18,18 @@ const props = defineProps<{
   server: Server
   end: 'votes' | 'date' | 'chronicle'
   rank?: number
+  /** The list this row sits in. Opening the server records it, so the
+   *  server's page can show more from the same list; null records that the
+   *  row came from no list in particular. */
+  origin?: SectionId | null
 }>()
 
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
 const localePath = useLocalePath()
+const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
+function remember() {
+  if (props.origin !== undefined) serverOrigin.value = props.origin
+}
 
 const rowClass = computed(() => ({
   'no-rank': props.end !== 'votes',
@@ -30,7 +39,7 @@ const rowClass = computed(() => ({
 </script>
 
 <template>
-  <NuxtLink class="game-row" :class="rowClass" :to="localePath(`/server/${server.id}`)">
+  <NuxtLink class="game-row" :class="rowClass" :to="localePath(`/server/${server.id}`)" @click="remember">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">
