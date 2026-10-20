@@ -105,8 +105,8 @@
       "description": "最近收录到 MMOTOP 的服务器，附开服日期、版本和倍率。"
     },
     "all": {
-      "title": "全部游戏服务器（A–Z）",
-      "description": "MMOTOP 收录的全部游戏服务器，按字母顺序排列，附版本和倍率。"
+      "title": "全部游戏服务器",
+      "description": "MMOTOP 收录的全部游戏服务器，附版本和倍率。"
     }
   },
   "notFound": {

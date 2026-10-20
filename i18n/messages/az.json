@@ -105,8 +105,8 @@
       "description": "MMOTOP-a son əlavə edilən serverlər: açılış tarixi, xronika və rate."
     },
     "all": {
-      "title": "A-dan Z-yə bütün oyun serverləri",
-      "description": "MMOTOP-dakı bütün oyun serverləri əlifba sırası ilə, xronikalar və rate-lərlə."
+      "title": "Bütün oyun serverləri",
+      "description": "MMOTOP-dakı bütün oyun serverləri, xronikalar və rate-lərlə."
     }
   },
   "notFound": {

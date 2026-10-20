@@ -105,8 +105,8 @@
       "description": "MMOTOP’a son eklenen sunucular; açılış tarihi, kronik ve rate bilgileriyle."
     },
     "all": {
-      "title": "A’dan Z’ye tüm oyun sunucuları",
-      "description": "MMOTOP’taki tüm oyun sunucuları alfabetik sırayla, kronikler ve rate’lerle."
+      "title": "Tüm oyun sunucuları",
+      "description": "MMOTOP’taki tüm oyun sunucuları, kronikler ve rate’lerle."
     }
   },
   "notFound": {

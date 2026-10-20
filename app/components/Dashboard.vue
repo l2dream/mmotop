@@ -492,24 +492,25 @@ const opened = computed(() =>
   SERVERS.filter((s) => s.openDate <= today.value).sort((a, b) => b.openDate.localeCompare(a.openDate)))
 // Newest additions to MMOTOP, whether they have opened yet or not.
 const recentlyListed = [...SERVERS].sort((a, b) => b.listedAt.localeCompare(a.listedAt))
-const byName = [...SERVERS].sort((a, b) => a.name.localeCompare(b.name))
 
 interface Row { server: Server, rank?: number }
 const rows = (list: Server[]): Row[] => list.map((server) => ({ server }))
 
 /**
  * Every list in full, after the filters and the search. The home panels show
- * the head of each; the section pages show all of it. ALL GAMES is the one
- * that differs: a random few at home, so the panel keeps surfacing servers
- * with no rank or date to show them by, and A–Z on its page, where a reader
- * is looking for one by name.
+ * the head of each; the section pages show all of it. ALL GAMES follows the
+ * shuffled pool in both places — a few at home, all of it on its page — so it
+ * keeps surfacing servers with no rank or date to show them by, and its
+ * Shuffle button draws both again.
  */
 const fullLists = computed<Record<SectionId, Row[]>>(() => ({
   top: serversByVotes.filter(matchesAll).map((server, i) => ({ server, rank: i + 1 })),
   soon: rows(upcoming.value.filter(matchesAll)),
   started: rows(opened.value.filter(matchesAll)),
   new: rows(recentlyListed.filter(matchesAll)),
-  all: rows(byName.filter(matchesAll))
+  all: rows(shuffledPool.value
+    .map((id) => SERVER_BY_ID.get(id))
+    .filter((s): s is Server => !!s && matchesAll(s)))
 }))
 
 const PANEL_ROWS = 10
@@ -519,10 +520,7 @@ const homeLists = computed<Record<SectionId, Row[]>>(() => ({
   soon: fullLists.value.soon.slice(0, PANEL_ROWS),
   started: fullLists.value.started.slice(0, PANEL_ROWS),
   new: fullLists.value.new.slice(0, NEW_ROWS),
-  all: rows(shuffledPool.value
-    .map((id) => SERVER_BY_ID.get(id))
-    .filter((s): s is Server => !!s && matchesAll(s))
-    .slice(0, RANDOM_PICK))
+  all: fullLists.value.all.slice(0, RANDOM_PICK)
 }))
 
 /** How each list's rows end, and its panel's accent colour. */
@@ -1163,21 +1161,7 @@ function clearSearch() {
           <GamePanel v-for="id in group" :key="id" :title="$t(`panels.${id}`)" :class="ACCENT[id]" :to="sectionLink(id)">
             <template #icon><PanelIcon :id="id" /></template>
             <template v-if="id === 'all'" #actions>
-              <button
-                class="shuffle-button"
-                type="button"
-                :aria-label="$t('panels.shuffle')"
-                :style="{ transform: `rotate(${shuffleTurns * 180}deg)` }"
-                @click="shuffleGames"
-              >
-                <svg class="shuffle-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M16 3h5v5" />
-                  <path d="M4 20 21 3" />
-                  <path d="M21 16v5h-5" />
-                  <path d="M15 15l6 6" />
-                  <path d="M3 4l5 5" />
-                </svg>
-              </button>
+              <ShuffleButton :turns="shuffleTurns" @shuffle="shuffleGames" />
             </template>
             <ServerRow
               v-for="row in homeLists[id]"
@@ -1199,6 +1183,9 @@ function clearSearch() {
         <BackLink :to="{ path: localePath('/'), query: route.query }" />
         <GamePanel class="section-panel" :title="$t(`panels.${section}`)" :class="ACCENT[section]">
           <template #icon><PanelIcon :id="section" /></template>
+          <template v-if="section === 'all'" #actions>
+            <ShuffleButton :turns="shuffleTurns" @shuffle="shuffleGames" />
+          </template>
           <ServerRow
             v-for="row in sectionList.slice(0, sectionShown)"
             :key="row.server.id"

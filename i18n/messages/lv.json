@@ -105,8 +105,8 @@
       "description": "Pēdējie MMOTOP pievienotie serveri ar atvēršanas datumu, hroniku un rate."
     },
     "all": {
-      "title": "Visi spēļu serveri no A līdz Z",
-      "description": "Visi MMOTOP spēļu serveri alfabēta secībā, ar hronikām un rate."
+      "title": "Visi spēļu serveri",
+      "description": "Visi MMOTOP spēļu serveri ar hronikām un rate."
     }
   },
   "notFound": {

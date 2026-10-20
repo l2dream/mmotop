@@ -105,8 +105,8 @@
       "description": "Naposledy přidané servery na MMOTOP s datem otevření, kronikou a rates."
     },
     "all": {
-      "title": "Všechny herní servery od A do Z",
-      "description": "Všechny herní servery na MMOTOP podle abecedy, s kronikami a rates."
+      "title": "Všechny herní servery",
+      "description": "Všechny herní servery na MMOTOP, s kronikami a rates."
     }
   },
   "notFound": {
