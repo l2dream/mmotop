@@ -9,7 +9,8 @@
     "theme": "Skift tema",
     "language": "Sprog",
     "login": "LOG IND",
-    "categories": "Spilkategorier"
+    "categories": "Spilkategorier",
+    "back": "Tilbage"
   },
   "language": {
     "search": "Søg sprog",

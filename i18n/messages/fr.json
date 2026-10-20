@@ -9,7 +9,8 @@
     "theme": "Changer de thème",
     "language": "Langue",
     "login": "CONNEXION",
-    "categories": "Catégories de jeux"
+    "categories": "Catégories de jeux",
+    "back": "Retour"
   },
   "language": {
     "search": "Rechercher une langue",
