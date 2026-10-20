@@ -1774,6 +1774,33 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .bottom-grid { grid-template-columns: 1fr; }
 }
 
+/* Between a phone and a wide screen — a small laptop, a tablet held
+   sideways — one column stretched each row across a thousand pixels and made
+   the page 2700px long. TOP GAMES keeps the full width, as the page's main
+   list; the other four pair up beneath it, each pair the same height: COMING
+   SOON beside ALREADY STARTED, NEW GAMES beside ALL GAMES. The two row
+   sections dissolve into one grid here; browsers without :has() keep the
+   single column. Below 860px a half-width row would squeeze the server name
+   under its minimum, so narrower screens keep one column too. */
+@media (min-width: 860px) and (max-width: 1100px) {
+  .dashboard:has(> .top-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "top top"
+      "soon started"
+      "new all";
+    gap: 14px;
+  }
+  .dashboard:has(> .top-grid) > .top-grid,
+  .dashboard:has(> .top-grid) > .bottom-grid { display: contents; }
+  .panel-top { grid-area: top; }
+  .panel-soon { grid-area: soon; }
+  .panel-started { grid-area: started; }
+  .panel-new { grid-area: new; }
+  .panel-all { grid-area: all; }
+}
+
 @media (max-width: 700px) {
   .site-footer {
     margin-top: 24px;
