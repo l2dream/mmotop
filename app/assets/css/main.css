@@ -1736,6 +1736,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .game-row { gap: 3px; grid-template-columns: 20px 32px minmax(0, 1fr) 58px 60px; }
   .rank { width: 20px; height: 20px; }
   .game-row.no-rank { grid-template-columns: 32px minmax(0, 1fr) 58px 60px; }
+  /* Restated after .no-rank above, which would otherwise win here and put the
+     empty fourth track back in ALL GAMES, 60px short of the edge. */
+  .game-row.chronicle-last { grid-template-columns: 32px minmax(0, 1fr) 58px; }
   .lang-panel { padding: 6px; }
   .lang-columns { column-gap: 6px; }
   .lang-item { padding: 0 3px; gap: 5px; }
