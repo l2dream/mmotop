@@ -1740,6 +1740,19 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   transition: color .18s ease;
 }
 .section-back:hover { color: #d9a8ff; }
+/* On a touch screen the link is a 24px-tall line of text; the padding makes
+   it a thumb-sized target, and the negative margin keeps it where it was. */
+@media (pointer: coarse) {
+  .section-back { padding-block: 10px; margin-block: -10px 2px; }
+  .panel-arrow { position: relative; }
+  /* The arrow is 11px wide; the tap area is the head's full height and as
+     wide again on both sides. */
+  .panel-arrow::after {
+    content: '';
+    position: absolute;
+    inset: -14px -12px;
+  }
+}
 .theme-light .section-back { color: #5d6177; }
 .theme-light .section-back:hover { color: #6d28d9; }
 
