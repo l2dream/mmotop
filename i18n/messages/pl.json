@@ -84,8 +84,8 @@
     "rank": "Miejsce {rank} w rankingu",
     "listed": "Na MMOTOP od",
     "visit": "Przejdź na stronę",
-    "others": "Więcej serwerów {game}",
-    "description": "{name}: serwer {game} ({chronicle}). Rates, data otwarcia i głosy na MMOTOP."
+    "description": "{name}: serwer {game} ({chronicle}). Rates, data otwarcia i głosy na MMOTOP.",
+    "recommended": "POLECANE"
   },
   "seo": {
     "top": {

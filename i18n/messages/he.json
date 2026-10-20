@@ -84,8 +84,8 @@
     "rank": "מקום {rank} בדירוג",
     "listed": "ב-MMOTOP מאז",
     "visit": "לאתר השרת",
-    "others": "עוד שרתי {game}",
-    "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP."
+    "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP.",
+    "recommended": "המלצות"
   },
   "seo": {
     "top": {

@@ -84,8 +84,8 @@
     "rank": "ランキング{rank}位",
     "listed": "MMOTOP掲載日",
     "visit": "公式サイトへ",
-    "others": "{game}の他のサーバー",
-    "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。"
+    "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。",
+    "recommended": "おすすめ"
   },
   "seo": {
     "top": {

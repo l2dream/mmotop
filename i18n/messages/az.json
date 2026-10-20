@@ -84,8 +84,8 @@
     "rank": "Reytinqdə № {rank}",
     "listed": "MMOTOP-a əlavə edilib",
     "visit": "Sayta keçid",
-    "others": "Digər {game} serverləri",
-    "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da."
+    "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da.",
+    "recommended": "TÖVSİYƏLƏR"
   },
   "seo": {
     "top": {

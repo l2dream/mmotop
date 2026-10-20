@@ -84,8 +84,8 @@
     "rank": "{rank} vieta reitinge",
     "listed": "MMOTOP nuo",
     "visit": "Apsilankyti svetainėje",
-    "others": "Daugiau {game} serverių",
-    "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP."
+    "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP.",
+    "recommended": "REKOMENDACIJOS"
   },
   "seo": {
     "top": {

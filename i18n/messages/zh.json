@@ -84,8 +84,8 @@
     "rank": "排行第 {rank} 名",
     "listed": "收录于 MMOTOP",
     "visit": "访问官网",
-    "others": "更多 {game} 服务器",
-    "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。"
+    "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。",
+    "recommended": "推荐"
   },
   "seo": {
     "top": {

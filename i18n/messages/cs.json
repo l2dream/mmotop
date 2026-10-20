@@ -84,8 +84,8 @@
     "rank": "{rank}. místo v žebříčku",
     "listed": "Na MMOTOP od",
     "visit": "Navštívit web",
-    "others": "Další servery {game}",
-    "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP."
+    "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP.",
+    "recommended": "DOPORUČENÉ"
   },
   "seo": {
     "top": {

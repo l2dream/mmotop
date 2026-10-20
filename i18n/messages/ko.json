@@ -84,8 +84,8 @@
     "rank": "랭킹 {rank}위",
     "listed": "MMOTOP 등록일",
     "visit": "웹사이트 방문",
-    "others": "다른 {game} 서버",
-    "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요."
+    "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요.",
+    "recommended": "추천"
   },
   "seo": {
     "top": {

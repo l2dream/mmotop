@@ -84,8 +84,8 @@
     "rank": "{rank}. vieta reitingā",
     "listed": "MMOTOP kopš",
     "visit": "Apmeklēt vietni",
-    "others": "Vairāk {game} serveru",
-    "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP."
+    "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP.",
+    "recommended": "IETEIKUMI"
   },
   "seo": {
     "top": {

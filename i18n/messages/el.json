@@ -84,8 +84,8 @@
     "rank": "{rank}η θέση στην κατάταξη",
     "listed": "Στο MMOTOP από",
     "visit": "Επίσκεψη ιστότοπου",
-    "others": "Περισσότεροι διακομιστές {game}",
-    "description": "{name}: διακομιστής {game} ({chronicle}). Rates, ημερομηνία ανοίγματος και ψήφοι στο MMOTOP."
+    "description": "{name}: διακομιστής {game} ({chronicle}). Rates, ημερομηνία ανοίγματος και ψήφοι στο MMOTOP.",
+    "recommended": "ΠΡΟΤΑΣΕΙΣ"
   },
   "seo": {
     "top": {

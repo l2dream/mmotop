@@ -1699,9 +1699,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .server-visit:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
 
 .server-others { margin-top: 14px; }
-/* The other panel titles are written in capitals; this one is built from
-   the game's name, so it is set in capitals here instead. */
-.server-others h2 { text-transform: uppercase; }
 
 .theme-light .server-title p,
 .theme-light .server-facts dt { color: #5d6177; }

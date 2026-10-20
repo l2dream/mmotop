@@ -84,8 +84,8 @@
     "rank": "Nr. {rank} på rangeringen",
     "listed": "På MMOTOP siden",
     "visit": "Besøk nettstedet",
-    "others": "Flere {game}-servere",
-    "description": "{name}: en {game}-server ({chronicle}). Rates, åpningsdato og stemmer på MMOTOP."
+    "description": "{name}: en {game}-server ({chronicle}). Rates, åpningsdato og stemmer på MMOTOP.",
+    "recommended": "ANBEFALINGER"
   },
   "seo": {
     "top": {

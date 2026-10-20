@@ -84,8 +84,8 @@
     "rank": "Sıralamada {rank}.",
     "listed": "MMOTOP’a eklenme",
     "visit": "Siteyi ziyaret et",
-    "others": "Diğer {game} sunucuları",
-    "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta."
+    "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta.",
+    "recommended": "ÖNERİLER"
   },
   "seo": {
     "top": {
