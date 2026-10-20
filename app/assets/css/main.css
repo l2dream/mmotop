@@ -1214,7 +1214,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .clock-icon,
 .bolt-icon,
 .sparkle-icon,
-.grid-icon {
+.grid-icon,
+.thumb-icon {
   display: block;
   filter: drop-shadow(0 0 7px var(--panel-glow, transparent));
 }
@@ -1233,6 +1234,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .bolt-icon { margin-inline-start: -3px; }
 .sparkle-icon { margin-inline-start: -2px; }
 .grid-icon { margin-inline-start: -4px; }
+.thumb-icon { margin-inline-start: -2px; }
 
 .theme-light .panel-head { border-bottom-color: rgba(103, 104, 173, .12); }
 .theme-light .panel-icon { color: #7c3aed; }

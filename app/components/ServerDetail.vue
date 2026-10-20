@@ -112,6 +112,26 @@ function fullDate(iso: string) {
   </article>
 
   <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="$t('server.recommended')">
+    <template #icon>
+      <svg class="thumb-icon" viewBox="0 0 24 24" width="24" height="24">
+        <defs>
+          <linearGradient id="thumbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E6D2FF" />
+            <stop offset="50%" stop-color="#A66BFF" />
+            <stop offset="100%" stop-color="#6D28D9" />
+          </linearGradient>
+        </defs>
+        <path d="M2 10.5A1.5 1.5 0 0 1 3.5 9H6v12H3.5A1.5 1.5 0 0 1 2 19.5z" fill="url(#thumbGrad)" />
+        <path d="M8 9.6 12.4 2.8a1.9 1.9 0 0 1 3.4 1.5L15 9h5.2a2.3 2.3 0 0 1 2.2 2.8l-1.9 7.9A2.4 2.4 0 0 1 18.2 21H8z" fill="url(#thumbGrad)" />
+        <path
+          d="M10.2 10.3 13.6 5"
+          stroke="#F3E8FF"
+          stroke-width="1.1"
+          stroke-linecap="round"
+          opacity="0.6"
+        />
+      </svg>
+    </template>
     <template #actions>
       <ShuffleButton :turns="others.turns" @shuffle="$emit('shuffle')" />
     </template>
