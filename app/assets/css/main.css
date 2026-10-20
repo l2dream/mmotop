@@ -1133,7 +1133,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 0 17px;
+  /* 23 + the panel's 1px border = 24px from the edge, for the head and the
+     rows alike (16px on phones, see the mobile block). */
+  padding: 0 23px;
   border-bottom: 1px solid rgba(104, 105, 161, .16);
 }
 
@@ -1239,7 +1241,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   grid-template-columns: 26px 37px minmax(120px, 1fr) 82px 72px;
   align-items: center;
   gap: 8px;
-  padding: 0 17px;
+  padding: 0 23px;
   border-bottom: 1px solid rgba(89, 94, 143, .13);
   background: rgba(255, 255, 255, .025);
   -webkit-backdrop-filter: blur(8px);
@@ -1700,11 +1702,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .filter-popup { width: calc(100vw - 20px); }
   /* The same inset as the rows under it, so the icon and arrow line up with
      their first and last columns, as they do at full width. */
-  .panel-head { padding-inline: 10px; }
+  .panel-head { padding-inline: 15px; }
   .game-row {
     grid-template-columns: 22px 32px minmax(0, 1fr) 58px 60px;
     gap: 5px;
-    padding-inline: 10px;
+    padding-inline: 15px;
   }
   /* One 60px trailing column for votes and dates alike, so they line up
      across the stacked panels. It is sized for the longest date any language
@@ -1728,6 +1730,12 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    320. Tighter padding and gaps hand each column back 14px — enough for every
    name but PORTUGUÊS (BRASIL), which has its BR chip to lean on. */
 @media (max-width: 360px) {
+  /* The 16px inset costs the name column 10px over the old 11px one, and at
+     320 most of TOP GAMES' names no longer fit. The gaps between columns give
+     it back instead of the inset: 3px rather than 5, and a 20px rank. */
+  .game-row { gap: 3px; grid-template-columns: 20px 32px minmax(0, 1fr) 58px 60px; }
+  .rank { width: 20px; height: 20px; }
+  .game-row.no-rank { grid-template-columns: 32px minmax(0, 1fr) 58px 60px; }
   .lang-panel { padding: 6px; }
   .lang-columns { column-gap: 6px; }
   .lang-item { padding: 0 3px; gap: 5px; }
