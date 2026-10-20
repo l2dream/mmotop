@@ -1724,25 +1724,51 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .server-visit { flex: 1; justify-content: center; }
 }
 
-/* A section page: the way back above its one panel. */
+/* The way back above a section or server page: a quiet pill named after
+   where it leads. */
 .section-back {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 0 0 12px;
-  padding: 4px 2px;
-  border-radius: 6px;
-  color: #9095ad;
+  max-width: 100%;
+  height: 32px;
+  margin: 0 0 14px;
+  padding: 0 14px 0 10px;
+  border: 1px solid rgba(103, 104, 173, .28);
+  border-radius: 999px;
+  background: rgba(20, 24, 56, .55);
+  color: #c9ccdf;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  transition: color .18s ease;
+  transition: color .18s ease, border-color .18s ease, background-color .18s ease;
 }
-.section-back:hover { color: #d9a8ff; }
-/* On a touch screen the link is a 24px-tall line of text; the padding makes
-   it a thumb-sized target, and the negative margin keeps it where it was. */
+.section-back svg { flex: 0 0 auto; color: #b98bff; }
+/* A long server name ends in an ellipsis rather than widening the page. */
+.section-back-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section-back:hover {
+  color: #fff;
+  border-color: rgba(156, 92, 255, .55);
+  background: rgba(124, 58, 237, .18);
+}
+.theme-light .section-back {
+  border-color: rgba(103, 104, 173, .2);
+  background: #fff;
+  color: #4a4e66;
+}
+.theme-light .section-back svg { color: #7c3aed; }
+.theme-light .section-back:hover {
+  color: #6d28d9;
+  border-color: rgba(124, 58, 237, .4);
+  background: #f5efff;
+}
 @media (pointer: coarse) {
-  .section-back { padding-block: 10px; margin-block: -10px 2px; }
+  /* Thumb-sized on a touch screen. */
+  .section-back { height: 36px; }
   .panel-arrow { position: relative; }
   /* The arrow is 11px wide; the tap area is the head's full height and as
      wide again on both sides. */
@@ -1752,8 +1778,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     inset: -14px -12px;
   }
 }
-.theme-light .section-back { color: #5d6177; }
-.theme-light .section-back:hover { color: #6d28d9; }
 
 .sr-only {
   position: absolute;
