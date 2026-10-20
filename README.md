@@ -1,8 +1,7 @@
 # MMOTOP
 
 A directory of game servers (Lineage II, World of Warcraft and others), built
-with Nuxt 4 and Vue 3, in 26 languages. Live at
-https://l2dream.github.io/mmotop/.
+with Nuxt 4 and Vue 3, in 26 languages. Live at https://mmotop.com/.
 
 ## Local development
 
@@ -15,8 +14,9 @@ npm run typecheck  # must pass: the deploy runs it first
 ## Deploy
 
 Every push to `main` runs `.github/workflows/deploy.yml`: type-check, then
-`npm run generate` with the `/mmotop/` base, then publish to GitHub Pages.
-The site is fully static.
+`npm run generate`, then publish to GitHub Pages. The base path and the
+site's address come from the Pages settings (custom domain mmotop.com, set
+in Settings → Pages). The site is fully static.
 
 ## Where things are
 

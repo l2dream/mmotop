@@ -40,8 +40,10 @@ const fontHref = computed(() => (scriptFont.value ? fontUrl(base, scriptFont.val
 function withSlash(url: string | undefined) {
   if (!url || !/^https?:\/\//.test(url)) return url
   const u = new URL(url)
-  if (u.search || u.hash || /\.[a-z0-9]+$/i.test(u.pathname) || u.pathname.endsWith('/')) return url
-  u.pathname += '/'
+  if (u.search || u.hash || /\.[a-z0-9]+$/i.test(u.pathname)) return url
+  // The home page on a domain of its own comes as a bare "https://mmotop.com";
+  // its path is "/" all the same, and toString() writes the slash out.
+  if (!u.pathname.endsWith('/')) u.pathname += '/'
   return u.toString()
 }
 
