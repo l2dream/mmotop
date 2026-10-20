@@ -985,6 +985,7 @@ function clearSearch() {
     </header>
 
     <LanguageSuggestion />
+    <ScrollDebug />
 
     <nav class="category-bar" :aria-label="$t('nav.categories')">
       <div
