@@ -1050,6 +1050,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .dashboard {
   max-width: 1480px;
   margin: 0 auto;
+  /* Chrome's scroll anchoring nudges the scroll position whenever content
+     near the top of the view changes — and while searching it changes on every
+     key. Once a page is even slightly scrolled (Chrome on Android leaves it so
+     after turning the phone), that moved everything down a step per letter.
+     The panels only ever change because of what the visitor just did, so there
+     is nothing for anchoring to protect here. */
+  overflow-anchor: none;
 }
 
 .site-footer {
