@@ -1,31 +1,27 @@
-# MMOTOP Nuxt dashboard
+# MMOTOP
 
-Recreation of the supplied MMOTOR gaming-directory UI using Nuxt 4 and Vue 3.
+A directory of game servers (Lineage II, World of Warcraft and others), built
+with Nuxt 4 and Vue 3, in 26 languages. Live at
+https://l2dream.github.io/mmotop/.
 
 ## Local development
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
+npm run typecheck  # must pass: the deploy runs it first
 ```
 
-Open `http://localhost:3000`.
+## Deploy
 
-## GitHub Pages
+Every push to `main` runs `.github/workflows/deploy.yml`: type-check, then
+`npm run generate` with the `/mmotop/` base, then publish to GitHub Pages.
+The site is fully static.
 
-Push the repository to GitHub, then enable:
+## Where things are
 
-**Settings → Pages → Build and deployment → Source: GitHub Actions**
-
-The included workflow generates a static Nuxt site and publishes it to GitHub Pages. For a project repository, the workflow automatically uses:
-
-`/<repository-name>/`
-
-as the Nuxt base URL.
-
-## Notes
-
-- Nuxt 4 is used for SSR/SSG-friendly SEO and Vue routing.
-- The page is fully static after `npm run generate`.
-- The visual system is implemented with scoped project CSS rather than a component library because the supplied design is highly custom.
-- Search, category selection, theme toggle, and the “More” navigation control are functional.
+- `app/pages/index.vue` — the dashboard: panels, search, filters, URL sync
+- `app/data/` — games and servers (servers are test data for now)
+- `app/i18n/`, `i18n/messages/` — the language registry and translations
+- `modules/fonts.ts` — self-hosted fonts, built from Fontsource packages
+- `modules/sitemap.ts` — sitemap.xml for every language
