@@ -11,12 +11,13 @@ export default defineNuxtConfig({
        * interactive-widget=resizes-content: the on-screen keyboard shrinks the
        * page itself rather than a separate visual viewport laid over it.
        *
-       * Found with ?debug=scroll on an Android phone in Chrome: after the phone
-       * had been turned sideways and back, typing in the search left the page
-       * scroll at 0 but moved visualViewport.offsetTop down ~18px per key, with
-       * the visual viewport reporting a height of 0. Chrome kept panning that
-       * zero-height view towards the caret, which it could never reach — the
-       * page slid down a step per letter. With the keyboard resizing the page,
+       * Found with a temporary on-screen readout on an Android phone in
+       * Chrome: after the phone had been turned sideways and back, typing in
+       * the search left the page scroll at 0 but moved
+       * visualViewport.offsetTop down ~18px per key, with the visual viewport
+       * reporting a height of 0. Chrome kept panning that zero-height view
+       * towards the caret, which it could never reach — the page slid down a
+       * step per letter. With the keyboard resizing the page,
        * the visual viewport is the page and has nowhere to pan.
        */
       viewport: 'width=device-width, initial-scale=1, interactive-widget=resizes-content',
