@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { localeByCode } from '~/i18n/locales'
+import { READY_LOCALES, bcp47, localeByCode } from '~/i18n/locales'
 import { fontUrl } from '~/i18n/fonts'
 
 /**
@@ -47,9 +47,40 @@ function withSlash(url: string | undefined) {
 
 const pageLinks = computed(() =>
   (localeHead.value.link ?? []).map(link => ({ ...link, href: withSlash(link.href) as string })))
+/**
+ * og:locale:alternate as Open Graph wants it, language_TERRITORY. The i18n
+ * module writes the bare language for most ("az", "de"), which consumers
+ * drop; the registry already holds the proper form for og:locale itself.
+ */
+function ogLocaleFor(content: string) {
+  const match = READY_LOCALES.find(l => l.code === content || bcp47(l.code).replace('-', '_') === content)
+  return match?.ogLocale ?? content
+}
+
 const pageMeta = computed(() =>
-  (localeHead.value.meta ?? []).map(meta =>
-    meta.property === 'og:url' ? { ...meta, content: withSlash(String(meta.content)) as string } : meta))
+  (localeHead.value.meta ?? []).map((meta) => {
+    if (meta.property === 'og:url') return { ...meta, content: withSlash(String(meta.content)) as string }
+    if (meta.property === 'og:locale:alternate') return { ...meta, content: ogLocaleFor(String(meta.content)) }
+    return meta
+  }))
+
+/**
+ * The picture shown when a link to any page is shared — in a chat, a forum,
+ * a social feed. One image for every page and language: it carries the
+ * wordmark and the games' names, which read the same in all of them. Open
+ * Graph wants an absolute address.
+ */
+const siteUrl = useRuntimeConfig().public.siteUrl as string
+const OG_IMAGE = `${siteUrl.replace(/\/$/, '')}${base}og-image.jpg`
+useSeoMeta({
+  ogImage: OG_IMAGE,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageType: 'image/jpeg',
+  ogImageAlt: 'MMOTOP',
+  twitterCard: 'summary_large_image',
+  twitterImage: OG_IMAGE
+})
 
 /**
  * Inter, from the site itself (see modules/fonts.ts).

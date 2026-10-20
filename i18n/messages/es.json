@@ -87,6 +87,28 @@
     "others": "Más servidores de {game}",
     "description": "{name}: servidor de {game} ({chronicle}). Rates, fecha de apertura y votos en MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Top servidores de juegos por votos",
+      "description": "Los servidores de juegos más votados del mes: Lineage II, World of Warcraft, AION y más en MMOTOP."
+    },
+    "soon": {
+      "title": "Próximas aperturas de servidores",
+      "description": "Servidores de juegos que abren pronto: fechas de lanzamiento, crónicas y rates en MMOTOP."
+    },
+    "started": {
+      "title": "Servidores de juegos recién abiertos",
+      "description": "Servidores de juegos que acaban de abrir, del más nuevo al más antiguo, con crónicas y rates en MMOTOP."
+    },
+    "new": {
+      "title": "Nuevos servidores en MMOTOP",
+      "description": "Los últimos servidores añadidos a MMOTOP, con fecha de apertura, crónica y rates."
+    },
+    "all": {
+      "title": "Todos los servidores de juegos de la A a la Z",
+      "description": "Todos los servidores de juegos de MMOTOP en orden alfabético, con crónicas y rates."
+    }
+  },
   "notFound": {
     "title": "Página no encontrada",
     "text": "Esta página no existe o se ha movido.",

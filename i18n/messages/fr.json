@@ -87,6 +87,28 @@
     "others": "Autres serveurs {game}",
     "description": "{name} : serveur {game} ({chronicle}). Rates, date d’ouverture et votes sur MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Top des serveurs de jeu par votes",
+      "description": "Les serveurs de jeu les plus votés du mois : Lineage II, World of Warcraft, AION et plus sur MMOTOP."
+    },
+    "soon": {
+      "title": "Serveurs de jeu bientôt ouverts",
+      "description": "Les serveurs de jeu qui ouvrent bientôt : dates de lancement, chroniques et rates sur MMOTOP."
+    },
+    "started": {
+      "title": "Serveurs de jeu récemment ouverts",
+      "description": "Les serveurs de jeu qui viennent d’ouvrir, du plus récent au plus ancien, avec chroniques et rates sur MMOTOP."
+    },
+    "new": {
+      "title": "Nouveaux serveurs sur MMOTOP",
+      "description": "Les derniers serveurs ajoutés à MMOTOP, avec date d’ouverture, chronique et rates."
+    },
+    "all": {
+      "title": "Tous les serveurs de jeu de A à Z",
+      "description": "Tous les serveurs de jeu listés sur MMOTOP, par ordre alphabétique, avec chroniques et rates."
+    }
+  },
   "notFound": {
     "title": "Page introuvable",
     "text": "Cette page n’existe pas ou a été déplacée.",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { localeByCode } from '~/i18n/locales'
+import { bcp47, localeByCode } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
@@ -556,15 +556,18 @@ const searchText = computed(() => query.value.trim())
 // frozen at whatever it was when the component first ran.
 const pageTitle = computed(() => {
   if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} — MMOTOP`
-  return props.section ? `${t(`panels.${props.section}`)} — MMOTOP` : t('meta.title')
+  return props.section ? `${t(`seo.${props.section}.title`)} — MMOTOP` : t('meta.title')
 })
+// The page's subject for its one h1: on a section page the plain-words name
+// ("Top game servers by votes"), not the capitalised panel label.
+const pageHeading = computed(() => (props.section ? t(`seo.${props.section}.title`) : t('meta.title')))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
     game: serverSubtitle(server.value),
     chronicle: server.value.chronicle
   })
-  : t('meta.description')))
+  : props.section ? t(`seo.${props.section}.description`) : t('meta.description')))
 
 /** A server's place among all servers by votes, and more of its game. */
 const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))
@@ -577,7 +580,7 @@ useSeoMeta({
   title: () => pageTitle.value,
   description: () => pageDescription.value,
   ogTitle: () => pageTitle.value,
-  ogDescription: () => (server.value ? pageDescription.value : t('meta.ogDescription')),
+  ogDescription: () => (server.value || props.section ? pageDescription.value : t('meta.ogDescription')),
   ogType: 'website',
   ogSiteName: 'MMOTOP',
   /**
@@ -586,15 +589,70 @@ useSeoMeta({
    * twenty-four of the twenty-six — which consumers simply drop, so every
    * shared link carried no locale signal at all.
    */
-  ogLocale: () => localeByCode(locale.value)?.ogLocale,
-  /**
-   * `summary`, not `summary_large_image`. The large card is a promise of a
-   * 1200x630 image and there is no image anywhere in this project, so the
-   * card rendered as a wide empty box. Worth upgrading once there is real
-   * artwork to put in it; until then this declares what actually exists.
-   */
-  twitterCard: 'summary'
+  ogLocale: () => localeByCode(locale.value)?.ogLocale
+  // The image and the card type are set once for every page, in app.vue.
 })
+
+/**
+ * Structured data: what each page is, in the form search engines read.
+ *
+ * The home page names the site. A section or server page carries its
+ * breadcrumb — MMOTOP › Top game servers, MMOTOP › LA2DREAM — which Google
+ * can show in place of the bare address; a section page also lists the
+ * servers on it. Addresses are absolute and end in a slash, as the pages are
+ * served.
+ */
+// localePath gives the route's path; the site's base (/mmotop/ on Pages) is
+// the router's to add, so it is added here by hand.
+const siteRoot = (useRuntimeConfig().public.siteUrl as string).replace(/\/$/, '')
+  + useRuntimeConfig().app.baseURL.replace(/\/$/, '')
+const absolute = (path: string) => `${siteRoot}${localePath(path).replace(/\/?$/, '/')}`
+
+const structuredData = computed(() => {
+  const home = absolute('/')
+  const crumbs = (name: string, url: string) => ({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'MMOTOP', item: home },
+      { '@type': 'ListItem', position: 2, name, item: url }
+    ]
+  })
+  if (server.value) {
+    return [crumbs(server.value.name, absolute(`/server/${server.value.id}`))]
+  }
+  if (props.section) {
+    return [
+      crumbs(t(`seo.${props.section}.title`), absolute(`/${props.section}`)),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: t(`seo.${props.section}.title`),
+        itemListElement: sectionList.value.slice(0, SECTION_PAGE).map((row, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: row.server.name,
+          url: absolute(`/server/${row.server.id}`)
+        }))
+      }
+    ]
+  }
+  return [{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MMOTOP',
+    url: home,
+    inLanguage: bcp47(locale.value)
+  }]
+})
+
+useHead(() => ({
+  script: structuredData.value.map((data, i) => ({
+    key: `ld-json-${i}`,
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify(data)
+  }))
+}))
 
 function selectCategory(category: string, fromMore = false) {
   activeCategory.value = category
@@ -797,7 +855,7 @@ function clearSearch() {
            five h2s and no h1 at all. This states the subject once, for crawlers
            and for anyone listing the headings. -->
       <!-- A server's page shows its own h1, the server's name. -->
-      <h1 v-if="!server" class="sr-only">{{ pageTitle }}</h1>
+      <h1 v-if="!server" class="sr-only">{{ pageHeading }}</h1>
 
       <button class="theme-button" type="button" :aria-label="$t('nav.theme')" @click="toggleTheme">
         <svg

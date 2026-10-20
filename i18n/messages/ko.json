@@ -87,6 +87,28 @@
     "others": "다른 {game} 서버",
     "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요."
   },
+  "seo": {
+    "top": {
+      "title": "투표순 게임 서버 랭킹",
+      "description": "이번 달 가장 많은 투표를 받은 게임 서버: Lineage II, World of Warcraft, AION 등을 MMOTOP에서."
+    },
+    "soon": {
+      "title": "곧 오픈하는 게임 서버",
+      "description": "곧 오픈하는 게임 서버의 오픈일, 크로니클, 배율을 MMOTOP에서 확인하세요."
+    },
+    "started": {
+      "title": "최근 오픈한 게임 서버",
+      "description": "막 오픈한 게임 서버를 최신순으로, 크로니클과 배율과 함께 MMOTOP에서."
+    },
+    "new": {
+      "title": "MMOTOP 신규 서버",
+      "description": "MMOTOP에 최근 추가된 서버의 오픈일, 크로니클, 배율."
+    },
+    "all": {
+      "title": "모든 게임 서버 (A–Z)",
+      "description": "MMOTOP에 등록된 모든 게임 서버를 알파벳순으로, 크로니클과 배율과 함께."
+    }
+  },
   "notFound": {
     "title": "페이지를 찾을 수 없습니다",
     "text": "이 페이지는 존재하지 않거나 이동되었습니다.",

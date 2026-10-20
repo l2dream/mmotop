@@ -87,6 +87,28 @@
     "others": "Fler {game}-servrar",
     "description": "{name}: en {game}-server ({chronicle}). Rates, öppningsdatum och röster på MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Topp spelservrar efter röster",
+      "description": "Månadens mest röstade spelservrar: Lineage II, World of Warcraft, AION och fler på MMOTOP."
+    },
+    "soon": {
+      "title": "Spelservrar som snart öppnar",
+      "description": "Spelservrar som öppnar snart: startdatum, krönikor och rates på MMOTOP."
+    },
+    "started": {
+      "title": "Nyligen öppnade spelservrar",
+      "description": "Spelservrar som just har öppnat, nyaste först, med krönikor och rates på MMOTOP."
+    },
+    "new": {
+      "title": "Nya servrar på MMOTOP",
+      "description": "De senast tillagda servrarna på MMOTOP med öppningsdatum, krönika och rates."
+    },
+    "all": {
+      "title": "Alla spelservrar från A till Ö",
+      "description": "Alla spelservrar på MMOTOP i bokstavsordning, med krönikor och rates."
+    }
+  },
   "notFound": {
     "title": "Sidan hittades inte",
     "text": "Sidan finns inte eller har flyttats.",

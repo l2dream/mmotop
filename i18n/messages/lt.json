@@ -87,6 +87,28 @@
     "others": "Daugiau {game} serverių",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Geriausi žaidimų serveriai pagal balsus",
+      "description": "Daugiausiai balsų šį mėnesį surinkę žaidimų serveriai: Lineage II, World of Warcraft, AION ir kiti MMOTOP."
+    },
+    "soon": {
+      "title": "Netrukus atidaromi žaidimų serveriai",
+      "description": "Netrukus atsidarantys žaidimų serveriai: starto datos, kronikos ir rate MMOTOP."
+    },
+    "started": {
+      "title": "Neseniai atidaryti žaidimų serveriai",
+      "description": "Ką tik atidaryti žaidimų serveriai, naujausi pirmiau, su kronikomis ir rate MMOTOP."
+    },
+    "new": {
+      "title": "Nauji serveriai MMOTOP",
+      "description": "Naujausi į MMOTOP įtraukti serveriai su atidarymo data, kronika ir rate."
+    },
+    "all": {
+      "title": "Visi žaidimų serveriai nuo A iki Ž",
+      "description": "Visi MMOTOP žaidimų serveriai abėcėlės tvarka, su kronikomis ir rate."
+    }
+  },
   "notFound": {
     "title": "Puslapis nerastas",
     "text": "Šio puslapio nėra arba jis perkeltas.",

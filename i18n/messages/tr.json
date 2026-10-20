@@ -87,6 +87,28 @@
     "others": "Diğer {game} sunucuları",
     "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta."
   },
+  "seo": {
+    "top": {
+      "title": "Oylara göre en iyi oyun sunucuları",
+      "description": "Ayın en çok oy alan oyun sunucuları: Lineage II, World of Warcraft, AION ve daha fazlası MMOTOP’ta."
+    },
+    "soon": {
+      "title": "Yakında açılacak oyun sunucuları",
+      "description": "Yakında açılacak oyun sunucuları: başlangıç tarihleri, kronikler ve rate’ler MMOTOP’ta."
+    },
+    "started": {
+      "title": "Yeni açılan oyun sunucuları",
+      "description": "Yeni açılan oyun sunucuları, en yeniler önce, kronikler ve rate’lerle MMOTOP’ta."
+    },
+    "new": {
+      "title": "MMOTOP’taki yeni sunucular",
+      "description": "MMOTOP’a son eklenen sunucular; açılış tarihi, kronik ve rate bilgileriyle."
+    },
+    "all": {
+      "title": "A’dan Z’ye tüm oyun sunucuları",
+      "description": "MMOTOP’taki tüm oyun sunucuları alfabetik sırayla, kronikler ve rate’lerle."
+    }
+  },
   "notFound": {
     "title": "Sayfa bulunamadı",
     "text": "Bu sayfa yok veya taşınmış.",

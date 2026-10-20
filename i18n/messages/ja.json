@@ -87,6 +87,28 @@
     "others": "{game}の他のサーバー",
     "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。"
   },
+  "seo": {
+    "top": {
+      "title": "投票数で選ぶゲームサーバーランキング",
+      "description": "今月最も投票されたゲームサーバー：Lineage II、World of Warcraft、AIONなどをMMOTOPで。"
+    },
+    "soon": {
+      "title": "まもなくオープンするゲームサーバー",
+      "description": "まもなくオープンするゲームサーバーのオープン日、クロニクル、レートをMMOTOPで。"
+    },
+    "started": {
+      "title": "最近オープンしたゲームサーバー",
+      "description": "オープンしたばかりのゲームサーバーを新しい順に、クロニクルとレート付きでMMOTOPで。"
+    },
+    "new": {
+      "title": "MMOTOPの新着サーバー",
+      "description": "MMOTOPに最近追加されたサーバー。オープン日、クロニクル、レートを掲載。"
+    },
+    "all": {
+      "title": "すべてのゲームサーバー（A〜Z）",
+      "description": "MMOTOPに掲載されているすべてのゲームサーバーをアルファベット順に、クロニクルとレート付きで。"
+    }
+  },
   "notFound": {
     "title": "ページが見つかりません",
     "text": "このページは存在しないか、移動されました。",

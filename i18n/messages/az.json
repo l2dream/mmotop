@@ -87,6 +87,28 @@
     "others": "Digər {game} serverləri",
     "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da."
   },
+  "seo": {
+    "top": {
+      "title": "Səslərə görə ən yaxşı oyun serverləri",
+      "description": "Ayın ən çox səs toplayan oyun serverləri: Lineage II, World of Warcraft, AION və digərləri MMOTOP-da."
+    },
+    "soon": {
+      "title": "Tezliklə açılacaq oyun serverləri",
+      "description": "Tezliklə açılacaq oyun serverləri: başlama tarixləri, xronikalar və rate-lər MMOTOP-da."
+    },
+    "started": {
+      "title": "Yeni açılmış oyun serverləri",
+      "description": "Təzəcə açılmış oyun serverləri, ən yenilər əvvəl, xronikalar və rate-lərlə MMOTOP-da."
+    },
+    "new": {
+      "title": "MMOTOP-da yeni serverlər",
+      "description": "MMOTOP-a son əlavə edilən serverlər: açılış tarixi, xronika və rate."
+    },
+    "all": {
+      "title": "A-dan Z-yə bütün oyun serverləri",
+      "description": "MMOTOP-dakı bütün oyun serverləri əlifba sırası ilə, xronikalar və rate-lərlə."
+    }
+  },
   "notFound": {
     "title": "Səhifə tapılmadı",
     "text": "Belə səhifə yoxdur və ya köçürülüb.",

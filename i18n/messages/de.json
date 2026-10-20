@@ -87,6 +87,28 @@
     "others": "Weitere {game}-Server",
     "description": "{name}: ein {game}-Server ({chronicle}). Rates, Eröffnungsdatum und Stimmen auf MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Top-Gameserver nach Stimmen",
+      "description": "Die beliebtesten Gameserver des Monats nach Spielerstimmen: Lineage II, World of Warcraft, AION und mehr auf MMOTOP."
+    },
+    "soon": {
+      "title": "Bald startende Gameserver",
+      "description": "Gameserver, die bald öffnen: Starttermine, Chroniken und Rates auf MMOTOP."
+    },
+    "started": {
+      "title": "Kürzlich gestartete Gameserver",
+      "description": "Gerade eröffnete Gameserver, die neuesten zuerst, mit Chroniken und Rates auf MMOTOP."
+    },
+    "new": {
+      "title": "Neue Server auf MMOTOP",
+      "description": "Die zuletzt auf MMOTOP eingetragenen Server mit Startdatum, Chronik und Rates."
+    },
+    "all": {
+      "title": "Alle Gameserver von A bis Z",
+      "description": "Alle auf MMOTOP gelisteten Gameserver alphabetisch, mit Chroniken und Rates."
+    }
+  },
   "notFound": {
     "title": "Seite nicht gefunden",
     "text": "Diese Seite existiert nicht oder wurde verschoben.",

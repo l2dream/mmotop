@@ -87,6 +87,28 @@
     "others": "Další servery {game}",
     "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Nejlepší herní servery podle hlasů",
+      "description": "Nejvíce hlasované herní servery měsíce: Lineage II, World of Warcraft, AION a další na MMOTOP."
+    },
+    "soon": {
+      "title": "Brzy spouštěné herní servery",
+      "description": "Herní servery, které brzy otevřou: data spuštění, kroniky a rates na MMOTOP."
+    },
+    "started": {
+      "title": "Nedávno spuštěné herní servery",
+      "description": "Právě otevřené herní servery od nejnovějších, s kronikami a rates na MMOTOP."
+    },
+    "new": {
+      "title": "Nové servery na MMOTOP",
+      "description": "Naposledy přidané servery na MMOTOP s datem otevření, kronikou a rates."
+    },
+    "all": {
+      "title": "Všechny herní servery od A do Z",
+      "description": "Všechny herní servery na MMOTOP podle abecedy, s kronikami a rates."
+    }
+  },
   "notFound": {
     "title": "Stránka nenalezena",
     "text": "Tato stránka neexistuje nebo byla přesunuta.",

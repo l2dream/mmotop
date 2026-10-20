@@ -87,6 +87,28 @@
     "others": "Veel {game} servereid",
     "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is."
   },
+  "seo": {
+    "top": {
+      "title": "Parimad mänguserverid häälte järgi",
+      "description": "Kuu enim hääli saanud mänguserverid: Lineage II, World of Warcraft, AION ja teised MMOTOP-is."
+    },
+    "soon": {
+      "title": "Peagi avatavad mänguserverid",
+      "description": "Mänguserverid, mis avatakse peagi: alguskuupäevad, kroonikad ja rate-id MMOTOP-is."
+    },
+    "started": {
+      "title": "Hiljuti avatud mänguserverid",
+      "description": "Äsja avatud mänguserverid, uusimad eespool, kroonikate ja rate-idega MMOTOP-is."
+    },
+    "new": {
+      "title": "Uued serverid MMOTOP-is",
+      "description": "Viimati MMOTOP-i lisatud serverid koos avamise kuupäeva, kroonika ja rate-idega."
+    },
+    "all": {
+      "title": "Kõik mänguserverid A–Z",
+      "description": "Kõik MMOTOP-i mänguserverid tähestikulises järjekorras, kroonikate ja rate-idega."
+    }
+  },
   "notFound": {
     "title": "Lehte ei leitud",
     "text": "Seda lehte pole olemas või see on teisaldatud.",

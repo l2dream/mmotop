@@ -87,6 +87,28 @@
     "others": "更多 {game} 服务器",
     "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。"
   },
+  "seo": {
+    "top": {
+      "title": "按票数排名的游戏服务器",
+      "description": "本月得票最多的游戏服务器：Lineage II、World of Warcraft、AION 等，尽在 MMOTOP。"
+    },
+    "soon": {
+      "title": "即将开服的游戏服务器",
+      "description": "即将开服的游戏服务器：开服日期、版本和倍率，尽在 MMOTOP。"
+    },
+    "started": {
+      "title": "最近开服的游戏服务器",
+      "description": "刚刚开服的游戏服务器，按时间从新到旧，附版本和倍率，尽在 MMOTOP。"
+    },
+    "new": {
+      "title": "MMOTOP 新收录服务器",
+      "description": "最近收录到 MMOTOP 的服务器，附开服日期、版本和倍率。"
+    },
+    "all": {
+      "title": "全部游戏服务器（A–Z）",
+      "description": "MMOTOP 收录的全部游戏服务器，按字母顺序排列，附版本和倍率。"
+    }
+  },
   "notFound": {
     "title": "页面未找到",
     "text": "此页面不存在或已被移动。",
