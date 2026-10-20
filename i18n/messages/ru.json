@@ -84,8 +84,8 @@
     "rank": "№ {rank} в рейтинге",
     "listed": "На MMOTOP с",
     "visit": "Перейти на сайт",
-    "others": "Другие серверы {game}",
-    "description": "{name} — сервер {game} ({chronicle}). Рейты, дата открытия и голоса на MMOTOP."
+    "description": "{name} — сервер {game} ({chronicle}). Рейты, дата открытия и голоса на MMOTOP.",
+    "recommended": "РЕКОМЕНДАЦИИ"
   },
   "seo": {
     "top": {

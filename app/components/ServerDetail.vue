@@ -7,8 +7,8 @@ import type { SectionId } from '~/data/sections'
 
 /**
  * One server's own page: what it is, when it opens, how it stands, and the
- * way to its site. Below it, more servers of the same game, so the page is
- * never a dead end.
+ * way to its site. Below it, recommendations — similar servers, the same
+ * game first — so the page is never a dead end.
  *
  * `today` comes from the dashboard, which moves it from the build date to
  * the visitor's own date on mount — the same date that splits COMING SOON
@@ -23,9 +23,6 @@ const props = defineProps<{
     rows: { server: Server, rank?: number }[]
     /** The list the visitor came through, kept by the rows here. */
     origin: SectionId | null
-    /** The panel's icon: its list's, or none for the game's own servers. */
-    icon: SectionId | null
-    title: string
     end: 'votes' | 'date' | 'chronicle'
     link?: RouteLocationRaw
     /** Deliberate shuffles so far, for the button's half-turn. */
@@ -114,8 +111,7 @@ function fullDate(iso: string) {
     </div>
   </article>
 
-  <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="others.title">
-    <template v-if="others.icon" #icon><PanelIcon :id="others.icon" /></template>
+  <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="$t('server.recommended')">
     <template #actions>
       <ShuffleButton :turns="others.turns" @shuffle="$emit('shuffle')" />
     </template>
@@ -127,6 +123,6 @@ function fullDate(iso: string) {
       :end="others.end"
       :origin="others.origin"
     />
-    <PanelFooter v-if="others.link" :to="others.link" :title="others.title" />
+    <PanelFooter v-if="others.link" :to="others.link" :title="$t('server.recommended')" />
   </GamePanel>
 </template>

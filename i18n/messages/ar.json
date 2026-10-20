@@ -84,8 +84,8 @@
     "rank": "المركز {rank} في التصنيف",
     "listed": "على MMOTOP منذ",
     "visit": "زيارة الموقع",
-    "others": "المزيد من خوادم {game}",
-    "description": "{name}: خادم {game} ({chronicle}). المعدلات وتاريخ الافتتاح والأصوات على MMOTOP."
+    "description": "{name}: خادم {game} ({chronicle}). المعدلات وتاريخ الافتتاح والأصوات على MMOTOP.",
+    "recommended": "مقترحات"
   },
   "seo": {
     "top": {

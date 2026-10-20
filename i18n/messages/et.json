@@ -84,8 +84,8 @@
     "rank": "Edetabelis {rank}. koht",
     "listed": "MMOTOP-is alates",
     "visit": "Ava veebisait",
-    "others": "Veel {game} servereid",
-    "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is."
+    "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is.",
+    "recommended": "SOOVITUSED"
   },
   "seo": {
     "top": {

@@ -84,8 +84,8 @@
     "rank": "Վարկանիշում № {rank}",
     "listed": "MMOTOP-ում՝ սկսած",
     "visit": "Այցելել կայք",
-    "others": "Այլ {game} սերվերներ",
-    "description": "{name}՝ {game} սերվեր ({chronicle})։ Rate-եր, բացման ամսաթիվ և ձայներ MMOTOP-ում։"
+    "description": "{name}՝ {game} սերվեր ({chronicle})։ Rate-եր, բացման ամսաթիվ և ձայներ MMOTOP-ում։",
+    "recommended": "ԱՌԱՋԱՐԿՆԵՐ"
   },
   "seo": {
     "top": {

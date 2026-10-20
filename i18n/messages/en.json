@@ -84,8 +84,8 @@
     "rank": "#{rank} in the ranking",
     "listed": "Listed on MMOTOP",
     "visit": "Visit website",
-    "others": "More {game} servers",
-    "description": "{name}: a {game} server ({chronicle}). Rates, opening date and votes on MMOTOP."
+    "description": "{name}: a {game} server ({chronicle}). Rates, opening date and votes on MMOTOP.",
+    "recommended": "RECOMMENDED"
   },
   "seo": {
     "top": {

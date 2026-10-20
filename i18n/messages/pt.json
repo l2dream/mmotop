@@ -84,8 +84,8 @@
     "rank": "N.º {rank} no ranking",
     "listed": "No MMOTOP desde",
     "visit": "Visitar o site",
-    "others": "Mais servidores de {game}",
-    "description": "{name}: servidor de {game} ({chronicle}). Rates, data de abertura e votos no MMOTOP."
+    "description": "{name}: servidor de {game} ({chronicle}). Rates, data de abertura e votos no MMOTOP.",
+    "recommended": "RECOMENDAÇÕES"
   },
   "seo": {
     "top": {

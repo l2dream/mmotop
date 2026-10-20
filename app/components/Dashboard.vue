@@ -651,7 +651,6 @@ onMounted(() => {
 const serverOthers = computed(() => {
   if (!server.value) return null
   const current = server.value
-  const game = serverSubtitle(current)
   const origin = serverOrigin.value
 
   /**
@@ -692,9 +691,10 @@ const serverOthers = computed(() => {
     SERVER_OTHERS - recommended.length - sameGame.length
   )
 
-  // The title says what the panel holds. Recommendations alone keep their
-  // list's look — its icon, its way of ending a row, TOP's places within the
-  // game — and its View more; anything mixed is plainer.
+  // The panel is titled RECOMMENDED whatever it holds. Recommendations alone
+  // keep their list's way of ending a row — TOP's places within the game, a
+  // date list's dates — and their View more to that list; anything mixed
+  // ends rows with the chronicle and leads to ALL GAMES.
   const onlyRecommended = !!origin && recommended.length > 0 && !sameGame.length && !otherGames.length
   const gameOnly = !otherGames.length
   const ranking = serversByVotes.filter((s) => s.game === current.game)
@@ -706,10 +706,6 @@ const serverOthers = computed(() => {
   return {
     rows,
     origin,
-    icon: onlyRecommended ? origin : gameOnly ? null : 'all' as SectionId,
-    title: onlyRecommended
-      ? `${t(`panels.${origin}`)} · ${game}`
-      : gameOnly ? t('server.others', { game }) : t('panels.all'),
     turns: othersTurns.value,
     end: onlyRecommended ? ROW_END[origin!] : 'chronicle' as const,
     link: onlyRecommended
