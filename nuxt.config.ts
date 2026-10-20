@@ -19,7 +19,16 @@ export default defineNuxtConfig({
        * page slid down a step per letter. With the keyboard resizing the page,
        * the visual viewport is the page and has nowhere to pan.
        */
-      viewport: 'width=device-width, initial-scale=1, interactive-widget=resizes-content'
+      viewport: 'width=device-width, initial-scale=1, interactive-widget=resizes-content',
+      // The site lives under /mmotop/, so the browser's own guess at
+      // /favicon.ico (the origin root) finds nothing; the icons are linked.
+      // The .ico is for browsers without SVG favicons (Safari), the PNG for
+      // an iPhone home-screen shortcut.
+      link: [
+        { rel: 'icon', href: `${process.env.NUXT_APP_BASE_URL || '/'}favicon.ico`, sizes: '32x32' },
+        { rel: 'icon', href: `${process.env.NUXT_APP_BASE_URL || '/'}favicon.svg`, type: 'image/svg+xml' },
+        { rel: 'apple-touch-icon', href: `${process.env.NUXT_APP_BASE_URL || '/'}apple-touch-icon.png` }
+      ]
     }
     // <html lang> and <html dir> are no longer set here: @nuxtjs/i18n writes
     // both per page, which is the only way they can be right on /ru/ as well
