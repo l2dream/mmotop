@@ -615,29 +615,27 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
 }))
 
 /**
- * The panel under a server's card: more servers of the same game from the
- * list the visitor came through — came from COMING SOON, more Lineage II
- * servers opening soon — in that list's order, with its way to the full list.
- * Opened directly, there is no list to follow, and it shows the game's best
- * by votes, as before.
+ * RECOMMENDED, the panel under a server's card: five other servers, chosen by
+ * the owner's rules, each deciding only among servers the rules above it
+ * left level:
+ *
+ *   1. the filters and search set in the header — servers that pass them
+ *      come first, the rest only fill what is left;
+ *   2. the list the visitor came through (COMING SOON, ALREADY STARTED…);
+ *      TOP, NEW and ALL GAMES hold every server, so they narrow nothing;
+ *   3. the same game;
+ *   4. the same chronicle;
+ *   5. close rates — within three times either way, or both without one;
+ *   6. then chance.
+ *
+ * Chance is a random number per server, drawn on mount and again by the
+ * panel's Shuffle, so each visit shows a different five among equals. A
+ * number per server rather than a shuffled array keeps the pick steady while
+ * the lists settle after hydration (today's date, the ALL GAMES pool). Until
+ * mount there are no numbers and likeness of dates and votes breaks the ties
+ * instead, so the prerendered page and the first render agree.
  */
 const SERVER_OTHERS = 5
-
-/**
- * The panel recommends: of the candidates, the ones most like this server
- * (same chronicle, close rates, opening around the same time, a similar
- * following — see serverSimilarity) are the likeliest to be picked, but the
- * pick is still a draw, so each visit and each Shuffle shows a different
- * five and nothing is shown every single time.
- *
- * A weighted draw without replacement: each server gets a random number
- * raised to 1/weight, and the five largest win. A random number per server
- * rather than a shuffled array, so the pick survives the list itself
- * changing under it — today's date moving from the build's to the visitor's,
- * the ALL GAMES pool being drawn. Until mount there are no numbers and the
- * five most similar are shown, so the prerendered page and the first render
- * agree.
- */
 const othersKeys = ref<Map<string, number> | null>(null)
 const othersTurns = ref(0)
 function drawOthers() {
@@ -651,71 +649,51 @@ onMounted(() => {
   if (server.value) drawOthers()
 })
 
+const filtersActive = computed(() =>
+  activeCategory.value !== 'all' || !!filters.value.version || filters.value.rates.length > 0
+  || customRateActive.value || !!query.value.trim())
+
 const serverOthers = computed(() => {
   if (!server.value) return null
   const current = server.value
   const origin = serverOrigin.value
-
-  /**
-   * A pick from a pool, in steps: the same chronicle first, then close rates,
-   * then the rest (see likenessStep), each step used up before the next is
-   * touched. Within a step the pick is a draw weighted by the remaining
-   * likeness — opening dates, votes — so each visit and each Shuffle differ.
-   * Shown in that same order.
-   */
+  const inOrigin = new Set(origin ? listOrder.value[origin].map((s) => s.id) : [])
   const keys = othersKeys.value
-  const draw = (pool: Server[], count: number) => pool
-    .map((s) => {
-      const score = serverSimilarity(current, s)
-      return { s, step: likenessStep(current, s), key: keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score }
+
+  // One tuple per server, compared left to right: each place answers one of
+  // the rules above, 1 for "yes", and the last is chance.
+  const rank = (s: Server) => [
+    !filtersActive.value || matchesAll(s) ? 1 : 0,
+    inOrigin.has(s.id) ? 1 : 0,
+    s.game === current.game ? 1 : 0,
+    s.game === current.game && s.chronicle === current.chronicle ? 1 : 0,
+    ratesClose(current, s) ? 1 : 0,
+    keys ? keys.get(s.id)! : serverSimilarity(current, s)
+  ]
+  const picked = SERVERS
+    .filter((s) => s.id !== current.id)
+    .map((s) => ({ s, key: rank(s) }))
+    .sort((a, b) => {
+      for (let i = 0; i < a.key.length; i++) if (a.key[i] !== b.key[i]) return b.key[i]! - a.key[i]!
+      return 0
     })
-    .sort((a, b) => a.step - b.step || b.key - a.key)
-    .slice(0, Math.max(0, count))
+    .slice(0, SERVER_OTHERS)
     .map(({ s }) => s)
 
-  // Filled in three steps, each only if the one before leaves room:
-  //   1. the recommendations — this game's servers from the list the visitor
-  //      came through (none when the page was opened directly);
-  //   2. the rest of this game's servers;
-  //   3. servers of the other games, so the panel is never thin or empty.
-  // Inside each, the same chronicle comes first, then close rates, then the
-  // rest; across games a chronicle cannot match, so rates lead there.
-  const notCurrent = (s: Server) => s.id !== current.id
-  const recommended = draw(
-    origin ? listOrder.value[origin].filter((s) => s.game === current.game && notCurrent(s)) : [],
-    SERVER_OTHERS
-  )
-  const sameGame = draw(
-    serversByVotes.filter((s) => s.game === current.game && notCurrent(s) && !recommended.includes(s)),
-    SERVER_OTHERS - recommended.length
-  )
-  const otherGames = draw(
-    listOrder.value.all.filter((s) => s.game !== current.game),
-    SERVER_OTHERS - recommended.length - sameGame.length
-  )
-
-  // The panel is titled RECOMMENDED whatever it holds. Recommendations alone
-  // keep their list's way of ending a row — TOP's places within the game, a
-  // date list's dates — and their View more to that list; anything mixed
-  // ends rows with the chronicle and leads to ALL GAMES.
-  const onlyRecommended = !!origin && recommended.length > 0 && !sameGame.length && !otherGames.length
-  const gameOnly = !otherGames.length
-  const ranking = serversByVotes.filter((s) => s.game === current.game)
-  const rows = [...recommended, ...sameGame, ...otherGames].map((s) => ({
-    server: s,
-    rank: onlyRecommended && origin === 'top' ? ranking.indexOf(s) + 1 : undefined
-  }))
-
+  // When all five come from the visitor's list, the rows end the way that
+  // list's do — TOP with places, the date lists with dates — and View more
+  // leads back to it; otherwise they end with the chronicle and View more
+  // leads to ALL GAMES. The header's filters travel either way.
+  const fromOrigin = !!origin && picked.every((s) => inOrigin.has(s.id))
   return {
-    rows,
+    rows: picked.map((s) => ({
+      server: s,
+      rank: fromOrigin && origin === 'top' ? serversByVotes.indexOf(s) + 1 : undefined
+    })),
     origin,
     turns: othersTurns.value,
-    end: onlyRecommended ? ROW_END[origin!] : 'chronicle' as const,
-    link: onlyRecommended
-      ? { path: localePath(`/${origin}`), query: { game: current.game } }
-      : gameOnly
-        ? { path: localePath('/all'), query: { game: current.game } }
-        : { path: localePath('/all'), query: {} }
+    end: fromOrigin ? ROW_END[origin!] : 'chronicle' as const,
+    link: { path: localePath(`/${fromOrigin ? origin : 'all'}`), query: filtersToQuery() }
   }
 })
 
