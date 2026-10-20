@@ -21,7 +21,8 @@
     "placeholder": "Meklēt spēles...",
     "short": "Meklēt",
     "action": "Meklēt",
-    "clear": "Notīrīt meklēšanu"
+    "clear": "Notīrīt meklēšanu",
+    "nothing": "Vaicājumam “{query}” nekas netika atrasts"
   },
   "categories": {
     "all": "Visas",
@@ -35,7 +36,8 @@
     "all": "VISAS SPĒLES",
     "viewMore": "Rādīt vairāk",
     "shuffle": "Sajaukt",
-    "empty": "Neviena spēle neatbilst izvēlētajiem filtriem."
+    "empty": "Neviena spēle neatbilst izvēlētajiem filtriem.",
+    "none": "Nav atbilstošu spēļu."
   },
   "filter": {
     "open": "Filtrs",

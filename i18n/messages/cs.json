@@ -21,7 +21,8 @@
     "placeholder": "Hledat hry...",
     "short": "Hledat",
     "action": "Hledat",
-    "clear": "Vymazat hledání"
+    "clear": "Vymazat hledání",
+    "nothing": "Pro „{query}“ nebylo nic nalezeno"
   },
   "categories": {
     "all": "Vše",
@@ -35,7 +36,8 @@
     "all": "VŠECHNY HRY",
     "viewMore": "Zobrazit více",
     "shuffle": "Zamíchat",
-    "empty": "Žádná hra neodpovídá zvoleným filtrům."
+    "empty": "Žádná hra neodpovídá zvoleným filtrům.",
+    "none": "Žádné odpovídající hry."
   },
   "filter": {
     "open": "Filtr",

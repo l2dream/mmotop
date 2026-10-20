@@ -21,7 +21,8 @@
     "placeholder": "Szukaj gier...",
     "short": "Szukaj",
     "action": "Szukaj",
-    "clear": "Wyczyść wyszukiwanie"
+    "clear": "Wyczyść wyszukiwanie",
+    "nothing": "Brak wyników dla „{query}”"
   },
   "categories": {
     "all": "Wszystkie",
@@ -35,7 +36,8 @@
     "all": "WSZYSTKIE GRY",
     "viewMore": "Pokaż więcej",
     "shuffle": "Wymieszaj",
-    "empty": "Żadna gra nie pasuje do wybranych filtrów."
+    "empty": "Żadna gra nie pasuje do wybranych filtrów.",
+    "none": "Brak pasujących gier."
   },
   "filter": {
     "open": "Filtr",

@@ -21,7 +21,8 @@
     "placeholder": "Søk spill...",
     "short": "Søk",
     "action": "Søk",
-    "clear": "Tøm søk"
+    "clear": "Tøm søk",
+    "nothing": "Ingen treff for «{query}»"
   },
   "categories": {
     "all": "Alle",
@@ -35,7 +36,8 @@
     "all": "ALLE SPILL",
     "viewMore": "Vis mer",
     "shuffle": "Bland",
-    "empty": "Ingen spill samsvarer med de valgte filtrene."
+    "empty": "Ingen spill samsvarer med de valgte filtrene.",
+    "none": "Ingen samsvarende spill."
   },
   "filter": {
     "open": "Filter",

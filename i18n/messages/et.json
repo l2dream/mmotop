@@ -21,7 +21,8 @@
     "placeholder": "Otsi mänge...",
     "short": "Otsi",
     "action": "Otsi",
-    "clear": "Tühjenda otsing"
+    "clear": "Tühjenda otsing",
+    "nothing": "Päringule „{query}” ei leitud midagi"
   },
   "categories": {
     "all": "Kõik",
@@ -35,7 +36,8 @@
     "all": "KÕIK MÄNGUD",
     "viewMore": "Näita rohkem",
     "shuffle": "Sega",
-    "empty": "Ükski mäng ei vasta valitud filtritele."
+    "empty": "Ükski mäng ei vasta valitud filtritele.",
+    "none": "Sobivaid mänge pole."
   },
   "filter": {
     "open": "Filter",

@@ -21,7 +21,8 @@
     "placeholder": "Search games...",
     "short": "Search",
     "action": "Search",
-    "clear": "Clear search"
+    "clear": "Clear search",
+    "nothing": "Nothing found for “{query}”"
   },
   "categories": {
     "all": "All",
@@ -35,7 +36,8 @@
     "all": "ALL GAMES",
     "viewMore": "View more",
     "shuffle": "Shuffle",
-    "empty": "No games match the selected filters."
+    "empty": "No games match the selected filters.",
+    "none": "No matching games."
   },
   "filter": {
     "open": "Filter",

@@ -21,7 +21,8 @@
     "placeholder": "Oyun ara...",
     "short": "Ara",
     "action": "Ara",
-    "clear": "Aramayı temizle"
+    "clear": "Aramayı temizle",
+    "nothing": "“{query}” için sonuç bulunamadı"
   },
   "categories": {
     "all": "Tümü",
@@ -35,7 +36,8 @@
     "all": "TÜM OYUNLAR",
     "viewMore": "Daha fazla göster",
     "shuffle": "Karıştır",
-    "empty": "Seçilen filtrelere uyan oyun yok."
+    "empty": "Seçilen filtrelere uyan oyun yok.",
+    "none": "Eşleşen oyun yok."
   },
   "filter": {
     "open": "Filtre",
