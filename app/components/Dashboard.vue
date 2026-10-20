@@ -633,10 +633,21 @@ const serverOthers = computed(() => {
   // opening soon — would leave the page with nothing under the card; the
   // game's best by votes stand in.
   const fromOrigin = serverOrigin.value ? others(listOrder.value[serverOrigin.value]) : []
-  const origin = fromOrigin.length ? serverOrigin.value : null
-  const sameGame = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
+  let origin = fromOrigin.length ? serverOrigin.value : null
+  let pool = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
+
+  // A game with no other server listed at all still gets a panel rather than
+  // a gap: servers of the other games, from the list the visitor came
+  // through, or from ALL GAMES. Likeness still weighs the draw — rates and
+  // dates mean something across games, a chronicle does not.
+  const otherGames = !others(serversByVotes).length
+  if (otherGames) {
+    origin = serverOrigin.value ?? 'all'
+    pool = listOrder.value[origin]
+  }
+
   const keys = othersKeys.value
-  const scored = sameGame
+  const scored = pool
     .filter((s) => s.id !== current.id)
     .map((s) => {
       const score = serverSimilarity(current, s)
@@ -651,16 +662,22 @@ const serverOthers = computed(() => {
     // Shown most alike first, whatever order they were drawn in.
     .sort((a, b) => b.score - a.score)
     .map(({ s }) => s)
-    // A place in TOP counts within the game, as the TOP page shows it with
-    // this game chosen.
-    .map((s) => ({ server: s, rank: origin === 'top' ? sameGame.indexOf(s) + 1 : undefined }))
+    // A place in TOP counts within whatever the pool is — the game, as the
+    // TOP page shows it with this game chosen, or every game.
+    .map((s) => ({ server: s, rank: origin === 'top' ? pool.indexOf(s) + 1 : undefined }))
+
+  const title = !origin
+    ? t('server.others', { game })
+    : otherGames ? t(`panels.${origin}`) : `${t(`panels.${origin}`)} · ${game}`
   return {
     rows,
     origin,
-    title: origin ? `${t(`panels.${origin}`)} · ${game}` : t('server.others', { game }),
+    title,
     turns: othersTurns.value,
     end: origin ? ROW_END[origin] : 'chronicle' as const,
-    link: origin ? { path: localePath(`/${origin}`), query: { game: current.game } } : undefined
+    link: origin
+      ? { path: localePath(`/${origin}`), query: otherGames ? {} : { game: current.game } }
+      : undefined
   }
 })
 
