@@ -1096,12 +1096,7 @@ function clearSearch() {
       </div>
 
       <div v-else-if="server" class="section-view">
-        <NuxtLink class="section-back" :to="{ path: localePath('/'), query: filtersToQuery() }">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M15 5l-7 7 7 7" />
-          </svg>
-          {{ $t('notFound.home') }}
-        </NuxtLink>
+        <BackLink :to="{ path: localePath('/'), query: filtersToQuery() }" />
         <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers" />
       </div>
 
@@ -1143,12 +1138,7 @@ function clearSearch() {
            the page, so a row does not stretch its name and its chronicle a
            thousand pixels apart. -->
       <div v-else class="section-view">
-        <NuxtLink class="section-back" :to="{ path: localePath('/'), query: route.query }">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M15 5l-7 7 7 7" />
-          </svg>
-          {{ $t('notFound.home') }}
-        </NuxtLink>
+        <BackLink :to="{ path: localePath('/'), query: route.query }" />
         <GamePanel class="section-panel" :title="$t(`panels.${section}`)" :class="ACCENT[section]">
           <template #icon><PanelIcon :id="section" /></template>
           <ServerRow

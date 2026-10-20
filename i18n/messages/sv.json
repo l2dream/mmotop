@@ -9,7 +9,8 @@
     "theme": "Byt tema",
     "language": "Språk",
     "login": "LOGGA IN",
-    "categories": "Spelkategorier"
+    "categories": "Spelkategorier",
+    "back": "Tillbaka"
   },
   "language": {
     "search": "Sök språk",

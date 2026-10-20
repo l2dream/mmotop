@@ -9,7 +9,8 @@
     "theme": "Toggle theme",
     "language": "Language",
     "login": "SIGN IN",
-    "categories": "Game categories"
+    "categories": "Game categories",
+    "back": "Back"
   },
   "language": {
     "search": "Search language",

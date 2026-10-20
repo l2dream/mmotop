@@ -9,7 +9,8 @@
     "theme": "Keisti temą",
     "language": "Kalba",
     "login": "PRISIJUNGTI",
-    "categories": "Žaidimų kategorijos"
+    "categories": "Žaidimų kategorijos",
+    "back": "Atgal"
   },
   "language": {
     "search": "Ieškoti kalbos",

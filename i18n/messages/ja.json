@@ -9,7 +9,8 @@
     "theme": "テーマ切替",
     "language": "言語",
     "login": "ログイン",
-    "categories": "ゲームカテゴリ"
+    "categories": "ゲームカテゴリ",
+    "back": "戻る"
   },
   "language": {
     "search": "言語を検索",
