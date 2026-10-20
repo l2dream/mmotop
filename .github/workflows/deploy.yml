@@ -40,10 +40,19 @@ jobs:
       - name: Type-check
         run: npm run typecheck
 
+      # Where Pages serves the site, asked of Pages itself rather than
+      # assumed: /mmotop/ on l2dream.github.io, the root once a custom
+      # domain is set in Settings → Pages. Switching to a domain then needs
+      # no change here, only a fresh deploy.
+      - name: Read Pages settings
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Generate static site
         run: npm run generate
         env:
-          NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.origin }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
