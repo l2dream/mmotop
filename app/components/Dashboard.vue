@@ -2,7 +2,7 @@
 import { bcp47, localeByCode } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
-import type { SectionId } from '~/data/sections'
+import { isSection, type SectionId } from '~/data/sections'
 
 /**
  * The whole site: the home page with its five panels; given `section`, one of
@@ -444,6 +444,7 @@ onNuxtReady(() => {
   // the watchers are let loose only after the restore has gone through them.
   if (server.value) {
     restoreFiltersFromUrl()
+    rememberOrigin()
     nextTick(() => { urlReady.value = true })
     return
   }
@@ -602,8 +603,21 @@ const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.
  * set by the row that was clicked (see ServerRow). Held for the visit, so
  * moving from server to server keeps it; a server page opened directly has
  * none.
+ *
+ * It also goes into the server page's address as ?from=, written once the
+ * page is up, so a reload — which empties the app's memory — still knows.
+ * Written then rather than put in the links, so the prerendered pages keep
+ * clean links for crawlers.
  */
 const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
+function rememberOrigin() {
+  const fromUrl = firstParam(route.query.from)
+  if (isSection(fromUrl)) {
+    serverOrigin.value = fromUrl
+  } else if (serverOrigin.value) {
+    router.replace({ path: route.path, query: { ...route.query, from: serverOrigin.value }, hash: route.hash })
+  }
+}
 
 /** Each list in its own order, before any filter or search. */
 const listOrder = computed<Record<SectionId, Server[]>>(() => ({
@@ -638,15 +652,41 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
 const SERVER_OTHERS = 5
 const othersKeys = ref<Map<string, number> | null>(null)
 const othersTurns = ref(0)
+
+/**
+ * The draw is kept for the tab (sessionStorage) under the server's id, and
+ * a reload of the page reuses it: refreshing should not reshuffle what the
+ * visitor was looking at. Coming to the server any other way draws anew, as
+ * does Shuffle. Storage can be unavailable (private modes, blocked site
+ * data); then every load simply draws.
+ */
+const nuxtApp = useNuxtApp()
+const drawKey = () => `mmotop-rec-${server.value?.id}`
 function drawOthers() {
   othersKeys.value = new Map(SERVERS.map((s) => [s.id, Math.random()]))
+  try {
+    sessionStorage.setItem(drawKey(), JSON.stringify(Object.fromEntries(othersKeys.value)))
+  } catch {}
 }
 function shuffleOthers() {
   drawOthers()
   othersTurns.value++
 }
 onMounted(() => {
-  if (server.value) drawOthers()
+  if (!server.value) return
+  // Only the page the browser itself reloaded: a mount during hydration on
+  // a load the Navigation Timing API reports as a reload.
+  const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+  if (nuxtApp.isHydrating && nav?.type === 'reload') {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(drawKey()) ?? 'null') as Record<string, number> | null
+      if (saved) {
+        othersKeys.value = new Map(SERVERS.map((s) => [s.id, saved[s.id] ?? Math.random()]))
+        return
+      }
+    } catch {}
+  }
+  drawOthers()
 })
 
 const filtersActive = computed(() =>
