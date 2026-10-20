@@ -344,13 +344,26 @@ function filtersToQuery() {
 // A server's page has no list for the filters to narrow, so there a change to
 // them — a category picked, filters applied, a search sent — goes to the home
 // page with the filters set, which is where they have something to show.
+//
+// While the filter popup is open the move waits for it to close (Apply, a
+// tap outside, Escape): picking a game there changes the filters at once,
+// and leaving straight away took the popup from under the visitor halfway
+// through setting it.
+let leaveWhenFilterCloses = false
 function writeFiltersToUrl() {
   if (server.value) {
+    if (filterOpen.value) {
+      leaveWhenFilterCloses = true
+      return
+    }
     router.push({ path: localePath('/'), query: filtersToQuery() })
     return
   }
   const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
-  router.replace({ query: { ...rest, ...filtersToQuery() }, hash: route.hash })
+  // The path is given with its trailing slash: left to the router, a
+  // replace that only changes the query wrote /top?game=… without it, which
+  // GitHub Pages answers with a redirect on the next reload.
+  router.replace({ path: route.path.replace(/\/?$/, '/'), query: { ...rest, ...filtersToQuery() }, hash: route.hash })
 }
 
 // onNuxtReady, not onMounted. A prerendered page hydrates under the path it
@@ -362,11 +375,18 @@ function writeFiltersToUrl() {
 // the onNuxtReady callback: that callback runs outside the component, so a
 // watcher made there was never stopped, and every language switch — which
 // remounts this page — left one more behind, all writing the same address.
+watch(filterOpen, (open) => {
+  if (open || !leaveWhenFilterCloses) return
+  leaveWhenFilterCloses = false
+  writeFiltersToUrl()
+})
+
 const urlReady = ref(false)
+let leaving = false
 let unmounted = false
 onUnmounted(() => { unmounted = true })
 watch([activeCategory, filters, customRateActive, customRateMin, customRateMax], () => {
-  if (!urlReady.value) return
+  if (!urlReady.value || leaving) return
   clearTimeout(searchUrlTimer)
   writeFiltersToUrl()
 }, { deep: true })
@@ -388,7 +408,7 @@ let searchUrlTimer: ReturnType<typeof setTimeout> | undefined
 watch(query, () => {
   // On a server's page the search is sent with Enter or the search button;
   // leaving for the home page mid-word would take the field away while typing.
-  if (!urlReady.value || server.value) return
+  if (!urlReady.value || server.value || leaving) return
   clearTimeout(searchUrlTimer)
   searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
 })
@@ -439,6 +459,10 @@ onNuxtReady(() => {
  */
 const localePath = useLocalePath()
 function goHome() {
+  // From a section or server page the link leaves this page. Without this,
+  // the reset below was written into this page's own address first, and
+  // that replace won over the link: the visitor stayed where they were.
+  if (props.section || server.value) leaving = true
   resetFilters()
   query.value = ''
   window.scrollTo({ top: 0, behavior: 'smooth' })
