@@ -410,9 +410,40 @@ function writeFiltersToUrl() {
 const urlReady = ref(false)
 let unmounted = false
 onUnmounted(() => { unmounted = true })
-watch([activeCategory, filters, customRateActive, customRateMin, customRateMax, query], () => {
-  if (urlReady.value) writeFiltersToUrl()
+watch([activeCategory, filters, customRateActive, customRateMin, customRateMax], () => {
+  if (!urlReady.value) return
+  clearTimeout(searchUrlTimer)
+  writeFiltersToUrl()
 }, { deep: true })
+
+/**
+ * The search text is written to the address once typing stops, not on every
+ * key. A changed address makes a phone browser bring its collapsed toolbar
+ * back, and on a phone held sideways — where the keyboard leaves a strip of
+ * page about a hundred pixels tall — that shoved the page down once per
+ * letter. The panels still narrow on each key; only the address waits.
+ *
+ * On a touch screen it waits for the field to be left (Search key, tapping
+ * away), so nothing moves while the keyboard is up; with a mouse, for half a
+ * second's pause. The cost: a reload in that window, mid-word, comes back
+ * without the last of what was typed. Writing on the way out was tried and
+ * cannot work — a reload keeps the address it started with, before any
+ * pagehide or beforeunload handler runs.
+ */
+let searchUrlTimer: ReturnType<typeof setTimeout> | undefined
+watch(query, () => {
+  if (!urlReady.value) return
+  clearTimeout(searchUrlTimer)
+  const typingOnTouch = window.matchMedia('(pointer: coarse)').matches && document.activeElement === searchInput.value
+  if (!typingOnTouch) searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
+})
+function onSearchBlur() {
+  if (!urlReady.value) return
+  clearTimeout(searchUrlTimer)
+  writeFiltersToUrl()
+}
+
+onUnmounted(() => clearTimeout(searchUrlTimer))
 onNuxtReady(() => {
   if (unmounted) return
   restoreFiltersFromUrl()
@@ -689,6 +720,9 @@ function onSearchEnter(event: KeyboardEvent) {
 function clearSearch() {
   query.value = ''
   searchInput.value?.focus()
+  // Written now: the field keeps focus, so the touch-screen wait above would
+  // otherwise leave the old text in the address until the field is left.
+  onSearchBlur()
 }
 
 </script>
@@ -767,6 +801,7 @@ function clearSearch() {
           :placeholder="$t('search.placeholder')"
           @input="query = ($event.target as HTMLInputElement).value"
           @keydown.enter="onSearchEnter"
+          @blur="onSearchBlur"
         />
         <!-- The phone-width placeholder. The real one stays the full phrase and
              is hidden there by CSS; this one-word stand-in shows only while the
