@@ -1304,7 +1304,7 @@ function clearSearch() {
 
       <template v-else-if="!section">
         <section v-for="(group, gi) in [['top', 'soon', 'started'], ['new', 'all']] as SectionId[][]" :key="gi" :class="gi === 0 ? 'top-grid' : 'bottom-grid'">
-          <GamePanel v-for="id in group" :key="id" :title="$t(`panels.${id}`)" :class="ACCENT[id]" :to="sectionLink(id)">
+          <GamePanel v-for="id in group" :key="id" :title="$t(`panels.${id}`)" :class="[ACCENT[id], `panel-${id}`]" :to="sectionLink(id)">
             <template #icon><PanelIcon :id="id" /></template>
             <template v-if="id === 'all'" #actions>
               <ShuffleButton :turns="shuffleTurns" @shuffle="shuffleGames" />
