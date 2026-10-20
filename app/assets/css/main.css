@@ -380,14 +380,29 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .filter-select {
   width: 100%;
   height: 36px;
-  padding: 0 10px;
+  padding-inline: 10px 27px;
   border: 1px solid rgba(103, 104, 173, .25);
   border-radius: 8px;
-  background: rgba(16, 20, 44, .72);
+  background-color: rgba(16, 20, 44, .72);
   color: #edf0ff;
   font: inherit;
   font-size: 13px;
+  /*
+   * Our own chevron instead of the browser's. Chrome's sat about 6px from the
+   * right edge while the text began about 15px from the left, and iOS and
+   * Firefox each draw a different arrow again. This is the More button's
+   * chevron, same stroke and colour. The path fills the middle half of its
+   * 12px box, so at 8px from the edge the visible arrow ends 11px in: the same
+   * inset as the text on the other side (1px border + 10px padding).
+   */
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23858aa6' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  background-position: right 8px center;
 }
+[dir="rtl"] .filter-select { background-position: left 8px center; }
 
 .filter-chip-row {
   display: flex;
@@ -507,7 +522,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .theme-light .filter-select {
-  background: #ffffff;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2383889f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   color: #1c1e33;
   border-color: rgba(103, 104, 173, .2);
 }
