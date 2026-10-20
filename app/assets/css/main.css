@@ -1740,6 +1740,21 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .lang-item { padding: 0 3px; gap: 5px; }
 }
 
+/*
+ * iOS zooms the page into any focused field set under 16px, then keeps
+ * nudging the zoomed page after the caret on every key — and the zoom outlives
+ * turning the phone back. The phone block above already sets 16px, but only up
+ * to 700px wide; a phone held sideways is wider than that, gets the desktop
+ * layout's 13–14px fields, and zoomed. Keyed to the pointer, not the width, so
+ * every touch screen gets 16px and a mouse keeps the smaller desktop type.
+ */
+@media (pointer: coarse) {
+  .search-box input,
+  .filter-select,
+  .filter-custom-input,
+  .lang-search-input { font-size: 16px; }
+}
+
 /* Icons only for language and login on every phone, up to 430px. The search
    field is what pays for their labels: at 320 it was once down to nine pixels
    of usable width, and when the labels came back at 381px a 390px phone ended
