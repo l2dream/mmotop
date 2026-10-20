@@ -36,19 +36,12 @@ export function serverSimilarity(a: Server, b: Server): number {
 }
 
 /**
- * Which step of the recommendations a server belongs to, relative to the one
- * being viewed: the order a player narrows by.
- *
- *   0  the same chronicle
- *   1  close rates — within three times either way (x500 and x1200, x5 and
- *      x10), or neither server advertising one
- *   2  everything else
+ * Rates a player would call close: within three times either way (x500 and
+ * x1200, x5 and x10), or neither server advertising one.
  */
-export function likenessStep(a: Server, b: Server): 0 | 1 | 2 {
-  if (a.chronicle === b.chronicle && a.game === b.game) return 0
-  if (a.rate == null && b.rate == null) return 1
+export function ratesClose(a: Server, b: Server): boolean {
+  if (a.rate == null || b.rate == null) return a.rate == null && b.rate == null
   // A hair over log 3: x1 against x3 sits exactly on the line, and floating
   // point put log(1/3) a hair past it.
-  if (a.rate != null && b.rate != null && Math.abs(Math.log(a.rate / b.rate)) <= Math.log(3) + 1e-9) return 1
-  return 2
+  return Math.abs(Math.log(a.rate / b.rate)) <= Math.log(3) + 1e-9
 }
