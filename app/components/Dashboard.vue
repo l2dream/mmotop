@@ -633,42 +633,47 @@ const serverOthers = computed(() => {
   // opening soon — would leave the page with nothing under the card; the
   // game's best by votes stand in.
   const fromOrigin = serverOrigin.value ? others(listOrder.value[serverOrigin.value]) : []
-  let origin = fromOrigin.length ? serverOrigin.value : null
-  let pool = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
+  const gameOrigin = fromOrigin.length ? serverOrigin.value : null
+  const sameGame = others(gameOrigin ? listOrder.value[gameOrigin] : serversByVotes)
 
-  // A game with no other server listed at all still gets a panel rather than
-  // a gap: servers of the other games, from the list the visitor came
-  // through, or from ALL GAMES. Likeness still weighs the draw — rates and
-  // dates mean something across games, a chronicle does not.
-  const otherGames = !others(serversByVotes).length
-  if (otherGames) {
-    origin = serverOrigin.value ?? 'all'
-    pool = listOrder.value[origin]
-  }
-
+  /**
+   * A weighted draw from a pool: the most alike are the likeliest picks, the
+   * pick shown most alike first. Each point of likeness makes a server about
+   * three times as likely to be drawn.
+   */
   const keys = othersKeys.value
-  const scored = pool
-    .filter((s) => s.id !== current.id)
+  const draw = (pool: Server[], count: number) => pool
     .map((s) => {
       const score = serverSimilarity(current, s)
-      // exp: each point of likeness makes a server about three times as
-      // likely to be drawn.
-      const draw = keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score
-      return { s, score, draw }
+      return { s, score, key: keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score }
     })
-  const rows = scored
-    .sort((a, b) => b.draw - a.draw)
-    .slice(0, SERVER_OTHERS)
-    // Shown most alike first, whatever order they were drawn in.
+    .sort((a, b) => b.key - a.key)
+    .slice(0, count)
     .sort((a, b) => b.score - a.score)
     .map(({ s }) => s)
-    // A place in TOP counts within whatever the pool is — the game, as the
-    // TOP page shows it with this game chosen, or every game.
-    .map((s) => ({ server: s, rank: origin === 'top' ? pool.indexOf(s) + 1 : undefined }))
+
+  // The game's own servers first; when it has fewer than five, servers of
+  // the other games make up the rest, so the panel is never thin or empty —
+  // from the list the visitor came through, or from ALL GAMES. Likeness
+  // still weighs that draw: rates and dates mean something across games, a
+  // chronicle does not.
+  const picked = draw(sameGame, SERVER_OTHERS)
+  const mixed = picked.length < SERVER_OTHERS
+  const origin = mixed ? (serverOrigin.value ?? 'all') : gameOrigin
+  if (mixed) {
+    const rest = listOrder.value[origin!].filter((s) => s.game !== current.game)
+    picked.push(...draw(rest, SERVER_OTHERS - picked.length))
+  }
+
+  // A place in TOP counts within the game when the panel is the game's own,
+  // as the TOP page shows it with the game chosen; among every game when the
+  // panel mixes them.
+  const ranking = mixed ? serversByVotes : serversByVotes.filter((s) => s.game === current.game)
+  const rows = picked.map((s) => ({ server: s, rank: origin === 'top' ? ranking.indexOf(s) + 1 : undefined }))
 
   const title = !origin
     ? t('server.others', { game })
-    : otherGames ? t(`panels.${origin}`) : `${t(`panels.${origin}`)} · ${game}`
+    : mixed ? t(`panels.${origin}`) : `${t(`panels.${origin}`)} · ${game}`
   return {
     rows,
     origin,
@@ -676,7 +681,7 @@ const serverOthers = computed(() => {
     turns: othersTurns.value,
     end: origin ? ROW_END[origin] : 'chronicle' as const,
     link: origin
-      ? { path: localePath(`/${origin}`), query: otherGames ? {} : { game: current.game } }
+      ? { path: localePath(`/${origin}`), query: mixed ? {} : { game: current.game } }
       : undefined
   }
 })
