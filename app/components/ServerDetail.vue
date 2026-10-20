@@ -21,7 +21,10 @@ const props = defineProps<{
   /** The panel under the card, worked out by the dashboard. */
   others: {
     rows: { server: Server, rank?: number }[]
+    /** The list the visitor came through, kept by the rows here. */
     origin: SectionId | null
+    /** The panel's icon: its list's, or none for the game's own servers. */
+    icon: SectionId | null
     title: string
     end: 'votes' | 'date' | 'chronicle'
     link?: RouteLocationRaw
@@ -112,7 +115,7 @@ function fullDate(iso: string) {
   </article>
 
   <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="others.title">
-    <template v-if="others.origin" #icon><PanelIcon :id="others.origin" /></template>
+    <template v-if="others.icon" #icon><PanelIcon :id="others.icon" /></template>
     <template #actions>
       <ShuffleButton :turns="others.turns" @shuffle="$emit('shuffle')" />
     </template>
