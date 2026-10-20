@@ -26,6 +26,9 @@ const props = defineProps<{
 
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
 const localePath = useLocalePath()
+// The filters and search travel with the link, as they do to a section page,
+// so the server's page — and a reload of it — keeps them.
+const route = useRoute()
 const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
 function remember() {
   if (props.origin !== undefined) serverOrigin.value = props.origin
@@ -39,7 +42,7 @@ const rowClass = computed(() => ({
 </script>
 
 <template>
-  <NuxtLink class="game-row" :class="rowClass" :to="localePath(`/server/${server.id}`)" @click="remember">
+  <NuxtLink class="game-row" :class="rowClass" :to="{ path: localePath(`/server/${server.id}`), query: route.query }" @click="remember">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">

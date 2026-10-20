@@ -438,10 +438,13 @@ function releaseDashboardHeight() {
 onUnmounted(() => clearTimeout(searchUrlTimer))
 onNuxtReady(() => {
   if (unmounted) return
-  // A server's address carries no filters, and writing them into it would
-  // send the visitor straight back to the home page.
+  // A server's address carries the filters it was reached with, so a reload
+  // keeps them in the header and on the way back. They are only read here:
+  // a change on this page goes to the home page (see writeFiltersToUrl), so
+  // the watchers are let loose only after the restore has gone through them.
   if (server.value) {
-    urlReady.value = true
+    restoreFiltersFromUrl()
+    nextTick(() => { urlReady.value = true })
     return
   }
   restoreFiltersFromUrl()
