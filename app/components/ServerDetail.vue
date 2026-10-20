@@ -20,9 +20,19 @@ const props = defineProps<{
 }>()
 
 const { locale } = useI18n()
-const { serverBadge, serverSubtitle, rateLabel } = useServerFormat()
+const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
+
+/**
+ * Languages whose dates Intl cannot be trusted with in the browser: Chrome
+ * ships no Armenian date data at all and printed "November 20, 2025", and for
+ * Azerbaijani it has no month names and printed "2025 M11 20". These use the
+ * site's own day-and-month, as in the lists, with the year after it. A fixed
+ * list rather than a check at run time, so the prerendered page — built in
+ * Node, which does have the data — and the browser always agree.
+ */
+const OWN_DATE_FORMAT = new Set(['hy', 'az'])
 
 /**
  * The full date, year included, in the reader's own form: "20 November 2025",
@@ -31,6 +41,7 @@ const opened = computed(() => props.server.openDate <= props.today)
  * format the American way, and the site's English is British.
  */
 function fullDate(iso: string) {
+  if (OWN_DATE_FORMAT.has(locale.value)) return `${formatDayMonth(iso)} ${iso.slice(0, 4)}`
   const tag = locale.value === 'en' ? 'en-GB' : bcp47(locale.value)
   return new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${iso}T00:00:00Z`))
