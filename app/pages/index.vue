@@ -438,9 +438,26 @@ watch(query, () => {
   if (!typingOnTouch) searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
 })
 function onSearchBlur() {
+  releaseDashboardHeight()
   if (!urlReady.value) return
   clearTimeout(searchUrlTimer)
   writeFiltersToUrl()
+}
+
+/**
+ * While the field has focus the page is not allowed to get shorter. Each key
+ * can remove rows, and a page that shrinks under a scrolled view makes the
+ * browser pull the scroll position back — on a phone, with the keyboard up,
+ * that is the whole page jumping once per letter. The height is held at what
+ * it was when typing began and let go when the field is left.
+ */
+const dashboardEl = ref<HTMLElement | null>(null)
+function holdDashboardHeight() {
+  const el = dashboardEl.value
+  if (el) el.style.minHeight = `${el.offsetHeight}px`
+}
+function releaseDashboardHeight() {
+  if (dashboardEl.value) dashboardEl.value.style.minHeight = ''
 }
 
 onUnmounted(() => clearTimeout(searchUrlTimer))
@@ -801,6 +818,7 @@ function clearSearch() {
           :placeholder="$t('search.placeholder')"
           @input="query = ($event.target as HTMLInputElement).value"
           @keydown.enter="onSearchEnter"
+          @focus="holdDashboardHeight"
           @blur="onSearchBlur"
         />
         <!-- The phone-width placeholder. The real one stays the full phrase and
@@ -1033,7 +1051,7 @@ function clearSearch() {
       </div>
     </nav>
 
-    <main class="dashboard">
+    <main ref="dashboardEl" class="dashboard">
       <section class="top-grid">
         <GamePanel :title="$t('panels.top')" class="accent-gold">
           <template #icon>
