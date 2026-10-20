@@ -1156,6 +1156,21 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   filter: drop-shadow(0 0 7px var(--panel-glow, transparent));
 }
 
+/*
+ * Each icon is drawn centred in its 24-unit box with its own empty margin —
+ * 1 unit for the wide trophy, 4 for the small grid — so the visible glyph
+ * began 19–22px from the panel edge while the arrow on the other side ends at
+ * exactly 18. Pulled out by that margin, every icon starts on the same line as
+ * the rows below it and mirrors the arrow. The 24px slot keeps its width (the
+ * icon is start-aligned in it), so the titles stay where they are.
+ */
+.panel-icon { justify-content: flex-start; }
+.trophy-icon { margin-inline-start: -1px; }
+.clock-icon,
+.bolt-icon { margin-inline-start: -3px; }
+.sparkle-icon { margin-inline-start: -2px; }
+.grid-icon { margin-inline-start: -4px; }
+
 .theme-light .panel-head { border-bottom-color: rgba(103, 104, 173, .12); }
 .theme-light .panel-icon { color: #7c3aed; }
 
