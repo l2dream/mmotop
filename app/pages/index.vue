@@ -417,25 +417,23 @@ watch([activeCategory, filters, customRateActive, customRateMin, customRateMax],
 }, { deep: true })
 
 /**
- * The search text is written to the address once typing stops, not on every
- * key. A changed address makes a phone browser bring its collapsed toolbar
- * back, and on a phone held sideways — where the keyboard leaves a strip of
- * page about a hundred pixels tall — that shoved the page down once per
- * letter. The panels still narrow on each key; only the address waits.
- *
- * On a touch screen it waits for the field to be left (Search key, tapping
- * away), so nothing moves while the keyboard is up; with a mouse, for half a
- * second's pause. The cost: a reload in that window, mid-word, comes back
- * without the last of what was typed. Writing on the way out was tried and
- * cannot work — a reload keeps the address it started with, before any
+ * The search text is written to the address half a second after typing
+ * stops, not on every key, so the address bar and history are not churned
+ * once per letter. Leaving the field writes at once. A reload inside that
+ * half second comes back without the last letters typed; writing on the way
+ * out cannot help — a reload keeps the address it started with, before any
  * pagehide or beforeunload handler runs.
+ *
+ * On a touch screen this used to wait for the field to be left, on the
+ * theory that address changes shoved the page on Android. They did not (that
+ * was the visual viewport, see interactive-widget in nuxt.config.ts), and the
+ * wait meant a reload with the keyboard up lost the search entirely.
  */
 let searchUrlTimer: ReturnType<typeof setTimeout> | undefined
 watch(query, () => {
   if (!urlReady.value) return
   clearTimeout(searchUrlTimer)
-  const typingOnTouch = window.matchMedia('(pointer: coarse)').matches && document.activeElement === searchInput.value
-  if (!typingOnTouch) searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
+  searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
 })
 function onSearchBlur() {
   releaseDashboardHeight()
