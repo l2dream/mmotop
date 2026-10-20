@@ -597,12 +597,19 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
 const SERVER_OTHERS = 5
 
 /**
- * The panel's pick is random: each server page draws its own on mount, and
- * its Shuffle button draws again. A random key per server rather than a
- * shuffled array, so the pick survives the list itself changing under it —
- * today's date moving from the build's to the visitor's, the ALL GAMES pool
- * being drawn. Until mount there are no keys and the list's own order is
- * used, so the prerendered page and the first render agree.
+ * The panel recommends: of the candidates, the ones most like this server
+ * (same chronicle, close rates, opening around the same time, a similar
+ * following — see serverSimilarity) are the likeliest to be picked, but the
+ * pick is still a draw, so each visit and each Shuffle shows a different
+ * five and nothing is shown every single time.
+ *
+ * A weighted draw without replacement: each server gets a random number
+ * raised to 1/weight, and the five largest win. A random number per server
+ * rather than a shuffled array, so the pick survives the list itself
+ * changing under it — today's date moving from the build's to the visitor's,
+ * the ALL GAMES pool being drawn. Until mount there are no numbers and the
+ * five most similar are shown, so the prerendered page and the first render
+ * agree.
  */
 const othersKeys = ref<Map<string, number> | null>(null)
 const othersTurns = ref(0)
@@ -629,10 +636,21 @@ const serverOthers = computed(() => {
   const origin = fromOrigin.length ? serverOrigin.value : null
   const sameGame = (origin ? listOrder.value[origin] : serversByVotes).filter((s) => s.game === current.game)
   const keys = othersKeys.value
-  const candidates = sameGame.filter((s) => s.id !== current.id)
-  if (keys) candidates.sort((a, b) => keys.get(a.id)! - keys.get(b.id)!)
-  const rows = candidates
+  const scored = sameGame
+    .filter((s) => s.id !== current.id)
+    .map((s) => {
+      const score = serverSimilarity(current, s)
+      // exp: each point of likeness makes a server about three times as
+      // likely to be drawn.
+      const draw = keys ? keys.get(s.id)! ** (1 / Math.exp(1.1 * score)) : score
+      return { s, score, draw }
+    })
+  const rows = scored
+    .sort((a, b) => b.draw - a.draw)
     .slice(0, SERVER_OTHERS)
+    // Shown most alike first, whatever order they were drawn in.
+    .sort((a, b) => b.score - a.score)
+    .map(({ s }) => s)
     // A place in TOP counts within the game, as the TOP page shows it with
     // this game chosen.
     .map((s) => ({ server: s, rank: origin === 'top' ? sameGame.indexOf(s) + 1 : undefined }))
