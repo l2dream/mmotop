@@ -87,6 +87,28 @@
     "others": "Vairāk {game} serveru",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Labākie spēļu serveri pēc balsīm",
+      "description": "Mēneša visvairāk balsotie spēļu serveri: Lineage II, World of Warcraft, AION un citi MMOTOP."
+    },
+    "soon": {
+      "title": "Drīzumā atveramie spēļu serveri",
+      "description": "Spēļu serveri, kas drīz atvērsies: starta datumi, hronikas un rate MMOTOP."
+    },
+    "started": {
+      "title": "Nesen atvērti spēļu serveri",
+      "description": "Tikko atvērti spēļu serveri, jaunākie vispirms, ar hronikām un rate MMOTOP."
+    },
+    "new": {
+      "title": "Jauni serveri MMOTOP",
+      "description": "Pēdējie MMOTOP pievienotie serveri ar atvēršanas datumu, hroniku un rate."
+    },
+    "all": {
+      "title": "Visi spēļu serveri no A līdz Z",
+      "description": "Visi MMOTOP spēļu serveri alfabēta secībā, ar hronikām un rate."
+    }
+  },
   "notFound": {
     "title": "Lapa nav atrasta",
     "text": "Šīs lapas nav vai tā ir pārvietota.",

@@ -87,6 +87,28 @@
     "others": "Flere {game}-servere",
     "description": "{name}: en {game}-server ({chronicle}). Rates, åbningsdato og stemmer på MMOTOP."
   },
+  "seo": {
+    "top": {
+      "title": "Top spilservere efter stemmer",
+      "description": "Månedens mest stemte spilservere: Lineage II, World of Warcraft, AION og flere på MMOTOP."
+    },
+    "soon": {
+      "title": "Spilservere der snart åbner",
+      "description": "Spilservere der åbner snart: startdatoer, krøniker og rates på MMOTOP."
+    },
+    "started": {
+      "title": "Nyligt åbnede spilservere",
+      "description": "Spilservere der lige er åbnet, nyeste først, med krøniker og rates på MMOTOP."
+    },
+    "new": {
+      "title": "Nye servere på MMOTOP",
+      "description": "De senest tilføjede servere på MMOTOP med åbningsdato, krønike og rates."
+    },
+    "all": {
+      "title": "Alle spilservere fra A til Å",
+      "description": "Alle spilservere på MMOTOP i alfabetisk rækkefølge med krøniker og rates."
+    }
+  },
   "notFound": {
     "title": "Siden blev ikke fundet",
     "text": "Siden findes ikke eller er blevet flyttet.",

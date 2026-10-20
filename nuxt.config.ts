@@ -27,6 +27,8 @@ export default defineNuxtConfig({
       // /favicon.ico (the origin root) finds nothing; the icons are linked.
       // The .ico is for browsers without SVG favicons (Safari), the PNG for
       // an iPhone home-screen shortcut.
+      // The browser's own toolbar on phones, in the page's default dark.
+      meta: [{ name: 'theme-color', content: '#070a1b' }],
       link: [
         { rel: 'icon', href: `${process.env.NUXT_APP_BASE_URL || '/'}favicon.ico`, sizes: '32x32' },
         { rel: 'icon', href: `${process.env.NUXT_APP_BASE_URL || '/'}favicon.svg`, type: 'image/svg+xml' },
@@ -56,7 +58,22 @@ export default defineNuxtConfig({
        * which "already started" is worked out against this in the prerendered
        * HTML, then against the visitor's own date once the page is running.
        */
-      buildDate: new Date().toISOString().slice(0, 10)
+      buildDate: new Date().toISOString().slice(0, 10),
+      /** The site's origin, for the absolute addresses Open Graph and
+       *  structured data require. The same value hreflang uses below. */
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://l2dream.github.io'
+    }
+  },
+
+  /**
+   * Every page is a directory on GitHub Pages, so /mmotop/top answers with a
+   * 301 to /mmotop/top/. Links written without the slash cost a crawler a
+   * redirect per link, and pointed at an address the canonical tag says is
+   * not the real one. NuxtLink adds it everywhere.
+   */
+  experimental: {
+    defaults: {
+      nuxtLink: { trailingSlash: 'append' }
     }
   },
 

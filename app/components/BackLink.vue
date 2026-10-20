@@ -17,7 +17,9 @@ import type { RouteLocationRaw } from 'vue-router'
 const props = defineProps<{ to: RouteLocationRaw }>()
 
 const router = useRouter()
-const href = computed(() => router.resolve(props.to).href)
+// With the trailing slash GitHub Pages serves the page at, like every
+// NuxtLink (see experimental.defaults in nuxt.config.ts).
+const href = computed(() => router.resolve(props.to).href.replace(/^([^?#]*?)\/?(?=[?#]|$)/, '$1/'))
 const canGoBack = ref(false)
 onMounted(() => {
   canGoBack.value = Boolean((window.history.state as { back?: unknown } | null)?.back)
