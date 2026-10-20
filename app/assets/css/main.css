@@ -1332,12 +1332,18 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    with the card padding exactly as the logo box does in the panels without a
    rank, instead of a thin digit needing a nudge to look equally inset.
    The transparent border keeps every place the same size as the medalled ones. */
+/* Centred between the panel edge and the badge beside it. The row's 18px
+   inset against the 8px column gap left the place 18px from the edge but 8px
+   from the badge, so it read as stuck to the badge — most of all 4 to 10,
+   which have no ring. Pulled 5px out, it has 13px on each side; the badge
+   and everything after it stay where they were. */
 .rank {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 26px;
   height: 26px;
+  margin-inline-start: -5px;
   border: 1px solid transparent;
   border-radius: 50%;
   color: #eef0f9;
@@ -1718,7 +1724,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     grid-template-columns: 32px minmax(0, 1fr) 58px;
   }
   .game-logo { width: 30px; height: 30px; }
-  .rank { width: 22px; height: 22px; font-size: 12px; }
+  /* 11px inset, 5px gap: 3px out gives 8px each side. */
+  .rank { width: 22px; height: 22px; font-size: 12px; margin-inline-start: -3px; }
   /* 11px, not the desktop 12: in the 58px column "Newschool" at 12px gets cut. */
   .version { font-size: 11px; }
 
