@@ -34,33 +34,16 @@ const current = computed<Locale>(
 /**
  * The groups, narrowed by whatever is typed. Empty groups drop out, so a
  * search for "kor" leaves one heading rather than seven, six of them bare.
- */
-/**
- * True while an input method is mid-word: Hangul assembling a syllable, or
- * pinyin and romaji still spelled out in Latin before they commit.
- */
-const composing = ref(false)
-
-/**
- * What the list actually filters on.
  *
- * During composition the field holds something provisional, and narrowing on
- * it cuts both ways. Korean builds up real text — ㅎ, 하, 한 — and each step is
- * worth filtering by. Pinyin and romaji do not: "zhongwen" matches nothing
- * until it becomes 中文, so filtering on it would flash "No matches" at
- * someone in the middle of typing their own language's name.
+ * Text still being composed by an input method filters like any other.
  *
- * So a composing query narrows the list when it finds something and is
- * ignored when it does not. Nothing provisional is ever allowed to empty the
- * list.
+ * It used to be ignored whenever it matched nothing, so that pinyin or romaji
+ * spelled out in Latin ("zhongwen") would not flash "No matches" before it
+ * became 中文. But Android keyboards compose every word, Latin ones included,
+ * until a space or the field is left — so on a phone, typing nonsense listed
+ * all twenty-six languages instead of saying nothing matched.
  */
-const effectiveQuery = computed(() => {
-  if (!composing.value) return query.value
-  const hits = READY_LOCALES.some(l => matchesQuery(l, query.value))
-  return hits ? query.value : ''
-})
-
-const groups = computed(() => groupedLocales(l => matchesQuery(l, effectiveQuery.value)))
+const groups = computed(() => groupedLocales(l => matchesQuery(l, query.value)))
 
 const empty = computed(() => groups.value.length === 0)
 
@@ -151,21 +134,12 @@ function close(returnFocus = true) {
   if (!open.value) return
   open.value = false
   query.value = ''
-  /**
-   * Cleared here as well as on compositionend, because closing mid-composition
-   * removes the input before that event can fire. Left true, it stuck for the
-   * rest of the session: every fruitless query was then treated as no query,
-   * so typing nonsense listed all twenty-six languages and "No matches" became
-   * unreachable.
-   */
-  composing.value = false
   if (returnFocus) trigger.value?.focus()
 }
 
 /** Back to all twenty-six, with the caret left in the field. */
 function clearQuery() {
   query.value = ''
-  composing.value = false
   searchEl.value?.focus()
 }
 
@@ -301,8 +275,6 @@ onBeforeUnmount(() => {
           :placeholder="t('language.search')"
           :aria-label="t('language.search')"
           @input="query = ($event.target as HTMLInputElement).value"
-          @compositionstart="composing = true"
-          @compositionend="composing = false"
         />
         <button
           v-if="query"
