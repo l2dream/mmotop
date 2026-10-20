@@ -105,8 +105,8 @@
       "description": "The latest servers added to MMOTOP, with opening dates, chronicles and rates."
     },
     "all": {
-      "title": "All game servers A–Z",
-      "description": "Every game server listed on MMOTOP, from A to Z, with chronicles and rates."
+      "title": "All game servers",
+      "description": "Every game server listed on MMOTOP, with chronicles and rates."
     }
   },
   "notFound": {

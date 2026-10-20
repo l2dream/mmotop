@@ -105,8 +105,8 @@
       "description": "Die zuletzt auf MMOTOP eingetragenen Server mit Startdatum, Chronik und Rates."
     },
     "all": {
-      "title": "Alle Gameserver von A bis Z",
-      "description": "Alle auf MMOTOP gelisteten Gameserver alphabetisch, mit Chroniken und Rates."
+      "title": "Alle Gameserver",
+      "description": "Alle auf MMOTOP gelisteten Gameserver, mit Chroniken und Rates."
     }
   },
   "notFound": {

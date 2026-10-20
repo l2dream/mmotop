@@ -105,8 +105,8 @@
       "description": "Naujausi į MMOTOP įtraukti serveriai su atidarymo data, kronika ir rate."
     },
     "all": {
-      "title": "Visi žaidimų serveriai nuo A iki Ž",
-      "description": "Visi MMOTOP žaidimų serveriai abėcėlės tvarka, su kronikomis ir rate."
+      "title": "Visi žaidimų serveriai",
+      "description": "Visi MMOTOP žaidimų serveriai su kronikomis ir rate."
     }
   },
   "notFound": {

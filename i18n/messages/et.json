@@ -105,8 +105,8 @@
       "description": "Viimati MMOTOP-i lisatud serverid koos avamise kuupäeva, kroonika ja rate-idega."
     },
     "all": {
-      "title": "Kõik mänguserverid A–Z",
-      "description": "Kõik MMOTOP-i mänguserverid tähestikulises järjekorras, kroonikate ja rate-idega."
+      "title": "Kõik mänguserverid",
+      "description": "Kõik MMOTOP-i mänguserverid kroonikate ja rate-idega."
     }
   },
   "notFound": {

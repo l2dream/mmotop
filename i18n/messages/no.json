@@ -105,8 +105,8 @@
       "description": "De sist tilføyde serverne på MMOTOP med åpningsdato, krønike og rates."
     },
     "all": {
-      "title": "Alle spillservere fra A til Å",
-      "description": "Alle spillservere på MMOTOP i alfabetisk rekkefølge, med krøniker og rates."
+      "title": "Alle spillservere",
+      "description": "Alle spillservere på MMOTOP, med krøniker og rates."
     }
   },
   "notFound": {

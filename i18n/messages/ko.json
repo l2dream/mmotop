@@ -105,8 +105,8 @@
       "description": "MMOTOP에 최근 추가된 서버의 오픈일, 크로니클, 배율."
     },
     "all": {
-      "title": "모든 게임 서버 (A–Z)",
-      "description": "MMOTOP에 등록된 모든 게임 서버를 알파벳순으로, 크로니클과 배율과 함께."
+      "title": "모든 게임 서버",
+      "description": "MMOTOP에 등록된 모든 게임 서버를 크로니클과 배율과 함께."
     }
   },
   "notFound": {

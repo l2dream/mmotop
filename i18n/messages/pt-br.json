@@ -105,8 +105,8 @@
       "description": "Os últimos servidores adicionados ao MMOTOP, com data de abertura, crônica e rates."
     },
     "all": {
-      "title": "Todos os servidores de jogos de A a Z",
-      "description": "Todos os servidores de jogos do MMOTOP em ordem alfabética, com crônicas e rates."
+      "title": "Todos os servidores de jogos",
+      "description": "Todos os servidores de jogos do MMOTOP, com crônicas e rates."
     }
   },
   "notFound": {
