@@ -4,11 +4,12 @@ import { defineNuxtModule } from 'nuxt/kit'
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from '../app/i18n/locales'
 import { SECTIONS } from '../app/data/sections'
 import { SERVERS } from '../app/data/servers'
+import { GAMES } from '../app/data/games'
 
 /**
  * Writes sitemap.xml and appends its address to robots.txt after the static
- * build, listing every page — home, the five sections and every server — in
- * all twenty-six languages, with their alternates.
+ * build, listing every page — home, each game, the five sections and every
+ * server — in all twenty-six languages, with their alternates.
  *
  * This is not the usual "nice to have" sitemap. The links to the other
  * twenty-five languages live inside the selector popup, which is `v-if="open"`
@@ -71,13 +72,14 @@ export default defineNuxtModule({
 
         // Every entry carries the full alternate set, which is what makes the
         // cluster reciprocal — the half of hreflang that is easy to get wrong.
-        // One cluster per page: the home page, each section, each server.
-        const pages = ['', ...SECTIONS, ...SERVERS.map(s => `server/${s.id}`)]
+        // One cluster per page: the home page, each game, each section, each
+        // server.
+        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...SERVERS.map(s => `server/${s.id}`)]
         const entries = pages.flatMap(page => READY_LOCALES.map(l => `  <url>
     <loc>${urlFor(l.code, page)}</loc>
 ${alternatesFor(page)}
     <changefreq>daily</changefreq>
-    <priority>${page ? (page.startsWith('server/') ? '0.5' : '0.6') : l.code === DEFAULT_LOCALE ? '1.0' : '0.8'}</priority>
+    <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : page.startsWith('server/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
   </url>`)).join('\n')
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>

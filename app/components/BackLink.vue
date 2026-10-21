@@ -2,14 +2,15 @@
 import type { RouteLocationRaw } from 'vue-router'
 import { isSection } from '~/data/sections'
 import { SERVERS } from '~/data/servers'
+import { gameById } from '~/data/games'
 
 /**
  * The way back above a section or server page, named after where it leads.
  *
  * Arrived from elsewhere on the site it goes back in history, so the
  * visitor lands where they were — the same list, the same filters, the same
- * scroll position — and says where that is: "‹ TOP GAMES", "‹ LA2DREAM",
- * "‹ Back to the home page". A bare "Back" left them guessing. Opened
+ * scroll position — and says where that is: "‹ TOP GAMES", "‹ Lineage II",
+ * "‹ LA2DREAM", "‹ Back to the home page". A bare "Back" left them guessing. Opened
  * directly, from a search engine or a shared link, there is nothing on the
  * site to go back to, so it leads to the home page and says so.
  *
@@ -36,6 +37,9 @@ const label = computed(() => {
   if (!backTo.value) return t('notFound.home')
   const { params } = router.resolve(backTo.value)
   if (isSection(params.section)) return t(`panels.${params.section}`)
+  // The same slot holds a game's home page: /lineage2/ reads "Lineage II".
+  const game = typeof params.section === 'string' ? gameById(params.section) : undefined
+  if (game) return game.name
   const server = SERVERS.find((s) => s.id === params.id)
   return server ? server.name : t('notFound.home')
 })
