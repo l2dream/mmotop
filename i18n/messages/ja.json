@@ -106,6 +106,9 @@
     "all": {
       "title": "すべてのゲームサーバー",
       "description": "MMOTOPに掲載されているすべてのゲームサーバーを、クロニクルとレート付きで。"
+    },
+    "game": {
+      "description": "{game}のサーバー：投票ランキング、近日オープン、新規オープンのサーバーをMMOTOPで。"
     }
   },
   "notFound": {

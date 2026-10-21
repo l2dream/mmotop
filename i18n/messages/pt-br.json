@@ -106,6 +106,9 @@
     "all": {
       "title": "Todos os servidores de jogos",
       "description": "Todos os servidores de jogos do MMOTOP, com crônicas e rates."
+    },
+    "game": {
+      "description": "Servidores de {game}: top por votos, próximas aberturas e novos lançamentos no MMOTOP."
     }
   },
   "notFound": {

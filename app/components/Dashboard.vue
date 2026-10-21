@@ -631,9 +631,9 @@ const pageDescription = computed(() => (server.value
   })
   : props.section
     ? t(`seo.${props.section}.description`)
-    // A game's page leads with the game, so its description is not the home
-    // page's word for word — search engines pass over duplicates.
-    : homeGame.value ? `${homeGame.value.name} — ${t('meta.description')}` : t('meta.description')))
+    // A game's page has its own sentence about that game's servers, so its
+    // description is not the home page's — search engines pass over duplicates.
+    : homeGame.value ? t('seo.game.description', { game: homeGame.value.name }) : t('meta.description')))
 
 /** A server's place among all servers by votes. */
 const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))

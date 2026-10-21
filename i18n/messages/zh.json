@@ -106,6 +106,9 @@
     "all": {
       "title": "全部游戏服务器",
       "description": "MMOTOP 收录的全部游戏服务器，附版本和倍率。"
+    },
+    "game": {
+      "description": "{game} 服务器：投票排行、即将开服和新开服务器，尽在 MMOTOP。"
     }
   },
   "notFound": {

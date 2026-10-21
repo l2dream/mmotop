@@ -106,6 +106,9 @@
     "all": {
       "title": "Alle Gameserver",
       "description": "Alle auf MMOTOP gelisteten Gameserver, mit Chroniken und Rates."
+    },
+    "game": {
+      "description": "{game}-Server: Top nach Stimmen, bald startende und neu eröffnete Server auf MMOTOP."
     }
   },
   "notFound": {
