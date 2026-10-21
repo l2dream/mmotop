@@ -8,10 +8,16 @@ import type { SectionId } from '~/data/sections'
  * arrows or a trackpad on a desktop) and snaps to a card.
  *
  * It also moves on by itself, a card every few seconds, wrapping to the start
- * at the end. It holds still while the pointer is over it or focus is inside
- * it, stops for good once the visitor scrolls it themselves, never runs while
- * it is off screen or hidden, and not at all for someone who has asked their
- * system for reduced motion.
+ * at the end. It holds still while a mouse is over it or focus is inside it,
+ * waits a while after the visitor moves it themselves (a swipe, the arrows,
+ * a sideways scroll), never runs while it is off screen or hidden, and not at
+ * all for someone who has asked their system for reduced motion.
+ *
+ * "Moves it themselves" means the strip actually scrolled sideways without
+ * this code asking it to. Listening for wheel and touch instead stopped every
+ * carousel the page was merely scrolled past: a mouse wheel or a finger moving
+ * the page down over a strip counted as handling it, so only the one at the
+ * bottom, never crossed on the way, kept turning.
  *
  * Both the list and this strip are in the page; which one shows is decided by
  * a class on <html> (see useCarouselPanels), so a reload in carousel mode
@@ -33,8 +39,12 @@ const atStart = ref(true)
 const atEnd = ref(false)
 
 const AUTO_MS = 4500
+/** How long the strip waits after the visitor last moved it. */
+const RESUME_MS = 8000
 let held = false
-let stopped = false
+let lastUser = 0
+let ours = false
+let oursTimer: ReturnType<typeof setTimeout> | undefined
 let timer: ReturnType<typeof setInterval> | undefined
 let observer: ResizeObserver | undefined
 let inView = false
@@ -60,16 +70,29 @@ function step(dir: 1 | -1, smooth = true) {
   const max = t.scrollWidth - t.clientWidth
   const pos = Math.abs(t.scrollLeft)
   const behavior: ScrollBehavior = smooth ? 'smooth' : 'auto'
+  // The scroll events this causes are ours, not the visitor's.
+  ours = true
+  clearTimeout(oursTimer)
+  oursTimer = setTimeout(() => { ours = false }, smooth ? 900 : 100)
   if (dir > 0 && pos >= max - 2) t.scrollTo({ left: 0, behavior })
   else if (dir < 0 && pos <= 2) t.scrollTo({ left: rtl ? -max : max, behavior })
   else t.scrollBy({ left: dir * by * (rtl ? -1 : 1), behavior })
 }
 
-function hold(on: boolean) { held = on }
-function stop() { stopped = true }
+// A mouse resting on the strip holds it; a touch does not, since on a phone
+// the finger lifts and nothing would ever let go.
+function hold(on: boolean, event?: PointerEvent) {
+  if (event && event.pointerType !== 'mouse') return
+  held = on
+}
+
+function onScroll() {
+  measure()
+  if (!ours) lastUser = Date.now()
+}
 
 function nav(dir: 1 | -1) {
-  stopped = true
+  lastUser = Date.now()
   step(dir, !reducedMotion())
 }
 
@@ -77,7 +100,8 @@ const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)'
 
 function tick() {
   const t = track.value
-  if (stopped || held || !inView || document.visibilityState !== 'visible') return
+  if (held || !inView || document.visibilityState !== 'visible') return
+  if (Date.now() - lastUser < RESUME_MS) return
   // display: none while the panel shows its list instead.
   if (!t || !t.offsetParent || !overflows.value) return
   step(1)
@@ -93,12 +117,16 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   clearInterval(timer)
+  clearTimeout(oursTimer)
   observer?.disconnect()
   io?.disconnect()
 })
 // New rows (a filter, a search) start from the first card again.
 watch(() => props.rows.map((r) => r.server.id).join(), async () => {
   await nextTick()
+  ours = true
+  clearTimeout(oursTimer)
+  oursTimer = setTimeout(() => { ours = false }, 100)
   track.value?.scrollTo({ left: 0 })
   measure()
 })
@@ -112,8 +140,8 @@ watch(() => props.rows.map((r) => r.server.id).join(), async () => {
     role="region"
     aria-roledescription="carousel"
     :aria-label="title"
-    @pointerenter="hold(true)"
-    @pointerleave="hold(false)"
+    @pointerenter="hold(true, $event)"
+    @pointerleave="hold(false, $event)"
     @focusin="hold(true)"
     @focusout="hold(false)"
   >
@@ -122,7 +150,7 @@ watch(() => props.rows.map((r) => r.server.id).join(), async () => {
         <path d="M15 5l-7 7 7 7" />
       </svg>
     </button>
-    <ul ref="track" class="carousel-track" @scroll.passive="measure" @wheel.passive="stop" @touchstart.passive="stop" @keydown="stop">
+    <ul ref="track" class="carousel-track" @scroll.passive="onScroll">
       <li v-for="row in rows" :key="row.server.id">
         <ServerTile :server="row.server" :rank="row.rank" :end="end" :origin="origin" />
       </li>
