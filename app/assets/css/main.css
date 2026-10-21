@@ -1938,6 +1938,22 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .panel-all { grid-area: all; }
 }
 
+/* Three panels side by side, but not yet wide enough for the desktop row:
+   from 1101px up to about 1360px a top panel is 316-400px wide, and the
+   fixed columns plus a name of at least 120px came to 386px — the votes and
+   dates ran out past the panel's edge and were cut, by up to 70px at 1101.
+   Here the rows take the phone's tighter spacing and narrower columns, and
+   the name gives way to an ellipsis instead. */
+@media (min-width: 1101px) and (max-width: 1359px) {
+  .top-grid .game-row {
+    grid-template-columns: 24px 36px minmax(0, 1fr) 72px 68px;
+    gap: 6px;
+    padding-inline: 12px;
+  }
+  .top-grid .game-row.no-rank { grid-template-columns: 36px minmax(0, 1fr) 72px 68px; }
+  .top-grid .rank { margin-inline-start: -3px; }
+}
+
 @media (max-width: 700px) {
   .site-footer {
     margin-top: 24px;
