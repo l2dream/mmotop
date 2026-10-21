@@ -136,9 +136,18 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   font-size: 25px;
   font-weight: 800;
   letter-spacing: -1.5px;
+  background: linear-gradient(90deg, #ffffff 35%, #d2b4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(166, 107, 255, .45));
 }
 
-.theme-light .brand { color: #131525; }
+.theme-light .brand {
+  color: #131525;
+  background-image: linear-gradient(90deg, #131525 35%, #5b21b6);
+  filter: none;
+}
 
 .theme-light .theme-button { color: #3c3f55; }
 
@@ -165,7 +174,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(31, 41, 102, .05);
 }
 
-.theme-light .category { color: #62667c; }
+.theme-light .category { color: #464a60; }
 
 .theme-light .category.active {
   color: #fff;
@@ -370,11 +379,11 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .filter-popup-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: #858aa6;
+  color: #b9bdd0;
 }
 
 .filter-select {
@@ -500,9 +509,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .filter-popup-label,
 .theme-light .filter-custom-sep,
 .theme-light .filter-reset,
-.theme-light .empty-state { color: #6d7395; }
+.theme-light .empty-state { color: #464a60; }
 .theme-light .filter-reset:hover { color: #5b21c4; }
-.theme-light .lang-item-code { color: #6e7394; }
+.theme-light .lang-item-code { color: #555a70; }
 
 .filter-apply {
   border: 0;
@@ -802,15 +811,15 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin-bottom: calc(var(--lang-row) * -1);
   pointer-events: none;
   padding-inline-start: 8px;
-  color: #7f839b;
-  font-size: 11px;
+  color: #b9bdd0;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
 
-.theme-light .lang-group-title { color: #6e7392; }
+.theme-light .lang-group-title { color: #464a60; }
 
 .lang-item {
   break-inside: avoid;
@@ -1011,8 +1020,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border: 0;
   background: transparent;
   padding: 0 25px;
-  color: #a7aac0;
+  color: #c6c9d9;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -1123,7 +1133,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   max-width: 1480px;
   margin: 34px auto 0;
   padding: 0 0 4px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1249,9 +1259,22 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    every all-caps line gets a little tracking, scaled to its size. */
 .panel h2 {
   margin: 0;
-  font-size: 14px;
-  letter-spacing: .03em;
+  font-size: 15px;
+  letter-spacing: .04em;
   font-weight: 800;
+  /* White running into a pale tint of the panel's own accent, with a soft
+     glow of the same: the one place text gets an effect, because it is large
+     and heavy enough to stay crisp. Even the tinted end stays above 10:1. */
+  background: linear-gradient(90deg, #ffffff 30%, color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, #ffffff));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, transparent));
+}
+
+.theme-light .panel h2 {
+  background-image: linear-gradient(90deg, #131525 30%, color-mix(in srgb, var(--panel-glow, #7c3aed) 45%, #131525));
+  filter: none;
 }
 
 /* Holds the header's controls together at the trailing edge: any panel action
@@ -1379,11 +1402,12 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .game-row.compact .date-year {
-  color: #8b90a7;
-  font-size: 11px;
+  color: #b9bdd0;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.theme-light .game-row.compact .date-year { color: #6c7189; }
+.theme-light .game-row.compact .date-year { color: #464a60; }
 
 .theme-light .game-row {
   border-bottom-color: rgba(103, 104, 173, .1);
@@ -1427,7 +1451,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border: 1px solid transparent;
   border-radius: 50%;
   color: #eef0f9;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 /* Only the top three are marked, in medal order. A ring rather than a fill:
@@ -1435,12 +1460,23 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
    discs would compete with both. */
 .rank-1 { border-color: rgba(255, 203, 77, .55); color: #ffd76a; }
 .rank-2 { border-color: rgba(200, 205, 218, .5); color: #d9deea; }
-.rank-3 { border-color: rgba(201, 139, 84, .55); color: #d89a63; }
+.rank-3 { border-color: rgba(201, 139, 84, .55); color: #e0a874; }
 
-.theme-light .rank { color: #4a4e68; }
-.theme-light .rank-1 { border-color: rgba(214, 130, 10, .5); color: #7a5604; }
-.theme-light .rank-2 { border-color: rgba(120, 128, 148, .45); color: #555c6c; }
-.theme-light .rank-3 { border-color: rgba(180, 110, 60, .5); color: #8c4c1f; }
+/* The medals glow in the dark theme: a soft halo in each medal's own colour
+   around the ring, and a faint one on the digit. Large and bold enough that
+   the glow reads as light, not as blur. On white a glow only muddies, so the
+   light theme keeps plain rings. */
+.rank-1, .rank-2, .rank-3 {
+  font-weight: 700;
+  box-shadow: 0 0 10px -2px currentColor, inset 0 0 6px -3px currentColor;
+  text-shadow: 0 0 8px color-mix(in srgb, currentColor 55%, transparent);
+}
+
+.theme-light .rank { color: #363a52; }
+.theme-light .rank-1 { border-color: rgba(214, 130, 10, .55); color: #6b4a00; }
+.theme-light .rank-2 { border-color: rgba(120, 128, 148, .5); color: #474d5c; }
+.theme-light .rank-3 { border-color: rgba(180, 110, 60, .55); color: #7a3f15; }
+.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 { box-shadow: none; text-shadow: none; }
 
 .game-logo {
   width: 34px;
@@ -1475,8 +1511,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   letter-spacing: .02em;
 }
 
@@ -1484,13 +1520,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  /* The faintest text on the page, and it read 3.6:1 against the dark rows —
-     under the 4.5 small text needs. Still the quietest line in the row. */
-  color: #959ab2;
-  font-size: 11px;
+  /* The quietest line in the row, but still 7:1 against it (AAA): readable
+     for low vision, not only the bare 4.5 minimum. */
+  color: #b9bdd0;
+  font-size: 13px;
 }
 
-.theme-light .game-name small { color: #5d6177; }
+.theme-light .game-name small { color: #464a60; }
 
 /* Every panel stacks the rate under its chronicle, so this is a column rather
    than a line of text and the ellipsis lives on .version-name. */
@@ -1503,7 +1539,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 1px;
   line-height: 1.2;
   color: #e4e7f5;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1521,11 +1558,12 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .version-rate {
   display: block;
-  color: #8b90a7;
-  font-size: 11px;
+  color: #b9bdd0;
+  font-size: 13px;
+  font-weight: 400;
 }
 
-.theme-light .version-rate { color: #6c7189; }
+.theme-light .version-rate { color: #464a60; }
 
 /* Pinned to the right edge of its column so the votes end the same distance
    from the card edge as the rank or logo begins on the left. */
@@ -1546,11 +1584,12 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   align-items: flex-end;
   gap: 2px;
   color: #ffd64a;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-.theme-light .rating { color: #916b00; }
+.theme-light .rating { color: #6b4e00; }
 
 .rating-value {
   display: flex;
@@ -1565,13 +1604,14 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .vote-icon path { fill: url(#voteGradLight); }
 
 .date {
-  color: #9ca1b7;
-  font-size: 12px;
+  color: #dfe2ef;
+  font-size: 14px;
+  font-weight: 600;
   text-align: end;
   white-space: nowrap;
 }
 
-.theme-light .date { color: #6d7187; }
+.theme-light .date { color: #2f3348; }
 
 .panel-footer {
   width: 100%;
@@ -1584,8 +1624,9 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border: 0;
   border-top: 1px solid rgba(89, 94, 143, .13);
   background: transparent;
-  color: #b65eff;
-  font-size: 12px;
+  color: #c99bff;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
   transition: color .18s ease, background-color .18s ease;
@@ -1595,7 +1636,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .panel-footer:focus-visible { outline-offset: -2px; box-shadow: none; }
 
 .theme-light .panel-footer {
-  color: #7c3aed;
+  color: #5b21b6;
   border-top-color: rgba(103, 104, 173, .12);
 }
 .theme-light .panel-footer:hover { color: #5b21c4; background: rgba(124, 58, 237, .06); }
@@ -1635,8 +1676,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 .server-title p {
   margin: 3px 0 0;
-  color: #8b90a7;
-  font-size: 13px;
+  color: #b9bdd0;
+  font-size: 14px;
 }
 
 /* Says which list the server is in today: the same date splits them. */
@@ -1645,7 +1686,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin-inline-start: auto;
   padding: 5px 10px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .05em;
   white-space: nowrap;
@@ -1668,8 +1709,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, .025);
 }
 .server-facts dt {
-  color: #8b90a7;
-  font-size: 11px;
+  color: #b9bdd0;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -1720,7 +1761,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .server-others { margin-top: 14px; }
 
 .theme-light .server-title p,
-.theme-light .server-facts dt { color: #5d6177; }
+.theme-light .server-facts dt { color: #464a60; }
 .theme-light .server-facts > div {
   border-color: rgba(103, 104, 173, .14);
   background: rgba(255, 255, 255, .6);
@@ -1845,7 +1886,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .site-footer {
     margin-top: 24px;
     text-align: center;
-    font-size: 11px;
+    font-size: 12px;
   }
   .site-shell { padding: 12px; }
 
@@ -2029,7 +2070,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .filter-popup { width: calc(100vw - 20px); }
   .panel-head { padding-inline: 15px; }
   .game-row {
-    grid-template-columns: 22px 32px minmax(0, 1fr) 58px 60px;
+    grid-template-columns: 24px 32px minmax(0, 1fr) 64px 64px;
     gap: 5px;
     padding-inline: 10px;
   }
@@ -2039,16 +2080,23 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
      and "gruod. 28" ran into the chronicle beside them. 60px holds the widest
      (Arabic, 59px) and costs only the name column, which already truncates. */
   .game-row.no-rank {
-    grid-template-columns: 32px minmax(0, 1fr) 58px 60px;
+    grid-template-columns: 32px minmax(0, 1fr) 64px 64px;
   }
   .game-row.chronicle-last {
-    grid-template-columns: 32px minmax(0, 1fr) 58px;
+    grid-template-columns: 32px minmax(0, 1fr) 64px;
   }
   .game-logo { width: 30px; height: 30px; }
   /* 11px inset, 5px gap: 3px out gives 8px each side. */
-  .rank { width: 22px; height: 22px; font-size: 12px; margin-inline-start: -3px; }
-  /* 11px, not the desktop 12: in the 58px column "Newschool" at 12px gets cut. */
-  .version { font-size: 11px; }
+  .rank { width: 24px; height: 24px; font-size: 13px; margin-inline-start: -3px; }
+  /* A step under the desktop sizes, so the chronicle and date columns hold
+     their longest entries ("Newschool", Arabic dates) in 64px; nothing
+     smaller than 12px. */
+  .game-name strong { font-size: 14px; }
+  .game-name small,
+  .version,
+  .version-rate { font-size: 12px; }
+  .date,
+  .rating { font-size: 13px; }
 
 }
 
