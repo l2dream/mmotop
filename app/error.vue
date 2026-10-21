@@ -48,12 +48,14 @@ function goHome() {
 
 <template>
   <div class="site-shell not-found">
-    <div class="not-found-card">
+    <!-- main, so a screen reader's "skip to main content" has somewhere to
+         go; it was the one page without the landmark. -->
+    <main class="not-found-card">
       <a :href="localePath('/')" class="brand not-found-brand" @click.prevent="goHome">MMOTOP</a>
       <p class="not-found-code">{{ error?.statusCode ?? 404 }}</p>
       <h1 class="not-found-title">{{ notFound ? t('notFound.title') : error?.statusMessage }}</h1>
       <p v-if="notFound" class="not-found-text">{{ t('notFound.text') }}</p>
       <a :href="localePath('/')" class="not-found-home" @click.prevent="goHome">{{ t('notFound.home') }}</a>
-    </div>
+    </main>
   </div>
 </template>
