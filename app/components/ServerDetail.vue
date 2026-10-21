@@ -72,6 +72,9 @@ function fullDate(iso: string) {
   const tag = locale.value === 'en' ? 'en-GB' : bcp47(locale.value)
   return new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${iso}T00:00:00Z`))
+    // The last word keeps to the one before it: on a phone "20 ноября 2025 г."
+    // wrapped as "20 ноября 2025 / г.", the "г." alone on a line.
+    .replace(/ (?=\S+$)/, '\u00a0')
 }
 </script>
 
