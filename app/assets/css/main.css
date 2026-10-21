@@ -1623,34 +1623,67 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .panel-footer {
   width: 100%;
-  height: 35px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 10px;
   padding: 0;
   border: 0;
-  border-top: 1px solid rgba(89, 94, 143, .13);
-  background: transparent;
-  color: #c99bff;
-  font-size: 13px;
-  font-weight: 500;
+  border-top: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 30%, transparent);
+  /* A band in the panel's own accent, so the way to more reads as a
+     control, not as a stray line of text under the last row. */
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 8%, transparent);
+  color: #e6d4ff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
   text-decoration: none;
   cursor: pointer;
   transition: color .18s ease, background-color .18s ease;
 }
 
-.panel-footer:hover { color: #d9a8ff; background: rgba(156, 92, 255, .06); }
-.panel-footer:focus-visible { outline-offset: -2px; box-shadow: none; }
+.panel-footer:hover {
+  color: #fff;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 18%, transparent);
+}
+.panel-footer:focus-visible { outline-offset: -3px; box-shadow: none; }
+
+/* The arrow sits in a disc of the accent: right for the full list, down for
+   more here. It nudges the way it points on hover. */
+.panel-footer-arrow {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 30%, transparent);
+  color: #fff;
+  transition: transform .18s ease, background-color .18s ease;
+}
+.panel-footer-arrow svg { display: block; }
+.panel-footer:hover .panel-footer-arrow {
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 50%, transparent);
+  transform: translateX(3px);
+}
+.panel-footer:hover .panel-footer-arrow.is-down { transform: translateY(2px); }
+[dir="rtl"] .panel-footer:hover .panel-footer-arrow:not(.is-down) { transform: translateX(-3px); }
 
 .theme-light .panel-footer {
-  color: #5b21b6;
-  border-top-color: rgba(103, 104, 173, .12);
+  color: #4c1d95;
+  border-top-color: color-mix(in srgb, var(--panel-glow, #7c3aed) 30%, transparent);
+  background: color-mix(in srgb, var(--panel-glow, #7c3aed) 7%, #ffffff);
 }
-.theme-light .panel-footer:hover { color: #5b21c4; background: rgba(124, 58, 237, .06); }
+.theme-light .panel-footer:hover {
+  color: #2e1065;
+  background: color-mix(in srgb, var(--panel-glow, #7c3aed) 15%, #ffffff);
+}
+.theme-light .panel-footer-arrow {
+  background: #6d28d9;
+  color: #fff;
+}
+.theme-light .panel-footer:hover .panel-footer-arrow { background: #5b21b6; }
 .theme-light .panel-arrow:hover { color: #4c1d95; }
-
-.panel-footer-arrow { display: flex; }
 
 .section-view {
   max-width: 760px;

@@ -167,8 +167,6 @@ function fullDate(iso: string) {
       :end="others.end"
       :origin="others.origin"
     />
-    <button v-if="others.more" type="button" class="panel-footer" @click="$emit('more')">
-      {{ $t('panels.viewMore') }}<span class="sr-only">: {{ $t('server.recommended') }}</span>
-    </button>
+    <PanelFooter v-if="others.more" :title="$t('server.recommended')" @click="$emit('more')" />
   </GamePanel>
 </template>
