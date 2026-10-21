@@ -524,7 +524,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .filter-apply {
   border: 0;
   border-radius: 8px;
-  background: linear-gradient(180deg, #6d28d9, #5b21b6);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -603,7 +603,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   padding: 10px 18px;
   border: 0;
   border-radius: 10px;
-  background: linear-gradient(180deg, #6d28d9, #5b21b6);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -612,7 +612,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .no-results-action:hover,
-.no-results-action:focus-visible { background: linear-gradient(180deg, #7c3aed, #6025c9); }
+.no-results-action:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
 
 .theme-light .no-results {
   border-color: rgba(103, 104, 173, .14);
@@ -1804,7 +1804,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 8px;
   padding: 11px 18px;
   border-radius: 10px;
-  background: linear-gradient(180deg, #6d28d9, #5b21b6);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -1812,20 +1812,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 6px 20px rgba(124, 58, 237, .35), inset 0 1px 0 rgba(255, 255, 255, .15);
 }
 .server-visit:hover,
-.server-visit:focus-visible { background: linear-gradient(180deg, #7c3aed, #6025c9); }
-
-/* The light theme keeps its brighter purple on filled buttons; the deeper
-   one above is the dark theme's. */
-.theme-light .server-visit,
-.theme-light .filter-apply,
-.theme-light .no-results-action,
-.theme-light .not-found-home { background: linear-gradient(180deg, #9048ff, #7c3aed); }
-.theme-light .server-visit:hover,
-.theme-light .server-visit:focus-visible,
-.theme-light .no-results-action:hover,
-.theme-light .no-results-action:focus-visible,
-.theme-light .not-found-home:hover,
-.theme-light .not-found-home:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
+.server-visit:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
 
 .server-others { margin-top: 14px; }
 
@@ -2272,7 +2259,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   margin-top: 24px;
   padding: 11px 20px;
   border-radius: 11px;
-  background: linear-gradient(180deg, #6d28d9, #5b21b6);
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -2280,7 +2267,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .not-found-home:hover,
-.not-found-home:focus-visible { background: linear-gradient(180deg, #7c3aed, #6025c9); }
+.not-found-home:focus-visible { background: linear-gradient(180deg, #9c5cff, #8645f0); }
 
 .theme-light .not-found-card {
   border-color: rgba(103, 104, 173, .14);
