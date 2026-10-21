@@ -1756,9 +1756,10 @@ html[data-carousel~="started"] .panel-started .panel-carousel,
 html[data-carousel~="new"] .panel-new .panel-carousel,
 html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 
-/* On a wide screen a carousel panel takes the whole width and every other
-   panel goes two to a row, filling in around it in their usual order; an odd
-   one left over at the end takes the whole width too (data-wide). */
+/* On a wide screen a carousel panel takes the whole width and the other
+   panels go two to a row, long with long and short with short; one left
+   without a partner of its length takes the whole width too (data-wide, see
+   useCarouselPanels). */
 @media (min-width: 860px) {
   html[data-carousel] .dashboard:has(> .top-grid) {
     display: grid;
