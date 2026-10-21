@@ -167,7 +167,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .theme-light .search-box input::placeholder { color: #62667c; }
-.theme-light .search-icon { color: #4a4e66; }
 
 .theme-light .login-button {
   background: #ffffff;
@@ -276,6 +275,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .theme-light .search-icon {
+  color: #4a4e66;
   border-inline-end-color: rgba(31, 41, 102, .14);
 }
 
@@ -1259,7 +1259,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   width: 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* Start-aligned: see the icon offsets below. */
+  justify-content: flex-start;
   color: #ae5cff;
   font-size: 20px;
   text-align: center;
@@ -1283,7 +1284,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
  * and mirrors the arrow. The 24px slot keeps its width (the
  * icon is start-aligned in it), so the titles stay where they are.
  */
-.panel-icon { justify-content: flex-start; }
 .trophy-icon { margin-inline-start: -1px; }
 .clock-icon,
 .bolt-icon { margin-inline-start: -3px; }
@@ -1562,10 +1562,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   flex-direction: column;
   gap: var(--line-gap);
 }
-.game-name strong { line-height: var(--line-1); }
-.game-name small { line-height: var(--line-2); }
-
 .game-name strong {
+  line-height: var(--line-1);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1575,6 +1573,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .game-name small {
+  line-height: var(--line-2);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
