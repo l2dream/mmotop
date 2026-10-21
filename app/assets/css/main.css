@@ -1688,6 +1688,17 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   font-weight: 500;
 }
 .server-votes { color: #ffd76a; }
+.server-fact-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(185, 139, 255, .45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color .18s ease, text-decoration-color .18s ease;
+}
+.server-fact-link:hover { color: #d9a8ff; text-decoration-color: currentColor; }
+.theme-light .server-fact-link { text-decoration-color: rgba(124, 58, 237, .4); }
+.theme-light .server-fact-link:hover { color: #6d28d9; }
 
 .server-actions { margin-top: 22px; display: flex; }
 

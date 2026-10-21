@@ -3,6 +3,7 @@ import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
 import { bcp47 } from '~/i18n/locales'
 import type { SectionId } from '~/data/sections'
+import { chronicleLanding, rateLanding } from '~/data/landing'
 
 /**
  * One server's own page: what it is, when it opens, how it stands, and the
@@ -36,6 +37,19 @@ const { locale } = useI18n()
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
+
+// The chronicle and the rate lead to their own pages — every server on
+// /lineage2/interlude/ or /lineage2/x50/ — which is also how a crawler finds
+// those pages.
+const localePath = useLocalePath()
+const chronicleLink = computed(() => {
+  const l = chronicleLanding(props.server.game, props.server.chronicle)
+  return l && localePath(`/${l.game}/${l.slug}/`)
+})
+const rateLink = computed(() => {
+  const l = props.server.rate == null ? undefined : rateLanding(props.server.game, props.server.rate)
+  return l && localePath(`/${l.game}/${l.slug}/`)
+})
 
 /**
  * Languages whose dates Intl cannot be trusted with in the browser: Chrome
@@ -77,11 +91,17 @@ function fullDate(iso: string) {
     <dl class="server-facts">
       <div>
         <dt>{{ $t('filter.version') }}</dt>
-        <dd :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</dd>
+        <dd :title="server.chronicle">
+          <NuxtLink v-if="chronicleLink" class="server-fact-link" :to="chronicleLink">{{ chronicleShort(server.game, server.chronicle) }}</NuxtLink>
+          <template v-else>{{ chronicleShort(server.game, server.chronicle) }}</template>
+        </dd>
       </div>
       <div>
         <dt>{{ $t('filter.rate') }}</dt>
-        <dd>{{ rateLabel(server) || '—' }}</dd>
+        <dd>
+          <NuxtLink v-if="rateLink" class="server-fact-link" :to="rateLink">{{ rateLabel(server) }}</NuxtLink>
+          <template v-else>{{ rateLabel(server) || '—' }}</template>
+        </dd>
       </div>
       <div>
         <dt>{{ $t('server.opens') }}</dt>

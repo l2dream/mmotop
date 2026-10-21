@@ -2,6 +2,14 @@ import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from './app/i18n/locales'
 import { SECTIONS } from './app/data/sections'
 import { SERVERS } from './app/data/servers'
 import { GAMES } from './app/data/games'
+import { LANDINGS, landingCollisions } from './app/data/landing'
+
+// A server's page and a chronicle's or rate's page share /<game>/<segment>/,
+// so a server whose id is one of its game's slugs would lose its page.
+const collisions = landingCollisions()
+if (collisions.length) {
+  throw new Error(`Server ids taken by chronicle or rate pages: ${collisions.join(', ')}`)
+}
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-07',
@@ -82,6 +90,14 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       /**
+       * Links that carry filters (/lineage2/la2dream/?game=wow&version=…) are
+       * the same file as the page without them, so the crawler rendering each
+       * one only to discard it was pure waste — tens of thousands of renders
+       * once chronicle and rate pages put their filters into every row's link.
+       * Every page is listed in `routes` below, none with a query.
+       */
+      ignore: [(path: string) => path.includes('?')],
+      /**
        * Every locale's page, listed outright. They were already being
        * generated — but by the i18n module's own route registration, and
        * nothing in the page links to them for the crawler to find (the
@@ -100,6 +116,8 @@ export default defineNuxtConfig({
           ...SECTIONS.map(id => `${prefix}/${id}`),
           ...GAMES.map(g => `${prefix}/${g.id}`),
           ...SERVERS.map(s => `${prefix}/${s.game}/${s.id}`),
+          // Each game's chronicle and rate pages (data/landing.ts).
+          ...LANDINGS.map(l => `${prefix}/${l.game}/${l.slug}`),
           // The old addresses, as redirect pages, for links made before the
           // server pages moved under their game.
           ...SERVERS.map(s => `${prefix}/server/${s.id}`)

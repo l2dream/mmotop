@@ -3,6 +3,7 @@ import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
 import { gameById } from '~/data/games'
+import { landingAt } from '~/data/landing'
 
 /**
  * One server, as it appears in every list on the site.
@@ -34,6 +35,14 @@ const localePath = useLocalePath()
 const route = useRoute()
 const linkQuery = computed(() => {
   const game = route.params.section
+  // A chronicle's or a rate's page (/lineage2/interlude/) carries that filter
+  // in the path as well.
+  const landing = landingAt(game, route.params.id)
+  if (landing) {
+    return landing.chronicle
+      ? { ...route.query, game: landing.game, version: landing.chronicle }
+      : { ...route.query, game: landing.game, min: String(landing.rate), max: String(landing.rate) }
+  }
   // A server's page sits under its game too (/lineage2/la2dream/); there the
   // segment names where the server lives, not a game the visitor chose.
   const onGamePage = typeof game === 'string' && !!gameById(game) && !route.params.id

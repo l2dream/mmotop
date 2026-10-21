@@ -108,6 +108,7 @@
       "description": "Visi MMOTOP žaidimų serveriai su kronikomis ir rate."
     },
     "game": {
+      "title": "{game} serveriai",
       "description": "{game} serveriai: populiariausi pagal balsus, greitai atsidarantys ir nauji serveriai MMOTOP."
     }
   },
