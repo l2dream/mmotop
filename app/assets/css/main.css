@@ -1792,6 +1792,21 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   scrollbar-width: none;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
+/* The ends fade where there is more beyond them, as on the category bar, so
+   a strip that scrolls reads as one: the right end at the start, both in
+   the middle, the left at the end (the other way round right to left). */
+.carousel-track {
+  --fade-s: 40px;
+  --fade-e: 40px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
+}
+.panel-carousel.at-start .carousel-track { --fade-s: 0px; }
+.panel-carousel.at-end .carousel-track { --fade-e: 0px; }
+[dir="rtl"] .carousel-track {
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
+  mask-image: linear-gradient(to left, transparent, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent);
+}
 .carousel-track > li { flex: 0 0 auto; width: 212px; scroll-snap-align: start; }
 
 .server-tile {
