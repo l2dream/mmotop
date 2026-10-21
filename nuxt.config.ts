@@ -32,8 +32,8 @@ export default defineNuxtConfig({
        * the visual viewport is the page and has nowhere to pan.
        */
       viewport: 'width=device-width, initial-scale=1, interactive-widget=resizes-content',
-      // The site lives under /mmotop/, so the browser's own guess at
-      // /favicon.ico (the origin root) finds nothing; the icons are linked.
+      // The icons are linked rather than left to the browser's own guess
+      // at /favicon.ico, which misses whenever the site has a base path.
       // The .ico is for browsers without SVG favicons (Safari), the PNG for
       // an iPhone home-screen shortcut.
       // The browser's own toolbar on phones, in the page's default dark.
@@ -70,7 +70,7 @@ export default defineNuxtConfig({
       buildDate: new Date().toISOString().slice(0, 10),
       /** The site's origin, for the absolute addresses Open Graph and
        *  structured data require. The same value hreflang uses below. */
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://l2dream.github.io'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://mmotop.com'
     }
   },
 
@@ -177,6 +177,6 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false,
 
     /** Absolute origin for hreflang and canonical tags. */
-    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://l2dream.github.io'
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://mmotop.com'
   }
 })

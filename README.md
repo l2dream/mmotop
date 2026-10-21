@@ -20,8 +20,10 @@ in Settings → Pages). The site is fully static.
 
 ## Where things are
 
-- `app/pages/index.vue` — the dashboard: panels, search, filters, URL sync
-- `app/data/` — games and servers (servers are test data for now)
+- `app/components/Dashboard.vue` — every page: panels, search, filters, URL sync
+- `app/pages/` — routes: home, `/<section>/`, `/<game>/`, `/<game>/<server>/`,
+  `/<game>/<chronicle or rate>/` (e.g. `/lineage2/interlude/`, `/lineage2/x50/`)
+- `app/data/` — games, servers (test data for now) and the chronicle/rate pages
 - `app/i18n/`, `i18n/messages/` — the language registry and translations
 - `modules/fonts.ts` — self-hosted fonts, built from Fontsource packages
-- `modules/sitemap.ts` — sitemap.xml for every language
+- `modules/sitemap.ts` — sitemap.xml and robots.txt for every language

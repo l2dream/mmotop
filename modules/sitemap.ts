@@ -38,7 +38,7 @@ export default defineNuxtModule({
 
     nuxt.hook('nitro:init', (nitro) => {
       nitro.hooks.hook('close', async () => {
-        const origin = (process.env.NUXT_PUBLIC_SITE_URL || 'https://l2dream.github.io').replace(/\/$/, '')
+        const origin = (process.env.NUXT_PUBLIC_SITE_URL || 'https://mmotop.com').replace(/\/$/, '')
         /**
          * The deploy sets this to /<repo>/ on Pages; locally it is just /.
          * Normalised at both ends: the trailing slash was already stripped,
