@@ -990,6 +990,19 @@ function closeFilter() {
   filterButtonEl.value?.focus()
 }
 
+/**
+ * Opened from the keyboard (Enter or Space, which fire a click with detail
+ * 0), focus moves into the popup, to its first field, so the next keys act
+ * on the filters rather than on whatever followed the button in the page.
+ * A mouse or a tap leaves focus alone: on a phone, focusing a select there
+ * would pop its picker open by itself.
+ */
+let focusFilterOnOpen = false
+function toggleFilterFrom(event: MouseEvent) {
+  filterOpen.value = !filterOpen.value
+  focusFilterOnOpen = filterOpen.value && event.detail === 0
+}
+
 function onDocumentPointer(event: PointerEvent) {
   const target = event.target as Node
 
@@ -1047,6 +1060,10 @@ watch(filterOpen, async (open) => {
   if (!open) return
   await nextTick()
   positionFilterPopup()
+  if (focusFilterOnOpen) {
+    focusFilterOnOpen = false
+    filterPopupEl.value?.querySelector<HTMLElement>('select, button, input')?.focus()
+  }
 })
 
 onMounted(() => {
@@ -1236,7 +1253,7 @@ function clearSearch() {
           :aria-expanded="filterOpen"
           ref="filterButtonEl"
           :class="{ active: filterOpen || activeFilterCount > 0 }"
-          @click="filterOpen = !filterOpen"
+          @click="toggleFilterFrom($event)"
         >
           <svg class="filter-icon" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <line x1="3" y1="5" x2="17" y2="5" />
