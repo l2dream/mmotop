@@ -102,8 +102,24 @@ function pick(): Locale | null {
   return null
 }
 
+/**
+ * Once answered in this tab, the offer is not made again until the next
+ * visit. Taking it stores the language, and the next page in the old one —
+ * the very page they left, reached with Back — used to read that stored
+ * choice and offer it all over again. A later visit still offers it, which is
+ * what the stored choice is for. Storage can be blocked (private modes); then
+ * this simply remembers nothing.
+ */
+const ANSWERED = 'mmotop-lang-hint-answered'
+function answeredThisVisit() {
+  try { return sessionStorage.getItem(ANSWERED) === '1' } catch { return false }
+}
+function markAnswered() {
+  try { sessionStorage.setItem(ANSWERED, '1') } catch {}
+}
+
 onMounted(() => {
-  if (dismissed.value) return
+  if (dismissed.value || answeredThisVisit()) return
   const found = pick()
   if (found && SUGGESTIONS[found.code]) {
     suggestion.value = found
@@ -134,11 +150,13 @@ useHead(() => ({
 
 function accept() {
   stored.value = suggestion.value!.code
+  markAnswered()
   suggestion.value = null
 }
 
 function dismiss() {
   dismissed.value = 'off'
+  markAnswered()
   suggestion.value = null
 }
 </script>
