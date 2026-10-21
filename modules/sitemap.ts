@@ -74,12 +74,12 @@ export default defineNuxtModule({
         // cluster reciprocal — the half of hreflang that is easy to get wrong.
         // One cluster per page: the home page, each game, each section, each
         // server.
-        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...SERVERS.map(s => `server/${s.id}`)]
+        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...SERVERS.map(s => `${s.game}/${s.id}`)]
         const entries = pages.flatMap(page => READY_LOCALES.map(l => `  <url>
     <loc>${urlFor(l.code, page)}</loc>
 ${alternatesFor(page)}
     <changefreq>daily</changefreq>
-    <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : page.startsWith('server/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
+    <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : page.includes('/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
   </url>`)).join('\n')
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>

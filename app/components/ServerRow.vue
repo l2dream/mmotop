@@ -49,7 +49,7 @@ const rowClass = computed(() => ({
 </script>
 
 <template>
-  <NuxtLink class="game-row" :class="rowClass" :to="{ path: localePath(`/server/${server.id}`), query: linkQuery }" @click="remember">
+  <NuxtLink class="game-row" :class="rowClass" :to="{ path: localePath(`/${server.game}/${server.id}`), query: linkQuery }" @click="remember">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">
