@@ -190,7 +190,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 0 -2px 0 #6d28d9;
 }
 
-.theme-light .category.more .more-chevron { color: #4a4e66; }
+.theme-light .category.more .more-chevron { background: #7c3aed; color: #fff; }
+.theme-light .category.more:hover .more-chevron { background: #6d28d9; }
+/* On the filled purple of an active tab a purple disc would vanish. */
+.theme-light .category.more.active .more-chevron { background: rgba(255, 255, 255, .28); }
 
 .theme-button {
   width: 40px;
@@ -1072,8 +1075,19 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 
 .category.more { display: flex; align-items: center; }
-.category.more .more-chevron { padding-inline-start: 8px; color: #c3c6d8; display: flex; }
-.category.more .more-chevron svg { display: block; transition: transform .18s ease; }
+.category.more .more-chevron {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-inline-start: 8px;
+  border-radius: 50%;
+  background: rgba(156, 92, 255, .32);
+  color: #fff;
+  transition: background-color .18s ease;
+}
+.category.more:hover .more-chevron { background: rgba(156, 92, 255, .55); }
+.category.more .more-chevron svg { display: block; width: 11px; height: 11px; transition: transform .18s ease; }
 .category.more .more-chevron.open svg { transform: rotate(180deg); }
 .category.more.active { color: #fff; }
 
@@ -1311,18 +1325,25 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   gap: 8px;
 }
 
-/* Flex, so the icon is centred in the head rather than sitting on a text
-   baseline a pixel low. The chevron is drawn in the middle third of its 24-unit
-   box, leaving a third of it empty on the outer side; the negative margin hands
-   that back, so the visible arrow ends exactly at the head's inset — mirroring
-   the panel icon's on the other side. */
+/* The arrow in a disc of the panel's accent, as on View more at the foot of
+   the panel: the two ways to the full list look alike. It nudges onward on
+   hover (`translate`, so the RTL mirror on the glyph is left alone). */
 .panel-arrow {
-  display: flex;
-  color: #d0a6ff;
-  transition: color .18s ease;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 30%, transparent);
+  color: #fff;
+  transition: background-color .18s ease, translate .18s ease;
 }
-.panel-arrow:hover { color: #d9a8ff; }
-.panel-arrow svg { margin-inline-end: -5.33px; }
+.panel-arrow svg { display: block; width: 14px; height: 14px; }
+.panel-arrow:hover {
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 50%, transparent);
+  translate: 2px 0;
+}
+[dir="rtl"] .panel-arrow:hover { translate: -2px 0; }
 
 /* Quiet by default, picking up the panel's own accent on hover. The icon is
    wordless on purpose — nothing here needs translating. */
@@ -1350,7 +1371,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .shuffle-icon { display: block; }
 
-.theme-light .panel-arrow { color: #6d28d9; }
+.theme-light .panel-arrow { background: #7c3aed; color: #fff; }
 
 .panel-body { min-height: 0; }
 
@@ -1714,7 +1735,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   color: #fff;
 }
 .theme-light .panel-footer:hover .panel-footer-arrow { background: #6d28d9; }
-.theme-light .panel-arrow:hover { color: #4c1d95; }
+.theme-light .panel-arrow:hover { background: #6d28d9; }
 
 .section-view {
   max-width: 760px;
@@ -1874,9 +1895,13 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   align-items: center;
   gap: 6px;
   max-width: 100%;
-  height: 32px;
+  --back-h: 32px;
+  height: var(--back-h);
   margin: 0 0 14px;
-  padding: 0 14px 0 10px;
+  padding-block: 0;
+  /* The disc sits the same distance from the pill's start as from its top
+     and bottom: half the spare height, less the 1px border. */
+  padding-inline: calc((var(--back-h) - 22px) / 2 - 1px) 14px;
   border: 1px solid #6f73a8;
   border-radius: 999px;
   background: rgba(20, 24, 56, .55);
@@ -1886,7 +1911,19 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   text-decoration: none;
   transition: color .18s ease, border-color .18s ease, background-color .18s ease;
 }
-.section-back svg { flex: 0 0 auto; color: #b98bff; }
+.section-back svg {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+  border-radius: 50%;
+  background: rgba(156, 92, 255, .32);
+  color: #fff;
+  transition: background-color .18s ease, translate .18s ease;
+}
+.section-back:hover svg { background: rgba(156, 92, 255, .55); translate: -2px 0; }
+[dir="rtl"] .section-back:hover svg { translate: 2px 0; }
 /* A long server name ends in an ellipsis rather than widening the page. */
 .section-back-label {
   overflow: hidden;
@@ -1903,7 +1940,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background: #fff;
   color: #363a52;
 }
-.theme-light .section-back svg { color: #6d28d9; }
+.theme-light .section-back svg { background: #7c3aed; color: #fff; }
+.theme-light .section-back:hover svg { background: #6d28d9; }
 .theme-light .section-back:hover {
   color: #5b21b6;
   border-color: #6d28d9;
@@ -1911,14 +1949,14 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 }
 @media (pointer: coarse) {
   /* Thumb-sized on a touch screen. */
-  .section-back { height: 36px; }
+  .section-back { --back-h: 36px; }
   .panel-arrow { position: relative; }
-  /* The arrow is 11px wide; the tap area is the head's full height and as
-     wide again on both sides. */
+  /* The disc is 26px; the tap area is the head's full height and a little
+     wider. */
   .panel-arrow::after {
     content: '';
     position: absolute;
-    inset: -14px -12px;
+    inset: -12px -8px;
   }
 }
 
