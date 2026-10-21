@@ -793,10 +793,10 @@ useSeoMeta({
 /**
  * Structured data: what each page is, in the form search engines read.
  *
- * The home page names the site. A section or server page carries its
- * breadcrumb — MMOTOP › Top game servers, MMOTOP › LA2DREAM — which Google
- * can show in place of the bare address; a section page also lists the
- * servers on it. Addresses are absolute and end in a slash, as the pages are
+ * The home page names the site. A game, section or server page carries its
+ * breadcrumb — MMOTOP › Top game servers, MMOTOP › Lineage II › LA2DREAM —
+ * which Google can show in place of the bare address; a section page also
+ * lists the servers on it. Addresses are absolute and end in a slash, as the pages are
  * served.
  */
 // localePath gives the route's path; the site's base (/mmotop/ on Pages) is
@@ -807,23 +807,23 @@ const absolute = (path: string) => `${siteRoot}${localePath(path).replace(/\/?$/
 
 const structuredData = computed(() => {
   const home = absolute('/')
-  const crumbs = (name: string, url: string) => ({
+  const crumbs = (...trail: [string, string][]) => ({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'MMOTOP', item: home },
-      { '@type': 'ListItem', position: 2, name, item: url }
-    ]
+    itemListElement: [['MMOTOP', home] as [string, string], ...trail].map(([name, item], i) => (
+      { '@type': 'ListItem', position: i + 1, name, item }
+    ))
   })
   if (server.value) {
-    return [crumbs(server.value.name, absolute(`/server/${server.value.id}`))]
+    const s = server.value
+    return [crumbs([serverSubtitle(s), absolute(`/${s.game}`)], [s.name, absolute(`/${s.game}/${s.id}`)])]
   }
   if (homeGame.value) {
-    return [crumbs(homeGame.value.name, absolute(`/${homeGame.value.id}`))]
+    return [crumbs([homeGame.value.name, absolute(`/${homeGame.value.id}`)])]
   }
   if (props.section) {
     return [
-      crumbs(t(`seo.${props.section}.title`), absolute(`/${props.section}`)),
+      crumbs([t(`seo.${props.section}.title`), absolute(`/${props.section}`)]),
       {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
@@ -832,7 +832,7 @@ const structuredData = computed(() => {
           '@type': 'ListItem',
           position: i + 1,
           name: row.server.name,
-          url: absolute(`/server/${row.server.id}`)
+          url: absolute(`/${row.server.game}/${row.server.id}`)
         }))
       }
     ]

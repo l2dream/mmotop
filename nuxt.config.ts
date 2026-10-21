@@ -99,6 +99,9 @@ export default defineNuxtConfig({
           ...(prefix ? [prefix] : []),
           ...SECTIONS.map(id => `${prefix}/${id}`),
           ...GAMES.map(g => `${prefix}/${g.id}`),
+          ...SERVERS.map(s => `${prefix}/${s.game}/${s.id}`),
+          // The old addresses, as redirect pages, for links made before the
+          // server pages moved under their game.
           ...SERVERS.map(s => `${prefix}/server/${s.id}`)
         ]
       })
