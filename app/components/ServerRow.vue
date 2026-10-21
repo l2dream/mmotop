@@ -34,7 +34,10 @@ const localePath = useLocalePath()
 const route = useRoute()
 const linkQuery = computed(() => {
   const game = route.params.section
-  return typeof game === 'string' && gameById(game) ? { ...route.query, game } : route.query
+  // A server's page sits under its game too (/lineage2/la2dream/); there the
+  // segment names where the server lives, not a game the visitor chose.
+  const onGamePage = typeof game === 'string' && !!gameById(game) && !route.params.id
+  return onGamePage ? { ...route.query, game } : route.query
 })
 const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
 function remember() {
