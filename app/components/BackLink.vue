@@ -3,6 +3,7 @@ import type { RouteLocationRaw } from 'vue-router'
 import { isSection } from '~/data/sections'
 import { SERVERS } from '~/data/servers'
 import { gameById } from '~/data/games'
+import { landingAt } from '~/data/landing'
 
 /**
  * The way back above a section or server page, named after where it leads.
@@ -10,7 +11,7 @@ import { gameById } from '~/data/games'
  * Arrived from elsewhere on the site it goes back in history, so the
  * visitor lands where they were — the same list, the same filters, the same
  * scroll position — and says where that is: "‹ TOP GAMES", "‹ Lineage II",
- * "‹ LA2DREAM", "‹ Back to the home page". A bare "Back" left them guessing. Opened
+ * "‹ Lineage II Interlude", "‹ LA2DREAM", "‹ Back to the home page". A bare "Back" left them guessing. Opened
  * directly, from a search engine or a shared link, there is nothing on the
  * site to go back to, so it leads to the home page and says so.
  *
@@ -39,8 +40,13 @@ const label = computed(() => {
   if (isSection(params.section)) return t(`panels.${params.section}`)
   // The same slot holds a game's home page: /lineage2/ reads "Lineage II".
   const game = typeof params.section === 'string' ? gameById(params.section) : undefined
-  if (game) return game.name
-  const server = SERVERS.find((s) => s.id === params.id)
+  if (!game) return t('notFound.home')
+  if (!params.id) return game.name
+  // Under the game: a chronicle's or rate's page, "Lineage II Interlude",
+  // or a server's, "LA2DREAM".
+  const landing = landingAt(params.section, params.id)
+  if (landing) return `${game.name} ${landing.chronicle ?? `x${landing.rate}`}`
+  const server = SERVERS.find((s) => s.id === params.id && s.game === game.id)
   return server ? server.name : t('notFound.home')
 })
 
