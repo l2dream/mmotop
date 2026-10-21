@@ -37,7 +37,10 @@
     "viewMore": "View more",
     "shuffle": "Shuffle",
     "empty": "No games match the selected filters.",
-    "none": "No matching games."
+    "none": "No matching games.",
+    "carousel": "Carousel",
+    "prev": "Previous",
+    "next": "Next"
   },
   "filter": {
     "open": "Filter",

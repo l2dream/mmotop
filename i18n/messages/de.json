@@ -37,7 +37,10 @@
     "viewMore": "Mehr anzeigen",
     "shuffle": "Mischen",
     "empty": "Keine Spiele entsprechen den gewählten Filtern.",
-    "none": "Keine passenden Spiele."
+    "none": "Keine passenden Spiele.",
+    "carousel": "Karussell",
+    "prev": "Zurück",
+    "next": "Weiter"
   },
   "filter": {
     "open": "Filter",

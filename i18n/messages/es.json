@@ -37,7 +37,10 @@
     "viewMore": "Ver más",
     "shuffle": "Mezclar",
     "empty": "Ningún juego coincide con los filtros seleccionados.",
-    "none": "No hay juegos que coincidan."
+    "none": "No hay juegos que coincidan.",
+    "carousel": "Carrusel",
+    "prev": "Anterior",
+    "next": "Siguiente"
   },
   "filter": {
     "open": "Filtro",

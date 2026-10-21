@@ -37,7 +37,10 @@
     "viewMore": "Rādīt vairāk",
     "shuffle": "Sajaukt",
     "empty": "Neviena spēle neatbilst izvēlētajiem filtriem.",
-    "none": "Nav atbilstošu spēļu."
+    "none": "Nav atbilstošu spēļu.",
+    "carousel": "Karuselis",
+    "prev": "Iepriekšējais",
+    "next": "Nākamais"
   },
   "filter": {
     "open": "Filtrs",

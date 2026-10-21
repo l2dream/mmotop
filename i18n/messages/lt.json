@@ -37,7 +37,10 @@
     "viewMore": "Rodyti daugiau",
     "shuffle": "Sumaišyti",
     "empty": "Nė vienas žaidimas neatitinka pasirinktų filtrų.",
-    "none": "Atitinkančių žaidimų nėra."
+    "none": "Atitinkančių žaidimų nėra.",
+    "carousel": "Karuselė",
+    "prev": "Ankstesnis",
+    "next": "Kitas"
   },
   "filter": {
     "open": "Filtras",

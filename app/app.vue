@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CAROUSEL_BOOT } from '~/composables/useCarouselPanels'
 import { READY_LOCALES, bcp47, localeByCode } from '~/i18n/locales'
 import { fontUrl } from '~/i18n/fonts'
 
@@ -116,6 +117,11 @@ useHead({
     key: 'theme-boot',
     tagPriority: 'critical',
     innerHTML: "try{if(localStorage.getItem('mmotop-theme')==='light')document.documentElement.classList.add('theme-light')}catch(e){}"
+  }, {
+    // The same for home panels switched to a carousel (useCarouselPanels).
+    key: 'carousel-boot',
+    tagPriority: 'critical',
+    innerHTML: CAROUSEL_BOOT
   }]
 })
 

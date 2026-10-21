@@ -37,7 +37,10 @@
     "viewMore": "Zobrazit více",
     "shuffle": "Zamíchat",
     "empty": "Žádná hra neodpovídá zvoleným filtrům.",
-    "none": "Žádné odpovídající hry."
+    "none": "Žádné odpovídající hry.",
+    "carousel": "Karusel",
+    "prev": "Předchozí",
+    "next": "Další"
   },
   "filter": {
     "open": "Filtr",
