@@ -1497,9 +1497,7 @@ function clearSearch() {
             :origin="section"
           />
           <div v-if="sectionList.length === 0" class="empty-state">{{ $t('panels.none') }}</div>
-          <button v-if="sectionList.length > sectionShown" type="button" class="panel-footer section-more" @click="sectionShown += SECTION_PAGE">
-            {{ $t('panels.viewMore') }}
-          </button>
+          <PanelFooter v-if="sectionList.length > sectionShown" :title="$t(`panels.${section}`)" @click="sectionShown += SECTION_PAGE" />
         </GamePanel>
       </div>
     </main>
