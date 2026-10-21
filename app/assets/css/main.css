@@ -1708,15 +1708,18 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .server-card { padding: 22px 24px 24px; }
 
 .server-head {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 14px;
+  column-gap: 14px;
 }
 
-.server-logo {
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
+/* As tall as the two lines beside it (26 + 4 + 18), so the badge, the name
+   and the game read as one block. Two classes: the list rows' own badge
+   size, set later in the phone block, used to win and shrank this one. */
+.game-logo.server-logo {
+  width: 48px;
+  height: 48px;
   border-radius: 10px;
   font-size: 15px;
 }
@@ -1725,20 +1728,22 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .server-title h1 {
   margin: 0;
   font-size: 22px;
+  line-height: 26px;
   font-weight: 800;
   letter-spacing: .02em;
   overflow-wrap: anywhere;
 }
 .server-title p {
-  margin: 3px 0 0;
+  margin: 4px 0 0;
   color: #b9bdd0;
   font-size: 14px;
+  line-height: 18px;
 }
 
-/* Says which list the server is in today: the same date splits them. */
+/* Says which list the server is in today: the same date splits them.
+   At the end of the head's row, centred on it. */
 .server-status {
-  flex: 0 0 auto;
-  margin-inline-start: auto;
+  justify-self: end;
   padding: 5px 10px;
   border-radius: 999px;
   font-size: 12px;
@@ -1829,9 +1834,16 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 700px) {
   .server-card { padding: 16px; }
-  .server-head { flex-wrap: wrap; gap: 12px; }
-  .server-logo { width: 44px; height: 44px; font-size: 13px; }
-  .server-title h1 { font-size: 18px; }
+  /* No room beside a long name on a phone, and wrapping only sometimes
+     left the status alone at the right edge of a line of its own. It always
+     has its own line here, under the badge and level with it. */
+  .server-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+  .server-status { grid-column: 1 / -1; justify-self: start; }
+  .game-logo.server-logo { width: 44px; height: 44px; font-size: 13px; }
+  .server-title h1 { font-size: 18px; line-height: 22px; }
   .server-facts { grid-template-columns: 1fr 1fr; }
   /* Five in two columns leaves one over; it takes the whole last row. */
   .server-facts > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
