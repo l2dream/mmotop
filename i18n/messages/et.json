@@ -37,7 +37,10 @@
     "viewMore": "Näita rohkem",
     "shuffle": "Sega",
     "empty": "Ükski mäng ei vasta valitud filtritele.",
-    "none": "Sobivaid mänge pole."
+    "none": "Sobivaid mänge pole.",
+    "carousel": "Karussell",
+    "prev": "Eelmine",
+    "next": "Järgmine"
   },
   "filter": {
     "open": "Filter",

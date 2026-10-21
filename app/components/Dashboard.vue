@@ -630,6 +630,21 @@ const homeLists = computed<Record<SectionId, Row[]>>(() => ({
   all: fullLists.value.all.slice(0, RANDOM_PICK)
 }))
 
+/**
+ * A panel switched to a carousel shows more than its list does — up to ten
+ * cards, since a strip that scrolls sideways has room for them.
+ */
+const CAROUSEL_CARDS = 10
+const carouselLists = computed<Record<SectionId, Row[]>>(() => ({
+  top: fullLists.value.top.slice(0, CAROUSEL_CARDS),
+  soon: fullLists.value.soon.slice(0, CAROUSEL_CARDS),
+  started: fullLists.value.started.slice(0, CAROUSEL_CARDS),
+  new: fullLists.value.new.slice(0, CAROUSEL_CARDS),
+  all: fullLists.value.all.slice(0, CAROUSEL_CARDS)
+}))
+const carousels = useCarouselPanels()
+onMounted(carousels.read)
+
 /** How each list's rows end, and its panel's accent colour. */
 const ROW_END = { top: 'votes', soon: 'date', started: 'date', new: 'date', all: 'chronicle' } as const
 const ACCENT: Record<SectionId, string> = {
@@ -1478,17 +1493,22 @@ function clearSearch() {
         <section v-for="(group, gi) in [['top', 'soon', 'started'], ['new', 'all']] as SectionId[][]" :key="gi" :class="gi === 0 ? 'top-grid' : 'bottom-grid'">
           <GamePanel v-for="id in group" :key="id" :title="$t(`panels.${id}`)" :class="[ACCENT[id], `panel-${id}`]" :to="sectionLink(id)">
             <template #icon><PanelIcon :id="id" /></template>
-            <template v-if="id === 'all'" #actions>
-              <ShuffleButton :turns="shuffleTurns" @shuffle="shuffleGames" />
+            <template #actions>
+              <ShuffleButton v-if="id === 'all'" :turns="shuffleTurns" @shuffle="shuffleGames" />
+              <CarouselToggle :pressed="carousels.ids.value.includes(id)" @toggle="carousels.toggle(id)" />
             </template>
-            <ServerRow
-              v-for="row in homeLists[id]"
-              :key="`${id}-${row.server.id}`"
-              :server="row.server"
-              :rank="row.rank"
-              :end="ROW_END[id]"
-              :origin="id"
-            />
+            <!-- Both views are drawn; html[data-carousel] picks which shows. -->
+            <div class="panel-list">
+              <ServerRow
+                v-for="row in homeLists[id]"
+                :key="`${id}-${row.server.id}`"
+                :server="row.server"
+                :rank="row.rank"
+                :end="ROW_END[id]"
+                :origin="id"
+              />
+            </div>
+            <PanelCarousel v-if="carouselLists[id].length" :rows="carouselLists[id]" :end="ROW_END[id]" :origin="id" :title="$t(`panels.${id}`)" />
             <div v-if="homeLists[id].length === 0" class="empty-state">{{ $t('panels.none') }}</div>
             <PanelFooter v-else :to="sectionLink(id)" :title="$t(`panels.${id}`)" />
           </GamePanel>

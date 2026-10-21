@@ -37,7 +37,10 @@
     "viewMore": "Vis mer",
     "shuffle": "Bland",
     "empty": "Ingen spill samsvarer med de valgte filtrene.",
-    "none": "Ingen samsvarende spill."
+    "none": "Ingen samsvarende spill.",
+    "carousel": "Karusell",
+    "prev": "Forrige",
+    "next": "Neste"
   },
   "filter": {
     "open": "Filter",

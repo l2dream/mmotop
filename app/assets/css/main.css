@@ -1740,6 +1740,209 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .panel-footer:hover .panel-footer-arrow { background: #6d28d9; }
 .theme-light .panel-arrow:hover { background: #6d28d9; }
 
+/* ── A home panel as a carousel ─────────────────────────────────────────
+   Each home panel can be switched from its list to a strip of cards (the
+   disc in its head, CarouselToggle). Both are in the page; the attribute on
+   <html> picks which one shows (useCarouselPanels). */
+.panel-carousel { display: none; }
+html[data-carousel~="top"] .panel-top .panel-list,
+html[data-carousel~="soon"] .panel-soon .panel-list,
+html[data-carousel~="started"] .panel-started .panel-list,
+html[data-carousel~="new"] .panel-new .panel-list,
+html[data-carousel~="all"] .panel-all .panel-list { display: none; }
+html[data-carousel~="top"] .panel-top .panel-carousel,
+html[data-carousel~="soon"] .panel-soon .panel-carousel,
+html[data-carousel~="started"] .panel-started .panel-carousel,
+html[data-carousel~="new"] .panel-new .panel-carousel,
+html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
+
+/* On a wide screen a carousel panel takes the whole width and every other
+   panel goes two to a row, filling in around it in their usual order; an odd
+   one left over at the end takes the whole width too (data-wide). */
+@media (min-width: 860px) {
+  html[data-carousel] .dashboard:has(> .top-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: none;
+    grid-auto-flow: row dense;
+    gap: 14px;
+  }
+  html[data-carousel] .dashboard:has(> .top-grid) > .top-grid,
+  html[data-carousel] .dashboard:has(> .top-grid) > .bottom-grid { display: contents; }
+  html[data-carousel] .dashboard .panel { grid-area: auto; }
+  html[data-wide~="top"] .dashboard .panel-top,
+  html[data-wide~="soon"] .dashboard .panel-soon,
+  html[data-wide~="started"] .dashboard .panel-started,
+  html[data-wide~="new"] .dashboard .panel-new,
+  html[data-wide~="all"] .dashboard .panel-all { grid-column: 1 / -1; }
+}
+
+.panel-carousel { position: relative; padding: 14px 0 12px; }
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 2px 16px 4px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 16px;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track > li { flex: 0 0 auto; width: 212px; scroll-snap-align: start; }
+
+.server-tile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 24%, transparent);
+  border-radius: 12px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--panel-glow, #9c5cff) 11%, transparent), rgba(255, 255, 255, .02));
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease, translate .18s ease;
+}
+.server-tile:hover {
+  border-color: color-mix(in srgb, var(--panel-glow, #9c5cff) 60%, transparent);
+  box-shadow: 0 8px 24px -10px color-mix(in srgb, var(--panel-glow, #9c5cff) 55%, transparent);
+  translate: 0 -2px;
+}
+.server-tile:focus-visible { outline-offset: 2px; }
+
+.server-tile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.server-tile .rank { margin: 0; }
+.server-tile-date {
+  color: #dfe2ef;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.server-tile-name,
+.server-tile-game,
+.server-tile-version {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.server-tile-name { font-size: 15px; font-weight: 700; line-height: 18px; letter-spacing: .02em; }
+.server-tile-game { margin-top: 2px; color: #b9bdd0; font-size: 13px; line-height: 16px; }
+.server-tile-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+.server-tile-version { min-width: 0; color: #e4e7f5; font-size: 13px; font-weight: 500; }
+.server-tile-votes {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffd64a;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.theme-light .server-tile {
+  border-color: color-mix(in srgb, var(--panel-glow, #7c3aed) 30%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--panel-glow, #7c3aed) 9%, #ffffff), #ffffff);
+}
+.theme-light .server-tile:hover { border-color: color-mix(in srgb, var(--panel-glow, #7c3aed) 65%, transparent); }
+.theme-light .server-tile-date,
+.theme-light .server-tile-version { color: #2f3348; }
+.theme-light .server-tile-game { color: #464a60; }
+.theme-light .server-tile-votes { color: #6b4e00; }
+
+/* Arrows over the strip's ends, only when there is more than fits. A swipe
+   does the job on a touch screen, so they are not drawn there. */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 50%, #0b0e22);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+  cursor: pointer;
+  translate: 0 -50%;
+  transition: background-color .18s ease;
+}
+.carousel-nav:hover { background: color-mix(in srgb, var(--panel-glow, #9c5cff) 75%, #0b0e22); }
+.carousel-nav svg { display: block; }
+.carousel-nav.is-prev { inset-inline-start: 6px; }
+.carousel-nav.is-next { inset-inline-end: 6px; }
+.panel-carousel.overflows .carousel-nav { display: grid; }
+.panel-carousel.at-start .carousel-nav.is-prev,
+.panel-carousel.at-end .carousel-nav.is-next { display: none; }
+[dir="rtl"] .carousel-nav svg { transform: scaleX(-1); }
+.theme-light .carousel-nav { background: #7c3aed; box-shadow: 0 4px 14px rgba(31, 41, 102, .2); }
+.theme-light .carousel-nav:hover { background: #6d28d9; }
+
+/* The switch in the panel's head: a disc like the arrow beside it, filled
+   while the panel is a carousel. */
+.carousel-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  color: #e6e8f8;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.carousel-toggle svg { display: block; }
+.carousel-toggle:hover { background: color-mix(in srgb, var(--panel-glow, #9c5cff) 20%, transparent); color: #fff; }
+.carousel-toggle.pressed {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 55%, transparent);
+  color: #fff;
+}
+.theme-light .carousel-toggle { border-color: #9a6cf5; color: #5b21b6; }
+.theme-light .carousel-toggle:hover { background: #f5efff; }
+.theme-light .carousel-toggle.pressed { border-color: transparent; background: #7c3aed; color: #fff; }
+
+/* With a mouse the arrows get gutters of their own beside the strip, so a
+   card never slides under one and loses its first letters. */
+@media (pointer: fine) {
+  .panel-carousel.overflows { padding-inline: 46px; }
+  .panel-carousel.overflows .carousel-track { padding-inline: 2px; scroll-padding-inline: 2px; }
+  .carousel-nav.is-prev { inset-inline-start: 7px; }
+  .carousel-nav.is-next { inset-inline-end: 7px; }
+}
+@media (pointer: coarse) {
+  .carousel-nav { display: none !important; }
+  .carousel-toggle::after { content: ''; position: absolute; inset: -9px -4px; }
+}
+@media (max-width: 700px) {
+  .carousel-track { gap: 10px; padding-inline: 12px; scroll-padding-inline: 12px; }
+  .carousel-track > li { width: 196px; }
+  .server-tile { padding: 12px; }
+}
+
 .section-view {
   max-width: 760px;
   margin-inline: auto;

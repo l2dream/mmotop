@@ -37,7 +37,10 @@
     "viewMore": "Daha çox göstər",
     "shuffle": "Qarışdır",
     "empty": "Seçilmiş filtrlərə uyğun oyun yoxdur.",
-    "none": "Uyğun oyun yoxdur."
+    "none": "Uyğun oyun yoxdur.",
+    "carousel": "Karusel",
+    "prev": "Əvvəlki",
+    "next": "Növbəti"
   },
   "filter": {
     "open": "Filtr",

@@ -37,7 +37,10 @@
     "viewMore": "Pokaż więcej",
     "shuffle": "Wymieszaj",
     "empty": "Żadna gra nie pasuje do wybranych filtrów.",
-    "none": "Brak pasujących gier."
+    "none": "Brak pasujących gier.",
+    "carousel": "Karuzela",
+    "prev": "Wstecz",
+    "next": "Dalej"
   },
   "filter": {
     "open": "Filtr",

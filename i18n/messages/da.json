@@ -37,7 +37,10 @@
     "viewMore": "Vis mere",
     "shuffle": "Bland",
     "empty": "Ingen spil matcher de valgte filtre.",
-    "none": "Ingen matchende spil."
+    "none": "Ingen matchende spil.",
+    "carousel": "Karrusel",
+    "prev": "Forrige",
+    "next": "Næste"
   },
   "filter": {
     "open": "Filter",

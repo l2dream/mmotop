@@ -37,7 +37,10 @@
     "viewMore": "Visa mer",
     "shuffle": "Blanda",
     "empty": "Inga spel matchar de valda filtren.",
-    "none": "Inga matchande spel."
+    "none": "Inga matchande spel.",
+    "carousel": "Karusell",
+    "prev": "Föregående",
+    "next": "Nästa"
   },
   "filter": {
     "open": "Filter",
