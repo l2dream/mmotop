@@ -5,12 +5,14 @@ import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
 
 /**
- * The whole site: the home page with its five panels; given `section`, one of
- * those lists on its own page, in full; given `serverId`, one server's page.
+ * The whole site: the home page with its five panels — for every game, or,
+ * given `game`, for one, at its own address (/lineage2/); given `section`,
+ * one of those lists on its own page, in full; given `serverId`, one
+ * server's page.
  * All share the header, search, filters and category bar, so a filter set on
  * the home page still applies after View more, and the other way round.
  */
-const props = defineProps<{ section?: SectionId, serverId?: string }>()
+const props = defineProps<{ section?: SectionId, serverId?: string, game?: string }>()
 
 const { t, locale } = useI18n()
 const { currentYear, serverSubtitle, rateLabel } = useServerFormat()
@@ -93,6 +95,14 @@ const {
   dark, query, activeCategory,
   filters, customRateActive, customRateMin, customRateMax
 } = useDashboardState()
+
+/**
+ * On the home page the chosen game is the address itself: / is every game,
+ * /lineage2/ is Lineage II. Set here, before anything renders, so the
+ * prerendered page of each game already shows that game's lists.
+ */
+const homeLike = !props.section && !props.serverId
+if (homeLike) activeCategory.value = props.game ?? 'all'
 
 const showMore = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
@@ -315,7 +325,7 @@ function restoreFiltersFromUrl() {
   // whose links carry no query — leaves the state as it is.
   if (!game && !chronicle && !rates.length && !min && !max && !text) return
 
-  const g = gameById(game)
+  const g = gameById(game || props.game || '')
   activeCategory.value = g ? g.id : 'all'
   filters.value.version = g?.chronicles.some((c) => c.name === chronicle) ? versionKey(g.id, chronicle) : ''
   filters.value.rates = rates
@@ -325,9 +335,9 @@ function restoreFiltersFromUrl() {
   query.value = text
 }
 
-function filtersToQuery() {
+function filtersToQuery(withGame = true) {
   const params: Record<string, string> = {}
-  if (activeCategory.value !== 'all') params.game = activeCategory.value
+  if (withGame && activeCategory.value !== 'all') params.game = activeCategory.value
   const v = filters.value.version
   if (v) params.version = v.slice(v.indexOf(':') + 1)
   if (filters.value.rates.length) params.rate = filters.value.rates.map(rateSlug).join(',')
@@ -349,21 +359,42 @@ function filtersToQuery() {
 // tap outside, Escape): picking a game there changes the filters at once,
 // and leaving straight away took the popup from under the visitor halfway
 // through setting it.
+//
+// On the home page the game is the address (see homeLike), so choosing one
+// moves to its page — a step in history, so Back returns to the last game —
+// and the rest of the filters ride along in the query.
 let leaveWhenFilterCloses = false
-function writeFiltersToUrl() {
-  if (server.value) {
+const withSlash = (path: string) => path.replace(/\/?$/, '/')
+
+/** The home page as the filters stand: the game's own page, or /. */
+function homeLocation() {
+  const game = activeCategory.value
+  return { path: withSlash(localePath(game === 'all' ? '/' : `/${game}`)), query: filtersToQuery(false) }
+}
+
+function writeFiltersToUrl(initial = false) {
+  const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
+  const home = homeLocation()
+  const leaves = !!server.value || (homeLike && withSlash(route.path) !== home.path)
+  if (leaves) {
     if (filterOpen.value) {
       leaveWhenFilterCloses = true
       return
     }
-    router.push({ path: localePath('/'), query: filtersToQuery() })
+    // An old /?game=… address, read on arrival, is put right in place
+    // rather than leaving a step behind.
+    if (initial) router.replace({ ...home, query: { ...rest, ...home.query }, hash: route.hash })
+    else router.push(home)
     return
   }
-  const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
   // The path is given with its trailing slash: left to the router, a
   // replace that only changes the query wrote /top?game=… without it, which
   // GitHub Pages answers with a redirect on the next reload.
-  router.replace({ path: route.path.replace(/\/?$/, '/'), query: { ...rest, ...filtersToQuery() }, hash: route.hash })
+  router.replace({
+    path: withSlash(route.path),
+    query: { ...rest, ...filtersToQuery(!homeLike) },
+    hash: route.hash
+  })
 }
 
 // onNuxtReady, not onMounted. A prerendered page hydrates under the path it
@@ -449,7 +480,7 @@ onNuxtReady(() => {
     return
   }
   restoreFiltersFromUrl()
-  writeFiltersToUrl()
+  writeFiltersToUrl(true)
   urlReady.value = true
 })
 
@@ -466,7 +497,7 @@ function goHome() {
   // From a section or server page the link leaves this page. Without this,
   // the reset below was written into this page's own address first, and
   // that replace won over the link: the visitor stayed where they were.
-  if (props.section || server.value) leaving = true
+  if (props.section || server.value || props.game) leaving = true
   resetFilters()
   query.value = ''
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -571,7 +602,7 @@ watch([query, activeCategory, filters, customRateActive, customRateMin, customRa
 
 // The filters travel with the link, so the full list opens the way the panel
 // was showing it.
-const sectionLink = (id: SectionId) => ({ path: localePath(`/${id}`), query: route.query })
+const sectionLink = (id: SectionId) => ({ path: localePath(`/${id}`), query: filtersToQuery() })
 
 // TOP GAMES holds every server that passes the filters and the search, so it
 // being empty means every list is.
@@ -580,13 +611,18 @@ const searchText = computed(() => query.value.trim())
 
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
+const homeGame = computed(() => (props.game ? gameById(props.game) : undefined))
 const pageTitle = computed(() => {
   if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} — MMOTOP`
-  return props.section ? `${t(`seo.${props.section}.title`)} — MMOTOP` : t('meta.title')
+  if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
+  // A game's page: the game's name is what tells it apart from the home page.
+  return homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title')
 })
 // The page's subject for its one h1: on a section page the plain-words name
 // ("Top game servers by votes"), not the capitalised panel label.
-const pageHeading = computed(() => (props.section ? t(`seo.${props.section}.title`) : t('meta.title')))
+const pageHeading = computed(() => (props.section
+  ? t(`seo.${props.section}.title`)
+  : homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title')))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
@@ -781,6 +817,9 @@ const structuredData = computed(() => {
   })
   if (server.value) {
     return [crumbs(server.value.name, absolute(`/server/${server.value.id}`))]
+  }
+  if (homeGame.value) {
+    return [crumbs(homeGame.value.name, absolute(`/${homeGame.value.id}`))]
   }
   if (props.section) {
     return [
@@ -1315,7 +1354,7 @@ function clearSearch() {
       </div>
 
       <div v-else-if="server" class="section-view">
-        <BackLink :to="{ path: localePath('/'), query: filtersToQuery() }" />
+        <BackLink :to="homeLocation()" />
         <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" @shuffle="shuffleOthers" />
       </div>
 
@@ -1344,7 +1383,7 @@ function clearSearch() {
            the page, so a row does not stretch its name and its chronicle a
            thousand pixels apart. -->
       <div v-else class="section-view">
-        <BackLink :to="{ path: localePath('/'), query: route.query }" />
+        <BackLink :to="homeLocation()" />
         <GamePanel class="section-panel" :title="$t(`panels.${section}`)" :class="ACCENT[section]">
           <template #icon><PanelIcon :id="section" /></template>
           <template v-if="section === 'all'" #actions>
