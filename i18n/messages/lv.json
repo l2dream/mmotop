@@ -106,6 +106,9 @@
     "all": {
       "title": "Visi spēļu serveri",
       "description": "Visi MMOTOP spēļu serveri ar hronikām un rate."
+    },
+    "game": {
+      "description": "{game} serveri: tops pēc balsīm, drīzumā atvērtie un jaunie serveri MMOTOP."
     }
   },
   "notFound": {

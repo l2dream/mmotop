@@ -106,6 +106,9 @@
     "all": {
       "title": "Bütün oyun serverləri",
       "description": "MMOTOP-dakı bütün oyun serverləri, xronikalar və rate-lərlə."
+    },
+    "game": {
+      "description": "{game} serverləri: səslərə görə ən yaxşılar, tezliklə açılanlar və yeni serverlər MMOTOP-da."
     }
   },
   "notFound": {

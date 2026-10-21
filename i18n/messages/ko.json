@@ -106,6 +106,9 @@
     "all": {
       "title": "모든 게임 서버",
       "description": "MMOTOP에 등록된 모든 게임 서버를 크로니클과 배율과 함께."
+    },
+    "game": {
+      "description": "{game} 서버: 투표 순위, 오픈 예정 및 새로 오픈한 서버를 MMOTOP에서 확인하세요."
     }
   },
   "notFound": {

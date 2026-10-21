@@ -106,6 +106,9 @@
     "all": {
       "title": "Alle spilservere",
       "description": "Alle spilservere på MMOTOP med krøniker og rates."
+    },
+    "game": {
+      "description": "{game}-servere: topliste efter stemmer, kommende lanceringer og nyåbnede servere på MMOTOP."
     }
   },
   "notFound": {
