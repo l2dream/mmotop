@@ -2,6 +2,7 @@
 import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
+import { gameById } from '~/data/games'
 
 /**
  * One server, as it appears in every list on the site.
@@ -27,8 +28,14 @@ const props = defineProps<{
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
 const localePath = useLocalePath()
 // The filters and search travel with the link, as they do to a section page,
-// so the server's page — and a reload of it — keeps them.
+// so the server's page — and a reload of it — keeps them. On a game's own
+// page (/lineage2/) the game is in the path rather than the query, so it is
+// added here.
 const route = useRoute()
+const linkQuery = computed(() => {
+  const game = route.params.section
+  return typeof game === 'string' && gameById(game) ? { ...route.query, game } : route.query
+})
 const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
 function remember() {
   if (props.origin !== undefined) serverOrigin.value = props.origin
@@ -42,7 +49,7 @@ const rowClass = computed(() => ({
 </script>
 
 <template>
-  <NuxtLink class="game-row" :class="rowClass" :to="{ path: localePath(`/server/${server.id}`), query: route.query }" @click="remember">
+  <NuxtLink class="game-row" :class="rowClass" :to="{ path: localePath(`/server/${server.id}`), query: linkQuery }" @click="remember">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">
