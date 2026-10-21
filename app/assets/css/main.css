@@ -2072,7 +2072,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .search-box { flex: 1 1 auto; min-width: 0; }
   .search-box input {
     height: 32px;
-    padding-inline: 28px 26px;
+    padding-inline: 30px 28px;
     /* 16px, not 11: iOS Safari zooms the page into any focused field under
        16px and leaves it zoomed after. The placeholder truncates sooner at
        narrow widths; it did at 320px already. */
@@ -2087,7 +2087,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .search-hint {
     display: block;
     position: absolute;
-    inset-inline: 29px 27px;
+    inset-inline: 31px 29px;
     top: 50%;
     transform: translateY(-50%);
     color: #a3a8c0;
@@ -2103,30 +2103,31 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   .filter-select,
   .filter-custom-input,
   .lang-search-input { font-size: 16px; }
+  /* 24px, WCAG 2.2's minimum target, centred in the 32px field. */
   .search-icon {
     inset-inline-start: 4px;
-    top: 5px;
-    width: 22px;
-    height: 22px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
   }
   .search-svg {
     width: 14px;
     height: 14px;
   }
-  .search-box.has-query input { padding-inline-end: 50px; }
+  .search-box.has-query input { padding-inline-end: 54px; }
   .search-clear {
-    inset-inline-end: 26px;
-    top: 5px;
-    width: 22px;
-    height: 22px;
+    inset-inline-end: 28px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
   }
   .filter-button {
     inset-inline-end: 2px;
-    top: 5px;
-    width: 22px;
-    height: 22px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
   }
-  /* On the 22px button a 16px badge hid the icon it counts for; smaller here
+  /* On the 24px button a 16px badge hid the icon it counts for; smaller here
      and pushed out to the corner, where badges usually sit. */
   .filter-badge {
     top: -4px;
@@ -2137,7 +2138,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     border-radius: 7px;
     line-height: 14px;
   }
-  /* 22px is too small to hit with a thumb, and a near miss landed in the
+  /* 24px is still small for a thumb, and a near miss landed in the
      search field and opened the keyboard instead. The tap area grows to about
      40px without the button looking any different; it reaches only 2px
      towards the text, so the field itself stays as easy to tap as before. */
