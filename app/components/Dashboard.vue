@@ -629,7 +629,11 @@ const pageDescription = computed(() => (server.value
     game: serverSubtitle(server.value),
     chronicle: server.value.chronicle
   })
-  : props.section ? t(`seo.${props.section}.description`) : t('meta.description')))
+  : props.section
+    ? t(`seo.${props.section}.description`)
+    // A game's page leads with the game, so its description is not the home
+    // page's word for word — search engines pass over duplicates.
+    : homeGame.value ? `${homeGame.value.name} — ${t('meta.description')}` : t('meta.description')))
 
 /** A server's place among all servers by votes. */
 const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))
@@ -777,7 +781,7 @@ useSeoMeta({
   title: () => pageTitle.value,
   description: () => pageDescription.value,
   ogTitle: () => pageTitle.value,
-  ogDescription: () => (server.value || props.section ? pageDescription.value : t('meta.ogDescription')),
+  ogDescription: () => (server.value || props.section || homeGame.value ? pageDescription.value : t('meta.ogDescription')),
   ogType: 'website',
   ogSiteName: 'MMOTOP',
   /**
@@ -853,6 +857,30 @@ useHead(() => ({
     innerHTML: JSON.stringify(data)
   }))
 }))
+
+/**
+ * The categories are links, so a crawler finds every game's page from every
+ * page, and a middle click opens one in a new tab. Where each leads follows
+ * the page: on a section page the game narrows that list (/top/?game=wow);
+ * anywhere else it is the game's own home page (/wow/). A plain click is
+ * handled in place by selectCategory, which keeps the filters popup and the
+ * More menu behaving as before.
+ */
+function categoryHref(category: string) {
+  const location = props.section
+    ? {
+        path: localePath(`/${props.section}`),
+        query: { ...filtersToQuery(false), ...(category === 'all' ? {} : { game: category }) }
+      }
+    : { path: localePath(category === 'all' ? '/' : `/${category}`), query: filtersToQuery(false) }
+  return router.resolve(location).href.replace(/^([^?#]*?)\/?(?=[?#]|$)/, '$1/')
+}
+
+function onCategoryClick(event: MouseEvent, category: string, fromMore = false) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
+  event.preventDefault()
+  selectCategory(category, fromMore)
+}
 
 function selectCategory(category: string, fromMore = false) {
   activeCategory.value = category
@@ -1279,17 +1307,17 @@ function clearSearch() {
         :class="{ 'fade-start': barFade.start, 'fade-end': barFade.end }"
         @scroll.passive="updateBarFade"
       >
-        <button
+        <a
           v-for="category in visibleCategories"
           :key="category"
           class="category"
           :class="{ active: activeCategory === category }"
-          :aria-pressed="activeCategory === category"
-          type="button"
-          @click="selectCategory(category)"
+          :aria-current="activeCategory === category ? 'page' : undefined"
+          :href="categoryHref(category)"
+          @click="onCategoryClick($event, category)"
         >
           {{ categoryLabel(category) }}
-        </button>
+        </a>
 
         <div class="category-more-wrap" ref="moreWrap">
           <button
@@ -1316,24 +1344,26 @@ function clearSearch() {
            to use keys that did nothing. Beside the scrolling strip rather
            than inside it, where the strip's fade mask clipped it away; still
            straight after the More button in the DOM, so Tab reaches it. -->
+      <!-- v-show, not v-if: the games behind More are links a crawler should
+           find in the page as well, not only once the menu is opened. -->
       <div
-        v-if="showMore"
+        v-show="showMore"
         id="more-categories"
         ref="moreDropdownEl"
         class="more-dropdown"
         :style="{ top: dropdownPos.top + 'px', left: dropdownPos.left + 'px', maxHeight: Math.min(360, dropdownPos.maxHeight) + 'px' }"
       >
-        <button
+        <a
           v-for="category in hiddenCategories"
           :key="category"
           class="more-dropdown-item"
           :class="{ active: activeCategory === category }"
-          type="button"
-          :aria-pressed="activeCategory === category"
-          @click="selectCategory(category, true)"
+          :aria-current="activeCategory === category ? 'page' : undefined"
+          :href="categoryHref(category)"
+          @click="onCategoryClick($event, category, true)"
         >
           {{ categoryLabel(category) }}
-        </button>
+        </a>
       </div>
     </nav>
 

@@ -75,9 +75,13 @@ export default defineNuxtModule({
         // One cluster per page: the home page, each game, each section, each
         // server.
         const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...SERVERS.map(s => `${s.game}/${s.id}`)]
+        // The build date: every page is rebuilt from the same data on each
+        // deploy, so this is when all of them last changed.
+        const lastmod = new Date().toISOString().slice(0, 10)
         const entries = pages.flatMap(page => READY_LOCALES.map(l => `  <url>
     <loc>${urlFor(l.code, page)}</loc>
 ${alternatesFor(page)}
+    <lastmod>${lastmod}</lastmod>
     <changefreq>daily</changefreq>
     <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : page.includes('/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
   </url>`)).join('\n')
