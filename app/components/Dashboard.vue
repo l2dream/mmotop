@@ -692,6 +692,9 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
 const SERVER_OTHERS = 5
 const othersKeys = ref<Map<string, number> | null>(null)
 const othersTurns = ref(0)
+/** How many rows the panel shows. Its button adds five more in place, next
+ *  in the same order, rather than leaving for a list page. */
+const othersShown = ref(SERVER_OTHERS)
 
 /**
  * The draw is kept for the tab (sessionStorage) under the server's id, and
@@ -711,6 +714,10 @@ function drawOthers() {
 function shuffleOthers() {
   drawOthers()
   othersTurns.value++
+  othersShown.value = SERVER_OTHERS
+}
+function moreOthers() {
+  othersShown.value += SERVER_OTHERS
 }
 onMounted(() => {
   if (!server.value) return
@@ -750,21 +757,21 @@ const serverOthers = computed(() => {
     ratesClose(current, s) ? 1 : 0,
     keys ? keys.get(s.id)! : serverSimilarity(current, s)
   ]
-  const picked = SERVERS
+  const ordered = SERVERS
     .filter((s) => s.id !== current.id)
     .map((s) => ({ s, key: rank(s) }))
     .sort((a, b) => {
       for (let i = 0; i < a.key.length; i++) if (a.key[i] !== b.key[i]) return b.key[i]! - a.key[i]!
       return 0
     })
-    .slice(0, SERVER_OTHERS)
     .map(({ s }) => s)
+  const picked = ordered.slice(0, othersShown.value)
 
-  // When all five come from the visitor's list, the rows end the way that
-  // list's do — TOP with places, the date lists with dates — and View more
-  // leads back to it; otherwise they end with the chronicle and View more
-  // leads to ALL GAMES. The header's filters travel either way.
-  const fromOrigin = !!origin && picked.every((s) => inOrigin.has(s.id))
+  // When the first five all come from the visitor's list, the rows end the
+  // way that list's do — TOP with places, the date lists with dates;
+  // otherwise they end with the chronicle. Decided on the first five alone,
+  // so loading more never changes the rows already shown.
+  const fromOrigin = !!origin && ordered.slice(0, SERVER_OTHERS).every((s) => inOrigin.has(s.id))
   return {
     rows: picked.map((s) => ({
       server: s,
@@ -773,7 +780,7 @@ const serverOthers = computed(() => {
     origin,
     turns: othersTurns.value,
     end: fromOrigin ? ROW_END[origin!] : 'chronicle' as const,
-    link: { path: localePath(`/${fromOrigin ? origin : 'all'}`), query: filtersToQuery() }
+    more: ordered.length > picked.length
   }
 })
 
@@ -1385,7 +1392,7 @@ function clearSearch() {
 
       <div v-else-if="server" class="section-view">
         <BackLink :to="homeLocation()" />
-        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" @shuffle="shuffleOthers" />
+        <ServerDetail :server="server" :rank="serverRank" :today="today" :others="serverOthers!" @shuffle="shuffleOthers" @more="moreOthers" />
       </div>
 
       <template v-else-if="!section">

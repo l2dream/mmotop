@@ -2,13 +2,13 @@
 import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
 import { bcp47 } from '~/i18n/locales'
-import type { RouteLocationRaw } from 'vue-router'
 import type { SectionId } from '~/data/sections'
 
 /**
  * One server's own page: what it is, when it opens, how it stands, and the
  * way to its site. Below it, recommendations — similar servers, the same
- * game first — so the page is never a dead end.
+ * game first — so the page is never a dead end. View more loads the next
+ * ones into the panel itself.
  *
  * `today` comes from the dashboard, which moves it from the build date to
  * the visitor's own date on mount — the same date that splits COMING SOON
@@ -24,12 +24,13 @@ const props = defineProps<{
     /** The list the visitor came through, kept by the rows here. */
     origin: SectionId | null
     end: 'votes' | 'date' | 'chronicle'
-    link?: RouteLocationRaw
+    /** Whether there are more to load below these. */
+    more: boolean
     /** Deliberate shuffles so far, for the button's half-turn. */
     turns: number
   }
 }>()
-defineEmits<{ shuffle: [] }>()
+defineEmits<{ shuffle: [], more: [] }>()
 
 const { locale } = useI18n()
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
@@ -143,6 +144,8 @@ function fullDate(iso: string) {
       :end="others.end"
       :origin="others.origin"
     />
-    <PanelFooter v-if="others.link" :to="others.link" :title="$t('server.recommended')" />
+    <button v-if="others.more" type="button" class="panel-footer" @click="$emit('more')">
+      {{ $t('panels.viewMore') }}<span class="sr-only">: {{ $t('server.recommended') }}</span>
+    </button>
   </GamePanel>
 </template>
