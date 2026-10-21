@@ -3,16 +3,19 @@ import { bcp47, localeByCode } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
+import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug } from '~/data/landing'
 
 /**
  * The whole site: the home page with its five panels — for every game, or,
  * given `game`, for one, at its own address (/lineage2/); given `section`,
  * one of those lists on its own page, in full; given `serverId`, one
- * server's page.
+ * server's page. A game's page given `chronicle` or `rate` as well is that
+ * game's chronicle or rate page (/lineage2/interlude/, /lineage2/x50/; see
+ * data/landing.ts): the same page with that filter set.
  * All share the header, search, filters and category bar, so a filter set on
  * the home page still applies after View more, and the other way round.
  */
-const props = defineProps<{ section?: SectionId, serverId?: string, game?: string }>()
+const props = defineProps<{ section?: SectionId, serverId?: string, game?: string, chronicle?: string, rate?: number }>()
 
 const { t, locale } = useI18n()
 const { currentYear, serverSubtitle, rateLabel } = useServerFormat()
@@ -102,7 +105,22 @@ const {
  * prerendered page of each game already shows that game's lists.
  */
 const homeLike = !props.section && !props.serverId
-if (homeLike) activeCategory.value = props.game ?? 'all'
+if (homeLike) {
+  activeCategory.value = props.game ?? 'all'
+  // A chronicle's or a rate's page sets its filter the same way. Any other
+  // page of the kind clears what those addresses carry: otherwise /lineage2/,
+  // reached from /lineage2/interlude/, would keep Interlude set and the
+  // address would follow it straight back there.
+  filters.value.version = props.game && props.chronicle ? versionKey(props.game, props.chronicle) : ''
+  if (props.rate != null) {
+    filters.value.rates = []
+    customRateActive.value = true
+    customRateMin.value = customRateMax.value = String(props.rate)
+  } else if (props.game && exactRate() != null && rateLanding(props.game, exactRate()!)) {
+    customRateActive.value = false
+    customRateMin.value = customRateMax.value = ''
+  }
+}
 
 const showMore = ref(false)
 const searchInput = ref<HTMLInputElement | null>(null)
@@ -317,13 +335,16 @@ function firstParam(v: unknown): string {
 function restoreFiltersFromUrl() {
   const q = route.query
   const game = firstParam(q.game)
-  const chronicle = firstParam(q.version)
+  let chronicle = firstParam(q.version)
   const rates = firstParam(q.rate).split(',').map((r) => RATE_BY_SLUG.get(r)).filter((r): r is string => !!r)
-  const min = firstParam(q.min), max = firstParam(q.max)
+  let min = firstParam(q.min), max = firstParam(q.max)
   const text = firstParam(q.q)
   // An address with no filter in it — the bare page, or a language switch,
   // whose links carry no query — leaves the state as it is.
   if (!game && !chronicle && !rates.length && !min && !max && !text) return
+  // On a chronicle's or a rate's page that filter is in the path instead.
+  chronicle ||= props.chronicle ?? ''
+  if (props.rate != null && !min && !max) min = max = String(props.rate)
 
   const g = gameById(game || props.game || '')
   activeCategory.value = g ? g.id : 'all'
@@ -366,11 +387,38 @@ function filtersToQuery(withGame = true) {
 let leaveWhenFilterCloses = false
 const withSlash = (path: string) => path.replace(/\/?$/, '/')
 
-/** The home page as the filters stand: the game's own page, or /. */
-function homeLocation() {
-  const game = activeCategory.value
-  return { path: withSlash(localePath(game === 'all' ? '/' : `/${game}`)), query: filtersToQuery(false) }
+/** The rate when From and To are one and the same number and nothing else
+ *  narrows the rate: what a rate's page (/lineage2/x50/) stands for. */
+function exactRate(): number | null {
+  if (!customRateActive.value || filters.value.rates.length) return null
+  const lo = parseFloat(customRateMin.value), hi = parseFloat(customRateMax.value)
+  return Number.isFinite(lo) && lo === hi ? lo : null
 }
+
+/**
+ * The home page for a game as the filters stand: /, the game's own page, or
+ * — when the filters are exactly what one stands for — its chronicle's or
+ * rate's page, so choosing Interlude in the filters lands on
+ * /lineage2/interlude/. Whatever the path carries is left out of the query.
+ */
+function homeLocationFor(game: string) {
+  const query = filtersToQuery(false)
+  if (game === 'all') return { path: withSlash(localePath('/')), query }
+  const v = filters.value.version
+  const chronicle = v.startsWith(`${game}:`) ? v.slice(v.indexOf(':') + 1) : ''
+  if (!chronicle) delete query.version
+  const rate = exactRate()
+  const landing = chronicle
+    ? chronicleLanding(game, chronicle)
+    : rate != null ? rateLanding(game, rate) : undefined
+  if (landing?.chronicle) delete query.version
+  if (landing?.rate != null) {
+    delete query.min
+    delete query.max
+  }
+  return { path: withSlash(localePath(landing ? `/${game}/${landing.slug}` : `/${game}`)), query }
+}
+const homeLocation = () => homeLocationFor(activeCategory.value)
 
 function writeFiltersToUrl(initial = false) {
   const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
@@ -392,7 +440,7 @@ function writeFiltersToUrl(initial = false) {
   // GitHub Pages answers with a redirect on the next reload.
   router.replace({
     path: withSlash(route.path),
-    query: { ...rest, ...filtersToQuery(!homeLike) },
+    query: { ...rest, ...(homeLike ? home.query : filtersToQuery()) },
     hash: route.hash
   })
 }
@@ -612,9 +660,16 @@ const searchText = computed(() => query.value.trim())
 // Getters rather than values: the tags have to follow the language, not be
 // frozen at whatever it was when the component first ran.
 const homeGame = computed(() => (props.game ? gameById(props.game) : undefined))
+/** On a chronicle's or a rate's page, what it is a page of: "Interlude", "x50". */
+const landingName = props.chronicle ?? (props.rate != null ? `x${props.rate}` : '')
+/** "Lineage II Interlude servers" — what someone would search for. */
+const landingTitle = computed(() => (landingName && homeGame.value
+  ? t('seo.game.title', { game: `${homeGame.value.name} ${landingName}` })
+  : ''))
 const pageTitle = computed(() => {
   if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} — MMOTOP`
   if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
+  if (landingTitle.value) return `${landingTitle.value} — MMOTOP`
   // A game's page: the game's name is what tells it apart from the home page.
   return homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title')
 })
@@ -622,7 +677,7 @@ const pageTitle = computed(() => {
 // ("Top game servers by votes"), not the capitalised panel label.
 const pageHeading = computed(() => (props.section
   ? t(`seo.${props.section}.title`)
-  : homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title')))
+  : landingTitle.value || (homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title'))))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
@@ -633,7 +688,9 @@ const pageDescription = computed(() => (server.value
     ? t(`seo.${props.section}.description`)
     // A game's page has its own sentence about that game's servers, so its
     // description is not the home page's — search engines pass over duplicates.
-    : homeGame.value ? t('seo.game.description', { game: homeGame.value.name }) : t('meta.description')))
+    : homeGame.value
+      ? t('seo.game.description', { game: landingName ? `${homeGame.value.name} ${landingName}` : homeGame.value.name })
+      : t('meta.description')))
 
 /** A server's place among all servers by votes. */
 const serverRank = computed(() => (server.value ? serversByVotes.indexOf(server.value) + 1 : 0))
@@ -830,7 +887,12 @@ const structuredData = computed(() => {
     return [crumbs([serverSubtitle(s), absolute(`/${s.game}`)], [s.name, absolute(`/${s.game}/${s.id}`)])]
   }
   if (homeGame.value) {
-    return [crumbs([homeGame.value.name, absolute(`/${homeGame.value.id}`)])]
+    const g = homeGame.value
+    const slug = props.chronicle ? chronicleLanding(g.id, props.chronicle)?.slug : props.rate != null ? rateLandingSlug(props.rate) : ''
+    return [crumbs(
+      [g.name, absolute(`/${g.id}`)],
+      ...(slug ? [[landingName, absolute(`/${g.id}/${slug}`)] as [string, string]] : [])
+    )]
   }
   if (props.section) {
     return [
@@ -879,7 +941,7 @@ function categoryHref(category: string) {
         path: localePath(`/${props.section}`),
         query: { ...filtersToQuery(false), ...(category === 'all' ? {} : { game: category }) }
       }
-    : { path: localePath(category === 'all' ? '/' : `/${category}`), query: filtersToQuery(false) }
+    : homeLocationFor(category)
   return router.resolve(location).href.replace(/^([^?#]*?)\/?(?=[?#]|$)/, '$1/')
 }
 

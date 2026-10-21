@@ -5,11 +5,12 @@ import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from '../app/i18n/locales'
 import { SECTIONS } from '../app/data/sections'
 import { SERVERS } from '../app/data/servers'
 import { GAMES } from '../app/data/games'
+import { LANDINGS } from '../app/data/landing'
 
 /**
  * Writes sitemap.xml and appends its address to robots.txt after the static
- * build, listing every page — home, each game, the five sections and every
- * server — in all twenty-six languages, with their alternates.
+ * build, listing every page — home, each game, the five sections, each game's
+ * chronicle and rate pages and every server — in all twenty-six languages, with their alternates.
  *
  * This is not the usual "nice to have" sitemap. The links to the other
  * twenty-five languages live inside the selector popup, which is `v-if="open"`
@@ -73,8 +74,9 @@ export default defineNuxtModule({
         // Every entry carries the full alternate set, which is what makes the
         // cluster reciprocal — the half of hreflang that is easy to get wrong.
         // One cluster per page: the home page, each game, each section, each
-        // server.
-        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...SERVERS.map(s => `${s.game}/${s.id}`)]
+        // game's chronicle and rate pages, each server.
+        const landings = new Set(LANDINGS.map(l => `${l.game}/${l.slug}`))
+        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...landings, ...SERVERS.map(s => `${s.game}/${s.id}`)]
         // The build date: every page is rebuilt from the same data on each
         // deploy, so this is when all of them last changed.
         const lastmod = new Date().toISOString().slice(0, 10)
@@ -83,7 +85,7 @@ export default defineNuxtModule({
 ${alternatesFor(page)}
     <lastmod>${lastmod}</lastmod>
     <changefreq>daily</changefreq>
-    <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : page.includes('/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
+    <priority>${!page ? (l.code === DEFAULT_LOCALE ? '1.0' : '0.8') : landings.has(page) ? '0.6' : page.includes('/') ? '0.5' : GAMES.some(g => g.id === page) ? '0.7' : '0.6'}</priority>
   </url>`)).join('\n')
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>

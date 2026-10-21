@@ -108,6 +108,7 @@
       "description": "MMOTOP’taki tüm oyun sunucuları, kronikler ve rate’lerle."
     },
     "game": {
+      "title": "{game} sunucuları",
       "description": "{game} sunucuları: oylara göre en iyiler, yakında açılacaklar ve yeni açılan sunucular MMOTOP'ta."
     }
   },

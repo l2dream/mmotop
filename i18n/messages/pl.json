@@ -108,6 +108,7 @@
       "description": "Wszystkie serwery gier z MMOTOP, z kronikami i rates."
     },
     "game": {
+      "title": "Serwery {game}",
       "description": "Serwery {game}: top według głosów, nadchodzące otwarcia i nowe starty na MMOTOP."
     }
   },

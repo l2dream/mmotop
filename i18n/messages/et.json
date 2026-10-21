@@ -108,6 +108,7 @@
       "description": "Kõik MMOTOP-i mänguserverid kroonikate ja rate-idega."
     },
     "game": {
+      "title": "{game} serverid",
       "description": "{game} serverid: edetabel häälte järgi, peatsed avamised ja uued serverid MMOTOPis."
     }
   },

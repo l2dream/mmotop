@@ -108,6 +108,7 @@
       "description": "Visi MMOTOP spēļu serveri ar hronikām un rate."
     },
     "game": {
+      "title": "{game} serveri",
       "description": "{game} serveri: tops pēc balsīm, drīzumā atvērtie un jaunie serveri MMOTOP."
     }
   },
