@@ -1,0 +1,10 @@
+# Supabase project settings used by the CLI (supabase link / db push /
+# functions deploy). The project itself is created in the dashboard.
+project_id = "mmotop"
+
+# Both are called by visitors who may not be signed in.
+[functions.vote]
+verify_jwt = false
+
+[functions.telegram-auth]
+verify_jwt = false
