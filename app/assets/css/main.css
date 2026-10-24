@@ -1914,32 +1914,53 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .theme-light .carousel-nav { background: #7c3aed; box-shadow: 0 4px 14px rgba(31, 41, 102, .2); }
 .theme-light .carousel-nav:hover { background: #6d28d9; }
 
-/* The switch in the panel's head: a disc like the arrow beside it, filled
-   while the panel is a carousel. */
+/* The switch in the panel's head: a track with a knob, the knob at the
+   start for the list and at the end for the carousel, the track filled with
+   the panel's accent while on. */
 .carousel-toggle {
   position: relative;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 55%, transparent);
+  border-radius: 999px;
+  background: rgba(8, 10, 24, .35);
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.carousel-toggle-knob {
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 2px;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, transparent);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: transparent;
-  color: #e6e8f8;
-  cursor: pointer;
-  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+  background: #c3c6d8;
+  color: #1b1e33;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  transition: translate .2s ease, background-color .2s ease, color .2s ease;
 }
-.carousel-toggle svg { display: block; }
-.carousel-toggle:hover { background: color-mix(in srgb, var(--panel-glow, #9c5cff) 20%, transparent); color: #fff; }
+.carousel-toggle-knob svg { display: block; }
+.carousel-toggle:hover { border-color: color-mix(in srgb, var(--panel-glow, #9c5cff) 85%, transparent); }
+.carousel-toggle:hover .carousel-toggle-knob { background: #fff; }
 .carousel-toggle.pressed {
   border-color: transparent;
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 55%, transparent);
-  color: #fff;
+  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 70%, #0b0e22);
 }
-.theme-light .carousel-toggle { border-color: #9a6cf5; color: #5b21b6; }
-.theme-light .carousel-toggle:hover { background: #f5efff; }
-.theme-light .carousel-toggle.pressed { border-color: transparent; background: #7c3aed; color: #fff; }
+.carousel-toggle.pressed .carousel-toggle-knob {
+  translate: 18px 0;
+  background: #fff;
+  color: color-mix(in srgb, var(--panel-glow, #9c5cff) 70%, #0b0e22);
+}
+[dir="rtl"] .carousel-toggle.pressed .carousel-toggle-knob { translate: -18px 0; }
+.theme-light .carousel-toggle { border-color: #9a6cf5; background: #fff; }
+.theme-light .carousel-toggle-knob { background: #ede9fe; color: #5b21b6; box-shadow: 0 1px 3px rgba(31, 41, 102, .25); }
+.theme-light .carousel-toggle:hover .carousel-toggle-knob { background: #ddd6fe; }
+.theme-light .carousel-toggle.pressed { border-color: transparent; background: #7c3aed; }
+.theme-light .carousel-toggle.pressed .carousel-toggle-knob { background: #fff; color: #7c3aed; }
 
 /* With a mouse the arrows get gutters of their own beside the strip, so a
    card never slides under one and loses its first letters. */
@@ -1951,7 +1972,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 }
 @media (pointer: coarse) {
   .carousel-nav { display: none !important; }
-  .carousel-toggle::after { content: ''; position: absolute; inset: -9px -4px; }
+  .carousel-toggle::after { content: ''; position: absolute; inset: -11px -4px; }
 }
 @media (max-width: 700px) {
   .carousel-track { gap: 10px; padding-inline: 12px; scroll-padding-inline: 12px; }
