@@ -29,11 +29,11 @@ const { to, remember } = useServerLink(() => props.server, () => props.origin)
         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>
       </span>
     </span>
-    <strong class="server-tile-name">{{ server.name }}</strong>
-    <small class="server-tile-game">{{ serverSubtitle(server) }}</small>
+    <strong class="server-tile-name"><HitText :text="server.name" /></strong>
+    <small class="server-tile-game"><HitText :text="serverSubtitle(server)" /></small>
     <span class="server-tile-foot">
       <span class="server-tile-version" :title="server.chronicle">
-        {{ chronicleShort(server.game, server.chronicle) }}<template v-if="rateLabel(server)"> · {{ rateLabel(server) }}</template>
+        <HitText :text="chronicleShort(server.game, server.chronicle)" /><template v-if="rateLabel(server)"> · <HitText :text="rateLabel(server)" /></template>
       </span>
       <span v-if="end === 'votes'" class="server-tile-votes">
         <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">

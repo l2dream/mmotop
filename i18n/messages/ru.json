@@ -9,7 +9,8 @@
     "theme": "Сменить тему",
     "language": "Язык",
     "login": "ВОЙТИ",
-    "categories": "Категории игр"
+    "categories": "Категории игр",
+    "toTop": "Наверх"
   },
   "language": {
     "search": "Поиск языка",

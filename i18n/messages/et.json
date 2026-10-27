@@ -9,7 +9,8 @@
     "theme": "Vaheta teemat",
     "language": "Keel",
     "login": "LOGI SISSE",
-    "categories": "Mängukategooriad"
+    "categories": "Mängukategooriad",
+    "toTop": "Üles"
   },
   "language": {
     "search": "Otsi keelt",
