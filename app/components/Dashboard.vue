@@ -3,6 +3,7 @@ import { bcp47, localeByCode } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
+import { REC_DATES, REC_RULES, type RecRule } from '~/data/recommendations'
 import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug } from '~/data/landing'
 
 /**
@@ -741,22 +742,9 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
 }))
 
 /**
- * RECOMMENDED, the panel under a server's card: five other servers, chosen by
- * the owner's rules, each deciding only among servers the rules above it
- * left level:
- *
- *   1. the filters and search set in the header — servers that pass them
- *      come first, the rest only fill what is left;
- *   2. the list the visitor came through (COMING SOON, ALREADY STARTED…);
- *      TOP, NEW and ALL GAMES hold every server, so they narrow nothing;
- *   3. the same game;
- *   4. coming through COMING SOON, ALREADY STARTED or NEW, the date that
- *      list goes by — the nearest opening, the latest opening, the latest
- *      listing — so the panel leads with what that list leads with; servers
- *      on the same day stay level;
- *   5. the same chronicle;
- *   6. close rates — within three times either way, or both without one;
- *   7. then chance.
+ * RECOMMENDED, the panel under a server's card: five other servers, ordered
+ * by the ladder of rules for the list the visitor came through (REC_RULES in
+ * data/recommendations), then by chance.
  *
  * Chance is a random number per server, drawn on mount and again by the
  * panel's Shuffle, so each visit shows a different five among equals. A
@@ -822,23 +810,22 @@ const serverOthers = computed(() => {
   const origin = serverOrigin.value
   const inOrigin = new Set(origin ? listOrder.value[origin].map((s) => s.id) : [])
   const keys = othersKeys.value
-  const day = (date: string) => Date.parse(date) / 86_400_000
-  const byDate: Partial<Record<SectionId, (s: Server) => number>> = {
-    soon: (s) => -day(s.openDate),
-    started: (s) => day(s.openDate),
-    new: (s) => day(s.listedAt)
-  }
-  const dated = origin ? byDate[origin] : undefined
+  const dated = origin ? REC_DATES[origin] : undefined
 
-  // One tuple per server, compared left to right: each place answers one of
-  // the rules above, 1 for "yes", and the last is chance.
+  // Each rule as a score, higher first; see data/recommendations.
+  const score: Record<RecRule, (s: Server) => number> = {
+    filters: (s) => !filtersActive.value || matchesAll(s) ? 1 : 0,
+    origin: (s) => inOrigin.has(s.id) ? 1 : 0,
+    game: (s) => s.game === current.game ? 1 : 0,
+    // Servers outside the list, or with no dated list, after every dated one.
+    date: (s) => dated && inOrigin.has(s.id) ? dated(s) : -Infinity,
+    chronicle: (s) => s.game === current.game && s.chronicle === current.chronicle ? 1 : 0,
+    rates: (s) => ratesClose(current, s) ? 1 : 0
+  }
+  const rules = REC_RULES[origin ?? 'none']
+  // One tuple per server, compared left to right, the last place chance.
   const rank = (s: Server) => [
-    !filtersActive.value || matchesAll(s) ? 1 : 0,
-    inOrigin.has(s.id) ? 1 : 0,
-    s.game === current.game ? 1 : 0,
-    dated && inOrigin.has(s.id) ? dated(s) : 0,
-    s.game === current.game && s.chronicle === current.chronicle ? 1 : 0,
-    ratesClose(current, s) ? 1 : 0,
+    ...rules.map((r) => score[r](s)),
     keys ? keys.get(s.id)! : serverSimilarity(current, s)
   ]
   const ordered = SERVERS
