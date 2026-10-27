@@ -68,14 +68,35 @@ const OWN_DATE_FORMAT = new Set(['hy', 'az'])
  * format the American way, and the site's English is British.
  */
 function fullDate(iso: string) {
-  if (OWN_DATE_FORMAT.has(locale.value)) return `${formatDayMonth(iso)} ${iso.slice(0, 4)}`
+  if (OWN_DATE_FORMAT.has(locale.value)) return `${keep(formatDayMonth(iso))} ${iso.slice(0, 4)}`
   const tag = locale.value === 'en' ? 'en-GB' : bcp47(locale.value)
-  return new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-    .format(new Date(`${iso}T00:00:00Z`))
-    // The last word keeps to the one before it: on a phone "20 ноября 2025 г."
-    // wrapped as "20 ноября 2025 / г.", the "г." alone on a line.
-    .replace(/ (?=\S+$)/, '\u00a0')
+  const parts = new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+    .formatToParts(new Date(`${iso}T00:00:00Z`))
+  // A narrow card may break the date in one place only: between the day and
+  // month and the year, so "12 January" stays together over "2025" rather
+  // than "12" over "January 2025", and "20 ноября / 2025 г." never leaves
+  // the "г." alone. Every other space is held. Where the year comes first
+  // (2025년 1월 12일) the break is after it instead. Words that go with the
+  // year go with it too: "12 de enero / de 2025", "2025 m. / sausio 12 d.".
+  const year = parts.findIndex((p) => p.type === 'year')
+  const before = year > 0
+  const free = before ? year - 1 : year + 1
+  return parts.map((p, i) => {
+    if (i !== free) return keep(p.value)
+    const at = before ? p.value.indexOf(' ') : p.value.lastIndexOf(' ')
+    return at < 0 ? p.value : keep(p.value.slice(0, at)) + ' ' + keep(p.value.slice(at + 1))
+  }).join('')
 }
+
+/** Spaces that do not break. */
+const keep = (text: string) => text.replace(/ /g, '\u00a0')
+
+/** The last two words held together, so a label that wraps in its narrow
+ *  box reads "VOTES / THIS MONTH", not "VOTES THIS / MONTH". */
+const keepTail = (text: string) => text.replace(/ (?=\S+$)/, '\u00a0')
+/** As keepTail, and a short first word (the place: "2 vieta reitinge") kept
+ *  with the next, so the number never stands alone either. */
+const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00a0')
 </script>
 
 <template>
@@ -93,32 +114,32 @@ function fullDate(iso: string) {
 
     <dl class="server-facts">
       <div>
-        <dt>{{ $t('filter.version') }}</dt>
+        <dt>{{ keepTail($t('filter.version')) }}</dt>
         <dd :title="server.chronicle">
           <NuxtLink v-if="chronicleLink" class="server-fact-link" :to="chronicleLink">{{ chronicleShort(server.game, server.chronicle) }}</NuxtLink>
           <template v-else>{{ chronicleShort(server.game, server.chronicle) }}</template>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('filter.rate') }}</dt>
+        <dt>{{ keepTail($t('filter.rate')) }}</dt>
         <dd>
           <NuxtLink v-if="rateLink" class="server-fact-link" :to="rateLink">{{ rateLabel(server) }}</NuxtLink>
           <template v-else>{{ rateLabel(server) || '—' }}</template>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('server.opens') }}</dt>
+        <dt>{{ keepTail($t('server.opens')) }}</dt>
         <dd>{{ fullDate(server.openDate) }}</dd>
       </div>
       <div>
-        <dt>{{ $t('server.votes') }}</dt>
+        <dt>{{ keepTail($t('server.votes')) }}</dt>
         <dd>
           <span class="server-votes">{{ server.votes }}</span>
-          <small>{{ $t('server.rank', { rank }) }}</small>
+          <small>{{ keepEnds($t('server.rank', { rank })) }}</small>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('server.listed') }}</dt>
+        <dt>{{ keepTail($t('server.listed')) }}</dt>
         <dd>{{ fullDate(server.listedAt) }}</dd>
       </div>
     </dl>
