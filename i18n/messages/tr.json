@@ -120,5 +120,15 @@
     "title": "Sayfa bulunamadı",
     "text": "Bu sayfa yok veya taşınmış.",
     "home": "Ana sayfaya dön"
+  },
+  "sort": {
+    "label": "Sırala",
+    "votes": "Oylar",
+    "date": "Açılış",
+    "added": "Eklenme",
+    "rate": "Rate",
+    "random": "Rastgele",
+    "asc": "artan",
+    "desc": "azalan"
   }
 }

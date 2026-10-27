@@ -120,5 +120,15 @@
     "title": "Səhifə tapılmadı",
     "text": "Belə səhifə yoxdur və ya köçürülüb.",
     "home": "Ana səhifəyə"
+  },
+  "sort": {
+    "label": "Sırala",
+    "votes": "Səslər",
+    "date": "Açılış",
+    "added": "Əlavə edilib",
+    "rate": "Rate",
+    "random": "Təsadüfi",
+    "asc": "artan",
+    "desc": "azalan"
   }
 }

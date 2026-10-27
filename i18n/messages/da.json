@@ -120,5 +120,15 @@
     "title": "Siden blev ikke fundet",
     "text": "Siden findes ikke eller er blevet flyttet.",
     "home": "Til forsiden"
+  },
+  "sort": {
+    "label": "Sortér",
+    "votes": "Stemmer",
+    "date": "Åbning",
+    "added": "Tilføjet",
+    "rate": "Rate",
+    "random": "Tilfældig",
+    "asc": "stigende",
+    "desc": "faldende"
   }
 }

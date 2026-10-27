@@ -20,19 +20,21 @@ export function useServerLink(server: () => Server, origin: () => SectionId | nu
   const route = useRoute()
 
   const query = computed(() => {
+    // A section page's order is its own; the server's page has no list for it.
+    const { sort: _s, ...rest } = route.query
     const game = route.params.section
     // A chronicle's or a rate's page (/lineage2/interlude/) carries that
     // filter in the path as well.
     const landing = landingAt(game, route.params.id)
     if (landing) {
       return landing.chronicle
-        ? { ...route.query, game: landing.game, version: landing.chronicle }
-        : { ...route.query, game: landing.game, min: String(landing.rate), max: String(landing.rate) }
+        ? { ...rest, game: landing.game, version: landing.chronicle }
+        : { ...rest, game: landing.game, min: String(landing.rate), max: String(landing.rate) }
     }
     // A server's page sits under its game too (/lineage2/la2dream/); there
     // the segment names where the server lives, not a game the visitor chose.
     const onGamePage = typeof game === 'string' && !!gameById(game) && !route.params.id
-    return onGamePage ? { ...route.query, game } : route.query
+    return onGamePage ? { ...rest, game } : rest
   })
 
   const to = computed(() => ({ path: localePath(`/${server().game}/${server().id}`), query: query.value }))

@@ -120,5 +120,15 @@
     "title": "Puslapis nerastas",
     "text": "Šio puslapio nėra arba jis perkeltas.",
     "home": "Į pradžią"
+  },
+  "sort": {
+    "label": "Rikiuoti",
+    "votes": "Balsai",
+    "date": "Atidarymas",
+    "added": "Pridėti",
+    "rate": "Rate",
+    "random": "Atsitiktinai",
+    "asc": "didėjančiai",
+    "desc": "mažėjančiai"
   }
 }

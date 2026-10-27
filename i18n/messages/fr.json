@@ -120,5 +120,15 @@
     "title": "Page introuvable",
     "text": "Cette page n’existe pas ou a été déplacée.",
     "home": "Retour à l’accueil"
+  },
+  "sort": {
+    "label": "Trier",
+    "votes": "Votes",
+    "date": "Ouverture",
+    "added": "Ajout",
+    "rate": "Rate",
+    "random": "Au hasard",
+    "asc": "croissant",
+    "desc": "décroissant"
   }
 }

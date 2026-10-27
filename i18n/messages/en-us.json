@@ -120,5 +120,15 @@
     "title": "Page not found",
     "text": "This page doesn’t exist or has been moved.",
     "home": "Back to the home page"
+  },
+  "sort": {
+    "label": "Sort",
+    "votes": "Votes",
+    "date": "Opening",
+    "added": "Added",
+    "rate": "Rate",
+    "random": "Random",
+    "asc": "ascending",
+    "desc": "descending"
   }
 }
