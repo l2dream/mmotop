@@ -90,6 +90,13 @@ function fullDate(iso: string) {
 
 /** Spaces that do not break. */
 const keep = (text: string) => text.replace(/ /g, '\u00a0')
+
+/** The last two words held together, so a label that wraps in its narrow
+ *  box reads "VOTES / THIS MONTH", not "VOTES THIS / MONTH". */
+const keepTail = (text: string) => text.replace(/ (?=\S+$)/, '\u00a0')
+/** As keepTail, and a short first word (the place: "2 vieta reitinge") kept
+ *  with the next, so the number never stands alone either. */
+const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00a0')
 </script>
 
 <template>
@@ -107,32 +114,32 @@ const keep = (text: string) => text.replace(/ /g, '\u00a0')
 
     <dl class="server-facts">
       <div>
-        <dt>{{ $t('filter.version') }}</dt>
+        <dt>{{ keepTail($t('filter.version')) }}</dt>
         <dd :title="server.chronicle">
           <NuxtLink v-if="chronicleLink" class="server-fact-link" :to="chronicleLink">{{ chronicleShort(server.game, server.chronicle) }}</NuxtLink>
           <template v-else>{{ chronicleShort(server.game, server.chronicle) }}</template>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('filter.rate') }}</dt>
+        <dt>{{ keepTail($t('filter.rate')) }}</dt>
         <dd>
           <NuxtLink v-if="rateLink" class="server-fact-link" :to="rateLink">{{ rateLabel(server) }}</NuxtLink>
           <template v-else>{{ rateLabel(server) || '—' }}</template>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('server.opens') }}</dt>
+        <dt>{{ keepTail($t('server.opens')) }}</dt>
         <dd>{{ fullDate(server.openDate) }}</dd>
       </div>
       <div>
-        <dt>{{ $t('server.votes') }}</dt>
+        <dt>{{ keepTail($t('server.votes')) }}</dt>
         <dd>
           <span class="server-votes">{{ server.votes }}</span>
-          <small>{{ $t('server.rank', { rank }) }}</small>
+          <small>{{ keepEnds($t('server.rank', { rank })) }}</small>
         </dd>
       </div>
       <div>
-        <dt>{{ $t('server.listed') }}</dt>
+        <dt>{{ keepTail($t('server.listed')) }}</dt>
         <dd>{{ fullDate(server.listedAt) }}</dd>
       </div>
     </dl>

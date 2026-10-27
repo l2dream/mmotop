@@ -42,7 +42,14 @@ body {
     radial-gradient(circle at 85% 90%, rgba(16, 185, 129, .08), transparent 32rem),
     radial-gradient(circle at 10% 90%, rgba(74, 38, 153, .12), transparent 34rem),
     #070a1b;
+  /* Wherever text wraps, no word is left alone on its last line: "Votes this
+     / month" becomes "Votes / this month", "#2 in the / ranking" "#2 / in the
+     ranking". Browsers without it simply wrap as before. */
+  text-wrap: pretty;
 }
+/* Short lines that wrap in two even halves rather than a full one over a
+   word: "#24 in / the ranking", the 404 text, the language hint. */
+.server-facts small, .not-found-text, .lang-hint-text { text-wrap: balance; }
 button, input { font: inherit; }
 button { color: inherit; }
 button:focus-visible, input:focus-visible, a:focus-visible {
