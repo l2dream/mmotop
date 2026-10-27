@@ -120,5 +120,15 @@
     "title": "Stránka nenalezena",
     "text": "Tato stránka neexistuje nebo byla přesunuta.",
     "home": "Na hlavní stránku"
+  },
+  "sort": {
+    "label": "Řadit",
+    "votes": "Hlasy",
+    "date": "Otevření",
+    "added": "Přidané",
+    "rate": "Rate",
+    "random": "Náhodně",
+    "asc": "vzestupně",
+    "desc": "sestupně"
   }
 }

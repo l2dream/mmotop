@@ -120,5 +120,15 @@
     "title": "Lapa nav atrasta",
     "text": "Šīs lapas nav vai tā ir pārvietota.",
     "home": "Uz sākumlapu"
+  },
+  "sort": {
+    "label": "Kārtot",
+    "votes": "Balsis",
+    "date": "Atvēršana",
+    "added": "Pievienoti",
+    "rate": "Rate",
+    "random": "Nejauši",
+    "asc": "augoši",
+    "desc": "dilstoši"
   }
 }

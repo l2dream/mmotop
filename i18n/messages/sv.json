@@ -120,5 +120,15 @@
     "title": "Sidan hittades inte",
     "text": "Sidan finns inte eller har flyttats.",
     "home": "Till startsidan"
+  },
+  "sort": {
+    "label": "Sortera",
+    "votes": "Röster",
+    "date": "Öppning",
+    "added": "Tillagda",
+    "rate": "Rate",
+    "random": "Slumpvis",
+    "asc": "stigande",
+    "desc": "fallande"
   }
 }

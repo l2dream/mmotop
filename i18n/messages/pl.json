@@ -120,5 +120,15 @@
     "title": "Nie znaleziono strony",
     "text": "Ta strona nie istnieje lub została przeniesiona.",
     "home": "Na stronę główną"
+  },
+  "sort": {
+    "label": "Sortuj",
+    "votes": "Głosy",
+    "date": "Otwarcie",
+    "added": "Dodane",
+    "rate": "Rate",
+    "random": "Losowo",
+    "asc": "rosnąco",
+    "desc": "malejąco"
   }
 }

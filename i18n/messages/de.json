@@ -120,5 +120,15 @@
     "title": "Seite nicht gefunden",
     "text": "Diese Seite existiert nicht oder wurde verschoben.",
     "home": "Zur Startseite"
+  },
+  "sort": {
+    "label": "Sortieren",
+    "votes": "Stimmen",
+    "date": "Eröffnung",
+    "added": "Hinzugefügt",
+    "rate": "Rate",
+    "random": "Zufällig",
+    "asc": "aufsteigend",
+    "desc": "absteigend"
   }
 }

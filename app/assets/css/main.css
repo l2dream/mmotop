@@ -567,6 +567,68 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .theme-light .filter-popup-actions { border-top-color: rgba(103, 104, 173, .14); background: #ffffff; }
 
+/* A section page's orders, between the panel's head and its rows: the same
+   chips as the filters', a little smaller, the chosen one with its arrow. */
+.sort-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 17px;
+  border-bottom: 1px solid rgba(89, 94, 143, .13);
+}
+
+.sort-label {
+  margin-inline-end: 4px;
+  color: #b9bdd0;
+  font-size: 13px;
+}
+
+.sort-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 4px 10px;
+  border: 1px solid #6f73a8;
+  border-radius: 8px;
+  background: transparent;
+  color: #d3d6e6;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sort-chip:hover { border-color: #b48cff; color: #fff; }
+
+.sort-chip.active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(180deg, rgba(94, 47, 180, .55), rgba(72, 35, 147, .4));
+  box-shadow: inset 0 -2px 0 #a453ff;
+}
+
+.sort-arrow { display: block; transition: transform .2s ease; }
+.sort-arrow.up { transform: rotate(180deg); }
+
+.theme-light .sort-bar { border-bottom-color: rgba(103, 104, 173, .12); }
+.theme-light .sort-label { color: #464a60; }
+.theme-light .sort-chip { color: #363a52; border-color: #9295b5; }
+.theme-light .sort-chip:hover { color: #16182b; }
+.theme-light .sort-chip.active {
+  color: #fff;
+  background: linear-gradient(180deg, #9048ff, #7c3aed);
+  box-shadow: inset 0 -2px 0 #6d28d9;
+}
+
+/* On a phone the chips alone, on one line; the group still names itself to
+   screen readers. Wider than the screen (a long language) it scrolls. */
+@media (max-width: 700px) {
+  .sort-bar { padding-inline: 10px; gap: 4px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .sort-label { display: none; }
+  .sort-chip { flex: 0 0 auto; padding-inline: 8px; font-size: 12.5px; }
+}
+
 .empty-state {
   padding: 30px 17px;
   text-align: center;
@@ -1404,7 +1466,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   transition: background .18s ease;
 }
 
-.game-row:nth-child(even) {
+.game-row:nth-of-type(even) {
   background:
     linear-gradient(color-mix(in srgb, var(--panel-glow, #9c5cff) 5%, transparent), color-mix(in srgb, var(--panel-glow, #9c5cff) 5%, transparent)),
     rgba(255, 255, 255, .025);
@@ -1475,7 +1537,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   backdrop-filter: blur(8px);
 }
 
-.theme-light .game-row:nth-child(even) {
+.theme-light .game-row:nth-of-type(even) {
   background:
     linear-gradient(color-mix(in srgb, var(--panel-glow, #9c5cff) 7%, transparent), color-mix(in srgb, var(--panel-glow, #9c5cff) 7%, transparent)),
     rgba(255, 255, 255, .35);

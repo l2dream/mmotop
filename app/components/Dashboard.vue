@@ -4,6 +4,7 @@ import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
 import { REC_DATES, REC_RULES, type RecRule } from '~/data/recommendations'
+import { parseSort, sortParam, sortServers, type SortKey } from '~/data/sorting'
 import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug } from '~/data/landing'
 
 /**
@@ -659,7 +660,38 @@ const ACCENT: Record<SectionId, string> = {
  */
 const SECTION_PAGE = 25
 const sectionShown = ref(SECTION_PAGE)
-const sectionList = computed(() => (props.section ? fullLists.value[props.section] : []))
+
+/**
+ * The order a section page shows its list in (data/sorting), from ?sort= in
+ * the address, so a reload or a shared link keeps it. Rows sorted by votes
+ * end with the votes and the place in TOP, rows sorted by a date with the
+ * date; otherwise they end as the list's own do.
+ */
+const sectionSort = computed(() => (props.section ? parseSort(props.section, firstParam(route.query.sort)) : null))
+const topPlace = computed(() => new Map(fullLists.value.top.map((r) => [r.server.id, r.rank!])))
+const sectionList = computed<Row[]>(() => {
+  if (!props.section || !sectionSort.value) return []
+  const end = sectionEnd.value
+  return sortServers(fullLists.value[props.section].map((r) => r.server), props.section, sectionSort.value)
+    .map((server) => ({ server, rank: end === 'votes' ? topPlace.value.get(server.id) : undefined }))
+})
+const sectionEnd = computed(() => {
+  const key = sectionSort.value?.key
+  if (key === 'votes') return 'votes' as const
+  if (key === 'date') return 'date' as const
+  return props.section ? ROW_END[props.section] : 'chronicle'
+})
+function pickSort(key: SortKey) {
+  if (!props.section || !sectionSort.value) return
+  const current = sectionSort.value
+  // The random order has Shuffle to draw again and no direction to turn.
+  if (key === 'random' && key === current.key) return
+  const next = key === current.key ? { key, reversed: !current.reversed } : { key, reversed: false }
+  const { sort: _s, ...rest } = route.query
+  const param = sortParam(props.section, next)
+  sectionShown.value = SECTION_PAGE
+  router.replace({ path: withSlash(route.path), query: param ? { ...rest, sort: param } : rest, hash: route.hash })
+}
 watch([query, activeCategory, filters, customRateActive, customRateMin, customRateMax], () => {
   sectionShown.value = SECTION_PAGE
 }, { deep: true })
@@ -1535,12 +1567,13 @@ function clearSearch() {
           <template v-if="section === 'all'" #actions>
             <ShuffleButton :turns="shuffleTurns" @shuffle="shuffleGames" />
           </template>
+          <SortBar v-if="sectionSort" :section="section" :choice="sectionSort" @pick="pickSort" />
           <ServerRow
             v-for="row in sectionList.slice(0, sectionShown)"
             :key="row.server.id"
             :server="row.server"
             :rank="row.rank"
-            :end="ROW_END[section]"
+            :end="sectionEnd"
             :origin="section"
           />
           <div v-if="sectionList.length === 0" class="empty-state">{{ $t('panels.none') }}</div>

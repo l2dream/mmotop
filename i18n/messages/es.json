@@ -120,5 +120,15 @@
     "title": "Página no encontrada",
     "text": "Esta página no existe o se ha movido.",
     "home": "Ir a la página principal"
+  },
+  "sort": {
+    "label": "Ordenar",
+    "votes": "Votos",
+    "date": "Apertura",
+    "added": "Añadidos",
+    "rate": "Rate",
+    "random": "Al azar",
+    "asc": "ascendente",
+    "desc": "descendente"
   }
 }
