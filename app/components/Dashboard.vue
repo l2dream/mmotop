@@ -750,9 +750,13 @@ const listOrder = computed<Record<SectionId, Server[]>>(() => ({
  *   2. the list the visitor came through (COMING SOON, ALREADY STARTED…);
  *      TOP, NEW and ALL GAMES hold every server, so they narrow nothing;
  *   3. the same game;
- *   4. the same chronicle;
- *   5. close rates — within three times either way, or both without one;
- *   6. then chance.
+ *   4. coming through COMING SOON, ALREADY STARTED or NEW, the date that
+ *      list goes by — the nearest opening, the latest opening, the latest
+ *      listing — so the panel leads with what that list leads with; servers
+ *      on the same day stay level;
+ *   5. the same chronicle;
+ *   6. close rates — within three times either way, or both without one;
+ *   7. then chance.
  *
  * Chance is a random number per server, drawn on mount and again by the
  * panel's Shuffle, so each visit shows a different five among equals. A
@@ -818,6 +822,13 @@ const serverOthers = computed(() => {
   const origin = serverOrigin.value
   const inOrigin = new Set(origin ? listOrder.value[origin].map((s) => s.id) : [])
   const keys = othersKeys.value
+  const day = (date: string) => Date.parse(date) / 86_400_000
+  const byDate: Partial<Record<SectionId, (s: Server) => number>> = {
+    soon: (s) => -day(s.openDate),
+    started: (s) => day(s.openDate),
+    new: (s) => day(s.listedAt)
+  }
+  const dated = origin ? byDate[origin] : undefined
 
   // One tuple per server, compared left to right: each place answers one of
   // the rules above, 1 for "yes", and the last is chance.
@@ -825,6 +836,7 @@ const serverOthers = computed(() => {
     !filtersActive.value || matchesAll(s) ? 1 : 0,
     inOrigin.has(s.id) ? 1 : 0,
     s.game === current.game ? 1 : 0,
+    dated && inOrigin.has(s.id) ? dated(s) : 0,
     s.game === current.game && s.chronicle === current.chronicle ? 1 : 0,
     ratesClose(current, s) ? 1 : 0,
     keys ? keys.get(s.id)! : serverSimilarity(current, s)
