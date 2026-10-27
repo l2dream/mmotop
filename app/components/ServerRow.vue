@@ -39,12 +39,12 @@ const rowClass = computed(() => ({
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
     <span class="game-logo">{{ serverBadge(server) }}</span>
     <span class="game-name">
-      <strong>{{ server.name }}</strong>
-      <small>{{ serverSubtitle(server) }}</small>
+      <strong><HitText :text="server.name" /></strong>
+      <small><HitText :text="serverSubtitle(server)" /></small>
     </span>
     <span class="version">
-      <span class="version-name" :title="server.chronicle">{{ chronicleShort(server.game, server.chronicle) }}</span>
-      <small class="version-rate">{{ rateLabel(server) }}</small>
+      <span class="version-name" :title="server.chronicle"><HitText :text="chronicleShort(server.game, server.chronicle)" /></span>
+      <small class="version-rate"><HitText :text="rateLabel(server)" /></small>
     </span>
     <span v-if="end === 'votes'" class="rating">
       <span class="rating-value">

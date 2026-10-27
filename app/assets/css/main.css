@@ -2203,6 +2203,54 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   }
 }
 
+/* The search's matches inside a row or card (HitText): a soft gold wash,
+   the text keeping its own colour and weight. */
+.search-hit {
+  padding: 0 1px;
+  border-radius: 3px;
+  background: rgba(255, 210, 90, .3);
+  box-shadow: 0 0 0 1px rgba(255, 210, 90, .45);
+  color: inherit;
+}
+.theme-light .search-hit {
+  background: #fde68a;
+  box-shadow: 0 0 0 1px #f5c542;
+  color: #1c1e33;
+}
+
+/* Back to top (ScrollTop): a disc in the corner once the page is scrolled
+   past a screen, fading in and out. */
+.scroll-top {
+  position: fixed;
+  inset-inline-end: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid #8a5cf0;
+  border-radius: 50%;
+  background: rgba(20, 23, 50, .9);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 10px;
+  transition: opacity .2s ease, translate .2s ease, background-color .18s ease;
+}
+.scroll-top.shown { opacity: 1; pointer-events: auto; translate: 0 0; }
+.scroll-top:hover { background: #7c3aed; }
+.theme-light .scroll-top { background: #7c3aed; border-color: transparent; box-shadow: 0 8px 22px rgba(31, 41, 102, .2); }
+.theme-light .scroll-top:hover { background: #6d28d9; }
+@media (max-width: 700px) {
+  .scroll-top { inset-inline-end: 14px; bottom: 14px; width: 44px; height: 44px; }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

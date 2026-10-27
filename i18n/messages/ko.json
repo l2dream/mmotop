@@ -9,7 +9,8 @@
     "theme": "테마 전환",
     "language": "언어",
     "login": "로그인",
-    "categories": "게임 카테고리"
+    "categories": "게임 카테고리",
+    "toTop": "맨 위로"
   },
   "language": {
     "search": "언어 검색",

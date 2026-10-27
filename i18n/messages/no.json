@@ -9,7 +9,8 @@
     "theme": "Bytt tema",
     "language": "Språk",
     "login": "LOGG INN",
-    "categories": "Spillkategorier"
+    "categories": "Spillkategorier",
+    "toTop": "Til toppen"
   },
   "language": {
     "search": "Søk språk",

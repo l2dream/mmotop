@@ -1038,6 +1038,16 @@ function onDocumentPointer(event: PointerEvent) {
  * just been removed, which drops a keyboard user at the top of the document.
  */
 function onDocumentKeydown(event: KeyboardEvent) {
+  // "/" jumps to the search, as on GitHub or YouTube — unless the visitor is
+  // already typing somewhere, where it is just a slash.
+  if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+    const t = event.target as HTMLElement | null
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return
+    event.preventDefault()
+    searchInput.value?.focus()
+    searchInput.value?.select()
+    return
+  }
   if (event.key !== 'Escape') return
   if (filterOpen.value) closeFilter()
   if (showMore.value) {
@@ -1229,6 +1239,7 @@ function clearSearch() {
           ref="searchInput"
           :value="query"
           type="search"
+          aria-keyshortcuts="/"
           :aria-label="$t('search.label')"
           :placeholder="$t('search.placeholder')"
           @input="query = ($event.target as HTMLInputElement).value"
@@ -1542,6 +1553,8 @@ function clearSearch() {
     <!-- Deliberately bare for now: just the copyright, until the rest of the
          site exists to link to. The year follows the same build-year-then-browser rule as the date
          labels, so the prerendered page is already right. -->
+    <ScrollTop />
+
     <footer class="site-footer">
       <span class="site-footer-copy" dir="ltr">© {{ currentYear }} MMOTOP</span>
     </footer>
