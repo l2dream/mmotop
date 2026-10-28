@@ -854,7 +854,10 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   border-color: rgba(156, 92, 255, .55);
   box-shadow: 0 0 0 3px rgba(156, 92, 255, .12);
 }
-.lang-search-input:focus-visible {
+.lang-search-input:focus-visible,
+.theme-light .lang-search-input:focus-visible {
+  /* The field around it shows the focus; the light theme's ring rule is
+     the more specific, so it is named here too. */
   outline: none;
   box-shadow: none;
 }
@@ -2821,4 +2824,65 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 @media (min-resolution: 2dppx) {
   .server-tile,
   .server-facts > div { border-width: .5px; }
+}
+
+/* The same glass for the header and the popups: the search field, the
+   language and login buttons (their violet frames kept), the game tabs'
+   bar, and the filter, language and More popups. The bar holds the More
+   popup, which is position: fixed — a backdrop-filter there would make the
+   bar its containing block and pull the popup inside it — so the bar gets
+   the glass's colours without the blur. */
+.search-box input {
+  border-color: rgba(255, 255, 255, .13);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02)), rgba(14, 17, 38, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.lang-button,
+.login-button {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02)), rgba(20, 23, 50, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.category-bar {
+  border: 1px solid rgba(255, 255, 255, .11);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .11), 0 4px 14px rgba(0, 0, 0, .28);
+}
+.filter-popup,
+.lang-panel,
+.more-dropdown {
+  border-color: rgba(255, 255, 255, .14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .025)), rgba(16, 19, 42, .84);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 18px 50px rgba(0, 0, 0, .45);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.theme-light .search-box input,
+.theme-light .category-bar {
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
+  box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
+}
+.theme-light .lang-button,
+.theme-light .login-button {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .7));
+  box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
+}
+.theme-light .filter-popup,
+.theme-light .lang-panel,
+.theme-light .more-dropdown {
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .84));
+  box-shadow: inset 0 1px 0 #fff, 0 18px 50px rgba(31, 41, 102, .16);
+}
+@media (min-resolution: 2dppx) {
+  .search-box input,
+  .category-bar,
+  .filter-popup,
+  .lang-panel,
+  .more-dropdown { border-width: .5px; }
 }
