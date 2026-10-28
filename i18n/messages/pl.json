@@ -132,14 +132,6 @@
     "desc": "malejąco"
   },
   "footer": {
-    "label": "Linki serwisu",
-    "games": "Gry",
-    "lists": "Listy",
-    "popular": "Popularne",
-    "top": "Najlepsze serwery",
-    "soon": "Wkrótce start",
-    "started": "Już wystartowały",
-    "new": "Nowe serwery",
-    "all": "Wszystkie serwery"
+    "popular": "Popularne"
   }
 }

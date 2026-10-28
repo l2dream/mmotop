@@ -132,14 +132,6 @@
     "desc": "dilstoši"
   },
   "footer": {
-    "label": "Vietnes saites",
-    "games": "Spēles",
-    "lists": "Saraksti",
-    "popular": "Populāri",
-    "top": "Labākie serveri",
-    "soon": "Drīzumā atver",
-    "started": "Jau palaisti",
-    "new": "Jauni serveri",
-    "all": "Visi serveri"
+    "popular": "Populāri"
   }
 }
