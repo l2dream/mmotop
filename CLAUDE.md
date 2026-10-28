@@ -13,3 +13,10 @@ Before pushing, make sure `npm run typecheck` passes: the deploy runs it and
 stops on a type error.
 
 The owner writes in Russian; answer in Russian.
+
+## Notes between sessions
+
+Read `docs/notes.md` at the start of a session: it holds what was agreed with
+the owner, which services are connected, and what was started and put off.
+Long conversations are compressed and lose such details; the file does not.
+Update it whenever something is started, put off or finished.

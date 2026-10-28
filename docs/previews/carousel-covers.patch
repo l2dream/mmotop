@@ -1,0 +1,238 @@
+diff --git a/app/assets/css/main.css b/app/assets/css/main.css
+index 4d190b4..6e06767 100644
+--- a/app/assets/css/main.css
++++ b/app/assets/css/main.css
+@@ -1813,7 +1813,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+-  padding: 14px;
++  overflow: hidden;
+   border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 24%, transparent);
+   border-radius: 12px;
+   background: linear-gradient(160deg, color-mix(in srgb, var(--panel-glow, #9c5cff) 11%, transparent), rgba(255, 255, 255, .02));
+@@ -1828,14 +1828,97 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
+ }
+ .server-tile:focus-visible { outline-offset: 2px; }
+ 
+-.server-tile-top {
++.tile-body {
++  flex: 1 1 auto;
+   display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-  gap: 8px;
+-  margin-bottom: 12px;
++  flex-direction: column;
++  min-width: 0;
++  padding: 24px 14px 14px;
++}
++
++/* The cover: the game's two colours (--b-from, --b-to from data/banners.ts),
++   its mark large and faint across it, the place or date in the corner and
++   the chronicle's badge sitting on its lower edge. Three looks are drawn
++   below for now (html[data-banner]); A is the default. */
++.tile-cover {
++  position: relative;
++  display: block;
++  height: 86px;
++  background:
++    radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--b-from) 75%, transparent), transparent 62%),
++    linear-gradient(135deg, var(--b-from), var(--b-to));
++}
++.tile-cover-mark {
++  position: absolute;
++  inset-inline-end: 10px;
++  bottom: -6px;
++  color: #fff;
++  font-size: 46px;
++  font-weight: 900;
++  font-style: italic;
++  letter-spacing: -.02em;
++  line-height: 1;
++  opacity: .22;
++  white-space: nowrap;
++  pointer-events: none;
++}
++.tile-cover-chip {
++  position: absolute;
++  top: 10px;
++  inset-inline-end: 10px;
++}
++.server-tile .rank.tile-cover-chip {
++  margin: 0;
++  background: rgba(8, 10, 24, .55);
++  -webkit-backdrop-filter: blur(4px);
++  backdrop-filter: blur(4px);
++  color: #fff;
++}
++.server-tile .rank-1.tile-cover-chip { color: #ffd76a; }
++.server-tile .rank-2.tile-cover-chip { color: #e4e8f2; }
++.server-tile .rank-3.tile-cover-chip { color: #f0b585; }
++.server-tile-date.tile-cover-chip {
++  padding: 3px 9px;
++  border-radius: 999px;
++  background: rgba(8, 10, 24, .55);
++  -webkit-backdrop-filter: blur(4px);
++  backdrop-filter: blur(4px);
++  color: #fff;
++}
++/* The chips sit on the cover's own dark glass in either theme, so they keep
++   the dark theme's light text in the light theme too. */
++.theme-light .server-tile-date.tile-cover-chip,
++.theme-light .server-tile .rank.tile-cover-chip { color: #fff; }
++.theme-light .server-tile .rank-1.tile-cover-chip { color: #ffd76a; }
++.theme-light .server-tile .rank-2.tile-cover-chip { color: #e4e8f2; }
++.theme-light .server-tile .rank-3.tile-cover-chip { color: #f0b585; }
++.tile-cover-badge {
++  position: absolute;
++  inset-inline-start: 12px;
++  bottom: -18px;
++  box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
++}
++
++/* B — cyber: a dark cover with a neon grid and a glowing edge. */
++html[data-banner="b"] .tile-cover {
++  background:
++    linear-gradient(to top, color-mix(in srgb, var(--b-from) 80%, transparent) 0 2px, transparent 2px),
++    repeating-linear-gradient(90deg, color-mix(in srgb, var(--b-from) 30%, transparent) 0 1px, transparent 1px 16px),
++    repeating-linear-gradient(0deg, color-mix(in srgb, var(--b-from) 22%, transparent) 0 1px, transparent 1px 16px),
++    radial-gradient(ellipse at 50% 120%, color-mix(in srgb, var(--b-from) 55%, transparent), transparent 70%),
++    linear-gradient(160deg, #0a0d1f, color-mix(in srgb, var(--b-to) 70%, #0a0d1f));
++  box-shadow: inset 0 -12px 18px -12px var(--b-from);
++}
++html[data-banner="b"] .tile-cover-mark { color: var(--b-from); opacity: .35; font-style: normal; letter-spacing: .04em; text-shadow: 0 0 12px var(--b-from); }
++
++/* C — geometric: hard diagonal bands in the game's colours. */
++html[data-banner="c"] .tile-cover {
++  background:
++    linear-gradient(115deg, transparent 0 52%, color-mix(in srgb, var(--b-from) 85%, #fff) 52% 56%, transparent 56%),
++    linear-gradient(115deg, transparent 0 60%, color-mix(in srgb, var(--b-from) 55%, var(--b-to)) 60% 78%, transparent 78%),
++    linear-gradient(115deg, var(--b-to) 0 52%, var(--b-from) 52%);
+ }
+-.server-tile .rank { margin: 0; }
++html[data-banner="c"] .tile-cover-mark { inset-inline-end: auto; inset-inline-start: 12px; top: 8px; bottom: auto; font-size: 34px; opacity: .3; }
+ .server-tile-date {
+   color: #dfe2ef;
+   font-size: 14px;
+@@ -1956,7 +2039,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
+ @media (max-width: 700px) {
+   .carousel-track { gap: 10px; padding-inline: 12px; scroll-padding-inline: 12px; }
+   .carousel-track > li { width: 196px; }
+-  .server-tile { padding: 12px; }
++  .tile-body { padding: 24px 12px 12px; }
+ }
+ 
+ .section-view {
+diff --git a/app/components/ServerTile.vue b/app/components/ServerTile.vue
+index 91df063..8f7e210 100644
+--- a/app/components/ServerTile.vue
++++ b/app/components/ServerTile.vue
+@@ -2,12 +2,14 @@
+ import { chronicleShort } from '~/data/games'
+ import type { Server } from '~/data/servers'
+ import type { SectionId } from '~/data/sections'
++import { bannerFor } from '~/data/banners'
+ 
+ /**
+- * One server as a card, for a panel shown as a carousel. The same facts as
+- * its row in the list — badge, name, game, chronicle and rate — with what
+- * ends the row (place and votes, or the opening date) moved to the card's
+- * corners. A link to the server's page, like the row.
++ * One server as a card, for a panel shown as a carousel: a cover in its
++ * game's colours (data/banners.ts) carrying the place or the opening date
++ * and the chronicle's badge, then the same facts as its row in the list —
++ * name, game, chronicle and rate, and the votes on TOP. A link to the
++ * server's page, like the row.
+  */
+ const props = defineProps<{
+   server: Server
+@@ -18,28 +20,33 @@ const props = defineProps<{
+ 
+ const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+ const { to, remember } = useServerLink(() => props.server, () => props.origin)
++const banner = computed(() => bannerFor(props.server.game))
++const coverStyle = computed(() => ({ '--b-from': banner.value.from, '--b-to': banner.value.to }))
+ </script>
+ 
+ <template>
+   <NuxtLink class="server-tile" :to="to" @click="remember">
+-    <span class="server-tile-top">
+-      <span class="game-logo">{{ serverBadge(server) }}</span>
+-      <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+-      <span v-else-if="end === 'date'" class="server-tile-date">
++    <span class="tile-cover" :style="coverStyle">
++      <span class="tile-cover-mark" aria-hidden="true">{{ banner.mark }}</span>
++      <span v-if="end === 'votes'" class="rank tile-cover-chip" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
++      <span v-else-if="end === 'date'" class="server-tile-date tile-cover-chip">
+         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>
+       </span>
++      <span class="game-logo tile-cover-badge">{{ serverBadge(server) }}</span>
+     </span>
+-    <strong class="server-tile-name">{{ server.name }}</strong>
+-    <small class="server-tile-game">{{ serverSubtitle(server) }}</small>
+-    <span class="server-tile-foot">
+-      <span class="server-tile-version" :title="server.chronicle">
+-        {{ chronicleShort(server.game, server.chronicle) }}<template v-if="rateLabel(server)"> · {{ rateLabel(server) }}</template>
+-      </span>
+-      <span v-if="end === 'votes'" class="server-tile-votes">
+-        <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+-          <path d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z" fill="url(#voteGrad)" />
+-        </svg>
+-        {{ server.votes }}
++    <span class="tile-body">
++      <strong class="server-tile-name">{{ server.name }}</strong>
++      <small class="server-tile-game">{{ serverSubtitle(server) }}</small>
++      <span class="server-tile-foot">
++        <span class="server-tile-version" :title="server.chronicle">
++          {{ chronicleShort(server.game, server.chronicle) }}<template v-if="rateLabel(server)"> · {{ rateLabel(server) }}</template>
++        </span>
++        <span v-if="end === 'votes'" class="server-tile-votes">
++          <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
++            <path d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z" fill="url(#voteGrad)" />
++          </svg>
++          {{ server.votes }}
++        </span>
+       </span>
+     </span>
+   </NuxtLink>
+diff --git a/app/data/banners.ts b/app/data/banners.ts
+new file mode 100644
+index 0000000..686f67e
+--- /dev/null
++++ b/app/data/banners.ts
+@@ -0,0 +1,34 @@
++/**
++ * The cover drawn at the top of a server's card in a carousel, per game,
++ * until servers can upload banners of their own.
++ *
++ * Drawn entirely by CSS from two colours and a short mark: no game's logo or
++ * artwork, which belong to their publishers. The colours only nod to each
++ * game's usual look so a strip of cards reads at a glance.
++ */
++export interface Banner {
++  /** The big faint text across the cover. */
++  mark: string
++  /** Light and dark ends of the cover's colour. */
++  from: string
++  to: string
++}
++
++export const BANNERS: Record<string, Banner> = {
++  lineage2: { mark: 'L2', from: '#f5b041', to: '#5c2a06' },
++  wow: { mark: 'WoW', from: '#4aa8ff', to: '#0c2257' },
++  mu: { mark: 'MU', from: '#ff5470', to: '#4c0819' },
++  aion: { mark: 'AION', from: '#a77bff', to: '#0f5c78' },
++  pw: { mark: 'PW', from: '#2fd69a', to: '#0b3f45' },
++  rf: { mark: 'RF', from: '#ff8a2b', to: '#1f2d3d' },
++  sro: { mark: 'SRO', from: '#e9bb62', to: '#6b1a1a' },
++  metin2: { mark: 'MT2', from: '#46d39b', to: '#11241c' },
++  rappelz: { mark: 'RZ', from: '#ff6fd8', to: '#341760' },
++  tibia: { mark: 'TIBIA', from: '#9ccc4a', to: '#3a2812' }
++}
++
++const FALLBACK: Banner = { mark: '', from: '#9c5cff', to: '#1b1240' }
++
++export function bannerFor(game: string): Banner {
++  return BANNERS[game] ?? FALLBACK
++}
