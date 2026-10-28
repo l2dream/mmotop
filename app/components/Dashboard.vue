@@ -710,27 +710,32 @@ const searchText = computed(() => query.value.trim())
 const homeGame = computed(() => (props.game ? gameById(props.game) : undefined))
 /** On a chronicle's or a rate's page, what it is a page of: "Interlude", "x50". */
 const landingName = props.chronicle ?? (props.rate != null ? `x${props.rate}` : '')
-/** "Lineage II Interlude servers" — what someone would search for. */
-const landingTitle = computed(() => (landingName && homeGame.value
-  ? t('seo.game.title', { game: `${homeGame.value.name} ${landingName}` })
+/**
+ * "Lineage II servers", "Lineage II Interlude servers" — what someone would
+ * search for, as the title and the h1 of a game's page and of its chronicle
+ * and rate pages. The word "servers" is the one people type; the old title,
+ * "Lineage II — MMOTOP — Game Server Rankings", did not lead with it.
+ */
+const landingTitle = computed(() => (homeGame.value
+  ? t('seo.game.title', { game: landingName ? `${homeGame.value.name} ${landingName}` : homeGame.value.name })
   : ''))
+/** "Interlude x500": what a server is, as people search for it. */
+const serverKind = (s: Server) => [s.chronicle, rateLabel(s)].filter(Boolean).join(' ')
 const pageTitle = computed(() => {
-  if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} — MMOTOP`
+  if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} ${serverKind(server.value)} — MMOTOP`
   if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
-  if (landingTitle.value) return `${landingTitle.value} — MMOTOP`
-  // A game's page: the game's name is what tells it apart from the home page.
-  return homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title')
+  return landingTitle.value ? `${landingTitle.value} — MMOTOP` : t('meta.title')
 })
 // The page's subject for its one h1: on a section page the plain-words name
 // ("Top game servers by votes"), not the capitalised panel label.
 const pageHeading = computed(() => (props.section
   ? t(`seo.${props.section}.title`)
-  : landingTitle.value || (homeGame.value ? `${homeGame.value.name} — ${t('meta.title')}` : t('meta.title'))))
+  : landingTitle.value || t('meta.title')))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
     game: serverSubtitle(server.value),
-    chronicle: server.value.chronicle
+    chronicle: serverKind(server.value)
   })
   : props.section
     ? t(`seo.${props.section}.description`)
