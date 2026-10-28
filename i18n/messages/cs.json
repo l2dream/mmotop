@@ -88,7 +88,14 @@
     "listed": "Na MMOTOP od",
     "visit": "Navštívit web",
     "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP.",
-    "recommended": "DOPORUČENÉ"
+    "recommended": "DOPORUČENÉ",
+    "about": {
+      "rate": "{name} je server {game} ve verzi {chronicle} s rate {rate}.",
+      "noRate": "{name} je server {game} ve verzi {chronicle}.",
+      "opened": "Spuštěn {date}.",
+      "opens": "Spuštění {date}.",
+      "votes": "Hlasy tento měsíc: {votes}, {rank}. místo v žebříčku MMOTOP."
+    }
   },
   "seo": {
     "top": {

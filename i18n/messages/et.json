@@ -88,7 +88,14 @@
     "listed": "MMOTOP-is alates",
     "visit": "Ava veebisait",
     "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is.",
-    "recommended": "SOOVITUSED"
+    "recommended": "SOOVITUSED",
+    "about": {
+      "rate": "{name} on {game} server versiooniga {chronicle} ja rate’idega {rate}.",
+      "noRate": "{name} on {game} server versiooniga {chronicle}.",
+      "opened": "Avati {date}.",
+      "opens": "Avamine {date}.",
+      "votes": "Hääli sel kuul: {votes}, MMOTOP edetabelis {rank}. koht."
+    }
   },
   "seo": {
     "top": {

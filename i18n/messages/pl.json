@@ -88,7 +88,14 @@
     "listed": "Na MMOTOP od",
     "visit": "Przejdź na stronę",
     "description": "{name}: serwer {game} ({chronicle}). Rates, data otwarcia i głosy na MMOTOP.",
-    "recommended": "POLECANE"
+    "recommended": "POLECANE",
+    "about": {
+      "rate": "{name} to serwer {game} w wersji {chronicle} z rate {rate}.",
+      "noRate": "{name} to serwer {game} w wersji {chronicle}.",
+      "opened": "Otwarty {date}.",
+      "opens": "Otwarcie {date}.",
+      "votes": "Głosy w tym miesiącu: {votes}, miejsce {rank} w rankingu MMOTOP."
+    }
   },
   "seo": {
     "top": {

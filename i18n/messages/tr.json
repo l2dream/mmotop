@@ -88,7 +88,14 @@
     "listed": "MMOTOP’a eklenme",
     "visit": "Siteyi ziyaret et",
     "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta.",
-    "recommended": "ÖNERİLER"
+    "recommended": "ÖNERİLER",
+    "about": {
+      "rate": "{name}, {chronicle} sürümünde {rate} rate ile çalışan bir {game} sunucusudur.",
+      "noRate": "{name}, {chronicle} sürümünde çalışan bir {game} sunucusudur.",
+      "opened": "Açılış tarihi: {date}.",
+      "opens": "Açılış tarihi: {date}.",
+      "votes": "Bu ayki oylar: {votes}, MMOTOP sıralamasında {rank}. sırada."
+    }
   },
   "seo": {
     "top": {

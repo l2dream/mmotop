@@ -88,7 +88,14 @@
     "listed": "Στο MMOTOP από",
     "visit": "Επίσκεψη ιστότοπου",
     "description": "{name}: διακομιστής {game} ({chronicle}). Rates, ημερομηνία ανοίγματος και ψήφοι στο MMOTOP.",
-    "recommended": "ΠΡΟΤΑΣΕΙΣ"
+    "recommended": "ΠΡΟΤΑΣΕΙΣ",
+    "about": {
+      "rate": "Ο {name} είναι server του {game} με έκδοση {chronicle} και rates {rate}.",
+      "noRate": "Ο {name} είναι server του {game} με έκδοση {chronicle}.",
+      "opened": "Άνοιξε στις {date}.",
+      "opens": "Ανοίγει στις {date}.",
+      "votes": "Ψήφοι αυτόν τον μήνα: {votes}, {rank}η θέση στην κατάταξη του MMOTOP."
+    }
   },
   "seo": {
     "top": {

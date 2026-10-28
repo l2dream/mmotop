@@ -88,7 +88,14 @@
     "listed": "MMOTOP nuo",
     "visit": "Apsilankyti svetainėje",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP.",
-    "recommended": "REKOMENDACIJOS"
+    "recommended": "REKOMENDACIJOS",
+    "about": {
+      "rate": "{name} – {game} serveris su versija {chronicle} ir rate {rate}.",
+      "noRate": "{name} – {game} serveris su versija {chronicle}.",
+      "opened": "Atidarytas {date}.",
+      "opens": "Atidarymas {date}.",
+      "votes": "Balsai šį mėnesį: {votes}, {rank} vieta MMOTOP reitinge."
+    }
   },
   "seo": {
     "top": {

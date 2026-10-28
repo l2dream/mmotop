@@ -88,7 +88,14 @@
     "listed": "ב-MMOTOP מאז",
     "visit": "לאתר השרת",
     "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP.",
-    "recommended": "המלצות"
+    "recommended": "המלצות",
+    "about": {
+      "rate": "{name} הוא שרת {game} בגרסה {chronicle} עם ריטים {rate}.",
+      "noRate": "{name} הוא שרת {game} בגרסה {chronicle}.",
+      "opened": "נפתח ב־{date}.",
+      "opens": "נפתח ב־{date}.",
+      "votes": "הצבעות החודש: {votes}, מקום {rank} בדירוג MMOTOP."
+    }
   },
   "seo": {
     "top": {

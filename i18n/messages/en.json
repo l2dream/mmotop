@@ -88,7 +88,14 @@
     "listed": "Listed on MMOTOP",
     "visit": "Visit website",
     "description": "{name}: a {game} server ({chronicle}). Rates, opening date and votes on MMOTOP.",
-    "recommended": "RECOMMENDED"
+    "recommended": "RECOMMENDED",
+    "about": {
+      "rate": "{name} is a {game} server running {chronicle} with {rate} rates.",
+      "noRate": "{name} is a {game} server running {chronicle}.",
+      "opened": "It opened on {date}.",
+      "opens": "It opens on {date}.",
+      "votes": "Votes this month: {votes}, #{rank} in the MMOTOP ranking."
+    }
   },
   "seo": {
     "top": {

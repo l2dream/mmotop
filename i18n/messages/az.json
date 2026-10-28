@@ -88,7 +88,14 @@
     "listed": "MMOTOP-a əlavə edilib",
     "visit": "Sayta keçid",
     "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da.",
-    "recommended": "TÖVSİYƏLƏR"
+    "recommended": "TÖVSİYƏLƏR",
+    "about": {
+      "rate": "{name} — {chronicle} versiyasında, {rate} reytli {game} serveridir.",
+      "noRate": "{name} — {chronicle} versiyasında {game} serveridir.",
+      "opened": "Açılış tarixi: {date}.",
+      "opens": "Açılış tarixi: {date}.",
+      "votes": "Bu ay səslər: {votes}, MMOTOP reytinqində {rank}-ci yer."
+    }
   },
   "seo": {
     "top": {
