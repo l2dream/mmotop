@@ -118,8 +118,17 @@ function markAnswered() {
   try { sessionStorage.setItem(ANSWERED, '1') } catch {}
 }
 
+/**
+ * Search engines' crawlers run the page with a browser language of their own
+ * (Googlebot's is English), so they were offered English on every page in
+ * another language — and indexed, say, a Korean server page with an English
+ * sentence across its top. The offer is for people choosing a language; a
+ * crawler reads each language at its own address anyway.
+ */
+const CRAWLER = /bot|crawl|spider|slurp|mediapartners|lighthouse/i
+
 onMounted(() => {
-  if (dismissed.value || answeredThisVisit()) return
+  if (dismissed.value || answeredThisVisit() || CRAWLER.test(navigator.userAgent)) return
   const found = pick()
   if (found && SUGGESTIONS[found.code]) {
     suggestion.value = found
