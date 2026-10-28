@@ -2792,3 +2792,33 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   .game-row:first-of-type { margin-top: 8px; }
   .game-row:last-of-type { margin-bottom: 8px; }
 }
+
+/* The same glass for a carousel's cards and for the facts on a server's
+   page, so every card on the site is made of one material. */
+.server-tile,
+.server-facts > div {
+  border-color: rgba(255, 255, 255, .13);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.server-tile:hover {
+  border-color: rgba(255, 255, 255, .24);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--panel-glow, #9c5cff) 16%, rgba(255, 255, 255, .08)), rgba(255, 255, 255, .03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 8px 24px -8px color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, rgba(0, 0, 0, .4));
+}
+.theme-light .server-tile,
+.theme-light .server-facts > div {
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .85), rgba(255, 255, 255, .55));
+  box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
+}
+.theme-light .server-tile:hover {
+  border-color: #fff;
+  background: linear-gradient(180deg, #fff, color-mix(in srgb, var(--panel-glow, #9c5cff) 8%, #fff));
+}
+@media (min-resolution: 2dppx) {
+  .server-tile,
+  .server-facts > div { border-width: .5px; }
+}
