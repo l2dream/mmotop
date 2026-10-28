@@ -1,0 +1,118 @@
+diff --git a/app/assets/css/main.css b/app/assets/css/main.css
+index 5922521..74ac255 100644
+--- a/app/assets/css/main.css
++++ b/app/assets/css/main.css
+@@ -1629,6 +1629,59 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
+   box-shadow: inset 0 0 0 1px #fff;
+ }
+ 
++/* Each game's own colour on its servers' badges: tinted ground, a frame in
++   the colour, the letters a pale tint of it. The rest of the row keeps the
++   panel's colours, so the badge alone tells the games apart down a list. */
++[data-game="lineage2"] { --game: #e8b04b; }
++[data-game="wow"] { --game: #4aa8ff; }
++[data-game="mu"] { --game: #ff5c6c; }
++[data-game="aion"] { --game: #2fd4c4; }
++[data-game="pw"] { --game: #a98bff; }
++[data-game="rf"] { --game: #ff8b3d; }
++[data-game="sro"] { --game: #3ed688; }
++[data-game="metin2"] { --game: #b5e04a; }
++[data-game="rappelz"] { --game: #ff70c0; }
++[data-game="tibia"] { --game: #d4a373; }
++
++.game-logo[data-game] {
++  background: linear-gradient(135deg, color-mix(in srgb, var(--game) 40%, #171b27), color-mix(in srgb, var(--game) 14%, #0d1018));
++  border-color: color-mix(in srgb, var(--game) 90%, transparent);
++  color: color-mix(in srgb, var(--game) 30%, #fff);
++  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 0 14px color-mix(in srgb, var(--game) 35%, transparent);
++}
++
++.theme-light .game-logo[data-game] {
++  background: linear-gradient(135deg, color-mix(in srgb, var(--game) 16%, #fff), color-mix(in srgb, var(--game) 26%, #fff));
++  border-color: color-mix(in srgb, var(--game) 70%, #fff);
++  color: color-mix(in srgb, var(--game) 45%, #10121f);
++  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
++}
++
++/* A stripe of the game's colour down the row's leading edge. */
++.game-row[data-game] { box-shadow: inset 3px 0 0 var(--game); }
++[dir="rtl"] .game-row[data-game] { box-shadow: inset -3px 0 0 var(--game); }
++
++/* The game tabs: a dot of each game's colour before its name, and the chosen
++   tab tinted and underlined in it rather than in the site's purple. */
++.category[data-game]::before {
++  content: "";
++  width: 8px;
++  height: 8px;
++  margin-inline-end: 8px;
++  border-radius: 50%;
++  background: var(--game);
++  box-shadow: 0 0 8px color-mix(in srgb, var(--game) 60%, transparent);
++}
++.category.active[data-game] {
++  background: linear-gradient(180deg, color-mix(in srgb, var(--game) 30%, transparent), color-mix(in srgb, var(--game) 10%, transparent));
++  box-shadow: inset 0 -2px 0 var(--game);
++}
++.theme-light .category.active[data-game] {
++  color: color-mix(in srgb, var(--game) 40%, #10121f);
++  background: linear-gradient(180deg, color-mix(in srgb, var(--game) 30%, #fff), color-mix(in srgb, var(--game) 18%, #fff));
++  box-shadow: inset 0 -2px 0 var(--game);
++}
++
+ .game-name {
+   min-width: 0;
+   display: flex;
+diff --git a/app/components/Dashboard.vue b/app/components/Dashboard.vue
+index 6b58831..926fefb 100644
+--- a/app/components/Dashboard.vue
++++ b/app/components/Dashboard.vue
+@@ -1455,6 +1455,7 @@ function clearSearch() {
+           :key="category"
+           class="category"
+           :class="{ active: activeCategory === category }"
++          :data-game="category === 'all' ? undefined : category"
+           :aria-current="activeCategory === category ? 'page' : undefined"
+           :href="categoryHref(category)"
+           @click="onCategoryClick($event, category)"
+diff --git a/app/components/ServerDetail.vue b/app/components/ServerDetail.vue
+index cdf3d20..9c18ce4 100644
+--- a/app/components/ServerDetail.vue
++++ b/app/components/ServerDetail.vue
+@@ -102,7 +102,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
+ <template>
+   <article class="panel server-card" :class="opened ? 'accent-amber' : 'accent-blue'">
+     <header class="server-head">
+-      <span class="game-logo server-logo">{{ serverBadge(server) }}</span>
++      <span class="game-logo server-logo" :data-game="server.game">{{ serverBadge(server) }}</span>
+       <div class="server-title">
+         <h1>{{ server.name }}</h1>
+         <p>{{ serverSubtitle(server) }}</p>
+diff --git a/app/components/ServerRow.vue b/app/components/ServerRow.vue
+index c1dfea6..4a52a62 100644
+--- a/app/components/ServerRow.vue
++++ b/app/components/ServerRow.vue
+@@ -35,9 +35,9 @@ const rowClass = computed(() => ({
+ </script>
+ 
+ <template>
+-  <NuxtLink class="game-row" :class="rowClass" :to="to" @click="remember">
++  <NuxtLink class="game-row" :class="rowClass" :data-game="server.game" :to="to" @click="remember">
+     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+-    <span class="game-logo">{{ serverBadge(server) }}</span>
++    <span class="game-logo" :data-game="server.game">{{ serverBadge(server) }}</span>
+     <span class="game-name">
+       <strong><HitText :text="server.name" /></strong>
+       <small><HitText :text="serverSubtitle(server)" /></small>
+diff --git a/app/components/ServerTile.vue b/app/components/ServerTile.vue
+index 0574c45..9b9a99e 100644
+--- a/app/components/ServerTile.vue
++++ b/app/components/ServerTile.vue
+@@ -23,7 +23,7 @@ const { to, remember } = useServerLink(() => props.server, () => props.origin)
+ <template>
+   <NuxtLink class="server-tile" :to="to" @click="remember">
+     <span class="server-tile-top">
+-      <span class="game-logo">{{ serverBadge(server) }}</span>
++      <span class="game-logo" :data-game="server.game">{{ serverBadge(server) }}</span>
+       <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+       <span v-else-if="end === 'date'" class="server-tile-date">
+         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>

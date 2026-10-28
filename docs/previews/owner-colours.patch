@@ -1,0 +1,257 @@
+diff --git a/app/assets/css/main.css b/app/assets/css/main.css
+index 5922521..0f3744e 100644
+--- a/app/assets/css/main.css
++++ b/app/assets/css/main.css
+@@ -1629,6 +1629,48 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
+   box-shadow: inset 0 0 0 1px #fff;
+ }
+ 
++/* An owner's own colours (data/looks): the badge's ground and frame, and
++   the card's — a row in a list, a card in a carousel — tint and frame. The
++   text keeps its own colours; only grounds and frames change. */
++.game-logo.look-badge {
++  background: linear-gradient(135deg, color-mix(in srgb, var(--look-badge) 42%, #171b27), color-mix(in srgb, var(--look-badge) 16%, #0d1018));
++  color: color-mix(in srgb, var(--look-badge) 25%, #fff);
++}
++.game-logo.look-badge-border {
++  border-color: var(--look-badge-border);
++  box-shadow: 0 0 12px color-mix(in srgb, var(--look-badge-border) 35%, transparent);
++}
++.game-row.look-card,
++.game-row.look-card:nth-of-type(even) {
++  background: linear-gradient(90deg, color-mix(in srgb, var(--look-card) 24%, transparent), color-mix(in srgb, var(--look-card) 8%, transparent));
++}
++.game-row.look-card:hover {
++  background: linear-gradient(90deg, color-mix(in srgb, var(--look-card) 32%, transparent), color-mix(in srgb, var(--look-card) 14%, transparent));
++}
++.game-row.look-card-border { box-shadow: inset 0 0 0 1px var(--look-card-border); }
++.server-tile.look-card {
++  background: linear-gradient(160deg, color-mix(in srgb, var(--look-card) 28%, transparent), color-mix(in srgb, var(--look-card) 6%, transparent));
++}
++.server-tile.look-card-border,
++.server-tile.look-card-border:hover { border-color: var(--look-card-border); }
++
++.theme-light .game-logo.look-badge {
++  background: linear-gradient(135deg, color-mix(in srgb, var(--look-badge) 18%, #fff), color-mix(in srgb, var(--look-badge) 32%, #fff));
++  color: color-mix(in srgb, var(--look-badge) 40%, #10121f);
++}
++.theme-light .game-logo.look-badge-border { border-color: color-mix(in srgb, var(--look-badge-border) 85%, #000); }
++.theme-light .game-row.look-card,
++.theme-light .game-row.look-card:nth-of-type(even) {
++  background: linear-gradient(90deg, color-mix(in srgb, var(--look-card) 26%, #fff), color-mix(in srgb, var(--look-card) 10%, #fff));
++}
++.theme-light .game-row.look-card:hover {
++  background: linear-gradient(90deg, color-mix(in srgb, var(--look-card) 34%, #fff), color-mix(in srgb, var(--look-card) 16%, #fff));
++}
++.theme-light .game-row.look-card-border { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--look-card-border) 85%, #000); }
++.theme-light .server-tile.look-card {
++  background: linear-gradient(160deg, color-mix(in srgb, var(--look-card) 26%, #fff), color-mix(in srgb, var(--look-card) 8%, #fff));
++}
++
+ .game-name {
+   min-width: 0;
+   display: flex;
+diff --git a/app/components/ServerDetail.vue b/app/components/ServerDetail.vue
+index cdf3d20..2d25da9 100644
+--- a/app/components/ServerDetail.vue
++++ b/app/components/ServerDetail.vue
+@@ -4,6 +4,7 @@ import type { Server } from '~/data/servers'
+ import { bcp47 } from '~/i18n/locales'
+ import type { SectionId } from '~/data/sections'
+ import { chronicleLanding, rateLanding } from '~/data/landing'
++import { lookStyle } from '~/data/looks'
+ 
+ /**
+  * One server's own page: what it is, when it opens, how it stands, and the
+@@ -37,6 +38,7 @@ const { locale } = useI18n()
+ const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
+ 
+ const opened = computed(() => props.server.openDate <= props.today)
++const look = computed(() => lookStyle(props.server.look))
+ 
+ // The chronicle and the rate lead to their own pages — every server on
+ // /lineage2/interlude/ or /lineage2/x50/ — which is also how a crawler finds
+@@ -102,7 +104,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
+ <template>
+   <article class="panel server-card" :class="opened ? 'accent-amber' : 'accent-blue'">
+     <header class="server-head">
+-      <span class="game-logo server-logo">{{ serverBadge(server) }}</span>
++      <span class="game-logo server-logo" :class="look.badge" :style="look.style">{{ serverBadge(server) }}</span>
+       <div class="server-title">
+         <h1>{{ server.name }}</h1>
+         <p>{{ serverSubtitle(server) }}</p>
+diff --git a/app/components/ServerRow.vue b/app/components/ServerRow.vue
+index c1dfea6..9a3ac28 100644
+--- a/app/components/ServerRow.vue
++++ b/app/components/ServerRow.vue
+@@ -2,6 +2,7 @@
+ import { chronicleShort } from '~/data/games'
+ import type { Server } from '~/data/servers'
+ import type { SectionId } from '~/data/sections'
++import { lookStyle } from '~/data/looks'
+ 
+ /**
+  * One server, as it appears in every list on the site.
+@@ -27,6 +28,9 @@ const props = defineProps<{
+ const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+ const { to, remember } = useServerLink(() => props.server, () => props.origin)
+ 
++// The owner's own colours, if they chose any.
++const look = computed(() => lookStyle(props.server.look))
++
+ const rowClass = computed(() => ({
+   'no-rank': props.end !== 'votes',
+   compact: props.end === 'date',
+@@ -35,9 +39,9 @@ const rowClass = computed(() => ({
+ </script>
+ 
+ <template>
+-  <NuxtLink class="game-row" :class="rowClass" :to="to" @click="remember">
++  <NuxtLink class="game-row" :class="[rowClass, look.card]" :style="look.style" :to="to" @click="remember">
+     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+-    <span class="game-logo">{{ serverBadge(server) }}</span>
++    <span class="game-logo" :class="look.badge">{{ serverBadge(server) }}</span>
+     <span class="game-name">
+       <strong><HitText :text="server.name" /></strong>
+       <small><HitText :text="serverSubtitle(server)" /></small>
+diff --git a/app/components/ServerTile.vue b/app/components/ServerTile.vue
+index 0574c45..7df951b 100644
+--- a/app/components/ServerTile.vue
++++ b/app/components/ServerTile.vue
+@@ -2,6 +2,7 @@
+ import { chronicleShort } from '~/data/games'
+ import type { Server } from '~/data/servers'
+ import type { SectionId } from '~/data/sections'
++import { lookStyle } from '~/data/looks'
+ 
+ /**
+  * One server as a card, for a panel shown as a carousel. The same facts as
+@@ -18,12 +19,13 @@ const props = defineProps<{
+ 
+ const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+ const { to, remember } = useServerLink(() => props.server, () => props.origin)
++const look = computed(() => lookStyle(props.server.look))
+ </script>
+ 
+ <template>
+-  <NuxtLink class="server-tile" :to="to" @click="remember">
++  <NuxtLink class="server-tile" :class="look.card" :style="look.style" :to="to" @click="remember">
+     <span class="server-tile-top">
+-      <span class="game-logo">{{ serverBadge(server) }}</span>
++      <span class="game-logo" :class="look.badge">{{ serverBadge(server) }}</span>
+       <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+       <span v-else-if="end === 'date'" class="server-tile-date">
+         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>
+diff --git a/app/data/looks.ts b/app/data/looks.ts
+new file mode 100644
+index 0000000..951bf71
+--- /dev/null
++++ b/app/data/looks.ts
+@@ -0,0 +1,42 @@
++/**
++ * The colours a server's owner may pick for the server's own badge and card
++ * (its row in a list, its card in a carousel). A fixed palette rather than
++ * any colour: each is bright enough to read on the dark theme and is mixed
++ * down to a tint for the light one, so text over it always stays readable.
++ */
++export const SWATCHES = {
++  gold: '#e8b04b',
++  orange: '#ff8b3d',
++  red: '#ff5c6c',
++  pink: '#ff70c0',
++  violet: '#a98bff',
++  blue: '#4aa8ff',
++  teal: '#2fd4c4',
++  green: '#3ed688',
++  lime: '#b5e04a',
++  silver: '#c9cfdf'
++} as const
++export type Swatch = keyof typeof SWATCHES
++
++/** What the owner chose; anything left out keeps the site's own look. */
++export interface ServerLook {
++  badge?: Swatch
++  badgeBorder?: Swatch
++  card?: Swatch
++  cardBorder?: Swatch
++}
++
++/** The look as CSS custom properties and the classes that use them. */
++export function lookStyle(look: ServerLook | undefined) {
++  if (!look) return { style: undefined, badge: undefined, card: undefined }
++  const style: Record<string, string> = {}
++  if (look.badge) style['--look-badge'] = SWATCHES[look.badge]
++  if (look.badgeBorder) style['--look-badge-border'] = SWATCHES[look.badgeBorder]
++  if (look.card) style['--look-card'] = SWATCHES[look.card]
++  if (look.cardBorder) style['--look-card-border'] = SWATCHES[look.cardBorder]
++  return {
++    style,
++    badge: { 'look-badge': !!look.badge, 'look-badge-border': !!look.badgeBorder },
++    card: { 'look-card': !!look.card, 'look-card-border': !!look.cardBorder }
++  }
++}
+diff --git a/app/data/servers.ts b/app/data/servers.ts
+index 7a974d8..6bd5e33 100644
+--- a/app/data/servers.ts
++++ b/app/data/servers.ts
+@@ -1,4 +1,5 @@
+ import type { GameId } from './games'
++import type { ServerLook } from './looks'
+ 
+ /**
+  * One listed server.
+@@ -27,6 +28,8 @@ export interface Server {
+   listedAt: string
+   /** Votes this calendar month; they reset on the 1st. Drives TOP GAMES. */
+   votes: number
++  /** Colours the owner picked for the badge and the card; see looks.ts. */
++  look?: ServerLook
+ }
+ 
+ /**
+@@ -37,7 +40,7 @@ export interface Server {
+  */
+ export const SERVERS: Server[] = [
+   // Lineage II
+-  { id: 'la2dream', name: 'LA2DREAM', game: 'lineage2', chronicle: 'Interlude', rate: 500, url: 'https://la2dream.example', openDate: '2025-11-20', listedAt: '2025-11-01', votes: 2480 },
++  { id: 'la2dream', name: 'LA2DREAM', game: 'lineage2', chronicle: 'Interlude', rate: 500, url: 'https://la2dream.example', openDate: '2025-11-20', listedAt: '2025-11-01', votes: 2480, look: { badge: 'gold', badgeBorder: 'gold', card: 'gold', cardBorder: 'gold' } },
+   { id: 'nordveil', name: 'NORDVEIL', game: 'lineage2', chronicle: 'High-Five', rate: 50, url: 'https://nordveil.example', openDate: '2026-10-05', listedAt: '2026-09-18', votes: 310 },
+   { id: 'ironhale', name: 'IRONHALE', game: 'lineage2', chronicle: 'Interlude', rate: 1200, url: 'https://ironhale.example', openDate: '2026-09-01', listedAt: '2026-08-14', votes: 1940 },
+   { id: 'emberline', name: 'EMBERLINE', game: 'lineage2', chronicle: 'Classic', rate: 1, url: 'https://emberline.example', openDate: '2024-12-23', listedAt: '2024-12-01', votes: 2150 },
+@@ -52,9 +55,9 @@ export const SERVERS: Server[] = [
+   // World of Warcraft
+   { id: 'coldharbor', name: 'COLDHARBOR', game: 'wow', chronicle: 'WotLK 3.3.5a', rate: 5, url: 'https://coldharbor.example', openDate: '2021-03-08', listedAt: '2021-03-01', votes: 2950 },
+   { id: 'hollowpeak', name: 'HOLLOWPEAK', game: 'wow', chronicle: 'Classic 1.12.1', rate: 1, url: 'https://hollowpeak.example', openDate: '2026-11-20', listedAt: '2026-09-08', votes: 540 },
+-  { id: 'runegate', name: 'RUNEGATE', game: 'wow', chronicle: 'Cataclysm 4.3.4', rate: 3, url: 'https://runegate.example', openDate: '2025-07-08', listedAt: '2025-06-20', votes: 1270 },
++  { id: 'runegate', name: 'RUNEGATE', game: 'wow', chronicle: 'Cataclysm 4.3.4', rate: 3, url: 'https://runegate.example', openDate: '2025-07-08', listedAt: '2025-06-20', votes: 1270, look: { badge: 'pink', badgeBorder: 'pink', card: 'pink', cardBorder: 'pink' } },
+   { id: 'stormglen', name: 'STORMGLEN', game: 'wow', chronicle: 'MoP 5.4.8', rate: 10, url: 'https://stormglen.example', openDate: '2026-02-05', listedAt: '2026-01-18', votes: 990 },
+-  { id: 'wyrmfall', name: 'WYRMFALL', game: 'wow', chronicle: 'Legion 7.3.5', rate: 100, url: 'https://wyrmfall.example', openDate: '2026-12-01', listedAt: '2026-09-05', votes: 260 },
++  { id: 'wyrmfall', name: 'WYRMFALL', game: 'wow', chronicle: 'Legion 7.3.5', rate: 100, url: 'https://wyrmfall.example', openDate: '2026-12-01', listedAt: '2026-09-05', votes: 260, look: { badge: 'blue', badgeBorder: 'violet', card: 'violet', cardBorder: 'blue' } },
+ 
+   // MuOnline
+   { id: 'crimsonvale', name: 'CRIMSONVALE', game: 'mu', chronicle: 'Season 6', rate: 1000, url: 'https://crimsonvale.example', openDate: '2026-09-20', listedAt: '2026-09-22', votes: 690 },
+@@ -63,7 +66,7 @@ export const SERVERS: Server[] = [
+   { id: 'nightveil', name: 'NIGHTVEIL', game: 'mu', chronicle: 'Season 13', rate: 200, url: 'https://nightveil.example', openDate: '2026-07-22', listedAt: '2026-07-01', votes: 830 },
+ 
+   // AION
+-  { id: 'skyhaven', name: 'SKYHAVEN', game: 'aion', chronicle: '4.8', rate: 10, url: 'https://skyhaven.example', openDate: '2025-03-15', listedAt: '2025-03-01', votes: 1480 },
++  { id: 'skyhaven', name: 'SKYHAVEN', game: 'aion', chronicle: '4.8', rate: 10, url: 'https://skyhaven.example', openDate: '2025-03-15', listedAt: '2025-03-01', votes: 1480, look: { badge: 'teal', badgeBorder: 'teal' } },
+   { id: 'elyria', name: 'ELYRIA', game: 'aion', chronicle: '5.8', rate: 5, url: 'https://elyria.example', openDate: '2026-12-28', listedAt: '2026-09-03', votes: 120 },
+   { id: 'abyssgate', name: 'ABYSSGATE', game: 'aion', chronicle: '2.7', rate: 1, url: 'https://abyssgate.example', openDate: '2024-06-01', listedAt: '2024-05-10', votes: 640 },
+   { id: 'wingsong', name: 'WINGSONG', game: 'aion', chronicle: '4.8', rate: 3, url: 'https://wingsong.example', openDate: '2026-09-10', listedAt: '2026-08-28', votes: 470 },
+@@ -80,12 +83,12 @@ export const SERVERS: Server[] = [
+ 
+   // Silkroad Online
+   { id: 'jaderoad', name: 'JADEROAD', game: 'sro', chronicle: 'Cap 110', rate: 30, url: 'https://jaderoad.example', openDate: '2026-03-03', listedAt: '2026-02-12', votes: 610 },
+-  { id: 'silkwind', name: 'SILKWIND', game: 'sro', chronicle: 'Cap 90', rate: 10, url: 'https://silkwind.example', openDate: '2026-10-25', listedAt: '2026-09-27', votes: 60 },
++  { id: 'silkwind', name: 'SILKWIND', game: 'sro', chronicle: 'Cap 90', rate: 10, url: 'https://silkwind.example', openDate: '2026-10-25', listedAt: '2026-09-27', votes: 60, look: { badge: 'green', badgeBorder: 'green', cardBorder: 'green' } },
+   { id: 'dunegate', name: 'DUNEGATE', game: 'sro', chronicle: 'Cap 140', rate: 50, url: 'https://dunegate.example', openDate: '2024-02-20', listedAt: '2024-02-01', votes: 820 },
+ 
+   // Metin2
+-  { id: 'redshrine', name: 'REDSHRINE', game: 'metin2', chronicle: 'Old School', rate: 1, url: 'https://redshrine.example', openDate: '2025-01-12', listedAt: '2024-12-20', votes: 1720 },
+-  { id: 'tigerfang', name: 'TIGERFANG', game: 'metin2', chronicle: 'Middle School', rate: 15, url: 'https://tigerfang.example', openDate: '2026-11-14', listedAt: '2026-09-14', votes: 230 },
++  { id: 'redshrine', name: 'REDSHRINE', game: 'metin2', chronicle: 'Old School', rate: 1, url: 'https://redshrine.example', openDate: '2025-01-12', listedAt: '2024-12-20', votes: 1720, look: { badge: 'red', badgeBorder: 'red', card: 'red' } },
++  { id: 'tigerfang', name: 'TIGERFANG', game: 'metin2', chronicle: 'Middle School', rate: 15, url: 'https://tigerfang.example', openDate: '2026-11-14', listedAt: '2026-09-14', votes: 230, look: { badge: 'orange', badgeBorder: 'orange', card: 'orange', cardBorder: 'orange' } },
+   { id: 'mistpeak', name: 'MISTPEAK', game: 'metin2', chronicle: 'New School', rate: 100, url: 'https://mistpeak.example', openDate: '2026-09-25', listedAt: '2026-09-24', votes: 340 },
+ 
+   // Rappelz
