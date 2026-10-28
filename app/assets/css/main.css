@@ -1310,11 +1310,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--panel-glow, #ffffff) 20%, transparent), transparent 45%),
     linear-gradient(180deg, rgba(17, 22, 48, .62), rgba(13, 18, 41, .58));
-  /* Prefixed first, standard last — everywhere in this file. The other way
-     round, the build's minifier kept only the prefixed line, so the published
-     site had no blur at all in Chrome or Firefox, only in Safari. */
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
   box-shadow: 0 14px 45px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.02);
 }
 
@@ -1323,8 +1318,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--panel-glow, #ffffff) 28%, transparent), transparent 45%),
     rgba(255, 255, 255, .55);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
   box-shadow: 0 14px 38px rgba(31, 41, 102, .07), inset 0 1px 0 #fff;
 }
 
@@ -1498,8 +1491,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   padding: 0 17px;
   border-bottom: 1px solid rgba(89, 94, 143, .13);
   background: rgba(255, 255, 255, .025);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
   transition: background .18s ease;
 }
 
@@ -1570,8 +1561,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .game-row {
   border-bottom-color: rgba(103, 104, 173, .1);
   background: rgba(255, 255, 255, .35);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
 
 .theme-light .game-row:nth-of-type(even) {
@@ -2768,8 +2757,6 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .game-row:nth-of-type(even) {
   background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
   transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 .game-row:first-of-type { margin-top: 10px; }
@@ -2803,8 +2790,6 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   border-color: rgba(255, 255, 255, .13);
   background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
 }
 .server-tile:hover {
   border-color: rgba(255, 255, 255, .24);
@@ -2830,21 +2815,20 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
    language and login buttons (their violet frames kept), the game tabs'
    bar, and the filter, language and More popups. The bar holds the More
    popup, which is position: fixed — a backdrop-filter there would make the
-   bar its containing block and pull the popup inside it — so the bar gets
-   the glass's colours without the blur. */
+   bar its containing block and pull the popup inside it. Only the popups
+   blur what is behind them: they lie over the lists, where it shows. On
+   the cards and fields it showed nothing — a flat panel blurred is the same
+   flat panel — and dozens of blurred cards halved the frame rate of a
+   scroll on a slow phone. */
 .search-box input {
   border-color: rgba(255, 255, 255, .13);
   background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02)), rgba(14, 17, 38, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
 }
 .lang-button,
 .login-button {
   background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02)), rgba(20, 23, 50, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(0, 0, 0, .28);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
 }
 .category-bar {
   border: 1px solid rgba(255, 255, 255, .11);
