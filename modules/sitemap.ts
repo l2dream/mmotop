@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from '../app/i18n/locales'
 import { SECTIONS } from '../app/data/sections'
 import { SERVERS } from '../app/data/servers'
 import { GAMES } from '../app/data/games'
-import { LANDINGS } from '../app/data/landing'
+import { LANDINGS, indexable } from '../app/data/landing'
 
 /**
  * Writes sitemap.xml and appends its address to robots.txt after the static
@@ -74,8 +74,9 @@ export default defineNuxtModule({
         // Every entry carries the full alternate set, which is what makes the
         // cluster reciprocal — the half of hreflang that is easy to get wrong.
         // One cluster per page: the home page, each game, each section, each
-        // game's chronicle and rate pages, each server.
-        const landings = new Set(LANDINGS.map(l => `${l.game}/${l.slug}`))
+        // game's chronicle and rate pages with servers enough to be worth one
+        // (see indexable), each server.
+        const landings = new Set(LANDINGS.filter(indexable).map(l => `${l.game}/${l.slug}`))
         const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...landings, ...SERVERS.map(s => `${s.game}/${s.id}`)]
         // The build date: every page is rebuilt from the same data on each
         // deploy, so this is when all of them last changed.

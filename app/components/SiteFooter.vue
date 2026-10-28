@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { GAMES } from '~/data/games'
-import { SERVERS } from '~/data/servers'
-import { LANDINGS } from '~/data/landing'
+import { LANDINGS, indexable, landingCount } from '~/data/landing'
 
 /**
  * The foot of every page, kept to one quiet line: the chronicle and rate
@@ -21,13 +20,11 @@ defineProps<{ year: number }>()
 const localePath = useLocalePath()
 
 const POPULAR = 8
-const count = (game: string, test: (s: (typeof SERVERS)[number]) => boolean) =>
-  SERVERS.filter((s) => s.game === game && test(s)).length
+// Only pages search engines are offered (see indexable): the footer is
+// there for them as much as for visitors.
 const popular = computed(() => LANDINGS
-  .map((l) => ({
-    l,
-    n: l.chronicle ? count(l.game, (s) => s.chronicle === l.chronicle) : count(l.game, (s) => s.rate === l.rate)
-  }))
+  .filter(indexable)
+  .map((l) => ({ l, n: landingCount(l) }))
   // Most servers first; among equals chronicles before rates, then the games
   // in their own order — a sort is stable, and LANDINGS is in that order.
   .sort((a, b) => b.n - a.n || Number(!!b.l.chronicle) - Number(!!a.l.chronicle))
