@@ -40,6 +40,22 @@ export const LANDINGS: Landing[] = GAMES.flatMap((g) => {
   return [...chronicles, ...rates]
 })
 
+/** How many servers a chronicle's or a rate's page lists. */
+export function landingCount(l: Landing) {
+  return SERVERS.filter((s) => s.game === l.game && (l.chronicle ? s.chronicle === l.chronicle : s.rate === l.rate)).length
+}
+
+/**
+ * A page for one server only repeats that server's own page — the same row
+ * in four panels and "no matching games" in the fifth — and search engines
+ * filed such pages as soft 404s or left them unindexed. So a chronicle's or
+ * a rate's page is offered to them (indexed, in the sitemap, in the footer)
+ * only from this many servers up. It stays on the site, and linked from its
+ * servers, for visitors; it is offered by itself once it has the servers.
+ */
+export const LANDING_MIN_SERVERS = 2
+export const indexable = (l: Landing) => landingCount(l) >= LANDING_MIN_SERVERS
+
 const BY_PATH = new Map(LANDINGS.map((l) => [`${l.game}/${l.slug}`, l]))
 
 /** The landing page at /<game>/<slug>/, if there is one. */

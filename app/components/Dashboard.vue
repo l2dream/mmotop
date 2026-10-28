@@ -5,7 +5,7 @@ import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
 import { REC_DATES, REC_RULES, type RecRule } from '~/data/recommendations'
 import { parseSort, sortParam, sortServers, type SortKey } from '~/data/sorting'
-import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug } from '~/data/landing'
+import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug, landingAt, indexable } from '~/data/landing'
 
 /**
  * The whole site: the home page with its five panels — for every game, or,
@@ -890,6 +890,28 @@ const serverOthers = computed(() => {
     end: fromOrigin ? ROW_END[origin!] : 'chronicle' as const,
     more: ordered.length > picked.length
   }
+})
+
+/**
+ * Pages kept out of search results while still on the site:
+ *
+ * - a list narrowed by the address — /started/?game=metin2&min=10 — which
+ *   may well be empty ("no games match the filters"), and is only the plain
+ *   list filtered anyway; search engines found hundreds of these through the
+ *   links that carry the filters, and filed the empty ones as soft 404s;
+ * - a chronicle's or a rate's page with too few servers (see indexable).
+ *
+ * The query is read in the browser, after the page is up, so this is added
+ * then — which is when a search engine that runs the page reads it too.
+ */
+const FILTER_KEYS = ['game', 'version', 'rate', 'min', 'max', 'q', 'sort']
+const filteredList = computed(() => !server.value && FILTER_KEYS.some((k) => firstParam(route.query[k])))
+const thinLanding = !!props.game && !!landingName && (() => {
+  const l = landingAt(props.game, route.params.id)
+  return !!l && !indexable(l)
+})()
+useHead({
+  meta: () => (filteredList.value || thinLanding ? [{ name: 'robots', content: 'noindex, follow' }] : [])
 })
 
 useSeoMeta({
