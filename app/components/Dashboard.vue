@@ -1582,13 +1582,8 @@ function clearSearch() {
       </div>
     </main>
 
-    <!-- Deliberately bare for now: just the copyright, until the rest of the
-         site exists to link to. The year follows the same build-year-then-browser rule as the date
-         labels, so the prerendered page is already right. -->
     <ScrollTop />
 
-    <footer class="site-footer">
-      <span class="site-footer-copy" dir="ltr">© {{ currentYear }} MMOTOP</span>
-    </footer>
+    <SiteFooter :year="currentYear" />
   </div>
 </template>

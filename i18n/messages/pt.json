@@ -130,5 +130,16 @@
     "random": "Aleatório",
     "asc": "crescente",
     "desc": "decrescente"
+  },
+  "footer": {
+    "label": "Ligações do site",
+    "games": "Jogos",
+    "lists": "Listas",
+    "popular": "Populares",
+    "top": "Melhores servidores",
+    "soon": "Abrem em breve",
+    "started": "Já iniciados",
+    "new": "Servidores novos",
+    "all": "Todos os servidores"
   }
 }

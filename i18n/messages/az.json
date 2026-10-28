@@ -130,5 +130,16 @@
     "random": "Təsadüfi",
     "asc": "artan",
     "desc": "azalan"
+  },
+  "footer": {
+    "label": "Sayt keçidləri",
+    "games": "Oyunlar",
+    "lists": "Siyahılar",
+    "popular": "Populyar",
+    "top": "Ən yaxşı serverlər",
+    "soon": "Tezliklə açılır",
+    "started": "Artıq açılıb",
+    "new": "Yeni serverlər",
+    "all": "Bütün serverlər"
   }
 }
