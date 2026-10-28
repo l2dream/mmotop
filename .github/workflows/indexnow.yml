@@ -1,0 +1,26 @@
+name: Notify search engines (IndexNow)
+
+# Once a day, after any deploy that day: see scripts/indexnow.mjs. Can also be
+# run by hand from the Actions tab, which sends the sitemap regardless.
+on:
+  schedule:
+    - cron: "37 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send changed pages
+        run: node scripts/indexnow.mjs ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}

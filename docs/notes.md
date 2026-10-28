@@ -24,6 +24,11 @@
   и обработана (Success, тогда 1222 адреса); 28 октября переотправлена (1638 адресов).
   Владелец переотправляет её
   (Sitemaps → ⋯ → Resubmit), когда карта сильно меняется.
+- **IndexNow** — сайт сам сообщает поисковикам (Bing, Яндекс, Seznam,
+  Naver…) об обновлениях: `.github/workflows/indexnow.yml` раз в день, если
+  был деплой, отправляет все адреса карты сайта (`scripts/indexnow.mjs`).
+  Ключ публичный, лежит в `public/<ключ>.txt`. Запуск вручную — Actions →
+  «Notify search engines (IndexNow)» → Run workflow.
 - **Хостинг** — GitHub Pages, деплой из `main` (`.github/workflows/deploy.yml`).
   DNS у GoDaddy (`domaincontrol.com`).
 
