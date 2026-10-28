@@ -130,5 +130,16 @@
     "random": "Random",
     "asc": "ascending",
     "desc": "descending"
+  },
+  "footer": {
+    "label": "Site links",
+    "games": "Games",
+    "lists": "Lists",
+    "popular": "Popular",
+    "top": "Top servers",
+    "soon": "Opening soon",
+    "started": "Already started",
+    "new": "New servers",
+    "all": "All servers"
   }
 }

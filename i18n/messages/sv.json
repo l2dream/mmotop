@@ -130,5 +130,16 @@
     "random": "Slumpvis",
     "asc": "stigande",
     "desc": "fallande"
+  },
+  "footer": {
+    "label": "Webbplatslänkar",
+    "games": "Spel",
+    "lists": "Listor",
+    "popular": "Populärt",
+    "top": "Toppservrar",
+    "soon": "Öppnar snart",
+    "started": "Redan startade",
+    "new": "Nya servrar",
+    "all": "Alla servrar"
   }
 }

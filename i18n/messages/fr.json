@@ -130,5 +130,16 @@
     "random": "Au hasard",
     "asc": "croissant",
     "desc": "décroissant"
+  },
+  "footer": {
+    "label": "Liens du site",
+    "games": "Jeux",
+    "lists": "Listes",
+    "popular": "Populaire",
+    "top": "Meilleurs serveurs",
+    "soon": "Ouverture prochaine",
+    "started": "Déjà lancés",
+    "new": "Nouveaux serveurs",
+    "all": "Tous les serveurs"
   }
 }

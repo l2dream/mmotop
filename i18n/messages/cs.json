@@ -130,5 +130,16 @@
     "random": "Náhodně",
     "asc": "vzestupně",
     "desc": "sestupně"
+  },
+  "footer": {
+    "label": "Odkazy webu",
+    "games": "Hry",
+    "lists": "Seznamy",
+    "popular": "Oblíbené",
+    "top": "Nejlepší servery",
+    "soon": "Brzy spuštění",
+    "started": "Již spuštěné",
+    "new": "Nové servery",
+    "all": "Všechny servery"
   }
 }
