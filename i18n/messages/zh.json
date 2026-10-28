@@ -88,7 +88,14 @@
     "listed": "收录于 MMOTOP",
     "visit": "访问官网",
     "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。",
-    "recommended": "推荐"
+    "recommended": "推荐",
+    "about": {
+      "rate": "{name} 是一个 {game} 服务器，版本为 {chronicle}，倍率 {rate}。",
+      "noRate": "{name} 是一个 {game} 服务器，版本为 {chronicle}。",
+      "opened": "已于 {date} 开服。",
+      "opens": "将于 {date} 开服。",
+      "votes": "本月票数：{votes}，MMOTOP 排名第 {rank}。"
+    }
   },
   "seo": {
     "top": {

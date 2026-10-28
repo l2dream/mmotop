@@ -88,7 +88,14 @@
     "listed": "MMOTOP 등록일",
     "visit": "웹사이트 방문",
     "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요.",
-    "recommended": "추천"
+    "recommended": "추천",
+    "about": {
+      "rate": "{name}은(는) {chronicle} 버전, {rate} 레이트의 {game} 서버입니다.",
+      "noRate": "{name}은(는) {chronicle} 버전의 {game} 서버입니다.",
+      "opened": "{date}에 오픈했습니다.",
+      "opens": "{date}에 오픈 예정입니다.",
+      "votes": "이번 달 투표: {votes}, MMOTOP 랭킹 {rank}위."
+    }
   },
   "seo": {
     "top": {

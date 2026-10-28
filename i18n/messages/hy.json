@@ -88,7 +88,14 @@
     "listed": "MMOTOP-ում՝ սկսած",
     "visit": "Այցելել կայք",
     "description": "{name}՝ {game} սերվեր ({chronicle})։ Rate-եր, բացման ամսաթիվ և ձայներ MMOTOP-ում։",
-    "recommended": "ԱՌԱՋԱՐԿՆԵՐ"
+    "recommended": "ԱՌԱՋԱՐԿՆԵՐ",
+    "about": {
+      "rate": "{name}-ը {game} սերվեր է {chronicle} տարբերակով և {rate} ռեյթերով։",
+      "noRate": "{name}-ը {game} սերվեր է {chronicle} տարբերակով։",
+      "opened": "Բացվել է՝ {date}։",
+      "opens": "Բացումը՝ {date}։",
+      "votes": "Այս ամսվա ձայներ՝ {votes}, MMOTOP վարկանիշում № {rank}։"
+    }
   },
   "seo": {
     "top": {

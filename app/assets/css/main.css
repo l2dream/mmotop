@@ -2125,11 +2125,20 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 
 /* Three across, so the five facts read as two even rows: what the server is
    and when it opens, then how it stands on MMOTOP. */
+.server-about {
+  margin: 16px 0 0;
+  max-width: 68ch;
+  color: #c6c9d9;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.theme-light .server-about { color: #3a3e55; }
+
 .server-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin: 22px 0 0;
+  margin: 18px 0 0;
 }
 .server-facts > div {
   padding: 12px 14px;

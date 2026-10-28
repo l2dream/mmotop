@@ -88,7 +88,14 @@
     "listed": "على MMOTOP منذ",
     "visit": "زيارة الموقع",
     "description": "{name}: خادم {game} ({chronicle}). المعدلات وتاريخ الافتتاح والأصوات على MMOTOP.",
-    "recommended": "مقترحات"
+    "recommended": "مقترحات",
+    "about": {
+      "rate": "{name} خادم {game} بإصدار {chronicle} ومعدلات {rate}.",
+      "noRate": "{name} خادم {game} بإصدار {chronicle}.",
+      "opened": "افتُتح في {date}.",
+      "opens": "يُفتتح في {date}.",
+      "votes": "أصوات هذا الشهر: {votes}، المركز {rank} في تصنيف MMOTOP."
+    }
   },
   "seo": {
     "top": {

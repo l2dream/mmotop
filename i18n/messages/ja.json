@@ -88,7 +88,14 @@
     "listed": "MMOTOP掲載日",
     "visit": "公式サイトへ",
     "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。",
-    "recommended": "おすすめ"
+    "recommended": "おすすめ",
+    "about": {
+      "rate": "{name}は{chronicle}・レート{rate}の{game}サーバーです。",
+      "noRate": "{name}は{chronicle}の{game}サーバーです。",
+      "opened": "{date}にオープンしました。",
+      "opens": "{date}にオープン予定です。",
+      "votes": "今月の投票数：{votes}、MMOTOPランキング{rank}位。"
+    }
   },
   "seo": {
     "top": {

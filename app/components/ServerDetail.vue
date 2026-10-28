@@ -33,10 +33,31 @@ const props = defineProps<{
 }>()
 defineEmits<{ shuffle: [], more: [] }>()
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
+
+/**
+ * The server in a few plain sentences, under its name: what it is, when it
+ * opens, how it stands. The same facts as the boxes below, but as text — a
+ * page of figures and labels alone read to search engines as next to empty,
+ * and they set several server pages aside as soft 404s. Owners will be able
+ * to add their own description later; this one is always there.
+ */
+/** Scripts that run sentences together, with no space after the full stop. */
+const NO_SPACES = new Set(['ja', 'zh'])
+const about = computed(() => {
+  const s = props.server
+  const kind = { name: s.name, game: serverSubtitle(s), chronicle: s.chronicle, rate: rateLabel(s) }
+  return [
+    t(s.rate == null ? 'server.about.noRate' : 'server.about.rate', kind),
+    // Some dates end in a full stop of their own ("20 ноября 2025 г.",
+    // "2025 m. sausio 12 d."), which the sentence's would double.
+    t(opened.value ? 'server.about.opened' : 'server.about.opens', { date: fullDate(s.openDate) }).replace(/\.\.$/, '.'),
+    t('server.about.votes', { votes: s.votes, rank: props.rank })
+  ].join(NO_SPACES.has(locale.value) ? '' : ' ')
+})
 
 // The chronicle and the rate lead to their own pages — every server on
 // /lineage2/interlude/ or /lineage2/x50/ — which is also how a crawler finds
@@ -111,6 +132,8 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
         {{ $t(opened ? 'panels.started' : 'panels.soon') }}
       </span>
     </header>
+
+    <p class="server-about">{{ about }}</p>
 
     <dl class="server-facts">
       <div>

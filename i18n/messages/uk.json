@@ -88,7 +88,14 @@
     "listed": "На MMOTOP з",
     "visit": "Перейти на сайт",
     "description": "{name} — сервер {game} ({chronicle}). Рейти, дата відкриття та голоси на MMOTOP.",
-    "recommended": "РЕКОМЕНДАЦІЇ"
+    "recommended": "РЕКОМЕНДАЦІЇ",
+    "about": {
+      "rate": "{name} — сервер {game} на версії {chronicle} з рейтами {rate}.",
+      "noRate": "{name} — сервер {game} на версії {chronicle}.",
+      "opened": "Відкрився {date}.",
+      "opens": "Відкриття {date}.",
+      "votes": "Голосів за місяць: {votes}, № {rank} у рейтингу MMOTOP."
+    }
   },
   "seo": {
     "top": {

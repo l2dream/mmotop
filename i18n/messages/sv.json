@@ -88,7 +88,14 @@
     "listed": "På MMOTOP sedan",
     "visit": "Besök webbplatsen",
     "description": "{name}: en {game}-server ({chronicle}). Rates, öppningsdatum och röster på MMOTOP.",
-    "recommended": "REKOMMENDATIONER"
+    "recommended": "REKOMMENDATIONER",
+    "about": {
+      "rate": "{name} är en {game}-server med versionen {chronicle} och rates {rate}.",
+      "noRate": "{name} är en {game}-server med versionen {chronicle}.",
+      "opened": "Öppnade {date}.",
+      "opens": "Öppnar {date}.",
+      "votes": "Röster denna månad: {votes}, plats {rank} i MMOTOP-rankingen."
+    }
   },
   "seo": {
     "top": {

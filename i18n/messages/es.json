@@ -88,7 +88,14 @@
     "listed": "En MMOTOP desde",
     "visit": "Visitar el sitio",
     "description": "{name}: servidor de {game} ({chronicle}). Rates, fecha de apertura y votos en MMOTOP.",
-    "recommended": "RECOMENDACIONES"
+    "recommended": "RECOMENDACIONES",
+    "about": {
+      "rate": "{name} es un servidor de {game} con la versión {chronicle} y rates {rate}.",
+      "noRate": "{name} es un servidor de {game} con la versión {chronicle}.",
+      "opened": "Abrió el {date}.",
+      "opens": "Abre el {date}.",
+      "votes": "Votos este mes: {votes}, n.º {rank} del ranking de MMOTOP."
+    }
   },
   "seo": {
     "top": {
