@@ -132,14 +132,6 @@
     "desc": "faldende"
   },
   "footer": {
-    "label": "Links på siden",
-    "games": "Spil",
-    "lists": "Lister",
-    "popular": "Populært",
-    "top": "Topservere",
-    "soon": "Åbner snart",
-    "started": "Allerede startet",
-    "new": "Nye servere",
-    "all": "Alle servere"
+    "popular": "Populært"
   }
 }

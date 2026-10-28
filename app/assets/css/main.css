@@ -1243,73 +1243,45 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .site-footer {
   max-width: 1480px;
-  margin: 40px auto 0;
-  padding: 28px 4px 4px;
-  border-top: 1px solid rgba(104, 105, 161, .2);
-  font-size: 14px;
+  margin: 34px auto 0;
+  padding: 0 0 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
-/* Three columns of links, the games' column the widest; a fourth of the row
-   left to the logo's side in the base below. */
-.footer-cols {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px 32px;
-  max-width: 900px;
-}
-
-.footer-col h2 {
-  margin: 0 0 10px;
-  color: #e4e6f2;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.footer-col ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 2px;
-}
-
-.footer-col a {
-  display: inline-block;
-  padding: 3px 0;
-  color: #b9bdd0;
-  text-decoration: none;
-  transition: color .15s ease;
-}
-
-.footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
-
-.footer-base {
+/* One line of links in the footer's own small type; their underlines
+   part them, with no dots left hanging where the line wraps. */
+.footer-popular {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 28px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(104, 105, 161, .12);
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 14px;
+  color: #b9bdd0;
 }
-
-.brand.footer-logo { font-size: 20px; }
+.footer-popular-label { font-weight: 600; }
+.footer-popular a {
+  color: #b9bdd0;
+  text-decoration: underline;
+  text-decoration-color: rgba(185, 189, 208, .35);
+  text-underline-offset: 3px;
+}
+.footer-popular a:hover { color: #fff; text-decoration-color: currentColor; }
 
 .site-footer-copy {
   color: #b9bdd0;
-  font-size: 13px;
   font-weight: 600;
 }
 
-.theme-light .site-footer { border-top-color: rgba(103, 104, 173, .2); }
-.theme-light .footer-base { border-top-color: rgba(103, 104, 173, .12); }
-.theme-light .footer-col h2 { color: #16182b; }
-.theme-light .footer-col a { color: #464a60; }
-.theme-light .footer-col a:hover { color: #16182b; }
+.theme-light .footer-popular,
+.theme-light .footer-popular a,
 .theme-light .site-footer-copy { color: #464a60; }
+.theme-light .footer-popular a { text-decoration-color: rgba(70, 74, 96, .35); }
+.theme-light .footer-popular a:hover { color: #16182b; }
 
 .top-grid {
   display: grid;
@@ -2437,14 +2409,14 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 }
 
 @media (max-width: 700px) {
-  /* Games and lists side by side, the popular pages under them across the
-     width; the base centred. Links get a taller line to tap. */
-  .site-footer { margin-top: 28px; padding-top: 22px; }
-  .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; }
-  .footer-col:last-child { grid-column: 1 / -1; }
-  .footer-col:last-child ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
-  .footer-col a { padding: 5px 0; }
-  .footer-base { flex-direction: column; gap: 6px; margin-top: 22px; }
+  .site-footer {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+  }
+  .footer-popular { justify-content: center; row-gap: 6px; }
   .site-shell { padding: 12px; }
 
   /* Two columns, not three. At phone width three columns leave about a

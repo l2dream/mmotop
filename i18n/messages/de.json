@@ -132,14 +132,6 @@
     "desc": "absteigend"
   },
   "footer": {
-    "label": "Seitenlinks",
-    "games": "Spiele",
-    "lists": "Listen",
-    "popular": "Beliebt",
-    "top": "Top-Server",
-    "soon": "Bald online",
-    "started": "Bereits gestartet",
-    "new": "Neue Server",
-    "all": "Alle Server"
+    "popular": "Beliebt"
   }
 }

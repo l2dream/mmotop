@@ -132,14 +132,6 @@
     "desc": "azalan"
   },
   "footer": {
-    "label": "Site bağlantıları",
-    "games": "Oyunlar",
-    "lists": "Listeler",
-    "popular": "Popüler",
-    "top": "En iyi sunucular",
-    "soon": "Yakında açılıyor",
-    "started": "Açılmış olanlar",
-    "new": "Yeni sunucular",
-    "all": "Tüm sunucular"
+    "popular": "Popüler"
   }
 }

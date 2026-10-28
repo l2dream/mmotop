@@ -132,14 +132,6 @@
     "desc": "descendente"
   },
   "footer": {
-    "label": "Enlaces del sitio",
-    "games": "Juegos",
-    "lists": "Listas",
-    "popular": "Populares",
-    "top": "Mejores servidores",
-    "soon": "Próximas aperturas",
-    "started": "Ya iniciados",
-    "new": "Servidores nuevos",
-    "all": "Todos los servidores"
+    "popular": "Populares"
   }
 }

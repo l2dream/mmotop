@@ -132,14 +132,6 @@
     "desc": "kahanevalt"
   },
   "footer": {
-    "label": "Saidi lingid",
-    "games": "Mängud",
-    "lists": "Nimekirjad",
-    "popular": "Populaarne",
-    "top": "Parimad serverid",
-    "soon": "Avatakse varsti",
-    "started": "Juba käivitatud",
-    "new": "Uued serverid",
-    "all": "Kõik serverid"
+    "popular": "Populaarne"
   }
 }

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { GAMES } from '~/data/games'
 import { SERVERS } from '~/data/servers'
-import { SECTIONS } from '~/data/sections'
 import { LANDINGS } from '~/data/landing'
 
 /**
- * The foot of every page: the games, the lists, and the chronicle and rate
- * pages with the most servers, each one link away from anywhere on the site
- * — for a visitor who has scrolled to the bottom, and for a crawler, which
- * otherwise reaches the landing pages only through the sitemap.
+ * The foot of every page, kept to one quiet line: the chronicle and rate
+ * pages with the most servers, then the copyright. The games and the lists
+ * are already a click away in the header and the panels; these pages are
+ * not, and a crawler would otherwise reach them only through the sitemap
+ * and the server pages.
  *
  * Paths end in a slash, as the pages are published: without it GitHub Pages
  * answers with a redirect first.
@@ -40,29 +40,10 @@ const popular = computed(() => LANDINGS
 
 <template>
   <footer class="site-footer">
-    <nav class="footer-cols" :aria-label="$t('footer.label')">
-      <div class="footer-col">
-        <h2>{{ $t('footer.games') }}</h2>
-        <ul>
-          <li v-for="g in GAMES" :key="g.id"><NuxtLink :to="localePath(`/${g.id}/`)">{{ g.name }}</NuxtLink></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2>{{ $t('footer.lists') }}</h2>
-        <ul>
-          <li v-for="id in SECTIONS" :key="id"><NuxtLink :to="localePath(`/${id}/`)">{{ $t(`footer.${id}`) }}</NuxtLink></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2>{{ $t('footer.popular') }}</h2>
-        <ul>
-          <li v-for="p in popular" :key="p.to"><NuxtLink :to="p.to">{{ p.label }}</NuxtLink></li>
-        </ul>
-      </div>
+    <nav class="footer-popular" :aria-label="$t('footer.popular')">
+      <span class="footer-popular-label">{{ $t('footer.popular') }}:</span>
+      <NuxtLink v-for="p in popular" :key="p.to" :to="p.to">{{ p.label }}</NuxtLink>
     </nav>
-    <div class="footer-base">
-      <NuxtLink class="brand footer-logo" :to="localePath('/')" :aria-label="$t('nav.home')">MMOTOP</NuxtLink>
-      <span class="site-footer-copy" dir="ltr">© {{ year }} MMOTOP</span>
-    </div>
+    <span class="site-footer-copy" dir="ltr">© {{ year }} MMOTOP</span>
   </footer>
 </template>

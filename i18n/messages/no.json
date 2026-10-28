@@ -132,14 +132,6 @@
     "desc": "synkende"
   },
   "footer": {
-    "label": "Nettstedslenker",
-    "games": "Spill",
-    "lists": "Lister",
-    "popular": "Populært",
-    "top": "Toppservere",
-    "soon": "Åpner snart",
-    "started": "Allerede startet",
-    "new": "Nye servere",
-    "all": "Alle servere"
+    "popular": "Populært"
   }
 }

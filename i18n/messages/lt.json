@@ -132,14 +132,6 @@
     "desc": "mažėjančiai"
   },
   "footer": {
-    "label": "Svetainės nuorodos",
-    "games": "Žaidimai",
-    "lists": "Sąrašai",
-    "popular": "Populiaru",
-    "top": "Geriausi serveriai",
-    "soon": "Netrukus atidaromi",
-    "started": "Jau paleisti",
-    "new": "Nauji serveriai",
-    "all": "Visi serveriai"
+    "popular": "Populiaru"
   }
 }

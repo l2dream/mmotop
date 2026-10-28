@@ -132,14 +132,6 @@
     "desc": "내림차순"
   },
   "footer": {
-    "label": "사이트 링크",
-    "games": "게임",
-    "lists": "목록",
-    "popular": "인기",
-    "top": "인기 서버",
-    "soon": "곧 오픈",
-    "started": "이미 오픈",
-    "new": "신규 서버",
-    "all": "모든 서버"
+    "popular": "인기"
   }
 }
