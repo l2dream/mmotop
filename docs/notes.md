@@ -58,6 +58,11 @@
   в Auth (почта, Google, Discord; Telegram — своя функция), Site URL и
   redirect `https://mmotop.com`. Потом на сайте: вход, кабинет, голосование
   с капчей Turnstile, награда по postback.
+  Секреты владелец отложил (29 октября, «займусь чуть позже»). Где ставить:
+  https://supabase.com/dashboard/project/xpfgjhyuompskzxsmwrc/functions/secrets
+  Turnstile: dash.cloudflare.com → Turnstile → Add widget (`mmotop`,
+  hostname `mmotop.com`, Managed); Secret Key → в Supabase, Site Key → мне
+  для сайта. Напомнить владельцу.
 - **Реальные серверы** — на сайте пока демо-серверы с адресами `.example`.
   Из поиска уже приходят люди, так что это главный приоритет: либо владелец
   присылает список, либо после логина серверы добавляют сами владельцы.
