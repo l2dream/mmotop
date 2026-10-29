@@ -2208,6 +2208,31 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   .account-pair { grid-template-columns: 1fr; }
 }
 
+/* Moderation, below the admin's own servers. */
+.admin-queue {
+  margin-top: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Every detail matters to a moderator: lines wrap rather than end in "…". */
+.admin-queue .account-server-main > * { white-space: normal; overflow-wrap: anywhere; }
+.admin-url { color: #c4a8ff; text-decoration: none; }
+.admin-url:hover { text-decoration: underline; }
+.admin-description {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: #c9cce0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.account-link:disabled { opacity: .5; cursor: default; }
+.theme-light .admin-queue { border-top-color: rgba(103, 104, 173, .16); }
+.theme-light .admin-url { color: #6d28d9; }
+.theme-light .admin-description { color: #3a3e58; }
+
 /* A server's page: its card, then more servers of its game. */
 .server-card { padding: 22px 24px 24px; }
 
