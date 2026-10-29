@@ -4,6 +4,7 @@ import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
 import { REC_DATES, REC_RULES, type RecRule } from '~/data/recommendations'
+import { ogImagePath } from '~/data/og'
 import { parseSort, sortParam, sortServers, type SortKey } from '~/data/sorting'
 import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug, landingAt, indexable } from '~/data/landing'
 
@@ -912,6 +913,22 @@ const thinLanding = !!props.game && !!landingName && (() => {
 })()
 useHead({
   meta: () => (filteredList.value || thinLanding ? [{ name: 'robots', content: 'noindex, follow' }] : [])
+})
+
+/**
+ * The page's own link picture where it has one (data/og.ts): a server's,
+ * a game's, a chronicle's or a rate's. Others keep the site's, set in app.vue.
+ */
+const ogPath = computed(() => ogImagePath({
+  server: server.value,
+  game: props.game,
+  landing: landingName ? String(route.params.id) : undefined
+}))
+const ogRoot = `${String(useRuntimeConfig().public.siteUrl).replace(/\/$/, '')}${useRuntimeConfig().app.baseURL}`
+useSeoMeta({
+  ogImage: () => (ogPath.value ? `${ogRoot}${ogPath.value}` : undefined),
+  ogImageType: () => (ogPath.value ? 'image/png' : undefined),
+  twitterImage: () => (ogPath.value ? `${ogRoot}${ogPath.value}` : undefined)
 })
 
 useSeoMeta({
