@@ -9,6 +9,7 @@
     "theme": "Toggle theme",
     "language": "Language",
     "login": "LOGIN",
+    "account": "ACCOUNT",
     "categories": "Game categories",
     "toTop": "Back to top"
   },
@@ -140,5 +141,49 @@
   },
   "footer": {
     "popular": "Popular"
+  },
+  "account": {
+    "title": "Account",
+    "loading": "Loading…",
+    "intro": "Sign in to add your server to MMOTOP and manage it. Enter your email and we will send you a sign-in link — no password needed.",
+    "email": "Email",
+    "sendLink": "Send sign-in link",
+    "sent": "We sent a sign-in link to {email}.",
+    "sentHint": "Open it on this device. If the email is not there, check the spam folder.",
+    "otherEmail": "Use another email",
+    "tooMany": "Too many attempts. Please try again in an hour.",
+    "failed": "Something went wrong. Please try again.",
+    "signedInAs": "Signed in as",
+    "signOut": "Sign out",
+    "noServers": "You have no servers yet. Add the first one — it appears on the site once a moderator approves it.",
+    "addServer": "Add a server",
+    "editServer": "Edit server",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Delete {name}? This cannot be undone.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "recheck": "After changes to a listed server, it goes back to moderation.",
+    "moderation": "Every new server and every change is checked by a moderator before it appears on the site.",
+    "idTaken": "This address is already taken. Choose another.",
+    "invalid": "Some fields are filled in incorrectly. Please check them.",
+    "fields": {
+      "name": "Server name",
+      "id": "Address on the site",
+      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters: {example}. Cannot be changed later.",
+      "game": "Game",
+      "chronicle": "Chronicle / version",
+      "rate": "Rates",
+      "rateHint": "e.g. 50",
+      "openDate": "Opening date",
+      "url": "Server website",
+      "description": "Description"
+    },
+    "status": {
+      "pending": "Under review",
+      "approved": "Listed",
+      "rejected": "Rejected",
+      "hidden": "Hidden"
+    }
   }
 }

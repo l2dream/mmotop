@@ -18,7 +18,7 @@ import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug, landingAt, 
  * All share the header, search, filters and category bar, so a filter set on
  * the home page still applies after View more, and the other way round.
  */
-const props = defineProps<{ section?: SectionId, serverId?: string, game?: string, chronicle?: string, rate?: number }>()
+const props = defineProps<{ section?: SectionId, serverId?: string, game?: string, chronicle?: string, rate?: number, account?: boolean }>()
 
 const { t, locale } = useI18n()
 const { currentYear, serverSubtitle, rateLabel } = useServerFormat()
@@ -45,6 +45,12 @@ const activeHidden = computed(() => hiddenCategories.value.includes(activeCatego
 
 const SERVER_BY_ID = new Map(SERVERS.map((server) => [server.id, server]))
 const server = computed(() => (props.serverId ? SERVER_BY_ID.get(props.serverId) : undefined))
+/**
+ * A page that is not a list: a server's, or the account page. The header's
+ * search and filters lead from it to the home page rather than narrowing
+ * anything here.
+ */
+const standalone = computed(() => !!server.value || !!props.account)
 
 /**
  * Today's date, for splitting COMING SOON from ALREADY STARTED. It starts as
@@ -107,7 +113,7 @@ const {
  * /lineage2/ is Lineage II. Set here, before anything renders, so the
  * prerendered page of each game already shows that game's lists.
  */
-const homeLike = !props.section && !props.serverId
+const homeLike = !props.section && !props.serverId && !props.account
 if (homeLike) {
   activeCategory.value = props.game ?? 'all'
   // A chronicle's or a rate's page sets its filter the same way. Any other
@@ -426,7 +432,7 @@ const homeLocation = () => homeLocationFor(activeCategory.value)
 function writeFiltersToUrl(initial = false) {
   const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
   const home = homeLocation()
-  const leaves = !!server.value || (homeLike && withSlash(route.path) !== home.path)
+  const leaves = standalone.value || (homeLike && withSlash(route.path) !== home.path)
   if (leaves) {
     if (filterOpen.value) {
       leaveWhenFilterCloses = true
@@ -490,13 +496,13 @@ let searchUrlTimer: ReturnType<typeof setTimeout> | undefined
 watch(query, () => {
   // On a server's page the search is sent with Enter or the search button;
   // leaving for the home page mid-word would take the field away while typing.
-  if (!urlReady.value || server.value || leaving) return
+  if (!urlReady.value || standalone.value || leaving) return
   clearTimeout(searchUrlTimer)
   searchUrlTimer = setTimeout(writeFiltersToUrl, 500)
 })
 function onSearchBlur() {
   releaseDashboardHeight()
-  if (!urlReady.value || server.value) return
+  if (!urlReady.value || standalone.value) return
   clearTimeout(searchUrlTimer)
   writeFiltersToUrl()
 }
@@ -518,13 +524,18 @@ function releaseDashboardHeight() {
 }
 
 onUnmounted(() => clearTimeout(searchUrlTimer))
+
+/** Whether a session is stored, for the header's account button; the
+ *  account page keeps it current as the visitor signs in and out. */
+const signedIn = useSignedIn()
+onMounted(() => { signedIn.value = hasStoredSession() })
 onNuxtReady(() => {
   if (unmounted) return
   // A server's address carries the filters it was reached with, so a reload
   // keeps them in the header and on the way back. They are only read here:
   // a change on this page goes to the home page (see writeFiltersToUrl), so
   // the watchers are let loose only after the restore has gone through them.
-  if (server.value) {
+  if (standalone.value) {
     restoreFiltersFromUrl()
     rememberOrigin()
     nextTick(() => { urlReady.value = true })
@@ -725,13 +736,14 @@ const serverKind = (s: Server) => [s.chronicle, rateLabel(s)].filter(Boolean).jo
 const pageTitle = computed(() => {
   if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} ${serverKind(server.value)} — MMOTOP`
   if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
+  if (props.account) return `${t('account.title')} — MMOTOP`
   return landingTitle.value ? `${landingTitle.value} — MMOTOP` : t('meta.title')
 })
 // The page's subject for its one h1: on a section page the plain-words name
 // ("Top game servers by votes"), not the capitalised panel label.
 const pageHeading = computed(() => (props.section
   ? t(`seo.${props.section}.title`)
-  : landingTitle.value || t('meta.title')))
+  : props.account ? t('account.title') : landingTitle.value || t('meta.title')))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
@@ -906,13 +918,13 @@ const serverOthers = computed(() => {
  * then — which is when a search engine that runs the page reads it too.
  */
 const FILTER_KEYS = ['game', 'version', 'rate', 'min', 'max', 'q', 'sort']
-const filteredList = computed(() => !server.value && FILTER_KEYS.some((k) => firstParam(route.query[k])))
+const filteredList = computed(() => !standalone.value && FILTER_KEYS.some((k) => firstParam(route.query[k])))
 const thinLanding = !!props.game && !!landingName && (() => {
   const l = landingAt(props.game, route.params.id)
   return !!l && !indexable(l)
 })()
 useHead({
-  meta: () => (filteredList.value || thinLanding ? [{ name: 'robots', content: 'noindex, follow' }] : [])
+  meta: () => (filteredList.value || thinLanding || props.account ? [{ name: 'robots', content: 'noindex, follow' }] : [])
 })
 
 /**
@@ -972,6 +984,8 @@ const structuredData = computed(() => {
       { '@type': 'ListItem', position: i + 1, name, item }
     ))
   })
+  // Nothing to tell a search engine about a page it is asked not to list.
+  if (props.account) return []
   if (server.value) {
     const s = server.value
     return [crumbs([serverSubtitle(s), absolute(`/${s.game}`)], [s.name, absolute(`/${s.game}/${s.id}`)])]
@@ -1217,7 +1231,7 @@ onMounted(() => {
 })
 
 function submitSearch() {
-  if (server.value && query.value.trim()) return writeFiltersToUrl()
+  if (standalone.value && query.value.trim()) return writeFiltersToUrl()
   searchInput.value?.focus()
 }
 
@@ -1228,7 +1242,7 @@ function submitSearch() {
  * mouse and keyboard there is nothing to dismiss, so the cursor stays.
  */
 function onSearchEnter(event: KeyboardEvent) {
-  if (server.value && query.value.trim()) return writeFiltersToUrl()
+  if (standalone.value && query.value.trim()) return writeFiltersToUrl()
   if (window.matchMedia('(pointer: coarse)').matches) (event.target as HTMLInputElement).blur()
 }
 
@@ -1467,21 +1481,21 @@ function clearSearch() {
       <div class="account-actions">
         <LanguageSwitcher />
 
-        <!-- aria-disabled until there is an account to sign in to: it is a real
-             button, and without this a screen reader announced it as one and
-             nothing happened when it was pressed. It keeps its look; only the
-             cursor stops promising a click.
+        <!-- To the account page: signing in there, or the cabinet once signed
+             in. Which of the two it says is known only in the browser (the
+             session is in localStorage), so the prerendered page says "Log in"
+             and a signed-in visitor sees it change on mount.
 
              Below 380px the label gives way to an icon, the way the language
              code does beside it — in Lithuanian and Latvian the word alone
              left the search field no room to type at 320px. -->
-        <button class="login-button" type="button" aria-disabled="true" :aria-label="$t('nav.login')">
+        <NuxtLink class="login-button" :to="localePath('/account')" :aria-label="signedIn ? $t('nav.account') : $t('nav.login')">
           <svg class="login-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="8" r="4" />
             <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" />
           </svg>
-          <span class="login-label" aria-hidden="true">{{ $t('nav.login') }}</span>
-        </button>
+          <span class="login-label" aria-hidden="true">{{ signedIn ? $t('nav.account') : $t('nav.login') }}</span>
+        </NuxtLink>
       </div>
     </header>
 
@@ -1557,7 +1571,7 @@ function clearSearch() {
     <main ref="dashboardEl" class="dashboard">
       <!-- When nothing matches at all, one card says so and offers the way
            back, instead of five empty panels each repeating it. -->
-      <div v-if="!server && nothingFound" class="no-results" role="status">
+      <div v-if="!standalone && nothingFound" class="no-results" role="status">
         <svg class="no-results-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
           <path d="M20 20l-3.5-3.5" />
@@ -1568,6 +1582,11 @@ function clearSearch() {
         <p v-else class="no-results-text">{{ $t('panels.empty') }}</p>
         <button v-if="searchText" type="button" class="no-results-action" @click="clearSearch">{{ $t('search.clear') }}</button>
         <button v-else type="button" class="no-results-action" @click="resetFilters">{{ $t('filter.reset') }}</button>
+      </div>
+
+      <div v-else-if="account" class="section-view">
+        <BackLink :to="homeLocation()" />
+        <AccountPanel />
       </div>
 
       <div v-else-if="server" class="section-view">
