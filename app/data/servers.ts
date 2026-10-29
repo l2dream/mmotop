@@ -1,4 +1,4 @@
-import { isChronicleAddress, type GameId } from './games'
+import { gameById, isChronicleAddress, type GameId } from './games'
 import LIVE from './live-servers.json'
 
 /**
@@ -108,7 +108,9 @@ const DEMO_SERVERS: Server[] = [
  * is left out rather than allowed to stop the build (see nuxt.config.ts); the
  * database already refuses rate-shaped ones like x50.
  */
-const LIVE_SERVERS = (LIVE as Server[]).filter((s) => !isChronicleAddress(s.game, s.id))
+// …and so is one under a game the site does not list (the database refuses
+// to approve those, see the other_game migration).
+const LIVE_SERVERS = (LIVE as Server[]).filter((s) => !!gameById(s.game) && !isChronicleAddress(s.game, s.id))
 
 /** The real servers first; a demo one with the same address gives way. */
 const LIVE_IDS = new Set(LIVE_SERVERS.map((s) => s.id))

@@ -17,6 +17,8 @@ interface OwnServer {
   id: string
   name: string
   game: string
+  /** The name of a game the site does not list yet, when game is 'other'. */
+  requested_game: string | null
   chronicle: string
   rate: number | null
   url: string
@@ -25,7 +27,7 @@ interface OwnServer {
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate'> & { rate: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'requested_game'> & { rate: string, requested_game: string }
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -122,7 +124,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, chronicle, rate, url, open_date, description, status')
+    .select('id, name, game, requested_game, chronicle, rate, url, open_date, description, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -139,6 +141,7 @@ function addServer() {
     id: '',
     name: '',
     game: GAMES[0]!.id,
+    requested_game: '',
     chronicle: '',
     rate: '',
     url: 'https://',
@@ -152,7 +155,7 @@ function editServer(s: OwnServer) {
   editing.value = s.id
   customId.value = false
   idOpen.value = false
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), description: s.description ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), requested_game: s.requested_game ?? '', description: s.description ?? '' }
 }
 
 function cancel() {
@@ -200,6 +203,7 @@ async function save() {
   const fields = {
     name: serverName(d.name).trim(),
     game: d.game,
+    requested_game: d.game === 'other' ? d.requested_game.trim() : null,
     chronicle: d.chronicle.trim(),
     rate: d.rate.trim() ? Number(d.rate) : null,
     url: d.url.trim(),
@@ -280,7 +284,7 @@ async function remove(s: OwnServer) {
           <!-- The address, made from the name: shown, not asked for. -->
           <p v-if="!idOpen" class="account-note account-page-link">
             {{ $t('account.fields.page') }}
-            <bdi class="account-strong" dir="ltr">mmotop.com/{{ draft.game }}/{{ draft.id || '…' }}/</bdi>
+            <bdi class="account-strong" dir="ltr">mmotop.com/{{ draft.game === 'other' ? '…' : draft.game }}/{{ draft.id || '…' }}/</bdi>
             <button v-if="!editing" type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
           </p>
           <label v-else class="account-field">
@@ -303,7 +307,12 @@ async function remove(s: OwnServer) {
               <span>{{ $t('account.fields.game') }}</span>
               <select v-model="draft.game" required>
                 <option v-for="g in GAMES" :key="g.id" :value="g.id">{{ g.name }}</option>
+                <option value="other">{{ $t('account.fields.otherGame') }}</option>
               </select>
+            </label>
+            <label v-if="draft.game === 'other'" class="account-field">
+              <span>{{ $t('account.fields.gameName') }}</span>
+              <input v-model="draft.requested_game" type="text" required minlength="2" maxlength="40">
             </label>
             <label class="account-field">
               <span>{{ $t('account.fields.chronicle') }}</span>
@@ -346,7 +355,7 @@ async function remove(s: OwnServer) {
             <li v-for="s in servers" :key="s.id" class="account-server">
               <div class="account-server-main">
                 <span class="account-strong">{{ s.name }}</span>
-                <span class="account-note">{{ gameById(s.game)?.name ?? s.game }} · {{ s.chronicle }}</span>
+                <span class="account-note">{{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}</span>
               </div>
               <span class="account-status" :class="`status-${s.status}`">{{ $t(`account.status.${s.status}`) }}</span>
               <div class="account-server-tools">
