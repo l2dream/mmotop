@@ -173,6 +173,8 @@
       "id": "Address on the site",
       "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters. Cannot be changed later.",
       "game": "Game",
+      "otherGame": "Another game…",
+      "gameName": "Game name",
       "chronicle": "Chronicle / version",
       "rate": "Rates",
       "rateHint": "e.g. 50",

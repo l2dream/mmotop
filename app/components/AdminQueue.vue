@@ -18,6 +18,7 @@ interface QueueServer {
   id: string
   name: string
   game: string
+  requested_game: string | null
   chronicle: string
   rate: number | null
   url: string
@@ -47,7 +48,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, chronicle, rate, url, open_date, description, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, url, open_date, description, status, created_at')
     .order('created_at', { ascending: false })
   if (!showAll.value) query = query.eq('status', 'pending')
   const { data, error: failed } = await query
@@ -64,7 +65,11 @@ async function setStatus(row: QueueServer, status: Status) {
   error.value = ''
   const { error: failed } = await props.supabase.from('servers').update({ status }).eq('id', row.id)
   busyId.value = null
-  if (failed) error.value = `Не удалось изменить ${row.name}.`
+  if (failed) {
+    error.value = failed.code === '23514' && row.game === 'other'
+      ? `Сначала нужно добавить на сайт игру «${row.requested_game}».`
+      : `Не удалось изменить ${row.name}.`
+  }
   else load()
 }
 
@@ -91,16 +96,21 @@ const ACTIONS: { status: Status, label: string }[] = [
         <div class="account-server-main">
           <span class="account-strong">{{ s.name }}</span>
           <span class="account-note">
-            {{ gameById(s.game)?.name ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template> · {{ s.open_date }}
+            {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template> · {{ s.open_date }}
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
-          <span class="account-note" dir="ltr">/{{ s.game }}/{{ s.id }}/</span>
+          <span v-if="s.game !== 'other'" class="account-note" dir="ltr">/{{ s.game }}/{{ s.id }}/</span>
         </div>
         <span class="account-status" :class="`status-${s.status}`">{{ STATUS_LABEL[s.status] }}</span>
+        <!-- Not a game the site lists: it has to be added (games.ts and the
+             database's check) and the server moved into it before approval. -->
+        <p v-if="s.game === 'other'" class="admin-description admin-new-game">
+          Новая игра: <b>{{ s.requested_game }}</b>. Чтобы одобрить сервер, её сначала нужно добавить на сайт.
+        </p>
         <p v-if="s.description" class="admin-description">{{ s.description }}</p>
         <div class="account-server-tools">
           <button
-            v-for="a in ACTIONS.filter((a) => a.status !== s.status)"
+            v-for="a in ACTIONS.filter((a) => a.status !== s.status && !(a.status === 'approved' && s.game === 'other'))"
             :key="a.status"
             type="button"
             class="account-link"
