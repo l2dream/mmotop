@@ -120,7 +120,9 @@ export default defineNuxtConfig({
           ...LANDINGS.map(l => `${prefix}/${l.game}/${l.slug}`),
           // The old addresses, as redirect pages, for links made before the
           // server pages moved under their game.
-          ...SERVERS.map(s => `${prefix}/server/${s.id}`)
+          ...SERVERS.map(s => `${prefix}/server/${s.id}`),
+          // Signing in and the owner's cabinet; not in the sitemap (noindex).
+          `${prefix}/account`
         ]
       })
     }
