@@ -1501,7 +1501,9 @@ function clearSearch() {
 
     <LanguageSuggestion />
 
-    <nav class="category-bar" :aria-label="$t('nav.categories')">
+    <!-- Not on the account page: games are nothing to pick there, and the
+         wordmark already leads home. -->
+    <nav v-if="!account" class="category-bar" :aria-label="$t('nav.categories')">
       <div
         ref="categoryBar"
         class="category-scroll"
@@ -1584,8 +1586,7 @@ function clearSearch() {
         <button v-else type="button" class="no-results-action" @click="resetFilters">{{ $t('filter.reset') }}</button>
       </div>
 
-      <div v-else-if="account" class="section-view">
-        <BackLink :to="homeLocation()" />
+      <div v-else-if="account" class="section-view account-view">
         <AccountPanel />
       </div>
 
