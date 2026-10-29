@@ -4,6 +4,11 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  # Servers approved in the account page, and the month's votes, live in the
+  # database; the site is static. Every half hour the build looks for a
+  # change there and deploys only if it finds one (see "Anything new?").
+  schedule:
+    - cron: "17,47 * * * *"
 
 permissions:
   contents: read
@@ -20,6 +25,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.check.outputs.changed == 'false' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,16 +35,32 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          # Not on the half-hourly check, which mostly stops before npm ci
+          # and would leave the cache step nothing to save.
+          cache: ${{ github.event_name != 'schedule' && 'npm' || '' }}
+
+      # A scheduled run compares the database with what the live site was
+      # built from, and stops here if they are the same. Pushes always build.
+      - name: Anything new?
+        id: check
+        if: github.event_name == 'schedule'
+        run: node scripts/fetch-servers.mjs --check
 
       - name: Install dependencies
+        if: steps.check.outputs.changed != 'false'
         run: npm ci
+
+      # Before the build: app/data/live-servers.json is committed empty.
+      - name: Fetch listed servers
+        if: steps.check.outputs.changed != 'false'
+        run: node scripts/fetch-servers.mjs
 
       # Before the build, so a type error stops the deploy instead of shipping.
       # The build itself does not type-check: a refactor once deleted a local
       # close() and every call quietly became window.close(), which browsers
       # ignore. The page built fine; the checker would have refused it.
       - name: Type-check
+        if: steps.check.outputs.changed != 'false'
         run: npm run typecheck
 
       # Where Pages serves the site, asked of Pages itself rather than
@@ -45,6 +68,7 @@ jobs:
       # domain is set in Settings → Pages. Switching to a domain then needs
       # no change here, only a fresh deploy.
       - name: Read Pages settings
+        if: steps.check.outputs.changed != 'false'
         id: pages
         uses: actions/configure-pages@v5
 
@@ -52,6 +76,7 @@ jobs:
       # and that went straight into the canonical, hreflang and sitemap. The
       # site is served over HTTPS either way, so the address always says so.
       - name: Generate static site
+        if: steps.check.outputs.changed != 'false'
         run: |
           export NUXT_PUBLIC_SITE_URL="${PAGES_ORIGIN/#http:/https:}"
           npm run generate
@@ -60,6 +85,7 @@ jobs:
           PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
 
       - name: Upload Pages artifact
+        if: steps.check.outputs.changed != 'false'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
@@ -70,6 +96,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: needs.build.outputs.skip != 'true'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

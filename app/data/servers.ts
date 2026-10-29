@@ -1,4 +1,5 @@
-import type { GameId } from './games'
+import { isChronicleAddress, type GameId } from './games'
+import LIVE from './live-servers.json'
 
 /**
  * One listed server.
@@ -35,7 +36,7 @@ export interface Server {
  * and never resolves. Dates are fixed, so after spring 2027 COMING SOON will
  * run dry — by then this list is replaced by the real one.
  */
-export const SERVERS: Server[] = [
+const DEMO_SERVERS: Server[] = [
   // Lineage II
   { id: 'la2dream', name: 'LA2DREAM', game: 'lineage2', chronicle: 'Interlude', rate: 500, url: 'https://la2dream.example', openDate: '2025-11-20', listedAt: '2025-11-01', votes: 2480 },
   { id: 'nordveil', name: 'NORDVEIL', game: 'lineage2', chronicle: 'High-Five', rate: 50, url: 'https://nordveil.example', openDate: '2026-10-05', listedAt: '2026-09-18', votes: 310 },
@@ -97,3 +98,18 @@ export const SERVERS: Server[] = [
   { id: 'thornwick', name: 'THORNWICK', game: 'tibia', chronicle: '8.60', rate: 5, url: 'https://thornwick.example', openDate: '2026-10-09', listedAt: '2026-09-16', votes: 200 },
   { id: 'brightmoor', name: 'BRIGHTMOOR', game: 'tibia', chronicle: '10.98', rate: 10, url: 'https://brightmoor.example', openDate: '2026-01-20', listedAt: '2026-01-05', votes: 930 }
 ]
+
+/**
+ * Servers that owners added through their account and a moderator approved.
+ * The committed file is empty; the deploy fills it from the database first
+ * (scripts/fetch-servers.mjs).
+ *
+ * One whose address is one of its game's chronicle pages (/lineage2/interlude/)
+ * is left out rather than allowed to stop the build (see nuxt.config.ts); the
+ * database already refuses rate-shaped ones like x50.
+ */
+const LIVE_SERVERS = (LIVE as Server[]).filter((s) => !isChronicleAddress(s.game, s.id))
+
+/** The real servers first; a demo one with the same address gives way. */
+const LIVE_IDS = new Set(LIVE_SERVERS.map((s) => s.id))
+export const SERVERS: Server[] = [...LIVE_SERVERS, ...DEMO_SERVERS.filter((s) => !LIVE_IDS.has(s.id))]

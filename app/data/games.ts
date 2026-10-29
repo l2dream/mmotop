@@ -134,3 +134,18 @@ export function chronicleBadge(gameId: string, chronicle: string): string {
   const found = gameById(gameId)?.chronicles.find((c) => c.name === chronicle)
   return found?.badge ?? chronicle.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 2).toUpperCase()
 }
+
+/** "WotLK 3.3.5a" → "wotlk-3-3-5a". Hyphens only, no dots, so every host
+ *  treats the segment as a directory. */
+export function chronicleSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
+/**
+ * Whether /<game>/<id>/ is one of the game's chronicle pages, which a server
+ * may not take: the account form refuses it, and the build leaves out any
+ * that got through (data/servers.ts).
+ */
+export function isChronicleAddress(game: string, id: string) {
+  return !!gameById(game)?.chronicles.some((c) => chronicleSlug(c.name) === id)
+}
