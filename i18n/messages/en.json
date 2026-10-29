@@ -169,8 +169,9 @@
     "invalid": "Some fields are filled in incorrectly. Please check them.",
     "fields": {
       "name": "Server name",
+      "page": "Page on the site:",
       "id": "Address on the site",
-      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters: {example}. Cannot be changed later.",
+      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters. Cannot be changed later.",
       "game": "Game",
       "chronicle": "Chronicle / version",
       "rate": "Rates",

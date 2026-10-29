@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import { GAMES, gameById, isChronicleAddress } from '~/data/games'
+import { SERVER_ID_PATTERN, serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
  * The account page: signing in by email, then the owner's own servers —
@@ -47,6 +48,15 @@ const loadingServers = ref(false)
 /** The server being edited, a fresh one being added, or none. */
 const draft = ref<Draft | null>(null)
 const editing = ref<string | null>(null)
+/**
+ * The address is made from the name unless the owner opened the field and
+ * wrote their own; a made one that is taken gets a number on the end.
+ */
+const customId = ref(false)
+const idOpen = ref(false)
+watch(() => draft.value?.name, (name) => {
+  if (draft.value && !editing.value && !customId.value) draft.value.id = name?.trim() ? serverIdFrom(name) : ''
+})
 
 let unsubscribe: (() => void) | undefined
 
@@ -123,6 +133,8 @@ async function loadServers() {
 function addServer() {
   error.value = ''
   editing.value = null
+  customId.value = false
+  idOpen.value = false
   draft.value = {
     id: '',
     name: '',
@@ -138,6 +150,8 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
+  customId.value = false
+  idOpen.value = false
   draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), description: s.description ?? '' }
 }
 
@@ -153,8 +167,9 @@ const chronicles = computed(() => (draft.value ? gameById(draft.value.game)?.chr
 async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
-  if (!editing.value && isChronicleAddress(d.game, d.id.trim().toLowerCase())) {
-    error.value = t('account.idTaken')
+  const id = d.id.trim().toLowerCase()
+  if (!editing.value && customId.value && (!SERVER_ID_PATTERN.test(id) || isChronicleAddress(d.game, id))) {
+    error.value = SERVER_ID_PATTERN.test(id) ? t('account.idTaken') : t('account.fields.idHint')
     return
   }
   busy.value = true
@@ -168,9 +183,19 @@ async function save() {
     open_date: d.open_date,
     description: d.description?.trim() || null
   }
-  const { error: failed } = editing.value
-    ? await supabase.value.from('servers').update(fields).eq('id', editing.value)
-    : await supabase.value.from('servers').insert({ ...fields, id: d.id.trim().toLowerCase(), owner_id: session.value.user.id })
+  let failed
+  if (editing.value) {
+    ({ error: failed } = await supabase.value.from('servers').update(fields).eq('id', editing.value))
+  } else {
+    // A made address that is taken, or is one of the game's chronicle pages,
+    // moves on to la2dream-2, -3… by itself; the owner's own is tried as is.
+    for (let n = 1; n <= (customId.value ? 1 : 20); n++) {
+      const candidate = n === 1 ? id : serverIdWithNumber(id, n)
+      if (isChronicleAddress(d.game, candidate)) continue
+      ;({ error: failed } = await supabase.value.from('servers').insert({ ...fields, id: candidate, owner_id: session.value.user.id }))
+      if (failed?.code !== '23505') break
+    }
+  }
   busy.value = false
   if (failed) {
     // 23505: the address is someone else's already; 23514: a check in the
@@ -229,20 +254,26 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.name') }}</span>
             <input v-model="draft.name" type="text" required minlength="2" maxlength="24">
           </label>
-          <label class="account-field">
+          <!-- The address, made from the name: shown, not asked for. -->
+          <p v-if="!idOpen" class="account-note account-page-link">
+            {{ $t('account.fields.page') }}
+            <bdi class="account-strong" dir="ltr">mmotop.com/{{ draft.game }}/{{ draft.id || '…' }}/</bdi>
+            <button v-if="!editing" type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
+          </p>
+          <label v-else class="account-field">
             <span>{{ $t('account.fields.id') }}</span>
             <input
               v-model="draft.id"
               type="text"
               required
-              :disabled="!!editing"
               pattern="[a-z0-9][a-z0-9\-]{1,30}[a-z0-9]"
               maxlength="32"
               autocapitalize="off"
               spellcheck="false"
               dir="ltr"
+              @input="customId = true"
             >
-            <small>{{ $t('account.fields.idHint', { example: `mmotop.com/${draft.game}/${draft.id || 'myserver'}/` }) }}</small>
+            <small>{{ $t('account.fields.idHint') }}</small>
           </label>
           <div class="account-pair">
             <label class="account-field">

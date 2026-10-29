@@ -2146,6 +2146,8 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-link:hover { text-decoration: underline; }
 .account-danger { color: #ff9a9a; }
 
+.account-page-link { overflow-wrap: anywhere; }
+.account-page-link .account-link { margin-inline-start: 8px; padding: 0; }
 .account-who { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
 .account-actions-row { display: flex; align-items: center; gap: 18px; }
 
