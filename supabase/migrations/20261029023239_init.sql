@@ -184,3 +184,17 @@ with (security_invoker = false) as
   group by s.id;
 
 grant select on public.server_votes_month to anon, authenticated;
+
+-- ── Grants ────────────────────────────────────────────────────────────────
+-- The project doesn't expose new tables automatically, so each role gets
+-- exactly what its policies above can use; RLS still decides which rows.
+grant select, update (display_name) on public.profiles to authenticated;
+grant select on public.servers to anon, authenticated;
+grant insert, update, delete on public.servers to authenticated;
+grant select, insert, update on public.server_postbacks to authenticated;
+grant execute on function public.is_admin() to anon, authenticated;
+
+-- The Edge Functions work as the service role.
+grant all on public.profiles, public.servers, public.server_postbacks, public.votes to service_role;
+grant select on public.server_votes_month to service_role;
+grant usage on all sequences in schema public to service_role;
