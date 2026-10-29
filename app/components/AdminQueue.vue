@@ -107,6 +107,11 @@ const ACTIONS: { status: Status, label: string }[] = [
         <p v-if="s.game === 'other'" class="admin-description admin-new-game">
           Новая игра: <b>{{ s.requested_game }}</b>. Чтобы одобрить сервер, её сначала нужно добавить на сайт.
         </p>
+        <!-- Listed fine, but with no chronicle page or filter entry of its own
+             until the version is added to games.ts. -->
+        <p v-else-if="!gameById(s.game)?.chronicles.some((c) => c.name === s.chronicle)" class="admin-description admin-new-game">
+          Новая версия: <b>{{ s.chronicle }}</b>. Сервер можно одобрить; своей страницы и пункта в фильтре у версии не будет, пока её не добавят на сайт.
+        </p>
         <p v-if="s.description" class="admin-description">{{ s.description }}</p>
         <div class="account-server-tools">
           <button
