@@ -55,8 +55,11 @@
   через логин (владелец так решил). Нужно: секреты функций (`TURNSTILE_SECRET`,
   `VOTE_SALT`, `TELEGRAM_BOT_TOKEN` — владелец ставит в Dashboard → Edge
   Functions → Secrets или даёт мне через настройки среды), провайдеры входа
-  в Auth (почта, Google, Discord; Telegram — своя функция), Site URL и
-  redirect `https://mmotop.com`. Потом на сайте: вход, кабинет, голосование
+  в Auth (почта уже включена; Google, Discord; Telegram — своя функция).
+  Site URL `https://mmotop.com` и redirect `https://mmotop.com/**` владелец
+  поставил 29 октября (токену не хватает `project_admin_write`, настройки
+  Auth меняет владелец сам). Встроенная почта — 2 письма в час; для
+  настоящих пользователей нужен SMTP (например, Resend). Потом на сайте: вход, кабинет, голосование
   с капчей Turnstile, награда по postback.
   Секреты владелец отложил (29 октября, «займусь чуть позже»). Где ставить:
   https://supabase.com/dashboard/project/xpfgjhyuompskzxsmwrc/functions/secrets
