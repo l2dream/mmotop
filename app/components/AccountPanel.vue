@@ -137,6 +137,7 @@ function addServer() {
   editing.value = null
   customId.value = false
   idOpen.value = false
+  ownChronicle.value = false
   draft.value = {
     id: '',
     name: '',
@@ -156,6 +157,7 @@ function editServer(s: OwnServer) {
   customId.value = false
   idOpen.value = false
   draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), requested_game: s.requested_game ?? '', description: s.description ?? '' }
+  ownChronicle.value = !chronicles.value.includes(s.chronicle)
 }
 
 function cancel() {
@@ -193,8 +195,29 @@ function typeName(event: Event) {
   }
 }
 
-/** Chronicles the chosen game already has, offered as the field is typed in. */
+/** Chronicles the chosen game already has, to pick from. */
 const chronicles = computed(() => (draft.value ? gameById(draft.value.game)?.chronicles.map((c) => c.name) ?? [] : []))
+
+/**
+ * The version is picked from the game's list, like the game itself; "Another
+ * version…" opens a field for one the list lacks. A game the site does not
+ * list has no versions to pick, so it gets the field straight away.
+ */
+const OWN = '__own'
+const ownChronicle = ref(false)
+const chronicleChoice = computed({
+  get: () => (ownChronicle.value ? OWN : draft.value?.chronicle ?? ''),
+  set: (value: string) => {
+    ownChronicle.value = value === OWN
+    draft.value!.chronicle = value === OWN ? '' : value
+  }
+})
+
+/** A different game has different versions: the choice starts again. */
+function pickGame() {
+  draft.value!.chronicle = ''
+  ownChronicle.value = draft.value!.game === 'other'
+}
 
 async function save() {
   const d = draft.value
@@ -311,23 +334,28 @@ async function remove(s: OwnServer) {
           <div class="account-pair">
             <label class="account-field">
               <span>{{ $t('account.fields.game') }}</span>
-              <select v-model="draft.game" required>
+              <select v-model="draft.game" required @change="pickGame">
                 <option v-for="g in GAMES" :key="g.id" :value="g.id">{{ g.name }}</option>
                 <option value="other">{{ $t('account.fields.otherGame') }}</option>
               </select>
             </label>
-            <label v-if="draft.game === 'other'" class="account-field">
-              <span>{{ $t('account.fields.gameName') }}</span>
-              <input v-model="draft.requested_game" type="text" required minlength="2" maxlength="40">
-            </label>
-            <label class="account-field">
+            <label v-if="draft.game !== 'other'" class="account-field">
               <span>{{ $t('account.fields.chronicle') }}</span>
-              <input v-model="draft.chronicle" type="text" required maxlength="40" list="account-chronicles">
-              <datalist id="account-chronicles">
-                <option v-for="c in chronicles" :key="c" :value="c" />
-              </datalist>
+              <select v-model="chronicleChoice" required>
+                <option value="" disabled>{{ $t('account.fields.choose') }}</option>
+                <option v-for="c in chronicles" :key="c" :value="c">{{ c }}</option>
+                <option :value="OWN">{{ $t('account.fields.otherChronicle') }}</option>
+              </select>
             </label>
           </div>
+          <label v-if="draft.game === 'other'" class="account-field">
+            <span>{{ $t('account.fields.gameName') }}</span>
+            <input v-model="draft.requested_game" type="text" required minlength="2" maxlength="40">
+          </label>
+          <label v-if="ownChronicle" class="account-field">
+            <span>{{ draft.game === 'other' ? $t('account.fields.chronicle') : $t('account.fields.chronicleName') }}</span>
+            <input v-model="draft.chronicle" type="text" required maxlength="40">
+          </label>
           <div class="account-pair">
             <label class="account-field">
               <span>{{ $t('account.fields.rate') }}</span>
