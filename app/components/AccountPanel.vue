@@ -166,11 +166,17 @@ function cancel() {
 
 /**
  * Server names are written in capitals across the site (LA2DREAM, NORDVEIL),
- * and a name is not a web address: letters go up as they are typed, and dots
- * never go in, so "la2dream.su" comes out as LA2DREAMSU.
+ * and follow the rules for a domain name in any language: letters of any
+ * script, digits and single hyphens. Anything else simply does not go in as
+ * it is typed or pasted, so "la2dream.su" comes out as LA2DREAMSU and
+ * "Dream PvP" as DREAMPVP. The database checks the same (name_chars).
  */
 function serverName(text: string) {
-  return text.toUpperCase().replace(/\./g, '')
+  return text
+    .toUpperCase()
+    .replace(/[^\p{L}\p{M}\p{N}-]/gu, '')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-/, '')
 }
 
 function typeName(event: Event) {
@@ -181,9 +187,9 @@ function typeName(event: Event) {
   draft.value!.name = after
   if (after !== before) {
     input.value = after
-    // Removed dots before the caret move it back by as many.
-    const shift = (before.slice(0, caret).match(/\./g) ?? []).length
-    input.setSelectionRange(caret - shift, caret - shift)
+    // The caret stays after what was typed before it, less what was dropped.
+    const kept = serverName(before.slice(0, caret)).length
+    input.setSelectionRange(kept, kept)
   }
 }
 
@@ -201,7 +207,7 @@ async function save() {
   busy.value = true
   error.value = ''
   const fields = {
-    name: serverName(d.name).trim(),
+    name: serverName(d.name).replace(/-+$/, ''),
     game: d.game,
     requested_game: d.game === 'other' ? d.requested_game.trim() : null,
     chronicle: d.chronicle.trim(),
