@@ -39,6 +39,9 @@ const sentTo = ref('')
 const busy = ref(false)
 const error = ref('')
 
+/** Admins also get the moderation queue (AdminQueue). */
+const isAdmin = ref(false)
+
 const servers = ref<OwnServer[]>([])
 const loadingServers = ref(false)
 /** The server being edited, a fresh one being added, or none. */
@@ -65,8 +68,17 @@ watch(() => session.value?.user.id, (id) => {
   signedIn.value = !!id
   servers.value = []
   draft.value = null
-  if (id) loadServers()
+  isAdmin.value = false
+  if (id) {
+    loadServers()
+    loadAdmin(id)
+  }
 })
+
+async function loadAdmin(id: string) {
+  const { data } = await supabase.value!.from('profiles').select('is_admin').eq('id', id).maybeSingle()
+  isAdmin.value = !!data?.is_admin
+}
 
 /** Back to this very page, in this language, with its trailing slash. */
 function returnAddress() {
@@ -288,6 +300,7 @@ async function remove(s: OwnServer) {
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <button type="button" class="account-button" @click="addServer">{{ $t('account.addServer') }}</button>
           <p class="account-note">{{ $t('account.moderation') }}</p>
+          <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>
 
