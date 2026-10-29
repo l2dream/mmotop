@@ -161,6 +161,29 @@ function cancel() {
   error.value = ''
 }
 
+/**
+ * Server names are written in capitals across the site (LA2DREAM, NORDVEIL),
+ * and a name is not a web address: letters go up as they are typed, and dots
+ * never go in, so "la2dream.su" comes out as LA2DREAMSU.
+ */
+function serverName(text: string) {
+  return text.toUpperCase().replace(/\./g, '')
+}
+
+function typeName(event: Event) {
+  const input = event.target as HTMLInputElement
+  const caret = input.selectionStart ?? input.value.length
+  const before = input.value
+  const after = serverName(before)
+  draft.value!.name = after
+  if (after !== before) {
+    input.value = after
+    // Removed dots before the caret move it back by as many.
+    const shift = (before.slice(0, caret).match(/\./g) ?? []).length
+    input.setSelectionRange(caret - shift, caret - shift)
+  }
+}
+
 /** Chronicles the chosen game already has, offered as the field is typed in. */
 const chronicles = computed(() => (draft.value ? gameById(draft.value.game)?.chronicles.map((c) => c.name) ?? [] : []))
 
@@ -175,7 +198,7 @@ async function save() {
   busy.value = true
   error.value = ''
   const fields = {
-    name: d.name.trim(),
+    name: serverName(d.name).trim(),
     game: d.game,
     chronicle: d.chronicle.trim(),
     rate: d.rate.trim() ? Number(d.rate) : null,
@@ -252,7 +275,7 @@ async function remove(s: OwnServer) {
           <h3 class="account-heading">{{ editing ? $t('account.editServer') : $t('account.addServer') }}</h3>
           <label class="account-field">
             <span>{{ $t('account.fields.name') }}</span>
-            <input v-model="draft.name" type="text" required minlength="2" maxlength="24">
+            <input :value="draft.name" type="text" required minlength="2" maxlength="24" autocapitalize="characters" @input="typeName">
           </label>
           <!-- The address, made from the name: shown, not asked for. -->
           <p v-if="!idOpen" class="account-note account-page-link">
