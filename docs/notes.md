@@ -41,7 +41,11 @@
   создаёт новый токен и кладёт его в настройки среды, затем начинает новую
   сессию. Первым делом в ней: проверить `SUPABASE_ACCESS_TOKEN` (или
   Network secret для `api.supabase.com`), развернуть миграцию и функции из
-  `supabase/` в проект `ruxwilcpqwpemgsnytei`, затем делать вход и кабинет.
+  `supabase/` в проект `xpfgjhyuompskzxsmwrc` (создан 29 октября заново,
+  West EU / Ireland, Nano; старого `ruxwilcpqwpemgsnytei` больше нет). При
+  создании «Automatically expose new tables» выключено, «automatic RLS»
+  включено — значит, в миграцию нужны явные GRANT для anon/authenticated
+  на каждую таблицу (сейчас там GRANT только на view `server_votes_month`), затем делать вход и кабинет.
   Добавление серверов будет только через логин (владелец так решил).
   Бэкенд готов в `supabase/` (миграция,
   функции `vote` и `telegram-auth`, README). Нужен токен: владелец создаёт
