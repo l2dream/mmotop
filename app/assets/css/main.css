@@ -2101,23 +2101,57 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field input,
 .account-field select,
 .account-field textarea {
+  /* The header's search field, the same glass in both themes (see
+     .search-box input), so the form reads as part of the same site. */
   width: 100%;
   min-height: 42px;
-  padding: 9px 12px;
+  padding: 9px 14px;
   border: 1px solid rgba(255, 255, 255, .13);
-  border-radius: 10px;
-  background: rgba(14, 17, 38, .7);
+  border-radius: 13px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02)), rgba(14, 17, 38, .55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
   color: #f0f1ff;
   font: inherit;
   font-size: 14px;
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, color .25s ease;
 }
+.account-field input::placeholder,
+.account-field textarea::placeholder { color: #a3a8c0; }
 .account-field textarea { resize: vertical; }
 .account-field input:disabled { opacity: .6; }
-.account-field input:focus-visible,
+/* The browser's own arrow drawn over the glass looked pasted on; a chevron
+   like the More menu's instead, as a second background layer. */
+.account-field select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 38px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9cce0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02));
+  background-repeat: no-repeat;
+  background-position: right 14px center, 0 0;
+  background-size: 14px, auto;
+  cursor: pointer;
+}
+[dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
+.account-field select option { color: #16182b; }
+/* The site's own focus ring, which inputs get already (see the top of this
+   file); select and textarea are not covered by that rule. */
 .account-field select:focus-visible,
 .account-field textarea:focus-visible {
-  outline: 2px solid #9c5cff;
-  outline-offset: 1px;
+  outline: 3px solid #c4a1ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(156, 92, 255, .22);
+}
+.theme-light .account-field select:focus-visible,
+.theme-light .account-field textarea:focus-visible {
+  outline-color: #5b21b6;
+  box-shadow: 0 0 0 6px rgba(124, 58, 237, .18);
+}
+@media (min-resolution: 2dppx) {
+  .account-field input,
+  .account-field select,
+  .account-field textarea { border-width: .5px; }
 }
 
 .account-button {
@@ -2189,10 +2223,24 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .theme-light .account-field input,
 .theme-light .account-field select,
 .theme-light .account-field textarea {
-  border-color: rgba(103, 104, 173, .25);
-  background: #fff;
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
+  box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
   color: #1c1e33;
 }
+.theme-light .account-field select {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a3e58' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
+  /* Again: the background shorthand just above resets them. */
+  background-repeat: no-repeat;
+  background-position: right 14px center, 0 0;
+  background-size: 14px, auto;
+}
+[dir="rtl"] .theme-light .account-field select,
+.theme-light [dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
+.theme-light .account-field input::placeholder,
+.theme-light .account-field textarea::placeholder { color: #555a70; }
 .theme-light .account-link { color: #6d28d9; }
 .theme-light .account-danger { color: #c62828; }
 .theme-light .account-server { border-color: rgba(103, 104, 173, .16); background: rgba(255, 255, 255, .7); }
