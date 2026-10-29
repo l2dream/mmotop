@@ -1,4 +1,4 @@
-import { GAMES } from './games'
+import { GAMES, chronicleSlug } from './games'
 import { SERVERS } from './servers'
 
 /**
@@ -14,11 +14,7 @@ import { SERVERS } from './servers'
  * landingCollisions).
  */
 
-/** "WotLK 3.3.5a" → "wotlk-3-3-5a". Hyphens only, no dots, so every host
- *  treats the segment as a directory. */
-export function chronicleSlug(name: string) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-}
+export { chronicleSlug }
 
 /** 50 → "x50", 1.5 → "x1-5". */
 export function rateSlug(rate: number) {

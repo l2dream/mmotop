@@ -6,3 +6,6 @@ node_modules
 .env.*
 !.env.example
 dist
+
+# Written by scripts/fetch-servers.mjs during the deploy.
+public/live-servers.json

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
-import { GAMES, gameById } from '~/data/games'
+import { GAMES, gameById, isChronicleAddress } from '~/data/games'
 
 /**
  * The account page: signing in by email, then the owner's own servers —
@@ -153,6 +153,10 @@ const chronicles = computed(() => (draft.value ? gameById(draft.value.game)?.chr
 async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
+  if (!editing.value && isChronicleAddress(d.game, d.id.trim().toLowerCase())) {
+    error.value = t('account.idTaken')
+    return
+  }
   busy.value = true
   error.value = ''
   const fields = {
