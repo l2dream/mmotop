@@ -2075,6 +2075,8 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 }
 
 /* ── The account page ────────────────────────────────────────────────── */
+/* No game menu above it, so the gap the menu left is put back. */
+.account-view { margin-top: 18px; }
 .account-body {
   padding: 20px 22px 24px;
   display: flex;
