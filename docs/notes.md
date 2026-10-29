@@ -42,22 +42,22 @@
   Доступ только к проекту mmotop: чтение — Project Settings, Advisors,
   API Keys; чтение и запись — Auth Config, Database, Migrations, Edge
   Functions, Edge Function Secrets.
-- **Логин и кабинет владельца — СЛЕДУЮЩИЙ ШАГ (29 октября).** Владелец
-  создаёт новый токен и кладёт его в настройки среды, затем начинает новую
-  сессию. Первым делом в ней: проверить `SUPABASE_ACCESS_TOKEN` (или
-  Network secret для `api.supabase.com`), развернуть миграцию и функции из
-  `supabase/` в проект `xpfgjhyuompskzxsmwrc` (создан 29 октября заново,
-  West EU / Ireland, Nano; старого `ruxwilcpqwpemgsnytei` больше нет). При
-  создании «Automatically expose new tables» выключено, «automatic RLS»
-  включено — значит, в миграцию нужны явные GRANT для anon/authenticated
-  на каждую таблицу (сейчас там GRANT только на view `server_votes_month`), затем делать вход и кабинет.
-  Добавление серверов будет только через логин (владелец так решил).
-  Бэкенд готов в `supabase/` (миграция,
-  функции `vote` и `telegram-auth`, README). Нужен токен: владелец создаёт
-  Supabase access token (30 дней), удаляет старый, который присылал в чат,
-  и кладёт новый в настройки среды как `SUPABASE_ACCESS_TOKEN`. Потом:
-  развернуть базу, сделать вход (почта, Google, Discord, Telegram), кабинет,
-  голосование с капчей Turnstile, наградой по postback.
+- **База Supabase развёрнута 29 октября** в проект `xpfgjhyuompskzxsmwrc`
+  (`https://xpfgjhyuompskzxsmwrc.supabase.co`): три миграции из
+  `supabase/migrations/` (применялись через Management API, имена файлов =
+  версии в проекте), функции `vote` и `telegram-auth` (verify_jwt выкл.).
+  Права проверены: anon читает только `servers` и `server_votes_month`,
+  authenticated — ещё свой профиль, свои серверы и постбэки; TRUNCATE и
+  прочее снято. Оставшиеся замечания советника намеренные: view рейтинга с
+  SECURITY DEFINER (голоса скрыты, счёт открыт), `is_admin()` нужен
+  политикам, `rls_auto_enable()` — от самого Supabase.
+- **Логин и кабинет владельца — СЛЕДУЮЩИЙ ШАГ.** Добавление серверов только
+  через логин (владелец так решил). Нужно: секреты функций (`TURNSTILE_SECRET`,
+  `VOTE_SALT`, `TELEGRAM_BOT_TOKEN` — владелец ставит в Dashboard → Edge
+  Functions → Secrets или даёт мне через настройки среды), провайдеры входа
+  в Auth (почта, Google, Discord; Telegram — своя функция), Site URL и
+  redirect `https://mmotop.com`. Потом на сайте: вход, кабинет, голосование
+  с капчей Turnstile, награда по postback.
 - **Реальные серверы** — на сайте пока демо-серверы с адресами `.example`.
   Из поиска уже приходят люди, так что это главный приоритет: либо владелец
   присылает список, либо после логина серверы добавляют сами владельцы.
