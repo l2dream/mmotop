@@ -1,7 +1,7 @@
 /**
  * A server's address on the site (/lineage2/<id>/), made from its name so an
  * owner never has to think one up: "LA2DREAM" → "la2dream", "Мечта x50" →
- * "mechta-x50". The result always fits what the database accepts — lowercase
+ * "mechta-x50", "ΔΡΆΚΟΣ" → "drakos". The result always fits what the database accepts — lowercase
  * Latin letters, digits and hyphens, 3 to 32 characters, not starting like a
  * rate page ("x50").
  */
@@ -12,13 +12,24 @@ const CYRILLIC: Record<string, string> = {
   ъ: '', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya'
 }
 
+/** Greek the way it is usually spelt in Latin letters (close to ELOT 743). */
+const GREEK: Record<string, string> = {
+  α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th', ι: 'i', κ: 'k', λ: 'l',
+  μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f',
+  χ: 'ch', ψ: 'ps', ω: 'o'
+}
+
 export function serverIdFrom(name: string) {
   let id = name
     .toLowerCase()
     .replace(/[\u0400-\u04ff]/g, (ch) => CYRILLIC[ch] ?? '')
-    // Accents off the Latin letters: "Élan" → "elan".
+    // Accents off the Latin and Greek letters: "Élan" → "elan", "ά" → "α".
+    // After the Cyrillic, where й and ё are letters of their own.
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
+    // ου is one sound, "ou": Ουρανός → ouranos.
+    .replace(/ου/g, 'ou')
+    .replace(/[\u0370-\u03ff]/g, (ch) => GREEK[ch] ?? '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 32)
