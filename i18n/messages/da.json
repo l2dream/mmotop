@@ -9,6 +9,7 @@
     "theme": "Skift tema",
     "language": "Sprog",
     "login": "LOG IND",
+    "account": "KONTO",
     "categories": "Spilkategorier",
     "toTop": "Til toppen"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populært"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Indlæser…",
+    "intro": "Log ind for at tilføje din server til MMOTOP og administrere den. Skriv din e-mail, så sender vi dig et login-link — ingen adgangskode.",
+    "email": "E-mail",
+    "sendLink": "Send login-link",
+    "sent": "Vi har sendt et login-link til {email}.",
+    "sentHint": "Åbn det på denne enhed. Hvis mailen ikke er kommet, så tjek spam-mappen.",
+    "otherEmail": "Brug en anden e-mail",
+    "tooMany": "For mange forsøg. Prøv igen om en time.",
+    "failed": "Noget gik galt. Prøv igen.",
+    "signedInAs": "Logget ind som",
+    "signOut": "Log ud",
+    "noServers": "Du har ingen servere endnu. Tilføj den første — den vises på siden, når en moderator har godkendt den.",
+    "addServer": "Tilføj server",
+    "editServer": "Rediger server",
+    "edit": "Rediger",
+    "delete": "Slet",
+    "confirmDelete": "Slet {name}? Det kan ikke fortrydes.",
+    "save": "Gem",
+    "cancel": "Annuller",
+    "recheck": "Når du ændrer en offentliggjort server, skal den godkendes igen.",
+    "moderation": "En moderator tjekker hver ny server og hver ændring, før de vises på siden.",
+    "idTaken": "Adressen er allerede taget. Vælg en anden.",
+    "invalid": "Nogle felter er ikke udfyldt korrekt. Tjek dem.",
+    "fields": {
+      "name": "Servernavn",
+      "page": "Side på sitet:",
+      "id": "Adresse på sitet",
+      "idHint": "Små latinske bogstaver, tal og bindestreger, 3–32 tegn. Kan ikke ændres senere.",
+      "game": "Spil",
+      "otherGame": "Andet spil…",
+      "gameName": "Spillets navn",
+      "chronicle": "Krønike / version",
+      "otherChronicle": "Anden version…",
+      "chronicleName": "Versionens navn",
+      "choose": "Vælg…",
+      "rate": "Rate",
+      "rateHint": "f.eks. 50",
+      "openDate": "Åbningsdato",
+      "url": "Serverens hjemmeside",
+      "description": "Beskrivelse"
+    },
+    "status": {
+      "pending": "Til godkendelse",
+      "approved": "Offentliggjort",
+      "rejected": "Afvist",
+      "hidden": "Skjult"
+    }
   }
 }

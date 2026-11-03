@@ -9,6 +9,7 @@
     "theme": "Temayı değiştir",
     "language": "Dil",
     "login": "GİRİŞ",
+    "account": "HESABIM",
     "categories": "Oyun kategorileri",
     "toTop": "Başa dön"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Popüler"
+  },
+  "account": {
+    "title": "Hesabım",
+    "loading": "Yükleniyor…",
+    "intro": "Sunucunuzu MMOTOP’a eklemek ve yönetmek için giriş yapın. E-posta adresinizi girin, size bir giriş bağlantısı gönderelim — şifre gerekmez.",
+    "email": "E-posta",
+    "sendLink": "Giriş bağlantısı gönder",
+    "sent": "{email} adresine bir giriş bağlantısı gönderdik.",
+    "sentHint": "Bağlantıyı bu cihazda açın. E-posta gelmediyse spam klasörüne bakın.",
+    "otherEmail": "Başka bir e-posta kullan",
+    "tooMany": "Çok fazla deneme. Lütfen bir saat sonra tekrar deneyin.",
+    "failed": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "signedInAs": "Giriş yapan:",
+    "signOut": "Çıkış yap",
+    "noServers": "Henüz sunucunuz yok. İlkini ekleyin — bir moderatör onayladığında sitede görünür.",
+    "addServer": "Sunucu ekle",
+    "editServer": "Sunucuyu düzenle",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "confirmDelete": "{name} silinsin mi? Bu işlem geri alınamaz.",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "recheck": "Değişiklikten sonra yayındaki sunucu yeniden incelemeye gider.",
+    "moderation": "Her yeni sunucu ve her değişiklik, sitede görünmeden önce bir moderatör tarafından incelenir.",
+    "idTaken": "Bu adres zaten alınmış. Başka bir adres seçin.",
+    "invalid": "Bazı alanlar hatalı doldurulmuş. Lütfen kontrol edin.",
+    "fields": {
+      "name": "Sunucu adı",
+      "page": "Sitedeki sayfa:",
+      "id": "Sitedeki adres",
+      "idHint": "Küçük Latin harfleri, rakamlar ve kısa çizgi, 3–32 karakter. Sonradan değiştirilemez.",
+      "game": "Oyun",
+      "otherGame": "Başka oyun…",
+      "gameName": "Oyunun adı",
+      "chronicle": "Kronik / sürüm",
+      "otherChronicle": "Başka sürüm…",
+      "chronicleName": "Sürümün adı",
+      "choose": "Seçin…",
+      "rate": "Rate",
+      "rateHint": "ör. 50",
+      "openDate": "Açılış tarihi",
+      "url": "Sunucunun sitesi",
+      "description": "Açıklama"
+    },
+    "status": {
+      "pending": "İncelemede",
+      "approved": "Yayında",
+      "rejected": "Reddedildi",
+      "hidden": "Gizli"
+    }
   }
 }

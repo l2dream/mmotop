@@ -9,6 +9,7 @@
     "theme": "Mainīt tēmu",
     "language": "Valoda",
     "login": "PIETEIKTIES",
+    "account": "KONTS",
     "categories": "Spēļu kategorijas",
     "toTop": "Uz augšu"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populāri"
+  },
+  "account": {
+    "title": "Konts",
+    "loading": "Ielādē…",
+    "intro": "Piesakies, lai pievienotu savu serveri MMOTOP un to pārvaldītu. Ievadi e-pastu, un mēs atsūtīsim pieteikšanās saiti — parole nav vajadzīga.",
+    "email": "E-pasts",
+    "sendLink": "Sūtīt pieteikšanās saiti",
+    "sent": "Mēs nosūtījām pieteikšanās saiti uz {email}.",
+    "sentHint": "Atver to šajā ierīcē. Ja vēstules nav, pārbaudi surogātpasta mapi.",
+    "otherEmail": "Izmantot citu e-pastu",
+    "tooMany": "Pārāk daudz mēģinājumu. Mēģini vēlreiz pēc stundas.",
+    "failed": "Kaut kas nogāja greizi. Mēģini vēlreiz.",
+    "signedInAs": "Pieteicies kā",
+    "signOut": "Iziet",
+    "noServers": "Tev vēl nav serveru. Pievieno pirmo — tas parādīsies vietnē, kad moderators to apstiprinās.",
+    "addServer": "Pievienot serveri",
+    "editServer": "Rediģēt serveri",
+    "edit": "Rediģēt",
+    "delete": "Dzēst",
+    "confirmDelete": "Dzēst {name}? To nevarēs atsaukt.",
+    "save": "Saglabāt",
+    "cancel": "Atcelt",
+    "recheck": "Pēc izmaiņām publicēts serveris atkal nonāk pārbaudē.",
+    "moderation": "Moderators pārbauda katru jaunu serveri un katru izmaiņu, pirms tie parādās vietnē.",
+    "idTaken": "Šī adrese jau ir aizņemta. Izvēlies citu.",
+    "invalid": "Daži lauki aizpildīti nepareizi. Pārbaudi tos.",
+    "fields": {
+      "name": "Servera nosaukums",
+      "page": "Lapa vietnē:",
+      "id": "Adrese vietnē",
+      "idHint": "Mazie latīņu burti, cipari un defises, 3–32 rakstzīmes. Vēlāk mainīt nevar.",
+      "game": "Spēle",
+      "otherGame": "Cita spēle…",
+      "gameName": "Spēles nosaukums",
+      "chronicle": "Hronika / versija",
+      "otherChronicle": "Cita versija…",
+      "chronicleName": "Versijas nosaukums",
+      "choose": "Izvēlies…",
+      "rate": "Rate",
+      "rateHint": "piem., 50",
+      "openDate": "Atvēršanas datums",
+      "url": "Servera vietne",
+      "description": "Apraksts"
+    },
+    "status": {
+      "pending": "Pārbaudē",
+      "approved": "Publicēts",
+      "rejected": "Noraidīts",
+      "hidden": "Paslēpts"
+    }
   }
 }

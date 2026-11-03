@@ -9,6 +9,7 @@
     "theme": "Design wechseln",
     "language": "Sprache",
     "login": "ANMELDEN",
+    "account": "KONTO",
     "categories": "Spielkategorien",
     "toTop": "Nach oben"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Beliebt"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Wird geladen…",
+    "intro": "Melden Sie sich an, um Ihren Server bei MMOTOP einzutragen und zu verwalten. Geben Sie Ihre E-Mail-Adresse ein – wir senden Ihnen einen Anmeldelink, ein Passwort ist nicht nötig.",
+    "email": "E-Mail-Adresse",
+    "sendLink": "Anmeldelink senden",
+    "sent": "Wir haben einen Anmeldelink an {email} gesendet.",
+    "sentHint": "Öffnen Sie ihn auf diesem Gerät. Wenn die E-Mail nicht ankommt, sehen Sie im Spam-Ordner nach.",
+    "otherEmail": "Andere E-Mail-Adresse verwenden",
+    "tooMany": "Zu viele Versuche. Bitte versuchen Sie es in einer Stunde erneut.",
+    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "signedInAs": "Angemeldet als",
+    "signOut": "Abmelden",
+    "noServers": "Sie haben noch keine Server. Fügen Sie den ersten hinzu – er erscheint auf der Website, sobald ein Moderator ihn freigibt.",
+    "addServer": "Server hinzufügen",
+    "editServer": "Server bearbeiten",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "confirmDelete": "{name} löschen? Das lässt sich nicht rückgängig machen.",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "recheck": "Nach einer Änderung wird ein veröffentlichter Server erneut geprüft.",
+    "moderation": "Jeder neue Server und jede Änderung wird von einem Moderator geprüft, bevor sie auf der Website erscheint.",
+    "idTaken": "Diese Adresse ist bereits vergeben. Bitte wählen Sie eine andere.",
+    "invalid": "Einige Felder sind nicht korrekt ausgefüllt. Bitte prüfen Sie sie.",
+    "fields": {
+      "name": "Servername",
+      "page": "Seite auf der Website:",
+      "id": "Adresse auf der Website",
+      "idHint": "Lateinische Kleinbuchstaben, Ziffern und Bindestriche, 3–32 Zeichen. Kann später nicht geändert werden.",
+      "game": "Spiel",
+      "otherGame": "Anderes Spiel…",
+      "gameName": "Name des Spiels",
+      "chronicle": "Chronik / Version",
+      "otherChronicle": "Andere Version…",
+      "chronicleName": "Name der Version",
+      "choose": "Auswählen…",
+      "rate": "Rate",
+      "rateHint": "z. B. 50",
+      "openDate": "Eröffnungsdatum",
+      "url": "Website des Servers",
+      "description": "Beschreibung"
+    },
+    "status": {
+      "pending": "In Prüfung",
+      "approved": "Veröffentlicht",
+      "rejected": "Abgelehnt",
+      "hidden": "Ausgeblendet"
+    }
   }
 }

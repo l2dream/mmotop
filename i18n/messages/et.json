@@ -9,6 +9,7 @@
     "theme": "Vaheta teemat",
     "language": "Keel",
     "login": "LOGI SISSE",
+    "account": "KONTO",
     "categories": "Mängukategooriad",
     "toTop": "Üles"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populaarne"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Laadimine…",
+    "intro": "Logi sisse, et lisada oma server MMOTOPi ja seda hallata. Sisesta oma e-post ja saadame sulle sisselogimislingi — parooli pole vaja.",
+    "email": "E-post",
+    "sendLink": "Saada sisselogimislink",
+    "sent": "Saatsime sisselogimislingi aadressile {email}.",
+    "sentHint": "Ava see selles seadmes. Kui kirja pole, vaata rämpsposti kausta.",
+    "otherEmail": "Kasuta teist e-posti",
+    "tooMany": "Liiga palju katseid. Proovi tunni aja pärast uuesti.",
+    "failed": "Midagi läks valesti. Proovi uuesti.",
+    "signedInAs": "Sisse logitud kui",
+    "signOut": "Logi välja",
+    "noServers": "Sul pole veel servereid. Lisa esimene — see ilmub saidile, kui moderaator on selle kinnitanud.",
+    "addServer": "Lisa server",
+    "editServer": "Muuda serverit",
+    "edit": "Muuda",
+    "delete": "Kustuta",
+    "confirmDelete": "Kas kustutada {name}? Seda ei saa tagasi võtta.",
+    "save": "Salvesta",
+    "cancel": "Tühista",
+    "recheck": "Pärast muutmist läheb avaldatud server uuesti ülevaatusele.",
+    "moderation": "Moderaator vaatab iga uue serveri ja iga muudatuse üle enne, kui need saidile ilmuvad.",
+    "idTaken": "See aadress on juba võetud. Vali teine.",
+    "invalid": "Mõni väli on valesti täidetud. Kontrolli neid.",
+    "fields": {
+      "name": "Serveri nimi",
+      "page": "Leht saidil:",
+      "id": "Aadress saidil",
+      "idHint": "Väikesed ladina tähed, numbrid ja sidekriipsud, 3–32 märki. Hiljem muuta ei saa.",
+      "game": "Mäng",
+      "otherGame": "Muu mäng…",
+      "gameName": "Mängu nimi",
+      "chronicle": "Kroonika / versioon",
+      "otherChronicle": "Muu versioon…",
+      "chronicleName": "Versiooni nimi",
+      "choose": "Vali…",
+      "rate": "Rate",
+      "rateHint": "nt 50",
+      "openDate": "Avamise kuupäev",
+      "url": "Serveri veebileht",
+      "description": "Kirjeldus"
+    },
+    "status": {
+      "pending": "Ülevaatusel",
+      "approved": "Avaldatud",
+      "rejected": "Tagasi lükatud",
+      "hidden": "Peidetud"
+    }
   }
 }

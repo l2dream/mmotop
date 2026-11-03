@@ -9,6 +9,7 @@
     "theme": "Changer de thème",
     "language": "Langue",
     "login": "CONNEXION",
+    "account": "COMPTE",
     "categories": "Catégories de jeux",
     "toTop": "Haut de page"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populaire"
+  },
+  "account": {
+    "title": "Mon compte",
+    "loading": "Chargement…",
+    "intro": "Connectez-vous pour ajouter votre serveur à MMOTOP et le gérer. Indiquez votre adresse e-mail : nous vous enverrons un lien de connexion, sans mot de passe.",
+    "email": "Adresse e-mail",
+    "sendLink": "Envoyer le lien de connexion",
+    "sent": "Nous avons envoyé un lien de connexion à {email}.",
+    "sentHint": "Ouvrez-le sur cet appareil. Si l’e-mail n’arrive pas, regardez dans le dossier des spams.",
+    "otherEmail": "Utiliser une autre adresse",
+    "tooMany": "Trop de tentatives. Réessayez dans une heure.",
+    "failed": "Une erreur s’est produite. Veuillez réessayer.",
+    "signedInAs": "Connecté en tant que",
+    "signOut": "Se déconnecter",
+    "noServers": "Vous n’avez pas encore de serveur. Ajoutez le premier : il apparaîtra sur le site dès qu’un modérateur l’aura validé.",
+    "addServer": "Ajouter un serveur",
+    "editServer": "Modifier le serveur",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDelete": "Supprimer {name} ? Cette action est irréversible.",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "recheck": "Après modification, un serveur publié repasse en modération.",
+    "moderation": "Chaque nouveau serveur et chaque modification sont vérifiés par un modérateur avant d’apparaître sur le site.",
+    "idTaken": "Cette adresse est déjà prise. Choisissez-en une autre.",
+    "invalid": "Certains champs sont mal remplis. Vérifiez-les.",
+    "fields": {
+      "name": "Nom du serveur",
+      "page": "Page sur le site :",
+      "id": "Adresse sur le site",
+      "idHint": "Lettres latines minuscules, chiffres et tirets, de 3 à 32 caractères. Non modifiable par la suite.",
+      "game": "Jeu",
+      "otherGame": "Autre jeu…",
+      "gameName": "Nom du jeu",
+      "chronicle": "Chronique / version",
+      "otherChronicle": "Autre version…",
+      "chronicleName": "Nom de la version",
+      "choose": "Choisir…",
+      "rate": "Rate",
+      "rateHint": "ex. : 50",
+      "openDate": "Date d’ouverture",
+      "url": "Site du serveur",
+      "description": "Description"
+    },
+    "status": {
+      "pending": "En vérification",
+      "approved": "Publié",
+      "rejected": "Refusé",
+      "hidden": "Masqué"
+    }
   }
 }

@@ -9,6 +9,7 @@
     "theme": "Mövzunu dəyiş",
     "language": "Dil",
     "login": "GİRİŞ",
+    "account": "KABİNET",
     "categories": "Oyun kateqoriyaları",
     "toTop": "Yuxarı"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populyar"
+  },
+  "account": {
+    "title": "Kabinet",
+    "loading": "Yüklənir…",
+    "intro": "Serverinizi MMOTOP-a əlavə etmək və onu idarə etmək üçün daxil olun. E-poçtunuzu yazın, sizə giriş linki göndərək — şifrə lazım deyil.",
+    "email": "E-poçt",
+    "sendLink": "Giriş linkini göndər",
+    "sent": "{email} ünvanına giriş linki göndərdik.",
+    "sentHint": "Onu bu cihazda açın. Məktub gəlməyibsə, spam qovluğuna baxın.",
+    "otherEmail": "Başqa e-poçt yaz",
+    "tooMany": "Həddindən çox cəhd. Bir saatdan sonra yenidən cəhd edin.",
+    "failed": "Nəsə alınmadı. Yenidən cəhd edin.",
+    "signedInAs": "Daxil olduğunuz hesab:",
+    "signOut": "Çıxış",
+    "noServers": "Hələ serveriniz yoxdur. Birincisini əlavə edin — moderator təsdiqlədikdən sonra saytda görünəcək.",
+    "addServer": "Server əlavə et",
+    "editServer": "Serveri dəyiş",
+    "edit": "Dəyiş",
+    "delete": "Sil",
+    "confirmDelete": "{name} silinsin? Bunu geri qaytarmaq olmaz.",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et",
+    "recheck": "Dəyişiklikdən sonra dərc olunmuş server yenidən yoxlamaya gedir.",
+    "moderation": "Hər yeni server və hər dəyişiklik saytda görünməzdən əvvəl moderator tərəfindən yoxlanılır.",
+    "idTaken": "Bu ünvan artıq tutulub. Başqasını seçin.",
+    "invalid": "Bəzi sahələr səhv doldurulub. Onları yoxlayın.",
+    "fields": {
+      "name": "Serverin adı",
+      "page": "Saytdakı səhifə:",
+      "id": "Saytdakı ünvan",
+      "idHint": "Kiçik latın hərfləri, rəqəmlər və defis, 3–32 simvol. Sonra dəyişmək olmaz.",
+      "game": "Oyun",
+      "otherGame": "Başqa oyun…",
+      "gameName": "Oyunun adı",
+      "chronicle": "Xronika / versiya",
+      "otherChronicle": "Başqa versiya…",
+      "chronicleName": "Versiyanın adı",
+      "choose": "Seçin…",
+      "rate": "Rate",
+      "rateHint": "məsələn, 50",
+      "openDate": "Açılış tarixi",
+      "url": "Serverin saytı",
+      "description": "Təsvir"
+    },
+    "status": {
+      "pending": "Yoxlamada",
+      "approved": "Dərc olunub",
+      "rejected": "Rədd edilib",
+      "hidden": "Gizlədilib"
+    }
   }
 }

@@ -9,6 +9,7 @@
     "theme": "Bytt tema",
     "language": "Språk",
     "login": "LOGG INN",
+    "account": "KONTO",
     "categories": "Spillkategorier",
     "toTop": "Til toppen"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populært"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Laster inn…",
+    "intro": "Logg inn for å legge til serveren din på MMOTOP og administrere den. Skriv inn e-postadressen din, så sender vi deg en innloggingslenke — uten passord.",
+    "email": "E-post",
+    "sendLink": "Send innloggingslenke",
+    "sent": "Vi har sendt en innloggingslenke til {email}.",
+    "sentHint": "Åpne den på denne enheten. Hvis e-posten ikke har kommet, sjekk søppelpostmappen.",
+    "otherEmail": "Bruk en annen e-post",
+    "tooMany": "For mange forsøk. Prøv igjen om en time.",
+    "failed": "Noe gikk galt. Prøv igjen.",
+    "signedInAs": "Logget inn som",
+    "signOut": "Logg ut",
+    "noServers": "Du har ingen servere ennå. Legg til den første — den vises på siden når en moderator har godkjent den.",
+    "addServer": "Legg til server",
+    "editServer": "Rediger server",
+    "edit": "Rediger",
+    "delete": "Slett",
+    "confirmDelete": "Slette {name}? Dette kan ikke angres.",
+    "save": "Lagre",
+    "cancel": "Avbryt",
+    "recheck": "Når du endrer en publisert server, må den godkjennes på nytt.",
+    "moderation": "En moderator sjekker hver nye server og hver endring før de vises på siden.",
+    "idTaken": "Adressen er allerede tatt. Velg en annen.",
+    "invalid": "Noen felt er ikke fylt ut riktig. Sjekk dem.",
+    "fields": {
+      "name": "Servernavn",
+      "page": "Side på nettstedet:",
+      "id": "Adresse på nettstedet",
+      "idHint": "Små latinske bokstaver, tall og bindestreker, 3–32 tegn. Kan ikke endres senere.",
+      "game": "Spill",
+      "otherGame": "Annet spill…",
+      "gameName": "Spillets navn",
+      "chronicle": "Krønike / versjon",
+      "otherChronicle": "Annen versjon…",
+      "chronicleName": "Versjonens navn",
+      "choose": "Velg…",
+      "rate": "Rate",
+      "rateHint": "f.eks. 50",
+      "openDate": "Åpningsdato",
+      "url": "Serverens nettside",
+      "description": "Beskrivelse"
+    },
+    "status": {
+      "pending": "Til godkjenning",
+      "approved": "Publisert",
+      "rejected": "Avvist",
+      "hidden": "Skjult"
+    }
   }
 }

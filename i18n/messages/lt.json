@@ -9,6 +9,7 @@
     "theme": "Keisti temą",
     "language": "Kalba",
     "login": "PRISIJUNGTI",
+    "account": "PASKYRA",
     "categories": "Žaidimų kategorijos",
     "toTop": "Į viršų"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populiaru"
+  },
+  "account": {
+    "title": "Paskyra",
+    "loading": "Įkeliama…",
+    "intro": "Prisijunk, kad pridėtum savo serverį į MMOTOP ir jį tvarkytum. Įvesk el. paštą ir atsiųsime prisijungimo nuorodą — slaptažodžio nereikia.",
+    "email": "El. paštas",
+    "sendLink": "Siųsti prisijungimo nuorodą",
+    "sent": "Išsiuntėme prisijungimo nuorodą adresu {email}.",
+    "sentHint": "Atidaryk ją šiame įrenginyje. Jei laiško nėra, pažiūrėk į šlamšto aplanką.",
+    "otherEmail": "Naudoti kitą el. paštą",
+    "tooMany": "Per daug bandymų. Bandyk dar kartą po valandos.",
+    "failed": "Kažkas nepavyko. Bandyk dar kartą.",
+    "signedInAs": "Prisijungta kaip",
+    "signOut": "Atsijungti",
+    "noServers": "Kol kas neturi serverių. Pridėk pirmąjį — jis atsiras svetainėje, kai moderatorius jį patvirtins.",
+    "addServer": "Pridėti serverį",
+    "editServer": "Redaguoti serverį",
+    "edit": "Redaguoti",
+    "delete": "Ištrinti",
+    "confirmDelete": "Ištrinti {name}? Šio veiksmo atšaukti negalima.",
+    "save": "Išsaugoti",
+    "cancel": "Atšaukti",
+    "recheck": "Pakeitus paskelbtą serverį, jis vėl keliauja moderuoti.",
+    "moderation": "Moderatorius peržiūri kiekvieną naują serverį ir kiekvieną pakeitimą, prieš jiems atsirandant svetainėje.",
+    "idTaken": "Šis adresas jau užimtas. Pasirink kitą.",
+    "invalid": "Kai kurie laukai užpildyti neteisingai. Patikrink juos.",
+    "fields": {
+      "name": "Serverio pavadinimas",
+      "page": "Puslapis svetainėje:",
+      "id": "Adresas svetainėje",
+      "idHint": "Mažosios lotyniškos raidės, skaitmenys ir brūkšneliai, 3–32 simboliai. Vėliau pakeisti negalima.",
+      "game": "Žaidimas",
+      "otherGame": "Kitas žaidimas…",
+      "gameName": "Žaidimo pavadinimas",
+      "chronicle": "Kronika / versija",
+      "otherChronicle": "Kita versija…",
+      "chronicleName": "Versijos pavadinimas",
+      "choose": "Pasirink…",
+      "rate": "Rate",
+      "rateHint": "pvz., 50",
+      "openDate": "Atidarymo data",
+      "url": "Serverio svetainė",
+      "description": "Aprašymas"
+    },
+    "status": {
+      "pending": "Tikrinamas",
+      "approved": "Paskelbtas",
+      "rejected": "Atmestas",
+      "hidden": "Paslėptas"
+    }
   }
 }

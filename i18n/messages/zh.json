@@ -9,6 +9,7 @@
     "theme": "切换主题",
     "language": "语言",
     "login": "登录",
+    "account": "我的账户",
     "categories": "游戏分类",
     "toTop": "回到顶部"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "热门"
+  },
+  "account": {
+    "title": "我的账户",
+    "loading": "加载中…",
+    "intro": "登录后即可将你的服务器添加到 MMOTOP 并进行管理。输入邮箱，我们会发送登录链接，无需密码。",
+    "email": "邮箱",
+    "sendLink": "发送登录链接",
+    "sent": "登录链接已发送至 {email}。",
+    "sentHint": "请在此设备上打开。如果没有收到邮件，请查看垃圾邮件文件夹。",
+    "otherEmail": "使用其他邮箱",
+    "tooMany": "尝试次数过多，请一小时后再试。",
+    "failed": "出了点问题，请重试。",
+    "signedInAs": "当前登录：",
+    "signOut": "退出登录",
+    "noServers": "你还没有服务器。添加第一个吧，管理员审核通过后就会显示在网站上。",
+    "addServer": "添加服务器",
+    "editServer": "编辑服务器",
+    "edit": "编辑",
+    "delete": "删除",
+    "confirmDelete": "确定删除 {name}？此操作无法撤销。",
+    "save": "保存",
+    "cancel": "取消",
+    "recheck": "已发布的服务器修改后需要重新审核。",
+    "moderation": "每个新服务器和每次修改在显示到网站之前都会经过管理员审核。",
+    "idTaken": "该地址已被占用，请换一个。",
+    "invalid": "部分内容填写有误，请检查。",
+    "fields": {
+      "name": "服务器名称",
+      "page": "网站页面：",
+      "id": "网站地址",
+      "idHint": "小写拉丁字母、数字和连字符，3–32 个字符。之后无法更改。",
+      "game": "游戏",
+      "otherGame": "其他游戏…",
+      "gameName": "游戏名称",
+      "chronicle": "版本",
+      "otherChronicle": "其他版本…",
+      "chronicleName": "版本名称",
+      "choose": "请选择…",
+      "rate": "Rate",
+      "rateHint": "例如 50",
+      "openDate": "开服日期",
+      "url": "服务器官网",
+      "description": "简介"
+    },
+    "status": {
+      "pending": "审核中",
+      "approved": "已发布",
+      "rejected": "已拒绝",
+      "hidden": "已隐藏"
+    }
   }
 }
