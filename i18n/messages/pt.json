@@ -9,6 +9,7 @@
     "theme": "Mudar tema",
     "language": "Idioma",
     "login": "ENTRAR",
+    "account": "CONTA",
     "categories": "Categorias de jogos",
     "toTop": "Voltar ao topo"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populares"
+  },
+  "account": {
+    "title": "A minha conta",
+    "loading": "A carregar…",
+    "intro": "Inicie sessão para adicionar o seu servidor ao MMOTOP e geri-lo. Indique o seu e-mail e enviamos-lhe uma ligação de acesso, sem palavra-passe.",
+    "email": "E-mail",
+    "sendLink": "Enviar ligação de acesso",
+    "sent": "Enviámos uma ligação de acesso para {email}.",
+    "sentHint": "Abra-a neste dispositivo. Se o e-mail não chegar, veja a pasta de spam.",
+    "otherEmail": "Usar outro e-mail",
+    "tooMany": "Demasiadas tentativas. Tente novamente dentro de uma hora.",
+    "failed": "Algo correu mal. Tente novamente.",
+    "signedInAs": "Sessão iniciada como",
+    "signOut": "Terminar sessão",
+    "noServers": "Ainda não tem servidores. Adicione o primeiro: aparece no site assim que um moderador o aprovar.",
+    "addServer": "Adicionar servidor",
+    "editServer": "Editar servidor",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "confirmDelete": "Eliminar {name}? Não é possível anular.",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "recheck": "Depois de alterado, um servidor publicado volta à moderação.",
+    "moderation": "Um moderador verifica cada servidor novo e cada alteração antes de aparecerem no site.",
+    "idTaken": "Este endereço já está ocupado. Escolha outro.",
+    "invalid": "Alguns campos não estão bem preenchidos. Verifique-os.",
+    "fields": {
+      "name": "Nome do servidor",
+      "page": "Página no site:",
+      "id": "Endereço no site",
+      "idHint": "Letras latinas minúsculas, algarismos e hífenes, de 3 a 32 caracteres. Não pode ser alterado depois.",
+      "game": "Jogo",
+      "otherGame": "Outro jogo…",
+      "gameName": "Nome do jogo",
+      "chronicle": "Crónica / versão",
+      "otherChronicle": "Outra versão…",
+      "chronicleName": "Nome da versão",
+      "choose": "Escolher…",
+      "rate": "Rate",
+      "rateHint": "p. ex. 50",
+      "openDate": "Data de abertura",
+      "url": "Site do servidor",
+      "description": "Descrição"
+    },
+    "status": {
+      "pending": "Em análise",
+      "approved": "Publicado",
+      "rejected": "Rejeitado",
+      "hidden": "Oculto"
+    }
   }
 }

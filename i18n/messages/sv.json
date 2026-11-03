@@ -9,6 +9,7 @@
     "theme": "Byt tema",
     "language": "Språk",
     "login": "LOGGA IN",
+    "account": "KONTO",
     "categories": "Spelkategorier",
     "toTop": "Till toppen"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Populärt"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Laddar…",
+    "intro": "Logga in för att lägga till din server på MMOTOP och hantera den. Ange din e-postadress så skickar vi en inloggningslänk — inget lösenord behövs.",
+    "email": "E-post",
+    "sendLink": "Skicka inloggningslänk",
+    "sent": "Vi har skickat en inloggningslänk till {email}.",
+    "sentHint": "Öppna den på den här enheten. Om mejlet inte har kommit, titta i skräpposten.",
+    "otherEmail": "Använd en annan e-postadress",
+    "tooMany": "För många försök. Försök igen om en timme.",
+    "failed": "Något gick fel. Försök igen.",
+    "signedInAs": "Inloggad som",
+    "signOut": "Logga ut",
+    "noServers": "Du har inga servrar än. Lägg till den första — den visas på sajten när en moderator har godkänt den.",
+    "addServer": "Lägg till server",
+    "editServer": "Redigera server",
+    "edit": "Redigera",
+    "delete": "Ta bort",
+    "confirmDelete": "Ta bort {name}? Det går inte att ångra.",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "recheck": "När du ändrar en publicerad server granskas den på nytt.",
+    "moderation": "En moderator granskar varje ny server och varje ändring innan de visas på sajten.",
+    "idTaken": "Adressen är redan upptagen. Välj en annan.",
+    "invalid": "Några fält är inte rätt ifyllda. Kontrollera dem.",
+    "fields": {
+      "name": "Servernamn",
+      "page": "Sida på sajten:",
+      "id": "Adress på sajten",
+      "idHint": "Små latinska bokstäver, siffror och bindestreck, 3–32 tecken. Kan inte ändras senare.",
+      "game": "Spel",
+      "otherGame": "Annat spel…",
+      "gameName": "Spelets namn",
+      "chronicle": "Krönika / version",
+      "otherChronicle": "Annan version…",
+      "chronicleName": "Versionens namn",
+      "choose": "Välj…",
+      "rate": "Rate",
+      "rateHint": "t.ex. 50",
+      "openDate": "Öppningsdatum",
+      "url": "Serverns webbplats",
+      "description": "Beskrivning"
+    },
+    "status": {
+      "pending": "Granskas",
+      "approved": "Publicerad",
+      "rejected": "Avvisad",
+      "hidden": "Dold"
+    }
   }
 }

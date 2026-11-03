@@ -9,6 +9,7 @@
     "theme": "Zmień motyw",
     "language": "Język",
     "login": "ZALOGUJ",
+    "account": "KONTO",
     "categories": "Kategorie gier",
     "toTop": "Do góry"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Popularne"
+  },
+  "account": {
+    "title": "Konto",
+    "loading": "Wczytywanie…",
+    "intro": "Zaloguj się, aby dodać swój serwer do MMOTOP i nim zarządzać. Podaj adres e-mail — wyślemy link do logowania, hasło nie jest potrzebne.",
+    "email": "E-mail",
+    "sendLink": "Wyślij link do logowania",
+    "sent": "Wysłaliśmy link do logowania na {email}.",
+    "sentHint": "Otwórz go na tym urządzeniu. Jeśli wiadomości nie ma, sprawdź folder spamu.",
+    "otherEmail": "Podaj inny adres",
+    "tooMany": "Zbyt wiele prób. Spróbuj ponownie za godzinę.",
+    "failed": "Coś poszło nie tak. Spróbuj ponownie.",
+    "signedInAs": "Zalogowano jako",
+    "signOut": "Wyloguj",
+    "noServers": "Nie masz jeszcze serwerów. Dodaj pierwszy — pojawi się na stronie, gdy zatwierdzi go moderator.",
+    "addServer": "Dodaj serwer",
+    "editServer": "Edytuj serwer",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "confirmDelete": "Usunąć {name}? Tego nie da się cofnąć.",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "recheck": "Po zmianach opublikowany serwer wraca do moderacji.",
+    "moderation": "Moderator sprawdza każdy nowy serwer i każdą zmianę, zanim pojawią się na stronie.",
+    "idTaken": "Ten adres jest już zajęty. Wybierz inny.",
+    "invalid": "Niektóre pola są wypełnione niepoprawnie. Sprawdź je.",
+    "fields": {
+      "name": "Nazwa serwera",
+      "page": "Strona w serwisie:",
+      "id": "Adres w serwisie",
+      "idHint": "Małe litery łacińskie, cyfry i myślniki, 3–32 znaki. Później nie można go zmienić.",
+      "game": "Gra",
+      "otherGame": "Inna gra…",
+      "gameName": "Nazwa gry",
+      "chronicle": "Kronika / wersja",
+      "otherChronicle": "Inna wersja…",
+      "chronicleName": "Nazwa wersji",
+      "choose": "Wybierz…",
+      "rate": "Rate",
+      "rateHint": "np. 50",
+      "openDate": "Data otwarcia",
+      "url": "Strona serwera",
+      "description": "Opis"
+    },
+    "status": {
+      "pending": "W weryfikacji",
+      "approved": "Opublikowany",
+      "rejected": "Odrzucony",
+      "hidden": "Ukryty"
+    }
   }
 }

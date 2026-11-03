@@ -9,6 +9,7 @@
     "theme": "Přepnout motiv",
     "language": "Jazyk",
     "login": "PŘIHLÁSIT",
+    "account": "ÚČET",
     "categories": "Kategorie her",
     "toTop": "Nahoru"
   },
@@ -140,5 +141,55 @@
   },
   "footer": {
     "popular": "Oblíbené"
+  },
+  "account": {
+    "title": "Můj účet",
+    "loading": "Načítání…",
+    "intro": "Přihlaste se, abyste mohli přidat svůj server na MMOTOP a spravovat ho. Zadejte e-mail a pošleme vám odkaz pro přihlášení, heslo není potřeba.",
+    "email": "E-mail",
+    "sendLink": "Poslat odkaz pro přihlášení",
+    "sent": "Odkaz pro přihlášení jsme poslali na {email}.",
+    "sentHint": "Otevřete ho na tomto zařízení. Pokud e-mail nepřišel, podívejte se do spamu.",
+    "otherEmail": "Zadat jiný e-mail",
+    "tooMany": "Příliš mnoho pokusů. Zkuste to znovu za hodinu.",
+    "failed": "Něco se pokazilo. Zkuste to znovu.",
+    "signedInAs": "Přihlášen jako",
+    "signOut": "Odhlásit se",
+    "noServers": "Zatím nemáte žádné servery. Přidejte první — na webu se objeví, jakmile ho schválí moderátor.",
+    "addServer": "Přidat server",
+    "editServer": "Upravit server",
+    "edit": "Upravit",
+    "delete": "Smazat",
+    "confirmDelete": "Smazat {name}? Nelze to vrátit zpět.",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "recheck": "Po úpravě jde zveřejněný server znovu ke schválení.",
+    "moderation": "Každý nový server i každou změnu zkontroluje moderátor, než se objeví na webu.",
+    "idTaken": "Tato adresa je už obsazená. Zvolte jinou.",
+    "invalid": "Některá pole nejsou vyplněna správně. Zkontrolujte je.",
+    "fields": {
+      "name": "Název serveru",
+      "page": "Stránka na webu:",
+      "id": "Adresa na webu",
+      "idHint": "Malá latinková písmena, číslice a pomlčky, 3–32 znaků. Později ji nelze změnit.",
+      "game": "Hra",
+      "otherGame": "Jiná hra…",
+      "gameName": "Název hry",
+      "chronicle": "Kronika / verze",
+      "otherChronicle": "Jiná verze…",
+      "chronicleName": "Název verze",
+      "choose": "Vyberte…",
+      "rate": "Rate",
+      "rateHint": "např. 50",
+      "openDate": "Datum otevření",
+      "url": "Web serveru",
+      "description": "Popis"
+    },
+    "status": {
+      "pending": "Ve schvalování",
+      "approved": "Zveřejněno",
+      "rejected": "Zamítnuto",
+      "hidden": "Skryto"
+    }
   }
 }
