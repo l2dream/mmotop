@@ -181,6 +181,8 @@
       "choose": "Seçin…",
       "rate": "Rate",
       "rateHint": "ör. 50",
+      "rateText": "Rate yerine (isteğe bağlı)",
+      "rateTextHint": "ör. PvP veya GvE",
       "openDate": "Açılış tarihi",
       "url": "Sunucunun sitesi",
       "description": "Açıklama"

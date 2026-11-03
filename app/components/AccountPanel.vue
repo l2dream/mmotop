@@ -21,13 +21,15 @@ interface OwnServer {
   requested_game: string | null
   chronicle: string
   rate: number | null
+  /** In place of a rate, when there is none: "PvP", "GvE"… */
+  rate_text: string | null
   url: string
   open_date: string
   description: string | null
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'requested_game'> & { rate: string, requested_game: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game'> & { rate: string, rate_text: string, requested_game: string }
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -124,7 +126,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, url, open_date, description, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -138,6 +140,7 @@ function addServer() {
   customId.value = false
   idOpen.value = false
   ownChronicle.value = false
+  noRate.value = false
   draft.value = {
     id: '',
     name: '',
@@ -145,6 +148,7 @@ function addServer() {
     requested_game: '',
     chronicle: '',
     rate: '',
+    rate_text: '',
     url: 'https://',
     open_date: new Date().toISOString().slice(0, 10),
     description: ''
@@ -156,7 +160,8 @@ function editServer(s: OwnServer) {
   editing.value = s.id
   customId.value = false
   idOpen.value = false
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), requested_game: s.requested_game ?? '', description: s.description ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '' }
+  noRate.value = s.rate == null
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
 }
 
@@ -213,6 +218,13 @@ const chronicleChoice = computed({
   }
 })
 
+/**
+ * "No rates": the number gives way to an optional word in its place, picked
+ * from the usual ones or written in. Shown where "x50" would be.
+ */
+const noRate = ref(false)
+const RATE_WORDS = ['PvP', 'GvE', 'RvR', 'PvE']
+
 /** A different game has different versions: the choice starts again. */
 function pickGame() {
   draft.value!.chronicle = ''
@@ -234,7 +246,8 @@ async function save() {
     game: d.game,
     requested_game: d.game === 'other' ? d.requested_game.trim() : null,
     chronicle: d.chronicle.trim(),
-    rate: d.rate.trim() ? Number(d.rate) : null,
+    rate: !noRate.value && d.rate.trim() ? Number(d.rate) : null,
+    rate_text: noRate.value ? d.rate_text.trim() || null : null,
     url: d.url.trim(),
     open_date: d.open_date,
     description: d.description?.trim() || null
@@ -357,10 +370,23 @@ async function remove(s: OwnServer) {
             <input v-model="draft.chronicle" type="text" required maxlength="40">
           </label>
           <div class="account-pair">
-            <label class="account-field">
-              <span>{{ $t('account.fields.rate') }}</span>
-              <input v-model="draft.rate" type="number" min="0.01" max="100000" step="any" inputmode="decimal" :placeholder="$t('account.fields.rateHint')">
-            </label>
+            <div class="account-field">
+              <label v-if="!noRate" class="account-field">
+                <span>{{ $t('account.fields.rate') }}</span>
+                <input v-model="draft.rate" type="number" min="0.01" max="100000" step="any" inputmode="decimal" :placeholder="$t('account.fields.rateHint')">
+              </label>
+              <label v-else class="account-field">
+                <span>{{ $t('account.fields.rateText') }}</span>
+                <input v-model="draft.rate_text" type="text" maxlength="20" list="account-rate-words" :placeholder="$t('account.fields.rateTextHint')">
+                <datalist id="account-rate-words">
+                  <option v-for="w in RATE_WORDS" :key="w" :value="w" />
+                </datalist>
+              </label>
+              <label class="account-check">
+                <input v-model="noRate" type="checkbox">
+                <span>{{ $t('filter.noRates') }}</span>
+              </label>
+            </div>
             <label class="account-field">
               <span>{{ $t('account.fields.openDate') }}</span>
               <input v-model="draft.open_date" type="date" required>

@@ -181,6 +181,8 @@
       "choose": "Izvēlies…",
       "rate": "Rate",
       "rateHint": "piem., 50",
+      "rateText": "Rate vietā (nav obligāts)",
+      "rateTextHint": "piem., PvP vai GvE",
       "openDate": "Atvēršanas datums",
       "url": "Servera vietne",
       "description": "Apraksts"

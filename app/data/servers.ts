@@ -21,6 +21,11 @@ export interface Server {
    * RvR or GvE instead); the filter's "No rates" chip finds those.
    */
   rate?: number
+  /**
+   * What a server with no rate shows in its place: "PvP", "GvE", "RvR" or
+   * the owner's own word. Never together with a rate.
+   */
+  rateText?: string
   url: string
   /** Opening date, "YYYY-MM-DD". */
   openDate: string

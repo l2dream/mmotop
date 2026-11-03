@@ -181,6 +181,8 @@
       "choose": "Seçin…",
       "rate": "Rate",
       "rateHint": "məsələn, 50",
+      "rateText": "Rate əvəzinə (məcburi deyil)",
+      "rateTextHint": "məsələn, PvP və ya GvE",
       "openDate": "Açılış tarixi",
       "url": "Serverin saytı",
       "description": "Təsvir"
