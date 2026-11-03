@@ -191,5 +191,18 @@
       "rejected": "Avvisad",
       "hidden": "Dold"
     }
+  },
+  "vote": {
+    "open": "Rösta",
+    "nickname": "Namn i spelet (valfritt)",
+    "nicknameHint": "Om servern belönar röster går belöningen till den här karaktären.",
+    "submit": "Lägg din röst",
+    "thanks": "Tack! Din röst räknas. Du kan rösta igen om 12 timmar.",
+    "thanksRewarded": "Tack! Din röst räknas och servern har fått veta om din belöning. Du kan rösta igen om 12 timmar.",
+    "tooSoon": "Du har redan röstat på den här servern. Du kan rösta igen: {time}.",
+    "badNickname": "Namnet är 2–32 bokstäver, siffror, mellanslag, punkter, bindestreck eller understreck.",
+    "captchaFailed": "Kontrollen misslyckades. Försök igen.",
+    "captchaLoad": "Kontrollen kunde inte laddas. Ladda om sidan och försök igen.",
+    "failed": "Något gick fel. Försök igen."
   }
 }

@@ -191,5 +191,18 @@
       "rejected": "Avvist",
       "hidden": "Skjult"
     }
+  },
+  "vote": {
+    "open": "Stem",
+    "nickname": "Navn i spillet (valgfritt)",
+    "nicknameHint": "Hvis serveren belønner stemmer, går belønningen til denne karakteren.",
+    "submit": "Avgi stemme",
+    "thanks": "Takk! Stemmen din er telt. Du kan stemme igjen om 12 timer.",
+    "thanksRewarded": "Takk! Stemmen din er telt, og serveren har fått beskjed om belønningen din. Du kan stemme igjen om 12 timer.",
+    "tooSoon": "Du har allerede stemt på denne serveren. Du kan stemme igjen: {time}.",
+    "badNickname": "Navnet er 2–32 bokstaver, tall, mellomrom, punktum, bindestreker eller understreker.",
+    "captchaFailed": "Kontrollen mislyktes. Prøv igjen.",
+    "captchaLoad": "Kontrollen kunne ikke lastes. Last inn siden på nytt og prøv igjen.",
+    "failed": "Noe gikk galt. Prøv igjen."
   }
 }

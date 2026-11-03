@@ -28,6 +28,11 @@ export interface Server {
   listedAt: string
   /** Votes this calendar month; they reset on the 1st. Drives TOP GAMES. */
   votes: number
+  /**
+   * Added by its owner and approved, so it is in the database and can be
+   * voted for. The demo servers below are not, and have no vote button.
+   */
+  live?: boolean
 }
 
 /**
@@ -110,7 +115,9 @@ const DEMO_SERVERS: Server[] = [
  */
 // …and so is one under a game the site does not list (the database refuses
 // to approve those, see the other_game migration).
-const LIVE_SERVERS = (LIVE as Server[]).filter((s) => !!gameById(s.game) && !isChronicleAddress(s.game, s.id))
+const LIVE_SERVERS = (LIVE as Server[])
+  .filter((s) => !!gameById(s.game) && !isChronicleAddress(s.game, s.id))
+  .map((s) => ({ ...s, live: true }))
 
 /** The real servers first; a demo one with the same address gives way. */
 const LIVE_IDS = new Set(LIVE_SERVERS.map((s) => s.id))

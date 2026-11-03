@@ -17,6 +17,9 @@ const SUPABASE_KEY = 'sb_publishable_m0WmMLZtsVOpcn_pjJQLmA_0UFch4QJ'
  */
 export const AUTH_STORAGE_KEY = 'mmotop-auth'
 
+/** Where the Edge Functions answer: /vote, /telegram-auth. */
+export const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`
+
 let client: Promise<SupabaseClient> | null = null
 
 /**
