@@ -181,6 +181,8 @@
       "choose": "Επιλέξτε…",
       "rate": "Rate",
       "rateHint": "π.χ. 50",
+      "rateText": "Αντί για rate (προαιρετικό)",
+      "rateTextHint": "π.χ. PvP ή GvE",
       "openDate": "Ημερομηνία έναρξης",
       "url": "Ιστότοπος διακομιστή",
       "description": "Περιγραφή"

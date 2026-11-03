@@ -46,8 +46,9 @@ export function useServerFormat() {
     return gameById(server.game)?.name ?? ''
   }
 
+  /** "x50"; or, with no rate, what the owner wrote instead ("PvP"). */
   function rateLabel(server: Server) {
-    return server.rate == null ? '' : `x${server.rate}`
+    return server.rate == null ? server.rateText ?? '' : `x${server.rate}`
   }
 
   // Split across two lines in the card, so the column stays narrow: day and month

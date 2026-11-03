@@ -181,6 +181,8 @@
       "choose": "Velg…",
       "rate": "Rate",
       "rateHint": "f.eks. 50",
+      "rateText": "I stedet for rate (valgfritt)",
+      "rateTextHint": "f.eks. PvP eller GvE",
       "openDate": "Åpningsdato",
       "url": "Serverens nettside",
       "description": "Beskrivelse"

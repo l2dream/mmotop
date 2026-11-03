@@ -181,6 +181,8 @@
       "choose": "Vali…",
       "rate": "Rate",
       "rateHint": "nt 50",
+      "rateText": "Rate’i asemel (valikuline)",
+      "rateTextHint": "nt PvP või GvE",
       "openDate": "Avamise kuupäev",
       "url": "Serveri veebileht",
       "description": "Kirjeldus"

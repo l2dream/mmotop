@@ -181,6 +181,8 @@
       "choose": "選択してください…",
       "rate": "Rate",
       "rateHint": "例: 50",
+      "rateText": "Rateの代わりに（任意）",
+      "rateTextHint": "例: PvP、GvE",
       "openDate": "オープン日",
       "url": "サーバーのサイト",
       "description": "説明"

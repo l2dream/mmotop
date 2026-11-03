@@ -21,6 +21,7 @@ interface QueueServer {
   requested_game: string | null
   chronicle: string
   rate: number | null
+  rate_text: string | null
   url: string
   open_date: string
   description: string | null
@@ -48,7 +49,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, url, open_date, description, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, status, created_at')
     .order('created_at', { ascending: false })
   if (!showAll.value) query = query.eq('status', 'pending')
   const { data, error: failed } = await query
@@ -96,7 +97,7 @@ const ACTIONS: { status: Status, label: string }[] = [
         <div class="account-server-main">
           <span class="account-strong">{{ s.name }}</span>
           <span class="account-note">
-            {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template> · {{ s.open_date }}
+            {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template><template v-else-if="s.rate_text"> · {{ s.rate_text }}</template> · {{ s.open_date }}
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
           <span v-if="s.game !== 'other'" class="account-note" dir="ltr">/{{ s.game }}/{{ s.id }}/</span>
