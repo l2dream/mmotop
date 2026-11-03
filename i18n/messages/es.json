@@ -191,5 +191,18 @@
       "rejected": "Rechazado",
       "hidden": "Oculto"
     }
+  },
+  "vote": {
+    "open": "Votar",
+    "nickname": "Nick en el juego (opcional)",
+    "nicknameHint": "Si el servidor premia los votos, la recompensa irá a este personaje.",
+    "submit": "Votar",
+    "thanks": "¡Gracias! Tu voto cuenta. Podrás volver a votar en 12 horas.",
+    "thanksRewarded": "¡Gracias! Tu voto cuenta y el servidor ya sabe lo de tu recompensa. Podrás volver a votar en 12 horas.",
+    "tooSoon": "Ya has votado por este servidor. Podrás volver a votar: {time}.",
+    "badNickname": "El nick tiene de 2 a 32 letras, números, espacios, puntos, guiones o guiones bajos.",
+    "captchaFailed": "La verificación no se ha superado. Inténtalo de nuevo.",
+    "captchaLoad": "No se ha podido cargar la verificación. Recarga la página e inténtalo de nuevo.",
+    "failed": "Algo ha fallado. Inténtalo de nuevo."
   }
 }

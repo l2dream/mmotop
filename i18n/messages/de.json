@@ -191,5 +191,18 @@
       "rejected": "Abgelehnt",
       "hidden": "Ausgeblendet"
     }
+  },
+  "vote": {
+    "open": "Abstimmen",
+    "nickname": "Spielername (optional)",
+    "nicknameHint": "Wenn der Server Stimmen belohnt, erhält dieser Charakter die Belohnung.",
+    "submit": "Stimme abgeben",
+    "thanks": "Danke! Ihre Stimme wurde gezählt. Sie können in 12 Stunden wieder abstimmen.",
+    "thanksRewarded": "Danke! Ihre Stimme wurde gezählt, und der Server wurde über Ihre Belohnung informiert. Sie können in 12 Stunden wieder abstimmen.",
+    "tooSoon": "Sie haben für diesen Server bereits abgestimmt. Wieder abstimmen können Sie: {time}.",
+    "badNickname": "Der Name hat 2–32 Buchstaben, Ziffern, Leerzeichen, Punkte, Bindestriche oder Unterstriche.",
+    "captchaFailed": "Die Prüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "captchaLoad": "Die Prüfung konnte nicht geladen werden. Laden Sie die Seite neu und versuchen Sie es erneut.",
+    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
   }
 }

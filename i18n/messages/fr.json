@@ -191,5 +191,18 @@
       "rejected": "Refusé",
       "hidden": "Masqué"
     }
+  },
+  "vote": {
+    "open": "Voter",
+    "nickname": "Pseudo en jeu (facultatif)",
+    "nicknameHint": "Si le serveur récompense les votes, ce personnage recevra la récompense.",
+    "submit": "Voter",
+    "thanks": "Merci ! Votre vote est pris en compte. Vous pourrez voter à nouveau dans 12 heures.",
+    "thanksRewarded": "Merci ! Votre vote est pris en compte et le serveur a été prévenu pour votre récompense. Vous pourrez voter à nouveau dans 12 heures.",
+    "tooSoon": "Vous avez déjà voté pour ce serveur. Prochain vote possible : {time}.",
+    "badNickname": "Le pseudo compte 2 à 32 lettres, chiffres, espaces, points, tirets ou tirets bas.",
+    "captchaFailed": "La vérification a échoué. Veuillez réessayer.",
+    "captchaLoad": "La vérification n’a pas pu se charger. Rechargez la page et réessayez.",
+    "failed": "Une erreur s’est produite. Veuillez réessayer."
   }
 }

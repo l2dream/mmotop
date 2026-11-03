@@ -191,5 +191,18 @@
       "rejected": "Reddedildi",
       "hidden": "Gizli"
     }
+  },
+  "vote": {
+    "open": "Oy ver",
+    "nickname": "Oyundaki adınız (isteğe bağlı)",
+    "nicknameHint": "Sunucu oy için ödül veriyorsa ödül bu karaktere gider.",
+    "submit": "Oyu gönder",
+    "thanks": "Teşekkürler! Oyunuz sayıldı. 12 saat sonra yeniden oy verebilirsiniz.",
+    "thanksRewarded": "Teşekkürler! Oyunuz sayıldı ve sunucuya ödülünüz için haber verildi. 12 saat sonra yeniden oy verebilirsiniz.",
+    "tooSoon": "Bu sunucuya zaten oy verdiniz. Yeniden oy verebileceğiniz zaman: {time}.",
+    "badNickname": "Ad 2–32 harf, rakam, boşluk, nokta, tire veya alt çizgiden oluşur.",
+    "captchaFailed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
+    "captchaLoad": "Doğrulama yüklenemedi. Sayfayı yenileyip tekrar deneyin.",
+    "failed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
   }
 }

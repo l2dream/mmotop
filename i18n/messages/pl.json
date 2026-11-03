@@ -191,5 +191,18 @@
       "rejected": "Odrzucony",
       "hidden": "Ukryty"
     }
+  },
+  "vote": {
+    "open": "Głosuj",
+    "nickname": "Nick w grze (opcjonalnie)",
+    "nicknameHint": "Jeśli serwer nagradza za głosy, nagroda trafi do tej postaci.",
+    "submit": "Oddaj głos",
+    "thanks": "Dziękujemy! Głos został policzony. Ponownie zagłosujesz za 12 godzin.",
+    "thanksRewarded": "Dziękujemy! Głos został policzony, a serwer otrzymał prośbę o nagrodę. Ponownie zagłosujesz za 12 godzin.",
+    "tooSoon": "Już głosowałeś na ten serwer. Ponownie zagłosujesz: {time}.",
+    "badNickname": "Nick to 2–32 litery, cyfry, spacje, kropki, myślniki lub podkreślenia.",
+    "captchaFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
+    "captchaLoad": "Nie udało się wczytać weryfikacji. Odśwież stronę i spróbuj ponownie.",
+    "failed": "Coś poszło nie tak. Spróbuj ponownie."
   }
 }

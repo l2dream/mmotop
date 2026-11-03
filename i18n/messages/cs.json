@@ -191,5 +191,18 @@
       "rejected": "Zamítnuto",
       "hidden": "Skryto"
     }
+  },
+  "vote": {
+    "open": "Hlasovat",
+    "nickname": "Přezdívka ve hře (nepovinné)",
+    "nicknameHint": "Pokud server hlasy odměňuje, odměnu dostane tato postava.",
+    "submit": "Odeslat hlas",
+    "thanks": "Děkujeme! Hlas byl započítán. Znovu můžete hlasovat za 12 hodin.",
+    "thanksRewarded": "Děkujeme! Hlas byl započítán a server dostal žádost o odměnu. Znovu můžete hlasovat za 12 hodin.",
+    "tooSoon": "Pro tento server jste už hlasovali. Znovu můžete hlasovat: {time}.",
+    "badNickname": "Přezdívka má 2–32 písmen, číslic, mezer, teček, pomlček nebo podtržítek.",
+    "captchaFailed": "Ověření se nezdařilo. Zkuste to znovu.",
+    "captchaLoad": "Ověření se nepodařilo načíst. Obnovte stránku a zkuste to znovu.",
+    "failed": "Něco se pokazilo. Zkuste to znovu."
   }
 }

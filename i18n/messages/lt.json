@@ -191,5 +191,18 @@
       "rejected": "Atmestas",
       "hidden": "Paslėptas"
     }
+  },
+  "vote": {
+    "open": "Balsuoti",
+    "nickname": "Slapyvardis žaidime (neprivaloma)",
+    "nicknameHint": "Jei serveris apdovanoja už balsus, prizą gaus šis veikėjas.",
+    "submit": "Atiduoti balsą",
+    "thanks": "Ačiū! Balsas įskaitytas. Vėl balsuoti galėsi po 12 valandų.",
+    "thanksRewarded": "Ačiū! Balsas įskaitytas, serveris gavo prašymą dėl prizo. Vėl balsuoti galėsi po 12 valandų.",
+    "tooSoon": "Už šį serverį jau balsavai. Vėl balsuoti galėsi: {time}.",
+    "badNickname": "Slapyvardis – 2–32 raidės, skaitmenys, tarpai, taškai, brūkšneliai arba pabraukimai.",
+    "captchaFailed": "Patikra nepavyko. Bandyk dar kartą.",
+    "captchaLoad": "Nepavyko įkelti patikros. Perkrauk puslapį ir bandyk dar kartą.",
+    "failed": "Kažkas nepavyko. Bandyk dar kartą."
   }
 }

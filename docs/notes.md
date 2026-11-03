@@ -99,11 +99,14 @@
   Auth меняет владелец сам). Встроенная почта — 2 письма в час; для
   настоящих пользователей нужен SMTP (например, Resend). Потом на сайте: вход, кабинет, голосование
   с капчей Turnstile, награда по postback.
-  Секреты владелец отложил (29 октября, «займусь чуть позже»). Где ставить:
-  https://supabase.com/dashboard/project/xpfgjhyuompskzxsmwrc/functions/secrets
-  Turnstile: dash.cloudflare.com → Turnstile → Add widget (`mmotop`,
-  hostname `mmotop.com`, Managed); Secret Key → в Supabase, Site Key → мне
-  для сайта. Напомнить владельцу.
+  Голосование залито 4 ноября (кнопка «Голосовать» на странице сервера
+  из базы, `VoteBox.vue`, капча Turnstile, тексты на 26 языках). Секреты
+  `TURNSTILE_SECRET` и `VOTE_SALT` владелец поставил 4 ноября. Turnstile Site Key `0x4AAAAAAFymAm542YKeKVAU`
+  (виджет `mmotop`, hostname mmotop.com, Managed) уже в коде. Владелец
+  ставит в https://supabase.com/dashboard/project/xpfgjhyuompskzxsmwrc/functions/secrets
+  `TURNSTILE_SECRET` (Secret Key виджета) и `VOTE_SALT` (любая длинная
+  случайная строка) — запись секретов мне автоматический режим не даёт.
+  Осталось проверить настоящий голос, когда в базе будет одобренный сервер.
 - **Кабинет `/account/` залит 29 октября**: вход по ссылке на почту, свои серверы — добавить, изменить,
   удалить, статус модерации. Кнопка «Войти» в шапке ведёт туда, после входа
   — «Кабинет». Тексты кабинета переведены на все 26 языков (3 ноября; тон

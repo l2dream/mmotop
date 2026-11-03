@@ -191,5 +191,18 @@
       "rejected": "Noraidīts",
       "hidden": "Paslēpts"
     }
+  },
+  "vote": {
+    "open": "Balsot",
+    "nickname": "Vārds spēlē (nav obligāts)",
+    "nicknameHint": "Ja serveris dod balvu par balsi, to saņems šis tēls.",
+    "submit": "Nodot balsi",
+    "thanks": "Paldies! Balss ieskaitīta. Atkal balsot varēsi pēc 12 stundām.",
+    "thanksRewarded": "Paldies! Balss ieskaitīta, un serveris saņēma pieprasījumu par balvu. Atkal balsot varēsi pēc 12 stundām.",
+    "tooSoon": "Tu jau esi balsojis par šo serveri. Atkal balsot varēsi: {time}.",
+    "badNickname": "Vārdā ir 2–32 burti, cipari, atstarpes, punkti, defises vai pasvītras.",
+    "captchaFailed": "Pārbaude neizdevās. Mēģini vēlreiz.",
+    "captchaLoad": "Pārbaudi neizdevās ielādēt. Pārlādē lapu un mēģini vēlreiz.",
+    "failed": "Kaut kas nogāja greizi. Mēģini vēlreiz."
   }
 }

@@ -38,6 +38,12 @@ const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerForm
 
 const opened = computed(() => props.server.openDate <= props.today)
 
+/** The vote box under the card, opened by the button (VoteBox). */
+const voting = ref(false)
+/** A vote cast just now, added to the count until the site is rebuilt. */
+const justVoted = ref(0)
+const votes = computed(() => props.server.votes + justVoted.value)
+
 /**
  * The server in a few plain sentences, under its name: what it is, when it
  * opens, how it stands. The same facts as the boxes below, but as text — a
@@ -157,7 +163,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
       <div>
         <dt>{{ keepTail($t('server.votes')) }}</dt>
         <dd>
-          <span class="server-votes">{{ server.votes }}</span>
+          <span class="server-votes">{{ votes }}</span>
           <small>{{ keepEnds($t('server.rank', { rank })) }}</small>
         </dd>
       </div>
@@ -168,6 +174,19 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
     </dl>
 
     <div class="server-actions">
+      <button
+        v-if="server.live"
+        type="button"
+        class="server-vote"
+        :aria-expanded="voting"
+        aria-controls="vote-box"
+        @click="voting = !voting"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17l-5.6 3 1.1-6.2L2.9 9.4l6.3-.9z" fill="url(#voteGrad)" />
+        </svg>
+        {{ $t('vote.open') }}
+      </button>
       <a class="server-visit" :href="server.url" target="_blank" rel="noopener nofollow">
         {{ $t('server.visit') }}
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -177,6 +196,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
         </svg>
       </a>
     </div>
+    <VoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />
   </article>
 
   <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="$t('server.recommended')">
