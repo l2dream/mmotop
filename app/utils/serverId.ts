@@ -44,6 +44,3 @@ export function serverIdWithNumber(id: string, n: number) {
   const tail = `-${n}`
   return `${id.slice(0, 32 - tail.length).replace(/-+$/, '')}${tail}`
 }
-
-/** What the database accepts as an address. */
-export const SERVER_ID_PATTERN = /^[a-z0-9][a-z0-9-]{1,30}[a-z0-9]$/

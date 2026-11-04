@@ -2,7 +2,7 @@
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import { GAMES, gameById, isChronicleAddress } from '~/data/games'
 import type { Server } from '~/data/servers'
-import { SERVER_ID_PATTERN, serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
+import { serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
  * The account page: signing in by email, then the owner's own servers —
@@ -53,14 +53,18 @@ const loadingServers = ref(false)
 /** The server being edited, a fresh one being added, or none. */
 const draft = ref<Draft | null>(null)
 const editing = ref<string | null>(null)
+/** The server's page on the site, in this language: https://mmotop.com/ru/lineage2/la2dream/. */
+function pageAddress(s: OwnServer) {
+  return `https://mmotop.com${localePath(`/${s.game}/${s.id}`).replace(/\/?$/, '/')}`
+}
+
 /**
- * The address is made from the name unless the owner opened the field and
- * wrote their own; a made one that is taken gets a number on the end.
+ * The address (/lineage2/<id>/) is made from the name and not shown in the
+ * form; one that is taken gets a number on the end when saving. The owner
+ * sees it in their list of servers once it is saved.
  */
-const customId = ref(false)
-const idOpen = ref(false)
 watch(() => draft.value?.name, (name) => {
-  if (draft.value && !editing.value && !customId.value) draft.value.id = name?.trim() ? serverIdFrom(name) : ''
+  if (draft.value && !editing.value) draft.value.id = name?.trim() ? serverIdFrom(name) : ''
 })
 
 let unsubscribe: (() => void) | undefined
@@ -138,8 +142,6 @@ async function loadServers() {
 function addServer() {
   error.value = ''
   editing.value = null
-  customId.value = false
-  idOpen.value = false
   ownChronicle.value = false
   noRate.value = false
   ownRateWord.value = false
@@ -160,8 +162,6 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  customId.value = false
-  idOpen.value = false
   draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '' }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
@@ -284,10 +284,6 @@ async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
   const id = d.id.trim().toLowerCase()
-  if (!editing.value && customId.value && (!SERVER_ID_PATTERN.test(id) || isChronicleAddress(d.game, id))) {
-    error.value = SERVER_ID_PATTERN.test(id) ? t('account.idTaken') : t('account.fields.idHint')
-    return
-  }
   busy.value = true
   error.value = ''
   const fields = {
@@ -305,9 +301,9 @@ async function save() {
   if (editing.value) {
     ({ error: failed } = await supabase.value.from('servers').update(fields).eq('id', editing.value))
   } else {
-    // A made address that is taken, or is one of the game's chronicle pages,
-    // moves on to la2dream-2, -3… by itself; the owner's own is tried as is.
-    for (let n = 1; n <= (customId.value ? 1 : 20); n++) {
+    // An address that is taken, or is one of the game's chronicle pages,
+    // moves on to la2dream-2, -3… by itself.
+    for (let n = 1; n <= 20; n++) {
       const candidate = n === 1 ? id : serverIdWithNumber(id, n)
       if (isChronicleAddress(d.game, candidate)) continue
       ;({ error: failed } = await supabase.value.from('servers').insert({ ...fields, id: candidate, owner_id: session.value.user.id }))
@@ -374,27 +370,6 @@ async function remove(s: OwnServer) {
           <label class="account-field">
             <span>{{ $t('account.fields.name') }}</span>
             <input :value="draft.name" type="text" required minlength="2" maxlength="24" autocapitalize="characters" @input="typeName">
-          </label>
-          <!-- The address, made from the name: shown, not asked for, with no
-               label (the owner asked for the address and the button alone). -->
-          <p v-if="!idOpen" class="account-note account-page-link">
-            <bdi class="account-strong" dir="ltr">mmotop.com/{{ draft.game === 'other' ? '…' : draft.game }}/{{ draft.id || '…' }}/</bdi>
-            <button v-if="!editing" type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
-          </p>
-          <label v-else class="account-field">
-            <span>{{ $t('account.fields.id') }}</span>
-            <input
-              v-model="draft.id"
-              type="text"
-              required
-              pattern="[a-z0-9][a-z0-9\-]{1,30}[a-z0-9]"
-              maxlength="32"
-              autocapitalize="off"
-              spellcheck="false"
-              dir="ltr"
-              @input="customId = true"
-            >
-            <small>{{ $t('account.fields.idHint') }}</small>
           </label>
           <div class="account-pair">
             <label class="account-field">
@@ -484,6 +459,10 @@ async function remove(s: OwnServer) {
                 <span class="account-note">{{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}</span>
               </div>
               <span class="account-status" :class="`status-${s.status}`">{{ $t(`account.status.${s.status}`) }}</span>
+              <!-- Its page's address, to share; shown here rather than in
+                   the form. A link once the server is on the site. -->
+              <a v-if="s.status === 'approved' && s.game !== 'other'" class="account-address" :href="pageAddress(s)" target="_blank" rel="noopener" dir="ltr">{{ pageAddress(s).replace(/^https:\/\//, '') }}</a>
+              <span v-else-if="s.game !== 'other'" class="account-address" dir="ltr">{{ pageAddress(s).replace(/^https:\/\//, '') }}</span>
               <div class="account-server-tools">
                 <button type="button" class="account-link" @click="editServer(s)">{{ $t('account.edit') }}</button>
                 <button type="button" class="account-link account-danger" @click="remove(s)">{{ $t('account.delete') }}</button>
