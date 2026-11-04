@@ -193,7 +193,7 @@
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
       "description": "Aprašymas (neprivaloma)",
-      "descriptionHint": "Kol laukas tuščias, jame matyti tekstas, kuriuo prasidės puslapis, – sudarytas iš serverio duomenų. Tavo aprašymas bus po šiuo tekstu. Apie ką parašyti: kuo serveris išsiskiria, premijos naujokams, renginiai, versija, žaidėjų skaičius."
+      "descriptionHint": "Apie ką parašyti: kuo serveris išsiskiria, premijos naujokams, renginiai, versija, žaidėjų skaičius."
     },
     "status": {
       "pending": "Tikrinamas",

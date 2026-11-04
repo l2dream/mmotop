@@ -193,7 +193,7 @@
       "openDate": "Date d’ouverture",
       "url": "Site du serveur",
       "description": "Description (facultatif)",
-      "descriptionHint": "Tant que le champ est vide, il affiche le texte par lequel commence la page, rédigé à partir des informations du serveur. Votre description viendra sous ce texte. À préciser : ce qui distingue le serveur, bonus pour les nouveaux, événements, version, joueurs en ligne."
+      "descriptionHint": "À préciser : ce qui distingue le serveur, bonus pour les nouveaux, événements, version, joueurs en ligne."
     },
     "status": {
       "pending": "En vérification",

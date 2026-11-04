@@ -193,7 +193,7 @@
       "openDate": "Åbningsdato",
       "url": "Serverens hjemmeside",
       "description": "Beskrivelse (valgfrit)",
-      "descriptionHint": "Så længe feltet er tomt, viser det teksten, siden starter med, lavet ud fra serverens oplysninger. Din beskrivelse kommer under den tekst. Skriv gerne om: hvad der gør serveren særlig, bonusser til nye spillere, events, version, online."
+      "descriptionHint": "Skriv gerne om: hvad der gør serveren særlig, bonusser til nye spillere, events, version, online."
     },
     "status": {
       "pending": "Til godkendelse",

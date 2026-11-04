@@ -193,7 +193,7 @@
       "openDate": "Avamise kuupäev",
       "url": "Serveri veebileht",
       "description": "Kirjeldus (valikuline)",
-      "descriptionHint": "Kuni väli on tühi, on selles näha tekst, millega leht algab — koostatud serveri andmetest. Sinu kirjeldus tuleb selle teksti alla. Mida kirjutada: mille poolest server eristub, boonused uustulnukatele, sündmused, versioon, online."
+      "descriptionHint": "Mida kirjutada: mille poolest server eristub, boonused uustulnukatele, sündmused, versioon, online."
     },
     "status": {
       "pending": "Ülevaatusel",

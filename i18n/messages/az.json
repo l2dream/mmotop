@@ -193,7 +193,7 @@
       "openDate": "Açılış tarixi",
       "url": "Serverin saytı",
       "description": "Təsvir (məcburi deyil)",
-      "descriptionHint": "Sahə boş olanda orada səhifənin başlayacağı mətn görünür — server məlumatlarından tərtib olunub. Sizin təsviriniz bu mətnin altında olacaq. Nə yazmaq olar: serveri fərqləndirən nədir, yeni oyunçulara bonuslar, tədbirlər, versiya, onlayn."
+      "descriptionHint": "Nə yazmaq olar: serveri fərqləndirən nədir, yeni oyunçulara bonuslar, tədbirlər, versiya, onlayn."
     },
     "status": {
       "pending": "Yoxlamada",
