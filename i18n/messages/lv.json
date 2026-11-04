@@ -99,8 +99,7 @@
       "rateLow": "Zemi rates: nesteidzīga attīstība, vērtīgas lietas un ilga spēle.",
       "rateMid": "Vidēji rates: ātrāk nekā oficiālajā, bet spēle nepaskrien nedēļā.",
       "rateHigh": "Augsti rates: ātra attīstība un drīzas kaujas.",
-      "rateMax": "Ļoti augsti rates: tēls gandrīz uzreiz gatavs PvP.",
-      "count": "{game} {chronicle} serveru MMOTOP: {count}."
+      "rateMax": "Ļoti augsti rates: tēls gandrīz uzreiz gatavs PvP."
     }
   },
   "seo": {

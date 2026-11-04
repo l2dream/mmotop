@@ -1,4 +1,4 @@
-import { SERVERS, type Server } from '~/data/servers'
+import type { Server } from '~/data/servers'
 import { bcp47 } from '~/i18n/locales'
 
 /**
@@ -35,14 +35,6 @@ function rateKind(rate: number) {
   if (rate <= 100) return 'rateMid'
   if (rate <= 1000) return 'rateHigh'
   return 'rateMax'
-}
-
-/**
- * How many servers the site lists on this game and chronicle, this one
- * counted whether it is listed yet or not (the account form's preview).
- */
-function sameKind(s: Server) {
-  return SERVERS.filter((o) => o.game === s.game && o.chronicle === s.chronicle && o.id !== s.id).length + 1
 }
 
 /** Spaces that do not break. */
@@ -84,12 +76,12 @@ export function useServerAbout() {
    * listed (the account form's preview) has nothing to say in; `game` names a
    * game the site does not list yet.
    *
-   * Besides the facts, two that compare: what the rate means, and how many
-   * servers of the same game and chronicle the site has — so that, with the
+   * Besides the facts, what the rate means to a player — so that, with the
    * same template, the text still says something of this server in
-   * particular. The count stands after a colon, like the votes, so no
-   * language has to decline "server" for it. `brief` leaves those two out:
-   * the account form's preview, where the owner asked for the facts alone.
+   * particular. (A count of servers of the same game and chronicle was here
+   * too; it repeated the first sentence's words and the owner had it
+   * removed.) `brief` leaves it out: the account form's preview, where the
+   * owner asked for the facts alone.
    */
   function aboutText(s: Server, today: string, options: { rank?: number, game?: string, brief?: boolean } = {}) {
     const kind = { name: s.name, game: options.game ?? serverSubtitle(s), chronicle: s.chronicle, rate: rateLabel(s) }
@@ -99,7 +91,6 @@ export function useServerAbout() {
       // "2025 m. sausio 12 d."), which the sentence's would double.
       t(s.openDate <= today ? 'server.about.opened' : 'server.about.opens', { date: fullDate(s.openDate) }).replace(/\.\.$/, '.'),
       ...(!options.brief && s.rate != null ? [t(`server.about.${rateKind(s.rate)}`)] : []),
-      ...(!options.brief && !options.game && sameKind(s) >= 2 ? [t('server.about.count', { game: kind.game, chronicle: s.chronicle, count: sameKind(s) })] : []),
       ...(options.rank ? [t('server.about.votes', { votes: s.votes, rank: options.rank })] : [])
     ].join(NO_SPACES.has(locale.value) ? '' : ' ')
   }

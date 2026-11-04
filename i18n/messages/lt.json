@@ -99,8 +99,7 @@
       "rateLow": "Žemi rate: neskubus lygių kėlimas, vertingi daiktai ir ilgas žaidimas.",
       "rateMid": "Vidutiniai rate: greičiau nei oficialiame, bet žaidimas neprabėga per savaitę.",
       "rateHigh": "Aukšti rate: greitas lygių kėlimas ir greitai prasidedantys mūšiai.",
-      "rateMax": "Labai aukšti rate: veikėjas beveik iškart pasiruošęs PvP.",
-      "count": "{game} {chronicle} serverių MMOTOP: {count}."
+      "rateMax": "Labai aukšti rate: veikėjas beveik iškart pasiruošęs PvP."
     }
   },
   "seo": {

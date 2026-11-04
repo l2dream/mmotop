@@ -99,8 +99,7 @@
       "rateLow": "Lave rates: rolig leveling, værdifulde ting og et langt spil.",
       "rateMid": "Mellem rates: hurtigere end officielt, men spillet er ikke overstået på en uge.",
       "rateHigh": "Høje rates: hurtig leveling og kampe snart.",
-      "rateMax": "Meget høje rates: en karakter er klar til PvP næsten med det samme.",
-      "count": "{game} {chronicle}-servere på MMOTOP: {count}."
+      "rateMax": "Meget høje rates: en karakter er klar til PvP næsten med det samme."
     }
   },
   "seo": {

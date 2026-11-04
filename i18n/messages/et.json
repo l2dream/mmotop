@@ -99,8 +99,7 @@
       "rateLow": "Madalad rate’id: rahulik arenemine, väärtuslikud esemed ja pikk mäng.",
       "rateMid": "Keskmised rate’id: kiirem kui ametlikus, aga mäng ei möödu nädalaga.",
       "rateHigh": "Kõrged rate’id: kiire arenemine ja peatsed lahingud.",
-      "rateMax": "Väga kõrged rate’id: tegelane on PvP-ks valmis peaaegu kohe.",
-      "count": "{game} {chronicle} servereid MMOTOPis: {count}."
+      "rateMax": "Väga kõrged rate’id: tegelane on PvP-ks valmis peaaegu kohe."
     }
   },
   "seo": {

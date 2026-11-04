@@ -99,8 +99,7 @@
       "rateLow": "Low rates: slow-paced leveling, valuable gear and a long game.",
       "rateMid": "Medium rates: faster than official, but the game doesn’t fly by in a week.",
       "rateHigh": "High rates: fast leveling and battles that start soon.",
-      "rateMax": "Very high rates: a character is ready for PvP almost right away.",
-      "count": "{game} {chronicle} servers on MMOTOP: {count}."
+      "rateMax": "Very high rates: a character is ready for PvP almost right away."
     }
   },
   "seo": {

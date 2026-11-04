@@ -99,8 +99,7 @@
       "rateLow": "Niedrige Rates: gemächliches Leveln, wertvolle Ausrüstung und ein langes Spiel.",
       "rateMid": "Mittlere Rates: schneller als offiziell, aber das Spiel ist nicht in einer Woche vorbei.",
       "rateHigh": "Hohe Rates: schnelles Leveln und bald die ersten Kämpfe.",
-      "rateMax": "Sehr hohe Rates: Ein Charakter ist fast sofort bereit für PvP.",
-      "count": "{game}-{chronicle}-Server auf MMOTOP: {count}."
+      "rateMax": "Sehr hohe Rates: Ein Charakter ist fast sofort bereit für PvP."
     }
   },
   "seo": {
