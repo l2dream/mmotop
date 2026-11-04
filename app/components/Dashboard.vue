@@ -263,8 +263,9 @@ const languageOptions = computed(() => {
 
 function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
-  // A server in several languages is one in each of them.
-  if (filters.value.language && server.language !== filters.value.language && server.language !== 'multi') return false
+  // A server in several languages, or an international one, is one in each.
+  if (filters.value.language && server.language !== filters.value.language
+    && server.language !== 'multi' && server.language !== 'intl') return false
   if (rateFilterActive.value) {
     const rate = server.rate
     if (rate == null) return filters.value.rates.includes(NO_RATE)
