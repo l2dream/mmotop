@@ -95,7 +95,12 @@
       "noRate": "{name} es un servidor de {game} con la versión {chronicle}.",
       "opened": "Abrió el {date}.",
       "opens": "Abre el {date}.",
-      "votes": "Votos este mes: {votes}, n.º {rank} del ranking de MMOTOP."
+      "votes": "Votos este mes: {votes}, n.º {rank} del ranking de MMOTOP.",
+      "rateLow": "Rates bajos: progreso pausado, objetos valiosos y una partida larga.",
+      "rateMid": "Rates medios: más rápido que el oficial, pero la partida no se acaba en una semana.",
+      "rateHigh": "Rates altos: progreso rápido y combates muy pronto.",
+      "rateMax": "Rates muy altos: el personaje está listo para el PvP casi al instante.",
+      "count": "Servidores de {game} {chronicle} en MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Fecha de apertura",
       "url": "Web del servidor",
       "description": "Descripción (opcional)",
-      "descriptionHint": "Mientras el campo esté vacío, muestra el texto con el que empieza la página, hecho con los datos del servidor. Tu descripción irá debajo de ese texto."
+      "descriptionHint": "Mientras el campo esté vacío, muestra el texto con el que empieza la página, hecho con los datos del servidor. Tu descripción irá debajo de ese texto. Qué contar: qué distingue al servidor, bonus para novatos, eventos, versión, jugadores en línea."
     },
     "status": {
       "pending": "En revisión",

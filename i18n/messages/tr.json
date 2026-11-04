@@ -95,7 +95,12 @@
       "noRate": "{name}, {chronicle} sürümünde çalışan bir {game} sunucusudur.",
       "opened": "Açılış tarihi: {date}.",
       "opens": "Açılış tarihi: {date}.",
-      "votes": "Bu ayki oylar: {votes}, MMOTOP sıralamasında {rank}. sırada."
+      "votes": "Bu ayki oylar: {votes}, MMOTOP sıralamasında {rank}. sırada.",
+      "rateLow": "Düşük rate: acelesiz gelişim, değerli eşyalar ve uzun bir oyun.",
+      "rateMid": "Orta rate: resmi sunucudan hızlı, ama oyun bir haftada bitmez.",
+      "rateHigh": "Yüksek rate: hızlı gelişim ve yakında başlayan savaşlar.",
+      "rateMax": "Çok yüksek rate: karakter neredeyse hemen PvP’ye hazır.",
+      "count": "MMOTOP’taki {game} {chronicle} sunucuları: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Açılış tarihi",
       "url": "Sunucunun sitesi",
       "description": "Açıklama (isteğe bağlı)",
-      "descriptionHint": "Alan boşken, sayfanın başında yer alacak ve sunucu bilgilerinden oluşturulan metni gösterir. Kendi açıklamanız bu metnin altında yer alır."
+      "descriptionHint": "Alan boşken, sayfanın başında yer alacak ve sunucu bilgilerinden oluşturulan metni gösterir. Kendi açıklamanız bu metnin altında yer alır. Neler yazılabilir: sunucuyu farklı kılan şey, yeni oyunculara bonuslar, etkinlikler, sürüm, çevrimiçi sayısı."
     },
     "status": {
       "pending": "İncelemede",

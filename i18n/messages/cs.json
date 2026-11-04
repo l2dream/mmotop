@@ -95,7 +95,12 @@
       "noRate": "{name} je server {game} ve verzi {chronicle}.",
       "opened": "Spuštěn {date}.",
       "opens": "Spuštění {date}.",
-      "votes": "Hlasy tento měsíc: {votes}, {rank}. místo v žebříčku MMOTOP."
+      "votes": "Hlasy tento měsíc: {votes}, {rank}. místo v žebříčku MMOTOP.",
+      "rateLow": "Nízké rate: klidné levelování, cenné předměty a dlouhá hra.",
+      "rateMid": "Střední rate: rychlejší než oficiální, ale hra neuteče za týden.",
+      "rateHigh": "Vysoké rate: rychlé levelování a brzký začátek bojů.",
+      "rateMax": "Velmi vysoké rate: postava je na PvP připravená téměř hned.",
+      "count": "Serverů {game} {chronicle} na MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Datum otevření",
       "url": "Web serveru",
       "description": "Popis (nepovinné)",
-      "descriptionHint": "Dokud je pole prázdné, je v něm vidět text, kterým stránka začne — sestavený z údajů o serveru. Váš popis bude pod tímto textem."
+      "descriptionHint": "Dokud je pole prázdné, je v něm vidět text, kterým stránka začne — sestavený z údajů o serveru. Váš popis bude pod tímto textem. O čem psát: čím se server liší, bonusy pro nováčky, události, verze, online."
     },
     "status": {
       "pending": "Ve schvalování",

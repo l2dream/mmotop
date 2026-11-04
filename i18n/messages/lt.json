@@ -95,7 +95,12 @@
       "noRate": "{name} – {game} serveris su versija {chronicle}.",
       "opened": "Atidarytas {date}.",
       "opens": "Atidarymas {date}.",
-      "votes": "Balsai šį mėnesį: {votes}, {rank} vieta MMOTOP reitinge."
+      "votes": "Balsai šį mėnesį: {votes}, {rank} vieta MMOTOP reitinge.",
+      "rateLow": "Žemi rate: neskubus lygių kėlimas, vertingi daiktai ir ilgas žaidimas.",
+      "rateMid": "Vidutiniai rate: greičiau nei oficialiame, bet žaidimas neprabėga per savaitę.",
+      "rateHigh": "Aukšti rate: greitas lygių kėlimas ir greitai prasidedantys mūšiai.",
+      "rateMax": "Labai aukšti rate: veikėjas beveik iškart pasiruošęs PvP.",
+      "count": "{game} {chronicle} serverių MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
       "description": "Aprašymas (neprivaloma)",
-      "descriptionHint": "Kol laukas tuščias, jame matyti tekstas, kuriuo prasidės puslapis, – sudarytas iš serverio duomenų. Tavo aprašymas bus po šiuo tekstu."
+      "descriptionHint": "Kol laukas tuščias, jame matyti tekstas, kuriuo prasidės puslapis, – sudarytas iš serverio duomenų. Tavo aprašymas bus po šiuo tekstu. Apie ką parašyti: kuo serveris išsiskiria, premijos naujokams, renginiai, versija, žaidėjų skaičius."
     },
     "status": {
       "pending": "Tikrinamas",

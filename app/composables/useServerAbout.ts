@@ -1,4 +1,4 @@
-import type { Server } from '~/data/servers'
+import { SERVERS, type Server } from '~/data/servers'
 import { bcp47 } from '~/i18n/locales'
 
 /**
@@ -25,6 +25,25 @@ const NO_SPACES = new Set(['ja', 'zh'])
  * Node, which does have the data — and the browser always agree.
  */
 const OWN_DATE_FORMAT = new Set(['hy', 'az'])
+
+/**
+ * What a rate means to a player, in the filter's own tiers (Dashboard's
+ * rateTiers): up to x10, x10–x100, x100–x1000, above.
+ */
+function rateKind(rate: number) {
+  if (rate <= 10) return 'rateLow'
+  if (rate <= 100) return 'rateMid'
+  if (rate <= 1000) return 'rateHigh'
+  return 'rateMax'
+}
+
+/**
+ * How many servers the site lists on this game and chronicle, this one
+ * counted whether it is listed yet or not (the account form's preview).
+ */
+function sameKind(s: Server) {
+  return SERVERS.filter((o) => o.game === s.game && o.chronicle === s.chronicle && o.id !== s.id).length + 1
+}
 
 /** Spaces that do not break. */
 const keep = (text: string) => text.replace(/ /g, ' ')
@@ -64,6 +83,12 @@ export function useServerAbout() {
    * The sentences. `rank` adds the one about votes, which a server not yet
    * listed (the account form's preview) has nothing to say in; `game` names a
    * game the site does not list yet.
+   *
+   * Besides the facts, two that compare: what the rate means, and how many
+   * servers of the same game and chronicle the site has — so that, with the
+   * same template, the text still says something of this server in
+   * particular. The count stands after a colon, like the votes, so no
+   * language has to decline "server" for it.
    */
   function aboutText(s: Server, today: string, options: { rank?: number, game?: string } = {}) {
     const kind = { name: s.name, game: options.game ?? serverSubtitle(s), chronicle: s.chronicle, rate: rateLabel(s) }
@@ -72,6 +97,8 @@ export function useServerAbout() {
       // Some dates end in a full stop of their own ("20 ноября 2025 г.",
       // "2025 m. sausio 12 d."), which the sentence's would double.
       t(s.openDate <= today ? 'server.about.opened' : 'server.about.opens', { date: fullDate(s.openDate) }).replace(/\.\.$/, '.'),
+      ...(s.rate != null ? [t(`server.about.${rateKind(s.rate)}`)] : []),
+      ...(!options.game && sameKind(s) >= 2 ? [t('server.about.count', { game: kind.game, chronicle: s.chronicle, count: sameKind(s) })] : []),
       ...(options.rank ? [t('server.about.votes', { votes: s.votes, rank: options.rank })] : [])
     ].join(NO_SPACES.has(locale.value) ? '' : ' ')
   }

@@ -95,7 +95,12 @@
       "noRate": "{name} ir {game} serveris ar versiju {chronicle}.",
       "opened": "Atvērts {date}.",
       "opens": "Atvēršana {date}.",
-      "votes": "Balsis šomēnes: {votes}, {rank}. vieta MMOTOP reitingā."
+      "votes": "Balsis šomēnes: {votes}, {rank}. vieta MMOTOP reitingā.",
+      "rateLow": "Zemi rates: nesteidzīga attīstība, vērtīgas lietas un ilga spēle.",
+      "rateMid": "Vidēji rates: ātrāk nekā oficiālajā, bet spēle nepaskrien nedēļā.",
+      "rateHigh": "Augsti rates: ātra attīstība un drīzas kaujas.",
+      "rateMax": "Ļoti augsti rates: tēls gandrīz uzreiz gatavs PvP.",
+      "count": "{game} {chronicle} serveru MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Atvēršanas datums",
       "url": "Servera vietne",
       "description": "Apraksts (nav obligāts)",
-      "descriptionHint": "Kamēr lauks ir tukšs, tajā redzams teksts, ar ko sāksies lapa, — sastādīts no servera datiem. Tavs apraksts būs zem šī teksta."
+      "descriptionHint": "Kamēr lauks ir tukšs, tajā redzams teksts, ar ko sāksies lapa, — sastādīts no servera datiem. Tavs apraksts būs zem šī teksta. Par ko uzrakstīt: ar ko serveris izceļas, bonusi jaunpienācējiem, pasākumi, versija, spēlētāju skaits."
     },
     "status": {
       "pending": "Pārbaudē",
