@@ -16,7 +16,8 @@ defineProps<{
 
 <template>
   <section class="panel">
-    <div class="panel-head">
+    <!-- No title, nothing for the head to hold: the panel starts with its body. -->
+    <div v-if="title || $slots.icon || $slots.actions || to" class="panel-head">
       <span v-if="$slots.icon" class="panel-icon"><slot name="icon" /></span>
       <h2>{{ title }}</h2>
       <span class="panel-tools">
