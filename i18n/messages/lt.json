@@ -197,7 +197,8 @@
       "otherLanguage": "Kita kalba…",
       "languageName": "Kalbos pavadinimas",
       "url": "Serverio svetainė",
-      "community": "Discord, Telegram ar kita bendruomenė (neprivaloma)",
+      "discord": "Discord (neprivaloma)",
+      "community": "Telegram, VK ar kita bendruomenė (neprivaloma)",
       "description": "Aprašymas (neprivaloma)"
     },
     "status": {

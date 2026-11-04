@@ -197,7 +197,8 @@
       "otherLanguage": "その他の言語…",
       "languageName": "言語名",
       "url": "サーバーのサイト",
-      "community": "Discord、Telegram などのコミュニティ（任意）",
+      "discord": "Discord（任意）",
+      "community": "Telegram、VK などのコミュニティ（任意）",
       "description": "説明（任意）"
     },
     "status": {

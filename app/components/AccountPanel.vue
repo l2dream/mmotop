@@ -25,6 +25,8 @@ interface OwnServer {
   language: string | null
   language_text: string | null
   /** Discord, Telegram…; https only. */
+  /** Its Discord, and any other community (Telegram, VK, a forum); https only. */
+  discord_url: string | null
   community_url: string | null
   chronicle: string
   rate: number | null
@@ -36,7 +38,7 @@ interface OwnServer {
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'community_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, community_url: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'discord_url' | 'community_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, discord_url: string, community_url: string }
 
 const { t } = useI18n()
 
@@ -138,7 +140,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, community_url, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, discord_url, community_url, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -160,6 +162,7 @@ function addServer() {
     // International by default, as the owner chose; one language is a pick away.
     language: 'intl',
     language_text: '',
+    discord_url: '',
     community_url: '',
     chronicle: '',
     rate: '',
@@ -173,7 +176,7 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', community_url: s.community_url ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', discord_url: s.discord_url ?? '', community_url: s.community_url ?? '' }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -307,6 +310,7 @@ async function save() {
     url: d.url.trim(),
     language: d.language || null,
     language_text: d.language === 'other' ? d.language_text.trim() : null,
+    discord_url: d.discord_url.trim() || null,
     community_url: d.community_url.trim() || null,
     open_date: d.open_date,
     description: d.description?.trim() || null
@@ -466,8 +470,12 @@ async function remove(s: OwnServer) {
             <input v-model="draft.url" type="url" required pattern="https?://.+" dir="ltr">
           </label>
           <label class="account-field">
+            <span>{{ $t('account.fields.discord') }}</span>
+            <input v-model="draft.discord_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://discord.gg/…">
+          </label>
+          <label class="account-field">
             <span>{{ $t('account.fields.community') }}</span>
-            <input v-model="draft.community_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://discord.gg/…">
+            <input v-model="draft.community_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://t.me/…">
           </label>
           <label class="account-field">
             <span>{{ $t('account.fields.description') }}</span>

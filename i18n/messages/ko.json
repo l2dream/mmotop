@@ -197,7 +197,8 @@
       "otherLanguage": "다른 언어…",
       "languageName": "언어 이름",
       "url": "서버 웹사이트",
-      "community": "Discord, Telegram 또는 다른 커뮤니티 (선택)",
+      "discord": "Discord (선택)",
+      "community": "Telegram, VK 또는 다른 커뮤니티 (선택)",
       "description": "설명 (선택)"
     },
     "status": {

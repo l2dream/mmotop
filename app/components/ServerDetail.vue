@@ -170,7 +170,13 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
           <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
         </svg>
       </a>
-      <!-- Its Discord, Telegram or other community, when the owner gave one. -->
+      <!-- Its Discord, and any other community, when the owner gave them. -->
+      <a v-if="server.discord" class="server-community" :href="server.discord" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z" />
+        </svg>
+        Discord
+      </a>
       <a v-if="server.community" class="server-community" :href="server.community" target="_blank" rel="noopener nofollow">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z" />

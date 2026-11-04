@@ -197,7 +197,8 @@
       "otherLanguage": "Άλλη γλώσσα…",
       "languageName": "Όνομα γλώσσας",
       "url": "Ιστότοπος διακομιστή",
-      "community": "Discord, Telegram ή άλλη κοινότητα (προαιρετικό)",
+      "discord": "Discord (προαιρετικό)",
+      "community": "Telegram, VK ή άλλη κοινότητα (προαιρετικό)",
       "description": "Περιγραφή (προαιρετικό)"
     },
     "status": {

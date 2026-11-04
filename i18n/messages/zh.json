@@ -197,7 +197,8 @@
       "otherLanguage": "其他语言…",
       "languageName": "语言名称",
       "url": "服务器官网",
-      "community": "Discord、Telegram 或其他社区（可选）",
+      "discord": "Discord（可选）",
+      "community": "Telegram、VK 或其他社区（可选）",
       "description": "简介（可选）"
     },
     "status": {

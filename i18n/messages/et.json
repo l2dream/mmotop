@@ -197,7 +197,8 @@
       "otherLanguage": "Muu keel…",
       "languageName": "Keele nimi",
       "url": "Serveri veebileht",
-      "community": "Discord, Telegram või muu kogukond (valikuline)",
+      "discord": "Discord (valikuline)",
+      "community": "Telegram, VK või muu kogukond (valikuline)",
       "description": "Kirjeldus (valikuline)"
     },
     "status": {

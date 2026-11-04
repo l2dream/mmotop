@@ -39,7 +39,9 @@ export interface Server {
   language?: string
   /** The name of an "other" language, as the owner wrote it. */
   languageText?: string
-  /** Its Discord, Telegram or other community, shown beside its site. */
+  /** Its Discord, shown beside its site. */
+  discord?: string
+  /** Any other community — Telegram, VK, a forum — shown beside its site. */
   community?: string
   /**
    * Added by its owner and approved, so it is in the database and can be

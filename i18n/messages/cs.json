@@ -197,7 +197,8 @@
       "otherLanguage": "Jiný jazyk…",
       "languageName": "Název jazyka",
       "url": "Web serveru",
-      "community": "Discord, Telegram nebo jiná komunita (nepovinné)",
+      "discord": "Discord (nepovinné)",
+      "community": "Telegram, VK nebo jiná komunita (nepovinné)",
       "description": "Popis (nepovinné)"
     },
     "status": {

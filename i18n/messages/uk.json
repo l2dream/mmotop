@@ -197,7 +197,8 @@
       "otherLanguage": "Інша мова…",
       "languageName": "Назва мови",
       "url": "Сайт сервера",
-      "community": "Discord, Telegram або інша спільнота (необов’язково)",
+      "discord": "Discord (необов’язково)",
+      "community": "Telegram, VK або інша спільнота (необов’язково)",
       "description": "Опис (необов’язково)"
     },
     "status": {

@@ -197,7 +197,8 @@
       "otherLanguage": "لغة أخرى…",
       "languageName": "اسم اللغة",
       "url": "موقع الخادم",
-      "community": "Discord أو Telegram أو مجتمع آخر (اختياري)",
+      "discord": "Discord (اختياري)",
+      "community": "Telegram أو VK أو مجتمع آخر (اختياري)",
       "description": "الوصف (اختياري)"
     },
     "status": {
