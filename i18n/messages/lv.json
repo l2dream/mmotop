@@ -191,8 +191,7 @@
       "rateOwn": "Savs variants…",
       "openDate": "Atvēršanas datums",
       "url": "Servera vietne",
-      "description": "Apraksts (nav obligāts)",
-      "descriptionHint": "Par ko uzrakstīt: ar ko serveris izceļas, bonusi jaunpienācējiem, pasākumi, versija, spēlētāju skaits."
+      "description": "Apraksts (nav obligāts)"
     },
     "status": {
       "pending": "Pārbaudē",

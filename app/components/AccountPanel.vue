@@ -465,7 +465,6 @@ async function remove(s: OwnServer) {
             <!-- The made text sits in the field itself, greyed, until the
                  owner writes their own: what the page says either way. -->
             <textarea v-model="draft.description" rows="7" maxlength="2000" :placeholder="aboutPreview" />
-            <small>{{ $t('account.fields.descriptionHint') }}</small>
           </label>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>

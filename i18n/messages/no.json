@@ -191,8 +191,7 @@
       "rateOwn": "Annet…",
       "openDate": "Åpningsdato",
       "url": "Serverens nettside",
-      "description": "Beskrivelse (valgfritt)",
-      "descriptionHint": "Skriv gjerne om: hva som skiller serveren ut, bonuser til nye spillere, eventer, versjon, online."
+      "description": "Beskrivelse (valgfritt)"
     },
     "status": {
       "pending": "Til godkjenning",

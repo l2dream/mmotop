@@ -191,8 +191,7 @@
       "rateOwn": "Eigene Angabe…",
       "openDate": "Eröffnungsdatum",
       "url": "Website des Servers",
-      "description": "Beschreibung (optional)",
-      "descriptionHint": "Was sich zu schreiben lohnt: was den Server ausmacht, Boni für Neulinge, Events, Version, Online-Zahlen."
+      "description": "Beschreibung (optional)"
     },
     "status": {
       "pending": "In Prüfung",

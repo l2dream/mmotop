@@ -191,8 +191,7 @@
       "rateOwn": "自定义…",
       "openDate": "开服日期",
       "url": "服务器官网",
-      "description": "简介（可选）",
-      "descriptionHint": "可以写：服务器的特色、新手福利、活动、版本、在线人数。"
+      "description": "简介（可选）"
     },
     "status": {
       "pending": "审核中",

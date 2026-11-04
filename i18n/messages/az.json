@@ -191,8 +191,7 @@
       "rateOwn": "Öz variantınız…",
       "openDate": "Açılış tarixi",
       "url": "Serverin saytı",
-      "description": "Təsvir (məcburi deyil)",
-      "descriptionHint": "Nə yazmaq olar: serveri fərqləndirən nədir, yeni oyunçulara bonuslar, tədbirlər, versiya, onlayn."
+      "description": "Təsvir (məcburi deyil)"
     },
     "status": {
       "pending": "Yoxlamada",

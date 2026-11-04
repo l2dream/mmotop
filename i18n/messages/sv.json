@@ -191,8 +191,7 @@
       "rateOwn": "Eget…",
       "openDate": "Öppningsdatum",
       "url": "Serverns webbplats",
-      "description": "Beskrivning (valfritt)",
-      "descriptionHint": "Skriv gärna om: vad som gör servern speciell, bonusar för nya spelare, events, version, online."
+      "description": "Beskrivning (valfritt)"
     },
     "status": {
       "pending": "Granskas",

@@ -191,8 +191,7 @@
       "rateOwn": "Autre…",
       "openDate": "Date d’ouverture",
       "url": "Site du serveur",
-      "description": "Description (facultatif)",
-      "descriptionHint": "À préciser : ce qui distingue le serveur, bonus pour les nouveaux, événements, version, joueurs en ligne."
+      "description": "Description (facultatif)"
     },
     "status": {
       "pending": "En vérification",

@@ -191,8 +191,7 @@
       "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
       "url": "Web serveru",
-      "description": "Popis (nepovinné)",
-      "descriptionHint": "O čem psát: čím se server liší, bonusy pro nováčky, události, verze, online."
+      "description": "Popis (nepovinné)"
     },
     "status": {
       "pending": "Ve schvalování",

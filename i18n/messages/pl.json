@@ -191,8 +191,7 @@
       "rateOwn": "Własny…",
       "openDate": "Data otwarcia",
       "url": "Strona serwera",
-      "description": "Opis (opcjonalnie)",
-      "descriptionHint": "O czym napisać: czym serwer się wyróżnia, bonusy dla nowych graczy, eventy, wersja, online."
+      "description": "Opis (opcjonalnie)"
     },
     "status": {
       "pending": "W weryfikacji",

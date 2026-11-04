@@ -191,8 +191,7 @@
       "rateOwn": "Kendi seçeneğiniz…",
       "openDate": "Açılış tarihi",
       "url": "Sunucunun sitesi",
-      "description": "Açıklama (isteğe bağlı)",
-      "descriptionHint": "Neler yazılabilir: sunucuyu farklı kılan şey, yeni oyunculara bonuslar, etkinlikler, sürüm, çevrimiçi sayısı."
+      "description": "Açıklama (isteğe bağlı)"
     },
     "status": {
       "pending": "İncelemede",
