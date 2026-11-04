@@ -368,8 +368,9 @@ async function remove(s: OwnServer) {
           <button type="button" class="account-link" @click="signOut">{{ $t('account.signOut') }}</button>
         </div>
 
-        <form v-if="draft" class="account-form" @submit.prevent="save">
-          <h3 class="account-heading">{{ editing ? $t('account.editServer') : $t('account.addServer') }}</h3>
+        <!-- No visible heading (the owner asked for the form alone); its name is
+             still there for screen readers. -->
+        <form v-if="draft" class="account-form" :aria-label="editing ? $t('account.editServer') : $t('account.addServer')" @submit.prevent="save">
           <label class="account-field">
             <span>{{ $t('account.fields.name') }}</span>
             <input :value="draft.name" type="text" required minlength="2" maxlength="24" autocapitalize="characters" @input="typeName">
