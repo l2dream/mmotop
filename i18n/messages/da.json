@@ -95,7 +95,12 @@
       "noRate": "{name} er en {game}-server med versionen {chronicle}.",
       "opened": "Åbnede {date}.",
       "opens": "Åbner {date}.",
-      "votes": "Stemmer denne måned: {votes}, plads {rank} på MMOTOP-ranglisten."
+      "votes": "Stemmer denne måned: {votes}, plads {rank} på MMOTOP-ranglisten.",
+      "rateLow": "Lave rates: rolig leveling, værdifulde ting og et langt spil.",
+      "rateMid": "Mellem rates: hurtigere end officielt, men spillet er ikke overstået på en uge.",
+      "rateHigh": "Høje rates: hurtig leveling og kampe snart.",
+      "rateMax": "Meget høje rates: en karakter er klar til PvP næsten med det samme.",
+      "count": "{game} {chronicle}-servere på MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Åbningsdato",
       "url": "Serverens hjemmeside",
       "description": "Beskrivelse (valgfrit)",
-      "descriptionHint": "Så længe feltet er tomt, viser det teksten, siden starter med, lavet ud fra serverens oplysninger. Din beskrivelse kommer under den tekst."
+      "descriptionHint": "Så længe feltet er tomt, viser det teksten, siden starter med, lavet ud fra serverens oplysninger. Din beskrivelse kommer under den tekst. Skriv gerne om: hvad der gør serveren særlig, bonusser til nye spillere, events, version, online."
     },
     "status": {
       "pending": "Til godkendelse",

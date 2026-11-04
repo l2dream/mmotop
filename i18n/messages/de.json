@@ -95,7 +95,12 @@
       "noRate": "{name} ist ein {game}-Server mit der Version {chronicle}.",
       "opened": "Eröffnet am {date}.",
       "opens": "Eröffnung am {date}.",
-      "votes": "Stimmen diesen Monat: {votes}, Platz {rank} im MMOTOP-Ranking."
+      "votes": "Stimmen diesen Monat: {votes}, Platz {rank} im MMOTOP-Ranking.",
+      "rateLow": "Niedrige Rates: gemächliches Leveln, wertvolle Ausrüstung und ein langes Spiel.",
+      "rateMid": "Mittlere Rates: schneller als offiziell, aber das Spiel ist nicht in einer Woche vorbei.",
+      "rateHigh": "Hohe Rates: schnelles Leveln und bald die ersten Kämpfe.",
+      "rateMax": "Sehr hohe Rates: Ein Charakter ist fast sofort bereit für PvP.",
+      "count": "{game}-{chronicle}-Server auf MMOTOP: {count}."
     }
   },
   "seo": {
@@ -181,14 +186,14 @@
       "choose": "Auswählen…",
       "rate": "Rate",
       "rateHint": "z. B. 50",
-      "rateText": "Statt Raten",
+      "rateText": "Statt Rates",
       "rateTextHint": "z. B. Hardcore",
       "rateNone": "Nicht angeben",
       "rateOwn": "Eigene Angabe…",
       "openDate": "Eröffnungsdatum",
       "url": "Website des Servers",
       "description": "Beschreibung (optional)",
-      "descriptionHint": "Solange das Feld leer ist, zeigt es den Text, mit dem die Seite beginnt – erstellt aus den Angaben zum Server. Ihre Beschreibung steht unter diesem Text."
+      "descriptionHint": "Solange das Feld leer ist, zeigt es den Text, mit dem die Seite beginnt – erstellt aus den Angaben zum Server. Ihre Beschreibung steht unter diesem Text. Was sich zu schreiben lohnt: was den Server ausmacht, Boni für Neulinge, Events, Version, Online-Zahlen."
     },
     "status": {
       "pending": "In Prüfung",

@@ -95,7 +95,12 @@
       "noRate": "{name} is a {game} server running {chronicle}.",
       "opened": "It opened on {date}.",
       "opens": "It opens on {date}.",
-      "votes": "Votes this month: {votes}, #{rank} in the MMOTOP ranking."
+      "votes": "Votes this month: {votes}, #{rank} in the MMOTOP ranking.",
+      "rateLow": "Low rates: slow-paced leveling, valuable gear and a long game.",
+      "rateMid": "Medium rates: faster than official, but the game doesn’t fly by in a week.",
+      "rateHigh": "High rates: fast leveling and battles that start soon.",
+      "rateMax": "Very high rates: a character is ready for PvP almost right away.",
+      "count": "{game} {chronicle} servers on MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Opening date",
       "url": "Server website",
       "description": "Description (optional)",
-      "descriptionHint": "While the field is empty, it shows the text the page opens with, made from the server’s details. Your own description goes under that text."
+      "descriptionHint": "While the field is empty, it shows the text the page opens with, made from the server’s details. Your own description goes under that text. Worth mentioning: what makes the server different, bonuses for new players, events, the build, online."
     },
     "status": {
       "pending": "In review",

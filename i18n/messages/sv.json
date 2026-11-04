@@ -95,7 +95,12 @@
       "noRate": "{name} är en {game}-server med versionen {chronicle}.",
       "opened": "Öppnade {date}.",
       "opens": "Öppnar {date}.",
-      "votes": "Röster denna månad: {votes}, plats {rank} i MMOTOP-rankingen."
+      "votes": "Röster denna månad: {votes}, plats {rank} i MMOTOP-rankingen.",
+      "rateLow": "Låga rates: lugn levling, värdefulla saker och ett långt spel.",
+      "rateMid": "Medelhöga rates: snabbare än officiellt, men spelet är inte över på en vecka.",
+      "rateHigh": "Höga rates: snabb levling och strider snart.",
+      "rateMax": "Mycket höga rates: en karaktär är redo för PvP nästan direkt.",
+      "count": "{game} {chronicle}-servrar på MMOTOP: {count}."
     }
   },
   "seo": {
@@ -188,7 +193,7 @@
       "openDate": "Öppningsdatum",
       "url": "Serverns webbplats",
       "description": "Beskrivning (valfritt)",
-      "descriptionHint": "Så länge fältet är tomt visar det texten som sidan börjar med, skriven utifrån serverns uppgifter. Din beskrivning hamnar under den texten."
+      "descriptionHint": "Så länge fältet är tomt visar det texten som sidan börjar med, skriven utifrån serverns uppgifter. Din beskrivning hamnar under den texten. Skriv gärna om: vad som gör servern speciell, bonusar för nya spelare, events, version, online."
     },
     "status": {
       "pending": "Granskas",
