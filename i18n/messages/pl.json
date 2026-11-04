@@ -99,8 +99,7 @@
       "rateLow": "Niskie rate: spokojne levelowanie, cenne przedmioty i długa gra.",
       "rateMid": "Średnie rate: szybciej niż na oficjalu, ale gra nie mija w tydzień.",
       "rateHigh": "Wysokie rate: szybkie levelowanie i walki już wkrótce.",
-      "rateMax": "Bardzo wysokie rate: postać jest gotowa do PvP niemal od razu.",
-      "count": "Serwery {game} {chronicle} w MMOTOP: {count}."
+      "rateMax": "Bardzo wysokie rate: postać jest gotowa do PvP niemal od razu."
     }
   },
   "seo": {

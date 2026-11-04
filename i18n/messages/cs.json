@@ -99,8 +99,7 @@
       "rateLow": "Nízké rate: klidné levelování, cenné předměty a dlouhá hra.",
       "rateMid": "Střední rate: rychlejší než oficiální, ale hra neuteče za týden.",
       "rateHigh": "Vysoké rate: rychlé levelování a brzký začátek bojů.",
-      "rateMax": "Velmi vysoké rate: postava je na PvP připravená téměř hned.",
-      "count": "Serverů {game} {chronicle} na MMOTOP: {count}."
+      "rateMax": "Velmi vysoké rate: postava je na PvP připravená téměř hned."
     }
   },
   "seo": {

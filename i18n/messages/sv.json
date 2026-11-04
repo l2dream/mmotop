@@ -99,8 +99,7 @@
       "rateLow": "Låga rates: lugn levling, värdefulla saker och ett långt spel.",
       "rateMid": "Medelhöga rates: snabbare än officiellt, men spelet är inte över på en vecka.",
       "rateHigh": "Höga rates: snabb levling och strider snart.",
-      "rateMax": "Mycket höga rates: en karaktär är redo för PvP nästan direkt.",
-      "count": "{game} {chronicle}-servrar på MMOTOP: {count}."
+      "rateMax": "Mycket höga rates: en karaktär är redo för PvP nästan direkt."
     }
   },
   "seo": {

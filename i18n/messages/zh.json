@@ -99,8 +99,7 @@
       "rateLow": "低倍率：升级节奏慢，装备珍贵，可以长久游玩。",
       "rateMid": "中倍率：比官服快，但不会一周就玩完。",
       "rateHigh": "高倍率：升级快，很快就能开战。",
-      "rateMax": "超高倍率：角色几乎马上就能参与 PvP。",
-      "count": "MMOTOP 上的 {game} {chronicle} 服务器：{count}。"
+      "rateMax": "超高倍率：角色几乎马上就能参与 PvP。"
     }
   },
   "seo": {

@@ -99,8 +99,7 @@
       "rateLow": "Düşük rate: acelesiz gelişim, değerli eşyalar ve uzun bir oyun.",
       "rateMid": "Orta rate: resmi sunucudan hızlı, ama oyun bir haftada bitmez.",
       "rateHigh": "Yüksek rate: hızlı gelişim ve yakında başlayan savaşlar.",
-      "rateMax": "Çok yüksek rate: karakter neredeyse hemen PvP’ye hazır.",
-      "count": "MMOTOP’taki {game} {chronicle} sunucuları: {count}."
+      "rateMax": "Çok yüksek rate: karakter neredeyse hemen PvP’ye hazır."
     }
   },
   "seo": {

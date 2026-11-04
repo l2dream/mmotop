@@ -99,8 +99,7 @@
       "rateLow": "Rates bajos: progreso pausado, objetos valiosos y una partida larga.",
       "rateMid": "Rates medios: más rápido que el oficial, pero la partida no se acaba en una semana.",
       "rateHigh": "Rates altos: progreso rápido y combates muy pronto.",
-      "rateMax": "Rates muy altos: el personaje está listo para el PvP casi al instante.",
-      "count": "Servidores de {game} {chronicle} en MMOTOP: {count}."
+      "rateMax": "Rates muy altos: el personaje está listo para el PvP casi al instante."
     }
   },
   "seo": {

@@ -99,8 +99,7 @@
       "rateLow": "Aşağı reyt: tələsmədən inkişaf, dəyərli əşyalar və uzun oyun.",
       "rateMid": "Orta reyt: rəsmidən sürətli, amma oyun bir həftəyə bitmir.",
       "rateHigh": "Yüksək reyt: sürətli inkişaf və tezliklə döyüşlər.",
-      "rateMax": "Çox yüksək reyt: personaj demək olar ki, dərhal PvP-yə hazırdır.",
-      "count": "MMOTOP-da {game} {chronicle} serverləri: {count}."
+      "rateMax": "Çox yüksək reyt: personaj demək olar ki, dərhal PvP-yə hazırdır."
     }
   },
   "seo": {
