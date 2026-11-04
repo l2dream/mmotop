@@ -38,13 +38,8 @@ interface OwnServer {
 
 type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'community_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, community_url: string }
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
-/** A new server starts in the language of the page it is added from. */
-const pageLanguage = () => {
-  const code = locale.value.split('-')[0]!
-  return SERVER_LANGUAGES.some((l) => l.code === code) ? code : 'en'
-}
 const localePath = useLocalePath()
 
 const supabase = shallowRef<SupabaseClient | null>(null)
@@ -162,7 +157,8 @@ function addServer() {
     name: '',
     game: GAMES[0]!.id,
     requested_game: '',
-    language: pageLanguage(),
+    // International by default, as the owner chose; one language is a pick away.
+    language: 'intl',
     language_text: '',
     community_url: '',
     chronicle: '',
@@ -451,10 +447,11 @@ async function remove(s: OwnServer) {
           </div>
           <label class="account-field">
             <span>{{ $t('account.fields.language') }}</span>
-            <!-- Optional: "Not specified" stores no language; a new server
-                 starts in the page's, which is right more often than not. -->
+            <!-- Optional: "Not specified" stores no language. A new server
+                 starts as international. -->
             <select v-model="draft.language">
               <option value="">{{ $t('account.fields.notSpecified') }}</option>
+              <option value="intl">{{ $t('server.international') }}</option>
               <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
               <option value="multi">{{ $t('server.multilingual') }}</option>
               <option value="other">{{ $t('account.fields.otherLanguage') }}</option>
