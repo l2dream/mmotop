@@ -334,7 +334,9 @@ async function remove(s: OwnServer) {
 </script>
 
 <template>
-  <GamePanel class="section-panel account-panel accent-violet" :title="$t('account.title')">
+  <!-- While a server is being added or edited, the form is all there is:
+       no panel title, no "Signed in as". Both come back with Save or Cancel. -->
+  <GamePanel class="section-panel account-panel accent-violet" :title="draft ? undefined : $t('account.title')">
     <div class="account-body">
       <p v-if="!ready" class="account-note" role="status">{{ $t('account.loading') }}</p>
 
@@ -361,7 +363,7 @@ async function remove(s: OwnServer) {
 
       <!-- Signed in: who, and their servers. -->
       <template v-else>
-        <div class="account-who">
+        <div v-if="!draft" class="account-who">
           <span class="account-note">{{ $t('account.signedInAs') }} <bdi class="account-strong">{{ session.user.email }}</bdi></span>
           <button type="button" class="account-link" @click="signOut">{{ $t('account.signOut') }}</button>
         </div>
