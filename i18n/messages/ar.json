@@ -92,6 +92,7 @@
     "international": "دولي",
     "multilingual": "عدة لغات",
     "community": "المجتمع",
+    "forum": "منتدى",
     "listed": "على MMOTOP منذ",
     "visit": "زيارة الموقع",
     "description": "{name}: خادم {game} ({chronicle}). المعدلات وتاريخ الافتتاح والأصوات على MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "اسم اللغة",
       "url": "موقع الخادم",
       "discord": "Discord (اختياري)",
-      "community": "Telegram أو VK أو مجتمع آخر (اختياري)",
+      "links": "شبكات أخرى",
+      "network": "الشبكة",
+      "linkAddress": "الرابط",
+      "removeLink": "إزالة",
+      "addLink": "إضافة شبكة",
       "description": "الوصف (اختياري)"
     },
     "status": {

@@ -2280,6 +2280,36 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light [dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
 .theme-light .account-field input::placeholder,
 .theme-light .account-field textarea::placeholder { color: #555a70; }
+/* A network row in the account form: its kind, its address, a cross. */
+.account-link-row {
+  display: grid;
+  grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr) 42px;
+  gap: 8px;
+  align-items: center;
+}
+.account-link-remove {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 11px;
+  background: none;
+  color: #ff9a9a;
+  cursor: pointer;
+}
+.account-link-remove:hover { background: rgba(255, 99, 99, .12); }
+.theme-light .account-link-remove { color: #c62828; }
+/* A clear gap between rows, so each network reads with its own address. */
+.account-link-row + .account-link-row { margin-top: 10px; }
+.account-add-link { padding: 6px 0; }
+@media (max-width: 430px) {
+  /* The network over its address, the cross beside the address. */
+  .account-link-row { grid-template-columns: minmax(0, 1fr) 42px; }
+  .account-link-row select { grid-column: 1 / -1; }
+}
+
 /* The made description in the empty field: lighter than typed text, so it
    is not mistaken for something already written. */
 .account-field textarea::placeholder { color: #8e93ad; }

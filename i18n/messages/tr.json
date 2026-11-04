@@ -92,6 +92,7 @@
     "international": "Uluslararası",
     "multilingual": "Birden fazla dil",
     "community": "Topluluk",
+    "forum": "Forum",
     "listed": "MMOTOP’a eklenme",
     "visit": "Siteyi ziyaret et",
     "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta.",
@@ -198,7 +199,11 @@
       "languageName": "Dilin adı",
       "url": "Sunucunun sitesi",
       "discord": "Discord (isteğe bağlı)",
-      "community": "Telegram, VK veya başka bir topluluk (isteğe bağlı)",
+      "links": "Diğer ağlar",
+      "network": "Ağ",
+      "linkAddress": "Bağlantı",
+      "removeLink": "Kaldır",
+      "addLink": "Ağ ekle",
       "description": "Açıklama (isteğe bağlı)"
     },
     "status": {

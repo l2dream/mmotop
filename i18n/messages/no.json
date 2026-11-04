@@ -92,6 +92,7 @@
     "international": "Internasjonal",
     "multilingual": "Flere språk",
     "community": "Fellesskap",
+    "forum": "Forum",
     "listed": "På MMOTOP siden",
     "visit": "Besøk nettstedet",
     "description": "{name}: en {game}-server ({chronicle}). Rates, åpningsdato og stemmer på MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Språkets navn",
       "url": "Serverens nettside",
       "discord": "Discord (valgfritt)",
-      "community": "Telegram, VK eller et annet fellesskap (valgfritt)",
+      "links": "Andre nettverk",
+      "network": "Nettverk",
+      "linkAddress": "Lenke",
+      "removeLink": "Fjern",
+      "addLink": "Legg til nettverk",
       "description": "Beskrivelse (valgfritt)"
     },
     "status": {

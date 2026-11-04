@@ -92,6 +92,7 @@
     "international": "Międzynarodowy",
     "multilingual": "Kilka języków",
     "community": "Społeczność",
+    "forum": "Forum",
     "listed": "Na MMOTOP od",
     "visit": "Przejdź na stronę",
     "description": "{name}: serwer {game} ({chronicle}). Rates, data otwarcia i głosy na MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Nazwa języka",
       "url": "Strona serwera",
       "discord": "Discord (opcjonalnie)",
-      "community": "Telegram, VK lub inna społeczność (opcjonalnie)",
+      "links": "Inne sieci",
+      "network": "Sieć",
+      "linkAddress": "Link",
+      "removeLink": "Usuń",
+      "addLink": "Dodaj sieć",
       "description": "Opis (opcjonalnie)"
     },
     "status": {

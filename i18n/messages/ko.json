@@ -92,6 +92,7 @@
     "international": "인터내셔널",
     "multilingual": "여러 언어",
     "community": "커뮤니티",
+    "forum": "포럼",
     "listed": "MMOTOP 등록일",
     "visit": "웹사이트 방문",
     "description": "{name}: {game} 서버({chronicle}). MMOTOP에서 배율, 오픈일, 투표를 확인하세요.",
@@ -198,7 +199,11 @@
       "languageName": "언어 이름",
       "url": "서버 웹사이트",
       "discord": "Discord (선택)",
-      "community": "Telegram, VK 또는 다른 커뮤니티 (선택)",
+      "links": "다른 SNS",
+      "network": "SNS",
+      "linkAddress": "링크",
+      "removeLink": "삭제",
+      "addLink": "SNS 추가",
       "description": "설명 (선택)"
     },
     "status": {

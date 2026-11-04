@@ -92,6 +92,7 @@
     "international": "Tarptautinis",
     "multilingual": "Kelios kalbos",
     "community": "Bendruomenė",
+    "forum": "Forumas",
     "listed": "MMOTOP nuo",
     "visit": "Apsilankyti svetainėje",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Kalbos pavadinimas",
       "url": "Serverio svetainė",
       "discord": "Discord (neprivaloma)",
-      "community": "Telegram, VK ar kita bendruomenė (neprivaloma)",
+      "links": "Kiti tinklai",
+      "network": "Tinklas",
+      "linkAddress": "Nuoroda",
+      "removeLink": "Pašalinti",
+      "addLink": "Pridėti tinklą",
       "description": "Aprašymas (neprivaloma)"
     },
     "status": {

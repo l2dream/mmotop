@@ -1,4 +1,5 @@
 import { gameById, isChronicleAddress, type GameId } from './games'
+import type { ServerLink } from './networks'
 import LIVE from './live-servers.json'
 
 /**
@@ -41,8 +42,8 @@ export interface Server {
   languageText?: string
   /** Its Discord, shown beside its site. */
   discord?: string
-  /** Any other community — Telegram, VK, a forum — shown beside its site. */
-  community?: string
+  /** Its other networks — Telegram, VK, YouTube, a forum… — each a button beside its site. */
+  links?: ServerLink[]
   /**
    * Added by its owner and approved, so it is in the database and can be
    * voted for. The demo servers below are not, and have no vote button.

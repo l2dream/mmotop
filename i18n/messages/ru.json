@@ -92,6 +92,7 @@
     "international": "Интернациональный",
     "multilingual": "Несколько языков",
     "community": "Сообщество",
+    "forum": "Форум",
     "listed": "На MMOTOP с",
     "visit": "Перейти на сайт",
     "description": "{name} — сервер {game} ({chronicle}). Рейты, дата открытия и голоса на MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Название языка",
       "url": "Сайт сервера",
       "discord": "Discord (необязательно)",
-      "community": "Telegram, VK или другое сообщество (необязательно)",
+      "links": "Другие сети",
+      "network": "Сеть",
+      "linkAddress": "Адрес ссылки",
+      "removeLink": "Убрать",
+      "addLink": "Добавить сеть",
       "description": "Описание (необязательно)"
     },
     "status": {

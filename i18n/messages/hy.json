@@ -92,6 +92,7 @@
     "international": "Միջազգային",
     "multilingual": "Մի քանի լեզու",
     "community": "Համայնք",
+    "forum": "Ֆորում",
     "listed": "MMOTOP-ում՝ սկսած",
     "visit": "Այցելել կայք",
     "description": "{name}՝ {game} սերվեր ({chronicle})։ Rate-եր, բացման ամսաթիվ և ձայներ MMOTOP-ում։",
@@ -198,7 +199,11 @@
       "languageName": "Լեզվի անունը",
       "url": "Սերվերի կայքը",
       "discord": "Discord (ոչ պարտադիր)",
-      "community": "Telegram, VK կամ այլ համայնք (ոչ պարտադիր)",
+      "links": "Այլ ցանցեր",
+      "network": "Ցանց",
+      "linkAddress": "Հղում",
+      "removeLink": "Հեռացնել",
+      "addLink": "Ավելացնել ցանց",
       "description": "Նկարագրություն (ոչ պարտադիր)"
     },
     "status": {

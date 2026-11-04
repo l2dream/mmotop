@@ -92,6 +92,7 @@
     "international": "国际",
     "multilingual": "多种语言",
     "community": "社区",
+    "forum": "论坛",
     "listed": "收录于 MMOTOP",
     "visit": "访问官网",
     "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。",
@@ -198,7 +199,11 @@
       "languageName": "语言名称",
       "url": "服务器官网",
       "discord": "Discord（可选）",
-      "community": "Telegram、VK 或其他社区（可选）",
+      "links": "其他社交网络",
+      "network": "网络",
+      "linkAddress": "链接",
+      "removeLink": "移除",
+      "addLink": "添加网络",
       "description": "简介（可选）"
     },
     "status": {

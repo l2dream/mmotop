@@ -92,6 +92,7 @@
     "international": "International",
     "multilingual": "Multiple languages",
     "community": "Community",
+    "forum": "Forum",
     "listed": "Listed on MMOTOP",
     "visit": "Visit website",
     "description": "{name}: a {game} server ({chronicle}). Rates, opening date and votes on MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Language name",
       "url": "Server website",
       "discord": "Discord (optional)",
-      "community": "Telegram, VK or another community (optional)",
+      "links": "Other networks",
+      "network": "Network",
+      "linkAddress": "Link",
+      "removeLink": "Remove",
+      "addLink": "Add a network",
       "description": "Description (optional)"
     },
     "status": {

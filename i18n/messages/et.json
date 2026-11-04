@@ -92,6 +92,7 @@
     "international": "Rahvusvaheline",
     "multilingual": "Mitu keelt",
     "community": "Kogukond",
+    "forum": "Foorum",
     "listed": "MMOTOP-is alates",
     "visit": "Ava veebisait",
     "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is.",
@@ -198,7 +199,11 @@
       "languageName": "Keele nimi",
       "url": "Serveri veebileht",
       "discord": "Discord (valikuline)",
-      "community": "Telegram, VK või muu kogukond (valikuline)",
+      "links": "Muud võrgustikud",
+      "network": "Võrgustik",
+      "linkAddress": "Link",
+      "removeLink": "Eemalda",
+      "addLink": "Lisa võrgustik",
       "description": "Kirjeldus (valikuline)"
     },
     "status": {
