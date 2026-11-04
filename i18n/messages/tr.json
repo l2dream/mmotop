@@ -188,7 +188,7 @@
       "openDate": "Açılış tarihi",
       "url": "Sunucunun sitesi",
       "description": "Açıklama (isteğe bağlı)",
-      "descriptionHint": "Sayfa her zaman aşağıdaki, sunucu bilgilerinden oluşturulan metinle başlar. Açıklama yazarsanız onun altında yer alır."
+      "descriptionHint": "Alan boşken, sayfanın başında yer alacak ve sunucu bilgilerinden oluşturulan metni gösterir. Kendi açıklamanız bu metnin altında yer alır."
     },
     "status": {
       "pending": "İncelemede",

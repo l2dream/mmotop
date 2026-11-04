@@ -188,7 +188,7 @@
       "openDate": "Fecha de apertura",
       "url": "Web del servidor",
       "description": "Descripción (opcional)",
-      "descriptionHint": "La página siempre empieza con el texto de abajo, hecho con los datos del servidor. Tu descripción, si escribes una, irá debajo."
+      "descriptionHint": "Mientras el campo esté vacío, muestra el texto con el que empieza la página, hecho con los datos del servidor. Tu descripción irá debajo de ese texto."
     },
     "status": {
       "pending": "En revisión",

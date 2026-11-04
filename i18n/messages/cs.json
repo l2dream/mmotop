@@ -188,7 +188,7 @@
       "openDate": "Datum otevření",
       "url": "Web serveru",
       "description": "Popis (nepovinné)",
-      "descriptionHint": "Stránka vždy začíná textem níže, sestaveným z údajů o serveru. Váš popis, pokud ho napíšete, bude pod ním."
+      "descriptionHint": "Dokud je pole prázdné, je v něm vidět text, kterým stránka začne — sestavený z údajů o serveru. Váš popis bude pod tímto textem."
     },
     "status": {
       "pending": "Ve schvalování",

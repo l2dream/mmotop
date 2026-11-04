@@ -188,7 +188,7 @@
       "openDate": "Öppningsdatum",
       "url": "Serverns webbplats",
       "description": "Beskrivning (valfritt)",
-      "descriptionHint": "Sidan börjar alltid med texten nedan, skriven utifrån serverns uppgifter. Din beskrivning, om du skriver en, hamnar under den."
+      "descriptionHint": "Så länge fältet är tomt visar det texten som sidan börjar med, skriven utifrån serverns uppgifter. Din beskrivning hamnar under den texten."
     },
     "status": {
       "pending": "Granskas",

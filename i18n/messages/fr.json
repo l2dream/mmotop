@@ -188,7 +188,7 @@
       "openDate": "Date d’ouverture",
       "url": "Site du serveur",
       "description": "Description (facultatif)",
-      "descriptionHint": "La page commence toujours par le texte ci-dessous, rédigé à partir des informations du serveur. Votre description, si vous en écrivez une, viendra en dessous."
+      "descriptionHint": "Tant que le champ est vide, il affiche le texte par lequel commence la page, rédigé à partir des informations du serveur. Votre description viendra sous ce texte."
     },
     "status": {
       "pending": "En vérification",

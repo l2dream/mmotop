@@ -188,7 +188,7 @@
       "openDate": "Opening date",
       "url": "Server website",
       "description": "Description (optional)",
-      "descriptionHint": "The page always opens with the text below, made from the server’s details. Your description, if you write one, goes under it."
+      "descriptionHint": "While the field is empty, it shows the text the page opens with, made from the server’s details. Your own description goes under that text."
     },
     "status": {
       "pending": "Under review",

@@ -188,7 +188,7 @@
       "openDate": "Åpningsdato",
       "url": "Serverens nettside",
       "description": "Beskrivelse (valgfritt)",
-      "descriptionHint": "Siden starter alltid med teksten nedenfor, laget ut fra serverens opplysninger. Beskrivelsen din, hvis du skriver en, kommer under den."
+      "descriptionHint": "Så lenge feltet er tomt, viser det teksten siden starter med, laget ut fra serverens opplysninger. Beskrivelsen din kommer under den teksten."
     },
     "status": {
       "pending": "Til godkjenning",

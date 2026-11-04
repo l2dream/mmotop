@@ -188,7 +188,7 @@
       "openDate": "Avamise kuupäev",
       "url": "Serveri veebileht",
       "description": "Kirjeldus (valikuline)",
-      "descriptionHint": "Leht algab alati allolevast tekstist, mis on koostatud serveri andmetest. Sinu kirjeldus, kui selle kirjutad, tuleb selle alla."
+      "descriptionHint": "Kuni väli on tühi, on selles näha tekst, millega leht algab — koostatud serveri andmetest. Sinu kirjeldus tuleb selle teksti alla."
     },
     "status": {
       "pending": "Ülevaatusel",
