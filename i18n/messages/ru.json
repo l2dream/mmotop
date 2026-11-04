@@ -181,8 +181,10 @@
       "choose": "Выберите…",
       "rate": "Рейты",
       "rateHint": "например, 50",
-      "rateText": "Вместо рейтов (необязательно)",
-      "rateTextHint": "например, PvP или GvE",
+      "rateText": "Вместо рейтов",
+      "rateTextHint": "например, Hardcore",
+      "rateNone": "Не указывать",
+      "rateOwn": "Свой вариант…",
       "openDate": "Дата открытия",
       "url": "Сайт сервера",
       "description": "Описание"

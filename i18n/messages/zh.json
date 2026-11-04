@@ -181,8 +181,10 @@
       "choose": "请选择…",
       "rate": "Rate",
       "rateHint": "例如 50",
-      "rateText": "代替 Rate（可选）",
-      "rateTextHint": "例如 PvP 或 GvE",
+      "rateText": "代替 Rate",
+      "rateTextHint": "例如 Hardcore",
+      "rateNone": "不填写",
+      "rateOwn": "自定义…",
       "openDate": "开服日期",
       "url": "服务器官网",
       "description": "简介"
