@@ -193,6 +193,8 @@
       "rateOwn": "Kendi seçeneğiniz…",
       "openDate": "Açılış tarihi",
       "language": "Sunucu dili",
+      "otherLanguage": "Başka dil…",
+      "languageName": "Dilin adı",
       "url": "Sunucunun sitesi",
       "community": "Discord, Telegram veya başka bir topluluk (isteğe bağlı)",
       "description": "Açıklama (isteğe bağlı)"

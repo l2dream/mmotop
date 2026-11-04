@@ -47,7 +47,9 @@ const votes = computed(() => props.server.votes + justVoted.value)
 /** The language its players speak, in that language's own name. */
 const languageName = computed(() => props.server.language === 'multi'
   ? t('server.multilingual')
-  : serverLanguageName(props.server.language))
+  : props.server.language === 'other'
+    ? props.server.languageText
+    : serverLanguageName(props.server.language))
 
 /**
  * The community link's button says where it goes when that is a place

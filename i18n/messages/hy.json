@@ -193,6 +193,8 @@
       "rateOwn": "Ձեր տարբերակը…",
       "openDate": "Բացման ամսաթիվ",
       "language": "Սերվերի լեզուն",
+      "otherLanguage": "Այլ լեզու…",
+      "languageName": "Լեզվի անունը",
       "url": "Սերվերի կայքը",
       "community": "Discord, Telegram կամ այլ համայնք (ոչ պարտադիր)",
       "description": "Նկարագրություն (ոչ պարտադիր)"

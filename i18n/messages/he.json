@@ -193,6 +193,8 @@
       "rateOwn": "משהו אחר…",
       "openDate": "תאריך פתיחה",
       "language": "שפת השרת",
+      "otherLanguage": "שפה אחרת…",
+      "languageName": "שם השפה",
       "url": "אתר השרת",
       "community": "Discord, Telegram או קהילה אחרת (לא חובה)",
       "description": "תיאור (לא חובה)"

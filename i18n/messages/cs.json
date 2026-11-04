@@ -193,6 +193,8 @@
       "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
       "language": "Jazyk serveru",
+      "otherLanguage": "Jiný jazyk…",
+      "languageName": "Název jazyka",
       "url": "Web serveru",
       "community": "Discord, Telegram nebo jiná komunita (nepovinné)",
       "description": "Popis (nepovinné)"

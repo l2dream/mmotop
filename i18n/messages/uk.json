@@ -193,6 +193,8 @@
       "rateOwn": "Свій варіант…",
       "openDate": "Дата відкриття",
       "language": "Мова сервера",
+      "otherLanguage": "Інша мова…",
+      "languageName": "Назва мови",
       "url": "Сайт сервера",
       "community": "Discord, Telegram або інша спільнота (необов’язково)",
       "description": "Опис (необов’язково)"

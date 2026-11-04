@@ -35,8 +35,10 @@ export interface Server {
   votes: number
   /** The owner's own words, shown on the server's page below the made one. */
   description?: string
-  /** The language its players speak, as in SERVER_LANGUAGES, or "multi". */
+  /** The language its players speak, as in SERVER_LANGUAGES, "multi", or "other". */
   language?: string
+  /** The name of an "other" language, as the owner wrote it. */
+  languageText?: string
   /** Its Discord, Telegram or other community, shown beside its site. */
   community?: string
   /**

@@ -193,6 +193,8 @@
       "rateOwn": "خيار آخر…",
       "openDate": "تاريخ الافتتاح",
       "language": "لغة الخادم",
+      "otherLanguage": "لغة أخرى…",
+      "languageName": "اسم اللغة",
       "url": "موقع الخادم",
       "community": "Discord أو Telegram أو مجتمع آخر (اختياري)",
       "description": "الوصف (اختياري)"
