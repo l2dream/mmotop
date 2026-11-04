@@ -86,6 +86,9 @@
     "opens": "תאריך פתיחה",
     "votes": "הצבעות החודש",
     "rank": "מקום {rank} בדירוג",
+    "language": "שפה",
+    "multilingual": "כמה שפות",
+    "community": "קהילה",
     "listed": "ב-MMOTOP מאז",
     "visit": "לאתר השרת",
     "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "לא לציין",
       "rateOwn": "משהו אחר…",
       "openDate": "תאריך פתיחה",
+      "language": "שפת השרת",
       "url": "אתר השרת",
+      "community": "Discord, Telegram או קהילה אחרת (לא חובה)",
       "description": "תיאור (לא חובה)"
     },
     "status": {

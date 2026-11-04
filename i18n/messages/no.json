@@ -86,6 +86,9 @@
     "opens": "Åpningsdato",
     "votes": "Stemmer denne måneden",
     "rank": "Nr. {rank} på rangeringen",
+    "language": "Språk",
+    "multilingual": "Flere språk",
+    "community": "Fellesskap",
     "listed": "På MMOTOP siden",
     "visit": "Besøk nettstedet",
     "description": "{name}: en {game}-server ({chronicle}). Rates, åpningsdato og stemmer på MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Ikke oppgi",
       "rateOwn": "Annet…",
       "openDate": "Åpningsdato",
+      "language": "Serverens språk",
       "url": "Serverens nettside",
+      "community": "Discord, Telegram eller et annet fellesskap (valgfritt)",
       "description": "Beskrivelse (valgfritt)"
     },
     "status": {

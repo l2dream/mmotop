@@ -86,6 +86,9 @@
     "opens": "Atidarymo data",
     "votes": "Balsai šį mėnesį",
     "rank": "{rank} vieta reitinge",
+    "language": "Kalba",
+    "multilingual": "Kelios kalbos",
+    "community": "Bendruomenė",
     "listed": "MMOTOP nuo",
     "visit": "Apsilankyti svetainėje",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atidarymo data ir balsai MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Nenurodyti",
       "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
+      "language": "Serverio kalba",
       "url": "Serverio svetainė",
+      "community": "Discord, Telegram ar kita bendruomenė (neprivaloma)",
       "description": "Aprašymas (neprivaloma)"
     },
     "status": {

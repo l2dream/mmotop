@@ -86,6 +86,9 @@
     "opens": "Datum otevření",
     "votes": "Hlasy tento měsíc",
     "rank": "{rank}. místo v žebříčku",
+    "language": "Jazyk",
+    "multilingual": "Více jazyků",
+    "community": "Komunita",
     "listed": "Na MMOTOP od",
     "visit": "Navštívit web",
     "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Neuvádět",
       "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
+      "language": "Jazyk serveru",
       "url": "Web serveru",
+      "community": "Discord, Telegram nebo jiná komunita (nepovinné)",
       "description": "Popis (nepovinné)"
     },
     "status": {

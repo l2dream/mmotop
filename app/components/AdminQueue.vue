@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { gameById } from '~/data/games'
+import { serverLanguageName } from '~/i18n/locales'
 
 /**
  * Moderation, in the account page of an admin: the servers waiting for a
@@ -22,6 +23,8 @@ interface QueueServer {
   chronicle: string
   rate: number | null
   rate_text: string | null
+  language: string | null
+  community_url: string | null
   url: string
   open_date: string
   description: string | null
@@ -49,7 +52,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, community_url, url, open_date, description, status, created_at')
     .order('created_at', { ascending: false })
   if (!showAll.value) query = query.eq('status', 'pending')
   const { data, error: failed } = await query
@@ -100,6 +103,8 @@ const ACTIONS: { status: Status, label: string }[] = [
             {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template><template v-else-if="s.rate_text"> · {{ s.rate_text }}</template> · {{ s.open_date }}
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
+          <a v-if="s.community_url" class="account-note admin-url" :href="s.community_url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.community_url }}</a>
+          <span v-if="s.language" class="account-note">Язык: {{ s.language === 'multi' ? 'несколько' : serverLanguageName(s.language) ?? s.language }}</span>
           <span v-if="s.game !== 'other'" class="account-note" dir="ltr">/{{ s.game }}/{{ s.id }}/</span>
         </div>
         <span class="account-status" :class="`status-${s.status}`">{{ STATUS_LABEL[s.status] }}</span>

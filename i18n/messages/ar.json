@@ -86,6 +86,9 @@
     "opens": "تاريخ الافتتاح",
     "votes": "الأصوات هذا الشهر",
     "rank": "المركز {rank} في التصنيف",
+    "language": "اللغة",
+    "multilingual": "عدة لغات",
+    "community": "المجتمع",
     "listed": "على MMOTOP منذ",
     "visit": "زيارة الموقع",
     "description": "{name}: خادم {game} ({chronicle}). المعدلات وتاريخ الافتتاح والأصوات على MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "بدون تحديد",
       "rateOwn": "خيار آخر…",
       "openDate": "تاريخ الافتتاح",
+      "language": "لغة الخادم",
       "url": "موقع الخادم",
+      "community": "Discord أو Telegram أو مجتمع آخر (اختياري)",
       "description": "الوصف (اختياري)"
     },
     "status": {

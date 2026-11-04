@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { chronicleShort } from '~/data/games'
+import { serverLanguageName } from '~/i18n/locales'
 import type { Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
 import { chronicleLanding, rateLanding } from '~/data/landing'
@@ -32,6 +33,7 @@ const props = defineProps<{
 }>()
 defineEmits<{ shuffle: [], more: [] }>()
 
+const { t } = useI18n()
 const { serverBadge, serverSubtitle, rateLabel } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
@@ -41,6 +43,28 @@ const voting = ref(false)
 /** A vote cast just now, added to the count until the site is rebuilt. */
 const justVoted = ref(0)
 const votes = computed(() => props.server.votes + justVoted.value)
+
+/** The language its players speak, in that language's own name. */
+const languageName = computed(() => props.server.language === 'multi'
+  ? t('server.multilingual')
+  : serverLanguageName(props.server.language))
+
+/**
+ * The community link's button says where it goes when that is a place
+ * players know by name; anything else is just "Community".
+ */
+const COMMUNITY_HOSTS: [RegExp, string][] = [
+  [/(^|\.)(discord\.gg|discord\.com|discordapp\.com)$/, 'Discord'],
+  [/(^|\.)(t\.me|telegram\.me|telegram\.org)$/, 'Telegram'],
+  [/(^|\.)(vk\.com|vk\.ru)$/, 'VK']
+]
+const communityLabel = computed(() => {
+  const url = props.server.community
+  if (!url) return ''
+  let host = ''
+  try { host = new URL(url).hostname } catch { /* shown as "Community" */ }
+  return COMMUNITY_HOSTS.find(([re]) => re.test(host))?.[1] ?? t('server.community')
+})
 
 /** The server in a few plain sentences (see useServerAbout). */
 const { fullDate, aboutText } = useServerAbout()
@@ -110,6 +134,10 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
           <small>{{ keepEnds($t('server.rank', { rank })) }}</small>
         </dd>
       </div>
+      <div v-if="languageName">
+        <dt>{{ keepTail($t('server.language')) }}</dt>
+        <dd>{{ languageName }}</dd>
+      </div>
       <div>
         <dt>{{ keepTail($t('server.listed')) }}</dt>
         <dd>{{ fullDate(server.listedAt) }}</dd>
@@ -137,6 +165,13 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
           <path d="M20 4 10 14" />
           <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
         </svg>
+      </a>
+      <!-- Its Discord, Telegram or other community, when the owner gave one. -->
+      <a v-if="server.community" class="server-community" :href="server.community" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z" />
+        </svg>
+        {{ communityLabel }}
       </a>
     </div>
     <VoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />

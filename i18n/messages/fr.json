@@ -86,6 +86,9 @@
     "opens": "Date d’ouverture",
     "votes": "Votes ce mois-ci",
     "rank": "N° {rank} du classement",
+    "language": "Langue",
+    "multilingual": "Plusieurs langues",
+    "community": "Communauté",
     "listed": "Sur MMOTOP depuis le",
     "visit": "Visiter le site",
     "description": "{name} : serveur {game} ({chronicle}). Rates, date d’ouverture et votes sur MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Ne pas préciser",
       "rateOwn": "Autre…",
       "openDate": "Date d’ouverture",
+      "language": "Langue du serveur",
       "url": "Site du serveur",
+      "community": "Discord, Telegram ou autre communauté (facultatif)",
       "description": "Description (facultatif)"
     },
     "status": {

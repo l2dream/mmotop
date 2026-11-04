@@ -86,6 +86,9 @@
     "opens": "オープン日",
     "votes": "今月の投票数",
     "rank": "ランキング{rank}位",
+    "language": "言語",
+    "multilingual": "複数の言語",
+    "community": "コミュニティ",
     "listed": "MMOTOP掲載日",
     "visit": "公式サイトへ",
     "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。",
@@ -187,7 +190,9 @@
       "rateNone": "指定しない",
       "rateOwn": "その他…",
       "openDate": "オープン日",
+      "language": "サーバーの言語",
       "url": "サーバーのサイト",
+      "community": "Discord、Telegram などのコミュニティ（任意）",
       "description": "説明（任意）"
     },
     "status": {

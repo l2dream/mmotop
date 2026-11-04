@@ -86,6 +86,9 @@
     "opens": "Дата открытия",
     "votes": "Голосов за месяц",
     "rank": "№ {rank} в рейтинге",
+    "language": "Язык",
+    "multilingual": "Несколько языков",
+    "community": "Сообщество",
     "listed": "На MMOTOP с",
     "visit": "Перейти на сайт",
     "description": "{name} — сервер {game} ({chronicle}). Рейты, дата открытия и голоса на MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Не указывать",
       "rateOwn": "Свой вариант…",
       "openDate": "Дата открытия",
+      "language": "Язык сервера",
       "url": "Сайт сервера",
+      "community": "Discord, Telegram или другое сообщество (необязательно)",
       "description": "Описание (необязательно)"
     },
     "status": {

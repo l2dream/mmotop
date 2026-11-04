@@ -2,6 +2,7 @@
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import { GAMES, gameById, isChronicleAddress } from '~/data/games'
 import type { Server } from '~/data/servers'
+import { SERVER_LANGUAGES } from '~/i18n/locales'
 import { serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
@@ -20,6 +21,10 @@ interface OwnServer {
   game: string
   /** The name of a game the site does not list yet, when game is 'other'. */
   requested_game: string | null
+  /** Two letters (SERVER_LANGUAGES) or "multi". */
+  language: string | null
+  /** Discord, Telegram…; https only. */
+  community_url: string | null
   chronicle: string
   rate: number | null
   /** In place of a rate, when there is none: "PvP", "GvE"… */
@@ -30,9 +35,15 @@ interface OwnServer {
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game'> & { rate: string, rate_text: string, requested_game: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'community_url'> & { rate: string, rate_text: string, requested_game: string, language: string, community_url: string }
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+/** A new server starts in the language of the page it is added from. */
+const pageLanguage = () => {
+  const code = locale.value.split('-')[0]!
+  return SERVER_LANGUAGES.some((l) => l.code === code) ? code : 'en'
+}
 const localePath = useLocalePath()
 
 const supabase = shallowRef<SupabaseClient | null>(null)
@@ -131,7 +142,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, community_url, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -150,6 +161,8 @@ function addServer() {
     name: '',
     game: GAMES[0]!.id,
     requested_game: '',
+    language: pageLanguage(),
+    community_url: '',
     chronicle: '',
     rate: '',
     rate_text: '',
@@ -162,7 +175,7 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? pageLanguage(), community_url: s.community_url ?? '' }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -294,6 +307,8 @@ async function save() {
     rate: noRate.value ? null : rateNumber(d),
     rate_text: noRate.value ? d.rate_text.trim() || null : null,
     url: d.url.trim(),
+    language: d.language,
+    community_url: d.community_url.trim() || null,
     open_date: d.open_date,
     description: d.description?.trim() || null
   }
@@ -432,8 +447,19 @@ async function remove(s: OwnServer) {
             </label>
           </div>
           <label class="account-field">
+            <span>{{ $t('account.fields.language') }}</span>
+            <select v-model="draft.language" required>
+              <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
+              <option value="multi">{{ $t('server.multilingual') }}</option>
+            </select>
+          </label>
+          <label class="account-field">
             <span>{{ $t('account.fields.url') }}</span>
             <input v-model="draft.url" type="url" required pattern="https?://.+" dir="ltr">
+          </label>
+          <label class="account-field">
+            <span>{{ $t('account.fields.community') }}</span>
+            <input v-model="draft.community_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://discord.gg/…">
           </label>
           <label class="account-field">
             <span>{{ $t('account.fields.description') }}</span>

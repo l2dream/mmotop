@@ -86,6 +86,9 @@
     "opens": "Açılış tarixi",
     "votes": "Bu ayın səsləri",
     "rank": "Reytinqdə № {rank}",
+    "language": "Dil",
+    "multilingual": "Bir neçə dil",
+    "community": "İcma",
     "listed": "MMOTOP-a əlavə edilib",
     "visit": "Sayta keçid",
     "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da.",
@@ -187,7 +190,9 @@
       "rateNone": "Göstərmə",
       "rateOwn": "Öz variantınız…",
       "openDate": "Açılış tarixi",
+      "language": "Serverin dili",
       "url": "Serverin saytı",
+      "community": "Discord, Telegram və ya başqa icma (məcburi deyil)",
       "description": "Təsvir (məcburi deyil)"
     },
     "status": {
