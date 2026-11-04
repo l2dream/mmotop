@@ -191,8 +191,7 @@
       "rateOwn": "Outro…",
       "openDate": "Data de abertura",
       "url": "Site do servidor",
-      "description": "Descrição (opcional)",
-      "descriptionHint": "O que contar: o que diferencia o servidor, bônus para novatos, eventos, versão, jogadores online."
+      "description": "Descrição (opcional)"
     },
     "status": {
       "pending": "Em análise",

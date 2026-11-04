@@ -191,8 +191,7 @@
       "rateOwn": "Oma variant…",
       "openDate": "Avamise kuupäev",
       "url": "Serveri veebileht",
-      "description": "Kirjeldus (valikuline)",
-      "descriptionHint": "Mida kirjutada: mille poolest server eristub, boonused uustulnukatele, sündmused, versioon, online."
+      "description": "Kirjeldus (valikuline)"
     },
     "status": {
       "pending": "Ülevaatusel",

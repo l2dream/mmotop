@@ -191,8 +191,7 @@
       "rateOwn": "その他…",
       "openDate": "オープン日",
       "url": "サーバーのサイト",
-      "description": "説明（任意）",
-      "descriptionHint": "書くとよいこと：サーバーの特色、新規プレイヤー特典、イベント、バージョン、オンライン人数。"
+      "description": "説明（任意）"
     },
     "status": {
       "pending": "審査中",

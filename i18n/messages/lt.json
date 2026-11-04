@@ -191,8 +191,7 @@
       "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
-      "description": "Aprašymas (neprivaloma)",
-      "descriptionHint": "Apie ką parašyti: kuo serveris išsiskiria, premijos naujokams, renginiai, versija, žaidėjų skaičius."
+      "description": "Aprašymas (neprivaloma)"
     },
     "status": {
       "pending": "Tikrinamas",

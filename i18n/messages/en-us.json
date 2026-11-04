@@ -191,8 +191,7 @@
       "rateOwn": "Your own…",
       "openDate": "Opening date",
       "url": "Server website",
-      "description": "Description (optional)",
-      "descriptionHint": "Worth mentioning: what makes the server different, bonuses for new players, events, the build, online."
+      "description": "Description (optional)"
     },
     "status": {
       "pending": "In review",
