@@ -174,9 +174,6 @@
     "invalid": "Nogle felter er ikke udfyldt korrekt. Tjek dem.",
     "fields": {
       "name": "Servernavn",
-      "page": "Side på sitet:",
-      "id": "Adresse på sitet",
-      "idHint": "Små latinske bogstaver, tal og bindestreger, 3–32 tegn. Kan ikke ændres senere.",
       "game": "Spil",
       "otherGame": "Andet spil…",
       "gameName": "Spillets navn",

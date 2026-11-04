@@ -174,9 +174,6 @@
     "invalid": "Alguns campos estão preenchidos incorretamente. Confira.",
     "fields": {
       "name": "Nome do servidor",
-      "page": "Página no site:",
-      "id": "Endereço no site",
-      "idHint": "Letras latinas minúsculas, números e hífens, de 3 a 32 caracteres. Não pode ser alterado depois.",
       "game": "Jogo",
       "otherGame": "Outro jogo…",
       "gameName": "Nome do jogo",

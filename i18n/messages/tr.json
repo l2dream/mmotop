@@ -174,9 +174,6 @@
     "invalid": "Bazı alanlar hatalı doldurulmuş. Lütfen kontrol edin.",
     "fields": {
       "name": "Sunucu adı",
-      "page": "Sitedeki sayfa:",
-      "id": "Sitedeki adres",
-      "idHint": "Küçük Latin harfleri, rakamlar ve kısa çizgi, 3–32 karakter. Sonradan değiştirilemez.",
       "game": "Oyun",
       "otherGame": "Başka oyun…",
       "gameName": "Oyunun adı",
