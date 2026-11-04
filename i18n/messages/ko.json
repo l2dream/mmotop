@@ -50,6 +50,8 @@
     "allVersions": "전체 버전",
     "game": "게임",
     "allGames": "전체 게임",
+    "language": "서버 언어",
+    "allLanguages": "모든 언어",
     "rate": "Rate",
     "from": "최소",
     "to": "최대",

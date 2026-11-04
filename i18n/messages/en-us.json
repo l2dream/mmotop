@@ -50,6 +50,8 @@
     "allVersions": "All versions",
     "game": "Game",
     "allGames": "All games",
+    "language": "Server language",
+    "allLanguages": "All languages",
     "rate": "Rate",
     "from": "From",
     "to": "To",

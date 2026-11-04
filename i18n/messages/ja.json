@@ -50,6 +50,8 @@
     "allVersions": "すべてのバージョン",
     "game": "ゲーム",
     "allGames": "すべてのゲーム",
+    "language": "サーバーの言語",
+    "allLanguages": "すべての言語",
     "rate": "Rate",
     "from": "最小",
     "to": "最大",
