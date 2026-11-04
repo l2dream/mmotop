@@ -57,17 +57,19 @@ const languageName = computed(() => props.server.language === 'multi'
  * The community link's button says where it goes when that is a place
  * players know by name; anything else is just "Community".
  */
-const COMMUNITY_HOSTS: [RegExp, string][] = [
-  [/(^|\.)(discord\.gg|discord\.com|discordapp\.com)$/, 'Discord'],
-  [/(^|\.)(t\.me|telegram\.me|telegram\.org)$/, 'Telegram'],
-  [/(^|\.)(vk\.com|vk\.ru)$/, 'VK']
+const COMMUNITY_HOSTS: [RegExp, 'discord' | 'telegram' | 'vk', string][] = [
+  [/(^|\.)(discord\.gg|discord\.com|discordapp\.com)$/, 'discord', 'Discord'],
+  [/(^|\.)(t\.me|telegram\.me|telegram\.org)$/, 'telegram', 'Telegram'],
+  [/(^|\.)(vk\.com|vk\.ru)$/, 'vk', 'VK']
 ]
-const communityLabel = computed(() => {
+/** The other community link's name and mark, from where it goes. */
+const community = computed(() => {
   const url = props.server.community
-  if (!url) return ''
+  if (!url) return null
   let host = ''
   try { host = new URL(url).hostname } catch { /* shown as "Community" */ }
-  return COMMUNITY_HOSTS.find(([re]) => re.test(host))?.[1] ?? t('server.community')
+  const known = COMMUNITY_HOSTS.find(([re]) => re.test(host))
+  return known ? { kind: known[1], label: known[2] } : { kind: 'other' as const, label: t('server.community') }
 })
 
 /** The server in a few plain sentences (see useServerAbout). */
@@ -172,16 +174,12 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
       </a>
       <!-- Its Discord, and any other community, when the owner gave them. -->
       <a v-if="server.discord" class="server-community" :href="server.discord" target="_blank" rel="noopener nofollow">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z" />
-        </svg>
+        <SocialIcon kind="discord" />
         Discord
       </a>
       <a v-if="server.community" class="server-community" :href="server.community" target="_blank" rel="noopener nofollow">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z" />
-        </svg>
-        {{ communityLabel }}
+        <SocialIcon :kind="community!.kind" />
+        {{ community!.label }}
       </a>
     </div>
     <VoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />
