@@ -88,17 +88,18 @@ export function useServerAbout() {
    * servers of the same game and chronicle the site has — so that, with the
    * same template, the text still says something of this server in
    * particular. The count stands after a colon, like the votes, so no
-   * language has to decline "server" for it.
+   * language has to decline "server" for it. `brief` leaves those two out:
+   * the account form's preview, where the owner asked for the facts alone.
    */
-  function aboutText(s: Server, today: string, options: { rank?: number, game?: string } = {}) {
+  function aboutText(s: Server, today: string, options: { rank?: number, game?: string, brief?: boolean } = {}) {
     const kind = { name: s.name, game: options.game ?? serverSubtitle(s), chronicle: s.chronicle, rate: rateLabel(s) }
     return [
       t(s.rate == null ? 'server.about.noRate' : 'server.about.rate', kind),
       // Some dates end in a full stop of their own ("20 ноября 2025 г.",
       // "2025 m. sausio 12 d."), which the sentence's would double.
       t(s.openDate <= today ? 'server.about.opened' : 'server.about.opens', { date: fullDate(s.openDate) }).replace(/\.\.$/, '.'),
-      ...(s.rate != null ? [t(`server.about.${rateKind(s.rate)}`)] : []),
-      ...(!options.game && sameKind(s) >= 2 ? [t('server.about.count', { game: kind.game, chronicle: s.chronicle, count: sameKind(s) })] : []),
+      ...(!options.brief && s.rate != null ? [t(`server.about.${rateKind(s.rate)}`)] : []),
+      ...(!options.brief && !options.game && sameKind(s) >= 2 ? [t('server.about.count', { game: kind.game, chronicle: s.chronicle, count: sameKind(s) })] : []),
       ...(options.rank ? [t('server.about.votes', { votes: s.votes, rank: options.rank })] : [])
     ].join(NO_SPACES.has(locale.value) ? '' : ' ')
   }

@@ -271,7 +271,7 @@ const aboutPreview = computed(() => {
     openDate: d.open_date || today,
     listedAt: today,
     votes: 0
-  }, today, { game: d.game === 'other' ? d.requested_game || '…' : undefined })
+  }, today, { game: d.game === 'other' ? d.requested_game || '…' : undefined, brief: true })
 })
 
 /** A different game has different versions: the choice starts again. */
