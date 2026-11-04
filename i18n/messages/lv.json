@@ -193,6 +193,8 @@
       "rateOwn": "Savs variants…",
       "openDate": "Atvēršanas datums",
       "language": "Servera valoda",
+      "otherLanguage": "Cita valoda…",
+      "languageName": "Valodas nosaukums",
       "url": "Servera vietne",
       "community": "Discord, Telegram vai cita kopiena (nav obligāts)",
       "description": "Apraksts (nav obligāts)"

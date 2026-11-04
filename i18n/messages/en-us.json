@@ -193,6 +193,8 @@
       "rateOwn": "Your own…",
       "openDate": "Opening date",
       "language": "Server language",
+      "otherLanguage": "Another language…",
+      "languageName": "Language name",
       "url": "Server website",
       "community": "Discord, Telegram or another community (optional)",
       "description": "Description (optional)"

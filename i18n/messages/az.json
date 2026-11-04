@@ -193,6 +193,8 @@
       "rateOwn": "Öz variantınız…",
       "openDate": "Açılış tarixi",
       "language": "Serverin dili",
+      "otherLanguage": "Başqa dil…",
+      "languageName": "Dilin adı",
       "url": "Serverin saytı",
       "community": "Discord, Telegram və ya başqa icma (məcburi deyil)",
       "description": "Təsvir (məcburi deyil)"

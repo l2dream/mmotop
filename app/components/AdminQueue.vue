@@ -24,6 +24,7 @@ interface QueueServer {
   rate: number | null
   rate_text: string | null
   language: string | null
+  language_text: string | null
   community_url: string | null
   url: string
   open_date: string
@@ -52,7 +53,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, community_url, url, open_date, description, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, community_url, url, open_date, description, status, created_at')
     .order('created_at', { ascending: false })
   if (!showAll.value) query = query.eq('status', 'pending')
   const { data, error: failed } = await query
@@ -104,7 +105,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
           <a v-if="s.community_url" class="account-note admin-url" :href="s.community_url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.community_url }}</a>
-          <span v-if="s.language" class="account-note">Язык: {{ s.language === 'multi' ? 'несколько' : serverLanguageName(s.language) ?? s.language }}</span>
+          <span v-if="s.language" class="account-note">Язык: {{ s.language === 'multi' ? 'несколько' : s.language === 'other' ? `${s.language_text} (свой)` : serverLanguageName(s.language) ?? s.language }}</span>
           <span v-if="s.game !== 'other'" class="account-note" dir="ltr">/{{ s.game }}/{{ s.id }}/</span>
         </div>
         <span class="account-status" :class="`status-${s.status}`">{{ STATUS_LABEL[s.status] }}</span>

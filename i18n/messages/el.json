@@ -193,6 +193,8 @@
       "rateOwn": "Δικό σας…",
       "openDate": "Ημερομηνία έναρξης",
       "language": "Γλώσσα διακομιστή",
+      "otherLanguage": "Άλλη γλώσσα…",
+      "languageName": "Όνομα γλώσσας",
       "url": "Ιστότοπος διακομιστή",
       "community": "Discord, Telegram ή άλλη κοινότητα (προαιρετικό)",
       "description": "Περιγραφή (προαιρετικό)"

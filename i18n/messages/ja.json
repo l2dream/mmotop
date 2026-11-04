@@ -193,6 +193,8 @@
       "rateOwn": "その他…",
       "openDate": "オープン日",
       "language": "サーバーの言語",
+      "otherLanguage": "その他の言語…",
+      "languageName": "言語名",
       "url": "サーバーのサイト",
       "community": "Discord、Telegram などのコミュニティ（任意）",
       "description": "説明（任意）"

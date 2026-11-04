@@ -193,6 +193,8 @@
       "rateOwn": "Outro…",
       "openDate": "Data de abertura",
       "language": "Língua do servidor",
+      "otherLanguage": "Outra língua…",
+      "languageName": "Nome da língua",
       "url": "Site do servidor",
       "community": "Discord, Telegram ou outra comunidade (opcional)",
       "description": "Descrição (opcional)"

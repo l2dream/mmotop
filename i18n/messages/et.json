@@ -193,6 +193,8 @@
       "rateOwn": "Oma variant…",
       "openDate": "Avamise kuupäev",
       "language": "Serveri keel",
+      "otherLanguage": "Muu keel…",
+      "languageName": "Keele nimi",
       "url": "Serveri veebileht",
       "community": "Discord, Telegram või muu kogukond (valikuline)",
       "description": "Kirjeldus (valikuline)"

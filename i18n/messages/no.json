@@ -193,6 +193,8 @@
       "rateOwn": "Annet…",
       "openDate": "Åpningsdato",
       "language": "Serverens språk",
+      "otherLanguage": "Annet språk…",
+      "languageName": "Språkets navn",
       "url": "Serverens nettside",
       "community": "Discord, Telegram eller et annet fellesskap (valgfritt)",
       "description": "Beskrivelse (valgfritt)"

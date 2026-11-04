@@ -193,6 +193,8 @@
       "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
       "language": "Serverio kalba",
+      "otherLanguage": "Kita kalba…",
+      "languageName": "Kalbos pavadinimas",
       "url": "Serverio svetainė",
       "community": "Discord, Telegram ar kita bendruomenė (neprivaloma)",
       "description": "Aprašymas (neprivaloma)"
