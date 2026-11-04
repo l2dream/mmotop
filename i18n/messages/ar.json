@@ -181,8 +181,10 @@
       "choose": "اختر…",
       "rate": "Rate",
       "rateHint": "مثلًا 50",
-      "rateText": "بدلًا من Rate (اختياري)",
-      "rateTextHint": "مثلًا PvP أو GvE",
+      "rateText": "بدلًا من Rate",
+      "rateTextHint": "مثلًا Hardcore",
+      "rateNone": "بدون تحديد",
+      "rateOwn": "خيار آخر…",
       "openDate": "تاريخ الافتتاح",
       "url": "موقع الخادم",
       "description": "الوصف"

@@ -181,8 +181,10 @@
       "choose": "Pasirink…",
       "rate": "Rate",
       "rateHint": "pvz., 50",
-      "rateText": "Vietoj rate (neprivaloma)",
-      "rateTextHint": "pvz., PvP arba GvE",
+      "rateText": "Vietoj rate",
+      "rateTextHint": "pvz., Hardcore",
+      "rateNone": "Nenurodyti",
+      "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
       "description": "Aprašymas"

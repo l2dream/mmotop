@@ -181,8 +181,10 @@
       "choose": "Escolher…",
       "rate": "Rate",
       "rateHint": "ex.: 50",
-      "rateText": "No lugar dos rates (opcional)",
-      "rateTextHint": "ex.: PvP ou GvE",
+      "rateText": "No lugar dos rates",
+      "rateTextHint": "ex.: Hardcore",
+      "rateNone": "Não informar",
+      "rateOwn": "Outro…",
       "openDate": "Data de abertura",
       "url": "Site do servidor",
       "description": "Descrição"

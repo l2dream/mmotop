@@ -181,8 +181,10 @@
       "choose": "Ընտրեք…",
       "rate": "Rate",
       "rateHint": "օրինակ՝ 50",
-      "rateText": "Rate-ի փոխարեն (ոչ պարտադիր)",
-      "rateTextHint": "օրինակ՝ PvP կամ GvE",
+      "rateText": "Rate-ի փոխարեն",
+      "rateTextHint": "օրինակ՝ Hardcore",
+      "rateNone": "Չնշել",
+      "rateOwn": "Ձեր տարբերակը…",
       "openDate": "Բացման ամսաթիվ",
       "url": "Սերվերի կայքը",
       "description": "Նկարագրություն"

@@ -181,8 +181,10 @@
       "choose": "בחר…",
       "rate": "Rate",
       "rateHint": "למשל 50",
-      "rateText": "במקום Rate (לא חובה)",
-      "rateTextHint": "למשל PvP או GvE",
+      "rateText": "במקום Rate",
+      "rateTextHint": "למשל Hardcore",
+      "rateNone": "לא לציין",
+      "rateOwn": "משהו אחר…",
       "openDate": "תאריך פתיחה",
       "url": "אתר השרת",
       "description": "תיאור"

@@ -181,8 +181,10 @@
       "choose": "Vyberte…",
       "rate": "Rate",
       "rateHint": "např. 50",
-      "rateText": "Místo rate (nepovinné)",
-      "rateTextHint": "např. PvP nebo GvE",
+      "rateText": "Místo rate",
+      "rateTextHint": "např. Hardcore",
+      "rateNone": "Neuvádět",
+      "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
       "url": "Web serveru",
       "description": "Popis"

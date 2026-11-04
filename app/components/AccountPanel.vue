@@ -141,6 +141,7 @@ function addServer() {
   idOpen.value = false
   ownChronicle.value = false
   noRate.value = false
+  ownRateWord.value = false
   draft.value = {
     id: '',
     name: '',
@@ -162,6 +163,7 @@ function editServer(s: OwnServer) {
   idOpen.value = false
   draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '' }
   noRate.value = s.rate == null
+  ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
 }
 
@@ -219,11 +221,20 @@ const chronicleChoice = computed({
 })
 
 /**
- * "No rates": the number gives way to an optional word in its place, picked
- * from the usual ones or written in. Shown where "x50" would be.
+ * "No rates": the number gives way to an optional word in its place, shown
+ * where "x50" would be. Picked from a list like the game and the version,
+ * with "Your own…" opening a field for one the list lacks.
  */
 const noRate = ref(false)
 const RATE_WORDS = ['PvP', 'GvE', 'RvR', 'PvE']
+const ownRateWord = ref(false)
+const rateWordChoice = computed({
+  get: () => (ownRateWord.value ? OWN : draft.value?.rate_text ?? ''),
+  set: (value: string) => {
+    ownRateWord.value = value === OWN
+    draft.value!.rate_text = value === OWN ? '' : value
+  }
+})
 
 /** A different game has different versions: the choice starts again. */
 function pickGame() {
@@ -375,13 +386,25 @@ async function remove(s: OwnServer) {
                 <span>{{ $t('account.fields.rate') }}</span>
                 <input v-model="draft.rate" type="number" min="0.01" max="100000" step="any" inputmode="decimal" :placeholder="$t('account.fields.rateHint')">
               </label>
-              <label v-else class="account-field">
-                <span>{{ $t('account.fields.rateText') }}</span>
-                <input v-model="draft.rate_text" type="text" maxlength="20" list="account-rate-words" :placeholder="$t('account.fields.rateTextHint')">
-                <datalist id="account-rate-words">
-                  <option v-for="w in RATE_WORDS" :key="w" :value="w" />
-                </datalist>
-              </label>
+              <template v-else>
+                <label class="account-field">
+                  <span>{{ $t('account.fields.rateText') }}</span>
+                  <select v-model="rateWordChoice">
+                    <option value="">{{ $t('account.fields.rateNone') }}</option>
+                    <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
+                    <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
+                  </select>
+                </label>
+                <input
+                  v-if="ownRateWord"
+                  v-model="draft.rate_text"
+                  type="text"
+                  required
+                  maxlength="20"
+                  :aria-label="$t('account.fields.rateText')"
+                  :placeholder="$t('account.fields.rateTextHint')"
+                >
+              </template>
               <label class="account-check">
                 <input v-model="noRate" type="checkbox">
                 <span>{{ $t('filter.noRates') }}</span>
