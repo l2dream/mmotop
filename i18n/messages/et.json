@@ -86,6 +86,9 @@
     "opens": "Avamise kuupäev",
     "votes": "Hääli sel kuul",
     "rank": "Edetabelis {rank}. koht",
+    "language": "Keel",
+    "multilingual": "Mitu keelt",
+    "community": "Kogukond",
     "listed": "MMOTOP-is alates",
     "visit": "Ava veebisait",
     "description": "{name}: {game} server ({chronicle}). Rate-id, avamise kuupäev ja hääled MMOTOP-is.",
@@ -187,7 +190,9 @@
       "rateNone": "Ära märgi",
       "rateOwn": "Oma variant…",
       "openDate": "Avamise kuupäev",
+      "language": "Serveri keel",
       "url": "Serveri veebileht",
+      "community": "Discord, Telegram või muu kogukond (valikuline)",
       "description": "Kirjeldus (valikuline)"
     },
     "status": {

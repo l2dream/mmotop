@@ -86,6 +86,9 @@
     "opens": "开服日期",
     "votes": "本月票数",
     "rank": "排行第 {rank} 名",
+    "language": "语言",
+    "multilingual": "多种语言",
+    "community": "社区",
     "listed": "收录于 MMOTOP",
     "visit": "访问官网",
     "description": "{name}：{game} 服务器（{chronicle}）。在 MMOTOP 查看倍率、开服日期和票数。",
@@ -187,7 +190,9 @@
       "rateNone": "不填写",
       "rateOwn": "自定义…",
       "openDate": "开服日期",
+      "language": "服务器语言",
       "url": "服务器官网",
+      "community": "Discord、Telegram 或其他社区（可选）",
       "description": "简介（可选）"
     },
     "status": {

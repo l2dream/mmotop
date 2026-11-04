@@ -86,6 +86,9 @@
     "opens": "Atvēršanas datums",
     "votes": "Balsis šomēnes",
     "rank": "{rank}. vieta reitingā",
+    "language": "Valoda",
+    "multilingual": "Vairākas valodas",
+    "community": "Kopiena",
     "listed": "MMOTOP kopš",
     "visit": "Apmeklēt vietni",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP.",
@@ -187,7 +190,9 @@
       "rateNone": "Nenorādīt",
       "rateOwn": "Savs variants…",
       "openDate": "Atvēršanas datums",
+      "language": "Servera valoda",
       "url": "Servera vietne",
+      "community": "Discord, Telegram vai cita kopiena (nav obligāts)",
       "description": "Apraksts (nav obligāts)"
     },
     "status": {

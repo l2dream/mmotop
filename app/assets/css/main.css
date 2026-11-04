@@ -2467,7 +2467,8 @@ a.account-address:hover { text-decoration: underline; }
 /* Beside "Visit the site": the header login button's violet frame, so the
    filled button stays the one to the server and this one reads second. */
 .server-actions { gap: 10px; flex-wrap: wrap; }
-.server-vote {
+.server-vote,
+.server-community {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -2479,11 +2480,14 @@ a.account-address:hover { text-decoration: underline; }
   color: #f3f4ff;
   font-size: 15px;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
 }
-.server-vote:hover { border-color: #a47bff; }
+.server-vote:hover,
+.server-community:hover { border-color: #a47bff; }
 .server-vote[aria-expanded="true"] { border-color: #c4a1ff; }
-.theme-light .server-vote {
+.theme-light .server-vote,
+.theme-light .server-community {
   border-color: #8b5cf6;
   background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .7));
   box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
@@ -2537,7 +2541,8 @@ a.account-address:hover { text-decoration: underline; }
   /* Five in two columns leaves one over; it takes the whole last row. */
   .server-facts > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .server-visit,
-  .server-vote { flex: 1; justify-content: center; }
+  .server-vote,
+  .server-community { flex: 1; justify-content: center; }
 }
 
 /* The way back above a section or server page: a quiet pill named after

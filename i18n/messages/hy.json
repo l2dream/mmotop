@@ -86,6 +86,9 @@
     "opens": "Բացման ամսաթիվ",
     "votes": "Այս ամսվա ձայներ",
     "rank": "Վարկանիշում № {rank}",
+    "language": "Լեզու",
+    "multilingual": "Մի քանի լեզու",
+    "community": "Համայնք",
     "listed": "MMOTOP-ում՝ սկսած",
     "visit": "Այցելել կայք",
     "description": "{name}՝ {game} սերվեր ({chronicle})։ Rate-եր, բացման ամսաթիվ և ձայներ MMOTOP-ում։",
@@ -187,7 +190,9 @@
       "rateNone": "Չնշել",
       "rateOwn": "Ձեր տարբերակը…",
       "openDate": "Բացման ամսաթիվ",
+      "language": "Սերվերի լեզուն",
       "url": "Սերվերի կայքը",
+      "community": "Discord, Telegram կամ այլ համայնք (ոչ պարտադիր)",
       "description": "Նկարագրություն (ոչ պարտադիր)"
     },
     "status": {

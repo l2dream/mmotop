@@ -86,6 +86,9 @@
     "opens": "Açılış tarihi",
     "votes": "Bu ayki oylar",
     "rank": "Sıralamada {rank}.",
+    "language": "Dil",
+    "multilingual": "Birden fazla dil",
+    "community": "Topluluk",
     "listed": "MMOTOP’a eklenme",
     "visit": "Siteyi ziyaret et",
     "description": "{name}: {game} sunucusu ({chronicle}). Rate, açılış tarihi ve oylar MMOTOP’ta.",
@@ -187,7 +190,9 @@
       "rateNone": "Belirtme",
       "rateOwn": "Kendi seçeneğiniz…",
       "openDate": "Açılış tarihi",
+      "language": "Sunucu dili",
       "url": "Sunucunun sitesi",
+      "community": "Discord, Telegram veya başka bir topluluk (isteğe bağlı)",
       "description": "Açıklama (isteğe bağlı)"
     },
     "status": {

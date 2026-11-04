@@ -249,3 +249,29 @@ export function matchesQuery(locale: Locale, query: string): boolean {
     || fold(locale.code).includes(q)
     || fold(locale.chip).includes(q)
 }
+
+/**
+ * Names that lowercasing the endonym gets wrong: Greek capitals drop their
+ * accents (ΕΛΛΗΝΙΚΑ → "Ελληνικα"), and 简体中文 names the simplified script,
+ * where a server's language is just 中文.
+ */
+const OWN_NAME: Record<string, string> = { el: 'Ελληνικά', zh: '中文' }
+
+/**
+ * The languages a server's players can speak, for the owner's form and the
+ * server's page: one per language — English and Portuguese once, not again
+ * as their US and Brazilian variants — each named in itself, as in the
+ * selector but in sentence case: "Русский", "Deutsch", "日本語". "multi" is
+ * for a server with several; its name comes from the page's own messages.
+ */
+export const SERVER_LANGUAGES = READY_LOCALES
+  .filter(l => !l.code.includes('-'))
+  .map(l => {
+    const lower = l.endonym.toLocaleLowerCase(l.code)
+    return { code: l.code, name: OWN_NAME[l.code] ?? lower.charAt(0).toLocaleUpperCase(l.code) + lower.slice(1) }
+  })
+
+/** A server language's own name, or undefined for "multi" and unknown codes. */
+export function serverLanguageName(code: string | undefined) {
+  return SERVER_LANGUAGES.find(l => l.code === code)?.name
+}
