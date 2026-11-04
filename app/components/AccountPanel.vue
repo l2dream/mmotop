@@ -175,7 +175,7 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? pageLanguage(), community_url: s.community_url ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', community_url: s.community_url ?? '' }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -307,7 +307,7 @@ async function save() {
     rate: noRate.value ? null : rateNumber(d),
     rate_text: noRate.value ? d.rate_text.trim() || null : null,
     url: d.url.trim(),
-    language: d.language,
+    language: d.language || null,
     community_url: d.community_url.trim() || null,
     open_date: d.open_date,
     description: d.description?.trim() || null
@@ -421,7 +421,7 @@ async function remove(s: OwnServer) {
                 <label class="account-field">
                   <span>{{ $t('account.fields.rateText') }}</span>
                   <select v-model="rateWordChoice">
-                    <option value="">{{ $t('account.fields.rateNone') }}</option>
+                    <option value="">{{ $t('account.fields.notSpecified') }}</option>
                     <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
                     <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
                   </select>
@@ -448,7 +448,10 @@ async function remove(s: OwnServer) {
           </div>
           <label class="account-field">
             <span>{{ $t('account.fields.language') }}</span>
-            <select v-model="draft.language" required>
+            <!-- Optional: "Not specified" stores no language; a new server
+                 starts in the page's, which is right more often than not. -->
+            <select v-model="draft.language">
+              <option value="">{{ $t('account.fields.notSpecified') }}</option>
               <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
               <option value="multi">{{ $t('server.multilingual') }}</option>
             </select>

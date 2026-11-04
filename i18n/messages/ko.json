@@ -189,7 +189,7 @@
       "rateHint": "예: 50",
       "rateText": "Rate 대신",
       "rateTextHint": "예: Hardcore",
-      "rateNone": "지정 안 함",
+      "notSpecified": "지정 안 함",
       "rateOwn": "직접 입력…",
       "openDate": "오픈 날짜",
       "language": "서버 언어",

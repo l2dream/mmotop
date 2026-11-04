@@ -189,7 +189,7 @@
       "rateHint": "nt 50",
       "rateText": "Rate’i asemel",
       "rateTextHint": "nt Hardcore",
-      "rateNone": "Ära märgi",
+      "notSpecified": "Ära märgi",
       "rateOwn": "Oma variant…",
       "openDate": "Avamise kuupäev",
       "language": "Serveri keel",

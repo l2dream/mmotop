@@ -189,7 +189,7 @@
       "rateHint": "наприклад, 50",
       "rateText": "Замість рейтів",
       "rateTextHint": "наприклад, Hardcore",
-      "rateNone": "Не вказувати",
+      "notSpecified": "Не вказувати",
       "rateOwn": "Свій варіант…",
       "openDate": "Дата відкриття",
       "language": "Мова сервера",

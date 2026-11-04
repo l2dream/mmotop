@@ -189,7 +189,7 @@
       "rateHint": "məsələn, 50",
       "rateText": "Rate əvəzinə",
       "rateTextHint": "məsələn, Hardcore",
-      "rateNone": "Göstərmə",
+      "notSpecified": "Göstərmə",
       "rateOwn": "Öz variantınız…",
       "openDate": "Açılış tarixi",
       "language": "Serverin dili",

@@ -189,7 +189,7 @@
       "rateHint": "مثلًا 50",
       "rateText": "بدلًا من Rate",
       "rateTextHint": "مثلًا Hardcore",
-      "rateNone": "بدون تحديد",
+      "notSpecified": "بدون تحديد",
       "rateOwn": "خيار آخر…",
       "openDate": "تاريخ الافتتاح",
       "language": "لغة الخادم",

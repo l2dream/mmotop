@@ -189,7 +189,7 @@
       "rateHint": "例: 50",
       "rateText": "Rateの代わりに",
       "rateTextHint": "例: Hardcore",
-      "rateNone": "指定しない",
+      "notSpecified": "指定しない",
       "rateOwn": "その他…",
       "openDate": "オープン日",
       "language": "サーバーの言語",
