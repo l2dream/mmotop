@@ -187,7 +187,8 @@
       "rateOwn": "Kendi seçeneğiniz…",
       "openDate": "Açılış tarihi",
       "url": "Sunucunun sitesi",
-      "description": "Açıklama"
+      "description": "Açıklama (isteğe bağlı)",
+      "descriptionHint": "Sayfa her zaman aşağıdaki, sunucu bilgilerinden oluşturulan metinle başlar. Açıklama yazarsanız onun altında yer alır."
     },
     "status": {
       "pending": "İncelemede",

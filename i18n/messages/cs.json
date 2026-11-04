@@ -187,7 +187,8 @@
       "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
       "url": "Web serveru",
-      "description": "Popis"
+      "description": "Popis (nepovinné)",
+      "descriptionHint": "Stránka vždy začíná textem níže, sestaveným z údajů o serveru. Váš popis, pokud ho napíšete, bude pod ním."
     },
     "status": {
       "pending": "Ve schvalování",

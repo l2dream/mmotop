@@ -2096,6 +2096,17 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .account-field > span { font-size: 13px; font-weight: 600; color: #c9cce0; }
 .account-field small { font-size: 12px; color: #9a9fb8; overflow-wrap: anywhere; }
+/* The made description, under the description field: what the page says. */
+.account-preview {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .04);
+  color: #c6c9d9;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.theme-light .account-preview { background: rgba(103, 104, 173, .07); color: #3a3e55; }
 /* A checkbox under a field: "No rates". The box in the site's violet. */
 .account-check {
   display: inline-flex;
@@ -2366,6 +2377,16 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 
 /* Three across, so the five facts read as two even rows: what the server is
    and when it opens, then how it stands on MMOTOP. */
+.server-description {
+  margin: 12px 0 0;
+  max-width: 68ch;
+  color: #dfe1f2;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.theme-light .server-description { color: #2b2e45; }
 .server-about {
   margin: 16px 0 0;
   max-width: 68ch;

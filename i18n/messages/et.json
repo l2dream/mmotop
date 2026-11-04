@@ -187,7 +187,8 @@
       "rateOwn": "Oma variant…",
       "openDate": "Avamise kuupäev",
       "url": "Serveri veebileht",
-      "description": "Kirjeldus"
+      "description": "Kirjeldus (valikuline)",
+      "descriptionHint": "Leht algab alati allolevast tekstist, mis on koostatud serveri andmetest. Sinu kirjeldus, kui selle kirjutad, tuleb selle alla."
     },
     "status": {
       "pending": "Ülevaatusel",

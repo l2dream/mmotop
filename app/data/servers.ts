@@ -33,6 +33,8 @@ export interface Server {
   listedAt: string
   /** Votes this calendar month; they reset on the 1st. Drives TOP GAMES. */
   votes: number
+  /** The owner's own words, shown on the server's page below the made one. */
+  description?: string
   /**
    * Added by its owner and approved, so it is in the database and can be
    * voted for. The demo servers below are not, and have no vote button.

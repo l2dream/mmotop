@@ -187,7 +187,8 @@
       "rateOwn": "Autre…",
       "openDate": "Date d’ouverture",
       "url": "Site du serveur",
-      "description": "Description"
+      "description": "Description (facultatif)",
+      "descriptionHint": "La page commence toujours par le texte ci-dessous, rédigé à partir des informations du serveur. Votre description, si vous en écrivez une, viendra en dessous."
     },
     "status": {
       "pending": "En vérification",

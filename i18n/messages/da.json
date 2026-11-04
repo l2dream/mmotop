@@ -187,7 +187,8 @@
       "rateOwn": "Andet…",
       "openDate": "Åbningsdato",
       "url": "Serverens hjemmeside",
-      "description": "Beskrivelse"
+      "description": "Beskrivelse (valgfrit)",
+      "descriptionHint": "Siden starter altid med teksten nedenfor, lavet ud fra serverens oplysninger. Din beskrivelse, hvis du skriver en, kommer under den."
     },
     "status": {
       "pending": "Til godkendelse",

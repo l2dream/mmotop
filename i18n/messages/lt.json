@@ -187,7 +187,8 @@
       "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
-      "description": "Aprašymas"
+      "description": "Aprašymas (neprivaloma)",
+      "descriptionHint": "Puslapis visada prasideda žemiau esančiu tekstu, sudarytu iš serverio duomenų. Tavo aprašymas, jei jį parašysi, bus po juo."
     },
     "status": {
       "pending": "Tikrinamas",

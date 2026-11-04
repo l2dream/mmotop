@@ -187,7 +187,8 @@
       "rateOwn": "Eigene Angabe…",
       "openDate": "Eröffnungsdatum",
       "url": "Website des Servers",
-      "description": "Beschreibung"
+      "description": "Beschreibung (optional)",
+      "descriptionHint": "Die Seite beginnt immer mit dem Text unten, erstellt aus den Angaben zum Server. Ihre Beschreibung steht, falls Sie eine schreiben, darunter."
     },
     "status": {
       "pending": "In Prüfung",

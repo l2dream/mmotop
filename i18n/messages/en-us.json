@@ -187,7 +187,8 @@
       "rateOwn": "Your own…",
       "openDate": "Opening date",
       "url": "Server website",
-      "description": "Description"
+      "description": "Description (optional)",
+      "descriptionHint": "The page always opens with the text below, made from the server’s details. Your description, if you write one, goes under it."
     },
     "status": {
       "pending": "In review",

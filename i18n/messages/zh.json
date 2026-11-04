@@ -187,7 +187,8 @@
       "rateOwn": "自定义…",
       "openDate": "开服日期",
       "url": "服务器官网",
-      "description": "简介"
+      "description": "简介（可选）",
+      "descriptionHint": "页面总是以下方根据服务器信息生成的文字开头。如果你填写了简介，会显示在它下面。"
     },
     "status": {
       "pending": "审核中",

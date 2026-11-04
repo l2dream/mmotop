@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import { GAMES, gameById, isChronicleAddress } from '~/data/games'
+import type { Server } from '~/data/servers'
 import { SERVER_ID_PATTERN, serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
@@ -236,6 +237,42 @@ const rateWordChoice = computed({
   }
 })
 
+/**
+ * The rate as a number, or none. The field is type="number", and v-model
+ * hands back a number from it (or '' when empty), not the string the draft's
+ * type promises — calling .trim() on it threw, and took the form with it.
+ */
+function rateNumber(d: Draft) {
+  const text = String(d.rate ?? '').trim()
+  return text ? Number(text) : null
+}
+
+/**
+ * What the server's page says of it whatever the owner writes — the made
+ * text (useServerAbout), shown under the description field as it is filled
+ * in. With no description of their own, this is all the page has.
+ */
+const { aboutText } = useServerAbout()
+const today = new Date().toISOString().slice(0, 10)
+const aboutPreview = computed(() => {
+  const d = draft.value
+  if (!d) return ''
+  const rate = !noRate.value && rateNumber(d) != null ? rateNumber(d)! : undefined
+  return aboutText({
+    id: d.id,
+    name: serverName(d.name) || '…',
+    // 'other' too: its name comes in through `game` below.
+    game: d.game as Server['game'],
+    chronicle: d.chronicle || '…',
+    ...(rate ? { rate } : {}),
+    ...(noRate.value && d.rate_text.trim() ? { rateText: d.rate_text.trim() } : {}),
+    url: d.url,
+    openDate: d.open_date || today,
+    listedAt: today,
+    votes: 0
+  }, today, { game: d.game === 'other' ? d.requested_game || '…' : undefined })
+})
+
 /** A different game has different versions: the choice starts again. */
 function pickGame() {
   draft.value!.chronicle = ''
@@ -257,7 +294,7 @@ async function save() {
     game: d.game,
     requested_game: d.game === 'other' ? d.requested_game.trim() : null,
     chronicle: d.chronicle.trim(),
-    rate: !noRate.value && d.rate.trim() ? Number(d.rate) : null,
+    rate: noRate.value ? null : rateNumber(d),
     rate_text: noRate.value ? d.rate_text.trim() || null : null,
     url: d.url.trim(),
     open_date: d.open_date,
@@ -422,7 +459,9 @@ async function remove(s: OwnServer) {
           <label class="account-field">
             <span>{{ $t('account.fields.description') }}</span>
             <textarea v-model="draft.description" rows="4" maxlength="2000" />
+            <small>{{ $t('account.fields.descriptionHint') }}</small>
           </label>
+          <p class="account-preview">{{ aboutPreview }}</p>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <div class="account-actions-row">
