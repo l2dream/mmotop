@@ -92,6 +92,7 @@
     "international": "Beynəlxalq",
     "multilingual": "Bir neçə dil",
     "community": "İcma",
+    "forum": "Forum",
     "listed": "MMOTOP-a əlavə edilib",
     "visit": "Sayta keçid",
     "description": "{name}: {game} serveri ({chronicle}). Rate, açılış tarixi və səslər MMOTOP-da.",
@@ -198,7 +199,11 @@
       "languageName": "Dilin adı",
       "url": "Serverin saytı",
       "discord": "Discord (məcburi deyil)",
-      "community": "Telegram, VK və ya başqa icma (məcburi deyil)",
+      "links": "Digər şəbəkələr",
+      "network": "Şəbəkə",
+      "linkAddress": "Keçid",
+      "removeLink": "Sil",
+      "addLink": "Şəbəkə əlavə et",
       "description": "Təsvir (məcburi deyil)"
     },
     "status": {

@@ -92,6 +92,7 @@
     "international": "Інтернаціональний",
     "multilingual": "Кілька мов",
     "community": "Спільнота",
+    "forum": "Форум",
     "listed": "На MMOTOP з",
     "visit": "Перейти на сайт",
     "description": "{name} — сервер {game} ({chronicle}). Рейти, дата відкриття та голоси на MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Назва мови",
       "url": "Сайт сервера",
       "discord": "Discord (необов’язково)",
-      "community": "Telegram, VK або інша спільнота (необов’язково)",
+      "links": "Інші мережі",
+      "network": "Мережа",
+      "linkAddress": "Адреса посилання",
+      "removeLink": "Прибрати",
+      "addLink": "Додати мережу",
       "description": "Опис (необов’язково)"
     },
     "status": {

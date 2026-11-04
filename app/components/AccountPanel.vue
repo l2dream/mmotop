@@ -3,6 +3,7 @@ import type { Session, SupabaseClient } from '@supabase/supabase-js'
 import { GAMES, gameById, isChronicleAddress } from '~/data/games'
 import type { Server } from '~/data/servers'
 import { SERVER_LANGUAGES } from '~/i18n/locales'
+import { NETWORKS, MAX_LINKS, type ServerLink } from '~/data/networks'
 import { serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
@@ -25,9 +26,9 @@ interface OwnServer {
   language: string | null
   language_text: string | null
   /** Discord, Telegram…; https only. */
-  /** Its Discord, and any other community (Telegram, VK, a forum); https only. */
+  /** Its Discord, and its other networks (Telegram, VK, YouTube…); https only. */
   discord_url: string | null
-  community_url: string | null
+  links: ServerLink[]
   chronicle: string
   rate: number | null
   /** In place of a rate, when there is none: "PvP", "GvE"… */
@@ -38,7 +39,7 @@ interface OwnServer {
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'discord_url' | 'community_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, discord_url: string, community_url: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'discord_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, discord_url: string }
 
 const { t } = useI18n()
 
@@ -140,7 +141,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, discord_url, community_url, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, discord_url, links, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -163,7 +164,7 @@ function addServer() {
     language: 'intl',
     language_text: '',
     discord_url: '',
-    community_url: '',
+    links: [],
     chronicle: '',
     rate: '',
     rate_text: '',
@@ -176,7 +177,7 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', discord_url: s.discord_url ?? '', community_url: s.community_url ?? '' }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', discord_url: s.discord_url ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -311,7 +312,8 @@ async function save() {
     language: d.language || null,
     language_text: d.language === 'other' ? d.language_text.trim() : null,
     discord_url: d.discord_url.trim() || null,
-    community_url: d.community_url.trim() || null,
+    // Rows left without an address are dropped rather than refused.
+    links: d.links.map((l) => ({ kind: l.kind, url: l.url.trim() })).filter((l) => l.url),
     open_date: d.open_date,
     description: d.description?.trim() || null
   }
@@ -473,10 +475,38 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.discord') }}</span>
             <input v-model="draft.discord_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://discord.gg/…">
           </label>
-          <label class="account-field">
-            <span>{{ $t('account.fields.community') }}</span>
-            <input v-model="draft.community_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://t.me/…">
-          </label>
+          <!-- Other networks, as many rows as the owner adds: the network, its
+               address, and a cross to take the row away. -->
+          <div class="account-field">
+            <span v-if="draft.links.length">{{ $t('account.fields.links') }}</span>
+            <div v-for="(link, i) in draft.links" :key="i" class="account-link-row">
+              <select v-model="link.kind" :aria-label="$t('account.fields.network')">
+                <option v-for="n in NETWORKS" :key="n.kind" :value="n.kind">{{ n.name ?? $t(n.kind === 'forum' ? 'server.forum' : 'server.community') }}</option>
+              </select>
+              <input
+                v-model="link.url"
+                type="url"
+                required
+                pattern="https://.+"
+                maxlength="200"
+                dir="ltr"
+                :aria-label="$t('account.fields.linkAddress')"
+                :placeholder="NETWORKS.find((n) => n.kind === link.kind)?.placeholder"
+              >
+              <button type="button" class="account-link-remove" :aria-label="$t('account.fields.removeLink')" @click="draft.links.splice(i, 1)">
+                <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <line x1="5" y1="5" x2="15" y2="15" />
+                  <line x1="15" y1="5" x2="5" y2="15" />
+                </svg>
+              </button>
+            </div>
+            <button
+              v-if="draft.links.length < MAX_LINKS"
+              type="button"
+              class="account-link account-add-link"
+              @click="draft.links.push({ kind: NETWORKS[draft.links.length % NETWORKS.length]!.kind, url: '' })"
+            >+ {{ $t('account.fields.addLink') }}</button>
+          </div>
           <label class="account-field">
             <span>{{ $t('account.fields.description') }}</span>
             <!-- The made text sits in the field itself, greyed, until the

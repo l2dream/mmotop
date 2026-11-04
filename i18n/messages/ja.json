@@ -92,6 +92,7 @@
     "international": "インターナショナル",
     "multilingual": "複数の言語",
     "community": "コミュニティ",
+    "forum": "フォーラム",
     "listed": "MMOTOP掲載日",
     "visit": "公式サイトへ",
     "description": "{name}：{game}サーバー（{chronicle}）。レート、オープン日、投票数をMMOTOPで。",
@@ -198,7 +199,11 @@
       "languageName": "言語名",
       "url": "サーバーのサイト",
       "discord": "Discord（任意）",
-      "community": "Telegram、VK などのコミュニティ（任意）",
+      "links": "その他のSNS",
+      "network": "SNS",
+      "linkAddress": "リンク",
+      "removeLink": "削除",
+      "addLink": "SNSを追加",
       "description": "説明（任意）"
     },
     "status": {

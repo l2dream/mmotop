@@ -92,6 +92,7 @@
     "international": "Mezinárodní",
     "multilingual": "Více jazyků",
     "community": "Komunita",
+    "forum": "Fórum",
     "listed": "Na MMOTOP od",
     "visit": "Navštívit web",
     "description": "{name}: server {game} ({chronicle}). Rates, datum otevření a hlasy na MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Název jazyka",
       "url": "Web serveru",
       "discord": "Discord (nepovinné)",
-      "community": "Telegram, VK nebo jiná komunita (nepovinné)",
+      "links": "Další sítě",
+      "network": "Síť",
+      "linkAddress": "Odkaz",
+      "removeLink": "Odebrat",
+      "addLink": "Přidat síť",
       "description": "Popis (nepovinné)"
     },
     "status": {

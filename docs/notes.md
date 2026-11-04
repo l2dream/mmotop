@@ -144,7 +144,12 @@
   языков (`SERVER_LANGUAGES` в `app/i18n/locales.ts`, по одному на язык, имя
   на самом языке; «Несколько языков» = `multi`);
   необязательные ссылки: Discord (`servers.discord_url`, миграция `discord_url`)
-  и другое сообщество — Telegram, VK, форум (`community_url`). Колонки
+  и «Другие сети» — кнопка «+ Добавить сеть», строки «сеть + адрес» с
+  крестиком, до 8: Telegram, VK, YouTube, Twitch, TikTok, Facebook,
+  Instagram, X, Форум, Другое (`servers.links` jsonb, проверка
+  `server_links_ok`, миграция `server_links`; `community_url` удалён).
+  Список сетей — `app/data/networks.ts`, иконки — `SocialIcon.vue`
+  (Simple Icons, CC0). Колонки
   `servers.language`, `servers.community_url` (миграция `language_community`).
   На странице сервера — карточка «Язык» и кнопка с названием по ссылке
   (Discord, Telegram, VK или «Сообщество»). Фильтр «Язык сервера» в окне

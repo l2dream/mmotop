@@ -92,6 +92,7 @@
     "international": "בינלאומי",
     "multilingual": "כמה שפות",
     "community": "קהילה",
+    "forum": "פורום",
     "listed": "ב-MMOTOP מאז",
     "visit": "לאתר השרת",
     "description": "{name}: שרת {game} ({chronicle}). ריטים, תאריך פתיחה והצבעות ב-MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "שם השפה",
       "url": "אתר השרת",
       "discord": "Discord (לא חובה)",
-      "community": "Telegram, VK או קהילה אחרת (לא חובה)",
+      "links": "רשתות נוספות",
+      "network": "רשת",
+      "linkAddress": "קישור",
+      "removeLink": "הסרה",
+      "addLink": "הוספת רשת",
       "description": "תיאור (לא חובה)"
     },
     "status": {

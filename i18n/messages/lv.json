@@ -92,6 +92,7 @@
     "international": "Starptautisks",
     "multilingual": "Vairākas valodas",
     "community": "Kopiena",
+    "forum": "Forums",
     "listed": "MMOTOP kopš",
     "visit": "Apmeklēt vietni",
     "description": "{name}: {game} serveris ({chronicle}). Rate, atvēršanas datums un balsis MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Valodas nosaukums",
       "url": "Servera vietne",
       "discord": "Discord (nav obligāts)",
-      "community": "Telegram, VK vai cita kopiena (nav obligāts)",
+      "links": "Citi tīkli",
+      "network": "Tīkls",
+      "linkAddress": "Saite",
+      "removeLink": "Noņemt",
+      "addLink": "Pievienot tīklu",
       "description": "Apraksts (nav obligāts)"
     },
     "status": {

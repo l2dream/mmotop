@@ -92,6 +92,7 @@
     "international": "Internationell",
     "multilingual": "Flera språk",
     "community": "Gemenskap",
+    "forum": "Forum",
     "listed": "På MMOTOP sedan",
     "visit": "Besök webbplatsen",
     "description": "{name}: en {game}-server ({chronicle}). Rates, öppningsdatum och röster på MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Språkets namn",
       "url": "Serverns webbplats",
       "discord": "Discord (valfritt)",
-      "community": "Telegram, VK eller annan gemenskap (valfritt)",
+      "links": "Andra nätverk",
+      "network": "Nätverk",
+      "linkAddress": "Länk",
+      "removeLink": "Ta bort",
+      "addLink": "Lägg till nätverk",
       "description": "Beskrivning (valfritt)"
     },
     "status": {

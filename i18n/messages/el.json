@@ -92,6 +92,7 @@
     "international": "Διεθνής",
     "multilingual": "Πολλές γλώσσες",
     "community": "Κοινότητα",
+    "forum": "Φόρουμ",
     "listed": "Στο MMOTOP από",
     "visit": "Επίσκεψη ιστότοπου",
     "description": "{name}: διακομιστής {game} ({chronicle}). Rates, ημερομηνία ανοίγματος και ψήφοι στο MMOTOP.",
@@ -198,7 +199,11 @@
       "languageName": "Όνομα γλώσσας",
       "url": "Ιστότοπος διακομιστή",
       "discord": "Discord (προαιρετικό)",
-      "community": "Telegram, VK ή άλλη κοινότητα (προαιρετικό)",
+      "links": "Άλλα δίκτυα",
+      "network": "Δίκτυο",
+      "linkAddress": "Σύνδεσμος",
+      "removeLink": "Αφαίρεση",
+      "addLink": "Προσθήκη δικτύου",
       "description": "Περιγραφή (προαιρετικό)"
     },
     "status": {
