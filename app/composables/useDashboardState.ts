@@ -19,6 +19,8 @@
 export interface RateFilters {
   version: string
   rates: string[]
+  /** A server language (SERVER_LANGUAGES), or '' for all. */
+  language: string
 }
 
 export function useDashboardState() {
@@ -28,7 +30,8 @@ export function useDashboardState() {
 
   const filters = useState<RateFilters>('dash-filters', () => ({
     version: '',
-    rates: []
+    rates: [],
+    language: ''
   }))
 
   const customRateActive = useState('dash-rate-on', () => false)

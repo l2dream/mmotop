@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { bcp47, localeByCode } from '~/i18n/locales'
+import { bcp47, localeByCode, SERVER_LANGUAGES } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
 import { SERVERS, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
@@ -248,11 +248,23 @@ const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
 const activeFilterCount = computed(
   () =>
     (filters.value.version || activeCategory.value !== 'all' ? 1 : 0) +
-    (rateFilterActive.value ? 1 : 0)
+    (rateFilterActive.value ? 1 : 0) +
+    (filters.value.language ? 1 : 0)
 )
+
+/**
+ * The server languages to filter by, the page's own first: someone reading
+ * in Portuguese most likely looks for a Portuguese server.
+ */
+const languageOptions = computed(() => {
+  const own = locale.value.split('-')[0]
+  return [...SERVER_LANGUAGES].sort((a, b) => Number(b.code === own) - Number(a.code === own))
+})
 
 function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
+  // A server in several languages is one in each of them.
+  if (filters.value.language && server.language !== filters.value.language && server.language !== 'multi') return false
   if (rateFilterActive.value) {
     const rate = server.rate
     if (rate == null) return filters.value.rates.includes(NO_RATE)
@@ -306,6 +318,7 @@ function resetFilters() {
   activeCategory.value = 'all'
   filters.value.version = ''
   filters.value.rates = []
+  filters.value.language = ''
   customRateActive.value = false
   customRateMin.value = ''
   customRateMax.value = ''
@@ -348,9 +361,10 @@ function restoreFiltersFromUrl() {
   const rates = firstParam(q.rate).split(',').map((r) => RATE_BY_SLUG.get(r)).filter((r): r is string => !!r)
   let min = firstParam(q.min), max = firstParam(q.max)
   const text = firstParam(q.q)
+  const lang = firstParam(q.lang)
   // An address with no filter in it — the bare page, or a language switch,
   // whose links carry no query — leaves the state as it is.
-  if (!game && !chronicle && !rates.length && !min && !max && !text) return
+  if (!game && !chronicle && !rates.length && !min && !max && !text && !lang) return
   // On a chronicle's or a rate's page that filter is in the path instead.
   chronicle ||= props.chronicle ?? ''
   if (props.rate != null && !min && !max) min = max = String(props.rate)
@@ -359,6 +373,7 @@ function restoreFiltersFromUrl() {
   activeCategory.value = g ? g.id : 'all'
   filters.value.version = g?.chronicles.some((c) => c.name === chronicle) ? versionKey(g.id, chronicle) : ''
   filters.value.rates = rates
+  filters.value.language = SERVER_LANGUAGES.some((l) => l.code === lang) ? lang : ''
   customRateActive.value = !!(min || max)
   customRateMin.value = min
   customRateMax.value = max
@@ -371,6 +386,7 @@ function filtersToQuery(withGame = true) {
   const v = filters.value.version
   if (v) params.version = v.slice(v.indexOf(':') + 1)
   if (filters.value.rates.length) params.rate = filters.value.rates.map(rateSlug).join(',')
+  if (filters.value.language) params.lang = filters.value.language
   if (customRateActive.value) {
     if (customRateMin.value) params.min = customRateMin.value
     if (customRateMax.value) params.max = customRateMax.value
@@ -430,7 +446,7 @@ function homeLocationFor(game: string) {
 const homeLocation = () => homeLocationFor(activeCategory.value)
 
 function writeFiltersToUrl(initial = false) {
-  const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, ...rest } = route.query
+  const { game: _g, version: _v, rate: _r, min: _n, max: _x, q: _q, lang: _l, ...rest } = route.query
   const home = homeLocation()
   const leaves = standalone.value || (homeLike && withSlash(route.path) !== home.path)
   if (leaves) {
@@ -852,7 +868,7 @@ onMounted(() => {
 
 const filtersActive = computed(() =>
   activeCategory.value !== 'all' || !!filters.value.version || filters.value.rates.length > 0
-  || customRateActive.value || !!query.value.trim())
+  || !!filters.value.language || customRateActive.value || !!query.value.trim())
 
 const serverOthers = computed(() => {
   if (!server.value) return null
@@ -917,7 +933,7 @@ const serverOthers = computed(() => {
  * The query is read in the browser, after the page is up, so this is added
  * then — which is when a search engine that runs the page reads it too.
  */
-const FILTER_KEYS = ['game', 'version', 'rate', 'min', 'max', 'q', 'sort']
+const FILTER_KEYS = ['game', 'version', 'rate', 'min', 'max', 'q', 'sort', 'lang']
 const filteredList = computed(() => !standalone.value && FILTER_KEYS.some((k) => firstParam(route.query[k])))
 const thinLanding = !!props.game && !!landingName && (() => {
   const l = landingAt(props.game, route.params.id)
@@ -1413,6 +1429,14 @@ function clearSearch() {
                 :value="versionKey(group.id, chronicle)"
               >{{ chronicle }}</option>
             </optgroup>
+          </select>
+        </div>
+
+        <div class="filter-popup-section">
+          <label class="filter-popup-label" for="filter-language">{{ $t('filter.language') }}</label>
+          <select id="filter-language" class="filter-select" v-model="filters.language">
+            <option value="">{{ $t('filter.allLanguages') }}</option>
+            <option v-for="l in languageOptions" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
           </select>
         </div>
 
