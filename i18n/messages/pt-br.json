@@ -197,7 +197,8 @@
       "otherLanguage": "Outro idioma…",
       "languageName": "Nome do idioma",
       "url": "Site do servidor",
-      "community": "Discord, Telegram ou outra comunidade (opcional)",
+      "discord": "Discord (opcional)",
+      "community": "Telegram, VK ou outra comunidade (opcional)",
       "description": "Descrição (opcional)"
     },
     "status": {

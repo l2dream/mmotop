@@ -197,7 +197,8 @@
       "otherLanguage": "Andet sprog…",
       "languageName": "Sprogets navn",
       "url": "Serverens hjemmeside",
-      "community": "Discord, Telegram eller et andet fællesskab (valgfrit)",
+      "discord": "Discord (valgfrit)",
+      "community": "Telegram, VK eller et andet fællesskab (valgfrit)",
       "description": "Beskrivelse (valgfrit)"
     },
     "status": {

@@ -197,7 +197,8 @@
       "otherLanguage": "שפה אחרת…",
       "languageName": "שם השפה",
       "url": "אתר השרת",
-      "community": "Discord, Telegram או קהילה אחרת (לא חובה)",
+      "discord": "Discord (לא חובה)",
+      "community": "Telegram, VK או קהילה אחרת (לא חובה)",
       "description": "תיאור (לא חובה)"
     },
     "status": {

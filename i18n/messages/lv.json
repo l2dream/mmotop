@@ -197,7 +197,8 @@
       "otherLanguage": "Cita valoda…",
       "languageName": "Valodas nosaukums",
       "url": "Servera vietne",
-      "community": "Discord, Telegram vai cita kopiena (nav obligāts)",
+      "discord": "Discord (nav obligāts)",
+      "community": "Telegram, VK vai cita kopiena (nav obligāts)",
       "description": "Apraksts (nav obligāts)"
     },
     "status": {

@@ -197,7 +197,8 @@
       "otherLanguage": "Başka dil…",
       "languageName": "Dilin adı",
       "url": "Sunucunun sitesi",
-      "community": "Discord, Telegram veya başka bir topluluk (isteğe bağlı)",
+      "discord": "Discord (isteğe bağlı)",
+      "community": "Telegram, VK veya başka bir topluluk (isteğe bağlı)",
       "description": "Açıklama (isteğe bağlı)"
     },
     "status": {

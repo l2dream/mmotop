@@ -197,7 +197,8 @@
       "otherLanguage": "Այլ լեզու…",
       "languageName": "Լեզվի անունը",
       "url": "Սերվերի կայքը",
-      "community": "Discord, Telegram կամ այլ համայնք (ոչ պարտադիր)",
+      "discord": "Discord (ոչ պարտադիր)",
+      "community": "Telegram, VK կամ այլ համայնք (ոչ պարտադիր)",
       "description": "Նկարագրություն (ոչ պարտադիր)"
     },
     "status": {
