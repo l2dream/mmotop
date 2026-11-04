@@ -189,7 +189,7 @@
       "rateHint": "例如 50",
       "rateText": "代替 Rate",
       "rateTextHint": "例如 Hardcore",
-      "rateNone": "不填写",
+      "notSpecified": "不填写",
       "rateOwn": "自定义…",
       "openDate": "开服日期",
       "language": "服务器语言",

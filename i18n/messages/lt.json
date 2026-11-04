@@ -189,7 +189,7 @@
       "rateHint": "pvz., 50",
       "rateText": "Vietoj rate",
       "rateTextHint": "pvz., Hardcore",
-      "rateNone": "Nenurodyti",
+      "notSpecified": "Nenurodyti",
       "rateOwn": "Savas variantas…",
       "openDate": "Atidarymo data",
       "language": "Serverio kalba",

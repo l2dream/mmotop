@@ -189,7 +189,7 @@
       "rateHint": "z. B. 50",
       "rateText": "Statt Rates",
       "rateTextHint": "z. B. Hardcore",
-      "rateNone": "Nicht angeben",
+      "notSpecified": "Nicht angeben",
       "rateOwn": "Eigene Angabe…",
       "openDate": "Eröffnungsdatum",
       "language": "Sprache des Servers",

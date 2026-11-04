@@ -189,7 +189,7 @@
       "rateHint": "f.eks. 50",
       "rateText": "I stedet for rate",
       "rateTextHint": "f.eks. Hardcore",
-      "rateNone": "Angiv ikke",
+      "notSpecified": "Angiv ikke",
       "rateOwn": "Andet…",
       "openDate": "Åbningsdato",
       "language": "Serverens sprog",

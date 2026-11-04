@@ -189,7 +189,7 @@
       "rateHint": "např. 50",
       "rateText": "Místo rate",
       "rateTextHint": "např. Hardcore",
-      "rateNone": "Neuvádět",
+      "notSpecified": "Neuvádět",
       "rateOwn": "Vlastní…",
       "openDate": "Datum otevření",
       "language": "Jazyk serveru",

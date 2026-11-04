@@ -189,7 +189,7 @@
       "rateHint": "piem., 50",
       "rateText": "Rate vietā",
       "rateTextHint": "piem., Hardcore",
-      "rateNone": "Nenorādīt",
+      "notSpecified": "Nenorādīt",
       "rateOwn": "Savs variants…",
       "openDate": "Atvēršanas datums",
       "language": "Servera valoda",

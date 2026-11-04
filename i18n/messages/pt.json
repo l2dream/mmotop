@@ -189,7 +189,7 @@
       "rateHint": "p. ex. 50",
       "rateText": "Em vez de rates",
       "rateTextHint": "p. ex. Hardcore",
-      "rateNone": "Não indicar",
+      "notSpecified": "Não indicar",
       "rateOwn": "Outro…",
       "openDate": "Data de abertura",
       "language": "Língua do servidor",

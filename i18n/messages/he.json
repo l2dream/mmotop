@@ -189,7 +189,7 @@
       "rateHint": "למשל 50",
       "rateText": "במקום Rate",
       "rateTextHint": "למשל Hardcore",
-      "rateNone": "לא לציין",
+      "notSpecified": "לא לציין",
       "rateOwn": "משהו אחר…",
       "openDate": "תאריך פתיחה",
       "language": "שפת השרת",
