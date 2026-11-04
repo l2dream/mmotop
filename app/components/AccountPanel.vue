@@ -249,8 +249,9 @@ function rateNumber(d: Draft) {
 
 /**
  * What the server's page says of it whatever the owner writes — the made
- * text (useServerAbout), shown under the description field as it is filled
- * in. With no description of their own, this is all the page has.
+ * text (useServerAbout), shown greyed in the empty description field as the
+ * form is filled in. With no description of their own, this is all the page
+ * has.
  */
 const { aboutText } = useServerAbout()
 const today = new Date().toISOString().slice(0, 10)
@@ -458,10 +459,11 @@ async function remove(s: OwnServer) {
           </label>
           <label class="account-field">
             <span>{{ $t('account.fields.description') }}</span>
-            <textarea v-model="draft.description" rows="4" maxlength="2000" />
+            <!-- The made text sits in the field itself, greyed, until the
+                 owner writes their own: what the page says either way. -->
+            <textarea v-model="draft.description" rows="5" maxlength="2000" :placeholder="aboutPreview" />
             <small>{{ $t('account.fields.descriptionHint') }}</small>
           </label>
-          <p class="account-preview">{{ aboutPreview }}</p>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <div class="account-actions-row">

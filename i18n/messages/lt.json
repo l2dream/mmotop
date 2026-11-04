@@ -188,7 +188,7 @@
       "openDate": "Atidarymo data",
       "url": "Serverio svetainė",
       "description": "Aprašymas (neprivaloma)",
-      "descriptionHint": "Puslapis visada prasideda žemiau esančiu tekstu, sudarytu iš serverio duomenų. Tavo aprašymas, jei jį parašysi, bus po juo."
+      "descriptionHint": "Kol laukas tuščias, jame matyti tekstas, kuriuo prasidės puslapis, – sudarytas iš serverio duomenų. Tavo aprašymas bus po šiuo tekstu."
     },
     "status": {
       "pending": "Tikrinamas",

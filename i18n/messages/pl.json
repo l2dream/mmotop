@@ -188,7 +188,7 @@
       "openDate": "Data otwarcia",
       "url": "Strona serwera",
       "description": "Opis (opcjonalnie)",
-      "descriptionHint": "Strona zawsze zaczyna się od tekstu poniżej, utworzonego z danych serwera. Twój opis, jeśli go napiszesz, pojawi się pod nim."
+      "descriptionHint": "Dopóki pole jest puste, widać w nim tekst, od którego zacznie się strona — utworzony z danych serwera. Twój opis pojawi się pod tym tekstem."
     },
     "status": {
       "pending": "W weryfikacji",

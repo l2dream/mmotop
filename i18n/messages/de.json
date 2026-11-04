@@ -188,7 +188,7 @@
       "openDate": "Eröffnungsdatum",
       "url": "Website des Servers",
       "description": "Beschreibung (optional)",
-      "descriptionHint": "Die Seite beginnt immer mit dem Text unten, erstellt aus den Angaben zum Server. Ihre Beschreibung steht, falls Sie eine schreiben, darunter."
+      "descriptionHint": "Solange das Feld leer ist, zeigt es den Text, mit dem die Seite beginnt – erstellt aus den Angaben zum Server. Ihre Beschreibung steht unter diesem Text."
     },
     "status": {
       "pending": "In Prüfung",

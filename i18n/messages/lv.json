@@ -188,7 +188,7 @@
       "openDate": "Atvēršanas datums",
       "url": "Servera vietne",
       "description": "Apraksts (nav obligāts)",
-      "descriptionHint": "Lapa vienmēr sākas ar zemāk redzamo tekstu, kas sastādīts no servera datiem. Tavs apraksts, ja to uzrakstīsi, būs zem tā."
+      "descriptionHint": "Kamēr lauks ir tukšs, tajā redzams teksts, ar ko sāksies lapa, — sastādīts no servera datiem. Tavs apraksts būs zem šī teksta."
     },
     "status": {
       "pending": "Pārbaudē",

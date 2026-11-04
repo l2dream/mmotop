@@ -2096,17 +2096,6 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .account-field > span { font-size: 13px; font-weight: 600; color: #c9cce0; }
 .account-field small { font-size: 12px; color: #9a9fb8; overflow-wrap: anywhere; }
-/* The made description, under the description field: what the page says. */
-.account-preview {
-  margin: 0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, .04);
-  color: #c6c9d9;
-  font-size: 13px;
-  line-height: 1.55;
-}
-.theme-light .account-preview { background: rgba(103, 104, 173, .07); color: #3a3e55; }
 /* A checkbox under a field: "No rates". The box in the site's violet. */
 .account-check {
   display: inline-flex;
@@ -2279,6 +2268,10 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .theme-light [dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
 .theme-light .account-field input::placeholder,
 .theme-light .account-field textarea::placeholder { color: #555a70; }
+/* The made description in the empty field: lighter than typed text, so it
+   is not mistaken for something already written. */
+.account-field textarea::placeholder { color: #8e93ad; }
+.theme-light .account-field textarea::placeholder { color: #868aa0; }
 .theme-light .account-link { color: #6d28d9; }
 .theme-light .account-danger { color: #c62828; }
 .theme-light .account-server { border-color: rgba(103, 104, 173, .16); background: rgba(255, 255, 255, .7); }

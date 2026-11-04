@@ -188,7 +188,7 @@
       "openDate": "Açılış tarixi",
       "url": "Serverin saytı",
       "description": "Təsvir (məcburi deyil)",
-      "descriptionHint": "Səhifə həmişə aşağıdakı, server məlumatlarından tərtib olunmuş mətnlə başlayır. Təsvir yazsanız, onun altında olacaq."
+      "descriptionHint": "Sahə boş olanda orada səhifənin başlayacağı mətn görünür — server məlumatlarından tərtib olunub. Sizin təsviriniz bu mətnin altında olacaq."
     },
     "status": {
       "pending": "Yoxlamada",
