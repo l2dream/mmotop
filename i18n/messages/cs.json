@@ -174,9 +174,6 @@
     "invalid": "Některá pole nejsou vyplněna správně. Zkontrolujte je.",
     "fields": {
       "name": "Název serveru",
-      "page": "Stránka na webu:",
-      "id": "Adresa na webu",
-      "idHint": "Malá latinková písmena, číslice a pomlčky, 3–32 znaků. Později ji nelze změnit.",
       "game": "Hra",
       "otherGame": "Jiná hra…",
       "gameName": "Název hry",
