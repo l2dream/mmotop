@@ -187,7 +187,8 @@
       "rateOwn": "Eget…",
       "openDate": "Öppningsdatum",
       "url": "Serverns webbplats",
-      "description": "Beskrivning"
+      "description": "Beskrivning (valfritt)",
+      "descriptionHint": "Sidan börjar alltid med texten nedan, skriven utifrån serverns uppgifter. Din beskrivning, om du skriver en, hamnar under den."
     },
     "status": {
       "pending": "Granskas",

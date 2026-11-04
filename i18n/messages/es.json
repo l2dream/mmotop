@@ -187,7 +187,8 @@
       "rateOwn": "Otro…",
       "openDate": "Fecha de apertura",
       "url": "Web del servidor",
-      "description": "Descripción"
+      "description": "Descripción (opcional)",
+      "descriptionHint": "La página siempre empieza con el texto de abajo, hecho con los datos del servidor. Tu descripción, si escribes una, irá debajo."
     },
     "status": {
       "pending": "En revisión",

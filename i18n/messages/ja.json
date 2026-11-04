@@ -187,7 +187,8 @@
       "rateOwn": "その他…",
       "openDate": "オープン日",
       "url": "サーバーのサイト",
-      "description": "説明"
+      "description": "説明（任意）",
+      "descriptionHint": "ページは常に、サーバー情報から作った下の文で始まります。説明を書いた場合は、その下に表示されます。"
     },
     "status": {
       "pending": "審査中",

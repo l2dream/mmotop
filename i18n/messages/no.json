@@ -187,7 +187,8 @@
       "rateOwn": "Annet…",
       "openDate": "Åpningsdato",
       "url": "Serverens nettside",
-      "description": "Beskrivelse"
+      "description": "Beskrivelse (valgfritt)",
+      "descriptionHint": "Siden starter alltid med teksten nedenfor, laget ut fra serverens opplysninger. Beskrivelsen din, hvis du skriver en, kommer under den."
     },
     "status": {
       "pending": "Til godkjenning",

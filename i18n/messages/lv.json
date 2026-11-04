@@ -187,7 +187,8 @@
       "rateOwn": "Savs variants…",
       "openDate": "Atvēršanas datums",
       "url": "Servera vietne",
-      "description": "Apraksts"
+      "description": "Apraksts (nav obligāts)",
+      "descriptionHint": "Lapa vienmēr sākas ar zemāk redzamo tekstu, kas sastādīts no servera datiem. Tavs apraksts, ja to uzrakstīsi, būs zem tā."
     },
     "status": {
       "pending": "Pārbaudē",

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { chronicleShort } from '~/data/games'
 import type { Server } from '~/data/servers'
-import { bcp47 } from '~/i18n/locales'
 import type { SectionId } from '~/data/sections'
 import { chronicleLanding, rateLanding } from '~/data/landing'
 
@@ -33,8 +32,7 @@ const props = defineProps<{
 }>()
 defineEmits<{ shuffle: [], more: [] }>()
 
-const { locale, t } = useI18n()
-const { serverBadge, serverSubtitle, rateLabel, formatDayMonth } = useServerFormat()
+const { serverBadge, serverSubtitle, rateLabel } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
 
@@ -44,26 +42,9 @@ const voting = ref(false)
 const justVoted = ref(0)
 const votes = computed(() => props.server.votes + justVoted.value)
 
-/**
- * The server in a few plain sentences, under its name: what it is, when it
- * opens, how it stands. The same facts as the boxes below, but as text — a
- * page of figures and labels alone read to search engines as next to empty,
- * and they set several server pages aside as soft 404s. Owners will be able
- * to add their own description later; this one is always there.
- */
-/** Scripts that run sentences together, with no space after the full stop. */
-const NO_SPACES = new Set(['ja', 'zh'])
-const about = computed(() => {
-  const s = props.server
-  const kind = { name: s.name, game: serverSubtitle(s), chronicle: s.chronicle, rate: rateLabel(s) }
-  return [
-    t(s.rate == null ? 'server.about.noRate' : 'server.about.rate', kind),
-    // Some dates end in a full stop of their own ("20 ноября 2025 г.",
-    // "2025 m. sausio 12 d."), which the sentence's would double.
-    t(opened.value ? 'server.about.opened' : 'server.about.opens', { date: fullDate(s.openDate) }).replace(/\.\.$/, '.'),
-    t('server.about.votes', { votes: s.votes, rank: props.rank })
-  ].join(NO_SPACES.has(locale.value) ? '' : ' ')
-})
+/** The server in a few plain sentences (see useServerAbout). */
+const { fullDate, aboutText } = useServerAbout()
+const about = computed(() => aboutText(props.server, props.today, { rank: props.rank }))
 
 // The chronicle and the rate lead to their own pages — every server on
 // /lineage2/interlude/ or /lineage2/x50/ — which is also how a crawler finds
@@ -77,46 +58,6 @@ const rateLink = computed(() => {
   const l = props.server.rate == null ? undefined : rateLanding(props.server.game, props.server.rate)
   return l && localePath(`/${l.game}/${l.slug}/`)
 })
-
-/**
- * Languages whose dates Intl cannot be trusted with in the browser: Chrome
- * ships no Armenian date data at all and printed "November 20, 2025", and for
- * Azerbaijani it has no month names and printed "2025 M11 20". These use the
- * site's own day-and-month, as in the lists, with the year after it. A fixed
- * list rather than a check at run time, so the prerendered page — built in
- * Node, which does have the data — and the browser always agree.
- */
-const OWN_DATE_FORMAT = new Set(['hy', 'az'])
-
-/**
- * The full date, year included, in the reader's own form: "20 November 2025",
- * "November 20, 2025", "2025年11月20日". The lists use a short day-and-month
- * to stay narrow; here there is room to say it properly. Plain "en" would
- * format the American way, and the site's English is British.
- */
-function fullDate(iso: string) {
-  if (OWN_DATE_FORMAT.has(locale.value)) return `${keep(formatDayMonth(iso))} ${iso.slice(0, 4)}`
-  const tag = locale.value === 'en' ? 'en-GB' : bcp47(locale.value)
-  const parts = new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-    .formatToParts(new Date(`${iso}T00:00:00Z`))
-  // A narrow card may break the date in one place only: between the day and
-  // month and the year, so "12 January" stays together over "2025" rather
-  // than "12" over "January 2025", and "20 ноября / 2025 г." never leaves
-  // the "г." alone. Every other space is held. Where the year comes first
-  // (2025년 1월 12일) the break is after it instead. Words that go with the
-  // year go with it too: "12 de enero / de 2025", "2025 m. / sausio 12 d.".
-  const year = parts.findIndex((p) => p.type === 'year')
-  const before = year > 0
-  const free = before ? year - 1 : year + 1
-  return parts.map((p, i) => {
-    if (i !== free) return keep(p.value)
-    const at = before ? p.value.indexOf(' ') : p.value.lastIndexOf(' ')
-    return at < 0 ? p.value : keep(p.value.slice(0, at)) + ' ' + keep(p.value.slice(at + 1))
-  }).join('')
-}
-
-/** Spaces that do not break. */
-const keep = (text: string) => text.replace(/ /g, '\u00a0')
 
 /** The last two words held together, so a label that wraps in its narrow
  *  box reads "VOTES / THIS MONTH", not "VOTES THIS / MONTH". */
@@ -140,6 +81,8 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
     </header>
 
     <p class="server-about">{{ about }}</p>
+    <!-- The owner's own words, as written: line breaks kept, nothing parsed. -->
+    <p v-if="server.description" class="server-description">{{ server.description }}</p>
 
     <dl class="server-facts">
       <div>

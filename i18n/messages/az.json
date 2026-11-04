@@ -187,7 +187,8 @@
       "rateOwn": "Öz variantınız…",
       "openDate": "Açılış tarixi",
       "url": "Serverin saytı",
-      "description": "Təsvir"
+      "description": "Təsvir (məcburi deyil)",
+      "descriptionHint": "Səhifə həmişə aşağıdakı, server məlumatlarından tərtib olunmuş mətnlə başlayır. Təsvir yazsanız, onun altında olacaq."
     },
     "status": {
       "pending": "Yoxlamada",

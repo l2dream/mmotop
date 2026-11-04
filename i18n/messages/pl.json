@@ -187,7 +187,8 @@
       "rateOwn": "Własny…",
       "openDate": "Data otwarcia",
       "url": "Strona serwera",
-      "description": "Opis"
+      "description": "Opis (opcjonalnie)",
+      "descriptionHint": "Strona zawsze zaczyna się od tekstu poniżej, utworzonego z danych serwera. Twój opis, jeśli go napiszesz, pojawi się pod nim."
     },
     "status": {
       "pending": "W weryfikacji",
