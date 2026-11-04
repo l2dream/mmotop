@@ -174,8 +174,6 @@
     "invalid": "Algunos campos no son correctos. Revísalos.",
     "fields": {
       "name": "Nombre del servidor",
-      "id": "Dirección en el sitio",
-      "idHint": "Letras latinas minúsculas, números y guiones, de 3 a 32 caracteres. No se puede cambiar después.",
       "game": "Juego",
       "otherGame": "Otro juego…",
       "gameName": "Nombre del juego",

@@ -2208,8 +2208,20 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-link:hover { text-decoration: underline; }
 .account-danger { color: #ff9a9a; }
 
-.account-page-link { overflow-wrap: anywhere; }
-.account-page-link .account-link { margin-inline-start: 8px; padding: 0; }
+/* A server's page address, on a row of its own across the card, so it is
+   read whole rather than cut or broken beside the status badge. */
+.account-server > .account-address {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: #c4a8ff;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.theme-light .account-server > .account-address { color: #6d28d9; }
+/* Not on the site yet, so not a link: grey like the line above it. */
+.account-server > span.account-address { color: #a9aec6; }
+.theme-light .account-server > span.account-address { color: #5a5f78; }
+a.account-address:hover { text-decoration: underline; }
 .account-who { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
 .account-actions-row { display: flex; align-items: center; gap: 18px; }
 .account-actions-row .account-link { align-self: center; }

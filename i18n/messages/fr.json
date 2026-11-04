@@ -174,8 +174,6 @@
     "invalid": "Certains champs sont mal remplis. Vérifiez-les.",
     "fields": {
       "name": "Nom du serveur",
-      "id": "Adresse sur le site",
-      "idHint": "Lettres latines minuscules, chiffres et tirets, de 3 à 32 caractères. Non modifiable par la suite.",
       "game": "Jeu",
       "otherGame": "Autre jeu…",
       "gameName": "Nom du jeu",
