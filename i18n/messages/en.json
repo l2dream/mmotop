@@ -193,7 +193,7 @@
       "openDate": "Opening date",
       "url": "Server website",
       "description": "Description (optional)",
-      "descriptionHint": "While the field is empty, it shows the text the page opens with, made from the server’s details. Your own description goes under that text. Worth writing: what sets the server apart, bonuses for newcomers, events, the build, online."
+      "descriptionHint": "Worth writing: what sets the server apart, bonuses for newcomers, events, the build, online."
     },
     "status": {
       "pending": "Under review",

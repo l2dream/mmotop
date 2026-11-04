@@ -193,7 +193,7 @@
       "openDate": "Fecha de apertura",
       "url": "Web del servidor",
       "description": "Descripción (opcional)",
-      "descriptionHint": "Mientras el campo esté vacío, muestra el texto con el que empieza la página, hecho con los datos del servidor. Tu descripción irá debajo de ese texto. Qué contar: qué distingue al servidor, bonus para novatos, eventos, versión, jugadores en línea."
+      "descriptionHint": "Qué contar: qué distingue al servidor, bonus para novatos, eventos, versión, jugadores en línea."
     },
     "status": {
       "pending": "En revisión",

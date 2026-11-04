@@ -193,7 +193,7 @@
       "openDate": "Datum otevření",
       "url": "Web serveru",
       "description": "Popis (nepovinné)",
-      "descriptionHint": "Dokud je pole prázdné, je v něm vidět text, kterým stránka začne — sestavený z údajů o serveru. Váš popis bude pod tímto textem. O čem psát: čím se server liší, bonusy pro nováčky, události, verze, online."
+      "descriptionHint": "O čem psát: čím se server liší, bonusy pro nováčky, události, verze, online."
     },
     "status": {
       "pending": "Ve schvalování",
