@@ -82,7 +82,8 @@ watch(() => draft.value?.name, (name) => {
 const draftAddress = computed(() => {
   const d = draft.value
   if (!d) return ''
-  return `mmotop.com${localePath(`/${d.game === 'other' ? '…' : d.game}/${d.chronicle ? versionSlug(d.chronicle) : '…'}/${d.id || '…'}`).replace(/\/?$/, '/')}`
+  // decodeURI: the path comes back encoded, and "…" for what is not chosen yet would read %E2%80%A6.
+  return `mmotop.com${decodeURI(localePath(`/${d.game === 'other' ? '…' : d.game}/${d.chronicle ? versionSlug(d.chronicle) : '…'}/${d.id || '…'}`)).replace(/\/?$/, '/')}`
 })
 
 let unsubscribe: (() => void) | undefined
@@ -192,6 +193,17 @@ function editServer(s: OwnServer) {
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
   customId.value = false
   idOpen.value = false
+}
+
+/** A row's network chosen: one from the list, or "Other network…" with a name to write. */
+function pickNetwork(link: ServerLink, value: string) {
+  if (value === OWN) {
+    link.kind = 'other'
+    link.name = ''
+  } else {
+    link.kind = value
+    delete link.name
+  }
 }
 
 function cancel() {
@@ -385,7 +397,9 @@ async function save() {
     language: d.language || null,
     language_text: d.language === 'other' ? d.language_text.trim() : null,
     // Rows left without an address are dropped rather than refused.
-    links: d.links.map((l) => ({ kind: l.kind, url: l.url.trim() })).filter((l) => l.url),
+    links: d.links
+      .map((l) => (l.name === undefined ? { kind: l.kind, url: l.url.trim() } : { kind: 'other', url: l.url.trim(), name: l.name.trim() }))
+      .filter((l) => l.url),
     open_date: d.open_date,
     description: d.description?.trim() || null
   }
@@ -576,8 +590,10 @@ async function remove(s: OwnServer) {
           <div class="account-field">
             <span v-if="draft.links.length">{{ $t('account.fields.links') }}</span>
             <div v-for="(link, i) in draft.links" :key="i" class="account-link-row">
-              <select v-model="link.kind" :aria-label="$t('account.fields.network')">
+              <!-- "Other network…" last: one the list lacks, named below. -->
+              <select :value="link.name === undefined ? link.kind : OWN" :aria-label="$t('account.fields.network')" @change="pickNetwork(link, ($event.target as HTMLSelectElement).value)">
                 <option v-for="n in NETWORKS" :key="n.kind" :value="n.kind">{{ n.name ?? $t(n.kind === 'forum' ? 'server.forum' : 'server.community') }}</option>
+                <option :value="OWN">{{ $t('account.fields.ownNetwork') }}</option>
               </select>
               <input
                 v-model="link.url"
@@ -595,6 +611,16 @@ async function remove(s: OwnServer) {
                   <line x1="15" y1="5" x2="5" y2="15" />
                 </svg>
               </button>
+              <input
+                v-if="link.name !== undefined"
+                v-model="link.name"
+                class="account-link-name"
+                type="text"
+                required
+                maxlength="30"
+                :placeholder="$t('account.fields.networkName')"
+                :aria-label="$t('account.fields.networkName')"
+              >
             </div>
             <button
               v-if="draft.links.length < MAX_LINKS"

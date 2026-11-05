@@ -204,6 +204,8 @@
       "links": "Nettverk",
       "network": "Nettverk",
       "linkAddress": "Lenke",
+      "ownNetwork": "Annet nettverk…",
+      "networkName": "Nettverkets navn",
       "removeLink": "Fjern",
       "addLink": "Legg til nettverk",
       "description": "Beskrivelse (valgfritt)",

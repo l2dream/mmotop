@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { chronicleShort } from '~/data/games'
 import { serverLanguageName } from '~/i18n/locales'
-import { NETWORKS, type ServerLink } from '~/data/networks'
+import { networkName, type ServerLink } from '~/data/networks'
 import type { Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
 import { chronicleLanding, rateLanding } from '~/data/landing'
@@ -55,8 +55,8 @@ const languageName = computed(() => props.server.language === 'multi'
     : serverLanguageName(props.server.language))
 
 /** A network's name on its button: the brand's own, or the page's word for a forum or anything else. */
-function linkLabel(kind: ServerLink['kind']) {
-  return NETWORKS.find((n) => n.kind === kind)?.name ?? t(kind === 'forum' ? 'server.forum' : 'server.community')
+function linkLabel(link: ServerLink) {
+  return networkName(link) ?? t(link.kind === 'forum' ? 'server.forum' : 'server.community')
 }
 
 /** The server in a few plain sentences (see useServerAbout). */
@@ -169,7 +169,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
       <!-- Its networks, when the owner gave them: Discord, Telegram… -->
       <a v-for="link in server.links ?? []" :key="link.url" class="server-community" :href="link.url" target="_blank" rel="noopener nofollow">
         <SocialIcon :kind="link.kind" />
-        {{ linkLabel(link.kind) }}
+        {{ linkLabel(link) }}
       </a>
     </div>
     <VoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />

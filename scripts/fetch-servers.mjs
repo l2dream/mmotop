@@ -59,7 +59,7 @@ const servers = rows.map((r) => ({
   ...(r.description?.trim() ? { description: r.description.trim() } : {}),
   ...(r.language ? { language: r.language } : {}),
   ...(r.language_text ? { languageText: r.language_text } : {}),
-  ...(r.links?.length ? { links: r.links.map((l) => ({ kind: l.kind, url: l.url })) } : {})
+  ...(r.links?.length ? { links: r.links.map((l) => ({ kind: l.kind, url: l.url, ...(l.name ? { name: l.name } : {}) })) } : {})
 }))
 const json = `${JSON.stringify(servers, null, 2)}\n`
 const movesJson = `${JSON.stringify(moves, null, 2)}\n`

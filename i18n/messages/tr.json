@@ -204,6 +204,8 @@
       "links": "Ağlar",
       "network": "Ağ",
       "linkAddress": "Bağlantı",
+      "ownNetwork": "Başka bir ağ…",
+      "networkName": "Ağın adı",
       "removeLink": "Kaldır",
       "addLink": "Ağ ekle",
       "description": "Açıklama (isteğe bağlı)",

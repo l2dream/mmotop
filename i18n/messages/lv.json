@@ -204,6 +204,8 @@
       "links": "Tīkli",
       "network": "Tīkls",
       "linkAddress": "Saite",
+      "ownNetwork": "Cits tīkls…",
+      "networkName": "Tīkla nosaukums",
       "removeLink": "Noņemt",
       "addLink": "Pievienot tīklu",
       "description": "Apraksts (nav obligāts)",

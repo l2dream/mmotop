@@ -123,10 +123,10 @@ const BUILT_IN = [
  * What a moderator added from the account page (the catalog table, see the
  * catalog migration), fetched by the deploy into live-catalog.json (committed
  * empty): a game an owner asked for, a version a game did not list, a word
- * in place of rates, a language.
+ * in place of rates, a language, a network (see data/networks.ts).
  */
 export interface CatalogEntry {
-  kind: 'game' | 'chronicle' | 'rate_word' | 'language'
+  kind: 'game' | 'chronicle' | 'rate_word' | 'language' | 'network'
   /** The game a version belongs to; '' for the rest. */
   game: string
   /** A game's address, a version's name, the word, a language's code. */

@@ -1,5 +1,10 @@
-/** The networks a server can list. */
-export type SocialKind = 'discord' | 'telegram' | 'vk' | 'youtube' | 'twitch' | 'tiktok' | 'facebook' | 'instagram' | 'x' | 'forum' | 'other'
+import CATALOG from './live-catalog.json'
+
+/**
+ * The networks a server can list: the built-in ones below, and those a
+ * moderator added (the catalog table, kind 'network') by their key.
+ */
+export type SocialKind = string
 
 /**
  * The networks a server can link to, in the order the account form offers
@@ -7,7 +12,7 @@ export type SocialKind = 'discord' | 'telegram' | 'vk' | 'youtube' | 'twitch' | 
  * language; a forum and "other" are named by the page's messages. The
  * database checks the same list (server_links_ok).
  */
-export const NETWORKS: { kind: SocialKind, name?: string, placeholder: string }[] = [
+const BUILT_IN: { kind: SocialKind, name?: string, placeholder: string }[] = [
   { kind: 'discord', name: 'Discord', placeholder: 'https://discord.gg/…' },
   { kind: 'telegram', name: 'Telegram', placeholder: 'https://t.me/…' },
   { kind: 'vk', name: 'VK', placeholder: 'https://vk.com/…' },
@@ -21,7 +26,25 @@ export const NETWORKS: { kind: SocialKind, name?: string, placeholder: string }[
   { kind: 'other', placeholder: 'https://…' }
 ]
 
+/** …with the moderator's additions before the forum and "other". */
+export const NETWORKS = [
+  ...BUILT_IN.slice(0, -2),
+  ...(CATALOG as { kind: string, key: string, name: string }[])
+    .filter((e) => e.kind === 'network' && !BUILT_IN.some((n) => n.kind === e.key))
+    .map((e) => ({ kind: e.key, name: e.name, placeholder: 'https://…' })),
+  ...BUILT_IN.slice(-2)
+]
+
 /** At most this many, as the database allows. */
 export const MAX_LINKS = 8
 
-export interface ServerLink { kind: SocialKind, url: string }
+/**
+ * One of the server's links. `name` is set on an "Other network…" one: the
+ * network the owner named, not yet in the list (a moderator adds it).
+ */
+export interface ServerLink { kind: SocialKind, url: string, name?: string }
+
+/** A link's label on its button: the owner's name for it, the network's, or the page's word for a forum or anything else. */
+export function networkName(link: Pick<ServerLink, 'kind' | 'name'>) {
+  return link.name || NETWORKS.find((n) => n.kind === link.kind)?.name
+}

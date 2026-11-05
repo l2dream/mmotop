@@ -204,6 +204,8 @@
       "links": "社交网络",
       "network": "网络",
       "linkAddress": "链接",
+      "ownNetwork": "其他平台…",
+      "networkName": "平台名称",
       "removeLink": "移除",
       "addLink": "添加网络",
       "description": "简介（可选）",

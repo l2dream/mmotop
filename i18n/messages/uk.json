@@ -204,6 +204,8 @@
       "links": "Соцмережі",
       "network": "Мережа",
       "linkAddress": "Адреса посилання",
+      "ownNetwork": "Інша мережа…",
+      "networkName": "Назва мережі",
       "removeLink": "Прибрати",
       "addLink": "Додати мережу",
       "description": "Опис (необов’язково)",

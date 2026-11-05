@@ -204,6 +204,8 @@
       "links": "Redes",
       "network": "Red",
       "linkAddress": "Enlace",
+      "ownNetwork": "Otra red…",
+      "networkName": "Nombre de la red",
       "removeLink": "Quitar",
       "addLink": "Añadir red",
       "description": "Descripción (opcional)",

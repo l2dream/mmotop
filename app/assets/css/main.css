@@ -2318,6 +2318,7 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .account-link-remove { color: #c62828; }
 /* A clear gap between rows, so each network reads with its own address. */
 .account-link-row + .account-link-row { margin-top: 10px; }
+.account-link-name { grid-column: 1 / -1; }
 .account-add-link { padding: 6px 0; }
 @media (max-width: 430px) {
   /* The network over its address, the cross beside the address. */

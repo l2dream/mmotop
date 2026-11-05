@@ -204,6 +204,8 @@
       "links": "Соцсети",
       "network": "Сеть",
       "linkAddress": "Адрес ссылки",
+      "ownNetwork": "Другая сеть…",
+      "networkName": "Название сети",
       "removeLink": "Убрать",
       "addLink": "Добавить сеть",
       "description": "Описание (необязательно)",

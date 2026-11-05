@@ -204,6 +204,8 @@
       "links": "Võrgustikud",
       "network": "Võrgustik",
       "linkAddress": "Link",
+      "ownNetwork": "Muu võrgustik…",
+      "networkName": "Võrgustiku nimi",
       "removeLink": "Eemalda",
       "addLink": "Lisa võrgustik",
       "description": "Kirjeldus (valikuline)",
