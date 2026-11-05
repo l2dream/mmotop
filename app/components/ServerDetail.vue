@@ -159,11 +159,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
           <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
         </svg>
       </a>
-      <!-- Its Discord and its other networks, when the owner gave them. -->
-      <a v-if="server.discord" class="server-community" :href="server.discord" target="_blank" rel="noopener nofollow">
-        <SocialIcon kind="discord" />
-        Discord
-      </a>
+      <!-- Its networks, when the owner gave them: Discord, Telegram… -->
       <a v-for="link in server.links ?? []" :key="link.url" class="server-community" :href="link.url" target="_blank" rel="noopener nofollow">
         <SocialIcon :kind="link.kind" />
         {{ linkLabel(link.kind) }}

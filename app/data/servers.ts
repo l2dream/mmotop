@@ -40,9 +40,7 @@ export interface Server {
   language?: string
   /** The name of an "other" language, as the owner wrote it. */
   languageText?: string
-  /** Its Discord, shown beside its site. */
-  discord?: string
-  /** Its other networks — Telegram, VK, YouTube, a forum… — each a button beside its site. */
+  /** Its networks — Discord, Telegram, VK, YouTube, a forum… — each a button beside its site. */
   links?: ServerLink[]
   /**
    * Added by its owner and approved, so it is in the database and can be
