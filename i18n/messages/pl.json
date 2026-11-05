@@ -240,6 +240,30 @@
       "copied": "Skopiowano",
       "afterSave": "Klucz pojawi się tu po zapisaniu serwera.",
       "how": "Jak to działa"
+    },
+    "signin": {
+      "code": "Kod z e-maila",
+      "codeHint": "Otwórz e-mail na telefonie i wpisz tu kod — nie musisz otwierać poczty na tym komputerze.",
+      "codeSubmit": "Zaloguj",
+      "codeWrong": "Kod nie pasuje lub wygasł. Poproś o nowy.",
+      "notMine": "Cudzy komputer — nie zapamiętuj logowania",
+      "or": "lub",
+      "qr": "Zaloguj kodem QR z telefonu",
+      "qrScan": "Zeskanuj kod telefonem, na którym jesteś już zalogowany, i potwierdź.",
+      "qrCode": "Kod potwierdzenia: {code}",
+      "qrExpired": "Czas minął.",
+      "qrNew": "Pokaż nowy kod",
+      "approveTitle": "Logowanie na innym urządzeniu",
+      "approveText": "Zezwolić na logowanie do Twojego konta na innym urządzeniu? Sprawdź, czy kod zgadza się z tym na jego ekranie: {code}",
+      "approve": "Zezwól",
+      "approveDone": "Gotowe: tamto urządzenie jest zalogowane.",
+      "approveExpired": "Ten kod QR wygasł. Odśwież go na tamtym urządzeniu.",
+      "approveSignIn": "Zaloguj się tutaj, aby zezwolić na logowanie na innym urządzeniu.",
+      "telegramFailed": "Nie udało się zalogować przez Telegram. Spróbuj ponownie.",
+      "telegramTitle": "Zaloguj przez Telegram",
+      "telegramHint": "Połącz Telegram, aby logować się nim na każdym komputerze.",
+      "telegramLinked": "Telegram połączony — możesz się nim logować.",
+      "telegramTaken": "Ten Telegram jest już połączony z innym kontem."
     }
   },
   "vote": {

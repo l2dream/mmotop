@@ -240,6 +240,30 @@
       "copied": "Kopieret",
       "afterSave": "Nøglen vises her, når serveren er gemt.",
       "how": "Sådan virker det"
+    },
+    "signin": {
+      "code": "Kode fra e-mailen",
+      "codeHint": "Åbn e-mailen på telefonen, og indtast koden her — du behøver ikke åbne din mail på denne computer.",
+      "codeSubmit": "Log ind",
+      "codeWrong": "Koden passede ikke eller er udløbet. Bed om en ny.",
+      "notMine": "Andres computer — husk ikke login",
+      "or": "eller",
+      "qr": "Log ind med QR-kode fra telefonen",
+      "qrScan": "Scan koden med en telefon, hvor du allerede er logget ind, og bekræft.",
+      "qrCode": "Bekræftelseskode: {code}",
+      "qrExpired": "Tiden er gået.",
+      "qrNew": "Vis ny kode",
+      "approveTitle": "Login på en anden enhed",
+      "approveText": "Tillad login på din konto på en anden enhed? Tjek at koden er den samme som på dens skærm: {code}",
+      "approve": "Tillad",
+      "approveDone": "Færdig: enheden er logget ind.",
+      "approveExpired": "Denne QR-kode er udløbet. Opdater den på den anden enhed.",
+      "approveSignIn": "Log ind her for at tillade login på den anden enhed.",
+      "telegramFailed": "Login med Telegram mislykkedes. Prøv igen.",
+      "telegramTitle": "Log ind med Telegram",
+      "telegramHint": "Tilknyt Telegram for at logge ind med det på enhver computer.",
+      "telegramLinked": "Telegram er tilknyttet — du kan logge ind med det.",
+      "telegramTaken": "Denne Telegram er allerede tilknyttet en anden konto."
     }
   },
   "vote": {

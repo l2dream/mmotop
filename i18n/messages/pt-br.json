@@ -240,6 +240,30 @@
       "copied": "Copiado",
       "afterSave": "A chave aparece aqui depois que o servidor for salvo.",
       "how": "Como funciona"
+    },
+    "signin": {
+      "code": "Código do e-mail",
+      "codeHint": "Abra o e-mail no celular e digite o código aqui — não precisa abrir seu e-mail neste computador.",
+      "codeSubmit": "Entrar",
+      "codeWrong": "O código não funcionou ou expirou. Peça um novo.",
+      "notMine": "Computador de outra pessoa — não manter conectado",
+      "or": "ou",
+      "qr": "Entrar com QR code pelo celular",
+      "qrScan": "Escaneie o código com um celular em que você já entrou na conta e confirme.",
+      "qrCode": "Código de confirmação: {code}",
+      "qrExpired": "O tempo acabou.",
+      "qrNew": "Mostrar novo código",
+      "approveTitle": "Entrada em outro dispositivo",
+      "approveText": "Permitir a entrada na sua conta em outro dispositivo? Confira se o código é igual ao da tela dele: {code}",
+      "approve": "Permitir",
+      "approveDone": "Pronto: esse dispositivo está conectado.",
+      "approveExpired": "Este QR code expirou. Atualize-o no outro dispositivo.",
+      "approveSignIn": "Entre aqui para permitir a entrada no outro dispositivo.",
+      "telegramFailed": "Não foi possível entrar com o Telegram. Tente de novo.",
+      "telegramTitle": "Entrar com Telegram",
+      "telegramHint": "Vincule o Telegram para entrar com ele em qualquer computador.",
+      "telegramLinked": "Telegram vinculado — você pode entrar com ele.",
+      "telegramTaken": "Este Telegram já está vinculado a outra conta."
     }
   },
   "vote": {

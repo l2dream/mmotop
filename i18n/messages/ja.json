@@ -240,6 +240,30 @@
       "copied": "コピーしました",
       "afterSave": "サーバーを保存すると、ここにキーが表示されます。",
       "how": "仕組み"
+    },
+    "signin": {
+      "code": "メールのコード",
+      "codeHint": "スマホでメールを開き、ここにコードを入力してください。このパソコンでメールを開く必要はありません。",
+      "codeSubmit": "ログイン",
+      "codeWrong": "コードが違うか期限切れです。新しいコードを請求してください。",
+      "notMine": "他人のパソコン — ログインを保持しない",
+      "or": "または",
+      "qr": "スマホのQRコードでログイン",
+      "qrScan": "すでにログインしているスマホでコードを読み取り、承認してください。",
+      "qrCode": "確認コード：{code}",
+      "qrExpired": "時間切れです。",
+      "qrNew": "新しいコードを表示",
+      "approveTitle": "別の端末でのログイン",
+      "approveText": "別の端末であなたのアカウントへのログインを許可しますか？その画面のコードと一致するか確認してください：{code}",
+      "approve": "許可する",
+      "approveDone": "完了：その端末でログインしました。",
+      "approveExpired": "このQRコードは期限切れです。相手の端末で更新してください。",
+      "approveSignIn": "別の端末でのログインを許可するには、ここでログインしてください。",
+      "telegramFailed": "Telegramでログインできませんでした。もう一度お試しください。",
+      "telegramTitle": "Telegramでログイン",
+      "telegramHint": "Telegramを連携すると、どのパソコンからでもログインできます。",
+      "telegramLinked": "Telegramを連携済みです。Telegramでログインできます。",
+      "telegramTaken": "このTelegramはすでに別のアカウントに連携されています。"
     }
   },
   "vote": {

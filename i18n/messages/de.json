@@ -240,6 +240,30 @@
       "copied": "Kopiert",
       "afterSave": "Der Schlüssel erscheint hier, sobald der Server gespeichert ist.",
       "how": "So funktioniert es"
+    },
+    "signin": {
+      "code": "Code aus der E-Mail",
+      "codeHint": "Öffnen Sie die E-Mail auf dem Handy und geben Sie den Code hier ein – Ihr Postfach müssen Sie auf diesem Computer nicht öffnen.",
+      "codeSubmit": "Anmelden",
+      "codeWrong": "Der Code passt nicht oder ist abgelaufen. Fordern Sie einen neuen an.",
+      "notMine": "Fremder Computer – Anmeldung nicht merken",
+      "or": "oder",
+      "qr": "Mit QR-Code vom Handy anmelden",
+      "qrScan": "Scannen Sie den Code mit einem Handy, auf dem Sie schon angemeldet sind, und bestätigen Sie.",
+      "qrCode": "Bestätigungscode: {code}",
+      "qrExpired": "Die Zeit ist abgelaufen.",
+      "qrNew": "Neuen Code zeigen",
+      "approveTitle": "Anmeldung auf einem anderen Gerät",
+      "approveText": "Anmeldung in Ihr Konto auf einem anderen Gerät erlauben? Vergleichen Sie den Code mit dem auf dessen Bildschirm: {code}",
+      "approve": "Erlauben",
+      "approveDone": "Fertig: Das Gerät ist angemeldet.",
+      "approveExpired": "Dieser QR-Code ist abgelaufen. Erneuern Sie ihn auf dem anderen Gerät.",
+      "approveSignIn": "Melden Sie sich hier an, um die Anmeldung auf dem anderen Gerät zu erlauben.",
+      "telegramFailed": "Anmeldung über Telegram fehlgeschlagen. Bitte erneut versuchen.",
+      "telegramTitle": "Mit Telegram anmelden",
+      "telegramHint": "Verknüpfen Sie Telegram, um sich damit an jedem Computer anzumelden.",
+      "telegramLinked": "Telegram ist verknüpft – Sie können sich damit anmelden.",
+      "telegramTaken": "Dieses Telegram ist bereits mit einem anderen Konto verknüpft."
     }
   },
   "vote": {
