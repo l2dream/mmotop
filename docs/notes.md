@@ -177,7 +177,7 @@
   (`verifyOtp type:'email'`, длина кода в проекте 8). Нужно, чтобы код был
   в письме: владелец добавляет `{{ .Token }}` в шаблоны Magic Link и Confirm
   signup (Auth → Emails → Templates; мне `project_admin_write` нет) —
-  ⚠️ СДЕЛАНО ЛИ — проверить у владельца;
+  владелец добавил 5 ноября, проверено через API;
   2) галочка **«Чужой компьютер — не запоминать вход»** — сессия в
   `sessionStorage` (`setTempSignIn`, своё хранилище в `useSupabase.ts`);
   3) **Telegram** — кнопка виджета `TelegramLogin.vue`, функция
