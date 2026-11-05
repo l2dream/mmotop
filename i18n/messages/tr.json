@@ -85,6 +85,7 @@
     "eastAsian": "Doğu Asya"
   },
   "server": {
+    "title": "{name} — {game} {kind} sunucusu",
     "opens": "Açılış tarihi",
     "votes": "Bu ayki oylar",
     "rank": "Sıralamada {rank}.",

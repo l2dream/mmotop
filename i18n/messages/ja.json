@@ -85,6 +85,7 @@
     "eastAsian": "東アジア"
   },
   "server": {
+    "title": "{name} — {game} {kind} サーバー",
     "opens": "オープン日",
     "votes": "今月の投票数",
     "rank": "ランキング{rank}位",

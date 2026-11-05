@@ -85,6 +85,7 @@
     "eastAsian": "شرق آسيا"
   },
   "server": {
+    "title": "{name} — خادم {game} {kind}",
     "opens": "تاريخ الافتتاح",
     "votes": "الأصوات هذا الشهر",
     "rank": "المركز {rank} في التصنيف",

@@ -53,8 +53,14 @@ export function useServerAbout() {
   function fullDate(iso: string) {
     if (OWN_DATE_FORMAT.has(locale.value)) return `${keep(formatDayMonth(iso))} ${iso.slice(0, 4)}`
     const tag = locale.value === 'en' ? 'en-GB' : bcp47(locale.value)
+    // Every kind of space Intl puts in a date made plain first: Node's ICU
+    // writes "2025 г." with a narrow no-break space (U+202F) and Chrome's with
+    // a no-break one (U+00A0), so the prerendered page and the browser's
+    // disagreed and Vue reported a hydration mismatch on every Russian server
+    // page. The spaces are held or freed below, the same way in both.
     const parts = new Intl.DateTimeFormat(tag, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
       .formatToParts(new Date(`${iso}T00:00:00Z`))
+      .map((p) => ({ ...p, value: p.value.replace(/[\u00a0\u202f\u2009]/g, ' ') }))
     // A narrow card may break the date in one place only: between the day and
     // month and the year, so "12 January" stays together over "2025" rather
     // than "12" over "January 2025", and "20 ноября / 2025 г." never leaves

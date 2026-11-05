@@ -85,6 +85,7 @@
     "eastAsian": "Şərqi Asiya"
   },
   "server": {
+    "title": "{name} — {game} {kind} serveri",
     "opens": "Açılış tarixi",
     "votes": "Bu ayın səsləri",
     "rank": "Reytinqdə № {rank}",

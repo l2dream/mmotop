@@ -2465,6 +2465,9 @@ a.account-address:hover { text-decoration: underline; }
 }
 .server-facts dd {
   margin: 5px 0 0;
+  /* A word longer than the box breaks, with a hyphen where the language has rules for it. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
   font-size: 15px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -2580,7 +2583,9 @@ a.account-address:hover { text-decoration: underline; }
   .server-status { grid-column: 1 / -1; justify-self: start; }
   .game-logo.server-logo { width: 44px; height: 44px; font-size: 13px; }
   .server-title h1 { font-size: 18px; line-height: 22px; }
-  .server-facts { grid-template-columns: 1fr 1fr; }
+  /* minmax(0, …): a plain 1fr is never narrower than its longest word, and
+     "Интернациональный" pushed the grid 7px off a 320px screen. */
+  .server-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* Five in two columns leaves one over; it takes the whole last row. */
   .server-facts > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .server-visit,

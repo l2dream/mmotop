@@ -85,6 +85,7 @@
     "eastAsian": "Східна Азія"
   },
   "server": {
+    "title": "{name} — сервер {game} {kind}",
     "opens": "Дата відкриття",
     "votes": "Голосів за місяць",
     "rank": "№ {rank} у рейтингу",

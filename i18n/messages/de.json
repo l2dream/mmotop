@@ -85,6 +85,7 @@
     "eastAsian": "Ostasiatisch"
   },
   "server": {
+    "title": "{name} — {game}-Server {kind}",
     "opens": "Eröffnung",
     "votes": "Stimmen diesen Monat",
     "rank": "Platz {rank} im Ranking",

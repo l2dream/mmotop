@@ -85,6 +85,7 @@
     "eastAsian": "东亚文字"
   },
   "server": {
+    "title": "{name} — {game} {kind} 服务器",
     "opens": "开服日期",
     "votes": "本月票数",
     "rank": "排行第 {rank} 名",
