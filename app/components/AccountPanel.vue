@@ -415,33 +415,40 @@ async function remove(s: OwnServer) {
           </label>
           <div class="account-pair">
             <div class="account-field">
-              <label v-if="!noRate" class="account-field">
-                <span>{{ $t('account.fields.rate') }}</span>
-                <input v-model="draft.rate" type="number" min="0.01" max="100000" step="any" inputmode="decimal" :placeholder="$t('account.fields.rateHint')">
-              </label>
-              <template v-else>
-                <label class="account-field">
-                  <span>{{ $t('account.fields.rateText') }}</span>
-                  <select v-model="rateWordChoice">
-                    <option value="">{{ $t('account.fields.notSpecified') }}</option>
-                    <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
-                    <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
-                  </select>
-                </label>
+              <!-- The "No rates" box sits inside the field itself, at its end;
+                   ticked, the number gives way to the list of words. -->
+              <span>{{ noRate ? $t('account.fields.rateText') : $t('account.fields.rate') }}</span>
+              <div class="account-rate-box" :class="{ 'has-select': noRate }">
                 <input
-                  v-if="ownRateWord"
-                  v-model="draft.rate_text"
-                  type="text"
-                  required
-                  maxlength="20"
-                  :aria-label="$t('account.fields.rateText')"
-                  :placeholder="$t('account.fields.rateTextHint')"
+                  v-if="!noRate"
+                  v-model="draft.rate"
+                  type="number"
+                  min="0.01"
+                  max="100000"
+                  step="any"
+                  inputmode="decimal"
+                  :aria-label="$t('account.fields.rate')"
+                  :placeholder="$t('account.fields.rateHint')"
                 >
-              </template>
-              <label class="account-check">
-                <input v-model="noRate" type="checkbox">
-                <span>{{ $t('filter.noRates') }}</span>
-              </label>
+                <select v-else v-model="rateWordChoice" :aria-label="$t('account.fields.rateText')">
+                  <option value="">{{ $t('account.fields.notSpecified') }}</option>
+                  <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
+                  <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
+                </select>
+                <label class="account-check">
+                  <input v-model="noRate" type="checkbox">
+                  <span>{{ $t('filter.noRates') }}</span>
+                </label>
+              </div>
+              <input
+                v-if="noRate && ownRateWord"
+                v-model="draft.rate_text"
+                type="text"
+                required
+                maxlength="20"
+                :aria-label="$t('account.fields.rateText')"
+                :placeholder="$t('account.fields.rateTextHint')"
+              >
             </div>
             <label class="account-field">
               <span>{{ $t('account.fields.openDate') }}</span>
