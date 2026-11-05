@@ -36,10 +36,12 @@ interface OwnServer {
   description: string | null
   /** The server's own logo (server-images), or none for the version's letters. */
   logo: string | null
+  /** A new logo of an approved server, waiting for the moderator (logo_review). */
+  logo_pending: string | null
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string }
+type Draft = Omit<OwnServer, 'status' | 'logo_pending' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string }
 
 const { t } = useI18n()
 
@@ -155,7 +157,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, logo, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, logo, logo_pending, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -199,7 +201,8 @@ function editServer(s: OwnServer) {
   idError.value = ''
   loadReward(s.id)
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
+  const { logo_pending: _pending, status: _status, ...own } = s
+  draft.value = { ...own, logo: s.logo_pending ?? s.logo, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -451,13 +454,16 @@ async function save() {
     return
   }
   const wasNew = !editing.value
+  const before = servers.value.find((x) => x.id === editing.value)
   const rewardSaved = await saveReward(savedId)
   busy.value = false
   cancel()
   await loadServers()
   // New, or changed after approval (servers_guard sends it back): on review.
   const status = servers.value.find((x) => x.id === savedId)?.status
-  notice.value = wasNew || status === 'pending' ? t('account.savedReview') : t('account.savedDone')
+  const logoWaits = !!before && status === 'approved' && !!servers.value.find((x) => x.id === savedId)?.logo_pending
+    && fields.logo !== (before.logo_pending ?? before.logo)
+  notice.value = wasNew || status === 'pending' ? t('account.savedReview') : logoWaits ? t('account.fields.logoReview') : t('account.savedDone')
   if (!rewardSaved) error.value = t('account.failed')
 }
 
@@ -654,6 +660,8 @@ async function remove(s: OwnServer) {
               <button v-if="draft.logo" type="button" class="account-link account-danger" @click="draft.logo = null">{{ $t('account.fields.removeLink') }}</button>
             </div>
             <small v-if="logoError" class="account-error" role="alert">{{ logoError }}</small>
+            <!-- A listed server keeps its old logo until the new one is looked at. -->
+            <small v-else-if="draft.logo && draft.logo === servers.find((x) => x.id === editing)?.logo_pending">{{ $t('account.fields.logoReview') }}</small>
           </div>
           <div class="account-pair">
             <label class="account-field">

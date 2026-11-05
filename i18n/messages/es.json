@@ -217,7 +217,8 @@
       "optional": "(opcional)",
       "logo": "Logo",
       "addLogo": "Subir un logo",
-      "changeLogo": "Reemplazar"
+      "changeLogo": "Reemplazar",
+      "logoReview": "El nuevo logo aparecerá en el sitio tras la revisión."
     },
     "status": {
       "pending": "En revisión",

@@ -217,7 +217,8 @@
       "optional": "（选填）",
       "logo": "标志",
       "addLogo": "上传标志",
-      "changeLogo": "更换"
+      "changeLogo": "更换",
+      "logoReview": "新标志将在审核通过后显示在网站上。"
     },
     "status": {
       "pending": "审核中",

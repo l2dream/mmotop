@@ -217,7 +217,8 @@
       "optional": "(neprivaloma)",
       "logo": "Logotipas",
       "addLogo": "Įkelti logotipą",
-      "changeLogo": "Pakeisti"
+      "changeLogo": "Pakeisti",
+      "logoReview": "Naujas logotipas atsiras svetainėje po patikrinimo."
     },
     "status": {
       "pending": "Tikrinamas",

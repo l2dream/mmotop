@@ -217,7 +217,8 @@
       "optional": "(facultatif)",
       "logo": "Logo",
       "addLogo": "Importer un logo",
-      "changeLogo": "Remplacer"
+      "changeLogo": "Remplacer",
+      "logoReview": "Le nouveau logo apparaîtra sur le site après vérification."
     },
     "status": {
       "pending": "En vérification",

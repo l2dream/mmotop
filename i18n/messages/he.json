@@ -217,7 +217,8 @@
       "optional": "(לא חובה)",
       "logo": "לוגו",
       "addLogo": "העלאת לוגו",
-      "changeLogo": "החלפה"
+      "changeLogo": "החלפה",
+      "logoReview": "הלוגו החדש יופיע באתר אחרי בדיקה."
     },
     "status": {
       "pending": "בבדיקה",

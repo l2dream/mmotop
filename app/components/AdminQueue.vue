@@ -33,6 +33,7 @@ interface QueueServer {
   open_date: string
   description: string | null
   logo: string | null
+  logo_pending: string | null
   status: Status
   created_at: string
 }
@@ -57,9 +58,10 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, logo_pending, status, created_at')
     .order('created_at', { ascending: false })
-  if (!showAll.value) query = query.eq('status', 'pending')
+  // Waiting: a server to look at, or only the new logo of one already listed.
+  if (!showAll.value) query = query.or('status.eq.pending,logo_pending.not.is.null')
   const { data, error: failed } = await query
   loading.value = false
   if (failed) error.value = 'Не удалось загрузить список.'
@@ -229,6 +231,18 @@ async function setStatus(row: QueueServer, status: Status) {
   else load()
 }
 
+/** A listed server's new logo: into place, or dropped (the old one stays). */
+async function decideLogo(row: QueueServer, accept: boolean) {
+  busyId.value = row.id
+  error.value = ''
+  const { error: failed } = await props.supabase.from('servers')
+    .update(accept ? { logo: row.logo_pending, logo_pending: null } : { logo_pending: null })
+    .eq('id', row.id)
+  busyId.value = null
+  if (failed) error.value = `Не удалось изменить ${row.name}.`
+  else load()
+}
+
 const ACTIONS: { status: Status, label: string }[] = [
   { status: 'approved', label: 'Одобрить' },
   { status: 'rejected', label: 'Отклонить' },
@@ -337,6 +351,20 @@ const ACTIONS: { status: Status, label: string }[] = [
             <button type="button" class="account-button" :disabled="busyId === s.id" @click="apply(s)">Применить</button>
           </div>
           <p class="account-note">Новое появится в списках и фильтрах сайта после ближайшей сборки (до получаса).</p>
+        </div>
+        <div v-if="s.logo_pending" class="admin-description admin-new-game admin-fix">
+          <p class="admin-fix-title">
+            Новый логотип<template v-if="s.status === 'approved'"> (сервер остаётся на сайте со старым)</template>:
+          </p>
+          <div class="admin-logo-pair">
+            <img v-if="s.logo" class="admin-logo-big is-old" :src="s.logo" alt="Старый">
+            <span v-if="s.logo" aria-hidden="true">→</span>
+            <img class="admin-logo-big" :src="s.logo_pending" alt="Новый">
+          </div>
+          <div class="account-server-tools">
+            <button type="button" class="account-button" :disabled="busyId === s.id" @click="decideLogo(s, true)">Принять логотип</button>
+            <button type="button" class="account-link account-danger" :disabled="busyId === s.id" @click="decideLogo(s, false)">Отклонить логотип</button>
+          </div>
         </div>
         <p v-if="s.description" class="admin-description">{{ s.description }}</p>
         <div class="account-server-tools">

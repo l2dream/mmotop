@@ -217,7 +217,8 @@
       "optional": "(valgfrit)",
       "logo": "Logo",
       "addLogo": "Upload et logo",
-      "changeLogo": "Erstat"
+      "changeLogo": "Erstat",
+      "logoReview": "Det nye logo vises på siden efter gennemgang."
     },
     "status": {
       "pending": "Til godkendelse",
