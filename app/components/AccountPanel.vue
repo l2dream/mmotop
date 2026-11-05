@@ -171,8 +171,8 @@ function addServer() {
     name: '',
     game: GAMES[0]!.id,
     requested_game: '',
-    // International by default, as the owner chose; one language is a pick away.
-    language: 'intl',
+    // "Not specified" by default, as the owner chose; a language is a pick away.
+    language: '',
     language_text: '',
     links: [],
     chronicle: '',
