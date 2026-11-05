@@ -208,7 +208,7 @@
       "networkName": "Võrgustiku nimi",
       "removeLink": "Eemalda",
       "addLink": "Lisa võrgustik",
-      "description": "Kirjeldus (valikuline)",
+      "description": "Kirjeldus",
       "addImage": "Lisa pilt",
       "uploading": "Laadin üles…",
       "imageTooBig": "Pilt on ka vähendatult liiga suur; proovi väiksemat.",

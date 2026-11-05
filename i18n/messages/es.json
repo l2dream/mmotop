@@ -208,7 +208,7 @@
       "networkName": "Nombre de la red",
       "removeLink": "Quitar",
       "addLink": "Añadir red",
-      "description": "Descripción (opcional)",
+      "description": "Descripción",
       "addImage": "Añadir imagen",
       "uploading": "Subiendo…",
       "imageTooBig": "La imagen sigue siendo demasiado grande tras reducirla; prueba con una más pequeña.",

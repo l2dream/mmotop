@@ -208,7 +208,7 @@
       "networkName": "SNS 이름",
       "removeLink": "삭제",
       "addLink": "SNS 추가",
-      "description": "설명 (선택)",
+      "description": "설명",
       "addImage": "이미지 추가",
       "uploading": "업로드 중…",
       "imageTooBig": "줄여도 이미지가 너무 큽니다. 더 작은 이미지를 사용해 주세요.",

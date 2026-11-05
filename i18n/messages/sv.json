@@ -208,7 +208,7 @@
       "networkName": "Nätverkets namn",
       "removeLink": "Ta bort",
       "addLink": "Lägg till nätverk",
-      "description": "Beskrivning (valfritt)",
+      "description": "Beskrivning",
       "addImage": "Lägg till bild",
       "uploading": "Laddar upp…",
       "imageTooBig": "Bilden är för stor även förminskad; prova en mindre.",
