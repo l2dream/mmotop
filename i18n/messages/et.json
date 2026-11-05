@@ -181,6 +181,8 @@
     "invalid": "Mõni väli on valesti täidetud. Kontrolli neid.",
     "fields": {
       "name": "Serveri nimi",
+      "id": "Aadress saidil",
+      "idHint": "Väikesed ladina tähed, numbrid ja sidekriipsud, 3–32 märki. Hiljem muuta ei saa.",
       "game": "Mäng",
       "otherGame": "Muu mäng…",
       "gameName": "Mängu nimi",

@@ -2221,6 +2221,8 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-link:hover { text-decoration: underline; }
 .account-danger { color: #ff9a9a; }
 
+.account-page-link { overflow-wrap: anywhere; }
+.account-page-link .account-link { margin-inline-start: 8px; padding: 0; }
 /* A server's page address, on a row of its own across the card, so it is
    read whole rather than cut or broken beside the status badge. */
 .account-server > .account-address {
