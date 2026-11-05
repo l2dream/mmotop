@@ -16,6 +16,7 @@ const BUILT_IN: { kind: SocialKind, name?: string, placeholder: string }[] = [
   { kind: 'discord', name: 'Discord', placeholder: 'https://discord.gg/…' },
   { kind: 'telegram', name: 'Telegram', placeholder: 'https://t.me/…' },
   { kind: 'vk', name: 'VK', placeholder: 'https://vk.com/…' },
+  { kind: 'ok', name: 'Одноклассники', placeholder: 'https://ok.ru/…' },
   { kind: 'youtube', name: 'YouTube', placeholder: 'https://youtube.com/@…' },
   { kind: 'twitch', name: 'Twitch', placeholder: 'https://twitch.tv/…' },
   { kind: 'tiktok', name: 'TikTok', placeholder: 'https://tiktok.com/@…' },
