@@ -185,7 +185,9 @@
   привязывать Telegram к вошедшему (`link: '1'`; блок «Вход через Telegram»
   внизу кабинета). Бот `@mmotop_login_bot` (владелец создал 5 ноября,
   `/setdomain mmotop.com`, секрет `TELEGRAM_BOT_TOKEN` поставил сам);
-  `TELEGRAM_BOT` в `useSupabase.ts`. Виджет работает только на mmotop.com;
+  `TELEGRAM_BOT` в `useSupabase.ts`. Виджет работает только на mmotop.com
+  (на localhost — «Bot domain invalid», это нормально). Блок привязки — вверху
+  кабинета под «Вы вошли как»; после привязки — одна строка;
   4) **QR-код** — функция `qr-login` (start/peek/approve/poll, таблица
   `login_requests`, 5 минут, одноразово, код из 4 цифр на обоих экранах);
   телефон открывает `/account/?approve=<id>.<secret>`, `AccountApprove.vue`.

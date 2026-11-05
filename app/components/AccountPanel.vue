@@ -619,6 +619,15 @@ async function remove(s: OwnServer) {
           <span class="account-note">{{ $t('account.signedInAs') }} <bdi class="account-strong">{{ who }}</bdi></span>
           <button type="button" class="account-link" @click="signOut">{{ $t('account.signOut') }}</button>
         </div>
+        <!-- Telegram, to sign in with it on any computer: near the top, where it is seen. -->
+        <!-- Once linked, one quiet line instead of the box. -->
+        <p v-if="TELEGRAM_BOT && !draft && telegramLinked" class="account-note">{{ $t('account.signin.telegramLinked') }}</p>
+        <section v-else-if="TELEGRAM_BOT && !draft" class="account-telegram">
+          <h3 class="account-heading">{{ $t('account.signin.telegramTitle') }}</h3>
+          <p class="account-note">{{ $t('account.signin.telegramHint') }}</p>
+          <TelegramLogin link @done="telegramDone" />
+          <p v-if="telegramNote" class="account-error" role="alert">{{ telegramNote }}</p>
+        </section>
         <!-- The phone approving a QR sign-in on another screen. -->
         <AccountApprove v-if="!draft && approveRequest && supabase" :supabase="supabase" :request="approveRequest" @close="closeApprove" />
 
@@ -900,16 +909,6 @@ X-MMOTOP-Signature: hex(HMAC-SHA256(secret,
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <button type="button" class="account-button" @click="addServer">{{ $t('account.addServer') }}</button>
           <p class="account-note">{{ $t('account.moderation') }}</p>
-          <!-- Telegram, to sign in with it on any computer. -->
-          <section v-if="TELEGRAM_BOT" class="account-telegram">
-            <h3 class="account-heading">{{ $t('account.signin.telegramTitle') }}</h3>
-            <p v-if="telegramLinked" class="account-note">{{ $t('account.signin.telegramLinked') }}</p>
-            <template v-else>
-              <p class="account-note">{{ $t('account.signin.telegramHint') }}</p>
-              <TelegramLogin link @done="telegramDone" />
-            </template>
-            <p v-if="telegramNote" class="account-error" role="alert">{{ telegramNote }}</p>
-          </section>
           <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>
