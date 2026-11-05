@@ -183,9 +183,9 @@
   3) **Telegram** — кнопка виджета `TelegramLogin.vue`, функция
   `telegram-auth` теперь ищет аккаунт по `profiles.telegram_id` и умеет
   привязывать Telegram к вошедшему (`link: '1'`; блок «Вход через Telegram»
-  внизу кабинета). Скрыто, пока `TELEGRAM_BOT` в `useSupabase.ts` пустой:
-  ждём от владельца бота (@BotFather, `/setdomain mmotop.com`), его имя и
-  секрет `TELEGRAM_BOT_TOKEN` (ставит сам);
+  внизу кабинета). Бот `@mmotop_login_bot` (владелец создал 5 ноября,
+  `/setdomain mmotop.com`, секрет `TELEGRAM_BOT_TOKEN` поставил сам);
+  `TELEGRAM_BOT` в `useSupabase.ts`. Виджет работает только на mmotop.com;
   4) **QR-код** — функция `qr-login` (start/peek/approve/poll, таблица
   `login_requests`, 5 минут, одноразово, код из 4 цифр на обоих экранах);
   телефон открывает `/account/?approve=<id>.<secret>`, `AccountApprove.vue`.

@@ -23,7 +23,7 @@ export const AUTH_STORAGE_KEY = 'mmotop-auth'
  * put its token into the functions' secrets as TELEGRAM_BOT_TOKEN; until
  * then the Telegram buttons stay hidden.
  */
-export const TELEGRAM_BOT = ''
+export const TELEGRAM_BOT = 'mmotop_login_bot'
 
 /** Where the Edge Functions answer: /vote, /telegram-auth, /qr-login. */
 export const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`
