@@ -205,6 +205,10 @@
       "removeLink": "Pašalinti",
       "addLink": "Pridėti tinklą",
       "description": "Aprašymas (neprivaloma)",
+      "addImage": "Pridėti paveikslėlį",
+      "uploading": "Įkeliama…",
+      "imageTooBig": "Paveikslėlis per didelis net sumažintas; pabandyk mažesnį.",
+      "imageFailed": "Nepavyko įkelti paveikslėlio. Bandyk dar kartą.",
       "preview": "Peržiūra"
     },
     "status": {

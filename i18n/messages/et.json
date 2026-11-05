@@ -205,6 +205,10 @@
       "removeLink": "Eemalda",
       "addLink": "Lisa võrgustik",
       "description": "Kirjeldus (valikuline)",
+      "addImage": "Lisa pilt",
+      "uploading": "Laadin üles…",
+      "imageTooBig": "Pilt on ka vähendatult liiga suur; proovi väiksemat.",
+      "imageFailed": "Pildi üleslaadimine ebaõnnestus. Proovi uuesti.",
       "preview": "Eelvaade"
     },
     "status": {

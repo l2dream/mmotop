@@ -205,6 +205,10 @@
       "removeLink": "Odebrat",
       "addLink": "Přidat síť",
       "description": "Popis (nepovinné)",
+      "addImage": "Přidat obrázek",
+      "uploading": "Nahrávání…",
+      "imageTooBig": "Obrázek je i po zmenšení příliš velký; zkuste menší.",
+      "imageFailed": "Obrázek se nepodařilo nahrát. Zkuste to znovu.",
       "preview": "Náhled"
     },
     "status": {

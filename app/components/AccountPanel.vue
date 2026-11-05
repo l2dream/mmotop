@@ -293,6 +293,65 @@ function pickGame() {
   ownChronicle.value = draft.value!.game === 'other'
 }
 
+/**
+ * A picture for the description, kept with us: shrunk in the browser to at
+ * most 1600px on its longer side and sent as WebP (a few-MB screenshot comes
+ * out at a few hundred KB), or as it is for a GIF, which would lose its
+ * animation. It goes into the owner's own folder of the server-images
+ * bucket, and its address onto a line of its own in the description, where
+ * RichDescription shows it as the picture.
+ */
+const IMAGE_BUCKET = 'server-images'
+const MAX_IMAGE = 2 * 1024 * 1024
+const imageInput = ref<HTMLInputElement | null>(null)
+const uploading = ref(false)
+const imageError = ref('')
+
+async function shrink(file: File): Promise<Blob> {
+  if (file.type === 'image/gif') return file
+  const bitmap = await createImageBitmap(file)
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height))
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.round(bitmap.width * scale)
+  canvas.height = Math.round(bitmap.height * scale)
+  canvas.getContext('2d')!.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
+  bitmap.close()
+  for (const quality of [0.85, 0.7, 0.55]) {
+    const blob = await new Promise<Blob | null>((done) => canvas.toBlob(done, 'image/webp', quality))
+    if (blob && blob.size <= MAX_IMAGE) return blob
+  }
+  throw new Error('too big')
+}
+
+async function addImage(event: Event) {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  input.value = ''
+  if (!file || !supabase.value || !session.value || !draft.value) return
+  imageError.value = ''
+  uploading.value = true
+  try {
+    const blob = await shrink(file).catch(() => null)
+    if (!blob || blob.size > MAX_IMAGE) {
+      imageError.value = t('account.fields.imageTooBig')
+      return
+    }
+    const ext = blob.type === 'image/gif' ? 'gif' : 'webp'
+    const path = `${session.value.user.id}/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+    const { error: failed } = await supabase.value.storage.from(IMAGE_BUCKET)
+      .upload(path, blob, { contentType: blob.type || 'image/webp', cacheControl: '31536000', upsert: false })
+    if (failed) {
+      imageError.value = t('account.fields.imageFailed')
+      return
+    }
+    const url = supabase.value.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl
+    const text = (draft.value.description ?? '').replace(/\s+$/, '')
+    draft.value.description = text ? `${text}\n${url}\n` : `${url}\n`
+  } finally {
+    uploading.value = false
+  }
+}
+
 async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
@@ -513,6 +572,13 @@ async function remove(s: OwnServer) {
                  owner writes their own: what the page says either way. -->
             <textarea v-model="draft.description" rows="7" maxlength="2000" :placeholder="aboutPreview" />
           </label>
+          <div class="account-image-row">
+            <input ref="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden @change="addImage">
+            <button type="button" class="account-link" :disabled="uploading" @click="imageInput?.click()">
+              {{ uploading ? $t('account.fields.uploading') : `+ ${$t('account.fields.addImage')}` }}
+            </button>
+            <span v-if="imageError" class="account-error" role="alert">{{ imageError }}</span>
+          </div>
           <!-- With a link in the description, how the page will show it: a
                YouTube player, a picture, a link. -->
           <div v-if="/https?:\/\//.test(draft.description ?? '')" class="account-field">

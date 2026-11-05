@@ -205,6 +205,10 @@
       "removeLink": "Usuń",
       "addLink": "Dodaj sieć",
       "description": "Opis (opcjonalnie)",
+      "addImage": "Dodaj obrazek",
+      "uploading": "Wysyłanie…",
+      "imageTooBig": "Obrazek jest za duży nawet po zmniejszeniu; spróbuj mniejszego.",
+      "imageFailed": "Nie udało się wysłać obrazka. Spróbuj ponownie.",
       "preview": "Podgląd"
     },
     "status": {

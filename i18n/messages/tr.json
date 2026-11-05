@@ -205,6 +205,10 @@
       "removeLink": "Kaldır",
       "addLink": "Ağ ekle",
       "description": "Açıklama (isteğe bağlı)",
+      "addImage": "Resim ekle",
+      "uploading": "Yükleniyor…",
+      "imageTooBig": "Resim küçültüldükten sonra bile çok büyük; daha küçük bir resim deneyin.",
+      "imageFailed": "Resim yüklenemedi. Lütfen tekrar deneyin.",
       "preview": "Önizleme"
     },
     "status": {

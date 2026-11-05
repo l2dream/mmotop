@@ -205,6 +205,10 @@
       "removeLink": "Remover",
       "addLink": "Adicionar rede",
       "description": "Descrição (opcional)",
+      "addImage": "Adicionar imagem",
+      "uploading": "A enviar…",
+      "imageTooBig": "A imagem continua grande demais mesmo reduzida; experimente uma mais pequena.",
+      "imageFailed": "Não foi possível enviar a imagem. Tente novamente.",
       "preview": "Pré-visualização"
     },
     "status": {

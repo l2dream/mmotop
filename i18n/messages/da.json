@@ -205,6 +205,10 @@
       "removeLink": "Fjern",
       "addLink": "Tilføj netværk",
       "description": "Beskrivelse (valgfrit)",
+      "addImage": "Tilføj billede",
+      "uploading": "Uploader…",
+      "imageTooBig": "Billedet er for stort, selv formindsket; prøv et mindre.",
+      "imageFailed": "Billedet kunne ikke uploades. Prøv igen.",
       "preview": "Forhåndsvisning"
     },
     "status": {
