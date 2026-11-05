@@ -217,7 +217,8 @@
       "optional": "(opcional)",
       "logo": "Logótipo",
       "addLogo": "Carregar logótipo",
-      "changeLogo": "Substituir"
+      "changeLogo": "Substituir",
+      "logoReview": "O novo logótipo aparecerá no site após a revisão."
     },
     "status": {
       "pending": "Em análise",

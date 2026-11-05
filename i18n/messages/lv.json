@@ -217,7 +217,8 @@
       "optional": "(nav obligāti)",
       "logo": "Logo",
       "addLogo": "Augšupielādēt logo",
-      "changeLogo": "Aizstāt"
+      "changeLogo": "Aizstāt",
+      "logoReview": "Jaunais logo parādīsies vietnē pēc pārbaudes."
     },
     "status": {
       "pending": "Pārbaudē",

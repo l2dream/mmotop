@@ -217,7 +217,8 @@
       "optional": "(opcional)",
       "logo": "Logo",
       "addLogo": "Enviar logo",
-      "changeLogo": "Substituir"
+      "changeLogo": "Substituir",
+      "logoReview": "O novo logo aparecerá no site após a análise."
     },
     "status": {
       "pending": "Em análise",

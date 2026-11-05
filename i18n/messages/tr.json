@@ -217,7 +217,8 @@
       "optional": "(isteğe bağlı)",
       "logo": "Logo",
       "addLogo": "Logo yükle",
-      "changeLogo": "Değiştir"
+      "changeLogo": "Değiştir",
+      "logoReview": "Yeni logo, incelemeden sonra sitede görünecek."
     },
     "status": {
       "pending": "İncelemede",

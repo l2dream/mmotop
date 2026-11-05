@@ -217,7 +217,8 @@
       "optional": "(nepovinné)",
       "logo": "Logo",
       "addLogo": "Nahrát logo",
-      "changeLogo": "Nahradit"
+      "changeLogo": "Nahradit",
+      "logoReview": "Nové logo se na webu objeví po kontrole."
     },
     "status": {
       "pending": "Ve schvalování",

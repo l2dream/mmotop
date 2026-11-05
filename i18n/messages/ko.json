@@ -217,7 +217,8 @@
       "optional": "(선택)",
       "logo": "로고",
       "addLogo": "로고 업로드",
-      "changeLogo": "교체"
+      "changeLogo": "교체",
+      "logoReview": "새 로고는 검토 후 사이트에 표시됩니다."
     },
     "status": {
       "pending": "검토 중",

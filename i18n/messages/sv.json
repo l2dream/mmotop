@@ -217,7 +217,8 @@
       "optional": "(valfritt)",
       "logo": "Logotyp",
       "addLogo": "Ladda upp logotyp",
-      "changeLogo": "Byt"
+      "changeLogo": "Byt",
+      "logoReview": "Den nya logotypen visas på sidan efter granskning."
     },
     "status": {
       "pending": "Granskas",

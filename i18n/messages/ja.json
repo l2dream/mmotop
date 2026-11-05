@@ -217,7 +217,8 @@
       "optional": "（任意）",
       "logo": "ロゴ",
       "addLogo": "ロゴをアップロード",
-      "changeLogo": "差し替え"
+      "changeLogo": "差し替え",
+      "logoReview": "新しいロゴは審査後にサイトに表示されます。"
     },
     "status": {
       "pending": "審査中",

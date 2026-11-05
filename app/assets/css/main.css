@@ -2422,6 +2422,9 @@ a.account-address:hover { text-decoration: underline; }
 .admin-new-game { padding: 8px 10px; border-radius: 8px; background: rgba(255, 210, 63, .1); color: #ffd75e; }
 .theme-light .admin-new-game { background: #fff4cc; color: #8a5a00; }
 .admin-fix { display: grid; gap: 10px; }
+.admin-logo-pair { display: flex; align-items: center; gap: 12px; }
+.admin-logo-big { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+.admin-logo-big.is-old { opacity: .6; }
 .admin-logo { width: 24px; height: 24px; border-radius: 5px; object-fit: cover; vertical-align: middle; margin-inline-end: 8px; }
 .admin-fix-title { margin: 0; }
 .admin-fix .account-field > span { color: inherit; }

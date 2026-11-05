@@ -217,7 +217,8 @@
       "optional": "(valikuline)",
       "logo": "Logo",
       "addLogo": "Laadi logo üles",
-      "changeLogo": "Asenda"
+      "changeLogo": "Asenda",
+      "logoReview": "Uus logo ilmub saidile pärast ülevaatust."
     },
     "status": {
       "pending": "Ülevaatusel",
