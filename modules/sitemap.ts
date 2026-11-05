@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { defineNuxtModule } from 'nuxt/kit'
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from '../app/i18n/locales'
 import { SECTIONS } from '../app/data/sections'
-import { SERVERS } from '../app/data/servers'
+import { SERVERS, serverPath } from '../app/data/servers'
 import { GAMES } from '../app/data/games'
 import { LANDINGS, indexable } from '../app/data/landing'
 
@@ -77,7 +77,7 @@ export default defineNuxtModule({
         // game's chronicle and rate pages with servers enough to be worth one
         // (see indexable), each server.
         const landings = new Set(LANDINGS.filter(indexable).map(l => `${l.game}/${l.slug}`))
-        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...landings, ...SERVERS.map(s => `${s.game}/${s.id}`)]
+        const pages = ['', ...GAMES.map(g => g.id), ...SECTIONS, ...landings, ...SERVERS.map(s => serverPath(s).slice(1))]
         // The build date: every page is rebuilt from the same data on each
         // deploy, so this is when all of them last changed.
         const lastmod = new Date().toISOString().slice(0, 10)

@@ -9,9 +9,8 @@ import { SERVERS } from './servers'
  * in the query and in the page's script, where it does not look.
  *
  * Only combinations some server has get a page, so none of them is empty.
- * They share /<game>/<segment>/ with the server pages, which is why a server's
- * id may not be one of its game's slugs; the build stops if one is (see
- * landingCollisions).
+ * Server pages sit a level deeper, /<game>/<version>/<server>/, so a server's
+ * id never competes with them.
  */
 
 export { chronicleSlug }
@@ -67,7 +66,3 @@ export function rateLanding(game: string, rate: number) {
   return landingAt(game, rateSlug(rate))
 }
 
-/** Servers whose address would be taken by a landing page. */
-export function landingCollisions() {
-  return SERVERS.filter((s) => BY_PATH.has(`${s.game}/${s.id}`)).map((s) => `${s.game}/${s.id}`)
-}

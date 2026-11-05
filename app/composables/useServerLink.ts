@@ -1,4 +1,4 @@
-import type { Server } from '~/data/servers'
+import { serverPath, type Server } from '~/data/servers'
 import type { SectionId } from '~/data/sections'
 import { gameById } from '~/data/games'
 import { landingAt } from '~/data/landing'
@@ -25,7 +25,7 @@ export function useServerLink(server: () => Server, origin: () => SectionId | nu
     const game = route.params.section
     // A chronicle's or a rate's page (/lineage2/interlude/) carries that
     // filter in the path as well.
-    const landing = landingAt(game, route.params.id)
+    const landing = route.params.server ? undefined : landingAt(game, route.params.id)
     if (landing) {
       return landing.chronicle
         ? { ...rest, game: landing.game, version: landing.chronicle }
@@ -37,7 +37,7 @@ export function useServerLink(server: () => Server, origin: () => SectionId | nu
     return onGamePage ? { ...rest, game } : rest
   })
 
-  const to = computed(() => ({ path: localePath(`/${server().game}/${server().id}`), query: query.value }))
+  const to = computed(() => ({ path: localePath(serverPath(server())), query: query.value }))
 
   const serverOrigin = useState<SectionId | null>('dash-origin', () => null)
   function remember() {

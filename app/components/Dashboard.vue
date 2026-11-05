@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { bcp47, localeByCode, SERVER_LANGUAGES } from '~/i18n/locales'
 import { GAMES, gameById, chronicleShort } from '~/data/games'
-import { SERVERS, type Server } from '~/data/servers'
+import { SERVERS, serverPath, type Server } from '~/data/servers'
 import { isSection, type SectionId } from '~/data/sections'
 import { REC_DATES, REC_RULES, type RecRule } from '~/data/recommendations'
 import { ogImagePath } from '~/data/og'
@@ -1007,7 +1007,14 @@ const structuredData = computed(() => {
   if (props.account) return []
   if (server.value) {
     const s = server.value
-    return [crumbs([serverSubtitle(s), absolute(`/${s.game}`)], [s.name, absolute(`/${s.game}/${s.id}`)])]
+    // MMOTOP › Lineage II › Interlude › LA2DREAM, as the address reads. A
+    // version the site has no page for yet is left out of the trail.
+    const version = chronicleLanding(s.game, s.chronicle)
+    return [crumbs(
+      [serverSubtitle(s), absolute(`/${s.game}`)],
+      ...(version ? [[s.chronicle, absolute(`/${s.game}/${version.slug}`)] as [string, string]] : []),
+      [s.name, absolute(serverPath(s))]
+    )]
   }
   if (homeGame.value) {
     const g = homeGame.value
@@ -1028,7 +1035,7 @@ const structuredData = computed(() => {
           '@type': 'ListItem',
           position: i + 1,
           name: row.server.name,
-          url: absolute(`/${row.server.game}/${row.server.id}`)
+          url: absolute(serverPath(row.server))
         }))
       }
     ]

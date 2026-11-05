@@ -6,7 +6,7 @@ import { defineNuxtModule } from 'nuxt/kit'
 import subsetFont from 'subset-font'
 import { Resvg } from '@resvg/resvg-js'
 import { GAMES, chronicleBadge } from '../app/data/games'
-import { SERVERS, type Server } from '../app/data/servers'
+import { SERVERS, serverPath, type Server } from '../app/data/servers'
 import { LANDINGS, indexable } from '../app/data/landing'
 
 /**
@@ -165,7 +165,7 @@ export default defineNuxtModule({
         }
 
         const pictures: [string, string][] = [
-          ...SERVERS.map((s): [string, string] => [`${s.game}/${s.id}.png`, serverPicture(s)]),
+          ...SERVERS.map((s): [string, string] => [`${serverPath(s).slice(1)}.png`, serverPicture(s)]),
           ...GAMES.filter((g) => SERVERS.some((s) => s.game === g.id)).map((g): [string, string] => [`${g.id}.png`, gamePicture(g.id)]),
           ...LANDINGS.filter(indexable).map((l): [string, string] => [`${l.game}/${l.slug}.png`, landingPicture(l)])
         ]

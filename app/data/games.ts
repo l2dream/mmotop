@@ -141,11 +141,3 @@ export function chronicleSlug(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 }
 
-/**
- * Whether /<game>/<id>/ is one of the game's chronicle pages, which a server
- * may not take: the account form refuses it, and the build leaves out any
- * that got through (data/servers.ts).
- */
-export function isChronicleAddress(game: string, id: string) {
-  return !!gameById(game)?.chronicles.some((c) => chronicleSlug(c.name) === id)
-}

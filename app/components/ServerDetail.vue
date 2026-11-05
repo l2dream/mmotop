@@ -90,7 +90,14 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
       <span class="game-logo server-logo">{{ serverBadge(server) }}</span>
       <div class="server-title">
         <h1>{{ server.name }}</h1>
-        <p>{{ serverSubtitle(server) }}</p>
+        <!-- Where the server sits on the site, as its address reads:
+             Lineage II › Interlude, each a link to its page. -->
+        <p class="server-crumbs">
+          <NuxtLink :to="localePath(`/${server.game}/`)">{{ serverSubtitle(server) }}</NuxtLink>
+          <span aria-hidden="true"> › </span>
+          <NuxtLink v-if="chronicleLink" :to="chronicleLink">{{ server.chronicle }}</NuxtLink>
+          <span v-else>{{ server.chronicle }}</span>
+        </p>
       </div>
       <span class="server-status" :class="opened ? 'is-started' : 'is-soon'">
         {{ $t(opened ? 'panels.started' : 'panels.soon') }}

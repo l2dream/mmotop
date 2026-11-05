@@ -4,8 +4,9 @@
 //
 // Run by .github/workflows/deploy.yml before the build:
 //
-//   node scripts/fetch-servers.mjs           write app/data/live-servers.json
-//                                            and public/live-servers.json
+//   node scripts/fetch-servers.mjs           write app/data/live-servers.json,
+//                                            live-moves.json and their copies
+//                                            in public/
 //   node scripts/fetch-servers.mjs --check   only say whether the list differs
 //                                            from the one the live site was
 //                                            built with (changed=true|false
@@ -30,9 +31,12 @@ async function rest(path) {
   return res.json()
 }
 
-const [rows, votes] = await Promise.all([
+const [rows, votes, moves] = await Promise.all([
   rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,links&status=eq.approved&order=id'),
-  rest('server_votes_month?select=server_id,votes')
+  rest('server_votes_month?select=server_id,votes'),
+  // Addresses servers had before their owner changed them, for the build to
+  // send on to the new ones (OLD_PATHS in app/data/servers.ts).
+  rest('server_moves?select=server_id,game,chronicle,id&order=moved_at')
 ])
 const votesById = new Map(votes.map((v) => [v.server_id, v.votes]))
 
@@ -54,15 +58,19 @@ const servers = rows.map((r) => ({
   ...(r.links?.length ? { links: r.links.map((l) => ({ kind: l.kind, url: l.url })) } : {})
 }))
 const json = `${JSON.stringify(servers, null, 2)}\n`
+const movesJson = `${JSON.stringify(moves, null, 2)}\n`
 
 if (process.argv.includes('--check')) {
   const live = await fetch(`${SITE}/live-servers.json`, { cache: 'no-store' })
-  const changed = !live.ok || (await live.text()) !== json
+  const liveMoves = await fetch(`${SITE}/live-moves.json`, { cache: 'no-store' })
+  const changed = !live.ok || (await live.text()) !== json || !liveMoves.ok || (await liveMoves.text()) !== movesJson
   console.log(changed ? 'The listed servers changed since the last deploy.' : 'Nothing new.')
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `changed=${changed}\n`)
 } else {
   await writeFile(new URL('../app/data/live-servers.json', import.meta.url), json)
   // Published beside the site, so the next --check has something to compare.
   await writeFile(new URL('../public/live-servers.json', import.meta.url), json)
+  await writeFile(new URL('../app/data/live-moves.json', import.meta.url), movesJson)
+  await writeFile(new URL('../public/live-moves.json', import.meta.url), movesJson)
   console.log(`${servers.length} listed server(s) from the database.`)
 }

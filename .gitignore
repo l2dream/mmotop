@@ -9,3 +9,4 @@ dist
 
 # Written by scripts/fetch-servers.mjs during the deploy.
 public/live-servers.json
+public/live-moves.json

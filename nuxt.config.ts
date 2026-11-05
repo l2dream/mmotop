@@ -1,15 +1,8 @@
 import { DEFAULT_LOCALE, READY_LOCALES, bcp47 } from './app/i18n/locales'
 import { SECTIONS } from './app/data/sections'
-import { SERVERS } from './app/data/servers'
+import { OLD_PATHS, SERVERS, serverPath } from './app/data/servers'
 import { GAMES } from './app/data/games'
-import { LANDINGS, landingCollisions } from './app/data/landing'
-
-// A server's page and a chronicle's or rate's page share /<game>/<segment>/,
-// so a server whose id is one of its game's slugs would lose its page.
-const collisions = landingCollisions()
-if (collisions.length) {
-  throw new Error(`Server ids taken by chronicle or rate pages: ${collisions.join(', ')}`)
-}
+import { LANDINGS } from './app/data/landing'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-07',
@@ -115,12 +108,16 @@ export default defineNuxtConfig({
           ...(prefix ? [prefix] : []),
           ...SECTIONS.map(id => `${prefix}/${id}`),
           ...GAMES.map(g => `${prefix}/${g.id}`),
-          ...SERVERS.map(s => `${prefix}/${s.game}/${s.id}`),
+          ...SERVERS.map(s => `${prefix}${serverPath(s)}`),
           // Each game's chronicle and rate pages (data/landing.ts).
           ...LANDINGS.map(l => `${prefix}/${l.game}/${l.slug}`),
-          // The old addresses, as redirect pages, for links made before the
-          // server pages moved under their game.
+          // The old addresses, as redirect pages: /server/<id>/ from before
+          // the server pages moved under their game, /<game>/<id>/ from
+          // before the version moved into the address, and any address an
+          // owner has since changed (data/servers.ts, OLD_PATHS). A landing
+          // page keeps its address over an old server one.
           ...SERVERS.map(s => `${prefix}/server/${s.id}`),
+          ...[...OLD_PATHS.keys()].filter(p => !LANDINGS.some(l => `${l.game}/${l.slug}` === p)).map(p => `${prefix}/${p}`),
           // Signing in and the owner's cabinet; not in the sitemap (noindex).
           `${prefix}/account`
         ]

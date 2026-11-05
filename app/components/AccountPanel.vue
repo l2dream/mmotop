@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
-import { GAMES, gameById, isChronicleAddress } from '~/data/games'
-import type { Server } from '~/data/servers'
+import { GAMES, gameById } from '~/data/games'
+import { serverPath, versionSlug, type Server } from '~/data/servers'
 import { SERVER_LANGUAGES } from '~/i18n/locales'
 import { NETWORKS, MAX_LINKS, type ServerLink } from '~/data/networks'
 import { SERVER_ID_PATTERN, serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
@@ -62,13 +62,13 @@ const loadingServers = ref(false)
 /** The server being edited, a fresh one being added, or none. */
 const draft = ref<Draft | null>(null)
 const editing = ref<string | null>(null)
-/** The server's page on the site, in this language: https://mmotop.com/ru/lineage2/la2dream/. */
+/** The server's page on the site, in this language: https://mmotop.com/ru/lineage2/interlude/la2dream/. */
 function pageAddress(s: OwnServer) {
-  return `https://mmotop.com${localePath(`/${s.game}/${s.id}`).replace(/\/?$/, '/')}`
+  return `https://mmotop.com${localePath(serverPath(s)).replace(/\/?$/, '/')}`
 }
 
 /**
- * The address (/lineage2/<id>/) is made from the name unless the owner
+ * The address (/lineage2/interlude/<id>/) is made from the name unless the owner
  * opened the field and wrote their own; a made one that is taken gets a
  * number on the end when saving, the owner's own is tried as it is.
  */
@@ -82,7 +82,7 @@ watch(() => draft.value?.name, (name) => {
 const draftAddress = computed(() => {
   const d = draft.value
   if (!d) return ''
-  return `mmotop.com${localePath(`/${d.game === 'other' ? '…' : d.game}/${d.id || '…'}`).replace(/\/?$/, '/')}`
+  return `mmotop.com${localePath(`/${d.game === 'other' ? '…' : d.game}/${d.chronicle ? versionSlug(d.chronicle) : '…'}/${d.id || '…'}`).replace(/\/?$/, '/')}`
 })
 
 let unsubscribe: (() => void) | undefined
@@ -369,8 +369,8 @@ async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
   const id = d.id.trim().toLowerCase()
-  if (!editing.value && customId.value && (!SERVER_ID_PATTERN.test(id) || isChronicleAddress(d.game, id))) {
-    error.value = SERVER_ID_PATTERN.test(id) ? t('account.idTaken') : t('account.fields.idHint')
+  if (customId.value && !SERVER_ID_PATTERN.test(id)) {
+    error.value = t('account.fields.idHint')
     return
   }
   busy.value = true
@@ -392,13 +392,14 @@ async function save() {
   }
   let failed
   if (editing.value) {
-    ({ error: failed } = await supabase.value.from('servers').update(fields).eq('id', editing.value))
+    // A changed address too: the database moves the votes with it and keeps
+    // the old one, which the site then sends on to the new (server_paths).
+    ({ error: failed } = await supabase.value.from('servers').update(customId.value ? { ...fields, id } : fields).eq('id', editing.value))
   } else {
-    // A made address that is taken, or is one of the game's chronicle pages,
-    // moves on to la2dream-2, -3… by itself; the owner's own is tried as is.
+    // A made address that is taken moves on to la2dream-2, -3… by itself;
+    // the owner's own is tried as is.
     for (let n = 1; n <= (customId.value ? 1 : 20); n++) {
       const candidate = n === 1 ? id : serverIdWithNumber(id, n)
-      if (isChronicleAddress(d.game, candidate)) continue
       ;({ error: failed } = await supabase.value.from('servers').insert({ ...fields, id: candidate, owner_id: session.value.user.id }))
       if (failed?.code !== '23505') break
     }
@@ -467,7 +468,7 @@ async function remove(s: OwnServer) {
           <!-- The page's address, made from the name, and Edit for one's own. -->
           <p v-if="!idOpen" class="account-note account-page-link">
             <bdi class="account-strong" dir="ltr">{{ draftAddress }}</bdi>
-            <button v-if="!editing" type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
+            <button type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
           </p>
           <label v-else class="account-field">
             <span>{{ $t('account.fields.id') }}</span>
