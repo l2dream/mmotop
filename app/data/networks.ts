@@ -23,7 +23,7 @@ const BUILT_IN: { kind: SocialKind, name?: string, placeholder: string }[] = [
   { kind: 'facebook', name: 'Facebook', placeholder: 'https://facebook.com/…' },
   { kind: 'instagram', name: 'Instagram', placeholder: 'https://instagram.com/…' },
   { kind: 'x', name: 'X', placeholder: 'https://x.com/…' },
-  { kind: 'ok', name: 'OK.ru', placeholder: 'https://ok.ru/…' },
+  { kind: 'ok', name: 'Odnoklassniki', placeholder: 'https://ok.ru/…' },
   { kind: 'forum', placeholder: 'https://…' },
   { kind: 'other', placeholder: 'https://…' }
 ]
