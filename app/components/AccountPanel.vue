@@ -4,7 +4,7 @@ import { GAMES, gameById, isChronicleAddress } from '~/data/games'
 import type { Server } from '~/data/servers'
 import { SERVER_LANGUAGES } from '~/i18n/locales'
 import { NETWORKS, MAX_LINKS, type ServerLink } from '~/data/networks'
-import { serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
+import { SERVER_ID_PATTERN, serverIdFrom, serverIdWithNumber } from '~/utils/serverId'
 
 /**
  * The account page: signing in by email, then the owner's own servers —
@@ -68,12 +68,21 @@ function pageAddress(s: OwnServer) {
 }
 
 /**
- * The address (/lineage2/<id>/) is made from the name and not shown in the
- * form; one that is taken gets a number on the end when saving. The owner
- * sees it in their list of servers once it is saved.
+ * The address (/lineage2/<id>/) is made from the name unless the owner
+ * opened the field and wrote their own; a made one that is taken gets a
+ * number on the end when saving, the owner's own is tried as it is.
  */
+const customId = ref(false)
+const idOpen = ref(false)
 watch(() => draft.value?.name, (name) => {
-  if (draft.value && !editing.value) draft.value.id = name?.trim() ? serverIdFrom(name) : ''
+  if (draft.value && !editing.value && !customId.value) draft.value.id = name?.trim() ? serverIdFrom(name) : ''
+})
+
+/** The page the address leads to, as the owner will share it. */
+const draftAddress = computed(() => {
+  const d = draft.value
+  if (!d) return ''
+  return `mmotop.com${localePath(`/${d.game === 'other' ? '…' : d.game}/${d.id || '…'}`).replace(/\/?$/, '/')}`
 })
 
 let unsubscribe: (() => void) | undefined
@@ -153,6 +162,8 @@ function addServer() {
   editing.value = null
   ownChronicle.value = false
   noRate.value = false
+  customId.value = false
+  idOpen.value = false
   ownRateWord.value = false
   draft.value = {
     id: '',
@@ -179,6 +190,8 @@ function editServer(s: OwnServer) {
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
+  customId.value = false
+  idOpen.value = false
 }
 
 function cancel() {
@@ -356,6 +369,10 @@ async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
   const id = d.id.trim().toLowerCase()
+  if (!editing.value && customId.value && (!SERVER_ID_PATTERN.test(id) || isChronicleAddress(d.game, id))) {
+    error.value = SERVER_ID_PATTERN.test(id) ? t('account.idTaken') : t('account.fields.idHint')
+    return
+  }
   busy.value = true
   error.value = ''
   const fields = {
@@ -377,9 +394,9 @@ async function save() {
   if (editing.value) {
     ({ error: failed } = await supabase.value.from('servers').update(fields).eq('id', editing.value))
   } else {
-    // An address that is taken, or is one of the game's chronicle pages,
-    // moves on to la2dream-2, -3… by itself.
-    for (let n = 1; n <= 20; n++) {
+    // A made address that is taken, or is one of the game's chronicle pages,
+    // moves on to la2dream-2, -3… by itself; the owner's own is tried as is.
+    for (let n = 1; n <= (customId.value ? 1 : 20); n++) {
       const candidate = n === 1 ? id : serverIdWithNumber(id, n)
       if (isChronicleAddress(d.game, candidate)) continue
       ;({ error: failed } = await supabase.value.from('servers').insert({ ...fields, id: candidate, owner_id: session.value.user.id }))
@@ -446,6 +463,26 @@ async function remove(s: OwnServer) {
           <label class="account-field">
             <span>{{ $t('account.fields.name') }}</span>
             <input :value="draft.name" type="text" required minlength="2" maxlength="24" autocapitalize="characters" @input="typeName">
+          </label>
+          <!-- The page's address, made from the name, and Edit for one's own. -->
+          <p v-if="!idOpen" class="account-note account-page-link">
+            <bdi class="account-strong" dir="ltr">{{ draftAddress }}</bdi>
+            <button v-if="!editing" type="button" class="account-link" @click="idOpen = true">{{ $t('account.edit') }}</button>
+          </p>
+          <label v-else class="account-field">
+            <span>{{ $t('account.fields.id') }}</span>
+            <input
+              v-model="draft.id"
+              type="text"
+              required
+              pattern="[a-z0-9][a-z0-9\-]{1,30}[a-z0-9]"
+              maxlength="32"
+              autocapitalize="off"
+              spellcheck="false"
+              dir="ltr"
+              @input="customId = true"
+            >
+            <small>{{ $t('account.fields.idHint') }}</small>
           </label>
           <div class="account-pair">
             <label class="account-field">

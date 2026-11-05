@@ -181,6 +181,8 @@
     "invalid": "Some fields aren’t filled in correctly. Please check them.",
     "fields": {
       "name": "Server name",
+      "id": "Address on the site",
+      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters. Can’t be changed later.",
       "game": "Game",
       "otherGame": "Other game…",
       "gameName": "Game name",

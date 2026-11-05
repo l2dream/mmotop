@@ -181,6 +181,8 @@
     "invalid": "Bəzi sahələr səhv doldurulub. Onları yoxlayın.",
     "fields": {
       "name": "Serverin adı",
+      "id": "Saytdakı ünvan",
+      "idHint": "Kiçik latın hərfləri, rəqəmlər və defis, 3–32 simvol. Sonra dəyişmək olmaz.",
       "game": "Oyun",
       "otherGame": "Başqa oyun…",
       "gameName": "Oyunun adı",

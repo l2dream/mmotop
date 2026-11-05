@@ -181,6 +181,8 @@
     "invalid": "Einige Felder sind nicht korrekt ausgefüllt. Bitte prüfen Sie sie.",
     "fields": {
       "name": "Servername",
+      "id": "Adresse auf der Website",
+      "idHint": "Lateinische Kleinbuchstaben, Ziffern und Bindestriche, 3–32 Zeichen. Kann später nicht geändert werden.",
       "game": "Spiel",
       "otherGame": "Anderes Spiel…",
       "gameName": "Name des Spiels",

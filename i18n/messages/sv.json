@@ -181,6 +181,8 @@
     "invalid": "Några fält är inte rätt ifyllda. Kontrollera dem.",
     "fields": {
       "name": "Servernamn",
+      "id": "Adress på sajten",
+      "idHint": "Små latinska bokstäver, siffror och bindestreck, 3–32 tecken. Kan inte ändras senare.",
       "game": "Spel",
       "otherGame": "Annat spel…",
       "gameName": "Spelets namn",
