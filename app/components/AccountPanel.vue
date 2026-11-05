@@ -461,6 +461,13 @@ async function save() {
   if (!rewardSaved) error.value = t('account.failed')
 }
 
+/**
+ * The logo and the reward for a vote are for a server already on the site:
+ * the form for adding one keeps to what moderation needs (the owner asked
+ * for it as short as it can be).
+ */
+const approvedDraft = computed(() => !!editing.value && servers.value.find((x) => x.id === editing.value)?.status === 'approved')
+
 /** The address field, brought into view with its problem under it. */
 const idField = ref<HTMLInputElement | null>(null)
 async function showIdField() {
@@ -631,8 +638,9 @@ async function remove(s: OwnServer) {
             <small v-if="idError" class="account-error" role="alert">{{ idError }}</small>
             <small v-else>{{ $t('account.fields.idHint') }}</small>
           </label>
-          <!-- The logo, beside where it will stand: the square of the lists. -->
-          <div class="account-field">
+          <!-- The logo, beside where it will stand: the square of the lists.
+               Only once the server is approved: adding one stays short. -->
+          <div v-if="approvedDraft" class="account-field">
             <span>{{ $t('account.fields.logo') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <div class="account-logo-row">
               <span class="game-logo account-logo" :class="{ 'has-logo': !!draft.logo }">
@@ -798,7 +806,7 @@ async function remove(s: OwnServer) {
             <RichDescription class="account-description-preview" :text="draft.description ?? ''" />
           </div>
           <!-- The reward for a vote, folded: most owners set it up once, if at all. -->
-          <details class="account-reward" :open="reward.enabled || undefined">
+          <details v-if="approvedDraft" class="account-reward" :open="reward.enabled || undefined">
             <summary>{{ $t('account.reward.title') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></summary>
             <p class="account-note">{{ $t('account.reward.hint') }}</p>
             <label class="account-check">
