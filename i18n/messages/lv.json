@@ -205,6 +205,10 @@
       "removeLink": "Noņemt",
       "addLink": "Pievienot tīklu",
       "description": "Apraksts (nav obligāts)",
+      "addImage": "Pievienot attēlu",
+      "uploading": "Augšupielādē…",
+      "imageTooBig": "Attēls ir par lielu pat pēc samazināšanas; mēģini mazāku.",
+      "imageFailed": "Attēlu neizdevās augšupielādēt. Mēģini vēlreiz.",
       "preview": "Priekšskatījums"
     },
     "status": {

@@ -205,6 +205,10 @@
       "removeLink": "Entfernen",
       "addLink": "Netzwerk hinzufügen",
       "description": "Beschreibung (optional)",
+      "addImage": "Bild hinzufügen",
+      "uploading": "Wird hochgeladen…",
+      "imageTooBig": "Das Bild ist auch verkleinert zu groß; versuchen Sie ein kleineres.",
+      "imageFailed": "Das Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
       "preview": "Vorschau"
     },
     "status": {

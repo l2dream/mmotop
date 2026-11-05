@@ -205,6 +205,10 @@
       "removeLink": "Remove",
       "addLink": "Add a network",
       "description": "Description (optional)",
+      "addImage": "Add a picture",
+      "uploading": "Uploading…",
+      "imageTooBig": "The picture is too large even after shrinking; try a smaller one.",
+      "imageFailed": "The picture could not be uploaded. Please try again.",
       "preview": "Preview"
     },
     "status": {

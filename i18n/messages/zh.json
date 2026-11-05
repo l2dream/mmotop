@@ -205,6 +205,10 @@
       "removeLink": "移除",
       "addLink": "添加网络",
       "description": "简介（可选）",
+      "addImage": "添加图片",
+      "uploading": "上传中…",
+      "imageTooBig": "图片压缩后仍然太大，请换一张小一点的。",
+      "imageFailed": "图片上传失败，请重试。",
       "preview": "预览"
     },
     "status": {

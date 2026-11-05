@@ -205,6 +205,10 @@
       "removeLink": "Fjern",
       "addLink": "Legg til nettverk",
       "description": "Beskrivelse (valgfritt)",
+      "addImage": "Legg til bilde",
+      "uploading": "Laster opp…",
+      "imageTooBig": "Bildet er for stort selv etter forminskning; prøv et mindre.",
+      "imageFailed": "Bildet kunne ikke lastes opp. Prøv igjen.",
       "preview": "Forhåndsvisning"
     },
     "status": {

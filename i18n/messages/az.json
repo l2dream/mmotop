@@ -205,6 +205,10 @@
       "removeLink": "Sil",
       "addLink": "Şəbəkə əlavə et",
       "description": "Təsvir (məcburi deyil)",
+      "addImage": "Şəkil əlavə et",
+      "uploading": "Yüklənir…",
+      "imageTooBig": "Şəkil kiçildildikdən sonra da çox böyükdür; daha kiçiyini sınayın.",
+      "imageFailed": "Şəkli yükləmək olmadı. Yenidən cəhd edin.",
       "preview": "Önizləmə"
     },
     "status": {

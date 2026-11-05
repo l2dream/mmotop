@@ -205,6 +205,10 @@
       "removeLink": "Ta bort",
       "addLink": "Lägg till nätverk",
       "description": "Beskrivning (valfritt)",
+      "addImage": "Lägg till bild",
+      "uploading": "Laddar upp…",
+      "imageTooBig": "Bilden är för stor även förminskad; prova en mindre.",
+      "imageFailed": "Bilden kunde inte laddas upp. Försök igen.",
       "preview": "Förhandsvisning"
     },
     "status": {
