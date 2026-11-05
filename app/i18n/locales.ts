@@ -1,3 +1,4 @@
+import CATALOG from '../data/live-catalog.json'
 /**
  * The single source of truth for which languages exist.
  *
@@ -264,12 +265,19 @@ const OWN_NAME: Record<string, string> = { el: 'Ελληνικά', zh: '中文' 
  * selector but in sentence case: "Русский", "Deutsch", "日本語". "multi" is
  * for a server with several; its name comes from the page's own messages.
  */
-export const SERVER_LANGUAGES = READY_LOCALES
-  .filter(l => !l.code.includes('-'))
-  .map(l => {
-    const lower = l.endonym.toLocaleLowerCase(l.code)
-    return { code: l.code, name: OWN_NAME[l.code] ?? lower.charAt(0).toLocaleUpperCase(l.code) + lower.slice(1) }
-  })
+export const SERVER_LANGUAGES = [
+  ...READY_LOCALES
+    .filter(l => !l.code.includes('-'))
+    .map(l => {
+      const lower = l.endonym.toLocaleLowerCase(l.code)
+      return { code: l.code, name: OWN_NAME[l.code] ?? lower.charAt(0).toLocaleUpperCase(l.code) + lower.slice(1) }
+    }),
+  // …and those a moderator added from an owner's "Other language" (the
+  // catalog table), with the name the moderator gave.
+  ...(CATALOG as { kind: string, key: string, name: string }[])
+    .filter(e => e.kind === 'language' && !READY_LOCALES.some(l => l.code === e.key))
+    .map(e => ({ code: e.key, name: e.name }))
+]
 
 /** A server language's own name, or undefined for "multi" and unknown codes. */
 export function serverLanguageName(code: string | undefined) {

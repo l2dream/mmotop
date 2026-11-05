@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
-import { GAMES, gameById } from '~/data/games'
+import { GAMES, RATE_WORDS, gameById } from '~/data/games'
 import { serverPath, versionSlug, type Server } from '~/data/servers'
 import { SERVER_LANGUAGES } from '~/i18n/locales'
 import { NETWORKS, MAX_LINKS, type ServerLink } from '~/data/networks'
@@ -253,7 +253,6 @@ const chronicleChoice = computed({
  * with "Your own…" opening a field for one the list lacks.
  */
 const noRate = ref(false)
-const RATE_WORDS = ['PvP', 'GvE', 'RvR', 'PvE']
 const ownRateWord = ref(false)
 const rateWordChoice = computed({
   get: () => (ownRateWord.value ? OWN : draft.value?.rate_text ?? ''),
