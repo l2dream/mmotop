@@ -2146,6 +2146,10 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
    keeps room for it, and with the list of words in its place the box sits
    just before the list's chevron. */
 .account-rate-box { position: relative; }
+/* No up/down arrows in the number: they sat on top of the "No rates" box. */
+.account-rate-box > input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.account-rate-box > input[type="number"]::-webkit-inner-spin-button,
+.account-rate-box > input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .account-rate-box > input,
 .account-rate-box > select { padding-inline-end: 9.5rem; }
 .account-rate-box > .account-check {
@@ -2190,6 +2194,9 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field input::placeholder,
 .account-field textarea::placeholder { color: #a3a8c0; }
 .account-field textarea { resize: vertical; }
+/* The description: as tall as its text (or the greyed made text), from three
+   lines up to about fifteen, then it scrolls. */
+.account-field textarea.account-description { field-sizing: content; min-height: calc(3lh + 24px); max-height: calc(15lh + 24px); }
 .account-field input:disabled { opacity: .6; }
 /* The browser's own arrow drawn over the glass looked pasted on; a chevron
    like the More menu's instead, as a second background layer. */

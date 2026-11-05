@@ -474,6 +474,17 @@ async function save() {
  */
 const approvedDraft = computed(() => !!editing.value && servers.value.find((x) => x.id === editing.value)?.status === 'approved')
 
+/**
+ * The description field grows with its text. Browsers with field-sizing do
+ * it by themselves (main.css); for the rest, the height follows the text here.
+ */
+function grow(event: Event) {
+  const el = event.target as HTMLTextAreaElement
+  if (CSS.supports?.('field-sizing', 'content')) return
+  el.style.height = 'auto'
+  el.style.height = `${el.scrollHeight + 2}px`
+}
+
 /** The address field, brought into view with its problem under it. */
 const idField = ref<HTMLInputElement | null>(null)
 async function showIdField() {
@@ -795,10 +806,12 @@ async function remove(s: OwnServer) {
             >+ {{ $t('account.fields.addLink') }}</button>
           </div>
           <label class="account-field">
-            <span>{{ $t('account.fields.description') }}</span>
+            <span>{{ $t('account.fields.description') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <!-- The made text sits in the field itself, greyed, until the
                  owner writes their own: what the page says either way. -->
-            <textarea v-model="draft.description" rows="7" maxlength="2000" :placeholder="aboutPreview" />
+            <!-- Three lines to start with, growing with what is written (or with
+                 the greyed made text), so an empty field takes little room. -->
+            <textarea v-model="draft.description" class="account-description" rows="3" maxlength="2000" :placeholder="aboutPreview" @input="grow" />
           </label>
           <div class="account-image-row">
             <input ref="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden @change="addImage">

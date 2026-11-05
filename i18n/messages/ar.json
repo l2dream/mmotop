@@ -208,7 +208,7 @@
       "networkName": "اسم الشبكة",
       "removeLink": "إزالة",
       "addLink": "إضافة شبكة",
-      "description": "الوصف (اختياري)",
+      "description": "الوصف",
       "addImage": "إضافة صورة",
       "uploading": "جارٍ الرفع…",
       "imageTooBig": "الصورة كبيرة جدًا حتى بعد تصغيرها؛ جرّب صورة أصغر.",

@@ -208,7 +208,7 @@
       "networkName": "Netværkets navn",
       "removeLink": "Fjern",
       "addLink": "Tilføj netværk",
-      "description": "Beskrivelse (valgfrit)",
+      "description": "Beskrivelse",
       "addImage": "Tilføj billede",
       "uploading": "Uploader…",
       "imageTooBig": "Billedet er for stort, selv formindsket; prøv et mindre.",

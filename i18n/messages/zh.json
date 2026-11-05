@@ -208,7 +208,7 @@
       "networkName": "平台名称",
       "removeLink": "移除",
       "addLink": "添加网络",
-      "description": "简介（可选）",
+      "description": "简介",
       "addImage": "添加图片",
       "uploading": "上传中…",
       "imageTooBig": "图片压缩后仍然太大，请换一张小一点的。",
