@@ -186,7 +186,8 @@
   внизу кабинета). Бот `@mmotop_login_bot` (владелец создал 5 ноября,
   `/setdomain mmotop.com`, секрет `TELEGRAM_BOT_TOKEN` поставил сам);
   `TELEGRAM_BOT` в `useSupabase.ts`. Виджет работает только на mmotop.com
-  (на localhost — «Bot domain invalid», это нормально). Блок привязки — вверху
+  (на localhost — «Bot domain invalid», это нормально). Владелец привязал свой
+  Telegram к своему (админскому, почтовому) кабинету 5 ноября — проверено в базе. Блок привязки — вверху
   кабинета под «Вы вошли как»; после привязки — одна строка;
   4) **QR-код** — функция `qr-login` (start/peek/approve/poll, таблица
   `login_requests`, 5 минут, одноразово, код из 4 цифр на обоих экранах);
