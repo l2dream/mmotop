@@ -2096,6 +2096,19 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .account-field > span { font-size: 13px; font-weight: 600; color: #c9cce0; }
 .account-field small { font-size: 12px; color: #9a9fb8; overflow-wrap: anywhere; }
+/* The rate field with its "No rates" box inside, at the end: the field
+   keeps room for it, and with the list of words in its place the box sits
+   just before the list's chevron. */
+.account-rate-box { position: relative; }
+.account-rate-box > input,
+.account-rate-box > select { padding-inline-end: 9.5rem; }
+.account-rate-box > .account-check {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.account-rate-box.has-select > .account-check { inset-inline-end: 38px; }
 /* A checkbox under a field: "No rates". The box in the site's violet. */
 .account-check {
   display: inline-flex;
