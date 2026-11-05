@@ -294,6 +294,13 @@ const rateWordChoice = computed({
  * hands back a number from it (or '' when empty), not the string the draft's
  * type promises — calling .trim() on it threw, and took the form with it.
  */
+/** The arrows: to the next whole rate up or down, never below x1. */
+function stepRate(by: 1 | -1) {
+  const d = draft.value!
+  const n = rateNumber(d) ?? 0
+  d.rate = String(by > 0 ? Math.floor(n) + 1 : Math.max(1, Math.ceil(n) - 1))
+}
+
 function rateNumber(d: Draft) {
   const text = String(d.rate ?? '').trim()
   return text ? Number(text) : null
@@ -704,7 +711,17 @@ async function remove(s: OwnServer) {
               <!-- The "No rates" box sits inside the field itself, at its end;
                    ticked, the number gives way to the list of words. -->
               <span>{{ noRate ? $t('account.fields.rateText') : $t('account.fields.rate') }}</span>
-              <div class="account-rate-box" :class="{ 'has-select': noRate }">
+              <div class="account-rate-box" :class="{ 'has-select': noRate, 'has-steps': !noRate }">
+                <!-- Up and down at the start of the field, clear of the
+                     "No rates" box at its end; on phones too, which show none. -->
+                <span v-if="!noRate" class="account-rate-steps">
+                  <button type="button" aria-label="+1" tabindex="-1" @click="stepRate(1)">
+                    <svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  </button>
+                  <button type="button" aria-label="-1" tabindex="-1" @click="stepRate(-1)">
+                    <svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  </button>
+                </span>
                 <input
                   v-if="!noRate"
                   v-model="draft.rate"
