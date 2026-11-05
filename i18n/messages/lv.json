@@ -204,7 +204,8 @@
       "linkAddress": "Saite",
       "removeLink": "Noņemt",
       "addLink": "Pievienot tīklu",
-      "description": "Apraksts (nav obligāts)"
+      "description": "Apraksts (nav obligāts)",
+      "preview": "Priekšskatījums"
     },
     "status": {
       "pending": "Pārbaudē",

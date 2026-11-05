@@ -204,7 +204,8 @@
       "linkAddress": "Адрес ссылки",
       "removeLink": "Убрать",
       "addLink": "Добавить сеть",
-      "description": "Описание (необязательно)"
+      "description": "Описание (необязательно)",
+      "preview": "Предпросмотр"
     },
     "status": {
       "pending": "На проверке",

@@ -204,7 +204,8 @@
       "linkAddress": "링크",
       "removeLink": "삭제",
       "addLink": "SNS 추가",
-      "description": "설명 (선택)"
+      "description": "설명 (선택)",
+      "preview": "미리보기"
     },
     "status": {
       "pending": "검토 중",

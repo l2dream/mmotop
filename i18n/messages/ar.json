@@ -204,7 +204,8 @@
       "linkAddress": "الرابط",
       "removeLink": "إزالة",
       "addLink": "إضافة شبكة",
-      "description": "الوصف (اختياري)"
+      "description": "الوصف (اختياري)",
+      "preview": "معاينة"
     },
     "status": {
       "pending": "قيد المراجعة",

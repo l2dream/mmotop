@@ -204,7 +204,8 @@
       "linkAddress": "קישור",
       "removeLink": "הסרה",
       "addLink": "הוספת רשת",
-      "description": "תיאור (לא חובה)"
+      "description": "תיאור (לא חובה)",
+      "preview": "תצוגה מקדימה"
     },
     "status": {
       "pending": "בבדיקה",

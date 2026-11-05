@@ -204,7 +204,8 @@
       "linkAddress": "Bağlantı",
       "removeLink": "Kaldır",
       "addLink": "Ağ ekle",
-      "description": "Açıklama (isteğe bağlı)"
+      "description": "Açıklama (isteğe bağlı)",
+      "preview": "Önizleme"
     },
     "status": {
       "pending": "İncelemede",

@@ -204,7 +204,8 @@
       "linkAddress": "Link",
       "removeLink": "Fjern",
       "addLink": "Tilføj netværk",
-      "description": "Beskrivelse (valgfrit)"
+      "description": "Beskrivelse (valgfrit)",
+      "preview": "Forhåndsvisning"
     },
     "status": {
       "pending": "Til godkendelse",

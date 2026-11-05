@@ -204,7 +204,8 @@
       "linkAddress": "Link",
       "removeLink": "Eemalda",
       "addLink": "Lisa võrgustik",
-      "description": "Kirjeldus (valikuline)"
+      "description": "Kirjeldus (valikuline)",
+      "preview": "Eelvaade"
     },
     "status": {
       "pending": "Ülevaatusel",

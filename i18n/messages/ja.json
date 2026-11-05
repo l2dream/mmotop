@@ -204,7 +204,8 @@
       "linkAddress": "リンク",
       "removeLink": "削除",
       "addLink": "SNSを追加",
-      "description": "説明（任意）"
+      "description": "説明（任意）",
+      "preview": "プレビュー"
     },
     "status": {
       "pending": "審査中",

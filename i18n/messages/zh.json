@@ -204,7 +204,8 @@
       "linkAddress": "链接",
       "removeLink": "移除",
       "addLink": "添加网络",
-      "description": "简介（可选）"
+      "description": "简介（可选）",
+      "preview": "预览"
     },
     "status": {
       "pending": "审核中",
