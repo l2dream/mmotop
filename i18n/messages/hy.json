@@ -204,6 +204,8 @@
       "links": "Ցանցեր",
       "network": "Ցանց",
       "linkAddress": "Հղում",
+      "ownNetwork": "Այլ ցանց…",
+      "networkName": "Ցանցի անունը",
       "removeLink": "Հեռացնել",
       "addLink": "Ավելացնել ցանց",
       "description": "Նկարագրություն (ոչ պարտադիր)",

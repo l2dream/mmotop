@@ -204,6 +204,8 @@
       "links": "רשתות",
       "network": "רשת",
       "linkAddress": "קישור",
+      "ownNetwork": "רשת אחרת…",
+      "networkName": "שם הרשת",
       "removeLink": "הסרה",
       "addLink": "הוספת רשת",
       "description": "תיאור (לא חובה)",

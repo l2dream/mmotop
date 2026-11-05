@@ -204,6 +204,8 @@
       "links": "SNS",
       "network": "SNS",
       "linkAddress": "リンク",
+      "ownNetwork": "その他のSNS…",
+      "networkName": "SNS名",
       "removeLink": "削除",
       "addLink": "SNSを追加",
       "description": "説明（任意）",

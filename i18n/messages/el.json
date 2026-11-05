@@ -204,6 +204,8 @@
       "links": "Δίκτυα",
       "network": "Δίκτυο",
       "linkAddress": "Σύνδεσμος",
+      "ownNetwork": "Άλλο δίκτυο…",
+      "networkName": "Όνομα δικτύου",
       "removeLink": "Αφαίρεση",
       "addLink": "Προσθήκη δικτύου",
       "description": "Περιγραφή (προαιρετικό)",

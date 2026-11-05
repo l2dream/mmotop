@@ -4,6 +4,7 @@ import { GAMES, RATE_WORDS, gameById, type CatalogEntry } from '~/data/games'
 import { SERVER_LANGUAGES, serverLanguageName } from '~/i18n/locales'
 import { serverIdFrom } from '~/utils/serverId'
 import { serverPath } from '~/data/servers'
+import { NETWORKS } from '~/data/networks'
 
 /**
  * Moderation, in the account page of an admin: the servers waiting for a
@@ -27,7 +28,7 @@ interface QueueServer {
   rate_text: string | null
   language: string | null
   language_text: string | null
-  links: { kind: string, url: string }[] | null
+  links: { kind: string, url: string, name?: string }[] | null
   url: string
   open_date: string
   description: string | null
@@ -71,7 +72,8 @@ async function load() {
         chronicle: s.chronicle,
         rateText: s.rate_text ?? '',
         langCode: '',
-        langName: s.language_text ?? ''
+        langName: s.language_text ?? '',
+        networks: (s.links ?? []).map((l) => ({ choice: '', name: l.name ?? '', key: l.name ? networkKey(l.name) : '' }))
       }
     }
   }
@@ -123,7 +125,18 @@ interface Fix {
   rateText: string
   langCode: string
   langName: string
+  /** Per link, for an "Other network…" one: an existing network ('' for a new one, named below). */
+  networks: { choice: string, name: string, key: string }[]
 }
+
+/** A new network's key, from its name: "Одноклассники" → "odnoklassniki". */
+const networkKey = (name: string) => serverIdFrom(name).slice(0, 24).replace(/-+$/, '')
+const networkList = computed(() => [
+  ...NETWORKS.filter((n) => n.name).map((n) => ({ kind: n.kind, name: n.name! })),
+  ...added('network').filter((e) => !NETWORKS.some((n) => n.kind === e.key)).map((e) => ({ kind: e.key, name: e.name }))
+])
+/** The links an owner named a network of their own for, with their index. */
+const ownLinks = (s: QueueServer) => (s.links ?? []).map((l, i) => ({ ...l, i })).filter((l) => l.kind === 'other' && !!l.name)
 const fixes = reactive<Record<string, Fix>>({})
 
 const targetGame = (f: Fix) => f.game || f.gameId.trim()
@@ -137,10 +150,12 @@ function missing(s: QueueServer): [string, string][] {
     ...(needsGame(s) ? [['игра', s.requested_game ?? ''] as [string, string]] : []),
     ...(needsVersion(s) ? [['версия', s.chronicle] as [string, string]] : []),
     ...(needsRate(s) ? [['слово вместо рейтов', s.rate_text ?? ''] as [string, string]] : []),
-    ...(needsLanguage(s) ? [['язык', s.language_text ?? ''] as [string, string]] : [])
+    ...(needsLanguage(s) ? [['язык', s.language_text ?? ''] as [string, string]] : []),
+    ...ownLinks(s).map((l) => ['сеть', l.name ?? ''] as [string, string])
   ]
 }
-const needsFix = (s: QueueServer) => needsGame(s) || needsVersion(s) || needsRate(s) || needsLanguage(s)
+const needsNetwork = (s: QueueServer) => ownLinks(s).length > 0
+const needsFix = (s: QueueServer) => needsGame(s) || needsVersion(s) || needsRate(s) || needsLanguage(s) || needsNetwork(s)
 
 async function apply(s: QueueServer) {
   const f = fixes[s.id]!
@@ -158,6 +173,18 @@ async function apply(s: QueueServer) {
   if (!versionsOf(game).includes(chronicle)) entries.push({ kind: 'chronicle', game, key: chronicle, name: chronicle })
   if (needsRate(s) && !rateWords.value.includes(word)) entries.push({ kind: 'rate_word', game: '', key: word, name: word })
   if (needsLanguage(s) && !languages.value.some((l) => l.code === code)) entries.push({ kind: 'language', game: '', key: code, name: f.langName.trim() })
+  // Each named network becomes the link's kind: one the site has, or a new one.
+  const links = (s.links ?? []).map((l) => ({ kind: l.kind, url: l.url, ...(l.name ? { name: l.name } : {}) }))
+  for (const l of ownLinks(s)) {
+    const n = f.networks[l.i]!
+    const kind = n.choice || n.key.trim()
+    if (!kind || (!n.choice && !n.name.trim())) {
+      error.value = 'Заполните поля решения.'
+      return
+    }
+    if (!n.choice && !networkList.value.some((x) => x.kind === kind)) entries.push({ kind: 'network', game: '', key: kind, name: n.name.trim() })
+    links[l.i] = { kind, url: l.url }
+  }
 
   busyId.value = s.id
   error.value = ''
@@ -168,6 +195,8 @@ async function apply(s: QueueServer) {
       busyId.value = null
       error.value = failed.code === '23514' && e.kind === 'game'
         ? `Адрес игры «${e.key}» не подходит: латиница, цифры и дефис, от 3 символов, не занятый сайтом (top, ru, account…).`
+        : failed.code === '23514' && e.kind === 'network'
+        ? `Код сети «${e.key}» не подходит: латиница, цифры и дефис.`
         : `Не удалось добавить «${e.name}».`
       return
     }
@@ -177,7 +206,8 @@ async function apply(s: QueueServer) {
     requested_game: null,
     chronicle,
     ...(needsRate(s) ? { rate_text: word } : {}),
-    ...(needsLanguage(s) ? { language: code, language_text: null } : {})
+    ...(needsLanguage(s) ? { language: code, language_text: null } : {}),
+    ...(needsNetwork(s) ? { links } : {})
   }).eq('id', s.id)
   busyId.value = null
   if (failed) error.value = `Не удалось изменить ${s.name}.`
@@ -282,6 +312,25 @@ const ACTIONS: { status: Status, label: string }[] = [
               <span>Название языка, как его пишут сами (Português)</span>
               <input v-model="fixes[s.id]!.langName" type="text" maxlength="40">
             </label>
+          </template>
+          <template v-for="l in ownLinks(s)" :key="l.i">
+            <label class="account-field">
+              <span>Сеть «{{ l.name }}» ({{ l.url }})</span>
+              <select v-model="fixes[s.id]!.networks[l.i]!.choice">
+                <option value="">Новая сеть</option>
+                <option v-for="n in networkList" :key="n.kind" :value="n.kind">{{ n.name }}</option>
+              </select>
+            </label>
+            <template v-if="!fixes[s.id]!.networks[l.i]!.choice">
+              <label class="account-field">
+                <span>Название сети, как на кнопке</span>
+                <input v-model="fixes[s.id]!.networks[l.i]!.name" type="text" maxlength="40" @input="fixes[s.id]!.networks[l.i]!.key = networkKey(fixes[s.id]!.networks[l.i]!.name)">
+              </label>
+              <label class="account-field">
+                <span>Код сети (латиница)</span>
+                <input v-model="fixes[s.id]!.networks[l.i]!.key" type="text" maxlength="24" dir="ltr" autocapitalize="off" spellcheck="false">
+              </label>
+            </template>
           </template>
           <div class="account-server-tools">
             <button type="button" class="account-button" :disabled="busyId === s.id" @click="apply(s)">Применить</button>

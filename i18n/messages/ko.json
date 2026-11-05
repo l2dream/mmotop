@@ -204,6 +204,8 @@
       "links": "SNS",
       "network": "SNS",
       "linkAddress": "링크",
+      "ownNetwork": "다른 SNS…",
+      "networkName": "SNS 이름",
       "removeLink": "삭제",
       "addLink": "SNS 추가",
       "description": "설명 (선택)",

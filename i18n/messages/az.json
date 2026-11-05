@@ -204,6 +204,8 @@
       "links": "Şəbəkələr",
       "network": "Şəbəkə",
       "linkAddress": "Keçid",
+      "ownNetwork": "Başqa şəbəkə…",
+      "networkName": "Şəbəkənin adı",
       "removeLink": "Sil",
       "addLink": "Şəbəkə əlavə et",
       "description": "Təsvir (məcburi deyil)",

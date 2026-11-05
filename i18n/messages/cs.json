@@ -204,6 +204,8 @@
       "links": "Sítě",
       "network": "Síť",
       "linkAddress": "Odkaz",
+      "ownNetwork": "Jiná síť…",
+      "networkName": "Název sítě",
       "removeLink": "Odebrat",
       "addLink": "Přidat síť",
       "description": "Popis (nepovinné)",

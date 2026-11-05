@@ -204,6 +204,8 @@
       "links": "Tinklai",
       "network": "Tinklas",
       "linkAddress": "Nuoroda",
+      "ownNetwork": "Kitas tinklas…",
+      "networkName": "Tinklo pavadinimas",
       "removeLink": "Pašalinti",
       "addLink": "Pridėti tinklą",
       "description": "Aprašymas (neprivaloma)",

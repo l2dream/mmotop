@@ -204,6 +204,8 @@
       "links": "الشبكات",
       "network": "الشبكة",
       "linkAddress": "الرابط",
+      "ownNetwork": "شبكة أخرى…",
+      "networkName": "اسم الشبكة",
       "removeLink": "إزالة",
       "addLink": "إضافة شبكة",
       "description": "الوصف (اختياري)",
