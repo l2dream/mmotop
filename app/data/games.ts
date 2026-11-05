@@ -1,3 +1,6 @@
+import CATALOG from './live-catalog.json'
+import { serverIdFrom } from '../utils/serverId'
+
 /**
  * The games MMOTOP lists servers for, in the order the category bar shows them.
  *
@@ -30,7 +33,7 @@ export interface GameInfo {
   chronicles: Chronicle[]
 }
 
-export const GAMES = [
+const BUILT_IN = [
   {
     id: 'lineage2', name: 'Lineage II', aliases: ['L2', 'Lineage 2', 'La2'],
     chronicles: [
@@ -116,7 +119,49 @@ export const GAMES = [
   }
 ] as const satisfies readonly GameInfo[]
 
-export type GameId = (typeof GAMES)[number]['id']
+/**
+ * What a moderator added from the account page (the catalog table, see the
+ * catalog migration), fetched by the deploy into live-catalog.json (committed
+ * empty): a game an owner asked for, a version a game did not list, a word
+ * in place of rates, a language.
+ */
+export interface CatalogEntry {
+  kind: 'game' | 'chronicle' | 'rate_word' | 'language'
+  /** The game a version belongs to; '' for the rest. */
+  game: string
+  /** A game's address, a version's name, the word, a language's code. */
+  key: string
+  /** A game's or a language's name as shown; the key again for the rest. */
+  name: string
+  badge: string | null
+}
+export const LIVE_CATALOG = CATALOG as CatalogEntry[]
+
+/** A version's square badge when nobody gave it one: its first two letters or digits. */
+export function defaultBadge(name: string) {
+  return name.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 2).toUpperCase()
+}
+
+function withCatalog(games: readonly GameInfo[]): GameInfo[] {
+  const all: GameInfo[] = games.map((g) => ({ ...g, chronicles: [...g.chronicles] }))
+  for (const e of LIVE_CATALOG) {
+    if (e.kind === 'game' && !all.some((g) => g.id === e.key)) all.push({ id: e.key, name: e.name, chronicles: [] })
+  }
+  for (const e of LIVE_CATALOG) {
+    const g = e.kind === 'chronicle' ? all.find((x) => x.id === e.game) : undefined
+    if (g && !g.chronicles.some((c) => c.name === e.key)) g.chronicles.push({ name: e.key, badge: e.badge || defaultBadge(e.key) })
+  }
+  return all
+}
+
+export const GAMES: readonly GameInfo[] = withCatalog(BUILT_IN)
+
+/** Words an owner can put in place of rates, and the ones a moderator added. */
+export const RATE_WORDS = [
+  ...new Set(['PvP', 'GvE', 'RvR', 'PvE', ...LIVE_CATALOG.filter((e) => e.kind === 'rate_word').map((e) => e.key)])
+]
+
+export type GameId = string
 
 const BY_ID = new Map<string, GameInfo>(GAMES.map((g) => [g.id, g]))
 
@@ -132,12 +177,14 @@ export function chronicleShort(gameId: string, chronicle: string): string {
 /** The badge for a server's chronicle; the first letters of it if unlisted. */
 export function chronicleBadge(gameId: string, chronicle: string): string {
   const found = gameById(gameId)?.chronicles.find((c) => c.name === chronicle)
-  return found?.badge ?? chronicle.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 2).toUpperCase()
+  return found?.badge ?? defaultBadge(chronicle)
 }
 
 /** "WotLK 3.3.5a" → "wotlk-3-3-5a". Hyphens only, no dots, so every host
  *  treats the segment as a directory. */
 export function chronicleSlug(name: string) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  // One with no Latin letters or digits, made Latin the way server
+  // addresses are: Эпилог → epilog.
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || serverIdFrom(name)
 }
 

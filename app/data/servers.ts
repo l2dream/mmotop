@@ -1,5 +1,4 @@
 import { chronicleSlug, gameById, type GameId } from './games'
-import { serverIdFrom } from '../utils/serverId'
 import MOVES from './live-moves.json'
 import type { ServerLink } from './networks'
 import LIVE from './live-servers.json'
@@ -138,12 +137,10 @@ export const SERVERS: Server[] = [...LIVE_SERVERS, ...DEMO_SERVERS.filter((s) =>
 
 /**
  * The version's part of a server's address: its chronicle's slug, the same
- * as the chronicle's own page (/lineage2/interlude/), or, for a version the
- * game does not list and that has no Latin letters to slug, the name made
- * Latin the way server addresses are (Эпилог → epilog).
+ * as the chronicle's own page (/lineage2/interlude/).
  */
 export function versionSlug(chronicle: string) {
-  return chronicleSlug(chronicle) || serverIdFrom(chronicle)
+  return chronicleSlug(chronicle)
 }
 
 /**

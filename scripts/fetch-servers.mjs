@@ -5,7 +5,8 @@
 // Run by .github/workflows/deploy.yml before the build:
 //
 //   node scripts/fetch-servers.mjs           write app/data/live-servers.json,
-//                                            live-moves.json and their copies
+//                                            live-moves.json, live-catalog.json
+//                                            and their copies
 //                                            in public/
 //   node scripts/fetch-servers.mjs --check   only say whether the list differs
 //                                            from the one the live site was
@@ -31,12 +32,15 @@ async function rest(path) {
   return res.json()
 }
 
-const [rows, votes, moves] = await Promise.all([
+const [rows, votes, moves, catalog] = await Promise.all([
   rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,links&status=eq.approved&order=id'),
   rest('server_votes_month?select=server_id,votes'),
   // Addresses servers had before their owner changed them, for the build to
   // send on to the new ones (OLD_PATHS in app/data/servers.ts).
-  rest('server_moves?select=server_id,game,chronicle,id&order=moved_at')
+  rest('server_moves?select=server_id,game,chronicle,id&order=moved_at'),
+  // Games, versions, rate words and languages a moderator added (the catalog
+  // migration), for the lists in app/data/games.ts and app/i18n/locales.ts.
+  rest('catalog?select=kind,game,key,name,badge&order=created_at')
 ])
 const votesById = new Map(votes.map((v) => [v.server_id, v.votes]))
 
@@ -59,11 +63,14 @@ const servers = rows.map((r) => ({
 }))
 const json = `${JSON.stringify(servers, null, 2)}\n`
 const movesJson = `${JSON.stringify(moves, null, 2)}\n`
+const catalogJson = `${JSON.stringify(catalog, null, 2)}\n`
 
 if (process.argv.includes('--check')) {
   const live = await fetch(`${SITE}/live-servers.json`, { cache: 'no-store' })
   const liveMoves = await fetch(`${SITE}/live-moves.json`, { cache: 'no-store' })
+  const liveCatalog = await fetch(`${SITE}/live-catalog.json`, { cache: 'no-store' })
   const changed = !live.ok || (await live.text()) !== json || !liveMoves.ok || (await liveMoves.text()) !== movesJson
+    || !liveCatalog.ok || (await liveCatalog.text()) !== catalogJson
   console.log(changed ? 'The listed servers changed since the last deploy.' : 'Nothing new.')
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `changed=${changed}\n`)
 } else {
@@ -72,5 +79,7 @@ if (process.argv.includes('--check')) {
   await writeFile(new URL('../public/live-servers.json', import.meta.url), json)
   await writeFile(new URL('../app/data/live-moves.json', import.meta.url), movesJson)
   await writeFile(new URL('../public/live-moves.json', import.meta.url), movesJson)
+  await writeFile(new URL('../app/data/live-catalog.json', import.meta.url), catalogJson)
+  await writeFile(new URL('../public/live-catalog.json', import.meta.url), catalogJson)
   console.log(`${servers.length} listed server(s) from the database.`)
 }

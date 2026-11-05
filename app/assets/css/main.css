@@ -2374,6 +2374,9 @@ a.account-address:hover { text-decoration: underline; }
 .account-link:disabled { opacity: .5; cursor: default; }
 .admin-new-game { padding: 8px 10px; border-radius: 8px; background: rgba(255, 210, 63, .1); color: #ffd75e; }
 .theme-light .admin-new-game { background: #fff4cc; color: #8a5a00; }
+.admin-fix { display: grid; gap: 10px; }
+.admin-fix-title { margin: 0; }
+.admin-fix .account-field > span { color: inherit; }
 .theme-light .admin-queue { border-top-color: rgba(103, 104, 173, .16); }
 .theme-light .admin-url { color: #6d28d9; }
 .theme-light .admin-description { color: #3a3e58; }
