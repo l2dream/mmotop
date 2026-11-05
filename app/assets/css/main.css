@@ -2146,7 +2146,33 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
    keeps room for it, and with the list of words in its place the box sits
    just before the list's chevron. */
 .account-rate-box { position: relative; }
-/* No up/down arrows in the number: they sat on top of the "No rates" box. */
+/* The browser's own arrows sat on top of the "No rates" box: they give way
+   to ours, at the start of the field. */
+.account-field .account-rate-box.has-steps > input { padding-inline-start: 42px; }
+.account-rate-steps {
+  position: absolute;
+  inset-inline-start: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1;
+}
+.account-rate-steps button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(138, 92, 240, .16);
+  color: #cbb8ff;
+  cursor: pointer;
+}
+.account-rate-steps button:hover { background: rgba(138, 92, 240, .3); color: #fff; }
+.theme-light .account-rate-steps button { background: #efe8ff; color: #6d28d9; }
 .account-rate-box > input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .account-rate-box > input[type="number"]::-webkit-inner-spin-button,
 .account-rate-box > input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
