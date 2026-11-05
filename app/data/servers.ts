@@ -1,4 +1,6 @@
-import { gameById, isChronicleAddress, type GameId } from './games'
+import { chronicleSlug, gameById, type GameId } from './games'
+import { serverIdFrom } from '../utils/serverId'
+import MOVES from './live-moves.json'
 import type { ServerLink } from './networks'
 import LIVE from './live-servers.json'
 
@@ -123,16 +125,56 @@ const DEMO_SERVERS: Server[] = [
  * The committed file is empty; the deploy fills it from the database first
  * (scripts/fetch-servers.mjs).
  *
- * One whose address is one of its game's chronicle pages (/lineage2/interlude/)
- * is left out rather than allowed to stop the build (see nuxt.config.ts); the
- * database already refuses rate-shaped ones like x50.
+ * One under a game the site does not list is left out (the database refuses
+ * to approve those, see the other_game migration).
  */
-// …and so is one under a game the site does not list (the database refuses
-// to approve those, see the other_game migration).
 const LIVE_SERVERS = (LIVE as Server[])
-  .filter((s) => !!gameById(s.game) && !isChronicleAddress(s.game, s.id))
+  .filter((s) => !!gameById(s.game))
   .map((s) => ({ ...s, live: true }))
 
 /** The real servers first; a demo one with the same address gives way. */
 const LIVE_IDS = new Set(LIVE_SERVERS.map((s) => s.id))
 export const SERVERS: Server[] = [...LIVE_SERVERS, ...DEMO_SERVERS.filter((s) => !LIVE_IDS.has(s.id))]
+
+/**
+ * The version's part of a server's address: its chronicle's slug, the same
+ * as the chronicle's own page (/lineage2/interlude/), or, for a version the
+ * game does not list and that has no Latin letters to slug, the name made
+ * Latin the way server addresses are (Эпилог → epilog).
+ */
+export function versionSlug(chronicle: string) {
+  return chronicleSlug(chronicle) || serverIdFrom(chronicle)
+}
+
+/**
+ * A server's page, without the language prefix: /lineage2/interlude/la2dream.
+ * The version sits in the path so the address reads like the site's own
+ * breadcrumb — game, version, server.
+ */
+export function serverPath(s: { game: string, chronicle: string, id: string }) {
+  return `/${s.game}/${versionSlug(s.chronicle)}/${s.id}`
+}
+
+/**
+ * Addresses a server used to have, each leading to where it is now:
+ *
+ * - /<game>/<id>/, the address every server had before the version moved
+ *   into it (and still the shape links shared until then have);
+ * - any earlier /<game>/<version>/<id>/ of a server from the database whose
+ *   owner later changed its version, game or address — the database keeps
+ *   those (server_moves, see the server_paths migration).
+ *
+ * Keys are paths without the leading slash; an address some current server
+ * has is never taken over by a redirect.
+ */
+const CURRENT = new Set(SERVERS.map((s) => serverPath(s).slice(1)))
+const BY_ID = new Map(SERVERS.map((s) => [s.id, s]))
+export const OLD_PATHS = new Map<string, Server>()
+for (const s of SERVERS) OLD_PATHS.set(`${s.game}/${s.id}`, s)
+for (const m of MOVES as { game: string, chronicle: string, id: string, server_id: string }[]) {
+  const to = BY_ID.get(m.server_id)
+  if (!to) continue
+  for (const path of [`${m.game}/${versionSlug(m.chronicle)}/${m.id}`, `${m.game}/${m.id}`]) {
+    if (!CURRENT.has(path) && !OLD_PATHS.has(path)) OLD_PATHS.set(path, to)
+  }
+}

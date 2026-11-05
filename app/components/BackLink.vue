@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router'
 import { isSection } from '~/data/sections'
-import { SERVERS } from '~/data/servers'
+import { SERVERS, serverPath } from '~/data/servers'
 import { gameById } from '~/data/games'
 import { landingAt } from '~/data/landing'
 
@@ -44,10 +44,13 @@ const label = computed(() => {
   if (!params.id) return game.name
   // Under the game: a chronicle's or rate's page, "Lineage II Interlude",
   // or a server's, "LA2DREAM".
+  if (params.server) {
+    const server = SERVERS.find((s) => serverPath(s) === `/${params.section}/${params.id}/${params.server}`)
+    return server ? server.name : t('notFound.home')
+  }
   const landing = landingAt(params.section, params.id)
   if (landing) return `${game.name} ${landing.chronicle ?? `x${landing.rate}`}`
-  const server = SERVERS.find((s) => s.id === params.id && s.game === game.id)
-  return server ? server.name : t('notFound.home')
+  return t('notFound.home')
 })
 
 function go(event: MouseEvent) {
