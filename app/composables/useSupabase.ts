@@ -17,8 +17,65 @@ const SUPABASE_KEY = 'sb_publishable_m0WmMLZtsVOpcn_pjJQLmA_0UFch4QJ'
  */
 export const AUTH_STORAGE_KEY = 'mmotop-auth'
 
-/** Where the Edge Functions answer: /vote, /telegram-auth. */
+/**
+ * The Telegram bot behind "Sign in with Telegram" (its username, no @). Empty
+ * until the owner has made the bot (@BotFather, /setdomain mmotop.com) and
+ * put its token into the functions' secrets as TELEGRAM_BOT_TOKEN; until
+ * then the Telegram buttons stay hidden.
+ */
+export const TELEGRAM_BOT = ''
+
+/** Where the Edge Functions answer: /vote, /telegram-auth, /qr-login. */
 export const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`
+
+/**
+ * "Someone else's computer": the session is kept in sessionStorage instead,
+ * gone when the tab closes. The choice itself sits in sessionStorage too, so
+ * it lasts as long as that session and no longer.
+ */
+const TEMP_KEY = 'mmotop-auth-temp'
+
+function tempSignIn() {
+  try {
+    return sessionStorage.getItem(TEMP_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function setTempSignIn(on: boolean) {
+  try {
+    if (on) sessionStorage.setItem(TEMP_KEY, '1')
+    else sessionStorage.removeItem(TEMP_KEY)
+  } catch {}
+}
+
+/** Where the library keeps the session: this tab only, or this browser. */
+const storage = {
+  getItem: (key: string) => {
+    try {
+      return sessionStorage.getItem(key) ?? localStorage.getItem(key)
+    } catch {
+      return null
+    }
+  },
+  setItem: (key: string, value: string) => {
+    try {
+      if (tempSignIn()) {
+        sessionStorage.setItem(key, value)
+        localStorage.removeItem(key)
+      } else {
+        localStorage.setItem(key, value)
+      }
+    } catch {}
+  },
+  removeItem: (key: string) => {
+    try {
+      sessionStorage.removeItem(key)
+      localStorage.removeItem(key)
+    } catch {}
+  }
+}
 
 let client: Promise<SupabaseClient> | null = null
 
@@ -31,6 +88,7 @@ export function useSupabase() {
   client ??= import('@supabase/supabase-js').then(({ createClient }) => createClient(SUPABASE_URL, SUPABASE_KEY, {
     auth: {
       storageKey: AUTH_STORAGE_KEY,
+      storage,
       persistSession: true,
       autoRefreshToken: true,
       // The link in the sign-in email lands on the account page with the
@@ -44,7 +102,7 @@ export function useSupabase() {
 /** Whether a session is stored, read without loading the library. */
 export function hasStoredSession() {
   try {
-    return !!localStorage.getItem(AUTH_STORAGE_KEY)
+    return !!(sessionStorage.getItem(AUTH_STORAGE_KEY) ?? localStorage.getItem(AUTH_STORAGE_KEY))
   } catch {
     return false
   }

@@ -240,6 +240,30 @@
       "copied": "Kopeeritud",
       "afterSave": "Võti ilmub siia pärast serveri salvestamist.",
       "how": "Kuidas see töötab"
+    },
+    "signin": {
+      "code": "Kood e-kirjast",
+      "codeHint": "Ava kiri telefonis ja sisesta kood siia — oma postkasti selles arvutis avama ei pea.",
+      "codeSubmit": "Logi sisse",
+      "codeWrong": "Kood ei sobinud või on aegunud. Küsi uus.",
+      "notMine": "Võõras arvuti — ära jäta sisselogituks",
+      "or": "või",
+      "qr": "Logi sisse telefoni QR-koodiga",
+      "qrScan": "Skanni kood telefoniga, kus oled juba sisse logitud, ja kinnita.",
+      "qrCode": "Kinnituskood: {code}",
+      "qrExpired": "Aeg sai otsa.",
+      "qrNew": "Näita uut koodi",
+      "approveTitle": "Sisselogimine teises seadmes",
+      "approveText": "Lubada teises seadmes oma kontole sisse logida? Kontrolli, et kood on sama mis selle ekraanil: {code}",
+      "approve": "Luba",
+      "approveDone": "Valmis: see seade on sisse logitud.",
+      "approveExpired": "See QR-kood on aegunud. Värskenda seda teises seadmes.",
+      "approveSignIn": "Logi siin sisse, et lubada sisselogimist teises seadmes.",
+      "telegramFailed": "Telegramiga sisselogimine ebaõnnestus. Proovi uuesti.",
+      "telegramTitle": "Logi sisse Telegramiga",
+      "telegramHint": "Seo Telegram, et sellega igas arvutis sisse logida.",
+      "telegramLinked": "Telegram on seotud — saad sellega sisse logida.",
+      "telegramTaken": "See Telegram on juba seotud teise kontoga."
     }
   },
   "vote": {

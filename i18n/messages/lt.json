@@ -240,6 +240,30 @@
       "copied": "Nukopijuota",
       "afterSave": "Raktas atsiras čia, kai serveris bus išsaugotas.",
       "how": "Kaip tai veikia"
+    },
+    "signin": {
+      "code": "Kodas iš laiško",
+      "codeHint": "Atidarykite laišką telefone ir įveskite kodą čia — paštą šiame kompiuteryje atidaryti nereikia.",
+      "codeSubmit": "Prisijungti",
+      "codeWrong": "Kodas netinka arba nebegalioja. Paprašykite naujo.",
+      "notMine": "Svetimas kompiuteris — neprisiminti prisijungimo",
+      "or": "arba",
+      "qr": "Prisijungti QR kodu iš telefono",
+      "qrScan": "Nuskenuokite kodą telefonu, kuriame jau esate prisijungę, ir patvirtinkite.",
+      "qrCode": "Patvirtinimo kodas: {code}",
+      "qrExpired": "Laikas baigėsi.",
+      "qrNew": "Rodyti naują kodą",
+      "approveTitle": "Prisijungimas kitame įrenginyje",
+      "approveText": "Leisti prisijungti prie jūsų paskyros kitame įrenginyje? Patikrinkite, ar kodas sutampa su jo ekrane rodomu: {code}",
+      "approve": "Leisti",
+      "approveDone": "Atlikta: tame įrenginyje prisijungta.",
+      "approveExpired": "Šis QR kodas nebegalioja. Atnaujinkite jį kitame įrenginyje.",
+      "approveSignIn": "Prisijunkite čia, kad leistumėte prisijungti kitame įrenginyje.",
+      "telegramFailed": "Nepavyko prisijungti per Telegram. Bandykite dar kartą.",
+      "telegramTitle": "Prisijungti per Telegram",
+      "telegramHint": "Susiekite Telegram, kad galėtumėte juo prisijungti bet kuriame kompiuteryje.",
+      "telegramLinked": "Telegram susietas — galite juo prisijungti.",
+      "telegramTaken": "Šis Telegram jau susietas su kita paskyra."
     }
   },
   "vote": {

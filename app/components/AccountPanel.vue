@@ -52,8 +52,6 @@ const session = shallowRef<Session | null>(null)
 /** Until the stored session has been read, nothing is drawn but a spinner. */
 const ready = ref(false)
 
-const email = ref('')
-const sentTo = ref('')
 const busy = ref(false)
 const error = ref('')
 /** What became of the last save, shown over the list once the form closes. */
@@ -121,35 +119,43 @@ watch(() => session.value?.user.id, (id) => {
 })
 
 async function loadAdmin(id: string) {
-  const { data } = await supabase.value!.from('profiles').select('is_admin').eq('id', id).maybeSingle()
+  const { data } = await supabase.value!.from('profiles').select('is_admin, telegram_id').eq('id', id).maybeSingle()
   isAdmin.value = !!data?.is_admin
-}
-
-/** Back to this very page, in this language, with its trailing slash. */
-function returnAddress() {
-  return `${window.location.origin}${useRuntimeConfig().app.baseURL.replace(/\/$/, '')}${localePath('/account').replace(/\/?$/, '/')}`
-}
-
-async function sendLink() {
-  if (!supabase.value || busy.value) return
-  busy.value = true
-  error.value = ''
-  const address = email.value.trim()
-  const { error: failed } = await supabase.value.auth.signInWithOtp({
-    email: address,
-    options: { emailRedirectTo: returnAddress() }
-  })
-  busy.value = false
-  if (failed) {
-    error.value = failed.status === 429 ? t('account.tooMany') : t('account.failed')
-    return
-  }
-  sentTo.value = address
+  telegramLinked.value = data?.telegram_id != null
 }
 
 async function signOut() {
   await supabase.value?.auth.signOut()
-  sentTo.value = ''
+  setTempSignIn(false)
+}
+
+/** Who is signed in, as they would recognise it: the email, or their Telegram name for an account made with Telegram. */
+const who = computed(() => {
+  const user = session.value?.user
+  if (!user) return ''
+  if (user.email?.endsWith('@telegram.mmotop.com')) return user.user_metadata?.user_name ? `@${user.user_metadata.user_name}` : user.user_metadata?.full_name ?? 'Telegram'
+  return user.email ?? ''
+})
+
+/** A QR sign-in this phone was asked to approve (?approve=<id>.<secret>), until answered. */
+const route = useRoute()
+const router = useRouter()
+const approveRequest = computed(() => (typeof route.query.approve === 'string' && /^[0-9a-f-]{36}\.[0-9a-f]{48}$/.test(route.query.approve) ? route.query.approve : ''))
+function closeApprove() {
+  const { approve: _a, ...query } = route.query
+  router.replace({ query })
+}
+
+/** Telegram tied to this account (profiles.telegram_id), so it can sign in with it. */
+const telegramLinked = ref(false)
+const telegramNote = ref('')
+function telegramDone(answer: { linked?: boolean, error?: string }) {
+  if (answer.linked) {
+    telegramLinked.value = true
+    telegramNote.value = ''
+  } else {
+    telegramNote.value = answer.error === 'taken' ? t('account.signin.telegramTaken') : t('account.signin.telegramFailed')
+  }
 }
 
 async function loadServers() {
@@ -604,33 +610,17 @@ async function remove(s: OwnServer) {
     <div class="account-body">
       <p v-if="!ready" class="account-note" role="status">{{ $t('account.loading') }}</p>
 
-      <!-- Signed out: one field, and a link by email instead of a password. -->
-      <template v-else-if="!session">
-        <template v-if="sentTo">
-          <p class="account-lead">
-            <i18n-t keypath="account.sent" scope="global">
-              <template #email><bdi class="account-strong">{{ sentTo }}</bdi></template>
-            </i18n-t>
-          </p>
-          <p class="account-note">{{ $t('account.sentHint') }}</p>
-          <button type="button" class="account-link" @click="sentTo = ''">{{ $t('account.otherEmail') }}</button>
-        </template>
-        <form v-else class="account-form" @submit.prevent="sendLink">
-          <p class="account-lead">{{ $t('account.intro') }}</p>
-          <label class="account-field">
-            <span>{{ $t('account.email') }}</span>
-            <input v-model="email" type="email" autocomplete="email" inputmode="email" required>
-          </label>
-          <button type="submit" class="account-button" :disabled="busy">{{ $t('account.sendLink') }}</button>
-        </form>
-      </template>
+      <!-- Signed out: email with a link or a code, Telegram, a QR code. -->
+      <AccountSignIn v-else-if="!session && supabase" :supabase="supabase" />
 
       <!-- Signed in: who, and their servers. -->
       <template v-else>
         <div v-if="!draft" class="account-who">
-          <span class="account-note">{{ $t('account.signedInAs') }} <bdi class="account-strong">{{ session.user.email }}</bdi></span>
+          <span class="account-note">{{ $t('account.signedInAs') }} <bdi class="account-strong">{{ who }}</bdi></span>
           <button type="button" class="account-link" @click="signOut">{{ $t('account.signOut') }}</button>
         </div>
+        <!-- The phone approving a QR sign-in on another screen. -->
+        <AccountApprove v-if="!draft && approveRequest && supabase" :supabase="supabase" :request="approveRequest" @close="closeApprove" />
 
         <!-- No visible heading (the owner asked for the form alone); its name is
              still there for screen readers. -->
@@ -910,6 +900,16 @@ X-MMOTOP-Signature: hex(HMAC-SHA256(secret,
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <button type="button" class="account-button" @click="addServer">{{ $t('account.addServer') }}</button>
           <p class="account-note">{{ $t('account.moderation') }}</p>
+          <!-- Telegram, to sign in with it on any computer. -->
+          <section v-if="TELEGRAM_BOT" class="account-telegram">
+            <h3 class="account-heading">{{ $t('account.signin.telegramTitle') }}</h3>
+            <p v-if="telegramLinked" class="account-note">{{ $t('account.signin.telegramLinked') }}</p>
+            <template v-else>
+              <p class="account-note">{{ $t('account.signin.telegramHint') }}</p>
+              <TelegramLogin link @done="telegramDone" />
+            </template>
+            <p v-if="telegramNote" class="account-error" role="alert">{{ telegramNote }}</p>
+          </section>
           <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>

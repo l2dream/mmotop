@@ -240,6 +240,30 @@
       "copied": "Kopyalandı",
       "afterSave": "Anahtar, sunucu kaydedildikten sonra burada görünür.",
       "how": "Nasıl çalışır"
+    },
+    "signin": {
+      "code": "E-postadaki kod",
+      "codeHint": "E-postayı telefonda açın ve kodu buraya girin — bu bilgisayarda e-postanızı açmanız gerekmez.",
+      "codeSubmit": "Giriş yap",
+      "codeWrong": "Kod uymadı ya da süresi doldu. Yenisini isteyin.",
+      "notMine": "Başkasının bilgisayarı — oturumu hatırlama",
+      "or": "veya",
+      "qr": "Telefondan QR kodla giriş",
+      "qrScan": "Kodu, hesabınıza zaten giriş yaptığınız bir telefonla tarayın ve onaylayın.",
+      "qrCode": "Onay kodu: {code}",
+      "qrExpired": "Süre doldu.",
+      "qrNew": "Yeni kod göster",
+      "approveTitle": "Başka cihazda giriş",
+      "approveText": "Hesabınıza başka bir cihazdan girişe izin verilsin mi? Kodun o cihazın ekranındakiyle aynı olduğunu kontrol edin: {code}",
+      "approve": "İzin ver",
+      "approveDone": "Tamam: o cihazda giriş yapıldı.",
+      "approveExpired": "Bu QR kodun süresi doldu. Diğer cihazda yenileyin.",
+      "approveSignIn": "Diğer cihazdaki girişe izin vermek için burada giriş yapın.",
+      "telegramFailed": "Telegram ile giriş yapılamadı. Tekrar deneyin.",
+      "telegramTitle": "Telegram ile giriş",
+      "telegramHint": "Her bilgisayardan Telegram ile girmek için Telegram’ı bağlayın.",
+      "telegramLinked": "Telegram bağlı — onunla giriş yapabilirsiniz.",
+      "telegramTaken": "Bu Telegram zaten başka bir hesaba bağlı."
     }
   },
   "vote": {

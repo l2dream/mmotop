@@ -240,6 +240,30 @@
       "copied": "Copied",
       "afterSave": "The key will appear here once the server is saved.",
       "how": "How it works"
+    },
+    "signin": {
+      "code": "Code from the email",
+      "codeHint": "Open the email on your phone and enter the code from it here — no need to open your mail on this computer.",
+      "codeSubmit": "Sign in",
+      "codeWrong": "The code didn’t work or has expired. Request a new one.",
+      "notMine": "Someone else’s computer — don’t stay signed in",
+      "or": "or",
+      "qr": "Sign in with a QR code from your phone",
+      "qrScan": "Scan the code with a phone where you’re already signed in to your account, and confirm.",
+      "qrCode": "Confirmation code: {code}",
+      "qrExpired": "Time’s up.",
+      "qrNew": "Show a new code",
+      "approveTitle": "Sign-in on another device",
+      "approveText": "Allow signing in to your account on another device? Check the code matches the one on its screen: {code}",
+      "approve": "Allow",
+      "approveDone": "Done: that device is signed in.",
+      "approveExpired": "This QR code has expired. Refresh it on that device.",
+      "approveSignIn": "Sign in here to allow the sign-in on the other device.",
+      "telegramFailed": "Couldn’t sign in with Telegram. Please try again.",
+      "telegramTitle": "Sign in with Telegram",
+      "telegramHint": "Link Telegram to sign in with it on any computer.",
+      "telegramLinked": "Telegram is linked — you can sign in with it.",
+      "telegramTaken": "This Telegram is already linked to another account."
     }
   },
   "vote": {

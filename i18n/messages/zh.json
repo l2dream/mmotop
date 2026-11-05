@@ -240,6 +240,30 @@
       "copied": "已复制",
       "afterSave": "保存服务器后，密钥会显示在这里。",
       "how": "工作原理"
+    },
+    "signin": {
+      "code": "邮件中的验证码",
+      "codeHint": "在手机上打开邮件，把验证码填在这里——无需在这台电脑上登录邮箱。",
+      "codeSubmit": "登录",
+      "codeWrong": "验证码不对或已过期，请重新获取。",
+      "notMine": "他人的电脑——不保持登录",
+      "or": "或",
+      "qr": "用手机扫描二维码登录",
+      "qrScan": "用已登录账户的手机扫描二维码并确认。",
+      "qrCode": "确认码：{code}",
+      "qrExpired": "已超时。",
+      "qrNew": "显示新二维码",
+      "approveTitle": "在其他设备上登录",
+      "approveText": "允许在其他设备上登录你的账户吗？请确认与该设备屏幕上的代码一致：{code}",
+      "approve": "允许",
+      "approveDone": "完成：该设备已登录。",
+      "approveExpired": "此二维码已过期，请在那台设备上刷新。",
+      "approveSignIn": "请先在此登录，再允许另一台设备登录。",
+      "telegramFailed": "Telegram 登录失败，请重试。",
+      "telegramTitle": "用 Telegram 登录",
+      "telegramHint": "绑定 Telegram，即可在任何电脑上用它登录。",
+      "telegramLinked": "Telegram 已绑定，可以用它登录。",
+      "telegramTaken": "此 Telegram 已绑定到其他账户。"
     }
   },
   "vote": {

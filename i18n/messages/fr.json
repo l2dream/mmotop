@@ -240,6 +240,30 @@
       "copied": "Copié",
       "afterSave": "La clé apparaîtra ici une fois le serveur enregistré.",
       "how": "Comment ça marche"
+    },
+    "signin": {
+      "code": "Code de l’e-mail",
+      "codeHint": "Ouvrez l’e-mail sur votre téléphone et saisissez ici le code — inutile d’ouvrir votre messagerie sur cet ordinateur.",
+      "codeSubmit": "Se connecter",
+      "codeWrong": "Code incorrect ou expiré. Demandez-en un nouveau.",
+      "notMine": "Ordinateur d’un tiers — ne pas rester connecté",
+      "or": "ou",
+      "qr": "Se connecter avec un QR code depuis le téléphone",
+      "qrScan": "Scannez le code avec un téléphone déjà connecté à votre compte, puis confirmez.",
+      "qrCode": "Code de confirmation : {code}",
+      "qrExpired": "Le temps est écoulé.",
+      "qrNew": "Afficher un nouveau code",
+      "approveTitle": "Connexion sur un autre appareil",
+      "approveText": "Autoriser la connexion à votre compte sur un autre appareil ? Vérifiez que le code correspond à celui de son écran : {code}",
+      "approve": "Autoriser",
+      "approveDone": "C’est fait : cet appareil est connecté.",
+      "approveExpired": "Ce QR code a expiré. Actualisez-le sur l’autre appareil.",
+      "approveSignIn": "Connectez-vous ici pour autoriser la connexion sur l’autre appareil.",
+      "telegramFailed": "Connexion via Telegram impossible. Réessayez.",
+      "telegramTitle": "Se connecter avec Telegram",
+      "telegramHint": "Liez Telegram pour vous connecter avec sur n’importe quel ordinateur.",
+      "telegramLinked": "Telegram est lié — vous pouvez vous connecter avec.",
+      "telegramTaken": "Ce Telegram est déjà lié à un autre compte."
     }
   },
   "vote": {

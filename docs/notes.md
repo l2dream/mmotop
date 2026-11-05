@@ -172,6 +172,27 @@
   content`, запасной JS `grow`); «(необязательно)» у него как у языка
   (из текста `fields.description` убрано); у рейтов свои стрелки ▲▼ в начале
   поля (браузерные налезали на «Без рейтов»; шаг — до целого, не ниже 1).
+- **Вход с чужого компьютера** (5 ноября, `AccountSignIn.vue`):
+  1) **код из письма** — после «Прислать ссылку» поле «Код из письма»
+  (`verifyOtp type:'email'`, длина кода в проекте 8). Нужно, чтобы код был
+  в письме: владелец добавляет `{{ .Token }}` в шаблоны Magic Link и Confirm
+  signup (Auth → Emails → Templates; мне `project_admin_write` нет) —
+  ⚠️ СДЕЛАНО ЛИ — проверить у владельца;
+  2) галочка **«Чужой компьютер — не запоминать вход»** — сессия в
+  `sessionStorage` (`setTempSignIn`, своё хранилище в `useSupabase.ts`);
+  3) **Telegram** — кнопка виджета `TelegramLogin.vue`, функция
+  `telegram-auth` теперь ищет аккаунт по `profiles.telegram_id` и умеет
+  привязывать Telegram к вошедшему (`link: '1'`; блок «Вход через Telegram»
+  внизу кабинета). Скрыто, пока `TELEGRAM_BOT` в `useSupabase.ts` пустой:
+  ждём от владельца бота (@BotFather, `/setdomain mmotop.com`), его имя и
+  секрет `TELEGRAM_BOT_TOKEN` (ставит сам);
+  4) **QR-код** — функция `qr-login` (start/peek/approve/poll, таблица
+  `login_requests`, 5 минут, одноразово, код из 4 цифр на обоих экранах);
+  телефон открывает `/account/?approve=<id>.<secret>`, `AccountApprove.vue`.
+  Миграции `sign_in_elsewhere`, `service_role_grants` (у service_role в
+  этом проекте нет прав на новые таблицы — выдавать явно!). Функции
+  выкладываю сам: `npx supabase functions deploy <имя> --project-ref
+  xpfgjhyuompskzxsmwrc --use-api`. CORS функций — mmotop.com и localhost:3000/4175.
 - **Описание с медиа** (5 ноября, `RichDescription.vue`): в описании
   ссылка на YouTube отдельной строкой → плеер (обложка, плеер
   youtube-nocookie грузится по нажатию), ссылка на картинку

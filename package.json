@@ -13,6 +13,7 @@
     "@nuxtjs/i18n": "^10.6.0",
     "@supabase/supabase-js": "^2.118.0",
     "nuxt": "^4.5.2",
+    "qrcode": "^1.5.4",
     "vue": "^3.5.0"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "@fontsource-variable/noto-sans-sc": "^5.3.1",
     "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^26.6.3",
+    "@types/qrcode": "^1.5.5",
     "@types/subset-font": "^2.3.0",
     "subset-font": "^2.9.0",
     "typescript": "^6.0.3",

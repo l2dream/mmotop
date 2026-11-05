@@ -240,6 +240,30 @@
       "copied": "Nokopēts",
       "afterSave": "Atslēga parādīsies šeit pēc servera saglabāšanas.",
       "how": "Kā tas darbojas"
+    },
+    "signin": {
+      "code": "Kods no e-pasta",
+      "codeHint": "Atveriet e-pastu tālrunī un ievadiet kodu šeit — pastu šajā datorā atvērt nevajag.",
+      "codeSubmit": "Pieteikties",
+      "codeWrong": "Kods neder vai ir novecojis. Pieprasiet jaunu.",
+      "notMine": "Svešs dators — neatcerēties pieteikšanos",
+      "or": "vai",
+      "qr": "Pieteikties ar QR kodu no tālruņa",
+      "qrScan": "Noskenējiet kodu ar tālruni, kurā jau esat pieteicies, un apstipriniet.",
+      "qrCode": "Apstiprinājuma kods: {code}",
+      "qrExpired": "Laiks beidzies.",
+      "qrNew": "Rādīt jaunu kodu",
+      "approveTitle": "Pieteikšanās citā ierīcē",
+      "approveText": "Atļaut pieteikties jūsu kontā citā ierīcē? Pārbaudiet, vai kods sakrīt ar tās ekrānā redzamo: {code}",
+      "approve": "Atļaut",
+      "approveDone": "Gatavs: šajā ierīcē esat pieteicies.",
+      "approveExpired": "Šis QR kods ir novecojis. Atjaunojiet to otrā ierīcē.",
+      "approveSignIn": "Piesakieties šeit, lai atļautu pieteikšanos otrā ierīcē.",
+      "telegramFailed": "Neizdevās pieteikties ar Telegram. Mēģiniet vēlreiz.",
+      "telegramTitle": "Pieteikties ar Telegram",
+      "telegramHint": "Piesaistiet Telegram, lai ar to pieteiktos jebkurā datorā.",
+      "telegramLinked": "Telegram piesaistīts — varat ar to pieteikties.",
+      "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam."
     }
   },
   "vote": {

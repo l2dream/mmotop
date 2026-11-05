@@ -240,6 +240,30 @@
       "copied": "Zkopírováno",
       "afterSave": "Klíč se tu objeví po uložení serveru.",
       "how": "Jak to funguje"
+    },
+    "signin": {
+      "code": "Kód z e-mailu",
+      "codeHint": "Otevřete e-mail v telefonu a zadejte sem kód — poštu na tomto počítači otevírat nemusíte.",
+      "codeSubmit": "Přihlásit",
+      "codeWrong": "Kód nesedí nebo vypršel. Vyžádejte si nový.",
+      "notMine": "Cizí počítač — nepamatovat přihlášení",
+      "or": "nebo",
+      "qr": "Přihlásit QR kódem z telefonu",
+      "qrScan": "Naskenujte kód telefonem, kde už jste přihlášeni, a potvrďte.",
+      "qrCode": "Ověřovací kód: {code}",
+      "qrExpired": "Čas vypršel.",
+      "qrNew": "Ukázat nový kód",
+      "approveTitle": "Přihlášení na jiném zařízení",
+      "approveText": "Povolit přihlášení do vašeho účtu na jiném zařízení? Ověřte, že kód odpovídá tomu na jeho obrazovce: {code}",
+      "approve": "Povolit",
+      "approveDone": "Hotovo: zařízení je přihlášeno.",
+      "approveExpired": "Tento QR kód vypršel. Obnovte ho na druhém zařízení.",
+      "approveSignIn": "Přihlaste se zde, abyste povolili přihlášení na druhém zařízení.",
+      "telegramFailed": "Přihlášení přes Telegram se nezdařilo. Zkuste to znovu.",
+      "telegramTitle": "Přihlásit přes Telegram",
+      "telegramHint": "Propojte Telegram a přihlašujte se jím na libovolném počítači.",
+      "telegramLinked": "Telegram je propojen — můžete se jím přihlašovat.",
+      "telegramTaken": "Tento Telegram je už propojen s jiným účtem."
     }
   },
   "vote": {

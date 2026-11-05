@@ -240,6 +240,30 @@
       "copied": "Copiado",
       "afterSave": "La clave aparecerá aquí cuando se guarde el servidor.",
       "how": "Cómo funciona"
+    },
+    "signin": {
+      "code": "Código del correo",
+      "codeHint": "Abre el correo en el móvil y escribe aquí el código: no hace falta abrir tu correo en este ordenador.",
+      "codeSubmit": "Entrar",
+      "codeWrong": "El código no es válido o ha caducado. Pide uno nuevo.",
+      "notMine": "Ordenador ajeno: no recordar la sesión",
+      "or": "o",
+      "qr": "Entrar con un código QR desde el móvil",
+      "qrScan": "Escanea el código con un móvil donde ya hayas iniciado sesión y confirma.",
+      "qrCode": "Código de confirmación: {code}",
+      "qrExpired": "Se acabó el tiempo.",
+      "qrNew": "Mostrar otro código",
+      "approveTitle": "Inicio de sesión en otro dispositivo",
+      "approveText": "¿Permitir el acceso a tu cuenta en otro dispositivo? Comprueba que el código coincide con el de su pantalla: {code}",
+      "approve": "Permitir",
+      "approveDone": "Listo: ese dispositivo ha iniciado sesión.",
+      "approveExpired": "Este código QR ha caducado. Actualízalo en el otro dispositivo.",
+      "approveSignIn": "Inicia sesión aquí para permitir el acceso en el otro dispositivo.",
+      "telegramFailed": "No se pudo entrar con Telegram. Inténtalo de nuevo.",
+      "telegramTitle": "Entrar con Telegram",
+      "telegramHint": "Vincula Telegram para entrar con él desde cualquier ordenador.",
+      "telegramLinked": "Telegram vinculado: puedes entrar con él.",
+      "telegramTaken": "Este Telegram ya está vinculado a otra cuenta."
     }
   },
   "vote": {

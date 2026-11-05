@@ -240,6 +240,30 @@
       "copied": "Kopyalandı",
       "afterSave": "Açar server saxlanıldıqdan sonra burada görünəcək.",
       "how": "Necə işləyir"
+    },
+    "signin": {
+      "code": "Məktubdakı kod",
+      "codeHint": "Məktubu telefonda açın və kodu bura yazın — bu kompüterdə poçtunuzu açmaq lazım deyil.",
+      "codeSubmit": "Daxil ol",
+      "codeWrong": "Kod uyğun gəlmədi və ya köhnəlib. Yenisini istəyin.",
+      "notMine": "Başqasının kompüteri — girişi yadda saxlama",
+      "or": "və ya",
+      "qr": "Telefondan QR kodla daxil ol",
+      "qrScan": "Kodu artıq kabinetə daxil olduğunuz telefonla skan edin və təsdiqləyin.",
+      "qrCode": "Təsdiq kodu: {code}",
+      "qrExpired": "Vaxt bitdi.",
+      "qrNew": "Yeni kod göstər",
+      "approveTitle": "Başqa cihazda giriş",
+      "approveText": "Başqa cihazda kabinetinizə girişə icazə verilsin? Kodun onun ekranındakı ilə eyni olduğunu yoxlayın: {code}",
+      "approve": "İcazə ver",
+      "approveDone": "Hazırdır: o cihazda giriş edildi.",
+      "approveExpired": "Bu QR kodun vaxtı bitib. Onu digər cihazda yeniləyin.",
+      "approveSignIn": "Digər cihazda girişə icazə vermək üçün burada daxil olun.",
+      "telegramFailed": "Telegram ilə daxil olmaq alınmadı. Yenidən cəhd edin.",
+      "telegramTitle": "Telegram ilə daxil ol",
+      "telegramHint": "İstənilən kompüterdə Telegram ilə daxil olmaq üçün onu bağlayın.",
+      "telegramLinked": "Telegram bağlanıb — onunla daxil ola bilərsiniz.",
+      "telegramTaken": "Bu Telegram artıq başqa kabinetə bağlanıb."
     }
   },
   "vote": {

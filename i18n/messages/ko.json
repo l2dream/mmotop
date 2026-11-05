@@ -240,6 +240,30 @@
       "copied": "복사됨",
       "afterSave": "서버를 저장하면 여기에 키가 표시됩니다.",
       "how": "작동 방식"
+    },
+    "signin": {
+      "code": "메일 속 코드",
+      "codeHint": "휴대폰에서 메일을 열고 여기에 코드를 입력하세요. 이 컴퓨터에서 메일을 열 필요가 없습니다.",
+      "codeSubmit": "로그인",
+      "codeWrong": "코드가 맞지 않거나 만료되었습니다. 새 코드를 요청하세요.",
+      "notMine": "다른 사람의 컴퓨터 — 로그인 유지 안 함",
+      "or": "또는",
+      "qr": "휴대폰 QR 코드로 로그인",
+      "qrScan": "이미 로그인한 휴대폰으로 코드를 스캔하고 승인하세요.",
+      "qrCode": "확인 코드: {code}",
+      "qrExpired": "시간이 다 되었습니다.",
+      "qrNew": "새 코드 보기",
+      "approveTitle": "다른 기기에서 로그인",
+      "approveText": "다른 기기에서 내 계정 로그인을 허용할까요? 그 화면의 코드와 같은지 확인하세요: {code}",
+      "approve": "허용",
+      "approveDone": "완료: 그 기기에서 로그인되었습니다.",
+      "approveExpired": "이 QR 코드는 만료되었습니다. 다른 기기에서 새로 고치세요.",
+      "approveSignIn": "다른 기기의 로그인을 허용하려면 여기에서 로그인하세요.",
+      "telegramFailed": "Telegram으로 로그인하지 못했습니다. 다시 시도하세요.",
+      "telegramTitle": "Telegram으로 로그인",
+      "telegramHint": "Telegram을 연결하면 어느 컴퓨터에서든 그것으로 로그인할 수 있습니다.",
+      "telegramLinked": "Telegram이 연결되었습니다 — 그것으로 로그인할 수 있습니다.",
+      "telegramTaken": "이 Telegram은 이미 다른 계정에 연결되어 있습니다."
     }
   },
   "vote": {
