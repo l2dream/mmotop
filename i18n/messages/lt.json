@@ -85,6 +85,7 @@
     "eastAsian": "Rytų Azijos"
   },
   "server": {
+    "title": "{name} — {game} serveris {kind}",
     "opens": "Atidarymo data",
     "votes": "Balsai šį mėnesį",
     "rank": "{rank} vieta reitinge",

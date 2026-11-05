@@ -85,6 +85,7 @@
     "eastAsian": "Austrumāzijas"
   },
   "server": {
+    "title": "{name} — {game} serveris {kind}",
     "opens": "Atvēršanas datums",
     "votes": "Balsis šomēnes",
     "rank": "{rank}. vieta reitingā",

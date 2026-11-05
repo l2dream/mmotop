@@ -751,7 +751,9 @@ const landingTitle = computed(() => (homeGame.value
 /** "Interlude x500": what a server is, as people search for it. */
 const serverKind = (s: Server) => [s.chronicle, rateLabel(s)].filter(Boolean).join(' ')
 const pageTitle = computed(() => {
-  if (server.value) return `${server.value.name} — ${serverSubtitle(server.value)} ${serverKind(server.value)} — MMOTOP`
+  // In the page's language ("сервер", "server", "Server"…): the same title
+  // in all twenty-six told a search engine nothing of the page's language.
+  if (server.value) return `${t('server.title', { name: server.value.name, game: serverSubtitle(server.value), kind: serverKind(server.value) })} — MMOTOP`
   if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
   if (props.account) return `${t('account.title')} — MMOTOP`
   return landingTitle.value ? `${landingTitle.value} — MMOTOP` : t('meta.title')

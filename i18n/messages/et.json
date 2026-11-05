@@ -85,6 +85,7 @@
     "eastAsian": "Ida-Aasia"
   },
   "server": {
+    "title": "{name} — {game} server {kind}",
     "opens": "Avamise kuupäev",
     "votes": "Hääli sel kuul",
     "rank": "Edetabelis {rank}. koht",

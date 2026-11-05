@@ -85,6 +85,7 @@
     "eastAsian": "מזרח אסיה"
   },
   "server": {
+    "title": "{name} — שרת {game} {kind}",
     "opens": "תאריך פתיחה",
     "votes": "הצבעות החודש",
     "rank": "מקום {rank} בדירוג",
