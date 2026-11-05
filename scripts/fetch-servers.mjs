@@ -31,7 +31,7 @@ async function rest(path) {
 }
 
 const [rows, votes] = await Promise.all([
-  rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,discord_url,links&status=eq.approved&order=id'),
+  rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,links&status=eq.approved&order=id'),
   rest('server_votes_month?select=server_id,votes')
 ])
 const votesById = new Map(votes.map((v) => [v.server_id, v.votes]))
@@ -51,7 +51,6 @@ const servers = rows.map((r) => ({
   ...(r.description?.trim() ? { description: r.description.trim() } : {}),
   ...(r.language ? { language: r.language } : {}),
   ...(r.language_text ? { languageText: r.language_text } : {}),
-  ...(r.discord_url ? { discord: r.discord_url } : {}),
   ...(r.links?.length ? { links: r.links.map((l) => ({ kind: l.kind, url: l.url })) } : {})
 }))
 const json = `${JSON.stringify(servers, null, 2)}\n`

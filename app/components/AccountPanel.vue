@@ -27,7 +27,6 @@ interface OwnServer {
   language_text: string | null
   /** Discord, Telegram…; https only. */
   /** Its Discord, and its other networks (Telegram, VK, YouTube…); https only. */
-  discord_url: string | null
   links: ServerLink[]
   chronicle: string
   rate: number | null
@@ -39,7 +38,7 @@ interface OwnServer {
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text' | 'discord_url'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string, discord_url: string }
+type Draft = Omit<OwnServer, 'status' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string }
 
 const { t } = useI18n()
 
@@ -141,7 +140,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, discord_url, links, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -163,7 +162,6 @@ function addServer() {
     // International by default, as the owner chose; one language is a pick away.
     language: 'intl',
     language_text: '',
-    discord_url: '',
     links: [],
     chronicle: '',
     rate: '',
@@ -177,7 +175,7 @@ function addServer() {
 function editServer(s: OwnServer) {
   error.value = ''
   editing.value = s.id
-  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', discord_url: s.discord_url ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
+  draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
@@ -311,7 +309,6 @@ async function save() {
     url: d.url.trim(),
     language: d.language || null,
     language_text: d.language === 'other' ? d.language_text.trim() : null,
-    discord_url: d.discord_url.trim() || null,
     // Rows left without an address are dropped rather than refused.
     links: d.links.map((l) => ({ kind: l.kind, url: l.url.trim() })).filter((l) => l.url),
     open_date: d.open_date,
@@ -471,11 +468,7 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.url') }}</span>
             <input v-model="draft.url" type="url" required pattern="https?://.+" dir="ltr">
           </label>
-          <label class="account-field">
-            <span>{{ $t('account.fields.discord') }}</span>
-            <input v-model="draft.discord_url" type="url" pattern="https://.+" maxlength="200" dir="ltr" placeholder="https://discord.gg/…">
-          </label>
-          <!-- Other networks, as many rows as the owner adds: the network, its
+          <!-- Networks, as many rows as the owner adds: the network, its
                address, and a cross to take the row away. -->
           <div class="account-field">
             <span v-if="draft.links.length">{{ $t('account.fields.links') }}</span>

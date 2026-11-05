@@ -143,11 +143,11 @@
   серверы фильтр по языку не находит)
   языков (`SERVER_LANGUAGES` в `app/i18n/locales.ts`, по одному на язык, имя
   на самом языке; «Несколько языков» = `multi`);
-  необязательные ссылки: Discord (`servers.discord_url`, миграция `discord_url`)
-  и «Другие сети» — кнопка «+ Добавить сеть», строки «сеть + адрес» с
-  крестиком, до 8: Telegram, VK, YouTube, Twitch, TikTok, Facebook,
-  Instagram, X, Форум, Другое (`servers.links` jsonb, проверка
-  `server_links_ok`, миграция `server_links`; `community_url` удалён).
+  «Соцсети» — только кнопка «+ Добавить сеть», строки «сеть + адрес» с
+  крестиком, до 8: Discord (первым), Telegram, VK, YouTube, Twitch, TikTok,
+  Facebook, Instagram, X, Форум, Другое (`servers.links` jsonb, проверка
+  `server_links_ok`; миграции `server_links`, `discord_in_links`; отдельные
+  `community_url` и `discord_url` удалены).
   Список сетей — `app/data/networks.ts`, иконки — `SocialIcon.vue`
   (Simple Icons, CC0). Колонки
   `servers.language`, `servers.community_url` (миграция `language_community`).
