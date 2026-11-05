@@ -43,6 +43,10 @@ export interface Server {
   languageText?: string
   /** Its networks — Discord, Telegram, VK, YouTube, a forum… — each a button beside its site. */
   links?: ServerLink[]
+  /** The owner's own logo, a square picture in our storage; else the version's letters. */
+  logo?: string
+  /** Whether a vote brings a reward in the game (the owner's postback is on). */
+  reward?: boolean
   /**
    * Added by its owner and approved, so it is in the database and can be
    * voted for. The demo servers below are not, and have no vote button.

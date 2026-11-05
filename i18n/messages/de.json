@@ -182,7 +182,7 @@
     "fields": {
       "name": "Servername",
       "id": "Adresse auf der Website",
-      "idHint": "Lateinische Kleinbuchstaben, Ziffern und Bindestriche, 3–32 Zeichen. Kann später nicht geändert werden.",
+      "idHint": "Lateinische Kleinbuchstaben, Ziffern und Bindestriche, 3–32 Zeichen.",
       "game": "Spiel",
       "otherGame": "Anderes Spiel…",
       "gameName": "Name des Spiels",
@@ -213,13 +213,32 @@
       "uploading": "Wird hochgeladen…",
       "imageTooBig": "Das Bild ist auch verkleinert zu groß; versuchen Sie ein kleineres.",
       "imageFailed": "Das Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
-      "preview": "Vorschau"
+      "preview": "Vorschau",
+      "optional": "(optional)",
+      "logo": "Logo",
+      "addLogo": "Logo hochladen",
+      "changeLogo": "Ersetzen"
     },
     "status": {
       "pending": "In Prüfung",
       "approved": "Veröffentlicht",
       "rejected": "Abgelehnt",
       "hidden": "Ausgeblendet"
+    },
+    "savedReview": "Ihr Server wurde zur Prüfung gesendet. Das dauert meist bis zu einem Tag.",
+    "savedDone": "Änderungen gespeichert.",
+    "reward": {
+      "title": "Belohnung fürs Voten",
+      "on": "Für eine Stimme belohnen",
+      "hint": "Spieler geben beim Voten ihren Nicknamen an; die Seite meldet es sofort Ihrem Server, und der vergibt die Belohnung.",
+      "url": "Benachrichtigungsadresse",
+      "secret": "Geheimer Schlüssel",
+      "secretHint": "Jede Benachrichtigung ist damit signiert, damit Ihr Server prüfen kann, dass sie von MMOTOP kommt.",
+      "newSecret": "Neuer Schlüssel",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "afterSave": "Der Schlüssel erscheint hier, sobald der Server gespeichert ist.",
+      "how": "So funktioniert es"
     }
   },
   "vote": {

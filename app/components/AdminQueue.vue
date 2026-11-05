@@ -32,6 +32,7 @@ interface QueueServer {
   url: string
   open_date: string
   description: string | null
+  logo: string | null
   status: Status
   created_at: string
 }
@@ -56,7 +57,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, status, created_at')
     .order('created_at', { ascending: false })
   if (!showAll.value) query = query.eq('status', 'pending')
   const { data, error: failed } = await query
@@ -249,7 +250,7 @@ const ACTIONS: { status: Status, label: string }[] = [
     <ul v-else class="account-servers">
       <li v-for="s in rows" :key="s.id" class="account-server">
         <div class="account-server-main">
-          <span class="account-strong">{{ s.name }}</span>
+          <span class="account-strong"><img v-if="s.logo" class="admin-logo" :src="s.logo" alt="" width="24" height="24">{{ s.name }}</span>
           <span class="account-note">
             {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template><template v-else-if="s.rate_text"> · {{ s.rate_text }}</template> · {{ s.open_date }}
           </span>

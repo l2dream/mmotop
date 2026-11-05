@@ -182,7 +182,7 @@
     "fields": {
       "name": "Název serveru",
       "id": "Adresa na webu",
-      "idHint": "Malá latinková písmena, číslice a pomlčky, 3–32 znaků. Později ji nelze změnit.",
+      "idHint": "Malá latinská písmena, číslice a pomlčky, 3–32 znaků.",
       "game": "Hra",
       "otherGame": "Jiná hra…",
       "gameName": "Název hry",
@@ -213,13 +213,32 @@
       "uploading": "Nahrávání…",
       "imageTooBig": "Obrázek je i po zmenšení příliš velký; zkuste menší.",
       "imageFailed": "Obrázek se nepodařilo nahrát. Zkuste to znovu.",
-      "preview": "Náhled"
+      "preview": "Náhled",
+      "optional": "(nepovinné)",
+      "logo": "Logo",
+      "addLogo": "Nahrát logo",
+      "changeLogo": "Nahradit"
     },
     "status": {
       "pending": "Ve schvalování",
       "approved": "Zveřejněno",
       "rejected": "Zamítnuto",
       "hidden": "Skryto"
+    },
+    "savedReview": "Server byl odeslán ke kontrole. Obvykle trvá do jednoho dne.",
+    "savedDone": "Změny uloženy.",
+    "reward": {
+      "title": "Odměna za hlas",
+      "on": "Dávat odměnu za hlas",
+      "hint": "Hráč při hlasování zadá přezdívku; web hned upozorní váš server a ten odměnu udělí.",
+      "url": "Adresa pro oznámení",
+      "secret": "Tajný klíč",
+      "secretHint": "Každé oznámení je jím podepsané, aby server ověřil, že je od MMOTOP.",
+      "newSecret": "Nový klíč",
+      "copy": "Kopírovat",
+      "copied": "Zkopírováno",
+      "afterSave": "Klíč se tu objeví po uložení serveru.",
+      "how": "Jak to funguje"
     }
   },
   "vote": {

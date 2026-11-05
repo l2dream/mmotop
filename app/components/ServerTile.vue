@@ -16,14 +16,14 @@ const props = defineProps<{
   origin?: SectionId | null
 }>()
 
-const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+const { serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
 const { to, remember } = useServerLink(() => props.server, () => props.origin)
 </script>
 
 <template>
   <NuxtLink class="server-tile" :to="to" @click="remember">
     <span class="server-tile-top">
-      <span class="game-logo">{{ serverBadge(server) }}</span>
+      <ServerLogo :server="server" />
       <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
       <span v-else-if="end === 'date'" class="server-tile-date">
         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>

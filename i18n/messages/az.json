@@ -182,7 +182,7 @@
     "fields": {
       "name": "Serverin adı",
       "id": "Saytdakı ünvan",
-      "idHint": "Kiçik latın hərfləri, rəqəmlər və defis, 3–32 simvol. Sonra dəyişmək olmaz.",
+      "idHint": "Kiçik latın hərfləri, rəqəmlər və defis, 3–32 simvol.",
       "game": "Oyun",
       "otherGame": "Başqa oyun…",
       "gameName": "Oyunun adı",
@@ -213,13 +213,32 @@
       "uploading": "Yüklənir…",
       "imageTooBig": "Şəkil kiçildildikdən sonra da çox böyükdür; daha kiçiyini sınayın.",
       "imageFailed": "Şəkli yükləmək olmadı. Yenidən cəhd edin.",
-      "preview": "Önizləmə"
+      "preview": "Önizləmə",
+      "optional": "(məcburi deyil)",
+      "logo": "Loqo",
+      "addLogo": "Loqo yüklə",
+      "changeLogo": "Dəyişdir"
     },
     "status": {
       "pending": "Yoxlamada",
       "approved": "Dərc olunub",
       "rejected": "Rədd edilib",
       "hidden": "Gizlədilib"
+    },
+    "savedReview": "Server yoxlamaya göndərildi. Adətən bir günə qədər çəkir.",
+    "savedDone": "Dəyişikliklər saxlanıldı.",
+    "reward": {
+      "title": "Səs üçün mükafat",
+      "on": "Səs üçün mükafat ver",
+      "hint": "Oyunçu səs verərkən nikini yazır; sayt dərhal serverinizə xəbər verir, server də mükafatı verir.",
+      "url": "Bildiriş ünvanı",
+      "secret": "Gizli açar",
+      "secretHint": "Hər bildiriş onunla imzalanır ki, server onun MMOTOP-dan gəldiyini yoxlaya bilsin.",
+      "newSecret": "Yeni açar",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "afterSave": "Açar server saxlanıldıqdan sonra burada görünəcək.",
+      "how": "Necə işləyir"
     }
   },
   "vote": {

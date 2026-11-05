@@ -182,7 +182,7 @@
     "fields": {
       "name": "Sunucu adı",
       "id": "Sitedeki adres",
-      "idHint": "Küçük Latin harfleri, rakamlar ve kısa çizgi, 3–32 karakter. Sonradan değiştirilemez.",
+      "idHint": "Küçük Latin harfleri, rakamlar ve tire, 3–32 karakter.",
       "game": "Oyun",
       "otherGame": "Başka oyun…",
       "gameName": "Oyunun adı",
@@ -213,13 +213,32 @@
       "uploading": "Yükleniyor…",
       "imageTooBig": "Resim küçültüldükten sonra bile çok büyük; daha küçük bir resim deneyin.",
       "imageFailed": "Resim yüklenemedi. Lütfen tekrar deneyin.",
-      "preview": "Önizleme"
+      "preview": "Önizleme",
+      "optional": "(isteğe bağlı)",
+      "logo": "Logo",
+      "addLogo": "Logo yükle",
+      "changeLogo": "Değiştir"
     },
     "status": {
       "pending": "İncelemede",
       "approved": "Yayında",
       "rejected": "Reddedildi",
       "hidden": "Gizli"
+    },
+    "savedReview": "Sunucunuz incelemeye gönderildi. Genellikle bir güne kadar sürer.",
+    "savedDone": "Değişiklikler kaydedildi.",
+    "reward": {
+      "title": "Oy ödülü",
+      "on": "Oy için ödül ver",
+      "hint": "Oyuncu oy verirken takma adını yazar; site hemen sunucunuza bildirir, sunucu da ödülü verir.",
+      "url": "Bildirim adresi",
+      "secret": "Gizli anahtar",
+      "secretHint": "Her bildirim bununla imzalanır; böylece sunucunuz MMOTOP’tan geldiğini doğrulayabilir.",
+      "newSecret": "Yeni anahtar",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "afterSave": "Anahtar, sunucu kaydedildikten sonra burada görünür.",
+      "how": "Nasıl çalışır"
     }
   },
   "vote": {

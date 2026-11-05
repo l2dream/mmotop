@@ -182,7 +182,7 @@
     "fields": {
       "name": "Nazwa serwera",
       "id": "Adres w serwisie",
-      "idHint": "Małe litery łacińskie, cyfry i myślniki, 3–32 znaki. Później nie można go zmienić.",
+      "idHint": "Małe litery łacińskie, cyfry i myślniki, 3–32 znaki.",
       "game": "Gra",
       "otherGame": "Inna gra…",
       "gameName": "Nazwa gry",
@@ -213,13 +213,32 @@
       "uploading": "Wysyłanie…",
       "imageTooBig": "Obrazek jest za duży nawet po zmniejszeniu; spróbuj mniejszego.",
       "imageFailed": "Nie udało się wysłać obrazka. Spróbuj ponownie.",
-      "preview": "Podgląd"
+      "preview": "Podgląd",
+      "optional": "(opcjonalnie)",
+      "logo": "Logo",
+      "addLogo": "Prześlij logo",
+      "changeLogo": "Zmień"
     },
     "status": {
       "pending": "W weryfikacji",
       "approved": "Opublikowany",
       "rejected": "Odrzucony",
       "hidden": "Ukryty"
+    },
+    "savedReview": "Serwer wysłano do weryfikacji. Zwykle trwa to do doby.",
+    "savedDone": "Zmiany zapisane.",
+    "reward": {
+      "title": "Nagroda za głos",
+      "on": "Dawaj nagrodę za głos",
+      "hint": "Gracz podaje nick przy głosowaniu; strona od razu powiadamia Twój serwer, a ten przyznaje nagrodę.",
+      "url": "Adres powiadomień",
+      "secret": "Tajny klucz",
+      "secretHint": "Każde powiadomienie jest nim podpisane, by serwer mógł sprawdzić, że pochodzi z MMOTOP.",
+      "newSecret": "Nowy klucz",
+      "copy": "Kopiuj",
+      "copied": "Skopiowano",
+      "afterSave": "Klucz pojawi się tu po zapisaniu serwera.",
+      "how": "Jak to działa"
     }
   },
   "vote": {

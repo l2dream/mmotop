@@ -182,7 +182,7 @@
     "fields": {
       "name": "Servera nosaukums",
       "id": "Adrese vietnē",
-      "idHint": "Mazie latīņu burti, cipari un defises, 3–32 rakstzīmes. Vēlāk mainīt nevar.",
+      "idHint": "Mazie latīņu burti, cipari un defises, 3–32 rakstzīmes.",
       "game": "Spēle",
       "otherGame": "Cita spēle…",
       "gameName": "Spēles nosaukums",
@@ -213,13 +213,32 @@
       "uploading": "Augšupielādē…",
       "imageTooBig": "Attēls ir par lielu pat pēc samazināšanas; mēģini mazāku.",
       "imageFailed": "Attēlu neizdevās augšupielādēt. Mēģini vēlreiz.",
-      "preview": "Priekšskatījums"
+      "preview": "Priekšskatījums",
+      "optional": "(nav obligāti)",
+      "logo": "Logo",
+      "addLogo": "Augšupielādēt logo",
+      "changeLogo": "Aizstāt"
     },
     "status": {
       "pending": "Pārbaudē",
       "approved": "Publicēts",
       "rejected": "Noraidīts",
       "hidden": "Paslēpts"
+    },
+    "savedReview": "Serveris nosūtīts pārbaudei. Parasti tā aizņem līdz diennaktij.",
+    "savedDone": "Izmaiņas saglabātas.",
+    "reward": {
+      "title": "Atlīdzība par balsi",
+      "on": "Piešķirt atlīdzību par balsi",
+      "hint": "Spēlētājs, balsojot norāda segvārdu; vietne uzreiz paziņo jūsu serverim, un tas piešķir atlīdzību.",
+      "url": "Paziņojumu adrese",
+      "secret": "Slepenā atslēga",
+      "secretHint": "Ar to parakstīts katrs paziņojums, lai serveris varētu pārbaudīt, ka tas ir no MMOTOP.",
+      "newSecret": "Jauna atslēga",
+      "copy": "Kopēt",
+      "copied": "Nokopēts",
+      "afterSave": "Atslēga parādīsies šeit pēc servera saglabāšanas.",
+      "how": "Kā tas darbojas"
     }
   },
   "vote": {

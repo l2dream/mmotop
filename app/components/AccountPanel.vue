@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
-import { GAMES, RATE_WORDS, gameById } from '~/data/games'
+import { GAMES, RATE_WORDS, chronicleBadge, gameById } from '~/data/games'
 import { serverPath, versionSlug, type Server } from '~/data/servers'
 import { SERVER_LANGUAGES } from '~/i18n/locales'
 import { NETWORKS, MAX_LINKS, type ServerLink } from '~/data/networks'
@@ -25,7 +25,6 @@ interface OwnServer {
   /** Two letters (SERVER_LANGUAGES), "multi", or "other" with its name in language_text. */
   language: string | null
   language_text: string | null
-  /** Discord, Telegram…; https only. */
   /** Its Discord, and its other networks (Telegram, VK, YouTube…); https only. */
   links: ServerLink[]
   chronicle: string
@@ -35,6 +34,8 @@ interface OwnServer {
   url: string
   open_date: string
   description: string | null
+  /** The server's own logo (server-images), or none for the version's letters. */
+  logo: string | null
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
@@ -53,6 +54,10 @@ const email = ref('')
 const sentTo = ref('')
 const busy = ref(false)
 const error = ref('')
+/** What became of the last save, shown over the list once the form closes. */
+const notice = ref('')
+/** A problem with the address, shown under it rather than at the foot of the form. */
+const idError = ref('')
 
 /** Admins also get the moderation queue (AdminQueue). */
 const isAdmin = ref(false)
@@ -150,7 +155,7 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, logo, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
@@ -160,6 +165,9 @@ async function loadServers() {
 
 function addServer() {
   error.value = ''
+  notice.value = ''
+  idError.value = ''
+  reward.value = { enabled: false, url: '', secret: null, exists: false }
   editing.value = null
   ownChronicle.value = false
   noRate.value = false
@@ -180,12 +188,16 @@ function addServer() {
     rate_text: '',
     url: 'https://',
     open_date: new Date().toISOString().slice(0, 10),
-    description: ''
+    description: '',
+    logo: null
   }
 }
 
 function editServer(s: OwnServer) {
   error.value = ''
+  notice.value = ''
+  idError.value = ''
+  loadReward(s.id)
   editing.value = s.id
   draft.value = { ...s, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
@@ -294,7 +306,8 @@ const { aboutText } = useServerAbout()
 const today = new Date().toISOString().slice(0, 10)
 const aboutPreview = computed(() => {
   const d = draft.value
-  if (!d) return ''
+  // Only once there is something to say: no "… — a server on version …".
+  if (!d || !serverName(d.name) || !d.chronicle.trim() || (d.game === 'other' && !d.requested_game.trim())) return ''
   const rate = !noRate.value && rateNumber(d) != null ? rateNumber(d)! : undefined
   return aboutText({
     id: d.id,
@@ -380,8 +393,10 @@ async function save() {
   const d = draft.value
   if (!supabase.value || !session.value || !d || busy.value) return
   const id = d.id.trim().toLowerCase()
+  idError.value = ''
   if (customId.value && !SERVER_ID_PATTERN.test(id)) {
-    error.value = t('account.fields.idHint')
+    idError.value = t('account.fields.idHint')
+    showIdField()
     return
   }
   busy.value = true
@@ -401,8 +416,11 @@ async function save() {
       .map((l) => (l.name === undefined ? { kind: l.kind, url: l.url.trim() } : { kind: 'other', url: l.url.trim(), name: l.name.trim() }))
       .filter((l) => l.url),
     open_date: d.open_date,
-    description: d.description?.trim() || null
+    description: d.description?.trim() || null,
+    logo: d.logo
   }
+  /** Where the server is saved: its address after this save. */
+  let savedId = editing.value && !customId.value ? editing.value : id
   let failed
   if (editing.value) {
     // A changed address too: the database moves the votes with it and keeps
@@ -414,18 +432,130 @@ async function save() {
     for (let n = 1; n <= (customId.value ? 1 : 20); n++) {
       const candidate = n === 1 ? id : serverIdWithNumber(id, n)
       ;({ error: failed } = await supabase.value.from('servers').insert({ ...fields, id: candidate, owner_id: session.value.user.id }))
+      savedId = candidate
       if (failed?.code !== '23505') break
     }
   }
-  busy.value = false
   if (failed) {
-    // 23505: the address is someone else's already; 23514: a check in the
-    // table refused a value the form let through.
-    error.value = failed.code === '23505' ? t('account.idTaken') : failed.code === '23514' ? t('account.invalid') : t('account.failed')
+    busy.value = false
+    // 23505: the address is someone else's already — said under the address,
+    // opened to be changed; 23514: a check in the table refused a value the
+    // form let through.
+    if (failed.code === '23505') {
+      idOpen.value = true
+      idError.value = t('account.idTaken')
+      showIdField()
+    } else {
+      error.value = failed.code === '23514' ? t('account.invalid') : t('account.failed')
+    }
     return
   }
+  const wasNew = !editing.value
+  const rewardSaved = await saveReward(savedId)
+  busy.value = false
   cancel()
-  loadServers()
+  await loadServers()
+  // New, or changed after approval (servers_guard sends it back): on review.
+  const status = servers.value.find((x) => x.id === savedId)?.status
+  notice.value = wasNew || status === 'pending' ? t('account.savedReview') : t('account.savedDone')
+  if (!rewardSaved) error.value = t('account.failed')
+}
+
+/** The address field, brought into view with its problem under it. */
+const idField = ref<HTMLInputElement | null>(null)
+async function showIdField() {
+  await nextTick()
+  idField.value?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  idField.value?.focus({ preventScroll: true })
+}
+
+/**
+ * The reward for a vote (server_postbacks): switched on, the vote function
+ * sends the voter's nickname to the owner's address, signed with the secret
+ * key. Read when a server is opened for editing, written after it is saved;
+ * a server with none stays without a row.
+ */
+const reward = ref<{ enabled: boolean, url: string, secret: string | null, exists: boolean }>({ enabled: false, url: '', secret: null, exists: false })
+const copied = ref(false)
+
+async function loadReward(serverId: string) {
+  reward.value = { enabled: false, url: '', secret: null, exists: false }
+  const { data } = await supabase.value!.from('server_postbacks').select('url, secret, enabled').eq('server_id', serverId).maybeSingle()
+  if (data && editing.value === serverId) reward.value = { enabled: data.enabled, url: data.url ?? '', secret: data.secret, exists: true }
+}
+
+/** A fresh key, made in the browser: 24 random bytes as hex, as the database makes them. */
+function newSecret() {
+  const bytes = crypto.getRandomValues(new Uint8Array(24))
+  reward.value.secret = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('')
+  copied.value = false
+}
+
+async function copySecret() {
+  if (!reward.value.secret) return
+  await navigator.clipboard?.writeText(reward.value.secret).catch(() => {})
+  copied.value = true
+}
+
+async function saveReward(serverId: string) {
+  const r = reward.value
+  if (!r.exists && !r.enabled && !r.url.trim()) return true
+  const { error: failed } = await supabase.value!.from('server_postbacks').upsert({
+    server_id: serverId,
+    url: r.url.trim() || null,
+    enabled: r.enabled && !!r.url.trim(),
+    ...(r.secret ? { secret: r.secret } : {})
+  }, { onConflict: 'server_id' })
+  return !failed
+}
+
+/**
+ * The server's logo: any picture, cut to a centred square and shrunk to
+ * 256px, sent as WebP into the owner's folder of server-images like the
+ * description's pictures. It stands where the version's letters would.
+ */
+const logoInput = ref<HTMLInputElement | null>(null)
+const logoBusy = ref(false)
+const logoError = ref('')
+
+async function squareLogo(file: File): Promise<Blob> {
+  const bitmap = await createImageBitmap(file)
+  const side = Math.min(bitmap.width, bitmap.height)
+  const size = Math.min(256, side)
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  canvas.getContext('2d')!.drawImage(bitmap, (bitmap.width - side) / 2, (bitmap.height - side) / 2, side, side, 0, 0, size, size)
+  bitmap.close()
+  const blob = await new Promise<Blob | null>((done) => canvas.toBlob(done, 'image/webp', 0.9))
+  if (!blob) throw new Error('no picture')
+  return blob
+}
+
+async function addLogo(event: Event) {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  input.value = ''
+  if (!file || !supabase.value || !session.value || !draft.value) return
+  logoError.value = ''
+  logoBusy.value = true
+  try {
+    const blob = await squareLogo(file).catch(() => null)
+    if (!blob) {
+      logoError.value = t('account.fields.imageFailed')
+      return
+    }
+    const path = `${session.value.user.id}/logo-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}.webp`
+    const { error: failed } = await supabase.value.storage.from(IMAGE_BUCKET)
+      .upload(path, blob, { contentType: 'image/webp', cacheControl: '31536000', upsert: false })
+    if (failed) {
+      logoError.value = t('account.fields.imageFailed')
+      return
+    }
+    draft.value.logo = supabase.value.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl
+  } finally {
+    logoBusy.value = false
+  }
 }
 
 async function remove(s: OwnServer) {
@@ -486,6 +616,7 @@ async function remove(s: OwnServer) {
           <label v-else class="account-field">
             <span>{{ $t('account.fields.id') }}</span>
             <input
+              ref="idField"
               v-model="draft.id"
               type="text"
               required
@@ -494,10 +625,28 @@ async function remove(s: OwnServer) {
               autocapitalize="off"
               spellcheck="false"
               dir="ltr"
-              @input="customId = true"
+              :aria-invalid="!!idError"
+              @input="customId = true; idError = ''"
             >
-            <small>{{ $t('account.fields.idHint') }}</small>
+            <small v-if="idError" class="account-error" role="alert">{{ idError }}</small>
+            <small v-else>{{ $t('account.fields.idHint') }}</small>
           </label>
+          <!-- The logo, beside where it will stand: the square of the lists. -->
+          <div class="account-field">
+            <span>{{ $t('account.fields.logo') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
+            <div class="account-logo-row">
+              <span class="game-logo account-logo" :class="{ 'has-logo': !!draft.logo }">
+                <img v-if="draft.logo" :src="draft.logo" alt="">
+                <template v-else>{{ chronicleBadge(draft.game, draft.chronicle || '…') }}</template>
+              </span>
+              <input ref="logoInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden @change="addLogo">
+              <button type="button" class="account-link" :disabled="logoBusy" @click="logoInput?.click()">
+                {{ logoBusy ? $t('account.fields.uploading') : draft.logo ? $t('account.fields.changeLogo') : `+ ${$t('account.fields.addLogo')}` }}
+              </button>
+              <button v-if="draft.logo" type="button" class="account-link account-danger" @click="draft.logo = null">{{ $t('account.fields.removeLink') }}</button>
+            </div>
+            <small v-if="logoError" class="account-error" role="alert">{{ logoError }}</small>
+          </div>
           <div class="account-pair">
             <label class="account-field">
               <span>{{ $t('account.fields.game') }}</span>
@@ -566,7 +715,7 @@ async function remove(s: OwnServer) {
             </label>
           </div>
           <label class="account-field">
-            <span>{{ $t('account.fields.language') }}</span>
+            <span>{{ $t('account.fields.language') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <!-- Optional: "Not specified" stores no language. A new server
                  starts as international. -->
             <select v-model="draft.language">
@@ -588,7 +737,7 @@ async function remove(s: OwnServer) {
           <!-- Networks, as many rows as the owner adds: the network, its
                address, and a cross to take the row away. -->
           <div class="account-field">
-            <span v-if="draft.links.length">{{ $t('account.fields.links') }}</span>
+            <span v-if="draft.links.length">{{ $t('account.fields.links') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <div v-for="(link, i) in draft.links" :key="i" class="account-link-row">
               <!-- "Other network…" last: one the list lacks, named below. -->
               <select :value="link.name === undefined ? link.kind : OWN" :aria-label="$t('account.fields.network')" @change="pickNetwork(link, ($event.target as HTMLSelectElement).value)">
@@ -648,6 +797,41 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.preview') }}</span>
             <RichDescription class="account-description-preview" :text="draft.description ?? ''" />
           </div>
+          <!-- The reward for a vote, folded: most owners set it up once, if at all. -->
+          <details class="account-reward" :open="reward.enabled || undefined">
+            <summary>{{ $t('account.reward.title') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></summary>
+            <p class="account-note">{{ $t('account.reward.hint') }}</p>
+            <label class="account-check">
+              <input v-model="reward.enabled" type="checkbox">
+              <span>{{ $t('account.reward.on') }}</span>
+            </label>
+            <label class="account-field">
+              <span>{{ $t('account.reward.url') }}</span>
+              <input v-model="reward.url" type="url" :required="reward.enabled" pattern="https://.+" maxlength="300" dir="ltr" placeholder="https://…">
+            </label>
+            <div class="account-field">
+              <span>{{ $t('account.reward.secret') }}</span>
+              <template v-if="reward.secret">
+                <div class="account-secret-row">
+                  <input :value="reward.secret" type="text" readonly dir="ltr" :aria-label="$t('account.reward.secret')" @focus="($event.target as HTMLInputElement).select()">
+                  <button type="button" class="account-link" @click="copySecret">{{ copied ? $t('account.reward.copied') : $t('account.reward.copy') }}</button>
+                </div>
+                <small>{{ $t('account.reward.secretHint') }}</small>
+                <button type="button" class="account-link account-new-secret" @click="newSecret">{{ $t('account.reward.newSecret') }}</button>
+              </template>
+              <small v-else>{{ $t('account.reward.afterSave') }}</small>
+            </div>
+            <details class="account-reward-how">
+              <summary>{{ $t('account.reward.how') }}</summary>
+              <pre dir="ltr">POST {{ reward.url.trim() || 'https://…' }}
+Content-Type: application/json
+X-MMOTOP-Signature: hex(HMAC-SHA256(secret,
+  "server_id:nickname:vote_id:voted_at"))
+
+{"server_id": "{{ draft.id || '…' }}", "nickname": "Player",
+ "vote_id": 123, "voted_at": "2026-11-05T12:00:00Z"}</pre>
+            </details>
+          </details>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <div class="account-actions-row">
@@ -657,6 +841,7 @@ async function remove(s: OwnServer) {
         </form>
 
         <template v-else>
+          <p v-if="notice" class="account-notice" role="status">{{ notice }}</p>
           <p v-if="loadingServers && !servers.length" class="account-note" role="status">{{ $t('account.loading') }}</p>
           <p v-else-if="!servers.length" class="account-lead">{{ $t('account.noServers') }}</p>
           <ul v-else class="account-servers">
