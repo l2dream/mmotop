@@ -204,7 +204,8 @@
       "linkAddress": "Nuoroda",
       "removeLink": "Pašalinti",
       "addLink": "Pridėti tinklą",
-      "description": "Aprašymas (neprivaloma)"
+      "description": "Aprašymas (neprivaloma)",
+      "preview": "Peržiūra"
     },
     "status": {
       "pending": "Tikrinamas",

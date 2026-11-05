@@ -98,8 +98,8 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
     </header>
 
     <p class="server-about">{{ about }}</p>
-    <!-- The owner's own words, as written: line breaks kept, nothing parsed. -->
-    <p v-if="server.description" class="server-description">{{ server.description }}</p>
+    <!-- The owner's own words, as written; YouTube links and pictures shown in place. -->
+    <RichDescription v-if="server.description" class="server-description" :text="server.description" />
 
     <dl class="server-facts">
       <div>

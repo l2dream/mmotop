@@ -204,7 +204,8 @@
       "linkAddress": "Lenke",
       "removeLink": "Fjern",
       "addLink": "Legg til nettverk",
-      "description": "Beskrivelse (valgfritt)"
+      "description": "Beskrivelse (valgfritt)",
+      "preview": "Forhåndsvisning"
     },
     "status": {
       "pending": "Til godkjenning",

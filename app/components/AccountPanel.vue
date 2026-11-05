@@ -513,6 +513,12 @@ async function remove(s: OwnServer) {
                  owner writes their own: what the page says either way. -->
             <textarea v-model="draft.description" rows="7" maxlength="2000" :placeholder="aboutPreview" />
           </label>
+          <!-- With a link in the description, how the page will show it: a
+               YouTube player, a picture, a link. -->
+          <div v-if="/https?:\/\//.test(draft.description ?? '')" class="account-field">
+            <span>{{ $t('account.fields.preview') }}</span>
+            <RichDescription class="account-description-preview" :text="draft.description ?? ''" />
+          </div>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <div class="account-actions-row">

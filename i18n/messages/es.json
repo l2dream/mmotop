@@ -204,7 +204,8 @@
       "linkAddress": "Enlace",
       "removeLink": "Quitar",
       "addLink": "Añadir red",
-      "description": "Descripción (opcional)"
+      "description": "Descripción (opcional)",
+      "preview": "Vista previa"
     },
     "status": {
       "pending": "En revisión",

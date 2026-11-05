@@ -204,7 +204,8 @@
       "linkAddress": "Link",
       "removeLink": "Usuń",
       "addLink": "Dodaj sieć",
-      "description": "Opis (opcjonalnie)"
+      "description": "Opis (opcjonalnie)",
+      "preview": "Podgląd"
     },
     "status": {
       "pending": "W weryfikacji",

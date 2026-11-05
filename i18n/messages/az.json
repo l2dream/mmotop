@@ -204,7 +204,8 @@
       "linkAddress": "Keçid",
       "removeLink": "Sil",
       "addLink": "Şəbəkə əlavə et",
-      "description": "Təsvir (məcburi deyil)"
+      "description": "Təsvir (məcburi deyil)",
+      "preview": "Önizləmə"
     },
     "status": {
       "pending": "Yoxlamada",

@@ -204,7 +204,8 @@
       "linkAddress": "Link",
       "removeLink": "Remove",
       "addLink": "Add a network",
-      "description": "Description (optional)"
+      "description": "Description (optional)",
+      "preview": "Preview"
     },
     "status": {
       "pending": "Under review",

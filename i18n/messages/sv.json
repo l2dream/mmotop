@@ -204,7 +204,8 @@
       "linkAddress": "Länk",
       "removeLink": "Ta bort",
       "addLink": "Lägg till nätverk",
-      "description": "Beskrivning (valfritt)"
+      "description": "Beskrivning (valfritt)",
+      "preview": "Förhandsvisning"
     },
     "status": {
       "pending": "Granskas",

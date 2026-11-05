@@ -204,7 +204,8 @@
       "linkAddress": "Odkaz",
       "removeLink": "Odebrat",
       "addLink": "Přidat síť",
-      "description": "Popis (nepovinné)"
+      "description": "Popis (nepovinné)",
+      "preview": "Náhled"
     },
     "status": {
       "pending": "Ve schvalování",
