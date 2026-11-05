@@ -182,7 +182,7 @@
     "fields": {
       "name": "Serveri nimi",
       "id": "Aadress saidil",
-      "idHint": "Väikesed ladina tähed, numbrid ja sidekriipsud, 3–32 märki. Hiljem muuta ei saa.",
+      "idHint": "Väikesed ladina tähed, numbrid ja sidekriipsud, 3–32 märki.",
       "game": "Mäng",
       "otherGame": "Muu mäng…",
       "gameName": "Mängu nimi",
@@ -213,13 +213,32 @@
       "uploading": "Laadin üles…",
       "imageTooBig": "Pilt on ka vähendatult liiga suur; proovi väiksemat.",
       "imageFailed": "Pildi üleslaadimine ebaõnnestus. Proovi uuesti.",
-      "preview": "Eelvaade"
+      "preview": "Eelvaade",
+      "optional": "(valikuline)",
+      "logo": "Logo",
+      "addLogo": "Laadi logo üles",
+      "changeLogo": "Asenda"
     },
     "status": {
       "pending": "Ülevaatusel",
       "approved": "Avaldatud",
       "rejected": "Tagasi lükatud",
       "hidden": "Peidetud"
+    },
+    "savedReview": "Server saadeti ülevaatusele. Tavaliselt võtab see kuni ööpäeva.",
+    "savedDone": "Muudatused salvestatud.",
+    "reward": {
+      "title": "Tasu hääle eest",
+      "on": "Anna hääle eest tasu",
+      "hint": "Mängija sisestab hääletades oma hüüdnime; sait teatab sellest kohe sinu serverile ja see annab tasu.",
+      "url": "Teavituste aadress",
+      "secret": "Salajane võti",
+      "secretHint": "Iga teavitus on sellega allkirjastatud, et server saaks kontrollida, et see tuleb MMOTOP-ist.",
+      "newSecret": "Uus võti",
+      "copy": "Kopeeri",
+      "copied": "Kopeeritud",
+      "afterSave": "Võti ilmub siia pärast serveri salvestamist.",
+      "how": "Kuidas see töötab"
     }
   },
   "vote": {

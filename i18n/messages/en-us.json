@@ -182,7 +182,7 @@
     "fields": {
       "name": "Server name",
       "id": "Address on the site",
-      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters. Can’t be changed later.",
+      "idHint": "Lowercase Latin letters, digits and hyphens, 3–32 characters.",
       "game": "Game",
       "otherGame": "Other game…",
       "gameName": "Game name",
@@ -213,13 +213,32 @@
       "uploading": "Uploading…",
       "imageTooBig": "The picture is too large even after shrinking; try a smaller one.",
       "imageFailed": "The picture couldn’t be uploaded. Please try again.",
-      "preview": "Preview"
+      "preview": "Preview",
+      "optional": "(optional)",
+      "logo": "Logo",
+      "addLogo": "Upload a logo",
+      "changeLogo": "Replace"
     },
     "status": {
       "pending": "In review",
       "approved": "Listed",
       "rejected": "Rejected",
       "hidden": "Hidden"
+    },
+    "savedReview": "Your server has been sent for review. It usually takes up to a day.",
+    "savedDone": "Changes saved.",
+    "reward": {
+      "title": "Reward for voting",
+      "on": "Give a reward for a vote",
+      "hint": "Players enter their nickname when they vote; the site tells your server at once, and the server gives the reward.",
+      "url": "Notification address",
+      "secret": "Secret key",
+      "secretHint": "Every notification is signed with it, so your server can check it comes from MMOTOP.",
+      "newSecret": "New key",
+      "copy": "Copy",
+      "copied": "Copied",
+      "afterSave": "The key will appear here once the server is saved.",
+      "how": "How it works"
     }
   },
   "vote": {

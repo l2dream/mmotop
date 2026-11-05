@@ -93,7 +93,8 @@ async function vote() {
 <template>
   <form class="vote-box" @submit.prevent="vote">
     <template v-if="!done">
-      <label class="account-field">
+      <!-- Only where a vote brings a reward: elsewhere the nickname goes nowhere. -->
+      <label v-if="server.reward" class="account-field">
         <span>{{ $t('vote.nickname') }}</span>
         <input v-model="nickname" type="text" maxlength="32" autocomplete="off" autocapitalize="off" spellcheck="false">
         <small>{{ $t('vote.nicknameHint') }}</small>

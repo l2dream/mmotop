@@ -35,7 +35,7 @@ const props = defineProps<{
 defineEmits<{ shuffle: [], more: [] }>()
 
 const { t } = useI18n()
-const { serverBadge, serverSubtitle, rateLabel } = useServerFormat()
+const { serverSubtitle, rateLabel } = useServerFormat()
 
 const opened = computed(() => props.server.openDate <= props.today)
 
@@ -87,7 +87,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
 <template>
   <article class="panel server-card" :class="opened ? 'accent-amber' : 'accent-blue'">
     <header class="server-head">
-      <span class="game-logo server-logo">{{ serverBadge(server) }}</span>
+      <ServerLogo class="server-logo" :server="server" />
       <div class="server-title">
         <h1>{{ server.name }}</h1>
         <!-- Where the server sits on the site, as its address reads:

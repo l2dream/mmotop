@@ -182,7 +182,7 @@
     "fields": {
       "name": "服务器名称",
       "id": "网站地址",
-      "idHint": "小写拉丁字母、数字和连字符，3–32 个字符。之后无法更改。",
+      "idHint": "小写拉丁字母、数字和连字符，3–32 个字符。",
       "game": "游戏",
       "otherGame": "其他游戏…",
       "gameName": "游戏名称",
@@ -213,13 +213,32 @@
       "uploading": "上传中…",
       "imageTooBig": "图片压缩后仍然太大，请换一张小一点的。",
       "imageFailed": "图片上传失败，请重试。",
-      "preview": "预览"
+      "preview": "预览",
+      "optional": "（选填）",
+      "logo": "标志",
+      "addLogo": "上传标志",
+      "changeLogo": "更换"
     },
     "status": {
       "pending": "审核中",
       "approved": "已发布",
       "rejected": "已拒绝",
       "hidden": "已隐藏"
+    },
+    "savedReview": "服务器已提交审核，通常在一天内完成。",
+    "savedDone": "更改已保存。",
+    "reward": {
+      "title": "投票奖励",
+      "on": "为投票发放奖励",
+      "hint": "玩家投票时填写游戏昵称，网站会立即通知你的服务器，由服务器发放奖励。",
+      "url": "通知地址",
+      "secret": "密钥",
+      "secretHint": "每条通知都用它签名，方便服务器确认通知来自 MMOTOP。",
+      "newSecret": "新密钥",
+      "copy": "复制",
+      "copied": "已复制",
+      "afterSave": "保存服务器后，密钥会显示在这里。",
+      "how": "工作原理"
     }
   },
   "vote": {

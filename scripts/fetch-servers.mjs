@@ -33,7 +33,7 @@ async function rest(path) {
 }
 
 const [rows, votes, moves, catalog] = await Promise.all([
-  rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,links&status=eq.approved&order=id'),
+  rest('servers?select=id,name,game,chronicle,rate,rate_text,url,open_date,listed_at,description,language,language_text,links,logo,reward&status=eq.approved&order=id'),
   rest('server_votes_month?select=server_id,votes'),
   // Addresses servers had before their owner changed them, for the build to
   // send on to the new ones (OLD_PATHS in app/data/servers.ts).
@@ -59,6 +59,8 @@ const servers = rows.map((r) => ({
   ...(r.description?.trim() ? { description: r.description.trim() } : {}),
   ...(r.language ? { language: r.language } : {}),
   ...(r.language_text ? { languageText: r.language_text } : {}),
+  ...(r.logo ? { logo: r.logo } : {}),
+  ...(r.reward ? { reward: true } : {}),
   ...(r.links?.length ? { links: r.links.map((l) => ({ kind: l.kind, url: l.url, ...(l.name ? { name: l.name } : {}) })) } : {})
 }))
 const json = `${JSON.stringify(servers, null, 2)}\n`

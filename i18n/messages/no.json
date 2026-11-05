@@ -182,7 +182,7 @@
     "fields": {
       "name": "Servernavn",
       "id": "Adresse på nettstedet",
-      "idHint": "Små latinske bokstaver, tall og bindestreker, 3–32 tegn. Kan ikke endres senere.",
+      "idHint": "Små latinske bokstaver, sifre og bindestrek, 3–32 tegn.",
       "game": "Spill",
       "otherGame": "Annet spill…",
       "gameName": "Spillets navn",
@@ -213,13 +213,32 @@
       "uploading": "Laster opp…",
       "imageTooBig": "Bildet er for stort selv etter forminskning; prøv et mindre.",
       "imageFailed": "Bildet kunne ikke lastes opp. Prøv igjen.",
-      "preview": "Forhåndsvisning"
+      "preview": "Forhåndsvisning",
+      "optional": "(valgfritt)",
+      "logo": "Logo",
+      "addLogo": "Last opp logo",
+      "changeLogo": "Bytt"
     },
     "status": {
       "pending": "Til godkjenning",
       "approved": "Publisert",
       "rejected": "Avvist",
       "hidden": "Skjult"
+    },
+    "savedReview": "Serveren er sendt til gjennomgang. Det tar vanligvis opptil et døgn.",
+    "savedDone": "Endringene er lagret.",
+    "reward": {
+      "title": "Belønning for stemme",
+      "on": "Gi belønning for en stemme",
+      "hint": "Spilleren skriver kallenavnet sitt ved stemming; siden varsler serveren din straks, og den deler ut belønningen.",
+      "url": "Adresse for varsler",
+      "secret": "Hemmelig nøkkel",
+      "secretHint": "Hvert varsel er signert med den, så serveren kan sjekke at det kommer fra MMOTOP.",
+      "newSecret": "Ny nøkkel",
+      "copy": "Kopier",
+      "copied": "Kopiert",
+      "afterSave": "Nøkkelen vises her når serveren er lagret.",
+      "how": "Slik fungerer det"
     }
   },
   "vote": {

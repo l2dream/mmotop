@@ -182,7 +182,7 @@
     "fields": {
       "name": "Servernamn",
       "id": "Adress på sajten",
-      "idHint": "Små latinska bokstäver, siffror och bindestreck, 3–32 tecken. Kan inte ändras senare.",
+      "idHint": "Små latinska bokstäver, siffror och bindestreck, 3–32 tecken.",
       "game": "Spel",
       "otherGame": "Annat spel…",
       "gameName": "Spelets namn",
@@ -213,13 +213,32 @@
       "uploading": "Laddar upp…",
       "imageTooBig": "Bilden är för stor även förminskad; prova en mindre.",
       "imageFailed": "Bilden kunde inte laddas upp. Försök igen.",
-      "preview": "Förhandsvisning"
+      "preview": "Förhandsvisning",
+      "optional": "(valfritt)",
+      "logo": "Logotyp",
+      "addLogo": "Ladda upp logotyp",
+      "changeLogo": "Byt"
     },
     "status": {
       "pending": "Granskas",
       "approved": "Publicerad",
       "rejected": "Avvisad",
       "hidden": "Dold"
+    },
+    "savedReview": "Din server har skickats för granskning. Det tar oftast upp till ett dygn.",
+    "savedDone": "Ändringarna har sparats.",
+    "reward": {
+      "title": "Belöning för röst",
+      "on": "Ge belöning för en röst",
+      "hint": "Spelaren anger sitt smeknamn när hen röstar; sidan meddelar genast din server, som delar ut belöningen.",
+      "url": "Adress för aviseringar",
+      "secret": "Hemlig nyckel",
+      "secretHint": "Varje avisering signeras med den, så att servern kan kontrollera att den kommer från MMOTOP.",
+      "newSecret": "Ny nyckel",
+      "copy": "Kopiera",
+      "copied": "Kopierat",
+      "afterSave": "Nyckeln visas här när servern har sparats.",
+      "how": "Så fungerar det"
     }
   },
   "vote": {

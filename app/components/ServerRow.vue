@@ -24,7 +24,7 @@ const props = defineProps<{
   origin?: SectionId | null
 }>()
 
-const { serverBadge, serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
+const { serverSubtitle, rateLabel, formatDayMonth, formatYear } = useServerFormat()
 const { to, remember } = useServerLink(() => props.server, () => props.origin)
 
 const rowClass = computed(() => ({
@@ -37,7 +37,7 @@ const rowClass = computed(() => ({
 <template>
   <NuxtLink class="game-row" :class="rowClass" :to="to" @click="remember">
     <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
-    <span class="game-logo">{{ serverBadge(server) }}</span>
+    <ServerLogo :server="server" />
     <span class="game-name">
       <strong><HitText :text="server.name" /></strong>
       <small><HitText :text="serverSubtitle(server)" /></small>

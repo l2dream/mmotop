@@ -182,7 +182,7 @@
     "fields": {
       "name": "Nome do servidor",
       "id": "Endereço no site",
-      "idHint": "Letras latinas minúsculas, números e hífens, de 3 a 32 caracteres. Não pode ser alterado depois.",
+      "idHint": "Letras latinas minúsculas, números e hífens, de 3 a 32 caracteres.",
       "game": "Jogo",
       "otherGame": "Outro jogo…",
       "gameName": "Nome do jogo",
@@ -213,13 +213,32 @@
       "uploading": "Enviando…",
       "imageTooBig": "A imagem continua grande demais mesmo reduzida; tente uma menor.",
       "imageFailed": "Não foi possível enviar a imagem. Tente novamente.",
-      "preview": "Pré-visualização"
+      "preview": "Pré-visualização",
+      "optional": "(opcional)",
+      "logo": "Logo",
+      "addLogo": "Enviar logo",
+      "changeLogo": "Substituir"
     },
     "status": {
       "pending": "Em análise",
       "approved": "Publicado",
       "rejected": "Recusado",
       "hidden": "Oculto"
+    },
+    "savedReview": "Seu servidor foi enviado para análise. Normalmente leva até um dia.",
+    "savedDone": "Alterações salvas.",
+    "reward": {
+      "title": "Recompensa por voto",
+      "on": "Dar recompensa por voto",
+      "hint": "O jogador informa o nick ao votar; o site avisa na hora o seu servidor, que entrega a recompensa.",
+      "url": "Endereço de notificação",
+      "secret": "Chave secreta",
+      "secretHint": "Cada notificação é assinada com ela, para o servidor conferir que vem do MMOTOP.",
+      "newSecret": "Nova chave",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "afterSave": "A chave aparece aqui depois que o servidor for salvo.",
+      "how": "Como funciona"
     }
   },
   "vote": {

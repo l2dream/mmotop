@@ -1642,6 +1642,8 @@ a.login-button { text-decoration: none; }
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
 
+.game-logo.has-logo { overflow: hidden; padding: 0; }
+.game-logo.has-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .theme-light .game-logo {
   background: linear-gradient(135deg, #f2f3fa, #e5e7f6);
   border-color: rgba(103, 104, 173, .25);
@@ -2096,6 +2098,50 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .account-field > span { font-size: 13px; font-weight: 600; color: #c9cce0; }
 .account-field small { font-size: 12px; color: #9a9fb8; overflow-wrap: anywhere; }
+.account-field small.account-error { color: #ff8a8a; }
+.theme-light .account-field small.account-error { color: #c62828; }
+/* "(optional)" after a field's name: quieter than the name. */
+.account-optional { font-weight: 400; }
+/* What became of the last save, over the list of servers. */
+.account-notice {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(138, 92, 240, .14);
+  border: 1px solid rgba(138, 92, 240, .35);
+  color: #e6defc;
+  font-size: 14px;
+}
+.theme-light .account-notice { background: #f1ebff; border-color: #d8c8fb; color: #3b1f86; }
+/* The logo as it will stand, then its buttons. */
+.account-logo-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.account-logo { width: 48px; height: 48px; font-size: 13px; }
+/* The reward, folded under its name. */
+.account-reward > summary,
+.account-reward-how > summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9cce0;
+  list-style-position: inside;
+}
+.theme-light .account-reward > summary,
+.theme-light .account-reward-how > summary { color: #3a3e58; }
+.account-reward > :not(summary) { margin-top: 12px; }
+.account-reward > .account-check { display: flex; }
+.account-secret-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.account-secret-row input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+.account-new-secret { align-self: flex-start; }
+.account-reward-how pre {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .3);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.theme-light .account-reward-how pre { background: #eef0f8; }
 /* The rate field with its "No rates" box inside, at the end: the field
    keeps room for it, and with the list of words in its place the box sits
    just before the list's chevron. */
@@ -2376,6 +2422,7 @@ a.account-address:hover { text-decoration: underline; }
 .admin-new-game { padding: 8px 10px; border-radius: 8px; background: rgba(255, 210, 63, .1); color: #ffd75e; }
 .theme-light .admin-new-game { background: #fff4cc; color: #8a5a00; }
 .admin-fix { display: grid; gap: 10px; }
+.admin-logo { width: 24px; height: 24px; border-radius: 5px; object-fit: cover; vertical-align: middle; margin-inline-end: 8px; }
 .admin-fix-title { margin: 0; }
 .admin-fix .account-field > span { color: inherit; }
 .theme-light .admin-queue { border-top-color: rgba(103, 104, 173, .16); }

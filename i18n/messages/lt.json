@@ -182,7 +182,7 @@
     "fields": {
       "name": "Serverio pavadinimas",
       "id": "Adresas svetainėje",
-      "idHint": "Mažosios lotyniškos raidės, skaitmenys ir brūkšneliai, 3–32 simboliai. Vėliau pakeisti negalima.",
+      "idHint": "Mažosios lotyniškos raidės, skaitmenys ir brūkšneliai, 3–32 simboliai.",
       "game": "Žaidimas",
       "otherGame": "Kitas žaidimas…",
       "gameName": "Žaidimo pavadinimas",
@@ -213,13 +213,32 @@
       "uploading": "Įkeliama…",
       "imageTooBig": "Paveikslėlis per didelis net sumažintas; pabandyk mažesnį.",
       "imageFailed": "Nepavyko įkelti paveikslėlio. Bandyk dar kartą.",
-      "preview": "Peržiūra"
+      "preview": "Peržiūra",
+      "optional": "(neprivaloma)",
+      "logo": "Logotipas",
+      "addLogo": "Įkelti logotipą",
+      "changeLogo": "Pakeisti"
     },
     "status": {
       "pending": "Tikrinamas",
       "approved": "Paskelbtas",
       "rejected": "Atmestas",
       "hidden": "Paslėptas"
+    },
+    "savedReview": "Serveris išsiųstas patikrinti. Paprastai tai užtrunka iki paros.",
+    "savedDone": "Pakeitimai išsaugoti.",
+    "reward": {
+      "title": "Atlygis už balsą",
+      "on": "Duoti atlygį už balsą",
+      "hint": "Žaidėjas balsuodamas nurodo slapyvardį; svetainė iškart praneša jūsų serveriui, o šis duoda atlygį.",
+      "url": "Pranešimų adresas",
+      "secret": "Slaptas raktas",
+      "secretHint": "Juo pasirašomas kiekvienas pranešimas, kad serveris galėtų patikrinti, jog jis iš MMOTOP.",
+      "newSecret": "Naujas raktas",
+      "copy": "Kopijuoti",
+      "copied": "Nukopijuota",
+      "afterSave": "Raktas atsiras čia, kai serveris bus išsaugotas.",
+      "how": "Kaip tai veikia"
     }
   },
   "vote": {
