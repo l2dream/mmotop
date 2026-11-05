@@ -8,21 +8,22 @@ export type SocialKind = string
 
 /**
  * The networks a server can link to, in the order the account form offers
- * them — Discord first, the one nearly every game server has. The brands keep their own names in every
+ * them: by how many people use them, the biggest first (as the owner asked,
+ * 5 November 2026), then a forum and "other". The brands keep their own names in every
  * language; a forum and "other" are named by the page's messages. The
  * database checks the same list (server_links_ok).
  */
 const BUILT_IN: { kind: SocialKind, name?: string, placeholder: string }[] = [
-  { kind: 'discord', name: 'Discord', placeholder: 'https://discord.gg/…' },
-  { kind: 'telegram', name: 'Telegram', placeholder: 'https://t.me/…' },
-  { kind: 'vk', name: 'VK', placeholder: 'https://vk.com/…' },
-  { kind: 'ok', name: 'Одноклассники', placeholder: 'https://ok.ru/…' },
   { kind: 'youtube', name: 'YouTube', placeholder: 'https://youtube.com/@…' },
-  { kind: 'twitch', name: 'Twitch', placeholder: 'https://twitch.tv/…' },
-  { kind: 'tiktok', name: 'TikTok', placeholder: 'https://tiktok.com/@…' },
   { kind: 'facebook', name: 'Facebook', placeholder: 'https://facebook.com/…' },
   { kind: 'instagram', name: 'Instagram', placeholder: 'https://instagram.com/…' },
+  { kind: 'tiktok', name: 'TikTok', placeholder: 'https://tiktok.com/@…' },
+  { kind: 'telegram', name: 'Telegram', placeholder: 'https://t.me/…' },
   { kind: 'x', name: 'X', placeholder: 'https://x.com/…' },
+  { kind: 'discord', name: 'Discord', placeholder: 'https://discord.gg/…' },
+  { kind: 'twitch', name: 'Twitch', placeholder: 'https://twitch.tv/…' },
+  { kind: 'vk', name: 'VK', placeholder: 'https://vk.com/…' },
+  { kind: 'ok', name: 'Одноклассники', placeholder: 'https://ok.ru/…' },
   { kind: 'forum', placeholder: 'https://…' },
   { kind: 'other', placeholder: 'https://…' }
 ]
