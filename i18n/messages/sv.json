@@ -333,6 +333,9 @@
     "badNickname": "Namnet är 2–32 bokstäver, siffror, mellanslag, punkter, bindestreck eller understreck.",
     "captchaFailed": "Kontrollen misslyckades. Försök igen.",
     "captchaLoad": "Kontrollen kunde inte laddas. Ladda om sidan och försök igen.",
-    "failed": "Något gick fel. Försök igen."
+    "failed": "Något gick fel. Försök igen.",
+    "checking": "Kontrollerar webbläsaren…",
+    "needCaptcha": "Många röster på kort tid – bekräfta att du inte är en robot.",
+    "altchaFailed": "Webbläsarkontrollen misslyckades. Ladda om sidan och försök igen."
   }
 }

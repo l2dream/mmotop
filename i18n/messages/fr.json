@@ -333,6 +333,9 @@
     "badNickname": "Le pseudo compte 2 à 32 lettres, chiffres, espaces, points, tirets ou tirets bas.",
     "captchaFailed": "La vérification a échoué. Veuillez réessayer.",
     "captchaLoad": "La vérification n’a pas pu se charger. Rechargez la page et réessayez.",
-    "failed": "Une erreur s’est produite. Veuillez réessayer."
+    "failed": "Une erreur s’est produite. Veuillez réessayer.",
+    "checking": "Vérification du navigateur…",
+    "needCaptcha": "Beaucoup de votes en peu de temps : confirmez que vous n’êtes pas un robot.",
+    "altchaFailed": "La vérification du navigateur a échoué. Rechargez la page et réessayez."
   }
 }

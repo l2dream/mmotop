@@ -5,6 +5,9 @@ import { GAMES } from './app/data/games'
 import { LANDINGS } from './app/data/landing'
 
 export default defineNuxtConfig({
+  // ALTCHA's widget is a web component, not a Vue one (VoteBox).
+  vue: { compilerOptions: { isCustomElement: (tag) => tag === 'altcha-widget' } },
+
   compatibilityDate: '2026-09-07',
   devtools: { enabled: true },
 

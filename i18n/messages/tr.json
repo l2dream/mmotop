@@ -333,6 +333,9 @@
     "badNickname": "Ad 2–32 harf, rakam, boşluk, nokta, tire veya alt çizgiden oluşur.",
     "captchaFailed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
     "captchaLoad": "Doğrulama yüklenemedi. Sayfayı yenileyip tekrar deneyin.",
-    "failed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+    "failed": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "checking": "Tarayıcınız kontrol ediliyor…",
+    "needCaptcha": "Kısa sürede çok fazla oy — robot olmadığınızı doğrulayın.",
+    "altchaFailed": "Tarayıcı kontrolü başarısız oldu. Sayfayı yenileyip tekrar deneyin."
   }
 }

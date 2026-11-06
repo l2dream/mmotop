@@ -333,6 +333,9 @@
     "badNickname": "Slapyvardis – 2–32 raidės, skaitmenys, tarpai, taškai, brūkšneliai arba pabraukimai.",
     "captchaFailed": "Patikra nepavyko. Bandyk dar kartą.",
     "captchaLoad": "Nepavyko įkelti patikros. Perkrauk puslapį ir bandyk dar kartą.",
-    "failed": "Kažkas nepavyko. Bandyk dar kartą."
+    "failed": "Kažkas nepavyko. Bandyk dar kartą.",
+    "checking": "Tikriname naršyklę…",
+    "needCaptcha": "Daug balsų per trumpą laiką — patvirtinkite, kad nesate robotas.",
+    "altchaFailed": "Naršyklės patikra nepavyko. Perkraukite puslapį ir bandykite dar kartą."
   }
 }

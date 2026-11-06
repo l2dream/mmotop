@@ -333,6 +333,9 @@
     "badNickname": "Der Name hat 2–32 Buchstaben, Ziffern, Leerzeichen, Punkte, Bindestriche oder Unterstriche.",
     "captchaFailed": "Die Prüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "captchaLoad": "Die Prüfung konnte nicht geladen werden. Laden Sie die Seite neu und versuchen Sie es erneut.",
-    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "checking": "Browser wird geprüft…",
+    "needCaptcha": "Viele Stimmen in kurzer Zeit – bitte bestätigen Sie, dass Sie kein Roboter sind.",
+    "altchaFailed": "Die Browserprüfung ist fehlgeschlagen. Laden Sie die Seite neu und versuchen Sie es erneut."
   }
 }

@@ -333,6 +333,9 @@
     "badNickname": "Nick to 2–32 litery, cyfry, spacje, kropki, myślniki lub podkreślenia.",
     "captchaFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
     "captchaLoad": "Nie udało się wczytać weryfikacji. Odśwież stronę i spróbuj ponownie.",
-    "failed": "Coś poszło nie tak. Spróbuj ponownie."
+    "failed": "Coś poszło nie tak. Spróbuj ponownie.",
+    "checking": "Sprawdzamy przeglądarkę…",
+    "needCaptcha": "Dużo głosów w krótkim czasie — potwierdź, że nie jesteś robotem.",
+    "altchaFailed": "Sprawdzenie przeglądarki nie powiodło się. Odśwież stronę i spróbuj ponownie."
   }
 }

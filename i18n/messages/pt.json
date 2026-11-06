@@ -333,6 +333,9 @@
     "badNickname": "O nick tem de 2 a 32 letras, algarismos, espaços, pontos, hífenes ou traços baixos.",
     "captchaFailed": "A verificação falhou. Tente novamente.",
     "captchaLoad": "Não foi possível carregar a verificação. Recarregue a página e tente novamente.",
-    "failed": "Algo correu mal. Tente novamente."
+    "failed": "Algo correu mal. Tente novamente.",
+    "checking": "A verificar o navegador…",
+    "needCaptcha": "Muitos votos em pouco tempo — confirme que não é um robô.",
+    "altchaFailed": "A verificação do navegador falhou. Recarregue a página e tente novamente."
   }
 }

@@ -333,6 +333,9 @@
     "badNickname": "A nickname is 2–32 letters, digits, spaces, dots, dashes or underscores.",
     "captchaFailed": "The check did not pass. Please try again.",
     "captchaLoad": "The check could not load. Reload the page and try again.",
-    "failed": "Something went wrong. Please try again."
+    "failed": "Something went wrong. Please try again.",
+    "checking": "Checking your browser…",
+    "needCaptcha": "Lots of votes in a short time — please confirm you’re not a robot.",
+    "altchaFailed": "The browser check failed. Reload the page and try again."
   }
 }
