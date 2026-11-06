@@ -333,6 +333,9 @@
     "badNickname": "Vārdā ir 2–32 burti, cipari, atstarpes, punkti, defises vai pasvītras.",
     "captchaFailed": "Pārbaude neizdevās. Mēģini vēlreiz.",
     "captchaLoad": "Pārbaudi neizdevās ielādēt. Pārlādē lapu un mēģini vēlreiz.",
-    "failed": "Kaut kas nogāja greizi. Mēģini vēlreiz."
+    "failed": "Kaut kas nogāja greizi. Mēģini vēlreiz.",
+    "checking": "Pārbaudām pārlūku…",
+    "needCaptcha": "Daudz balsu īsā laikā — apstipriniet, ka neesat robots.",
+    "altchaFailed": "Pārlūka pārbaude neizdevās. Pārlādējiet lapu un mēģiniet vēlreiz."
   }
 }

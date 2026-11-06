@@ -333,6 +333,9 @@
     "badNickname": "Ad 2–32 hərf, rəqəm, boşluq, nöqtə, defis və ya alt xətdən ibarətdir.",
     "captchaFailed": "Yoxlama keçmədi. Yenidən cəhd edin.",
     "captchaLoad": "Yoxlamanı yükləmək olmadı. Səhifəni yeniləyib yenidən cəhd edin.",
-    "failed": "Nəsə alınmadı. Yenidən cəhd edin."
+    "failed": "Nəsə alınmadı. Yenidən cəhd edin.",
+    "checking": "Brauzer yoxlanılır…",
+    "needCaptcha": "Qısa müddətdə çoxlu səs — robot olmadığınızı təsdiqləyin.",
+    "altchaFailed": "Brauzer yoxlaması alınmadı. Səhifəni yeniləyib yenidən cəhd edin."
   }
 }

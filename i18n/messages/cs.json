@@ -333,6 +333,9 @@
     "badNickname": "Přezdívka má 2–32 písmen, číslic, mezer, teček, pomlček nebo podtržítek.",
     "captchaFailed": "Ověření se nezdařilo. Zkuste to znovu.",
     "captchaLoad": "Ověření se nepodařilo načíst. Obnovte stránku a zkuste to znovu.",
-    "failed": "Něco se pokazilo. Zkuste to znovu."
+    "failed": "Něco se pokazilo. Zkuste to znovu.",
+    "checking": "Kontrolujeme prohlížeč…",
+    "needCaptcha": "Hodně hlasů za krátkou dobu — potvrďte, že nejste robot.",
+    "altchaFailed": "Kontrola prohlížeče selhala. Obnovte stránku a zkuste to znovu."
   }
 }

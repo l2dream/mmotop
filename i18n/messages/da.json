@@ -333,6 +333,9 @@
     "badNickname": "Navnet er 2–32 bogstaver, tal, mellemrum, punktummer, bindestreger eller understreger.",
     "captchaFailed": "Kontrollen mislykkedes. Prøv igen.",
     "captchaLoad": "Kontrollen kunne ikke indlæses. Genindlæs siden, og prøv igen.",
-    "failed": "Noget gik galt. Prøv igen."
+    "failed": "Noget gik galt. Prøv igen.",
+    "checking": "Tjekker din browser…",
+    "needCaptcha": "Mange stemmer på kort tid — bekræft, at du ikke er en robot.",
+    "altchaFailed": "Browsertjekket mislykkedes. Genindlæs siden, og prøv igen."
   }
 }

@@ -333,6 +333,9 @@
     "badNickname": "Nimi on 2–32 tähte, numbrit, tühikut, punkti, sidekriipsu või alakriipsu.",
     "captchaFailed": "Kontroll ei õnnestunud. Proovi uuesti.",
     "captchaLoad": "Kontrolli ei õnnestunud laadida. Laadi leht uuesti ja proovi veel kord.",
-    "failed": "Midagi läks valesti. Proovi uuesti."
+    "failed": "Midagi läks valesti. Proovi uuesti.",
+    "checking": "Kontrollime brauserit…",
+    "needCaptcha": "Palju hääli lühikese ajaga — kinnita, et sa pole robot.",
+    "altchaFailed": "Brauseri kontroll ebaõnnestus. Laadi leht uuesti ja proovi uuesti."
   }
 }
