@@ -34,6 +34,7 @@ interface QueueServer {
   description: string | null
   logo: string | null
   logo_pending: string | null
+  reward: boolean
   status: Status
   created_at: string
 }
@@ -58,7 +59,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, logo_pending, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, logo_pending, reward, status, created_at')
     .order('created_at', { ascending: false })
   // Waiting: a server to look at, or only the new logo of one already listed.
   if (!showAll.value) query = query.or('status.eq.pending,logo_pending.not.is.null')
@@ -243,6 +244,29 @@ async function decideLogo(row: QueueServer, accept: boolean) {
   else load()
 }
 
+/**
+ * A server's reward notifications (postback_log), opened from its row: to look
+ * into "the reward never came". The address and secret key are not shown —
+ * they stay the owner's.
+ */
+const openLog = ref<string | null>(null)
+const logRows = ref<{ id: number, nickname: string, test: boolean, status: number, sent_at: string }[]>([])
+const logLoading = ref(false)
+async function toggleLog(row: QueueServer) {
+  if (openLog.value === row.id) {
+    openLog.value = null
+    return
+  }
+  openLog.value = row.id
+  logRows.value = []
+  logLoading.value = true
+  const { data } = await props.supabase.from('postback_log').select('id, nickname, test, status, sent_at')
+    .eq('server_id', row.id).order('sent_at', { ascending: false }).limit(30)
+  logLoading.value = false
+  if (openLog.value === row.id) logRows.value = data ?? []
+}
+const logTime = (at: string) => new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(at))
+
 const ACTIONS: { status: Status, label: string }[] = [
   { status: 'approved', label: 'Одобрить' },
   { status: 'rejected', label: 'Отклонить' },
@@ -272,6 +296,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           <a v-for="l in s.links ?? []" :key="l.url" class="account-note admin-url" :href="l.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ l.kind }}: {{ l.url }}</a>
           <span v-if="s.language" class="account-note">Язык: {{ s.language === 'multi' ? 'несколько' : s.language === 'intl' ? 'интернациональный' : s.language === 'other' ? `${s.language_text} (свой)` : serverLanguageName(s.language) ?? s.language }}</span>
           <span v-if="s.game !== 'other'" class="account-note" dir="ltr">{{ serverPath(s) }}/</span>
+          <span class="account-note">Награда за голос: {{ s.reward ? 'включена' : 'выключена' }}</span>
         </div>
         <span class="account-status" :class="`status-${s.status}`">{{ STATUS_LABEL[s.status] }}</span>
         <!-- Something the site's lists do not have: the moderator names it
@@ -367,7 +392,21 @@ const ACTIONS: { status: Status, label: string }[] = [
           </div>
         </div>
         <p v-if="s.description" class="admin-description">{{ s.description }}</p>
+        <!-- The reward notifications, opened on demand. -->
+        <div v-if="openLog === s.id" class="admin-description admin-log">
+          <p v-if="logLoading" class="account-note" role="status">Загрузка…</p>
+          <p v-else-if="!logRows.length" class="account-note">Уведомлений о голосах не было.</p>
+          <ul v-else class="account-postback-log">
+            <li v-for="row in logRows" :key="row.id">
+              <span class="account-note">{{ logTime(row.sent_at) }}</span>
+              <bdi class="account-strong">{{ row.nickname }}</bdi>
+              <span v-if="row.test" class="account-note">(проверка)</span>
+              <span class="account-postback-status" :class="row.status >= 200 && row.status < 300 ? 'is-ok' : 'is-bad'">{{ row.status || 'нет ответа' }}</span>
+            </li>
+          </ul>
+        </div>
         <div class="account-server-tools">
+          <button type="button" class="account-link" @click="toggleLog(s)">{{ openLog === s.id ? 'Скрыть журнал' : 'Журнал наград' }}</button>
           <button
             v-for="a in ACTIONS.filter((a) => a.status !== s.status && !(a.status === 'approved' && s.game === 'other'))"
             :key="a.status"
