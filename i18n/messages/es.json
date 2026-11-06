@@ -152,7 +152,9 @@
     "desc": "descendente"
   },
   "footer": {
-    "popular": "Populares"
+    "popular": "Populares",
+    "privacy": "Privacidad",
+    "terms": "Condiciones"
   },
   "account": {
     "title": "Mi cuenta",

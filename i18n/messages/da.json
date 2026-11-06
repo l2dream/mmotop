@@ -152,7 +152,9 @@
     "desc": "faldende"
   },
   "footer": {
-    "popular": "Populært"
+    "popular": "Populært",
+    "privacy": "Privatliv",
+    "terms": "Vilkår"
   },
   "account": {
     "title": "Konto",

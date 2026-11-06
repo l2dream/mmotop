@@ -18,7 +18,7 @@ import { chronicleLanding, rateLanding, rateSlug as rateLandingSlug, landingAt, 
  * All share the header, search, filters and category bar, so a filter set on
  * the home page still applies after View more, and the other way round.
  */
-const props = defineProps<{ section?: SectionId, serverId?: string, game?: string, chronicle?: string, rate?: number, account?: boolean }>()
+const props = defineProps<{ section?: SectionId, serverId?: string, game?: string, chronicle?: string, rate?: number, account?: boolean, legal?: 'privacy' | 'terms' }>()
 
 const { t, locale } = useI18n()
 const { currentYear, serverSubtitle, rateLabel } = useServerFormat()
@@ -50,7 +50,7 @@ const server = computed(() => (props.serverId ? SERVER_BY_ID.get(props.serverId)
  * search and filters lead from it to the home page rather than narrowing
  * anything here.
  */
-const standalone = computed(() => !!server.value || !!props.account)
+const standalone = computed(() => !!server.value || !!props.account || !!props.legal)
 
 /**
  * Today's date, for splitting COMING SOON from ALREADY STARTED. It starts as
@@ -113,7 +113,7 @@ const {
  * /lineage2/ is Lineage II. Set here, before anything renders, so the
  * prerendered page of each game already shows that game's lists.
  */
-const homeLike = !props.section && !props.serverId && !props.account
+const homeLike = !props.section && !props.serverId && !props.account && !props.legal
 if (homeLike) {
   activeCategory.value = props.game ?? 'all'
   // A chronicle's or a rate's page sets its filter the same way. Any other
@@ -756,13 +756,18 @@ const pageTitle = computed(() => {
   if (server.value) return `${t('server.title', { name: server.value.name, game: serverSubtitle(server.value), kind: serverKind(server.value) })} — MMOTOP`
   if (props.section) return `${t(`seo.${props.section}.title`)} — MMOTOP`
   if (props.account) return `${t('account.title')} — MMOTOP`
+  if (props.legal) return `${legalTitle.value} — MMOTOP`
   return landingTitle.value ? `${landingTitle.value} — MMOTOP` : t('meta.title')
 })
 // The page's subject for its one h1: on a section page the plain-words name
 // ("Top game servers by votes"), not the capitalised panel label.
+/** The legal pages' names, in Russian on the Russian site and in English elsewhere, as their text is (LegalPage). */
+const legalTitle = computed(() => (props.legal === 'privacy'
+  ? (locale.value === 'ru' ? 'Политика конфиденциальности' : 'Privacy Policy')
+  : (locale.value === 'ru' ? 'Условия использования' : 'Terms of Use')))
 const pageHeading = computed(() => (props.section
   ? t(`seo.${props.section}.title`)
-  : props.account ? t('account.title') : landingTitle.value || t('meta.title')))
+  : props.account ? t('account.title') : props.legal ? legalTitle.value : landingTitle.value || t('meta.title')))
 const pageDescription = computed(() => (server.value
   ? t('server.description', {
     name: server.value.name,
@@ -1004,7 +1009,7 @@ const structuredData = computed(() => {
     ))
   })
   // Nothing to tell a search engine about a page it is asked not to list.
-  if (props.account) return []
+  if (props.account || props.legal) return []
   if (server.value) {
     const s = server.value
     // MMOTOP › Lineage II › Interlude › LA2DREAM, as the address reads. A
@@ -1537,7 +1542,7 @@ function clearSearch() {
 
     <!-- Not on the account page: games are nothing to pick there, and the
          wordmark already leads home. -->
-    <nav v-if="!account" class="category-bar" :aria-label="$t('nav.categories')">
+    <nav v-if="!account && !legal" class="category-bar" :aria-label="$t('nav.categories')">
       <div
         ref="categoryBar"
         class="category-scroll"
@@ -1622,6 +1627,10 @@ function clearSearch() {
 
       <div v-else-if="account" class="section-view account-view">
         <AccountPanel />
+      </div>
+
+      <div v-else-if="legal" class="section-view account-view">
+        <LegalPage :kind="legal" />
       </div>
 
       <div v-else-if="server" class="section-view">

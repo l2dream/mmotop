@@ -152,7 +152,9 @@
     "desc": "décroissant"
   },
   "footer": {
-    "popular": "Populaire"
+    "popular": "Populaire",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
   },
   "account": {
     "title": "Mon compte",

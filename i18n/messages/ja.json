@@ -152,7 +152,9 @@
     "desc": "降順"
   },
   "footer": {
-    "popular": "人気"
+    "popular": "人気",
+    "privacy": "プライバシー",
+    "terms": "利用規約"
   },
   "account": {
     "title": "マイページ",
