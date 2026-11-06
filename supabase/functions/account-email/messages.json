@@ -1,0 +1,106 @@
+{
+  "en": {
+    "subject": "Your code to add an email to MMOTOP",
+    "text": "Your code: {code}\n\nEnter it in your MMOTOP account to add this email. It is valid for 30 minutes.\n\nIf you did not ask for this, ignore this email."
+  },
+  "ru": {
+    "subject": "Код для привязки почты к MMOTOP",
+    "text": "Ваш код: {code}\n\nВведите его в кабинете MMOTOP, чтобы привязать эту почту. Код действует 30 минут.\n\nЕсли вы ничего не привязывали, просто проигнорируйте письмо."
+  },
+  "uk": {
+    "subject": "Код для прив’язки пошти до MMOTOP",
+    "text": "Ваш код: {code}\n\nВведіть його в кабінеті MMOTOP, щоб прив’язати цю пошту. Код діє 30 хвилин.\n\nЯкщо ви нічого не прив’язували, просто проігноруйте лист."
+  },
+  "de": {
+    "subject": "Ihr Code zum Hinzufügen einer E-Mail bei MMOTOP",
+    "text": "Ihr Code: {code}\n\nGeben Sie ihn in Ihrem MMOTOP-Konto ein, um diese E-Mail hinzuzufügen. Er gilt 30 Minuten.\n\nWenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail."
+  },
+  "fr": {
+    "subject": "Votre code pour ajouter un e-mail à MMOTOP",
+    "text": "Votre code : {code}\n\nSaisissez-le dans votre compte MMOTOP pour ajouter cet e-mail. Il est valable 30 minutes.\n\nSi vous n’avez rien demandé, ignorez cet e-mail."
+  },
+  "es": {
+    "subject": "Tu código para añadir un correo a MMOTOP",
+    "text": "Tu código: {code}\n\nIntrodúcelo en tu cuenta de MMOTOP para añadir este correo. Vale 30 minutos.\n\nSi no lo pediste, ignora este correo."
+  },
+  "pt": {
+    "subject": "O seu código para associar um e-mail ao MMOTOP",
+    "text": "O seu código: {code}\n\nIntroduza-o na sua conta MMOTOP para associar este e-mail. É válido durante 30 minutos.\n\nSe não pediu isto, ignore este e-mail."
+  },
+  "pt-br": {
+    "subject": "Seu código para vincular um e-mail ao MMOTOP",
+    "text": "Seu código: {code}\n\nDigite-o na sua conta do MMOTOP para vincular este e-mail. Ele vale por 30 minutos.\n\nSe você não pediu isso, ignore este e-mail."
+  },
+  "pl": {
+    "subject": "Twój kod do dodania e-maila w MMOTOP",
+    "text": "Twój kod: {code}\n\nWpisz go na koncie MMOTOP, aby dodać ten e-mail. Kod jest ważny 30 minut.\n\nJeśli to nie Ty, zignoruj tę wiadomość."
+  },
+  "cs": {
+    "subject": "Váš kód pro přidání e-mailu na MMOTOP",
+    "text": "Váš kód: {code}\n\nZadejte ho ve svém účtu MMOTOP a přidáte tento e-mail. Platí 30 minut.\n\nPokud jste o nic nežádali, e-mail ignorujte."
+  },
+  "da": {
+    "subject": "Din kode til at tilføje en e-mail på MMOTOP",
+    "text": "Din kode: {code}\n\nIndtast den på din MMOTOP-konto for at tilføje denne e-mail. Den gælder i 30 minutter.\n\nHvis du ikke har bedt om det, så ignorer denne mail."
+  },
+  "sv": {
+    "subject": "Din kod för att lägga till e-post på MMOTOP",
+    "text": "Din kod: {code}\n\nAnge den i ditt MMOTOP-konto för att lägga till den här e-posten. Den gäller i 30 minuter.\n\nOm du inte bett om detta kan du ignorera mejlet."
+  },
+  "no": {
+    "subject": "Koden din for å legge til e-post på MMOTOP",
+    "text": "Koden din: {code}\n\nSkriv den inn på MMOTOP-kontoen din for å legge til denne e-posten. Den gjelder i 30 minutter.\n\nHvis du ikke ba om dette, kan du se bort fra e-posten."
+  },
+  "et": {
+    "subject": "Sinu kood e-posti lisamiseks MMOTOP-is",
+    "text": "Sinu kood: {code}\n\nSisesta see oma MMOTOP-i kontol, et see e-post lisada. Kood kehtib 30 minutit.\n\nKui sa seda ei küsinud, jäta kiri tähelepanuta."
+  },
+  "lv": {
+    "subject": "Jūsu kods e-pasta piesaistei MMOTOP",
+    "text": "Jūsu kods: {code}\n\nIevadiet to savā MMOTOP kontā, lai piesaistītu šo e-pastu. Kods derīgs 30 minūtes.\n\nJa neko nepieprasījāt, ignorējiet šo vēstuli."
+  },
+  "lt": {
+    "subject": "Jūsų kodas el. paštui susieti su MMOTOP",
+    "text": "Jūsų kodas: {code}\n\nĮveskite jį savo MMOTOP paskyroje, kad susietumėte šį el. paštą. Kodas galioja 30 minučių.\n\nJei nieko neprašėte, nekreipkite dėmesio į šį laišką."
+  },
+  "tr": {
+    "subject": "MMOTOP’a e-posta eklemek için kodunuz",
+    "text": "Kodunuz: {code}\n\nBu e-postayı eklemek için MMOTOP hesabınıza girin. Kod 30 dakika geçerlidir.\n\nBunu siz istemediyseniz bu e-postayı yok sayın."
+  },
+  "az": {
+    "subject": "MMOTOP-a poçt bağlamaq üçün kodunuz",
+    "text": "Kodunuz: {code}\n\nBu poçtu bağlamaq üçün onu MMOTOP kabinetinə daxil edin. Kod 30 dəqiqə etibarlıdır.\n\nBunu siz istəməmisinizsə, məktuba fikir verməyin."
+  },
+  "el": {
+    "subject": "Ο κωδικός σας για προσθήκη email στο MMOTOP",
+    "text": "Ο κωδικός σας: {code}\n\nΠληκτρολογήστε τον στον λογαριασμό σας στο MMOTOP για να προσθέσετε αυτό το email. Ισχύει 30 λεπτά.\n\nΑν δεν το ζητήσατε, αγνοήστε αυτό το email."
+  },
+  "hy": {
+    "subject": "MMOTOP-ին փոստ կապելու ձեր կոդը",
+    "text": "Ձեր կոդը՝ {code}\n\nՄուտքագրեք այն MMOTOP-ի ձեր հաշվում՝ այս փոստը կապելու համար։ Կոդը գործում է 30 րոպե։\n\nԵթե դուք դա չեք խնդրել, անտեսեք նամակը։"
+  },
+  "ar": {
+    "subject": "رمزك لربط بريد بـ MMOTOP",
+    "text": "رمزك: {code}\n\nأدخله في حسابك على MMOTOP لربط هذا البريد. صالح لمدة 30 دقيقة.\n\nإن لم تطلب ذلك، فتجاهل هذه الرسالة."
+  },
+  "he": {
+    "subject": "הקוד שלכם לקישור מייל ל-MMOTOP",
+    "text": "הקוד שלכם: {code}\n\nהזינו אותו בחשבון MMOTOP כדי לקשר את המייל הזה. הקוד בתוקף 30 דקות.\n\nאם לא ביקשתם זאת, התעלמו מהמייל."
+  },
+  "zh": {
+    "subject": "绑定邮箱到 MMOTOP 的验证码",
+    "text": "你的验证码：{code}\n\n在 MMOTOP 账户中输入它即可绑定此邮箱。30 分钟内有效。\n\n如果不是你本人操作，请忽略此邮件。"
+  },
+  "ja": {
+    "subject": "MMOTOPにメールを追加するためのコード",
+    "text": "コード：{code}\n\nMMOTOPのアカウントで入力すると、このメールアドレスが追加されます。有効期限は30分です。\n\n心当たりがない場合は、このメールを無視してください。"
+  },
+  "ko": {
+    "subject": "MMOTOP에 이메일을 연결하는 코드",
+    "text": "코드: {code}\n\nMMOTOP 계정에 입력하면 이 이메일이 연결됩니다. 30분간 유효합니다.\n\n요청하지 않았다면 이 메일을 무시하세요."
+  },
+  "en-us": {
+    "subject": "Your code to add an email to MMOTOP",
+    "text": "Your code: {code}\n\nEnter it in your MMOTOP account to add this email. It is valid for 30 minutes.\n\nIf you did not ask for this, ignore this email."
+  }
+}

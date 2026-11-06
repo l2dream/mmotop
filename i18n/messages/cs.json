@@ -310,7 +310,16 @@
       "unlinkConfirm": "Odpojit {name}? Dokud ho znovu nepropojíte, nepřihlásíte se jím.",
       "onlyWay": "Je to jediný způsob přihlášení, nelze ho odpojit.",
       "unlinked": "{name} odpojeno.",
-      "howLink": "Google a Discord se propojí samy, když se jimi přihlásíte se stejným e-mailem jako účet."
+      "howLink": "Google a Discord se propojí samy, když se jimi přihlásíte se stejným e-mailem jako účet.",
+      "addEmail": "Přidat e-mail",
+      "addEmailHint": "Dokud účet nemá e-mail, lze se přihlásit jen přes Telegram. S e-mailem se přihlásíte i jím, přes Google a Discord.",
+      "sendCode": "Poslat kód",
+      "codeSent": "Poslali jsme kód na {email}. Zadejte ho níže.",
+      "confirm": "Potvrdit",
+      "taken": "Tento e-mail už patří jinému účtu.",
+      "added": "E-mail přidán. Teď se můžete přihlašovat i jím.",
+      "wait": "Nový kód si můžete vyžádat za minutu.",
+      "badEmail": "Zkontrolujte e-mailovou adresu."
     }
   },
   "vote": {

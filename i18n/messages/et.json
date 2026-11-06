@@ -310,7 +310,16 @@
       "unlinkConfirm": "Eemaldada {name}? Sellega ei saa sisse logida enne uuesti sidumist.",
       "onlyWay": "See on ainus viis kontole, seda ei saa eemaldada.",
       "unlinked": "{name} eemaldatud.",
-      "howLink": "Google ja Discord seotakse ise, kui logid nendega sisse konto e-postiga."
+      "howLink": "Google ja Discord seotakse ise, kui logid nendega sisse konto e-postiga.",
+      "addEmail": "Lisa e-post",
+      "addEmailHint": "Seni kuni kontol pole e-posti, saab sisse logida ainult Telegramiga. E-postiga saad sisse logida ka selle, Google’i ja Discordiga.",
+      "sendCode": "Saada kood",
+      "codeSent": "Saatsime koodi aadressile {email}. Sisesta see allpool.",
+      "confirm": "Kinnita",
+      "taken": "See e-post kuulub juba teisele kontole.",
+      "added": "E-post lisatud. Nüüd saad ka sellega sisse logida.",
+      "wait": "Uue koodi saad küsida minuti pärast.",
+      "badEmail": "Kontrolli e-posti aadressi."
     }
   },
   "vote": {

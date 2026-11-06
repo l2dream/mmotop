@@ -310,7 +310,16 @@
       "unlinkConfirm": "{name} bağlantısı kaldırılsın mı? Yeniden bağlayana kadar onunla giriş yapamazsınız.",
       "onlyWay": "Hesaba tek giriş yolu bu, kaldırılamaz.",
       "unlinked": "{name} bağlantısı kaldırıldı.",
-      "howLink": "Google ve Discord, hesabın e-postasıyla onlarla giriş yaptığınızda kendiliğinden bağlanır."
+      "howLink": "Google ve Discord, hesabın e-postasıyla onlarla giriş yaptığınızda kendiliğinden bağlanır.",
+      "addEmail": "E-posta ekle",
+      "addEmailHint": "Hesabın e-postası olmadıkça yalnızca Telegram ile girilebilir. E-postayla onunla, Google ve Discord ile de girebilirsiniz.",
+      "sendCode": "Kod gönder",
+      "codeSent": "{email} adresine bir kod gönderdik. Aşağıya girin.",
+      "confirm": "Onayla",
+      "taken": "Bu e-posta zaten başka bir hesaba ait.",
+      "added": "E-posta eklendi. Artık onunla da giriş yapabilirsiniz.",
+      "wait": "Bir dakika sonra yeni kod isteyebilirsiniz.",
+      "badEmail": "E-posta adresini kontrol edin."
     }
   },
   "vote": {

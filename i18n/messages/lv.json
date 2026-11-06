@@ -310,7 +310,16 @@
       "unlinkConfirm": "Atsaistīt {name}? Ar to nevarēsiet pieteikties, kamēr nepiesaistīsiet atkal.",
       "onlyWay": "Tas ir vienīgais veids, kā piekļūt kontam, to nevar atsaistīt.",
       "unlinked": "{name} atsaistīts.",
-      "howLink": "Google un Discord piesaistās paši, ja piesakāties ar tiem ar konta e-pastu."
+      "howLink": "Google un Discord piesaistās paši, ja piesakāties ar tiem ar konta e-pastu.",
+      "addEmail": "Piesaistīt e-pastu",
+      "addEmailHint": "Kamēr kontam nav e-pasta, pieteikties var tikai ar Telegram. Ar e-pastu varēsiet pieteikties arī ar to, Google un Discord.",
+      "sendCode": "Sūtīt kodu",
+      "codeSent": "Nosūtījām kodu uz {email}. Ievadiet to zemāk.",
+      "confirm": "Apstiprināt",
+      "taken": "Šis e-pasts jau pieder citam kontam.",
+      "added": "E-pasts piesaistīts. Tagad varat pieteikties arī ar to.",
+      "wait": "Jaunu kodu varēsiet pieprasīt pēc minūtes.",
+      "badEmail": "Pārbaudiet e-pasta adresi."
     }
   },
   "vote": {

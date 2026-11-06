@@ -310,7 +310,16 @@
       "unlinkConfirm": "Koppla bort {name}? Du kan inte logga in med det förrän du kopplar det igen.",
       "onlyWay": "Det är det enda sättet in på kontot och kan inte kopplas bort.",
       "unlinked": "{name} bortkopplad.",
-      "howLink": "Google och Discord kopplas själva när du loggar in med dem med kontots e-post."
+      "howLink": "Google och Discord kopplas själva när du loggar in med dem med kontots e-post.",
+      "addEmail": "Lägg till e-post",
+      "addEmailHint": "Så länge kontot saknar e-post går det bara att logga in med Telegram. Med e-post kan du också logga in med den, Google och Discord.",
+      "sendCode": "Skicka kod",
+      "codeSent": "Vi skickade en kod till {email}. Ange den nedan.",
+      "confirm": "Bekräfta",
+      "taken": "Den här e-posten tillhör redan ett annat konto.",
+      "added": "E-post tillagd. Nu kan du logga in med den också.",
+      "wait": "Du kan begära en ny kod om en minut.",
+      "badEmail": "Kontrollera e-postadressen."
     }
   },
   "vote": {

@@ -310,7 +310,16 @@
       "unlinkConfirm": "Desassociar {name}? Não poderá entrar com ele até o associar de novo.",
       "onlyWay": "É a única forma de entrar na conta, não pode ser desassociada.",
       "unlinked": "{name} desassociado.",
-      "howLink": "O Google e o Discord associam-se sozinhos se entrar com eles usando o e-mail da conta."
+      "howLink": "O Google e o Discord associam-se sozinhos se entrar com eles usando o e-mail da conta.",
+      "addEmail": "Associar e-mail",
+      "addEmailHint": "Enquanto a conta não tiver e-mail, só é possível entrar com o Telegram. Com e-mail, poderá entrar também por ele, pelo Google e pelo Discord.",
+      "sendCode": "Enviar código",
+      "codeSent": "Enviámos um código para {email}. Introduza-o abaixo.",
+      "confirm": "Confirmar",
+      "taken": "Este e-mail já pertence a outra conta.",
+      "added": "E-mail associado. Já pode entrar com ele.",
+      "wait": "Pode pedir um novo código daqui a um minuto.",
+      "badEmail": "Verifique o endereço de e-mail."
     }
   },
   "vote": {

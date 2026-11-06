@@ -310,7 +310,16 @@
       "unlinkConfirm": "{name} ayrılsın? Yenidən bağlayana qədər onunla daxil ola bilməyəcəksiniz.",
       "onlyWay": "Bu, hesaba yeganə giriş yoludur, ayırmaq olmaz.",
       "unlinked": "{name} ayrıldı.",
-      "howLink": "Google və Discord hesabın poçtu ilə onlardan daxil olduqda özü bağlanır."
+      "howLink": "Google və Discord hesabın poçtu ilə onlardan daxil olduqda özü bağlanır.",
+      "addEmail": "Poçt bağla",
+      "addEmailHint": "Hesabın poçtu olmadıqca yalnız Telegram ilə daxil olmaq olar. Poçtla həm onunla, həm də Google və Discord ilə daxil ola biləcəksiniz.",
+      "sendCode": "Kod göndər",
+      "codeSent": "{email} ünvanına kod göndərdik. Aşağıda daxil edin.",
+      "confirm": "Təsdiqlə",
+      "taken": "Bu poçt artıq başqa hesaba aiddir.",
+      "added": "Poçt bağlandı. İndi onunla da daxil ola bilərsiniz.",
+      "wait": "Yeni kodu bir dəqiqədən sonra istəyə bilərsiniz.",
+      "badEmail": "Poçt ünvanını yoxlayın."
     }
   },
   "vote": {

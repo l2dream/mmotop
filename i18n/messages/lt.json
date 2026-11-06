@@ -310,7 +310,16 @@
       "unlinkConfirm": "Atsieti {name}? Juo neprisijungsite, kol vėl nesusiesite.",
       "onlyWay": "Tai vienintelis būdas patekti į paskyrą, jo atsieti negalima.",
       "unlinked": "{name} atsietas.",
-      "howLink": "Google ir Discord susiejami patys, jei jais prisijungiate su paskyros el. paštu."
+      "howLink": "Google ir Discord susiejami patys, jei jais prisijungiate su paskyros el. paštu.",
+      "addEmail": "Susieti el. paštą",
+      "addEmailHint": "Kol paskyra neturi el. pašto, prisijungti galima tik per Telegram. Su el. paštu galėsite jungtis ir juo, per Google ir Discord.",
+      "sendCode": "Siųsti kodą",
+      "codeSent": "Išsiuntėme kodą adresu {email}. Įveskite jį žemiau.",
+      "confirm": "Patvirtinti",
+      "taken": "Šis el. paštas jau priklauso kitai paskyrai.",
+      "added": "El. paštas susietas. Dabar galite jungtis ir juo.",
+      "wait": "Naują kodą galėsite paprašyti po minutės.",
+      "badEmail": "Patikrinkite el. pašto adresą."
     }
   },
   "vote": {

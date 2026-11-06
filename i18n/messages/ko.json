@@ -310,7 +310,16 @@
       "unlinkConfirm": "{name} 연결을 해제할까요? 다시 연결할 때까지 그것으로 로그인할 수 없습니다.",
       "onlyWay": "계정에 들어가는 유일한 방법이라 해제할 수 없습니다.",
       "unlinked": "{name} 연결을 해제했습니다.",
-      "howLink": "계정과 같은 이메일로 Google·Discord에 로그인하면 자동으로 연결됩니다."
+      "howLink": "계정과 같은 이메일로 Google·Discord에 로그인하면 자동으로 연결됩니다.",
+      "addEmail": "이메일 연결",
+      "addEmailHint": "계정에 이메일이 없으면 Telegram으로만 로그인할 수 있습니다. 이메일을 연결하면 이메일, Google, Discord로도 로그인할 수 있습니다.",
+      "sendCode": "코드 보내기",
+      "codeSent": "{email}로 코드를 보냈습니다. 아래에 입력하세요.",
+      "confirm": "확인",
+      "taken": "이 이메일은 이미 다른 계정에서 사용 중입니다.",
+      "added": "이메일이 연결되었습니다. 이제 이메일로도 로그인할 수 있습니다.",
+      "wait": "1분 후에 새 코드를 요청할 수 있습니다.",
+      "badEmail": "이메일 주소를 확인하세요."
     }
   },
   "vote": {
