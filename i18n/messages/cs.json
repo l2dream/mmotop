@@ -239,7 +239,18 @@
       "copy": "Kopírovat",
       "copied": "Zkopírováno",
       "afterSave": "Klíč se tu objeví po uložení serveru.",
-      "how": "Jak to funguje"
+      "how": "Jak to funguje",
+      "test": "Odeslat testovací oznámení",
+      "testHint": "Pošle na adresu požadavek s přezdívkou TEST, abyste ověřili skript na serveru bez hlasování. Nastavení se předtím uloží.",
+      "testOk": "Server odpověděl {status} — vše v pořádku.",
+      "testBad": "Server odpověděl {status} — oznámení nebylo přijato.",
+      "testNone": "Server neodpověděl do 5 sekund.",
+      "testNoUrl": "Nejdřív zadejte adresu pro oznámení.",
+      "testSoon": "Počkejte pár sekund a zkuste to znovu.",
+      "log": "Poslední oznámení",
+      "logEmpty": "Zatím žádná oznámení.",
+      "logTest": "test",
+      "logNone": "bez odpovědi"
     },
     "signin": {
       "code": "Kód z e-mailu",

@@ -239,7 +239,18 @@
       "copy": "复制",
       "copied": "已复制",
       "afterSave": "保存服务器后，密钥会显示在这里。",
-      "how": "工作原理"
+      "how": "工作原理",
+      "test": "发送测试通知",
+      "testHint": "向该地址发送一个昵称为 TEST 的请求，无需投票即可检查服务器上的脚本。发送前会先保存设置。",
+      "testOk": "服务器返回 {status}，一切正常。",
+      "testBad": "服务器返回 {status}，通知未被接受。",
+      "testNone": "服务器 5 秒内没有响应。",
+      "testNoUrl": "请先填写通知地址。",
+      "testSoon": "请等几秒后再试。",
+      "log": "最近的通知",
+      "logEmpty": "暂无通知。",
+      "logTest": "测试",
+      "logNone": "无响应"
     },
     "signin": {
       "code": "邮件中的验证码",

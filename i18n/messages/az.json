@@ -239,7 +239,18 @@
       "copy": "Kopyala",
       "copied": "Kopyalandı",
       "afterSave": "Açar server saxlanıldıqdan sonra burada görünəcək.",
-      "how": "Necə işləyir"
+      "how": "Necə işləyir",
+      "test": "Test bildirişi göndər",
+      "testHint": "Ünvana TEST nikli sorğu göndərir — beləcə səs vermədən serverdəki skripti yoxlaya bilərsiniz. Ayarlar əvvəlcə saxlanılır.",
+      "testOk": "Server {status} cavabını verdi — hər şey qaydasındadır.",
+      "testBad": "Server {status} cavabını verdi — bildiriş qəbul edilmədi.",
+      "testNone": "Server 5 saniyə ərzində cavab vermədi.",
+      "testNoUrl": "Əvvəlcə bildiriş ünvanını göstərin.",
+      "testSoon": "Bir neçə saniyə gözləyib yenidən cəhd edin.",
+      "log": "Son bildirişlər",
+      "logEmpty": "Hələ bildiriş olmayıb.",
+      "logTest": "test",
+      "logNone": "cavab yoxdur"
     },
     "signin": {
       "code": "Məktubdakı kod",

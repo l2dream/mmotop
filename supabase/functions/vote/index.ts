@@ -9,6 +9,7 @@
 // SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are provided by the platform.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4'
 import { corsHeaders, json } from '../_shared/cors.ts'
+import { sendPostback } from '../_shared/postback.ts'
 
 const VOTE_HOURS = 12
 const NICK = /^[\p{L}\p{N}_\-. ]{2,32}$/u
@@ -20,12 +21,6 @@ const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE
 async function sha256Hex(text: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('')
-}
-
-async function hmacHex(secret: string, text: string): Promise<string> {
-  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])
-  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(text))
-  return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, '0')).join('')
 }
 
 function clientIp(req: Request): string {
@@ -89,19 +84,7 @@ Deno.serve(async (req) => {
   if (nickname) {
     const { data: pb } = await admin.from('server_postbacks').select('url, secret, enabled').eq('server_id', serverId).maybeSingle()
     if (pb?.enabled && pb.url) {
-      const payload = { server_id: serverId, nickname, vote_id: vote.id, voted_at: vote.created_at }
-      const signature = await hmacHex(pb.secret, `${serverId}:${nickname}:${vote.id}:${vote.created_at}`)
-      try {
-        const res = await fetch(pb.url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-MMOTOP-Signature': signature },
-          body: JSON.stringify(payload),
-          signal: AbortSignal.timeout(5000)
-        })
-        postback = res.status
-      } catch {
-        postback = 0
-      }
+      postback = await sendPostback(admin, { url: pb.url, secret: pb.secret }, { server_id: serverId, nickname, vote_id: vote.id, voted_at: vote.created_at })
       await admin.from('votes').update({ postback_status: postback }).eq('id', vote.id)
     }
   }

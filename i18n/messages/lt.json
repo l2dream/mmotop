@@ -239,7 +239,18 @@
       "copy": "Kopijuoti",
       "copied": "Nukopijuota",
       "afterSave": "Raktas atsiras čia, kai serveris bus išsaugotas.",
-      "how": "Kaip tai veikia"
+      "how": "Kaip tai veikia",
+      "test": "Siųsti bandomąjį pranešimą",
+      "testHint": "Išsiųs adresu užklausą su slapyvardžiu TEST, kad galėtumėte patikrinti serverio skriptą nebalsuodami. Nustatymai prieš tai bus išsaugoti.",
+      "testOk": "Serveris atsakė {status} — viskas gerai.",
+      "testBad": "Serveris atsakė {status} — pranešimas nepriimtas.",
+      "testNone": "Serveris neatsakė per 5 sekundes.",
+      "testNoUrl": "Pirmiausia nurodykite pranešimų adresą.",
+      "testSoon": "Palaukite kelias sekundes ir bandykite dar kartą.",
+      "log": "Paskutiniai pranešimai",
+      "logEmpty": "Pranešimų dar nebuvo.",
+      "logTest": "bandymas",
+      "logNone": "nėra atsakymo"
     },
     "signin": {
       "code": "Kodas iš laiško",

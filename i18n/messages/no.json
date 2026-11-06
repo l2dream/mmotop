@@ -239,7 +239,18 @@
       "copy": "Kopier",
       "copied": "Kopiert",
       "afterSave": "Nøkkelen vises her når serveren er lagret.",
-      "how": "Slik fungerer det"
+      "how": "Slik fungerer det",
+      "test": "Send et testvarsel",
+      "testHint": "Sender adressen en forespørsel med kallenavnet TEST, så du kan teste skriptet på serveren uten å stemme. Innstillingene lagres først.",
+      "testOk": "Serveren svarte {status} — alt i orden.",
+      "testBad": "Serveren svarte {status} — varselet ble ikke tatt imot.",
+      "testNone": "Serveren svarte ikke innen 5 sekunder.",
+      "testNoUrl": "Oppgi varslingsadressen først.",
+      "testSoon": "Vent noen sekunder og prøv igjen.",
+      "log": "Siste varsler",
+      "logEmpty": "Ingen varsler ennå.",
+      "logTest": "test",
+      "logNone": "ikke svar"
     },
     "signin": {
       "code": "Kode fra e-posten",

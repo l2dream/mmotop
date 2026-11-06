@@ -517,8 +517,68 @@ const copied = ref(false)
 
 async function loadReward(serverId: string) {
   reward.value = { enabled: false, url: '', secret: null, exists: false }
+  testResult.value = ''
+  loadPostbackLog(serverId)
   const { data } = await supabase.value!.from('server_postbacks').select('url, secret, enabled').eq('server_id', serverId).maybeSingle()
   if (data && editing.value === serverId) reward.value = { enabled: data.enabled, url: data.url ?? '', secret: data.secret, exists: true }
+}
+
+/** The last notifications sent for the server (postback_log): votes' and tests. */
+const postbackLog = ref<{ id: number, nickname: string, test: boolean, status: number, sent_at: string }[]>([])
+async function loadPostbackLog(serverId: string) {
+  const { data } = await supabase.value!.from('postback_log').select('id, nickname, test, status, sent_at')
+    .eq('server_id', serverId).order('sent_at', { ascending: false }).limit(15)
+  if (editing.value === serverId) postbackLog.value = data ?? []
+}
+const { locale } = useI18n()
+const logTime = (at: string) => new Intl.DateTimeFormat(locale.value, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(at))
+
+/**
+ * "Send a test notification": the settings as they are in the form are saved
+ * first, then the postback-test function sends the address a request with
+ * the nickname TEST and says what the server answered.
+ */
+const testing = ref(false)
+const testResult = ref('')
+const testOk = ref(false)
+async function sendTest() {
+  const serverId = editing.value
+  if (!serverId || testing.value) return
+  testOk.value = false
+  if (!reward.value.url.trim()) {
+    testResult.value = t('account.reward.testNoUrl')
+    return
+  }
+  testing.value = true
+  testResult.value = ''
+  if (!(await saveReward(serverId))) {
+    testing.value = false
+    testResult.value = t('account.failed')
+    return
+  }
+  reward.value.exists = true
+  let answer: { status?: number, error?: string } = {}
+  try {
+    const { data } = await supabase.value!.auth.getSession()
+    const res = await fetch(`${FUNCTIONS_URL}/postback-test`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data.session?.access_token ?? ''}` },
+      body: JSON.stringify({ server_id: serverId })
+    })
+    answer = await res.json().catch(() => ({ error: 'failed' }))
+  } catch {
+    answer = { error: 'failed' }
+  }
+  testing.value = false
+  if (typeof answer.status === 'number') {
+    testOk.value = answer.status >= 200 && answer.status < 300
+    testResult.value = answer.status === 0
+      ? t('account.reward.testNone')
+      : t(testOk.value ? 'account.reward.testOk' : 'account.reward.testBad', { status: answer.status })
+  } else {
+    testResult.value = answer.error === 'too_soon' ? t('account.reward.testSoon') : answer.error === 'no_url' ? t('account.reward.testNoUrl') : t('account.failed')
+  }
+  loadPostbackLog(serverId)
 }
 
 /** A fresh key, made in the browser: 24 random bytes as hex, as the database makes them. */
@@ -866,6 +926,24 @@ async function remove(s: OwnServer) {
               </template>
               <small v-else>{{ $t('account.reward.afterSave') }}</small>
             </div>
+            <!-- A test sent now, and what became of the last ones. -->
+            <div class="account-field">
+              <button type="button" class="account-button account-button-quiet" :disabled="testing" @click="sendTest">{{ $t('account.reward.test') }}</button>
+              <small>{{ $t('account.reward.testHint') }}</small>
+              <p v-if="testResult" :class="testOk ? 'account-ok' : 'account-error'" role="status">{{ testResult }}</p>
+            </div>
+            <div class="account-field">
+              <span>{{ $t('account.reward.log') }}</span>
+              <p v-if="!postbackLog.length" class="account-note">{{ $t('account.reward.logEmpty') }}</p>
+              <ul v-else class="account-postback-log">
+                <li v-for="row in postbackLog" :key="row.id">
+                  <span class="account-note">{{ logTime(row.sent_at) }}</span>
+                  <bdi class="account-strong">{{ row.nickname }}</bdi>
+                  <span v-if="row.test" class="account-note">({{ $t('account.reward.logTest') }})</span>
+                  <span class="account-postback-status" :class="row.status >= 200 && row.status < 300 ? 'is-ok' : 'is-bad'">{{ row.status ? row.status : $t('account.reward.logNone') }}</span>
+                </li>
+              </ul>
+            </div>
             <details class="account-reward-how">
               <summary>{{ $t('account.reward.how') }}</summary>
               <pre dir="ltr">POST {{ reward.url.trim() || 'https://…' }}
@@ -874,7 +952,10 @@ X-MMOTOP-Signature: hex(HMAC-SHA256(secret,
   "server_id:nickname:vote_id:voted_at"))
 
 {"server_id": "{{ draft.id || '…' }}", "nickname": "Player",
- "vote_id": 123, "voted_at": "2026-11-05T12:00:00Z"}</pre>
+ "vote_id": 123, "voted_at": "2026-11-05T12:00:00Z"}
+
+Test: "nickname": "TEST", "vote_id": 0, "test": true
+Answer 200 when the reward is given.</pre>
             </details>
           </details>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>

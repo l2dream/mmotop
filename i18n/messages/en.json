@@ -239,7 +239,18 @@
       "copy": "Copy",
       "copied": "Copied",
       "afterSave": "The key will appear here once the server is saved.",
-      "how": "How it works"
+      "how": "How it works",
+      "test": "Send a test notification",
+      "testHint": "Sends the address a request with the nickname TEST, to check the script on your server without voting. Your settings are saved first.",
+      "testOk": "The server answered {status} — all good.",
+      "testBad": "The server answered {status} — the notification was not accepted.",
+      "testNone": "The server did not answer within 5 seconds.",
+      "testNoUrl": "Enter the notification address first.",
+      "testSoon": "Wait a few seconds and try again.",
+      "log": "Recent notifications",
+      "logEmpty": "No notifications yet.",
+      "logTest": "test",
+      "logNone": "no answer"
     },
     "signin": {
       "code": "Code from the email",

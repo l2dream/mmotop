@@ -239,7 +239,18 @@
       "copy": "Kopyala",
       "copied": "Kopyalandı",
       "afterSave": "Anahtar, sunucu kaydedildikten sonra burada görünür.",
-      "how": "Nasıl çalışır"
+      "how": "Nasıl çalışır",
+      "test": "Test bildirimi gönder",
+      "testHint": "Adrese TEST takma adlı bir istek gönderir; böylece oy vermeden sunucudaki betiği deneyebilirsiniz. Ayarlar önce kaydedilir.",
+      "testOk": "Sunucu {status} yanıtını verdi — her şey yolunda.",
+      "testBad": "Sunucu {status} yanıtını verdi — bildirim kabul edilmedi.",
+      "testNone": "Sunucu 5 saniye içinde yanıt vermedi.",
+      "testNoUrl": "Önce bildirim adresini girin.",
+      "testSoon": "Birkaç saniye bekleyip tekrar deneyin.",
+      "log": "Son bildirimler",
+      "logEmpty": "Henüz bildirim yok.",
+      "logTest": "test",
+      "logNone": "yanıt yok"
     },
     "signin": {
       "code": "E-postadaki kod",

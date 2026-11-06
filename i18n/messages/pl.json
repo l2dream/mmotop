@@ -239,7 +239,18 @@
       "copy": "Kopiuj",
       "copied": "Skopiowano",
       "afterSave": "Klucz pojawi się tu po zapisaniu serwera.",
-      "how": "Jak to działa"
+      "how": "Jak to działa",
+      "test": "Wyślij testowe powiadomienie",
+      "testHint": "Wyśle na adres żądanie z nickiem TEST — tak sprawdzisz skrypt na serwerze bez głosowania. Ustawienia zostaną najpierw zapisane.",
+      "testOk": "Serwer odpowiedział {status} — wszystko w porządku.",
+      "testBad": "Serwer odpowiedział {status} — powiadomienie nie zostało przyjęte.",
+      "testNone": "Serwer nie odpowiedział w ciągu 5 sekund.",
+      "testNoUrl": "Najpierw podaj adres powiadomień.",
+      "testSoon": "Odczekaj kilka sekund i spróbuj ponownie.",
+      "log": "Ostatnie powiadomienia",
+      "logEmpty": "Nie było jeszcze powiadomień.",
+      "logTest": "test",
+      "logNone": "brak odpowiedzi"
     },
     "signin": {
       "code": "Kod z e-maila",

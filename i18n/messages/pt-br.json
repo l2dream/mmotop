@@ -239,7 +239,18 @@
       "copy": "Copiar",
       "copied": "Copiado",
       "afterSave": "A chave aparece aqui depois que o servidor for salvo.",
-      "how": "Como funciona"
+      "how": "Como funciona",
+      "test": "Enviar notificação de teste",
+      "testHint": "Envia ao endereço uma requisição com o nick TEST, para testar o script do servidor sem votar. As configurações são salvas antes.",
+      "testOk": "O servidor respondeu {status} — tudo certo.",
+      "testBad": "O servidor respondeu {status} — a notificação não foi aceita.",
+      "testNone": "O servidor não respondeu em 5 segundos.",
+      "testNoUrl": "Informe primeiro o endereço de notificação.",
+      "testSoon": "Espere alguns segundos e tente de novo.",
+      "log": "Últimas notificações",
+      "logEmpty": "Ainda não há notificações.",
+      "logTest": "teste",
+      "logNone": "sem resposta"
     },
     "signin": {
       "code": "Código do e-mail",

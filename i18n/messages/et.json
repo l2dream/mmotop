@@ -239,7 +239,18 @@
       "copy": "Kopeeri",
       "copied": "Kopeeritud",
       "afterSave": "Võti ilmub siia pärast serveri salvestamist.",
-      "how": "Kuidas see töötab"
+      "how": "Kuidas see töötab",
+      "test": "Saada testteavitus",
+      "testHint": "Saadab aadressile päringu hüüdnimega TEST, et saaksid serveri skripti kontrollida ilma hääletamata. Seaded salvestatakse enne.",
+      "testOk": "Server vastas {status} — kõik korras.",
+      "testBad": "Server vastas {status} — teavitust ei võetud vastu.",
+      "testNone": "Server ei vastanud 5 sekundi jooksul.",
+      "testNoUrl": "Sisesta esmalt teavituste aadress.",
+      "testSoon": "Oota paar sekundit ja proovi uuesti.",
+      "log": "Viimased teavitused",
+      "logEmpty": "Teavitusi pole veel olnud.",
+      "logTest": "test",
+      "logNone": "vastust pole"
     },
     "signin": {
       "code": "Kood e-kirjast",

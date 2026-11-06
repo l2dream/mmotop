@@ -239,7 +239,18 @@
       "copy": "Kopēt",
       "copied": "Nokopēts",
       "afterSave": "Atslēga parādīsies šeit pēc servera saglabāšanas.",
-      "how": "Kā tas darbojas"
+      "how": "Kā tas darbojas",
+      "test": "Nosūtīt testa paziņojumu",
+      "testHint": "Nosūtīs uz adresi pieprasījumu ar segvārdu TEST, lai pārbaudītu skriptu serverī bez balsošanas. Iestatījumi pirms tam tiks saglabāti.",
+      "testOk": "Serveris atbildēja {status} — viss kārtībā.",
+      "testBad": "Serveris atbildēja {status} — paziņojums netika pieņemts.",
+      "testNone": "Serveris neatbildēja 5 sekunžu laikā.",
+      "testNoUrl": "Vispirms norādiet paziņojumu adresi.",
+      "testSoon": "Pagaidiet dažas sekundes un mēģiniet vēlreiz.",
+      "log": "Pēdējie paziņojumi",
+      "logEmpty": "Paziņojumu vēl nav bijis.",
+      "logTest": "tests",
+      "logNone": "nav atbildes"
     },
     "signin": {
       "code": "Kods no e-pasta",

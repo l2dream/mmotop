@@ -239,7 +239,18 @@
       "copy": "Kopiér",
       "copied": "Kopieret",
       "afterSave": "Nøglen vises her, når serveren er gemt.",
-      "how": "Sådan virker det"
+      "how": "Sådan virker det",
+      "test": "Send en testnotifikation",
+      "testHint": "Sender adressen en forespørgsel med kaldenavnet TEST, så du kan tjekke scriptet på serveren uden at stemme. Indstillingerne gemmes først.",
+      "testOk": "Serveren svarede {status} — alt i orden.",
+      "testBad": "Serveren svarede {status} — notifikationen blev ikke modtaget.",
+      "testNone": "Serveren svarede ikke inden for 5 sekunder.",
+      "testNoUrl": "Angiv først notifikationsadressen.",
+      "testSoon": "Vent et par sekunder, og prøv igen.",
+      "log": "Seneste notifikationer",
+      "logEmpty": "Ingen notifikationer endnu.",
+      "logTest": "test",
+      "logNone": "intet svar"
     },
     "signin": {
       "code": "Kode fra e-mailen",
