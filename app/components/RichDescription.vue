@@ -9,6 +9,11 @@
  * The player starts as the video's cover with a play button; YouTube's own
  * player (from youtube-nocookie.com, no cookies until it plays) loads only
  * when pressed, so a page with three videos does not load three players.
+ *
+ * Where YouTube is blocked or throttled (Iran, Russia) the cover does not
+ * load: then a plain "Watch on YouTube" link stands in its place. Once
+ * playing, a line under the player offers the same link — whether YouTube's
+ * own frame loaded cannot be seen from here.
  */
 const props = defineProps<{ text: string }>()
 
@@ -64,26 +69,54 @@ const blocks = computed<Block[]>(() => props.text.split('\n').map((raw) => {
 
 /** Videos the visitor has pressed play on. */
 const playing = ref(new Set<number>())
+/** Videos whose cover did not load: YouTube unreachable from here. */
+const unreachable = ref(new Set<number>())
+const watchUrl = (id: string) => `https://www.youtube.com/watch?v=${id}`
+const markUnreachable = (i: number) => { unreachable.value = new Set(unreachable.value).add(i) }
+
+/**
+ * The page comes prerendered, so a cover can fail before the page's script
+ * is listening for it: once up, the covers that already failed are found.
+ */
+const root = ref<HTMLElement | null>(null)
+onMounted(() => {
+  root.value?.querySelectorAll<HTMLImageElement>('img[data-cover]').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0) markUnreachable(Number(img.dataset.cover))
+  })
+})
 </script>
 
 <template>
-  <div class="rich-description">
+  <div ref="root" class="rich-description">
     <template v-for="(block, i) in blocks" :key="i">
-      <div v-if="block.kind === 'video'" class="rich-video">
-        <iframe
-          v-if="playing.has(i)"
-          :src="`https://www.youtube-nocookie.com/embed/${block.id}?autoplay=1`"
-          title="YouTube"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowfullscreen
-        />
-        <button v-else type="button" class="rich-video-cover" :aria-label="`YouTube ▶`" @click="playing = new Set(playing).add(i)">
-          <img :src="`https://i.ytimg.com/vi/${block.id}/hqdefault.jpg`" alt="" loading="lazy" referrerpolicy="no-referrer">
-          <span class="rich-video-play" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
-          </span>
-        </button>
-      </div>
+      <!-- A video: the player, or a plain link where YouTube is out of reach. -->
+      <template v-if="block.kind === 'video'">
+        <a v-if="unreachable.has(i)" class="rich-video-fallback" :href="watchUrl(block.id)" target="_blank" rel="noopener nofollow ugc">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+          {{ $t('rich.watchYoutube') }}
+        </a>
+        <template v-else>
+          <div class="rich-video">
+            <iframe
+              v-if="playing.has(i)"
+              :src="`https://www.youtube-nocookie.com/embed/${block.id}?autoplay=1`"
+              title="YouTube"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowfullscreen
+            />
+            <button v-else type="button" class="rich-video-cover" :aria-label="`YouTube ▶`" @click="playing = new Set(playing).add(i)">
+              <img :src="`https://i.ytimg.com/vi/${block.id}/hqdefault.jpg`" alt="" loading="lazy" referrerpolicy="no-referrer" :data-cover="i" @error="markUnreachable(i)">
+              <span class="rich-video-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+              </span>
+            </button>
+          </div>
+          <p v-if="playing.has(i)" class="rich-video-note">
+            {{ $t('rich.notLoading') }}
+            <a :href="watchUrl(block.id)" target="_blank" rel="noopener nofollow ugc">{{ $t('rich.watchYoutube') }}</a>
+          </p>
+        </template>
+      </template>
       <a v-else-if="block.kind === 'image'" class="rich-image" :href="block.url" target="_blank" rel="noopener nofollow ugc">
         <img :src="block.url" alt="" loading="lazy" referrerpolicy="no-referrer">
       </a>

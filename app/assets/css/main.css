@@ -2621,6 +2621,20 @@ a.account-address:hover { text-decoration: underline; }
 .rich-video,
 .rich-image { margin: 8px 0; max-width: 560px; }
 .rich-video { position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: #000; }
+/* YouTube out of reach: the link in the player's place, and under a playing one. */
+.rich-video-fallback {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 14px; border-radius: 8px;
+  background: rgba(255, 255, 255, .05); border: 1px dashed rgba(255, 255, 255, .18);
+  color: #e6e7f5; font-weight: 700; text-decoration: none;
+}
+.rich-video-fallback svg { color: #ff4d4d; }
+.rich-video-fallback:hover { background: rgba(255, 255, 255, .09); }
+.theme-light .rich-video-fallback { background: #f4f5fb; border-color: rgba(22, 24, 43, .18); color: #16182b; }
+.rich-video-note { margin: 6px 0 0; font-size: 12px; color: #9a9fb8; }
+.rich-video-note a { color: #c4a8ff; }
+.theme-light .rich-video-note { color: #5b5f78; }
+.theme-light .rich-video-note a { color: #6d28d9; }
 .rich-video iframe,
 .rich-video-cover { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .rich-video-cover { padding: 0; background: #000; cursor: pointer; }

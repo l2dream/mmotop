@@ -337,5 +337,9 @@
     "checking": "正在检查浏览器…",
     "needCaptcha": "短时间内投票过多，请确认你不是机器人。",
     "altchaFailed": "浏览器检查失败，请刷新页面后重试。"
+  },
+  "rich": {
+    "watchYoutube": "在 YouTube 上观看",
+    "notLoading": "视频无法加载？"
   }
 }

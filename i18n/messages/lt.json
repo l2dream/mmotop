@@ -337,5 +337,9 @@
     "checking": "Tikriname naršyklę…",
     "needCaptcha": "Daug balsų per trumpą laiką — patvirtinkite, kad nesate robotas.",
     "altchaFailed": "Naršyklės patikra nepavyko. Perkraukite puslapį ir bandykite dar kartą."
+  },
+  "rich": {
+    "watchYoutube": "Žiūrėti YouTube",
+    "notLoading": "Vaizdo įrašas neįsikelia?"
   }
 }

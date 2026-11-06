@@ -337,5 +337,9 @@
     "checking": "Checking your browser…",
     "needCaptcha": "Lots of votes in a short time — please confirm you’re not a robot.",
     "altchaFailed": "The browser check failed. Reload the page and try again."
+  },
+  "rich": {
+    "watchYoutube": "Watch on YouTube",
+    "notLoading": "Video not loading?"
   }
 }

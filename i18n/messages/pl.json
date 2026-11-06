@@ -337,5 +337,9 @@
     "checking": "Sprawdzamy przeglądarkę…",
     "needCaptcha": "Dużo głosów w krótkim czasie — potwierdź, że nie jesteś robotem.",
     "altchaFailed": "Sprawdzenie przeglądarki nie powiodło się. Odśwież stronę i spróbuj ponownie."
+  },
+  "rich": {
+    "watchYoutube": "Obejrzyj na YouTube",
+    "notLoading": "Film się nie ładuje?"
   }
 }

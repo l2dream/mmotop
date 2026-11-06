@@ -337,5 +337,9 @@
     "checking": "Tjekker din browser…",
     "needCaptcha": "Mange stemmer på kort tid — bekræft, at du ikke er en robot.",
     "altchaFailed": "Browsertjekket mislykkedes. Genindlæs siden, og prøv igen."
+  },
+  "rich": {
+    "watchYoutube": "Se på YouTube",
+    "notLoading": "Indlæses videoen ikke?"
   }
 }

@@ -337,5 +337,9 @@
     "checking": "Browser wird geprüft…",
     "needCaptcha": "Viele Stimmen in kurzer Zeit – bitte bestätigen Sie, dass Sie kein Roboter sind.",
     "altchaFailed": "Die Browserprüfung ist fehlgeschlagen. Laden Sie die Seite neu und versuchen Sie es erneut."
+  },
+  "rich": {
+    "watchYoutube": "Auf YouTube ansehen",
+    "notLoading": "Video lädt nicht?"
   }
 }
