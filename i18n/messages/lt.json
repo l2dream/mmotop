@@ -301,7 +301,16 @@
       "delete": "Ištrinti paskyrą",
       "deleteConfirm": "Ištrinti paskyrą ir visus jūsų serverius ({n})? Jų balsai taip pat dings. To atšaukti negalima.",
       "deleteLastAdmin": "Vienintelio administratoriaus ištrinti negalima: pirmiausia paskirkite kitą.",
-      "deleted": "Paskyra ištrinta."
+      "deleted": "Paskyra ištrinta.",
+      "ways": "Prisijungimo būdai",
+      "email": "El. paštas",
+      "linked": "susietas",
+      "notLinked": "nesusietas",
+      "unlink": "Atsieti",
+      "unlinkConfirm": "Atsieti {name}? Juo neprisijungsite, kol vėl nesusiesite.",
+      "onlyWay": "Tai vienintelis būdas patekti į paskyrą, jo atsieti negalima.",
+      "unlinked": "{name} atsietas.",
+      "howLink": "Google ir Discord susiejami patys, jei jais prisijungiate su paskyros el. paštu."
     }
   },
   "vote": {

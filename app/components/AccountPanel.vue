@@ -144,6 +144,42 @@ const who = computed(() => {
 /** An account made with Telegram has no email of its own to change (a placeholder, never mailed). */
 const telegramOnly = computed(() => !!session.value?.user.email?.endsWith('@telegram.mmotop.com'))
 
+/**
+ * The ways into the account (account_ways): the email, Telegram, Google,
+ * Discord. Any but the email can be unlinked (account_unlink), unless the
+ * account has no real email — then its one way stays.
+ */
+const ways = ref<{ email: boolean, telegram: boolean, google: boolean, discord: boolean } | null>(null)
+const waysNote = ref('')
+const waysFailed = ref(false)
+async function loadWays() {
+  const { data } = await supabase.value!.rpc('account_ways')
+  ways.value = data as typeof ways.value
+}
+const wayRows = computed(() => {
+  const w = ways.value
+  if (!w) return []
+  return [
+    { id: 'email', name: t('account.settings.email'), on: w.email },
+    { id: 'telegram', name: 'Telegram', on: w.telegram },
+    { id: 'google', name: 'Google', on: w.google },
+    { id: 'discord', name: 'Discord', on: w.discord }
+  ].filter((row) => row.on || row.id !== 'email')
+})
+async function unlink(way: string, name: string) {
+  if (!supabase.value || busy.value || !window.confirm(t('account.settings.unlinkConfirm', { name }))) return
+  busy.value = true
+  waysNote.value = ''
+  const { data, error: failed } = await supabase.value.rpc('account_unlink', { p_way: way })
+  busy.value = false
+  waysFailed.value = !!failed || data !== 'ok'
+  waysNote.value = failed ? t('account.failed') : data === 'ok' ? t('account.settings.unlinked', { name }) : t('account.settings.onlyWay')
+  if (data === 'ok' && way === 'telegram') telegramLinked.value = false
+  // The session's own list of identities is refreshed too.
+  if (data === 'ok') await supabase.value.auth.refreshSession().catch(() => {})
+  loadWays()
+}
+
 /** A new email: confirmed from both the old and the new address (secure email change). */
 const newEmail = ref('')
 const emailNote = ref('')
@@ -1099,8 +1135,21 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
           <button type="button" class="account-button" @click="addServer">{{ $t('account.addServer') }}</button>
           <p class="account-note">{{ $t('account.moderation') }}</p>
           <!-- The account itself: its email, and deleting it. -->
-          <details class="account-reward account-settings">
+          <details class="account-reward account-settings" @toggle="loadWays">
             <summary>{{ $t('account.settings.title') }}</summary>
+            <!-- The ways into the account, each one that can go with Unlink. -->
+            <div class="account-field">
+              <span>{{ $t('account.settings.ways') }}</span>
+              <ul class="account-postback-log account-ways">
+                <li v-for="w in wayRows" :key="w.id">
+                  <span class="account-strong">{{ w.name }}</span>
+                  <span class="account-note" :dir="w.id === 'email' ? 'ltr' : undefined">{{ w.id === 'email' ? session?.user.email : w.on ? $t('account.settings.linked') : $t('account.settings.notLinked') }}</span>
+                  <button v-if="w.on && w.id !== 'email'" type="button" class="account-link account-danger admin-moderator-remove" :disabled="busy" @click="unlink(w.id, w.name)">{{ $t('account.settings.unlink') }}</button>
+                </li>
+              </ul>
+              <small>{{ $t('account.settings.howLink') }}</small>
+              <small v-if="waysNote" :class="waysFailed ? 'account-error' : 'account-ok'" role="status">{{ waysNote }}</small>
+            </div>
             <form v-if="!telegramOnly" class="account-field" @submit.prevent="changeEmail">
               <span>{{ $t('account.settings.changeEmail') }}</span>
               <div class="account-secret-row">

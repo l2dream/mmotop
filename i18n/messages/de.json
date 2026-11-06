@@ -301,7 +301,16 @@
       "delete": "Konto löschen",
       "deleteConfirm": "Ihr Konto und alle Ihre Server ({n}) löschen? Ihre Stimmen verschwinden ebenfalls. Das lässt sich nicht rückgängig machen.",
       "deleteLastAdmin": "Der einzige Admin kann nicht gelöscht werden: Ernennen Sie zuerst einen anderen.",
-      "deleted": "Konto gelöscht."
+      "deleted": "Konto gelöscht.",
+      "ways": "Anmeldewege",
+      "email": "E-Mail",
+      "linked": "verknüpft",
+      "notLinked": "nicht verknüpft",
+      "unlink": "Trennen",
+      "unlinkConfirm": "{name} trennen? Bis zur erneuten Verknüpfung ist keine Anmeldung damit möglich.",
+      "onlyWay": "Das ist der einzige Weg ins Konto und kann nicht getrennt werden.",
+      "unlinked": "{name} getrennt.",
+      "howLink": "Google und Discord verknüpfen sich selbst, wenn Sie sich damit mit der E-Mail des Kontos anmelden."
     }
   },
   "vote": {

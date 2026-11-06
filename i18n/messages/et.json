@@ -301,7 +301,16 @@
       "delete": "Kustuta konto",
       "deleteConfirm": "Kustutada konto ja kõik sinu serverid ({n})? Ka nende hääled kaovad. Seda ei saa tagasi võtta.",
       "deleteLastAdmin": "Ainust administraatorit ei saa kustutada: määra enne teine.",
-      "deleted": "Konto kustutatud."
+      "deleted": "Konto kustutatud.",
+      "ways": "Sisselogimise viisid",
+      "email": "E-post",
+      "linked": "seotud",
+      "notLinked": "sidumata",
+      "unlink": "Eemalda",
+      "unlinkConfirm": "Eemaldada {name}? Sellega ei saa sisse logida enne uuesti sidumist.",
+      "onlyWay": "See on ainus viis kontole, seda ei saa eemaldada.",
+      "unlinked": "{name} eemaldatud.",
+      "howLink": "Google ja Discord seotakse ise, kui logid nendega sisse konto e-postiga."
     }
   },
   "vote": {

@@ -301,7 +301,16 @@
       "delete": "Eliminar cuenta",
       "deleteConfirm": "¿Eliminar tu cuenta y todos tus servidores ({n})? Sus votos también se perderán. No se puede deshacer.",
       "deleteLastAdmin": "No se puede eliminar al único administrador: nombra a otro primero.",
-      "deleted": "Cuenta eliminada."
+      "deleted": "Cuenta eliminada.",
+      "ways": "Formas de entrar",
+      "email": "Correo",
+      "linked": "vinculado",
+      "notLinked": "no vinculado",
+      "unlink": "Desvincular",
+      "unlinkConfirm": "¿Desvincular {name}? No podrás entrar con él hasta volver a vincularlo.",
+      "onlyWay": "Es la única forma de entrar en la cuenta, no se puede desvincular.",
+      "unlinked": "{name} desvinculado.",
+      "howLink": "Google y Discord se vinculan solos si entras con ellos usando el correo de la cuenta."
     }
   },
   "vote": {

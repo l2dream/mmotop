@@ -301,7 +301,16 @@
       "delete": "Supprimer le compte",
       "deleteConfirm": "Supprimer votre compte et tous vos serveurs ({n}) ? Leurs votes disparaîtront aussi. C’est irréversible.",
       "deleteLastAdmin": "Le seul administrateur ne peut pas être supprimé : nommez-en un autre d’abord.",
-      "deleted": "Compte supprimé."
+      "deleted": "Compte supprimé.",
+      "ways": "Moyens de connexion",
+      "email": "E-mail",
+      "linked": "lié",
+      "notLinked": "non lié",
+      "unlink": "Délier",
+      "unlinkConfirm": "Délier {name} ? Vous ne pourrez plus vous connecter avec avant de le lier à nouveau.",
+      "onlyWay": "C’est le seul moyen d’accéder au compte : impossible de le délier.",
+      "unlinked": "{name} délié.",
+      "howLink": "Google et Discord se lient d’eux-mêmes si vous vous connectez avec l’e-mail du compte."
     }
   },
   "vote": {
