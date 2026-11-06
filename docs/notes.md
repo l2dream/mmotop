@@ -193,7 +193,9 @@
   ключ; приложение опубликовано (In production, Branding заполнен:
   /privacy/, /terms/, домены mmotop.com и xpfgjhyuompskzxsmwrc.supabase.co);
   на экране входа Google написано «xpfgjhyuompskzxsmwrc.supabase.co»
-  (своё имя — только со своим доменом в Supabase, платно). Discord — ещё нет:
+  (своё имя — только со своим доменом в Supabase, платно). Discord включён
+  6 ноября (приложение MMOTOP в Discord Developer Portal, redirect на
+  callback Supabase). Как настраивались:
   нужно создать OAuth-приложения в Google Cloud и Discord Developer Portal,
   redirect `https://xpfgjhyuompskzxsmwrc.supabase.co/auth/v1/callback`, и
   вписать Client ID/Secret в Auth → Providers (мне `project_admin_write` нет).
