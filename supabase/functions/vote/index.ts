@@ -1,14 +1,18 @@
 // GET  /functions/v1/vote               → an ALTCHA challenge (JSON)
-// POST /functions/v1/vote  { server_id, nickname?, altcha, captcha? }
+// POST /functions/v1/vote  { server_id, nickname?, altcha, captcha?, browser? }
 //
-// One vote per IP per server per VOTE_HOURS. In front of it, ALTCHA: a small
+// One vote per IP per server per VOTE_HOURS, and one per browser (a random
+// mark the page keeps in localStorage, sent as `browser`), so a new address
+// from a VPN alone does not give another vote. In front of it, ALTCHA: a small
 // proof of work the visitor's browser solves by itself in a second or two,
 // served from here rather than by a third party, so it works wherever the
 // site does (Cloudflare's Turnstile is throttled in Russia and patchy in
 // Iran). A solved challenge counts once (altcha_used). Only a vote that looks
-// suspicious — a burst of votes for the server, or one address voting for
-// many servers — also needs a Turnstile captcha ({ error: 'need_captcha' }
-// until it comes with one). The IP is stored only as a salted hash. When the server's owner has
+// suspicious — a burst of votes for the server, one address voting for many
+// servers, an address of a data centre or VPN (dc_ranges), or more than
+// SUBNET_VOTES from one /24 network — also needs a Turnstile captcha ({ error: 'need_captcha' }
+// until it comes with one). The IP, its network and the browser mark are
+// stored only as salted hashes. When the server's owner has
 // switched the reward on, the voter's in-game nickname is sent on to the
 // owner's postback URL, signed, so the game server can grant the bonus.
 //
@@ -60,6 +64,7 @@ async function altchaPasses(payload: unknown): Promise<boolean> {
 /** Limits past which a vote also needs Turnstile. */
 const BURST_VOTES = 20 // for one server within ten minutes
 const SPREAD_SERVERS = 5 // from one address within an hour
+const SUBNET_VOTES = 3 // for one server from one /24 (or /48) within VOTE_HOURS
 
 async function sha256Hex(text: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
@@ -69,6 +74,19 @@ async function sha256Hex(text: string): Promise<string> {
 function clientIp(req: Request): string {
   // The platform's proxy puts the visitor first in x-forwarded-for.
   return (req.headers.get('x-forwarded-for') ?? '').split(',')[0]!.trim() || req.headers.get('x-real-ip') || 'unknown'
+}
+
+/** The address's network: the first three bytes of IPv4, the first three groups of IPv6. */
+function subnetOf(ip: string): string {
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(ip)) return ip.split('.').slice(0, 3).join('.') + '.0/24'
+  if (ip.includes(':')) {
+    const [head = '', tail = ''] = ip.split('::')
+    const left = head ? head.split(':') : []
+    const right = tail ? tail.split(':') : []
+    const groups = ip.includes('::') ? [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'), ...right] : left
+    return groups.slice(0, 3).map((g) => parseInt(g || '0', 16).toString(16)).join(':') + '::/48'
+  }
+  return ip
 }
 
 async function captchaPasses(token: string, ip: string): Promise<boolean> {
@@ -86,7 +104,7 @@ Deno.serve(async (req) => {
   if (req.method === 'GET') return json(req, await newChallenge())
   if (req.method !== 'POST') return json(req, { error: 'method' }, 405)
 
-  let input: { server_id?: string, nickname?: string, captcha?: string, altcha?: string }
+  let input: { server_id?: string, nickname?: string, captcha?: string, altcha?: string, browser?: string }
   try { input = await req.json() } catch { return json(req, { error: 'bad_request' }, 400) }
 
   const serverId = String(input.server_id ?? '')
@@ -97,15 +115,18 @@ Deno.serve(async (req) => {
   const ip = clientIp(req)
   const { data: server } = await admin.from('servers').select('id, status').eq('id', serverId).maybeSingle()
   if (!server || server.status !== 'approved') return json(req, { error: 'no_server' }, 404)
-  const ipHash = await sha256Hex(`${Deno.env.get('VOTE_SALT') ?? ''}:${ip}`)
+  const ipHash = await sha256Hex(`${SALT}:${ip}`)
+  const netHash = await sha256Hex(`${SALT}:net:${subnetOf(ip)}`)
+  const browser = typeof input.browser === 'string' && /^[A-Za-z0-9_-]{16,64}$/.test(input.browser) ? input.browser : ''
+  const browserHash = browser ? await sha256Hex(`${SALT}:browser:${browser}`) : null
 
   // A Turnstile captcha, when one came, is checked first; then ALTCHA, and
   // for a suspicious vote the captcha is required on top.
   const hasCaptcha = !!input.captcha
   if (hasCaptcha && !(await captchaPasses(String(input.captcha), ip))) return json(req, { error: 'captcha' }, 403)
   // Noted for the moderation page's count (vote_checks), a week at most.
-  const note = async (kind: 'need_captcha' | 'captcha_passed') => {
-    await admin.from('vote_checks').insert({ server_id: serverId, kind })
+  const note = async (kind: 'need_captcha' | 'captcha_passed', reason: string | null = null) => {
+    await admin.from('vote_checks').insert({ server_id: serverId, kind, reason })
     await admin.from('vote_checks').delete().lt('created_at', new Date(Date.now() - 7 * 86400_000).toISOString())
   }
   if (hasCaptcha) await note('captcha_passed')
@@ -113,20 +134,30 @@ Deno.serve(async (req) => {
     if (!(await altchaPasses(input.altcha))) return json(req, { error: 'altcha' }, 403)
     const tenMinutes = new Date(Date.now() - 10 * 60_000).toISOString()
     const hour = new Date(Date.now() - 3600_000).toISOString()
-    const [{ count: burst }, { data: spread }] = await Promise.all([
+    const window = new Date(Date.now() - VOTE_HOURS * 3600_000).toISOString()
+    const [{ count: burst }, { data: spread }, { count: fromNet }, { data: datacenter }] = await Promise.all([
       admin.from('votes').select('id', { count: 'exact', head: true }).eq('server_id', serverId).gte('created_at', tenMinutes),
-      admin.from('votes').select('server_id').eq('ip_hash', ipHash).gte('created_at', hour).limit(50)
+      admin.from('votes').select('server_id').eq('ip_hash', ipHash).gte('created_at', hour).limit(50),
+      admin.from('votes').select('id', { count: 'exact', head: true }).eq('server_id', serverId).eq('net_hash', netHash).gte('created_at', window),
+      admin.rpc('is_datacenter_ip', { p_ip: ip })
     ])
     const servers = new Set((spread ?? []).map((v) => v.server_id))
-    if ((burst ?? 0) >= BURST_VOTES || servers.size >= SPREAD_SERVERS) {
-      await note('need_captcha')
+    const reason = datacenter === true ? 'datacenter'
+      : (fromNet ?? 0) >= SUBNET_VOTES ? 'subnet'
+      : (burst ?? 0) >= BURST_VOTES ? 'burst'
+      : servers.size >= SPREAD_SERVERS ? 'spread'
+      : null
+    if (reason) {
+      await note('need_captcha', reason)
       return json(req, { error: 'need_captcha' }, 403)
     }
   }
 
+  // Same address or same browser within VOTE_HOURS: not yet.
   const since = new Date(Date.now() - VOTE_HOURS * 3600_000).toISOString()
   const { data: recent } = await admin.from('votes').select('created_at')
-    .eq('server_id', serverId).eq('ip_hash', ipHash).gte('created_at', since)
+    .eq('server_id', serverId).gte('created_at', since)
+    .or(browserHash ? `ip_hash.eq.${ipHash},browser_hash.eq.${browserHash}` : `ip_hash.eq.${ipHash}`)
     .order('created_at', { ascending: false }).limit(1)
   if (recent && recent.length) {
     const next = new Date(new Date(recent[0]!.created_at).getTime() + VOTE_HOURS * 3600_000)
@@ -142,7 +173,7 @@ Deno.serve(async (req) => {
   }
 
   const { data: vote, error } = await admin.from('votes')
-    .insert({ server_id: serverId, ip_hash: ipHash, nickname: nickname || null, user_id: userId })
+    .insert({ server_id: serverId, ip_hash: ipHash, net_hash: netHash, browser_hash: browserHash, nickname: nickname || null, user_id: userId })
     .select('id, created_at').single()
   if (error || !vote) return json(req, { error: 'failed' }, 500)
 
