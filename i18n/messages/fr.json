@@ -239,7 +239,18 @@
       "copy": "Copier",
       "copied": "Copié",
       "afterSave": "La clé apparaîtra ici une fois le serveur enregistré.",
-      "how": "Comment ça marche"
+      "how": "Comment ça marche",
+      "test": "Envoyer une notification de test",
+      "testHint": "Envoie à l’adresse une requête avec le pseudo TEST, pour vérifier le script de votre serveur sans voter. Les réglages sont d’abord enregistrés.",
+      "testOk": "Le serveur a répondu {status} — tout va bien.",
+      "testBad": "Le serveur a répondu {status} — la notification n’a pas été acceptée.",
+      "testNone": "Le serveur n’a pas répondu en 5 secondes.",
+      "testNoUrl": "Indiquez d’abord l’adresse de notification.",
+      "testSoon": "Patientez quelques secondes et réessayez.",
+      "log": "Dernières notifications",
+      "logEmpty": "Aucune notification pour l’instant.",
+      "logTest": "test",
+      "logNone": "pas de réponse"
     },
     "signin": {
       "code": "Code de l’e-mail",

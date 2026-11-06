@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.qr-login]
 verify_jwt = false
+
+[functions.postback-test]
+verify_jwt = false

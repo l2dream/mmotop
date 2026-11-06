@@ -239,7 +239,18 @@
       "copy": "Kopiera",
       "copied": "Kopierat",
       "afterSave": "Nyckeln visas här när servern har sparats.",
-      "how": "Så fungerar det"
+      "how": "Så fungerar det",
+      "test": "Skicka en testavisering",
+      "testHint": "Skickar en förfrågan med smeknamnet TEST till adressen, så att du kan testa skriptet på servern utan att rösta. Inställningarna sparas först.",
+      "testOk": "Servern svarade {status} — allt i sin ordning.",
+      "testBad": "Servern svarade {status} — aviseringen togs inte emot.",
+      "testNone": "Servern svarade inte inom 5 sekunder.",
+      "testNoUrl": "Ange aviseringsadressen först.",
+      "testSoon": "Vänta några sekunder och försök igen.",
+      "log": "Senaste aviseringar",
+      "logEmpty": "Inga aviseringar ännu.",
+      "logTest": "test",
+      "logNone": "inget svar"
     },
     "signin": {
       "code": "Kod från mejlet",

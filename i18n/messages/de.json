@@ -239,7 +239,18 @@
       "copy": "Kopieren",
       "copied": "Kopiert",
       "afterSave": "Der Schlüssel erscheint hier, sobald der Server gespeichert ist.",
-      "how": "So funktioniert es"
+      "how": "So funktioniert es",
+      "test": "Test-Benachrichtigung senden",
+      "testHint": "Schickt eine Anfrage mit dem Nicknamen TEST an die Adresse, um das Skript auf Ihrem Server ohne Stimme zu prüfen. Die Einstellungen werden vorher gespeichert.",
+      "testOk": "Der Server antwortete {status} – alles in Ordnung.",
+      "testBad": "Der Server antwortete {status} – die Benachrichtigung wurde nicht angenommen.",
+      "testNone": "Der Server hat nicht innerhalb von 5 Sekunden geantwortet.",
+      "testNoUrl": "Geben Sie zuerst die Benachrichtigungsadresse an.",
+      "testSoon": "Warten Sie ein paar Sekunden und versuchen Sie es erneut.",
+      "log": "Letzte Benachrichtigungen",
+      "logEmpty": "Noch keine Benachrichtigungen.",
+      "logTest": "Test",
+      "logNone": "keine Antwort"
     },
     "signin": {
       "code": "Code aus der E-Mail",
