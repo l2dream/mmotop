@@ -251,7 +251,8 @@
       "logEmpty": "Nie było jeszcze powiadomień.",
       "logTest": "test",
       "logNone": "brak odpowiedzi",
-      "logRetry": "ponowienie {n}"
+      "logRetry": "ponowienie {n}",
+      "example": "Pobierz przykładowy odbiornik (PHP)"
     },
     "signin": {
       "code": "Kod z e-maila",

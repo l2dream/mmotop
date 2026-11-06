@@ -251,7 +251,8 @@
       "logEmpty": "Ingen varsler ennå.",
       "logTest": "test",
       "logNone": "ikke svar",
-      "logRetry": "nytt forsøk {n}"
+      "logRetry": "nytt forsøk {n}",
+      "example": "Last ned en eksempelmottaker (PHP)"
     },
     "signin": {
       "code": "Kode fra e-posten",

@@ -251,7 +251,8 @@
       "logEmpty": "Pranešimų dar nebuvo.",
       "logTest": "bandymas",
       "logNone": "nėra atsakymo",
-      "logRetry": "pakartojimas {n}"
+      "logRetry": "pakartojimas {n}",
+      "example": "Atsisiųsti imtuvo pavyzdį (PHP)"
     },
     "signin": {
       "code": "Kodas iš laiško",

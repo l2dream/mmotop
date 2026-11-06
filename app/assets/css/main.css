@@ -2131,6 +2131,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-secret-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
 .account-secret-row input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
 .account-new-secret { align-self: flex-start; }
+.account-example { display: inline-block; margin-top: 8px; }
 .account-ok { color: #6ee7a8; font-size: 13px; }
 .theme-light .account-ok { color: #047857; }
 /* The last notifications: time, nickname, what the server answered. */

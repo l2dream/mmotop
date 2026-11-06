@@ -251,7 +251,8 @@
       "logEmpty": "아직 알림이 없습니다.",
       "logTest": "테스트",
       "logNone": "응답 없음",
-      "logRetry": "재시도 {n}"
+      "logRetry": "재시도 {n}",
+      "example": "수신 스크립트 예제 다운로드 (PHP)"
     },
     "signin": {
       "code": "메일 속 코드",

@@ -251,7 +251,8 @@
       "logEmpty": "Paziņojumu vēl nav bijis.",
       "logTest": "tests",
       "logNone": "nav atbildes",
-      "logRetry": "atkārtojums {n}"
+      "logRetry": "atkārtojums {n}",
+      "example": "Lejupielādēt uztvērēja piemēru (PHP)"
     },
     "signin": {
       "code": "Kods no e-pasta",

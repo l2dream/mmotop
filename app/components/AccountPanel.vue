@@ -960,6 +960,8 @@ Answer 200 when the reward is given.
 No answer, 5xx or 429: sent again after 1, 5, 15
 and 40 min with the same vote_id — reward each
 vote_id once.</pre>
+              <!-- A ready receiver for Lineage II packs (public/postback/). -->
+              <a class="account-link account-example" :href="`${$config.app.baseURL}postback/mmotop-vote.php`" download="mmotop-vote.php">{{ $t('account.reward.example') }}</a>
             </details>
           </details>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>

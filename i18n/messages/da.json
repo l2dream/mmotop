@@ -251,7 +251,8 @@
       "logEmpty": "Ingen notifikationer endnu.",
       "logTest": "test",
       "logNone": "intet svar",
-      "logRetry": "gentagelse {n}"
+      "logRetry": "gentagelse {n}",
+      "example": "Hent et eksempel på en modtager (PHP)"
     },
     "signin": {
       "code": "Kode fra e-mailen",
