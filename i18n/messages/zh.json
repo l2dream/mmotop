@@ -250,7 +250,8 @@
       "log": "最近的通知",
       "logEmpty": "暂无通知。",
       "logTest": "测试",
-      "logNone": "无响应"
+      "logNone": "无响应",
+      "logRetry": "重试 {n}"
     },
     "signin": {
       "code": "邮件中的验证码",

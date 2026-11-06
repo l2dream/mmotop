@@ -250,7 +250,8 @@
       "log": "Letzte Benachrichtigungen",
       "logEmpty": "Noch keine Benachrichtigungen.",
       "logTest": "Test",
-      "logNone": "keine Antwort"
+      "logNone": "keine Antwort",
+      "logRetry": "Wiederholung {n}"
     },
     "signin": {
       "code": "Code aus der E-Mail",

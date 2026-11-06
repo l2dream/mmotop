@@ -250,7 +250,8 @@
       "log": "Poslední oznámení",
       "logEmpty": "Zatím žádná oznámení.",
       "logTest": "test",
-      "logNone": "bez odpovědi"
+      "logNone": "bez odpovědi",
+      "logRetry": "opakování {n}"
     },
     "signin": {
       "code": "Kód z e-mailu",

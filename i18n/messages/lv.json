@@ -250,7 +250,8 @@
       "log": "Pēdējie paziņojumi",
       "logEmpty": "Paziņojumu vēl nav bijis.",
       "logTest": "tests",
-      "logNone": "nav atbildes"
+      "logNone": "nav atbildes",
+      "logRetry": "atkārtojums {n}"
     },
     "signin": {
       "code": "Kods no e-pasta",

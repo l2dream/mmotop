@@ -250,7 +250,8 @@
       "log": "Seneste notifikationer",
       "logEmpty": "Ingen notifikationer endnu.",
       "logTest": "test",
-      "logNone": "intet svar"
+      "logNone": "intet svar",
+      "logRetry": "gentagelse {n}"
     },
     "signin": {
       "code": "Kode fra e-mailen",

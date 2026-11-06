@@ -250,7 +250,8 @@
       "log": "Dernières notifications",
       "logEmpty": "Aucune notification pour l’instant.",
       "logTest": "test",
-      "logNone": "pas de réponse"
+      "logNone": "pas de réponse",
+      "logRetry": "nouvel essai {n}"
     },
     "signin": {
       "code": "Code de l’e-mail",

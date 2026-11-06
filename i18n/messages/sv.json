@@ -250,7 +250,8 @@
       "log": "Senaste aviseringar",
       "logEmpty": "Inga aviseringar ännu.",
       "logTest": "test",
-      "logNone": "inget svar"
+      "logNone": "inget svar",
+      "logRetry": "nytt försök {n}"
     },
     "signin": {
       "code": "Kod från mejlet",

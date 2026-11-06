@@ -250,7 +250,8 @@
       "log": "Ostatnie powiadomienia",
       "logEmpty": "Nie było jeszcze powiadomień.",
       "logTest": "test",
-      "logNone": "brak odpowiedzi"
+      "logNone": "brak odpowiedzi",
+      "logRetry": "ponowienie {n}"
     },
     "signin": {
       "code": "Kod z e-maila",
