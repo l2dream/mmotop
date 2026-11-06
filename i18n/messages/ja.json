@@ -280,7 +280,9 @@
       "telegramTitle": "Telegramでログイン",
       "telegramHint": "Telegramを連携すると、どのパソコンからでもログインできます。",
       "telegramLinked": "Telegramを連携済みです。Telegramでログインできます。",
-      "telegramTaken": "このTelegramはすでに別のアカウントに連携されています。"
+      "telegramTaken": "このTelegramはすでに別のアカウントに連携されています。",
+      "google": "Googleでログイン",
+      "discord": "Discordでログイン"
     },
     "reason": "理由：{note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "ランキング {n} 位",
       "days": "日別の票数（直近30日）",
       "dayVotes": "{date}：{n}"
+    },
+    "settings": {
+      "title": "アカウント",
+      "changeEmail": "メールアドレスを変更",
+      "newEmail": "新しいメールアドレス",
+      "emailSent": "旧アドレスと新アドレスに確認メールを送りました。両方を確認すると変更されます。",
+      "delete": "アカウントを削除",
+      "deleteConfirm": "アカウントとすべてのサーバー（{n}件）を削除しますか？投票も消え、元に戻せません。",
+      "deleteLastAdmin": "唯一の管理者は削除できません。先に別の管理者を任命してください。",
+      "deleted": "アカウントを削除しました。"
     }
   },
   "vote": {

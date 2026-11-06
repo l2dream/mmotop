@@ -280,7 +280,9 @@
       "telegramTitle": "Mit Telegram anmelden",
       "telegramHint": "Verknüpfen Sie Telegram, um sich damit an jedem Computer anzumelden.",
       "telegramLinked": "Telegram ist verknüpft – Sie können sich damit anmelden.",
-      "telegramTaken": "Dieses Telegram ist bereits mit einem anderen Konto verknüpft."
+      "telegramTaken": "Dieses Telegram ist bereits mit einem anderen Konto verknüpft.",
+      "google": "Mit Google anmelden",
+      "discord": "Mit Discord anmelden"
     },
     "reason": "Grund: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr. {n} im Ranking",
       "days": "Stimmen pro Tag, letzte 30 Tage",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konto",
+      "changeEmail": "E-Mail ändern",
+      "newEmail": "Neue E-Mail",
+      "emailSent": "Wir haben Bestätigungs-E-Mails an die alte und die neue Adresse geschickt. Die Adresse ändert sich, sobald Sie beide bestätigen.",
+      "delete": "Konto löschen",
+      "deleteConfirm": "Ihr Konto und alle Ihre Server ({n}) löschen? Ihre Stimmen verschwinden ebenfalls. Das lässt sich nicht rückgängig machen.",
+      "deleteLastAdmin": "Der einzige Admin kann nicht gelöscht werden: Ernennen Sie zuerst einen anderen.",
+      "deleted": "Konto gelöscht."
     }
   },
   "vote": {

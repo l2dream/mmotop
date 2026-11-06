@@ -280,7 +280,9 @@
       "telegramTitle": "Prisijungti per Telegram",
       "telegramHint": "Susiekite Telegram, kad galėtumėte juo prisijungti bet kuriame kompiuteryje.",
       "telegramLinked": "Telegram susietas — galite juo prisijungti.",
-      "telegramTaken": "Šis Telegram jau susietas su kita paskyra."
+      "telegramTaken": "Šis Telegram jau susietas su kita paskyra.",
+      "google": "Prisijungti per Google",
+      "discord": "Prisijungti per Discord"
     },
     "reason": "Priežastis: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr. {n} reitinge",
       "days": "Balsai per dieną, paskutinės 30 dienų",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Paskyra",
+      "changeEmail": "Keisti el. paštą",
+      "newEmail": "Naujas el. paštas",
+      "emailSent": "Išsiuntėme patvirtinimo laiškus senu ir nauju adresu. El. paštas pasikeis, kai patvirtinsite abu.",
+      "delete": "Ištrinti paskyrą",
+      "deleteConfirm": "Ištrinti paskyrą ir visus jūsų serverius ({n})? Jų balsai taip pat dings. To atšaukti negalima.",
+      "deleteLastAdmin": "Vienintelio administratoriaus ištrinti negalima: pirmiausia paskirkite kitą.",
+      "deleted": "Paskyra ištrinta."
     }
   },
   "vote": {

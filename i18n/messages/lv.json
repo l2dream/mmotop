@@ -280,7 +280,9 @@
       "telegramTitle": "Pieteikties ar Telegram",
       "telegramHint": "Piesaistiet Telegram, lai ar to pieteiktos jebkurā datorā.",
       "telegramLinked": "Telegram piesaistīts — varat ar to pieteikties.",
-      "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam."
+      "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam.",
+      "google": "Pieteikties ar Google",
+      "discord": "Pieteikties ar Discord"
     },
     "reason": "Iemesls: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr. {n} reitingā",
       "days": "Balsis pa dienām, pēdējās 30 dienas",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konts",
+      "changeEmail": "Mainīt e-pastu",
+      "newEmail": "Jaunais e-pasts",
+      "emailSent": "Nosūtījām apstiprinājuma vēstules uz veco un jauno adresi. E-pasts mainīsies, kad apstiprināsiet abas.",
+      "delete": "Dzēst kontu",
+      "deleteConfirm": "Dzēst kontu un visus jūsu serverus ({n})? Arī to balsis pazudīs. To nevar atsaukt.",
+      "deleteLastAdmin": "Vienīgo administratoru nevar dzēst: vispirms ieceliet citu.",
+      "deleted": "Konts dzēsts."
     }
   },
   "vote": {

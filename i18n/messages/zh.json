@@ -280,7 +280,9 @@
       "telegramTitle": "用 Telegram 登录",
       "telegramHint": "绑定 Telegram，即可在任何电脑上用它登录。",
       "telegramLinked": "Telegram 已绑定，可以用它登录。",
-      "telegramTaken": "此 Telegram 已绑定到其他账户。"
+      "telegramTaken": "此 Telegram 已绑定到其他账户。",
+      "google": "用 Google 登录",
+      "discord": "用 Discord 登录"
     },
     "reason": "原因：{note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "排名第 {n}",
       "days": "每日票数（最近 30 天）",
       "dayVotes": "{date}：{n}"
+    },
+    "settings": {
+      "title": "账户",
+      "changeEmail": "更换邮箱",
+      "newEmail": "新邮箱",
+      "emailSent": "我们已向旧邮箱和新邮箱发送确认邮件。两封都确认后邮箱才会更换。",
+      "delete": "删除账户",
+      "deleteConfirm": "删除你的账户及全部服务器（{n} 个）？它们的票数也会一并删除，且无法恢复。",
+      "deleteLastAdmin": "不能删除唯一的管理员：请先任命另一位。",
+      "deleted": "账户已删除。"
     }
   },
   "vote": {

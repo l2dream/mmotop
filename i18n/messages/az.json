@@ -280,7 +280,9 @@
       "telegramTitle": "Telegram ilə daxil ol",
       "telegramHint": "İstənilən kompüterdə Telegram ilə daxil olmaq üçün onu bağlayın.",
       "telegramLinked": "Telegram bağlanıb — onunla daxil ola bilərsiniz.",
-      "telegramTaken": "Bu Telegram artıq başqa kabinetə bağlanıb."
+      "telegramTaken": "Bu Telegram artıq başqa kabinetə bağlanıb.",
+      "google": "Google ilə daxil ol",
+      "discord": "Discord ilə daxil ol"
     },
     "reason": "Səbəb: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Reytinqdə № {n}",
       "days": "Günlər üzrə səslər, son 30 gün",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Hesab",
+      "changeEmail": "Poçtu dəyiş",
+      "newEmail": "Yeni poçt",
+      "emailSent": "Köhnə və yeni ünvana təsdiq məktubları göndərdik. Hər ikisini təsdiqləyəndə poçt dəyişəcək.",
+      "delete": "Hesabı sil",
+      "deleteConfirm": "Hesabınız və bütün serverləriniz ({n}) silinsin? Onların səsləri də itəcək. Bunu geri qaytarmaq olmaz.",
+      "deleteLastAdmin": "Yeganə administratoru silmək olmaz: əvvəlcə başqasını təyin edin.",
+      "deleted": "Hesab silindi."
     }
   },
   "vote": {

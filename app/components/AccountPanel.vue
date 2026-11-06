@@ -141,6 +141,53 @@ const who = computed(() => {
   return user.email ?? ''
 })
 
+/** An account made with Telegram has no email of its own to change (a placeholder, never mailed). */
+const telegramOnly = computed(() => !!session.value?.user.email?.endsWith('@telegram.mmotop.com'))
+
+/** A new email: confirmed from both the old and the new address (secure email change). */
+const newEmail = ref('')
+const emailNote = ref('')
+async function changeEmail() {
+  if (!supabase.value || busy.value) return
+  busy.value = true
+  emailNote.value = ''
+  const { error: failed } = await supabase.value.auth.updateUser({ email: newEmail.value.trim() }, { emailRedirectTo: `${window.location.origin}${useRuntimeConfig().app.baseURL.replace(/\/$/, '')}${localePath('/account').replace(/\/?$/, '/')}` })
+  busy.value = false
+  if (failed) {
+    error.value = failed.status === 429 ? t('account.tooMany') : t('account.failed')
+    return
+  }
+  emailNote.value = t('account.settings.emailSent')
+  newEmail.value = ''
+}
+
+/** The account gone for good, with its servers (the account-delete function). */
+const deleteNote = ref('')
+async function deleteAccount() {
+  if (!supabase.value || busy.value || !window.confirm(t('account.settings.deleteConfirm', { n: servers.value.length }))) return
+  busy.value = true
+  deleteNote.value = ''
+  let answer: { deleted?: boolean, error?: string } = {}
+  try {
+    const { data } = await supabase.value.auth.getSession()
+    const res = await fetch(`${FUNCTIONS_URL}/account-delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data.session?.access_token ?? ''}` },
+      body: '{}'
+    })
+    answer = await res.json().catch(() => ({ error: 'failed' }))
+  } catch {
+    answer = { error: 'failed' }
+  }
+  busy.value = false
+  if (answer.deleted) {
+    window.alert(t('account.settings.deleted'))
+    await signOut()
+  } else {
+    deleteNote.value = answer.error === 'last_admin' ? t('account.settings.deleteLastAdmin') : t('account.failed')
+  }
+}
+
 /** A QR sign-in this phone was asked to approve (?approve=<id>.<secret>), until answered. */
 const route = useRoute()
 const router = useRouter()
@@ -1051,6 +1098,23 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
           <p v-if="error" class="account-error" role="alert">{{ error }}</p>
           <button type="button" class="account-button" @click="addServer">{{ $t('account.addServer') }}</button>
           <p class="account-note">{{ $t('account.moderation') }}</p>
+          <!-- The account itself: its email, and deleting it. -->
+          <details class="account-reward account-settings">
+            <summary>{{ $t('account.settings.title') }}</summary>
+            <form v-if="!telegramOnly" class="account-field" @submit.prevent="changeEmail">
+              <span>{{ $t('account.settings.changeEmail') }}</span>
+              <div class="account-secret-row">
+                <input v-model="newEmail" type="email" autocomplete="email" :placeholder="$t('account.settings.newEmail')" :aria-label="$t('account.settings.newEmail')" required>
+                <button type="submit" class="account-link" :disabled="busy">{{ $t('account.save') }}</button>
+              </div>
+              <small v-if="emailNote" class="account-ok" role="status">{{ emailNote }}</small>
+            </form>
+            <div class="account-field">
+              <button type="button" class="account-link account-danger" :disabled="busy" @click="deleteAccount">{{ $t('account.settings.delete') }}</button>
+              <small v-if="deleteNote" class="account-error" role="alert">{{ deleteNote }}</small>
+            </div>
+          </details>
+          <AdminModerators v-if="isAdmin && supabase" :supabase="supabase" :me="session?.user.id ?? ''" />
           <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>
