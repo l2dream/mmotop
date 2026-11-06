@@ -255,7 +255,8 @@
       "example": "Lejupielādēt uztvērēja piemēru (PHP)",
       "listTitle": "Balsu saraksts — otrs veids",
       "listHint": "Jūsu serveris pats var ņemt no šejienes, kas nobalsoja: rinda par balsi “numurs;laiks;segvārds” par pēdējo diennakti. Pievienojiet &since=pēdējās apstrādātās balss numurs, lai saņemtu tikai jaunās. Paziņojumu adresi tad var neaizpildīt.",
-      "urlOptional": "(nav vajadzīga, ja serveris pats ņem balsu sarakstu)"
+      "urlOptional": "(nav vajadzīga, ja serveris pats ņem balsu sarakstu)",
+      "exampleList": "Lejupielādēt piemēru balsu sarakstam (PHP, pēc grafika)"
     },
     "signin": {
       "code": "Kods no e-pasta",

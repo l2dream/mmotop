@@ -255,7 +255,8 @@
       "example": "Baixar um receptor de exemplo (PHP)",
       "listTitle": "Lista de votos — a outra forma",
       "listHint": "Seu servidor pode buscar aqui quem votou: uma linha por voto, “número;hora;nick”, das últimas 24 horas. Adicione &since=número do último voto processado para receber só os novos. Aí o endereço de notificação pode ficar vazio.",
-      "urlOptional": "(não precisa se o servidor buscar a lista de votos)"
+      "urlOptional": "(não precisa se o servidor buscar a lista de votos)",
+      "exampleList": "Baixar um exemplo para a lista de votos (PHP, agendado)"
     },
     "signin": {
       "code": "Código do e-mail",

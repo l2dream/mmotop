@@ -255,7 +255,8 @@
       "example": "Laadi alla näidisvastuvõtja (PHP)",
       "listTitle": "Häälte nimekiri — teine viis",
       "listHint": "Sinu server saab siit ise võtta, kes hääletas: rida hääle kohta „number;aeg;hüüdnimi“ viimase ööpäeva kohta. Lisa &since=viimati töödeldud hääle number, et saada ainult uued. Teavituste aadressi võib siis tühjaks jätta.",
-      "urlOptional": "(pole vaja, kui server võtab häälte nimekirja ise)"
+      "urlOptional": "(pole vaja, kui server võtab häälte nimekirja ise)",
+      "exampleList": "Laadi alla näide häälte nimekirja jaoks (PHP, ajakava järgi)"
     },
     "signin": {
       "code": "Kood e-kirjast",

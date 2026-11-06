@@ -255,7 +255,8 @@
       "example": "Atsisiųsti imtuvo pavyzdį (PHP)",
       "listTitle": "Balsų sąrašas — antras būdas",
       "listHint": "Jūsų serveris pats gali imti iš čia, kas balsavo: eilutė vienam balsui „numeris;laikas;slapyvardis“ už paskutinę parą. Pridėkite &since=paskutinio apdoroto balso numeris, kad gautumėte tik naujus. Tada pranešimų adreso galima nenurodyti.",
-      "urlOptional": "(nereikia, jei serveris pats ima balsų sąrašą)"
+      "urlOptional": "(nereikia, jei serveris pats ima balsų sąrašą)",
+      "exampleList": "Atsisiųsti pavyzdį balsų sąrašui (PHP, pagal grafiką)"
     },
     "signin": {
       "code": "Kodas iš laiško",

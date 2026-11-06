@@ -949,6 +949,7 @@ async function remove(s: OwnServer) {
                 <button type="button" class="account-link" @click="copyList">{{ listCopied ? $t('account.reward.copied') : $t('account.reward.copy') }}</button>
               </div>
               <small>{{ $t('account.reward.listHint') }}</small>
+              <a class="account-link account-example" :href="`${$config.app.baseURL}postback/mmotop-votes-list.php`" download="mmotop-votes-list.php">{{ $t('account.reward.exampleList') }}</a>
             </div>
             <!-- A test sent now, and what became of the last ones. -->
             <div class="account-field">

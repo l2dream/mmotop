@@ -255,7 +255,8 @@
       "example": "Örnek alıcıyı indir (PHP)",
       "listTitle": "Oy listesi — diğer yol",
       "listHint": "Sunucunuz kimin oy verdiğini buradan kendisi alabilir: oy başına bir satır, “numara;zaman;takma ad”, son 24 saat için. Yalnızca yenileri almak için &since=en son işlenen oyun numarası ekleyin. Bu durumda bildirim adresi boş kalabilir.",
-      "urlOptional": "(sunucu oy listesini alıyorsa gerekmez)"
+      "urlOptional": "(sunucu oy listesini alıyorsa gerekmez)",
+      "exampleList": "Oy listesi için örneği indir (PHP, zamanlanmış)"
     },
     "signin": {
       "code": "E-postadaki kod",

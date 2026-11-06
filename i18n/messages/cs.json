@@ -255,7 +255,8 @@
       "example": "Stáhnout ukázkový přijímač (PHP)",
       "listTitle": "Seznam hlasů — druhý způsob",
       "listHint": "Váš server si odsud může sám brát, kdo hlasoval: řádek na hlas „číslo;čas;přezdívka“ za posledních 24 hodin. Přidejte &since=číslo posledního zpracovaného hlasu a dostanete jen nové. Adresa pro oznámení pak může zůstat prázdná.",
-      "urlOptional": "(není potřeba, pokud si server bere seznam hlasů)"
+      "urlOptional": "(není potřeba, pokud si server bere seznam hlasů)",
+      "exampleList": "Stáhnout ukázku pro seznam hlasů (PHP, podle plánu)"
     },
     "signin": {
       "code": "Kód z e-mailu",
