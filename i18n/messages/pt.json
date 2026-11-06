@@ -337,5 +337,9 @@
     "checking": "A verificar o navegador…",
     "needCaptcha": "Muitos votos em pouco tempo — confirme que não é um robô.",
     "altchaFailed": "A verificação do navegador falhou. Recarregue a página e tente novamente."
+  },
+  "rich": {
+    "watchYoutube": "Ver no YouTube",
+    "notLoading": "O vídeo não carrega?"
   }
 }

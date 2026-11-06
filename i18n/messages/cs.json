@@ -337,5 +337,9 @@
     "checking": "Kontrolujeme prohlížeč…",
     "needCaptcha": "Hodně hlasů za krátkou dobu — potvrďte, že nejste robot.",
     "altchaFailed": "Kontrola prohlížeče selhala. Obnovte stránku a zkuste to znovu."
+  },
+  "rich": {
+    "watchYoutube": "Přehrát na YouTube",
+    "notLoading": "Video se nenačítá?"
   }
 }

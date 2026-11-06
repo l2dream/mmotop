@@ -337,5 +337,9 @@
     "checking": "Brauzer yoxlanılır…",
     "needCaptcha": "Qısa müddətdə çoxlu səs — robot olmadığınızı təsdiqləyin.",
     "altchaFailed": "Brauzer yoxlaması alınmadı. Səhifəni yeniləyib yenidən cəhd edin."
+  },
+  "rich": {
+    "watchYoutube": "YouTube-da bax",
+    "notLoading": "Video yüklənmir?"
   }
 }

@@ -337,5 +337,9 @@
     "checking": "Kontrollerar webbläsaren…",
     "needCaptcha": "Många röster på kort tid – bekräfta att du inte är en robot.",
     "altchaFailed": "Webbläsarkontrollen misslyckades. Ladda om sidan och försök igen."
+  },
+  "rich": {
+    "watchYoutube": "Titta på YouTube",
+    "notLoading": "Laddas inte videon?"
   }
 }

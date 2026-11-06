@@ -337,5 +337,9 @@
     "checking": "Kontrollime brauserit…",
     "needCaptcha": "Palju hääli lühikese ajaga — kinnita, et sa pole robot.",
     "altchaFailed": "Brauseri kontroll ebaõnnestus. Laadi leht uuesti ja proovi uuesti."
+  },
+  "rich": {
+    "watchYoutube": "Vaata YouTube’is",
+    "notLoading": "Video ei laadi?"
   }
 }

@@ -337,5 +337,9 @@
     "checking": "브라우저를 확인하는 중…",
     "needCaptcha": "짧은 시간에 투표가 많습니다. 로봇이 아님을 확인해 주세요.",
     "altchaFailed": "브라우저 확인에 실패했습니다. 페이지를 새로 고친 뒤 다시 시도하세요."
+  },
+  "rich": {
+    "watchYoutube": "YouTube에서 보기",
+    "notLoading": "영상이 로드되지 않나요?"
   }
 }

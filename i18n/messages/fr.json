@@ -337,5 +337,9 @@
     "checking": "Vérification du navigateur…",
     "needCaptcha": "Beaucoup de votes en peu de temps : confirmez que vous n’êtes pas un robot.",
     "altchaFailed": "La vérification du navigateur a échoué. Rechargez la page et réessayez."
+  },
+  "rich": {
+    "watchYoutube": "Regarder sur YouTube",
+    "notLoading": "La vidéo ne se charge pas ?"
   }
 }

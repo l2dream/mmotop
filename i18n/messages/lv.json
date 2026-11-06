@@ -337,5 +337,9 @@
     "checking": "Pārbaudām pārlūku…",
     "needCaptcha": "Daudz balsu īsā laikā — apstipriniet, ka neesat robots.",
     "altchaFailed": "Pārlūka pārbaude neizdevās. Pārlādējiet lapu un mēģiniet vēlreiz."
+  },
+  "rich": {
+    "watchYoutube": "Skatīties YouTube",
+    "notLoading": "Video neielādējas?"
   }
 }

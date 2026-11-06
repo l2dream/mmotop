@@ -337,5 +337,9 @@
     "checking": "Tarayıcınız kontrol ediliyor…",
     "needCaptcha": "Kısa sürede çok fazla oy — robot olmadığınızı doğrulayın.",
     "altchaFailed": "Tarayıcı kontrolü başarısız oldu. Sayfayı yenileyip tekrar deneyin."
+  },
+  "rich": {
+    "watchYoutube": "YouTube’da izle",
+    "notLoading": "Video yüklenmiyor mu?"
   }
 }
