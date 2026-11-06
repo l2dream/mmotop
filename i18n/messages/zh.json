@@ -152,7 +152,9 @@
     "desc": "降序"
   },
   "footer": {
-    "popular": "热门"
+    "popular": "热门",
+    "privacy": "隐私",
+    "terms": "条款"
   },
   "account": {
     "title": "我的账户",

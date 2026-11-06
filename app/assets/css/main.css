@@ -1284,6 +1284,15 @@ a.login-button { text-decoration: none; }
 .theme-light .footer-popular,
 .theme-light .footer-popular a,
 .theme-light .site-footer-copy { color: #464a60; }
+.site-footer-legal { display: flex; gap: 14px; justify-content: center; font-size: 13px; }
+.site-footer-legal a { color: #9a9fb8; text-decoration: none; }
+.site-footer-legal a:hover { text-decoration: underline; }
+.theme-light .site-footer-legal a { color: #464a60; }
+/* The privacy and terms pages: plain reading text. */
+.legal-body { display: grid; gap: 18px; padding: 4px 2px 8px; line-height: 1.6; max-width: 46rem; }
+.legal-body h2 { margin: 0 0 6px; font-size: 16px; }
+.legal-body p { margin: 0 0 8px; color: #c9cce0; }
+.theme-light .legal-body p { color: #3a3e58; }
 .theme-light .footer-popular a { text-decoration-color: rgba(70, 74, 96, .35); }
 .theme-light .footer-popular a:hover { color: #16182b; }
 

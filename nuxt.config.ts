@@ -119,7 +119,10 @@ export default defineNuxtConfig({
           ...SERVERS.map(s => `${prefix}/server/${s.id}`),
           ...[...OLD_PATHS.keys()].filter(p => !LANDINGS.some(l => `${l.game}/${l.slug}` === p)).map(p => `${prefix}/${p}`),
           // Signing in and the owner's cabinet; not in the sitemap (noindex).
-          `${prefix}/account`
+          `${prefix}/account`,
+          // What the site keeps and its rules (LegalPage).
+          `${prefix}/privacy`,
+          `${prefix}/terms`
         ]
       })
     }

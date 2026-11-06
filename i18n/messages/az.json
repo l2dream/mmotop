@@ -152,7 +152,9 @@
     "desc": "azalan"
   },
   "footer": {
-    "popular": "Populyar"
+    "popular": "Populyar",
+    "privacy": "Məxfilik",
+    "terms": "Şərtlər"
   },
   "account": {
     "title": "Kabinet",

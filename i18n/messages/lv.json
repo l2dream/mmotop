@@ -152,7 +152,9 @@
     "desc": "dilstoši"
   },
   "footer": {
-    "popular": "Populāri"
+    "popular": "Populāri",
+    "privacy": "Privātums",
+    "terms": "Noteikumi"
   },
   "account": {
     "title": "Konts",

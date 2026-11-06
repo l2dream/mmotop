@@ -152,7 +152,9 @@
     "desc": "내림차순"
   },
   "footer": {
-    "popular": "인기"
+    "popular": "인기",
+    "privacy": "개인정보",
+    "terms": "이용약관"
   },
   "account": {
     "title": "내 계정",

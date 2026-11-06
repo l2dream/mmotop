@@ -42,5 +42,9 @@ const popular = computed(() => LANDINGS
       <NuxtLink v-for="p in popular" :key="p.to" :to="p.to">{{ p.label }}</NuxtLink>
     </nav>
     <span class="site-footer-copy" dir="ltr">© {{ year }} MMOTOP</span>
+    <nav class="site-footer-legal">
+      <NuxtLink :to="localePath('/privacy/')">{{ $t('footer.privacy') }}</NuxtLink>
+      <NuxtLink :to="localePath('/terms/')">{{ $t('footer.terms') }}</NuxtLink>
+    </nav>
   </footer>
 </template>

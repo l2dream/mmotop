@@ -152,7 +152,9 @@
     "desc": "mažėjančiai"
   },
   "footer": {
-    "popular": "Populiaru"
+    "popular": "Populiaru",
+    "privacy": "Privatumas",
+    "terms": "Sąlygos"
   },
   "account": {
     "title": "Paskyra",

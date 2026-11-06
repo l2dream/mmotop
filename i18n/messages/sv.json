@@ -152,7 +152,9 @@
     "desc": "fallande"
   },
   "footer": {
-    "popular": "Populärt"
+    "popular": "Populärt",
+    "privacy": "Integritet",
+    "terms": "Villkor"
   },
   "account": {
     "title": "Konto",

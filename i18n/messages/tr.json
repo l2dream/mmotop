@@ -152,7 +152,9 @@
     "desc": "azalan"
   },
   "footer": {
-    "popular": "Popüler"
+    "popular": "Popüler",
+    "privacy": "Gizlilik",
+    "terms": "Koşullar"
   },
   "account": {
     "title": "Hesabım",

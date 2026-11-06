@@ -152,7 +152,9 @@
     "desc": "sestupně"
   },
   "footer": {
-    "popular": "Oblíbené"
+    "popular": "Oblíbené",
+    "privacy": "Soukromí",
+    "terms": "Podmínky"
   },
   "account": {
     "title": "Můj účet",
