@@ -281,6 +281,13 @@
       "telegramHint": "İstənilən kompüterdə Telegram ilə daxil olmaq üçün onu bağlayın.",
       "telegramLinked": "Telegram bağlanıb — onunla daxil ola bilərsiniz.",
       "telegramTaken": "Bu Telegram artıq başqa kabinetə bağlanıb."
+    },
+    "reason": "Səbəb: {note}",
+    "stats": {
+      "month": "Bu ayın səsləri: {n}",
+      "rank": "Reytinqdə № {n}",
+      "days": "Günlər üzrə səslər, son 30 gün",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

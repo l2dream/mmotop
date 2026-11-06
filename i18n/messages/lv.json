@@ -281,6 +281,13 @@
       "telegramHint": "Piesaistiet Telegram, lai ar to pieteiktos jebkurā datorā.",
       "telegramLinked": "Telegram piesaistīts — varat ar to pieteikties.",
       "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam."
+    },
+    "reason": "Iemesls: {note}",
+    "stats": {
+      "month": "Balsis šomēnes: {n}",
+      "rank": "Nr. {n} reitingā",
+      "days": "Balsis pa dienām, pēdējās 30 dienas",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

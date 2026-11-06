@@ -281,6 +281,13 @@
       "telegramHint": "Susiekite Telegram, kad galėtumėte juo prisijungti bet kuriame kompiuteryje.",
       "telegramLinked": "Telegram susietas — galite juo prisijungti.",
       "telegramTaken": "Šis Telegram jau susietas su kita paskyra."
+    },
+    "reason": "Priežastis: {note}",
+    "stats": {
+      "month": "Balsų šį mėnesį: {n}",
+      "rank": "Nr. {n} reitinge",
+      "days": "Balsai per dieną, paskutinės 30 dienų",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

@@ -281,6 +281,13 @@
       "telegramHint": "绑定 Telegram，即可在任何电脑上用它登录。",
       "telegramLinked": "Telegram 已绑定，可以用它登录。",
       "telegramTaken": "此 Telegram 已绑定到其他账户。"
+    },
+    "reason": "原因：{note}",
+    "stats": {
+      "month": "本月票数：{n}",
+      "rank": "排名第 {n}",
+      "days": "每日票数（最近 30 天）",
+      "dayVotes": "{date}：{n}"
     }
   },
   "vote": {

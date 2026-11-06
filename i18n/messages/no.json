@@ -281,6 +281,13 @@
       "telegramHint": "Koble til Telegram for å logge inn med det på hvilken som helst datamaskin.",
       "telegramLinked": "Telegram er koblet til — du kan logge inn med det.",
       "telegramTaken": "Denne Telegram-kontoen er allerede koblet til en annen konto."
+    },
+    "reason": "Begrunnelse: {note}",
+    "stats": {
+      "month": "Stemmer denne måneden: {n}",
+      "rank": "Nr. {n} på rangeringen",
+      "days": "Stemmer per dag, siste 30 dager",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

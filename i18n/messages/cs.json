@@ -281,6 +281,13 @@
       "telegramHint": "Propojte Telegram a přihlašujte se jím na libovolném počítači.",
       "telegramLinked": "Telegram je propojen — můžete se jím přihlašovat.",
       "telegramTaken": "Tento Telegram je už propojen s jiným účtem."
+    },
+    "reason": "Důvod: {note}",
+    "stats": {
+      "month": "Hlasů tento měsíc: {n}",
+      "rank": "Č. {n} v žebříčku",
+      "days": "Hlasy po dnech, posledních 30 dní",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

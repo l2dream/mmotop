@@ -38,12 +38,14 @@ interface OwnServer {
   logo: string | null
   /** A new logo of an approved server, waiting for the moderator (logo_review). */
   logo_pending: string | null
+  /** Why the moderator rejected or hid it, if they said. */
+  moderation_note: string | null
   status: 'pending' | 'approved' | 'rejected' | 'hidden'
 }
 
-type Draft = Omit<OwnServer, 'status' | 'logo_pending' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string }
+type Draft = Omit<OwnServer, 'status' | 'logo_pending' | 'moderation_note' | 'rate' | 'rate_text' | 'requested_game' | 'language' | 'language_text'> & { rate: string, rate_text: string, requested_game: string, language: string, language_text: string }
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const localePath = useLocalePath()
 
@@ -119,8 +121,10 @@ watch(() => session.value?.user.id, (id) => {
 })
 
 async function loadAdmin(id: string) {
-  const { data } = await supabase.value!.from('profiles').select('is_admin, telegram_id').eq('id', id).maybeSingle()
+  const { data } = await supabase.value!.from('profiles').select('is_admin, telegram_id, locale').eq('id', id).maybeSingle()
   isAdmin.value = !!data?.is_admin
+  // The language messages to the owner are written in (notify-owner).
+  if (data && data.locale !== locale.value) await supabase.value!.from('profiles').update({ locale: locale.value }).eq('id', id)
   telegramLinked.value = data?.telegram_id != null
 }
 
@@ -163,12 +167,33 @@ async function loadServers() {
   loadingServers.value = true
   const { data, error: failed } = await supabase.value
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, logo, logo_pending, status')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, url, open_date, description, language, language_text, links, logo, logo_pending, moderation_note, status')
     .eq('owner_id', session.value.user.id)
     .order('created_at')
   loadingServers.value = false
   if (failed) error.value = t('account.failed')
-  else servers.value = data as OwnServer[]
+  else {
+    servers.value = data as OwnServer[]
+    loadStanding()
+  }
+}
+
+/**
+ * This month's votes and the place in the ranking, for each listed server
+ * (server_votes_month, the same count the site shows; one place among all
+ * listed servers, as on the TOP list).
+ */
+const standing = ref<Record<string, { votes: number, rank: number }>>({})
+async function loadStanding() {
+  if (!servers.value.some((s) => s.status === 'approved')) return
+  const { data } = await supabase.value!.from('server_votes_month').select('server_id, votes')
+  const all = (data ?? []) as { server_id: string, votes: number }[]
+  const next: Record<string, { votes: number, rank: number }> = {}
+  for (const s of servers.value) {
+    const mine = all.find((x) => x.server_id === s.id)
+    if (mine) next[s.id] = { votes: mine.votes, rank: 1 + all.filter((x) => x.votes > mine.votes).length }
+  }
+  standing.value = next
 }
 
 function addServer() {
@@ -207,7 +232,7 @@ function editServer(s: OwnServer) {
   idError.value = ''
   loadReward(s.id)
   editing.value = s.id
-  const { logo_pending: _pending, status: _status, ...own } = s
+  const { logo_pending: _pending, status: _status, moderation_note: _note, ...own } = s
   draft.value = { ...own, logo: s.logo_pending ?? s.logo, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
@@ -530,7 +555,6 @@ async function loadPostbackLog(serverId: string) {
     .eq('server_id', serverId).order('sent_at', { ascending: false }).limit(15)
   if (editing.value === serverId) postbackLog.value = data ?? []
 }
-const { locale } = useI18n()
 const logTime = (at: string) => new Intl.DateTimeFormat(locale.value, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(at))
 
 /**
@@ -1012,6 +1036,8 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
                 <span class="account-note">{{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}</span>
               </div>
               <span class="account-status" :class="`status-${s.status}`">{{ $t(`account.status.${s.status}`) }}</span>
+              <p v-if="s.moderation_note && (s.status === 'rejected' || s.status === 'hidden')" class="account-error account-reason">{{ $t('account.reason', { note: s.moderation_note }) }}</p>
+              <ServerStats v-if="s.status === 'approved' && supabase" class="account-server-stats" :supabase="supabase" :server-id="s.id" :votes="standing[s.id]?.votes ?? 0" :rank="standing[s.id]?.rank ?? null" />
               <!-- Its page's address, to share; shown here rather than in
                    the form. A link once the server is on the site. -->
               <a v-if="s.status === 'approved' && s.game !== 'other'" class="account-address" :href="pageAddress(s)" target="_blank" rel="noopener" dir="ltr">{{ pageAddress(s).replace(/^https:\/\//, '') }}</a>

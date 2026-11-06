@@ -281,6 +281,13 @@
       "telegramHint": "Seo Telegram, et sellega igas arvutis sisse logida.",
       "telegramLinked": "Telegram on seotud — saad sellega sisse logida.",
       "telegramTaken": "See Telegram on juba seotud teise kontoga."
+    },
+    "reason": "Põhjus: {note}",
+    "stats": {
+      "month": "Hääli sel kuul: {n}",
+      "rank": "Edetabelis nr {n}",
+      "days": "Hääled päevade kaupa, viimased 30 päeva",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

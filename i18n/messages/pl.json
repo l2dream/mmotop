@@ -281,6 +281,13 @@
       "telegramHint": "Połącz Telegram, aby logować się nim na każdym komputerze.",
       "telegramLinked": "Telegram połączony — możesz się nim logować.",
       "telegramTaken": "Ten Telegram jest już połączony z innym kontem."
+    },
+    "reason": "Powód: {note}",
+    "stats": {
+      "month": "Głosy w tym miesiącu: {n}",
+      "rank": "Nr {n} w rankingu",
+      "days": "Głosy dziennie, ostatnie 30 dni",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {
