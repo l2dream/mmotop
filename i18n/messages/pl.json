@@ -301,7 +301,16 @@
       "delete": "Usuń konto",
       "deleteConfirm": "Usunąć konto i wszystkie Twoje serwery ({n})? Ich głosy też przepadną. Tego nie można cofnąć.",
       "deleteLastAdmin": "Nie można usunąć jedynego administratora: najpierw wyznacz innego.",
-      "deleted": "Konto usunięte."
+      "deleted": "Konto usunięte.",
+      "ways": "Sposoby logowania",
+      "email": "E-mail",
+      "linked": "połączony",
+      "notLinked": "niepołączony",
+      "unlink": "Odłącz",
+      "unlinkConfirm": "Odłączyć {name}? Nie zalogujesz się nim, dopóki nie połączysz go ponownie.",
+      "onlyWay": "To jedyny sposób wejścia na konto, nie można go odłączyć.",
+      "unlinked": "Odłączono {name}.",
+      "howLink": "Google i Discord łączą się same, gdy zalogujesz się nimi z e-mailem konta."
     }
   },
   "vote": {

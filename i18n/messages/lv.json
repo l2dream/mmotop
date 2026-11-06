@@ -301,7 +301,16 @@
       "delete": "Dzēst kontu",
       "deleteConfirm": "Dzēst kontu un visus jūsu serverus ({n})? Arī to balsis pazudīs. To nevar atsaukt.",
       "deleteLastAdmin": "Vienīgo administratoru nevar dzēst: vispirms ieceliet citu.",
-      "deleted": "Konts dzēsts."
+      "deleted": "Konts dzēsts.",
+      "ways": "Pieteikšanās veidi",
+      "email": "E-pasts",
+      "linked": "piesaistīts",
+      "notLinked": "nav piesaistīts",
+      "unlink": "Atsaistīt",
+      "unlinkConfirm": "Atsaistīt {name}? Ar to nevarēsiet pieteikties, kamēr nepiesaistīsiet atkal.",
+      "onlyWay": "Tas ir vienīgais veids, kā piekļūt kontam, to nevar atsaistīt.",
+      "unlinked": "{name} atsaistīts.",
+      "howLink": "Google un Discord piesaistās paši, ja piesakāties ar tiem ar konta e-pastu."
     }
   },
   "vote": {

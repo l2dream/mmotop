@@ -301,7 +301,16 @@
       "delete": "Hesabı sil",
       "deleteConfirm": "Hesabınız ve tüm sunucularınız ({n}) silinsin mi? Oyları da kaybolur. Bu geri alınamaz.",
       "deleteLastAdmin": "Tek yönetici silinemez: önce başka birini atayın.",
-      "deleted": "Hesap silindi."
+      "deleted": "Hesap silindi.",
+      "ways": "Giriş yolları",
+      "email": "E-posta",
+      "linked": "bağlı",
+      "notLinked": "bağlı değil",
+      "unlink": "Bağlantıyı kaldır",
+      "unlinkConfirm": "{name} bağlantısı kaldırılsın mı? Yeniden bağlayana kadar onunla giriş yapamazsınız.",
+      "onlyWay": "Hesaba tek giriş yolu bu, kaldırılamaz.",
+      "unlinked": "{name} bağlantısı kaldırıldı.",
+      "howLink": "Google ve Discord, hesabın e-postasıyla onlarla giriş yaptığınızda kendiliğinden bağlanır."
     }
   },
   "vote": {

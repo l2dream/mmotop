@@ -301,7 +301,16 @@
       "delete": "Radera konto",
       "deleteConfirm": "Radera ditt konto och alla dina servrar ({n})? Deras röster försvinner också. Det går inte att ångra.",
       "deleteLastAdmin": "Den enda administratören kan inte raderas: utse en annan först.",
-      "deleted": "Kontot är raderat."
+      "deleted": "Kontot är raderat.",
+      "ways": "Sätt att logga in",
+      "email": "E-post",
+      "linked": "kopplad",
+      "notLinked": "inte kopplad",
+      "unlink": "Koppla bort",
+      "unlinkConfirm": "Koppla bort {name}? Du kan inte logga in med det förrän du kopplar det igen.",
+      "onlyWay": "Det är det enda sättet in på kontot och kan inte kopplas bort.",
+      "unlinked": "{name} bortkopplad.",
+      "howLink": "Google och Discord kopplas själva när du loggar in med dem med kontots e-post."
     }
   },
   "vote": {

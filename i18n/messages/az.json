@@ -301,7 +301,16 @@
       "delete": "Hesabı sil",
       "deleteConfirm": "Hesabınız və bütün serverləriniz ({n}) silinsin? Onların səsləri də itəcək. Bunu geri qaytarmaq olmaz.",
       "deleteLastAdmin": "Yeganə administratoru silmək olmaz: əvvəlcə başqasını təyin edin.",
-      "deleted": "Hesab silindi."
+      "deleted": "Hesab silindi.",
+      "ways": "Giriş üsulları",
+      "email": "Poçt",
+      "linked": "bağlıdır",
+      "notLinked": "bağlı deyil",
+      "unlink": "Ayır",
+      "unlinkConfirm": "{name} ayrılsın? Yenidən bağlayana qədər onunla daxil ola bilməyəcəksiniz.",
+      "onlyWay": "Bu, hesaba yeganə giriş yoludur, ayırmaq olmaz.",
+      "unlinked": "{name} ayrıldı.",
+      "howLink": "Google və Discord hesabın poçtu ilə onlardan daxil olduqda özü bağlanır."
     }
   },
   "vote": {

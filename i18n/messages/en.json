@@ -301,7 +301,16 @@
       "delete": "Delete account",
       "deleteConfirm": "Delete your account and all your servers ({n})? Their votes go too. This can’t be undone.",
       "deleteLastAdmin": "The only admin can’t be deleted: appoint another one first.",
-      "deleted": "Account deleted."
+      "deleted": "Account deleted.",
+      "ways": "Ways to sign in",
+      "email": "Email",
+      "linked": "linked",
+      "notLinked": "not linked",
+      "unlink": "Unlink",
+      "unlinkConfirm": "Unlink {name}? You won’t be able to sign in with it until you link it again.",
+      "onlyWay": "This is the only way into the account, so it can’t be unlinked.",
+      "unlinked": "{name} unlinked.",
+      "howLink": "Google and Discord link by themselves when you sign in with them using the account’s email."
     }
   },
   "vote": {

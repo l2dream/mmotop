@@ -301,7 +301,16 @@
       "delete": "删除账户",
       "deleteConfirm": "删除你的账户及全部服务器（{n} 个）？它们的票数也会一并删除，且无法恢复。",
       "deleteLastAdmin": "不能删除唯一的管理员：请先任命另一位。",
-      "deleted": "账户已删除。"
+      "deleted": "账户已删除。",
+      "ways": "登录方式",
+      "email": "邮箱",
+      "linked": "已绑定",
+      "notLinked": "未绑定",
+      "unlink": "解除绑定",
+      "unlinkConfirm": "解除绑定 {name}？在重新绑定之前将无法用它登录。",
+      "onlyWay": "这是登录该账户的唯一方式，无法解除绑定。",
+      "unlinked": "已解除绑定 {name}。",
+      "howLink": "用与账户相同的邮箱通过 Google 或 Discord 登录时，会自动绑定。"
     }
   },
   "vote": {

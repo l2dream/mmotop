@@ -301,7 +301,16 @@
       "delete": "Slet konto",
       "deleteConfirm": "Slet din konto og alle dine servere ({n})? Deres stemmer forsvinder også. Det kan ikke fortrydes.",
       "deleteLastAdmin": "Den eneste administrator kan ikke slettes: udnævn en anden først.",
-      "deleted": "Kontoen er slettet."
+      "deleted": "Kontoen er slettet.",
+      "ways": "Måder at logge ind",
+      "email": "E-mail",
+      "linked": "tilknyttet",
+      "notLinked": "ikke tilknyttet",
+      "unlink": "Fjern",
+      "unlinkConfirm": "Fjern {name}? Du kan ikke logge ind med det, før du tilknytter det igen.",
+      "onlyWay": "Det er den eneste vej ind på kontoen og kan ikke fjernes.",
+      "unlinked": "{name} fjernet.",
+      "howLink": "Google og Discord tilknyttes selv, når du logger ind med dem med kontoens e-mail."
     }
   },
   "vote": {

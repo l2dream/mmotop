@@ -301,7 +301,16 @@
       "delete": "Smazat účet",
       "deleteConfirm": "Smazat účet a všechny vaše servery ({n})? Jejich hlasy zmizí také. Nelze to vrátit.",
       "deleteLastAdmin": "Jediného administrátora nelze smazat: nejdřív jmenujte jiného.",
-      "deleted": "Účet smazán."
+      "deleted": "Účet smazán.",
+      "ways": "Způsoby přihlášení",
+      "email": "E-mail",
+      "linked": "propojeno",
+      "notLinked": "nepropojeno",
+      "unlink": "Odpojit",
+      "unlinkConfirm": "Odpojit {name}? Dokud ho znovu nepropojíte, nepřihlásíte se jím.",
+      "onlyWay": "Je to jediný způsob přihlášení, nelze ho odpojit.",
+      "unlinked": "{name} odpojeno.",
+      "howLink": "Google a Discord se propojí samy, když se jimi přihlásíte se stejným e-mailem jako účet."
     }
   },
   "vote": {
