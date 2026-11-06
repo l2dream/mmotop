@@ -77,6 +77,14 @@ async function showCaptcha() {
 }
 onUnmounted(() => captcha?.remove())
 
+// TEST — remove after checking (see docs/notes.md, "Временное для проверки"):
+// ?turnstile=1 on a server's page opens the box straight on Turnstile, as for
+// a suspicious vote, to see that the captcha loads and the vote goes through.
+const route = useRoute()
+onMounted(() => {
+  if (route.query.turnstile === '1') showCaptcha()
+})
+
 /** "в 14:30" today, a full date and time otherwise, in the page's language. */
 function when(iso: string) {
   const at = new Date(iso)
