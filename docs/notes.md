@@ -82,6 +82,19 @@
 
 ## Начато и отложено
 
+- **⏰ ПРИ ПЕРЕХОДЕ В ЛАЙВ — свой домен для Supabase** (владелец решил
+  6 ноября: будет платить, когда сайт перейдёт в лайв-режим). Сейчас при входе
+  через Google на экране «Переход в приложение xpfgjhyuompskzxsmwrc.supabase.co»;
+  с доменом Supabase (например `auth.mmotop.com` или `api.mmotop.com`) будет
+  mmotop.com. Нужен платный тариф Supabase (Pro) + дополнение Custom Domain
+  (~10 $/мес) — точные цены проверить в момент перехода. После подключения
+  домена переписать по всему проекту адрес `xpfgjhyuompskzxsmwrc.supabase.co`:
+  `useSupabase.ts`, `fetch-servers.mjs`, `notify-owner`, `postback-retry`
+  (pg_cron), триггер `servers_notify_owner`, ссылки на список голосов и
+  пример приёмника, redirect в Google Cloud и Discord, домены в Google
+  Branding, CORS функций. Старый адрес Supabase продолжает работать, так что
+  можно переводить по частям.
+
 - **⚠️ Временное для проверки — УДАЛИТЬ после проверки** (владелец просил не
   забыть): тестовая ссылка `?turnstile=1` на странице сервера — окно
   голосования сразу с Turnstile (`VoteBox.vue`, блок с пометкой `TEST`).
