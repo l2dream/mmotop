@@ -250,7 +250,8 @@
       "log": "Siste varsler",
       "logEmpty": "Ingen varsler ennå.",
       "logTest": "test",
-      "logNone": "ikke svar"
+      "logNone": "ikke svar",
+      "logRetry": "nytt forsøk {n}"
     },
     "signin": {
       "code": "Kode fra e-posten",

@@ -9,7 +9,7 @@
 // SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are provided by the platform.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4'
 import { corsHeaders, json } from '../_shared/cors.ts'
-import { sendPostback } from '../_shared/postback.ts'
+import { retryDelay, sendPostback, shouldRetry } from '../_shared/postback.ts'
 
 const VOTE_HOURS = 12
 const NICK = /^[\p{L}\p{N}_\-. ]{2,32}$/u
@@ -86,6 +86,13 @@ Deno.serve(async (req) => {
     if (pb?.enabled && pb.url) {
       postback = await sendPostback(admin, { url: pb.url, secret: pb.secret }, { server_id: serverId, nickname, vote_id: vote.id, voted_at: vote.created_at })
       await admin.from('votes').update({ postback_status: postback }).eq('id', vote.id)
+      // Not taken: tried again in a minute, and a few times after.
+      if (shouldRetry(postback)) {
+        await admin.from('postback_retries').insert({
+          vote_id: vote.id, server_id: serverId, nickname, voted_at: vote.created_at,
+          attempts: 1, next_at: new Date(Date.now() + retryDelay(1)! * 60_000).toISOString()
+        })
+      }
     }
   }
 

@@ -250,7 +250,8 @@
       "log": "최근 알림",
       "logEmpty": "아직 알림이 없습니다.",
       "logTest": "테스트",
-      "logNone": "응답 없음"
+      "logNone": "응답 없음",
+      "logRetry": "재시도 {n}"
     },
     "signin": {
       "code": "메일 속 코드",

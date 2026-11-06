@@ -250,7 +250,7 @@ async function decideLogo(row: QueueServer, accept: boolean) {
  * they stay the owner's.
  */
 const openLog = ref<string | null>(null)
-const logRows = ref<{ id: number, nickname: string, test: boolean, status: number, sent_at: string }[]>([])
+const logRows = ref<{ id: number, nickname: string, test: boolean, status: number, attempt: number, sent_at: string }[]>([])
 const logLoading = ref(false)
 async function toggleLog(row: QueueServer) {
   if (openLog.value === row.id) {
@@ -260,7 +260,7 @@ async function toggleLog(row: QueueServer) {
   openLog.value = row.id
   logRows.value = []
   logLoading.value = true
-  const { data } = await props.supabase.from('postback_log').select('id, nickname, test, status, sent_at')
+  const { data } = await props.supabase.from('postback_log').select('id, nickname, test, status, attempt, sent_at')
     .eq('server_id', row.id).order('sent_at', { ascending: false }).limit(30)
   logLoading.value = false
   if (openLog.value === row.id) logRows.value = data ?? []
@@ -401,6 +401,7 @@ const ACTIONS: { status: Status, label: string }[] = [
               <span class="account-note">{{ logTime(row.sent_at) }}</span>
               <bdi class="account-strong">{{ row.nickname }}</bdi>
               <span v-if="row.test" class="account-note">(проверка)</span>
+              <span v-else-if="row.attempt > 1" class="account-note">(повтор {{ row.attempt - 1 }})</span>
               <span class="account-postback-status" :class="row.status >= 200 && row.status < 300 ? 'is-ok' : 'is-bad'">{{ row.status || 'нет ответа' }}</span>
             </li>
           </ul>

@@ -250,7 +250,8 @@
       "log": "Viimased teavitused",
       "logEmpty": "Teavitusi pole veel olnud.",
       "logTest": "test",
-      "logNone": "vastust pole"
+      "logNone": "vastust pole",
+      "logRetry": "kordus {n}"
     },
     "signin": {
       "code": "Kood e-kirjast",

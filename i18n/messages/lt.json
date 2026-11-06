@@ -250,7 +250,8 @@
       "log": "Paskutiniai pranešimai",
       "logEmpty": "Pranešimų dar nebuvo.",
       "logTest": "bandymas",
-      "logNone": "nėra atsakymo"
+      "logNone": "nėra atsakymo",
+      "logRetry": "pakartojimas {n}"
     },
     "signin": {
       "code": "Kodas iš laiško",

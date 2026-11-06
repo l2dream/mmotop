@@ -250,7 +250,8 @@
       "log": "Son bildirimler",
       "logEmpty": "Henüz bildirim yok.",
       "logTest": "test",
-      "logNone": "yanıt yok"
+      "logNone": "yanıt yok",
+      "logRetry": "tekrar {n}"
     },
     "signin": {
       "code": "E-postadaki kod",

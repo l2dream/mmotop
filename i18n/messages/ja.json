@@ -250,7 +250,8 @@
       "log": "最近の通知",
       "logEmpty": "まだ通知はありません。",
       "logTest": "テスト",
-      "logNone": "応答なし"
+      "logNone": "応答なし",
+      "logRetry": "再送 {n}"
     },
     "signin": {
       "code": "メールのコード",

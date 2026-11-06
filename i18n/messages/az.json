@@ -250,7 +250,8 @@
       "log": "Son bildirişlər",
       "logEmpty": "Hələ bildiriş olmayıb.",
       "logTest": "test",
-      "logNone": "cavab yoxdur"
+      "logNone": "cavab yoxdur",
+      "logRetry": "təkrar {n}"
     },
     "signin": {
       "code": "Məktubdakı kod",

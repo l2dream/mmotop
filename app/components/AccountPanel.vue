@@ -524,9 +524,9 @@ async function loadReward(serverId: string) {
 }
 
 /** The last notifications sent for the server (postback_log): votes' and tests. */
-const postbackLog = ref<{ id: number, nickname: string, test: boolean, status: number, sent_at: string }[]>([])
+const postbackLog = ref<{ id: number, nickname: string, test: boolean, status: number, attempt: number, sent_at: string }[]>([])
 async function loadPostbackLog(serverId: string) {
-  const { data } = await supabase.value!.from('postback_log').select('id, nickname, test, status, sent_at')
+  const { data } = await supabase.value!.from('postback_log').select('id, nickname, test, status, attempt, sent_at')
     .eq('server_id', serverId).order('sent_at', { ascending: false }).limit(15)
   if (editing.value === serverId) postbackLog.value = data ?? []
 }
@@ -940,6 +940,7 @@ async function remove(s: OwnServer) {
                   <span class="account-note">{{ logTime(row.sent_at) }}</span>
                   <bdi class="account-strong">{{ row.nickname }}</bdi>
                   <span v-if="row.test" class="account-note">({{ $t('account.reward.logTest') }})</span>
+                  <span v-else-if="row.attempt > 1" class="account-note">({{ $t('account.reward.logRetry', { n: row.attempt - 1 }) }})</span>
                   <span class="account-postback-status" :class="row.status >= 200 && row.status < 300 ? 'is-ok' : 'is-bad'">{{ row.status ? row.status : $t('account.reward.logNone') }}</span>
                 </li>
               </ul>
@@ -955,7 +956,10 @@ X-MMOTOP-Signature: hex(HMAC-SHA256(secret,
  "vote_id": 123, "voted_at": "2026-11-05T12:00:00Z"}
 
 Test: "nickname": "TEST", "vote_id": 0, "test": true
-Answer 200 when the reward is given.</pre>
+Answer 200 when the reward is given.
+No answer, 5xx or 429: sent again after 1, 5, 15
+and 40 min with the same vote_id — reward each
+vote_id once.</pre>
             </details>
           </details>
           <p v-if="editing" class="account-note">{{ $t('account.recheck') }}</p>
