@@ -281,6 +281,13 @@
       "telegramHint": "Verknüpfen Sie Telegram, um sich damit an jedem Computer anzumelden.",
       "telegramLinked": "Telegram ist verknüpft – Sie können sich damit anmelden.",
       "telegramTaken": "Dieses Telegram ist bereits mit einem anderen Konto verknüpft."
+    },
+    "reason": "Grund: {note}",
+    "stats": {
+      "month": "Stimmen diesen Monat: {n}",
+      "rank": "Nr. {n} im Ranking",
+      "days": "Stimmen pro Tag, letzte 30 Tage",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

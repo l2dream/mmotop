@@ -281,6 +281,13 @@
       "telegramHint": "Associe o Telegram para entrar com ele em qualquer computador.",
       "telegramLinked": "Telegram associado — pode entrar com ele.",
       "telegramTaken": "Este Telegram já está associado a outra conta."
+    },
+    "reason": "Motivo: {note}",
+    "stats": {
+      "month": "Votos este mês: {n}",
+      "rank": "N.º {n} no ranking",
+      "days": "Votos por dia, últimos 30 dias",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

@@ -281,6 +281,13 @@
       "telegramHint": "Liez Telegram pour vous connecter avec sur n’importe quel ordinateur.",
       "telegramLinked": "Telegram est lié — vous pouvez vous connecter avec.",
       "telegramTaken": "Ce Telegram est déjà lié à un autre compte."
+    },
+    "reason": "Raison : {note}",
+    "stats": {
+      "month": "Votes ce mois-ci : {n}",
+      "rank": "N° {n} du classement",
+      "days": "Votes par jour, 30 derniers jours",
+      "dayVotes": "{date} : {n}"
     }
   },
   "vote": {

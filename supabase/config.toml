@@ -20,3 +20,6 @@ verify_jwt = false
 
 [functions.votes-list]
 verify_jwt = false
+
+[functions.notify-owner]
+verify_jwt = false

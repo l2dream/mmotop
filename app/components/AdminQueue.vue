@@ -35,6 +35,7 @@ interface QueueServer {
   logo: string | null
   logo_pending: string | null
   reward: boolean
+  moderation_note: string | null
   status: Status
   created_at: string
 }
@@ -59,7 +60,7 @@ async function load() {
   error.value = ''
   let query = props.supabase
     .from('servers')
-    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, logo_pending, reward, status, created_at')
+    .select('id, name, game, requested_game, chronicle, rate, rate_text, language, language_text, links, url, open_date, description, logo, logo_pending, reward, moderation_note, status, created_at')
     .order('created_at', { ascending: false })
   // Waiting: a server to look at, or only the new logo of one already listed.
   if (!showAll.value) query = query.or('status.eq.pending,logo_pending.not.is.null')
@@ -219,10 +220,27 @@ async function apply(s: QueueServer) {
   load()
 }
 
-async function setStatus(row: QueueServer, status: Status) {
+/**
+ * Rejecting or hiding asks for a reason first (optional), which the owner
+ * sees in their account and in the message they get (notify-owner).
+ */
+const asking = ref<{ id: string, status: Status } | null>(null)
+const note = ref('')
+function decide(row: QueueServer, status: Status) {
+  if (status === 'approved') {
+    setStatus(row, status)
+    return
+  }
+  asking.value = { id: row.id, status }
+  note.value = row.moderation_note ?? ''
+}
+
+async function setStatus(row: QueueServer, status: Status, reason?: string) {
   busyId.value = row.id
   error.value = ''
-  const { error: failed } = await props.supabase.from('servers').update({ status }).eq('id', row.id)
+  const { error: failed } = await props.supabase.from('servers')
+    .update(status === 'approved' ? { status } : { status, moderation_note: reason?.trim() || null }).eq('id', row.id)
+  asking.value = null
   busyId.value = null
   if (failed) {
     error.value = failed.code === '23514' && row.game === 'other'
@@ -415,11 +433,25 @@ const ACTIONS: { status: Status, label: string }[] = [
             class="account-link"
             :class="{ 'account-danger': a.status !== 'approved' }"
             :disabled="busyId === s.id"
-            @click="setStatus(s, a.status)"
+            @click="decide(s, a.status)"
           >
             {{ a.label }}
           </button>
         </div>
+        <!-- The reason, before rejecting or hiding. -->
+        <div v-if="asking?.id === s.id" class="admin-description admin-fix">
+          <label class="account-field">
+            <span>Причина (её увидит владелец; можно оставить пустой)</span>
+            <textarea v-model="note" rows="3" maxlength="500" placeholder="Например: сайт сервера не открывается" />
+          </label>
+          <div class="account-server-tools">
+            <button type="button" class="account-button" :disabled="busyId === s.id" @click="setStatus(s, asking.status, note)">
+              {{ asking.status === 'rejected' ? 'Отклонить' : 'Скрыть' }}
+            </button>
+            <button type="button" class="account-link" @click="asking = null">Отмена</button>
+          </div>
+        </div>
+        <p v-if="s.moderation_note && s.status !== 'approved'" class="account-note">Причина: {{ s.moderation_note }}</p>
       </li>
     </ul>
     <p v-if="error" class="account-error" role="alert">{{ error }}</p>

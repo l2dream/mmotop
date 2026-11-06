@@ -281,6 +281,13 @@
       "telegramHint": "Telegram을 연결하면 어느 컴퓨터에서든 그것으로 로그인할 수 있습니다.",
       "telegramLinked": "Telegram이 연결되었습니다 — 그것으로 로그인할 수 있습니다.",
       "telegramTaken": "이 Telegram은 이미 다른 계정에 연결되어 있습니다."
+    },
+    "reason": "사유: {note}",
+    "stats": {
+      "month": "이번 달 투표: {n}",
+      "rank": "순위 {n}위",
+      "days": "일별 투표, 최근 30일",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

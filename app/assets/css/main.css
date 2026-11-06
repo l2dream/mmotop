@@ -2377,6 +2377,23 @@ a.account-address:hover { text-decoration: underline; }
 .account-server-main { display: flex; flex-direction: column; min-width: 0; }
 .account-server-main > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .account-server-tools { grid-column: 1 / -1; display: flex; gap: 18px; }
+.account-reason, .account-server-stats { grid-column: 1 / -1; }
+/* A listed server's month: the count, the place, then the bars by day. */
+.server-stats { display: grid; gap: 8px; }
+.server-stats-line { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: 14px; font-weight: 600; color: #e6e7f5; }
+.server-stats-rank { color: #c4a8ff; }
+.server-stats-chart { display: grid; gap: 4px; }
+.server-stats-chart svg { width: 100%; height: 64px; display: block; overflow: visible; }
+.server-stats-bar { fill: #8a5cf0; }
+.server-stats-bar.is-hovered { fill: #b597ff; }
+.server-stats-base { stroke: rgba(255, 255, 255, .14); stroke-width: 1; }
+.server-stats-tip { margin: 0; font-size: 12px; color: #9a9fb8; font-variant-numeric: tabular-nums; }
+.theme-light .server-stats-line { color: #16182b; }
+.theme-light .server-stats-rank { color: #6d28d9; }
+.theme-light .server-stats-bar { fill: #7c3aed; }
+.theme-light .server-stats-bar.is-hovered { fill: #5b21b6; }
+.theme-light .server-stats-base { stroke: rgba(22, 24, 43, .15); }
+.theme-light .server-stats-tip { color: #5b5f78; }
 .account-status {
   align-self: start;
   padding: 3px 9px;

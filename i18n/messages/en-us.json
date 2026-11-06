@@ -281,6 +281,13 @@
       "telegramHint": "Link Telegram to sign in with it on any computer.",
       "telegramLinked": "Telegram is linked — you can sign in with it.",
       "telegramTaken": "This Telegram is already linked to another account."
+    },
+    "reason": "Reason: {note}",
+    "stats": {
+      "month": "Votes this month: {n}",
+      "rank": "No. {n} in the ranking",
+      "days": "Votes per day, last 30 days",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

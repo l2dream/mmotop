@@ -281,6 +281,13 @@
       "telegramHint": "Her bilgisayardan Telegram ile girmek için Telegram’ı bağlayın.",
       "telegramLinked": "Telegram bağlı — onunla giriş yapabilirsiniz.",
       "telegramTaken": "Bu Telegram zaten başka bir hesaba bağlı."
+    },
+    "reason": "Neden: {note}",
+    "stats": {
+      "month": "Bu ayki oylar: {n}",
+      "rank": "Sıralamada {n}.",
+      "days": "Günlük oylar, son 30 gün",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

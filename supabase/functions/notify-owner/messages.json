@@ -1,0 +1,210 @@
+{
+  "en": {
+    "approved": "Your server {name} is approved and listed on MMOTOP.",
+    "rejected": "The moderator rejected your server {name}.",
+    "hidden": "The moderator hid your server {name}.",
+    "reason": "Reason: {note}",
+    "soon": "It will be on the site within half an hour: {url}",
+    "cabinet": "Your account: {url}"
+  },
+  "ru": {
+    "approved": "Ваш сервер {name} одобрен и опубликован на MMOTOP.",
+    "rejected": "Модератор отклонил ваш сервер {name}.",
+    "hidden": "Модератор скрыл ваш сервер {name}.",
+    "reason": "Причина: {note}",
+    "soon": "На сайте он появится в течение получаса: {url}",
+    "cabinet": "Кабинет: {url}"
+  },
+  "uk": {
+    "approved": "Ваш сервер {name} схвалено й опубліковано на MMOTOP.",
+    "rejected": "Модератор відхилив ваш сервер {name}.",
+    "hidden": "Модератор приховав ваш сервер {name}.",
+    "reason": "Причина: {note}",
+    "soon": "На сайті він з’явиться протягом пів години: {url}",
+    "cabinet": "Кабінет: {url}"
+  },
+  "de": {
+    "approved": "Ihr Server {name} wurde freigegeben und ist auf MMOTOP gelistet.",
+    "rejected": "Der Moderator hat Ihren Server {name} abgelehnt.",
+    "hidden": "Der Moderator hat Ihren Server {name} ausgeblendet.",
+    "reason": "Grund: {note}",
+    "soon": "Innerhalb einer halben Stunde ist er auf der Website: {url}",
+    "cabinet": "Ihr Konto: {url}"
+  },
+  "fr": {
+    "approved": "Votre serveur {name} est approuvé et publié sur MMOTOP.",
+    "rejected": "Le modérateur a refusé votre serveur {name}.",
+    "hidden": "Le modérateur a masqué votre serveur {name}.",
+    "reason": "Raison : {note}",
+    "soon": "Il sera sur le site d’ici une demi-heure : {url}",
+    "cabinet": "Votre compte : {url}"
+  },
+  "es": {
+    "approved": "Tu servidor {name} está aprobado y publicado en MMOTOP.",
+    "rejected": "El moderador rechazó tu servidor {name}.",
+    "hidden": "El moderador ocultó tu servidor {name}.",
+    "reason": "Motivo: {note}",
+    "soon": "Estará en el sitio en menos de media hora: {url}",
+    "cabinet": "Tu cuenta: {url}"
+  },
+  "pt": {
+    "approved": "O seu servidor {name} foi aprovado e publicado no MMOTOP.",
+    "rejected": "O moderador recusou o seu servidor {name}.",
+    "hidden": "O moderador ocultou o seu servidor {name}.",
+    "reason": "Motivo: {note}",
+    "soon": "Estará no site dentro de meia hora: {url}",
+    "cabinet": "A sua conta: {url}"
+  },
+  "pt-br": {
+    "approved": "Seu servidor {name} foi aprovado e publicado no MMOTOP.",
+    "rejected": "O moderador recusou seu servidor {name}.",
+    "hidden": "O moderador ocultou seu servidor {name}.",
+    "reason": "Motivo: {note}",
+    "soon": "Ele estará no site em até meia hora: {url}",
+    "cabinet": "Sua conta: {url}"
+  },
+  "pl": {
+    "approved": "Twój serwer {name} został zatwierdzony i opublikowany w MMOTOP.",
+    "rejected": "Moderator odrzucił Twój serwer {name}.",
+    "hidden": "Moderator ukrył Twój serwer {name}.",
+    "reason": "Powód: {note}",
+    "soon": "Pojawi się na stronie w ciągu pół godziny: {url}",
+    "cabinet": "Twoje konto: {url}"
+  },
+  "cs": {
+    "approved": "Váš server {name} byl schválen a zveřejněn na MMOTOP.",
+    "rejected": "Moderátor zamítl váš server {name}.",
+    "hidden": "Moderátor skryl váš server {name}.",
+    "reason": "Důvod: {note}",
+    "soon": "Na webu bude do půl hodiny: {url}",
+    "cabinet": "Váš účet: {url}"
+  },
+  "da": {
+    "approved": "Din server {name} er godkendt og vises på MMOTOP.",
+    "rejected": "Moderatoren afviste din server {name}.",
+    "hidden": "Moderatoren skjulte din server {name}.",
+    "reason": "Begrundelse: {note}",
+    "soon": "Den er på siden inden for en halv time: {url}",
+    "cabinet": "Din konto: {url}"
+  },
+  "sv": {
+    "approved": "Din server {name} är godkänd och listad på MMOTOP.",
+    "rejected": "Moderatorn avvisade din server {name}.",
+    "hidden": "Moderatorn dolde din server {name}.",
+    "reason": "Anledning: {note}",
+    "soon": "Den syns på sidan inom en halvtimme: {url}",
+    "cabinet": "Ditt konto: {url}"
+  },
+  "no": {
+    "approved": "Serveren din {name} er godkjent og vises på MMOTOP.",
+    "rejected": "Moderatoren avviste serveren din {name}.",
+    "hidden": "Moderatoren skjulte serveren din {name}.",
+    "reason": "Begrunnelse: {note}",
+    "soon": "Den kommer på siden innen en halvtime: {url}",
+    "cabinet": "Kontoen din: {url}"
+  },
+  "et": {
+    "approved": "Sinu server {name} on heaks kiidetud ja MMOTOP-is avaldatud.",
+    "rejected": "Moderaator lükkas sinu serveri {name} tagasi.",
+    "hidden": "Moderaator peitis sinu serveri {name}.",
+    "reason": "Põhjus: {note}",
+    "soon": "Saidile ilmub see poole tunni jooksul: {url}",
+    "cabinet": "Sinu konto: {url}"
+  },
+  "lv": {
+    "approved": "Jūsu serveris {name} ir apstiprināts un publicēts MMOTOP.",
+    "rejected": "Moderators noraidīja jūsu serveri {name}.",
+    "hidden": "Moderators paslēpa jūsu serveri {name}.",
+    "reason": "Iemesls: {note}",
+    "soon": "Vietnē tas parādīsies pusstundas laikā: {url}",
+    "cabinet": "Jūsu konts: {url}"
+  },
+  "lt": {
+    "approved": "Jūsų serveris {name} patvirtintas ir paskelbtas MMOTOP.",
+    "rejected": "Moderatorius atmetė jūsų serverį {name}.",
+    "hidden": "Moderatorius paslėpė jūsų serverį {name}.",
+    "reason": "Priežastis: {note}",
+    "soon": "Svetainėje jis atsiras per pusvalandį: {url}",
+    "cabinet": "Jūsų paskyra: {url}"
+  },
+  "tr": {
+    "approved": "{name} sunucunuz onaylandı ve MMOTOP’ta yayında.",
+    "rejected": "Moderatör {name} sunucunuzu reddetti.",
+    "hidden": "Moderatör {name} sunucunuzu gizledi.",
+    "reason": "Neden: {note}",
+    "soon": "Yarım saat içinde sitede olacak: {url}",
+    "cabinet": "Hesabınız: {url}"
+  },
+  "az": {
+    "approved": "{name} serveriniz təsdiqləndi və MMOTOP-da dərc olundu.",
+    "rejected": "Moderator {name} serverinizi rədd etdi.",
+    "hidden": "Moderator {name} serverinizi gizlətdi.",
+    "reason": "Səbəb: {note}",
+    "soon": "Yarım saat ərzində saytda görünəcək: {url}",
+    "cabinet": "Kabinetiniz: {url}"
+  },
+  "el": {
+    "approved": "Ο server σας {name} εγκρίθηκε και δημοσιεύτηκε στο MMOTOP.",
+    "rejected": "Ο συντονιστής απέρριψε τον server σας {name}.",
+    "hidden": "Ο συντονιστής έκρυψε τον server σας {name}.",
+    "reason": "Αιτία: {note}",
+    "soon": "Θα εμφανιστεί στον ιστότοπο μέσα σε μισή ώρα: {url}",
+    "cabinet": "Ο λογαριασμός σας: {url}"
+  },
+  "hy": {
+    "approved": "Ձեր {name} սերվերը հաստատվել և հրապարակվել է MMOTOP-ում։",
+    "rejected": "Մոդերատորը մերժել է ձեր {name} սերվերը։",
+    "hidden": "Մոդերատորը թաքցրել է ձեր {name} սերվերը։",
+    "reason": "Պատճառ՝ {note}",
+    "soon": "Կայքում այն կհայտնվի կես ժամվա ընթացքում՝ {url}",
+    "cabinet": "Ձեր հաշիվը՝ {url}"
+  },
+  "ar": {
+    "approved": "تمت الموافقة على خادمك {name} ونشره على MMOTOP.",
+    "rejected": "رفض المشرف خادمك {name}.",
+    "hidden": "أخفى المشرف خادمك {name}.",
+    "reason": "السبب: {note}",
+    "soon": "سيظهر على الموقع خلال نصف ساعة: {url}",
+    "cabinet": "حسابك: {url}"
+  },
+  "he": {
+    "approved": "השרת שלכם {name} אושר ופורסם ב-MMOTOP.",
+    "rejected": "המנחה דחה את השרת שלכם {name}.",
+    "hidden": "המנחה הסתיר את השרת שלכם {name}.",
+    "reason": "סיבה: {note}",
+    "soon": "הוא יופיע באתר בתוך חצי שעה: {url}",
+    "cabinet": "החשבון שלכם: {url}"
+  },
+  "zh": {
+    "approved": "你的服务器 {name} 已通过审核，并在 MMOTOP 上发布。",
+    "rejected": "审核员拒绝了你的服务器 {name}。",
+    "hidden": "审核员隐藏了你的服务器 {name}。",
+    "reason": "原因：{note}",
+    "soon": "半小时内会出现在网站上：{url}",
+    "cabinet": "你的账户：{url}"
+  },
+  "ja": {
+    "approved": "サーバー {name} が承認され、MMOTOPに掲載されました。",
+    "rejected": "モデレーターがサーバー {name} を却下しました。",
+    "hidden": "モデレーターがサーバー {name} を非表示にしました。",
+    "reason": "理由：{note}",
+    "soon": "30分以内にサイトに表示されます：{url}",
+    "cabinet": "アカウント：{url}"
+  },
+  "ko": {
+    "approved": "서버 {name}이(가) 승인되어 MMOTOP에 게시되었습니다.",
+    "rejected": "운영자가 서버 {name}을(를) 거절했습니다.",
+    "hidden": "운영자가 서버 {name}을(를) 숨겼습니다.",
+    "reason": "사유: {note}",
+    "soon": "30분 안에 사이트에 표시됩니다: {url}",
+    "cabinet": "내 계정: {url}"
+  },
+  "en-us": {
+    "approved": "Your server {name} is approved and listed on MMOTOP.",
+    "rejected": "The moderator rejected your server {name}.",
+    "hidden": "The moderator hid your server {name}.",
+    "reason": "Reason: {note}",
+    "soon": "It will be on the site within half an hour: {url}",
+    "cabinet": "Your account: {url}"
+  }
+}

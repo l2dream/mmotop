@@ -281,6 +281,13 @@
       "telegramHint": "اربط Telegram لتدخل به من أي حاسوب.",
       "telegramLinked": "تم ربط Telegram — يمكنك الدخول به.",
       "telegramTaken": "حساب Telegram هذا مرتبط بحساب آخر بالفعل."
+    },
+    "reason": "السبب: {note}",
+    "stats": {
+      "month": "أصوات هذا الشهر: {n}",
+      "rank": "المركز {n} في الترتيب",
+      "days": "الأصوات يوميًا، آخر 30 يومًا",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

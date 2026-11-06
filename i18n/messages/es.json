@@ -281,6 +281,13 @@
       "telegramHint": "Vincula Telegram para entrar con él desde cualquier ordenador.",
       "telegramLinked": "Telegram vinculado: puedes entrar con él.",
       "telegramTaken": "Este Telegram ya está vinculado a otra cuenta."
+    },
+    "reason": "Motivo: {note}",
+    "stats": {
+      "month": "Votos este mes: {n}",
+      "rank": "N.º {n} en el ranking",
+      "days": "Votos por día, últimos 30 días",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

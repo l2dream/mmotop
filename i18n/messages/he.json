@@ -281,6 +281,13 @@
       "telegramHint": "קשרו את Telegram כדי להיכנס דרכו מכל מחשב.",
       "telegramLinked": "Telegram מקושר — אפשר להיכנס דרכו.",
       "telegramTaken": "ה-Telegram הזה כבר מקושר לחשבון אחר."
+    },
+    "reason": "סיבה: {note}",
+    "stats": {
+      "month": "הצבעות החודש: {n}",
+      "rank": "מקום {n} בדירוג",
+      "days": "הצבעות ליום, 30 הימים האחרונים",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

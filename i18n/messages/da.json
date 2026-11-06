@@ -281,6 +281,13 @@
       "telegramHint": "Tilknyt Telegram for at logge ind med det på enhver computer.",
       "telegramLinked": "Telegram er tilknyttet — du kan logge ind med det.",
       "telegramTaken": "Denne Telegram er allerede tilknyttet en anden konto."
+    },
+    "reason": "Begrundelse: {note}",
+    "stats": {
+      "month": "Stemmer denne måned: {n}",
+      "rank": "Nr. {n} på ranglisten",
+      "days": "Stemmer pr. dag, seneste 30 dage",
+      "dayVotes": "{date}: {n}"
     }
   },
   "vote": {

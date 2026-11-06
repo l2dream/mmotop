@@ -281,6 +281,13 @@
       "telegramHint": "Telegramを連携すると、どのパソコンからでもログインできます。",
       "telegramLinked": "Telegramを連携済みです。Telegramでログインできます。",
       "telegramTaken": "このTelegramはすでに別のアカウントに連携されています。"
+    },
+    "reason": "理由：{note}",
+    "stats": {
+      "month": "今月の票数：{n}",
+      "rank": "ランキング {n} 位",
+      "days": "日別の票数（直近30日）",
+      "dayVotes": "{date}：{n}"
     }
   },
   "vote": {
