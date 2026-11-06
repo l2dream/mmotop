@@ -73,7 +73,8 @@ Deno.serve(async (req) => {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resend}` },
-      body: JSON.stringify({ from: 'MMOTOP <noreply@mmotop.com>', to: [email], subject: lines[0], text })
+      // A reply goes to support@ (forwarded to the owner), not to noreply@.
+      body: JSON.stringify({ from: 'MMOTOP <noreply@mmotop.com>', reply_to: 'support@mmotop.com', to: [email], subject: lines[0], text })
     }).catch(() => null)
     if (res?.ok) sent.push('email')
   }

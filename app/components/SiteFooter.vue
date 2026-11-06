@@ -45,6 +45,7 @@ const popular = computed(() => LANDINGS
     <nav class="site-footer-legal">
       <NuxtLink :to="localePath('/privacy/')">{{ $t('footer.privacy') }}</NuxtLink>
       <NuxtLink :to="localePath('/terms/')">{{ $t('footer.terms') }}</NuxtLink>
+      <a href="mailto:support@mmotop.com" dir="ltr">support@mmotop.com</a>
     </nav>
   </footer>
 </template>
