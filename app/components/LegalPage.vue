@@ -6,12 +6,12 @@
  * English for every other language (marked lang="en" there), rather than
  * machine-translated into twenty-six legal texts.
  *
- * CONTACT is the address people may write to about their data; empty until
- * the owner gives one, and then the paragraph shows.
+ * CONTACT is the address people may write to (support@mmotop.com, forwarded
+ * to the owner's mailbox by ImprovMX).
  */
 const props = defineProps<{ kind: 'privacy' | 'terms' }>()
 const { locale } = useI18n()
-const CONTACT = ''
+const CONTACT = 'support@mmotop.com'
 const ru = computed(() => locale.value === 'ru')
 
 type Doc = { title: string, updated: string, sections: { h: string, p: string[] }[] }

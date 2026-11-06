@@ -198,11 +198,17 @@
   redirect `https://xpfgjhyuompskzxsmwrc.supabase.co/auth/v1/callback`, и
   вписать Client ID/Secret в Auth → Providers (мне `project_admin_write` нет).
   Аккаунт с той же подтверждённой почтой — тот же аккаунт.
+- **Почта support@mmotop.com** (6 ноября): пересылка через ImprovMX
+  (бесплатно; DNS в GoDaddy: MX mx1/mx2.improvmx.com, TXT
+  `v=spf1 include:spf.improvmx.com ~all`; `*@mmotop.com` → Gmail владельца).
+  Отвечать от support@ — Gmail «Отправлять письма как», SMTP Resend
+  (smtp.resend.com:587 TLS, пользователь `resend`, отдельный ключ
+  `gmail-support`). Адрес на сайте: подвал, «Связаться с нами» на /privacy/ и
+  /terms/, reply_to писем владельцам (`notify-owner`).
 - **Политика конфиденциальности и условия** (6 ноября): `/privacy/` и
   `/terms/` (`LegalPage.vue`, текст по-русски на русской версии, по-английски
   на остальных; ссылки в подвале). Нужны Google для публикации входа
-  (Branding). Контактной почты на страницах нет — `CONTACT` в
-  `LegalPage.vue` пустой, ⚠️ спросить у владельца, какую почту указать.
+  (Branding). Контакт — support@mmotop.com.
 - **Аккаунт** (6 ноября): свёрнутый блок «Аккаунт» в кабинете — сменить почту
   (`updateUser`, подтверждение на старую и новую; у Telegram-аккаунтов без
   почты не показывается) и удалить аккаунт (функция `account-delete`: файлы
