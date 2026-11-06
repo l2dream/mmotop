@@ -190,7 +190,9 @@
   (`AccountSignIn.vue`, `signInWithOAuth`) появляются сами, когда провайдер
   включён в Supabase (читаем `/auth/v1/settings`). Google включён владельцем
   6 ноября (проект Google Cloud «MMOTOP», клиент Web) — Google принимает
-  ключ; на его экране входа написано «xpfgjhyuompskzxsmwrc.supabase.co»
+  ключ; приложение опубликовано (In production, Branding заполнен:
+  /privacy/, /terms/, домены mmotop.com и xpfgjhyuompskzxsmwrc.supabase.co);
+  на экране входа Google написано «xpfgjhyuompskzxsmwrc.supabase.co»
   (своё имя — только со своим доменом в Supabase, платно). Discord — ещё нет:
   нужно создать OAuth-приложения в Google Cloud и Discord Developer Portal,
   redirect `https://xpfgjhyuompskzxsmwrc.supabase.co/auth/v1/callback`, и
