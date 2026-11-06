@@ -188,7 +188,10 @@
   `server_vote_days` — владельцу и админу).
 - **Google и Discord** (6 ноября): кнопки на странице входа
   (`AccountSignIn.vue`, `signInWithOAuth`) появляются сами, когда провайдер
-  включён в Supabase (читаем `/auth/v1/settings`). ⚠️ Владелец ещё не включил:
+  включён в Supabase (читаем `/auth/v1/settings`). Google включён владельцем
+  6 ноября (проект Google Cloud «MMOTOP», клиент Web) — Google принимает
+  ключ; на его экране входа написано «xpfgjhyuompskzxsmwrc.supabase.co»
+  (своё имя — только со своим доменом в Supabase, платно). Discord — ещё нет:
   нужно создать OAuth-приложения в Google Cloud и Discord Developer Portal,
   redirect `https://xpfgjhyuompskzxsmwrc.supabase.co/auth/v1/callback`, и
   вписать Client ID/Secret в Auth → Providers (мне `project_admin_write` нет).
