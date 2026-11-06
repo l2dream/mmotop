@@ -218,6 +218,12 @@
   redirect `https://xpfgjhyuompskzxsmwrc.supabase.co/auth/v1/callback`, и
   вписать Client ID/Secret в Auth → Providers (мне `project_admin_write` нет).
   Аккаунт с той же подтверждённой почтой — тот же аккаунт.
+- **Лимиты почты** (6 ноября; владелец оставил бесплатный Resend): Resend
+  Free — 3 000 писем в месяц, 100 в день, 3 домена, история 30 дней; дальше
+  только Pro от 20 $/мес (50 тыс.). Supabase сам режет письма входа до
+  30 в час (Auth → Rate Limits, меняет владелец). Письма тратят: вход по
+  почте, решения модератора, коды привязки почты, ответы с support@. Если
+  тесно — Brevo (300/день бесплатно) или Amazon SES (~0,10 $ за 1 000).
 - **Почта support@mmotop.com** (6 ноября): пересылка через ImprovMX
   (бесплатно; DNS в GoDaddy: MX mx1/mx2.improvmx.com, TXT
   `v=spf1 include:spf.improvmx.com ~all`; `*@mmotop.com` → Gmail владельца).
