@@ -252,7 +252,10 @@
       "logTest": "teste",
       "logNone": "sem resposta",
       "logRetry": "nova tentativa {n}",
-      "example": "Descarregar um recetor de exemplo (PHP)"
+      "example": "Descarregar um recetor de exemplo (PHP)",
+      "listTitle": "Lista de votos — a outra forma",
+      "listHint": "O seu servidor pode ir buscar aqui quem votou: uma linha por voto, «número;hora;nick», das últimas 24 horas. Acrescente &since=número do último voto tratado para receber só os novos. O endereço de notificação pode então ficar vazio.",
+      "urlOptional": "(não é preciso se o servidor for buscar a lista de votos)"
     },
     "signin": {
       "code": "Código do e-mail",

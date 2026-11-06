@@ -252,7 +252,10 @@
       "logTest": "test",
       "logNone": "cavab yoxdur",
       "logRetry": "təkrar {n}",
-      "example": "Nümunə qəbuledicini yüklə (PHP)"
+      "example": "Nümunə qəbuledicini yüklə (PHP)",
+      "listTitle": "Səslərin siyahısı — ikinci yol",
+      "listHint": "Serveriniz kimin səs verdiyini buradan özü götürə bilər: hər səs üçün bir sətir, “nömrə;vaxt;nik”, son sutka üçün. Yalnız yeniləri almaq üçün &since=son emal edilmiş səsin nömrəsi əlavə edin. Onda bildiriş ünvanı boş qala bilər.",
+      "urlOptional": "(server səslərin siyahısını özü götürürsə, lazım deyil)"
     },
     "signin": {
       "code": "Məktubdakı kod",

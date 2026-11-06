@@ -586,6 +586,20 @@ function newSecret() {
   const bytes = crypto.getRandomValues(new Uint8Array(24))
   reward.value.secret = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('')
   copied.value = false
+  listCopied.value = false
+}
+
+/**
+ * The vote list for this server (the votes-list function): the other way of
+ * rewarding, read by the game server itself. Its key is the secret key.
+ */
+const voteListUrl = computed(() => (editing.value && reward.value.secret
+  ? `${FUNCTIONS_URL}/votes-list?server=${editing.value}&key=${reward.value.secret}`
+  : ''))
+const listCopied = ref(false)
+async function copyList() {
+  await navigator.clipboard?.writeText(voteListUrl.value).catch(() => {})
+  listCopied.value = true
 }
 
 async function copySecret() {
@@ -600,7 +614,8 @@ async function saveReward(serverId: string) {
   const { error: failed } = await supabase.value!.from('server_postbacks').upsert({
     server_id: serverId,
     url: r.url.trim() || null,
-    enabled: r.enabled && !!r.url.trim(),
+    // On without an address too: the server may read the vote list instead.
+    enabled: r.enabled,
     ...(r.secret ? { secret: r.secret } : {})
   }, { onConflict: 'server_id' })
   return !failed
@@ -911,8 +926,8 @@ async function remove(s: OwnServer) {
               <span>{{ $t('account.reward.on') }}</span>
             </label>
             <label class="account-field">
-              <span>{{ $t('account.reward.url') }}</span>
-              <input v-model="reward.url" type="url" :required="reward.enabled" pattern="https://.+" maxlength="300" dir="ltr" placeholder="https://…">
+              <span>{{ $t('account.reward.url') }} <small class="account-optional">{{ $t('account.reward.urlOptional') }}</small></span>
+              <input v-model="reward.url" type="url" pattern="https://.+" maxlength="300" dir="ltr" placeholder="https://…">
             </label>
             <div class="account-field">
               <span>{{ $t('account.reward.secret') }}</span>
@@ -925,6 +940,15 @@ async function remove(s: OwnServer) {
                 <button type="button" class="account-link account-new-secret" @click="newSecret">{{ $t('account.reward.newSecret') }}</button>
               </template>
               <small v-else>{{ $t('account.reward.afterSave') }}</small>
+            </div>
+            <!-- The other way: the game server reads who voted by itself. -->
+            <div v-if="reward.secret && editing" class="account-field">
+              <span>{{ $t('account.reward.listTitle') }}</span>
+              <div class="account-secret-row">
+                <input :value="voteListUrl" type="text" readonly dir="ltr" :aria-label="$t('account.reward.listTitle')" @focus="($event.target as HTMLInputElement).select()">
+                <button type="button" class="account-link" @click="copyList">{{ listCopied ? $t('account.reward.copied') : $t('account.reward.copy') }}</button>
+              </div>
+              <small>{{ $t('account.reward.listHint') }}</small>
             </div>
             <!-- A test sent now, and what became of the last ones. -->
             <div class="account-field">
@@ -959,7 +983,11 @@ Test: "nickname": "TEST", "vote_id": 0, "test": true
 Answer 200 when the reward is given.
 No answer, 5xx or 429: sent again after 1, 5, 15
 and 40 min with the same vote_id — reward each
-vote_id once.</pre>
+vote_id once.
+
+Vote list (instead of, or as well as, the above):
+GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
+1042;2026-11-06T10:15:02.123Z;Dreamer</pre>
               <!-- A ready receiver for Lineage II packs (public/postback/). -->
               <a class="account-link account-example" :href="`${$config.app.baseURL}postback/mmotop-vote.php`" download="mmotop-vote.php">{{ $t('account.reward.example') }}</a>
             </details>
