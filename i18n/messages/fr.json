@@ -310,7 +310,16 @@
       "unlinkConfirm": "Délier {name} ? Vous ne pourrez plus vous connecter avec avant de le lier à nouveau.",
       "onlyWay": "C’est le seul moyen d’accéder au compte : impossible de le délier.",
       "unlinked": "{name} délié.",
-      "howLink": "Google et Discord se lient d’eux-mêmes si vous vous connectez avec l’e-mail du compte."
+      "howLink": "Google et Discord se lient d’eux-mêmes si vous vous connectez avec l’e-mail du compte.",
+      "addEmail": "Ajouter un e-mail",
+      "addEmailHint": "Tant que le compte n’a pas d’e-mail, on ne peut s’y connecter qu’avec Telegram. Avec un e-mail, vous pourrez aussi vous connecter par e-mail, Google et Discord.",
+      "sendCode": "Envoyer un code",
+      "codeSent": "Nous avons envoyé un code à {email}. Saisissez-le ci-dessous.",
+      "confirm": "Confirmer",
+      "taken": "Cet e-mail appartient déjà à un autre compte.",
+      "added": "E-mail ajouté. Vous pouvez maintenant vous connecter avec.",
+      "wait": "Vous pourrez demander un nouveau code dans une minute.",
+      "badEmail": "Vérifiez l’adresse e-mail."
     }
   },
   "vote": {

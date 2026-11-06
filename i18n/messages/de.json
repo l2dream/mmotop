@@ -310,7 +310,16 @@
       "unlinkConfirm": "{name} trennen? Bis zur erneuten Verknüpfung ist keine Anmeldung damit möglich.",
       "onlyWay": "Das ist der einzige Weg ins Konto und kann nicht getrennt werden.",
       "unlinked": "{name} getrennt.",
-      "howLink": "Google und Discord verknüpfen sich selbst, wenn Sie sich damit mit der E-Mail des Kontos anmelden."
+      "howLink": "Google und Discord verknüpfen sich selbst, wenn Sie sich damit mit der E-Mail des Kontos anmelden.",
+      "addEmail": "E-Mail hinzufügen",
+      "addEmailHint": "Solange das Konto keine E-Mail hat, ist die Anmeldung nur mit Telegram möglich. Mit E-Mail geht es auch per E-Mail, Google und Discord.",
+      "sendCode": "Code senden",
+      "codeSent": "Wir haben einen Code an {email} geschickt. Geben Sie ihn unten ein.",
+      "confirm": "Bestätigen",
+      "taken": "Diese E-Mail gehört bereits zu einem anderen Konto.",
+      "added": "E-Mail hinzugefügt. Sie können sich jetzt auch damit anmelden.",
+      "wait": "Einen neuen Code können Sie in einer Minute anfordern.",
+      "badEmail": "Prüfen Sie die E-Mail-Adresse."
     }
   },
   "vote": {

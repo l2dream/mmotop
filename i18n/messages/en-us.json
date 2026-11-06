@@ -310,7 +310,16 @@
       "unlinkConfirm": "Unlink {name}? You won’t be able to sign in with it until you link it again.",
       "onlyWay": "This is the only way into the account, so it can’t be unlinked.",
       "unlinked": "{name} unlinked.",
-      "howLink": "Google and Discord link by themselves when you sign in with them using the account’s email."
+      "howLink": "Google and Discord link by themselves when you sign in with them using the account’s email.",
+      "addEmail": "Add an email",
+      "addEmailHint": "Until the account has an email, it can only be signed into with Telegram. With one, you can sign in by email, Google and Discord too.",
+      "sendCode": "Send a code",
+      "codeSent": "We sent a code to {email}. Enter it below.",
+      "confirm": "Confirm",
+      "taken": "This email already belongs to another account.",
+      "added": "Email added. You can sign in with it now.",
+      "wait": "You can ask for a new code in a minute.",
+      "badEmail": "Check the email address."
     }
   },
   "vote": {

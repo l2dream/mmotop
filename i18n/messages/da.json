@@ -310,7 +310,16 @@
       "unlinkConfirm": "Fjern {name}? Du kan ikke logge ind med det, før du tilknytter det igen.",
       "onlyWay": "Det er den eneste vej ind på kontoen og kan ikke fjernes.",
       "unlinked": "{name} fjernet.",
-      "howLink": "Google og Discord tilknyttes selv, når du logger ind med dem med kontoens e-mail."
+      "howLink": "Google og Discord tilknyttes selv, når du logger ind med dem med kontoens e-mail.",
+      "addEmail": "Tilføj e-mail",
+      "addEmailHint": "Så længe kontoen ikke har en e-mail, kan man kun logge ind med Telegram. Med en e-mail kan du også logge ind med den, Google og Discord.",
+      "sendCode": "Send kode",
+      "codeSent": "Vi har sendt en kode til {email}. Indtast den nedenfor.",
+      "confirm": "Bekræft",
+      "taken": "Denne e-mail tilhører allerede en anden konto.",
+      "added": "E-mail tilføjet. Du kan nu også logge ind med den.",
+      "wait": "Du kan bede om en ny kode om et minut.",
+      "badEmail": "Tjek e-mailadressen."
     }
   },
   "vote": {

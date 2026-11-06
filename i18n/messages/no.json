@@ -310,7 +310,16 @@
       "unlinkConfirm": "Koble fra {name}? Du kan ikke logge inn med det før du kobler det igjen.",
       "onlyWay": "Det er den eneste veien inn på kontoen og kan ikke kobles fra.",
       "unlinked": "{name} koblet fra.",
-      "howLink": "Google og Discord kobles selv når du logger inn med dem med kontoens e-post."
+      "howLink": "Google og Discord kobles selv når du logger inn med dem med kontoens e-post.",
+      "addEmail": "Legg til e-post",
+      "addEmailHint": "Så lenge kontoen ikke har e-post, kan man bare logge inn med Telegram. Med e-post kan du også logge inn med den, Google og Discord.",
+      "sendCode": "Send kode",
+      "codeSent": "Vi sendte en kode til {email}. Skriv den inn nedenfor.",
+      "confirm": "Bekreft",
+      "taken": "Denne e-posten tilhører allerede en annen konto.",
+      "added": "E-post lagt til. Nå kan du også logge inn med den.",
+      "wait": "Du kan be om en ny kode om ett minutt.",
+      "badEmail": "Sjekk e-postadressen."
     }
   },
   "vote": {

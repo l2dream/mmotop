@@ -310,7 +310,16 @@
       "unlinkConfirm": "Odłączyć {name}? Nie zalogujesz się nim, dopóki nie połączysz go ponownie.",
       "onlyWay": "To jedyny sposób wejścia na konto, nie można go odłączyć.",
       "unlinked": "Odłączono {name}.",
-      "howLink": "Google i Discord łączą się same, gdy zalogujesz się nimi z e-mailem konta."
+      "howLink": "Google i Discord łączą się same, gdy zalogujesz się nimi z e-mailem konta.",
+      "addEmail": "Dodaj e-mail",
+      "addEmailHint": "Dopóki konto nie ma e-maila, można się zalogować tylko przez Telegram. Z e-mailem zalogujesz się też nim, przez Google i Discord.",
+      "sendCode": "Wyślij kod",
+      "codeSent": "Wysłaliśmy kod na {email}. Wpisz go poniżej.",
+      "confirm": "Potwierdź",
+      "taken": "Ten e-mail należy już do innego konta.",
+      "added": "E-mail dodany. Teraz możesz logować się też nim.",
+      "wait": "Nowy kod możesz zamówić za minutę.",
+      "badEmail": "Sprawdź adres e-mail."
     }
   },
   "vote": {

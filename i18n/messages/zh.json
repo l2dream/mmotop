@@ -310,7 +310,16 @@
       "unlinkConfirm": "解除绑定 {name}？在重新绑定之前将无法用它登录。",
       "onlyWay": "这是登录该账户的唯一方式，无法解除绑定。",
       "unlinked": "已解除绑定 {name}。",
-      "howLink": "用与账户相同的邮箱通过 Google 或 Discord 登录时，会自动绑定。"
+      "howLink": "用与账户相同的邮箱通过 Google 或 Discord 登录时，会自动绑定。",
+      "addEmail": "绑定邮箱",
+      "addEmailHint": "账户没有邮箱时只能用 Telegram 登录。绑定邮箱后，还可以用邮箱、Google 和 Discord 登录。",
+      "sendCode": "发送验证码",
+      "codeSent": "我们已向 {email} 发送验证码，请在下方输入。",
+      "confirm": "确认",
+      "taken": "该邮箱已属于其他账户。",
+      "added": "邮箱已绑定，现在也可以用它登录。",
+      "wait": "一分钟后可以重新获取验证码。",
+      "badEmail": "请检查邮箱地址。"
     }
   },
   "vote": {

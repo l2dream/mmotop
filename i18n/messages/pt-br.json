@@ -310,7 +310,16 @@
       "unlinkConfirm": "Desvincular {name}? Você não poderá entrar com ele até vincular de novo.",
       "onlyWay": "É a única forma de entrar na conta, não dá para desvincular.",
       "unlinked": "{name} desvinculado.",
-      "howLink": "Google e Discord se vinculam sozinhos se você entrar com eles usando o e-mail da conta."
+      "howLink": "Google e Discord se vinculam sozinhos se você entrar com eles usando o e-mail da conta.",
+      "addEmail": "Vincular e-mail",
+      "addEmailHint": "Enquanto a conta não tiver e-mail, só dá para entrar pelo Telegram. Com e-mail, você poderá entrar também por ele, pelo Google e pelo Discord.",
+      "sendCode": "Enviar código",
+      "codeSent": "Enviamos um código para {email}. Digite-o abaixo.",
+      "confirm": "Confirmar",
+      "taken": "Este e-mail já pertence a outra conta.",
+      "added": "E-mail vinculado. Agora você também pode entrar com ele.",
+      "wait": "Você pode pedir um novo código daqui a um minuto.",
+      "badEmail": "Confira o endereço de e-mail."
     }
   },
   "vote": {

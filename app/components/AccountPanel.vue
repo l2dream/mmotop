@@ -180,6 +180,69 @@ async function unlink(way: string, name: string) {
   loadWays()
 }
 
+/**
+ * A first real email for an account made with Telegram (the account-email
+ * function): a code to the address, typed back here, and the account has it.
+ */
+const claimEmail = ref('')
+const claimCode = ref('')
+const claimSentTo = ref('')
+const claimNote = ref('')
+const claimFailed = ref(false)
+async function emailCall(body: Record<string, string>) {
+  const { data } = await supabase.value!.auth.getSession()
+  try {
+    const res = await fetch(`${FUNCTIONS_URL}/account-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data.session?.access_token ?? ''}` },
+      body: JSON.stringify(body)
+    })
+    return await res.json().catch(() => ({ error: 'failed' }))
+  } catch {
+    return { error: 'failed' }
+  }
+}
+const CLAIM_ERRORS: Record<string, string> = {
+  taken: 'account.settings.taken',
+  too_soon: 'account.settings.wait',
+  bad_email: 'account.settings.badEmail',
+  wrong_code: 'account.signin.codeWrong'
+}
+async function sendEmailCode() {
+  if (busy.value) return
+  busy.value = true
+  claimNote.value = ''
+  const email = claimEmail.value.trim()
+  const answer = await emailCall({ action: 'send', email })
+  busy.value = false
+  claimFailed.value = !answer.sent
+  if (answer.sent) {
+    claimSentTo.value = email
+    claimNote.value = t('account.settings.codeSent', { email })
+  } else {
+    claimNote.value = t(CLAIM_ERRORS[answer.error] ?? 'account.failed')
+  }
+}
+async function confirmEmailCode() {
+  if (busy.value) return
+  busy.value = true
+  const answer = await emailCall({ action: 'confirm', code: claimCode.value })
+  busy.value = false
+  claimFailed.value = !answer.added
+  if (!answer.added) {
+    claimNote.value = t(CLAIM_ERRORS[answer.error] ?? 'account.failed')
+    return
+  }
+  // The session takes up the new email; the account is no longer Telegram-only.
+  await supabase.value!.auth.refreshSession().catch(() => {})
+  const { data } = await supabase.value!.auth.getSession()
+  session.value = data.session
+  claimNote.value = t('account.settings.added')
+  claimSentTo.value = ''
+  claimCode.value = ''
+  loadWays()
+}
+
 /** A new email: confirmed from both the old and the new address (secure email change). */
 const newEmail = ref('')
 const emailNote = ref('')
@@ -1144,11 +1207,25 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
                 <li v-for="w in wayRows" :key="w.id">
                   <span class="account-strong">{{ w.name }}</span>
                   <span class="account-note" :dir="w.id === 'email' ? 'ltr' : undefined">{{ w.id === 'email' ? session?.user.email : w.on ? $t('account.settings.linked') : $t('account.settings.notLinked') }}</span>
-                  <button v-if="w.on && w.id !== 'email'" type="button" class="account-link account-danger admin-moderator-remove" :disabled="busy" @click="unlink(w.id, w.name)">{{ $t('account.settings.unlink') }}</button>
+                  <button v-if="w.on && w.id !== 'email' && ways?.email" type="button" class="account-link account-danger admin-moderator-remove" :disabled="busy" @click="unlink(w.id, w.name)">{{ $t('account.settings.unlink') }}</button>
                 </li>
               </ul>
               <small>{{ $t('account.settings.howLink') }}</small>
               <small v-if="waysNote" :class="waysFailed ? 'account-error' : 'account-ok'" role="status">{{ waysNote }}</small>
+            </div>
+            <!-- An account made with Telegram gets its first real email here. -->
+            <div v-if="telegramOnly" class="account-field">
+              <span>{{ $t('account.settings.addEmail') }}</span>
+              <small>{{ $t('account.settings.addEmailHint') }}</small>
+              <form class="account-secret-row" @submit.prevent="sendEmailCode">
+                <input v-model="claimEmail" type="email" autocomplete="email" :placeholder="$t('account.settings.newEmail')" :aria-label="$t('account.settings.newEmail')" required>
+                <button type="submit" class="account-link" :disabled="busy">{{ $t('account.settings.sendCode') }}</button>
+              </form>
+              <form v-if="claimSentTo" class="account-secret-row" @submit.prevent="confirmEmailCode">
+                <input v-model="claimCode" class="account-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" dir="ltr" :aria-label="$t('account.signin.code')" required>
+                <button type="submit" class="account-link" :disabled="busy">{{ $t('account.settings.confirm') }}</button>
+              </form>
+              <small v-if="claimNote" :class="claimFailed ? 'account-error' : 'account-ok'" role="status">{{ claimNote }}</small>
             </div>
             <form v-if="!telegramOnly" class="account-field" @submit.prevent="changeEmail">
               <span>{{ $t('account.settings.changeEmail') }}</span>
