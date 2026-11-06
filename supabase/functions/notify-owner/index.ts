@@ -55,7 +55,9 @@ Deno.serve(async (req) => {
   const lines = [fill(words[s.status as 'approved' | 'rejected' | 'hidden'], { name: s.name })]
   if (s.status !== 'approved' && s.moderation_note) lines.push(fill(words.reason, { note: s.moderation_note }))
   lines.push(s.status === 'approved' ? fill(words.soon, { url: page }) : fill(words.cabinet, { url: cabinet }))
-  const text = lines.join('\n\n')
+  // Signed off as the team, with where to write.
+  const signature = `—\n${words.team}\n${SITE} · ${words.questions}: support@mmotop.com`
+  const text = [...lines, signature].join('\n\n')
 
   const sent: string[] = []
   const bot = Deno.env.get('TELEGRAM_BOT_TOKEN')

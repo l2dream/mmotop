@@ -189,6 +189,9 @@
   `RESEND_API_KEY` (владелец поставил 6 ноября; письмо на delivered@resend.dev
   проверено — ушло). Один раз
   на статус (`servers.notified_status`). Миграция `cabinet_more`.
+  Письма подписаны (6 ноября): «—», «Команда MMOTOP», https://mmotop.com ·
+  Вопросы: support@mmotop.com — на языке владельца (`team`, `questions` в
+  `notify-owner/messages.json`); то же в письме с кодом (`account-email`).
 - **Отклонённый сервер после правки владельцем снова уходит на проверку**
   (6 ноября, миграция `rejected_resubmit`; раньше оставался «Отклонён»).
   Причина отклонения остаётся видна модератору.
