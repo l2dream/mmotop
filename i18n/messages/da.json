@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Stem",
-    "nickname": "Navn i spillet (valgfrit)",
+    "nickname": "Navn i spillet",
     "nicknameHint": "Hvis serveren belønner stemmer, går belønningen til denne karakter.",
     "submit": "Afgiv stemme",
     "thanks": "Tak! Din stemme tæller. Du kan stemme igen om 12 timer.",

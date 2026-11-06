@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Głosuj",
-    "nickname": "Nick w grze (opcjonalnie)",
+    "nickname": "Nick w grze",
     "nicknameHint": "Jeśli serwer nagradza za głosy, nagroda trafi do tej postaci.",
     "submit": "Oddaj głos",
     "thanks": "Dziękujemy! Głos został policzony. Ponownie zagłosujesz za 12 godzin.",

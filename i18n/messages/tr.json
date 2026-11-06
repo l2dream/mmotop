@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Oy ver",
-    "nickname": "Oyundaki adınız (isteğe bağlı)",
+    "nickname": "Oyundaki adınız",
     "nicknameHint": "Sunucu oy için ödül veriyorsa ödül bu karaktere gider.",
     "submit": "Oyu gönder",
     "thanks": "Teşekkürler! Oyunuz sayıldı. 12 saat sonra yeniden oy verebilirsiniz.",

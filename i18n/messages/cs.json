@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Hlasovat",
-    "nickname": "Přezdívka ve hře (nepovinné)",
+    "nickname": "Přezdívka ve hře",
     "nicknameHint": "Pokud server hlasy odměňuje, odměnu dostane tato postava.",
     "submit": "Odeslat hlas",
     "thanks": "Děkujeme! Hlas byl započítán. Znovu můžete hlasovat za 12 hodin.",

@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Hääleta",
-    "nickname": "Mängunimi (valikuline)",
+    "nickname": "Mängunimi",
     "nicknameHint": "Kui server annab häälte eest auhinna, saab selle see tegelane.",
     "submit": "Anna hääl",
     "thanks": "Aitäh! Hääl on arvesse võetud. Uuesti saad hääletada 12 tunni pärast.",

@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Səs ver",
-    "nickname": "Oyundakı adınız (məcburi deyil)",
+    "nickname": "Oyundakı adınız",
     "nicknameHint": "Server səsə görə mükafat verirsə, mükafat bu personaja gələcək.",
     "submit": "Səsi göndər",
     "thanks": "Təşəkkürlər! Səsiniz sayıldı. 12 saatdan sonra yenidən səs verə bilərsiniz.",

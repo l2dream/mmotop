@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Abstimmen",
-    "nickname": "Spielername (optional)",
+    "nickname": "Spielername",
     "nicknameHint": "Wenn der Server Stimmen belohnt, erhält dieser Charakter die Belohnung.",
     "submit": "Stimme abgeben",
     "thanks": "Danke! Ihre Stimme wurde gezählt. Sie können in 12 Stunden wieder abstimmen.",
