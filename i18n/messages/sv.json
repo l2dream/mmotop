@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Rösta",
-    "nickname": "Namn i spelet (valfritt)",
+    "nickname": "Namn i spelet",
     "nicknameHint": "Om servern belönar röster går belöningen till den här karaktären.",
     "submit": "Lägg din röst",
     "thanks": "Tack! Din röst räknas. Du kan rösta igen om 12 timmar.",

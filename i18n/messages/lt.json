@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Balsuoti",
-    "nickname": "Slapyvardis žaidime (neprivaloma)",
+    "nickname": "Slapyvardis žaidime",
     "nicknameHint": "Jei serveris apdovanoja už balsus, prizą gaus šis veikėjas.",
     "submit": "Atiduoti balsą",
     "thanks": "Ačiū! Balsas įskaitytas. Vėl balsuoti galėsi po 12 valandų.",

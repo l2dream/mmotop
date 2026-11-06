@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Voter",
-    "nickname": "Pseudo en jeu (facultatif)",
+    "nickname": "Pseudo en jeu",
     "nicknameHint": "Si le serveur récompense les votes, ce personnage recevra la récompense.",
     "submit": "Voter",
     "thanks": "Merci ! Votre vote est pris en compte. Vous pourrez voter à nouveau dans 12 heures.",

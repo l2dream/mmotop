@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Vote",
-    "nickname": "In-game nickname (optional)",
+    "nickname": "In-game nickname",
     "nicknameHint": "If the server rewards votes, the reward goes to this character.",
     "submit": "Vote",
     "thanks": "Thanks! Your vote counts. You can vote again in 12 hours.",

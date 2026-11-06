@@ -2110,7 +2110,12 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field small.account-error { color: #ff8a8a; }
 .theme-light .account-field small.account-error { color: #c62828; }
 /* "(optional)" after a field's name: quieter than the name. */
-.account-optional { font-weight: 400; }
+/* "(optional)" after a field's name, the same everywhere: the name's size,
+   regular weight, the quiet grey of hints. */
+.account-optional,
+.account-field small.account-optional { font-weight: 400; font-size: inherit; color: #9a9fb8; }
+.theme-light .account-optional,
+.theme-light .account-field small.account-optional { color: #5b5f78; }
 /* What became of the last save, over the list of servers. */
 .account-notice {
   padding: 10px 12px;

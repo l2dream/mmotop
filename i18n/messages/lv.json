@@ -324,7 +324,7 @@
   },
   "vote": {
     "open": "Balsot",
-    "nickname": "Vārds spēlē (nav obligāts)",
+    "nickname": "Vārds spēlē",
     "nicknameHint": "Ja serveris dod balvu par balsi, to saņems šis tēls.",
     "submit": "Nodot balsi",
     "thanks": "Paldies! Balss ieskaitīta. Atkal balsot varēsi pēc 12 stundām.",
