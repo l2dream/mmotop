@@ -252,7 +252,10 @@
       "logTest": "bandymas",
       "logNone": "nėra atsakymo",
       "logRetry": "pakartojimas {n}",
-      "example": "Atsisiųsti imtuvo pavyzdį (PHP)"
+      "example": "Atsisiųsti imtuvo pavyzdį (PHP)",
+      "listTitle": "Balsų sąrašas — antras būdas",
+      "listHint": "Jūsų serveris pats gali imti iš čia, kas balsavo: eilutė vienam balsui „numeris;laikas;slapyvardis“ už paskutinę parą. Pridėkite &since=paskutinio apdoroto balso numeris, kad gautumėte tik naujus. Tada pranešimų adreso galima nenurodyti.",
+      "urlOptional": "(nereikia, jei serveris pats ima balsų sąrašą)"
     },
     "signin": {
       "code": "Kodas iš laiško",

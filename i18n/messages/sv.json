@@ -252,7 +252,10 @@
       "logTest": "test",
       "logNone": "inget svar",
       "logRetry": "nytt försök {n}",
-      "example": "Ladda ner en exempelmottagare (PHP)"
+      "example": "Ladda ner en exempelmottagare (PHP)",
+      "listTitle": "Röstlista — det andra sättet",
+      "listHint": "Din server kan själv hämta härifrån vem som röstat: en rad per röst, ”nummer;tid;smeknamn”, för det senaste dygnet. Lägg till &since=numret på den senast hanterade rösten för att bara få nya. Då kan aviseringsadressen vara tom.",
+      "urlOptional": "(behövs inte om servern hämtar röstlistan)"
     },
     "signin": {
       "code": "Kod från mejlet",

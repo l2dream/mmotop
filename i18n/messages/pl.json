@@ -252,7 +252,10 @@
       "logTest": "test",
       "logNone": "brak odpowiedzi",
       "logRetry": "ponowienie {n}",
-      "example": "Pobierz przykładowy odbiornik (PHP)"
+      "example": "Pobierz przykładowy odbiornik (PHP)",
+      "listTitle": "Lista głosów — drugi sposób",
+      "listHint": "Twój serwer może sam pobierać stąd, kto zagłosował: wiersz na głos „numer;czas;nick” z ostatniej doby. Dodaj &since=numer ostatnio obsłużonego głosu, aby dostawać tylko nowe. Adres powiadomień może wtedy zostać pusty.",
+      "urlOptional": "(niepotrzebny, jeśli serwer pobiera listę głosów)"
     },
     "signin": {
       "code": "Kod z e-maila",

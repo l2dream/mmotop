@@ -252,7 +252,10 @@
       "logTest": "Test",
       "logNone": "keine Antwort",
       "logRetry": "Wiederholung {n}",
-      "example": "Beispiel-Empfänger herunterladen (PHP)"
+      "example": "Beispiel-Empfänger herunterladen (PHP)",
+      "listTitle": "Stimmenliste – der andere Weg",
+      "listHint": "Ihr Server kann sich hier selbst abholen, wer abgestimmt hat: eine Zeile pro Stimme, „Nummer;Zeit;Nickname“, für die letzten 24 Stunden. Hängen Sie &since=Nummer der zuletzt verarbeiteten Stimme an, um nur neue zu bekommen. Die Benachrichtigungsadresse kann dann leer bleiben.",
+      "urlOptional": "(nicht nötig, wenn Ihr Server die Stimmenliste abholt)"
     },
     "signin": {
       "code": "Code aus der E-Mail",

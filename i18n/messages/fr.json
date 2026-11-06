@@ -252,7 +252,10 @@
       "logTest": "test",
       "logNone": "pas de réponse",
       "logRetry": "nouvel essai {n}",
-      "example": "Télécharger un exemple de récepteur (PHP)"
+      "example": "Télécharger un exemple de récepteur (PHP)",
+      "listTitle": "Liste des votes — l’autre méthode",
+      "listHint": "Votre serveur peut récupérer ici lui-même qui a voté : une ligne par vote, « numéro;heure;pseudo », sur les dernières 24 heures. Ajoutez &since=numéro du dernier vote traité pour n’avoir que les nouveaux. L’adresse de notification peut alors rester vide.",
+      "urlOptional": "(inutile si votre serveur récupère la liste des votes)"
     },
     "signin": {
       "code": "Code de l’e-mail",

@@ -252,7 +252,10 @@
       "logTest": "test",
       "logNone": "vastust pole",
       "logRetry": "kordus {n}",
-      "example": "Laadi alla näidisvastuvõtja (PHP)"
+      "example": "Laadi alla näidisvastuvõtja (PHP)",
+      "listTitle": "Häälte nimekiri — teine viis",
+      "listHint": "Sinu server saab siit ise võtta, kes hääletas: rida hääle kohta „number;aeg;hüüdnimi“ viimase ööpäeva kohta. Lisa &since=viimati töödeldud hääle number, et saada ainult uued. Teavituste aadressi võib siis tühjaks jätta.",
+      "urlOptional": "(pole vaja, kui server võtab häälte nimekirja ise)"
     },
     "signin": {
       "code": "Kood e-kirjast",
