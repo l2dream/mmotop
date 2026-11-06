@@ -191,7 +191,9 @@
   на статус (`servers.notified_status`). Миграция `cabinet_more`.
   Письма подписаны (6 ноября): «—», «Команда MMOTOP», https://mmotop.com ·
   Вопросы: support@mmotop.com — на языке владельца (`team`, `questions` в
-  `notify-owner/messages.json`); то же в письме с кодом (`account-email`).
+  `notify-owner/messages.json`); то же в письме с кодом (`account-email`) и
+  (владелец вставил сам, по-английски) в шаблонах входа Supabase — Magic Link
+  и Confirm signup, вместе с «If you did not try to sign in…».
 - **Отклонённый сервер после правки владельцем снова уходит на проверку**
   (6 ноября, миграция `rejected_resubmit`; раньше оставался «Отклонён»).
   Причина отклонения остаётся видна модератору.
