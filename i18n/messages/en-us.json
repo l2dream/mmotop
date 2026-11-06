@@ -255,7 +255,8 @@
       "example": "Download an example receiver (PHP)",
       "listTitle": "Vote list — the other way",
       "listHint": "Your server can fetch who voted from here by itself: one line per vote, “number;time;nickname”, for the last 24 hours. Add &since=the number of the last vote you handled to get only new ones. Then the notification address can stay empty.",
-      "urlOptional": "(not needed if your server fetches the vote list)"
+      "urlOptional": "(not needed if your server fetches the vote list)",
+      "exampleList": "Download an example for the vote list (PHP, run on a schedule)"
     },
     "signin": {
       "code": "Code from the email",

@@ -255,7 +255,8 @@
       "example": "Last ned en eksempelmottaker (PHP)",
       "listTitle": "Stemmeliste — den andre måten",
       "listHint": "Serveren din kan selv hente herfra hvem som har stemt: én linje per stemme, «nummer;tid;kallenavn», for siste døgn. Legg til &since=nummeret på siste behandlede stemme for å få bare nye. Da kan varslingsadressen stå tom.",
-      "urlOptional": "(trengs ikke hvis serveren henter stemmelisten)"
+      "urlOptional": "(trengs ikke hvis serveren henter stemmelisten)",
+      "exampleList": "Last ned et eksempel for stemmelisten (PHP, etter tidsplan)"
     },
     "signin": {
       "code": "Kode fra e-posten",

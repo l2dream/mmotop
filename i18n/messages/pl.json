@@ -255,7 +255,8 @@
       "example": "Pobierz przykładowy odbiornik (PHP)",
       "listTitle": "Lista głosów — drugi sposób",
       "listHint": "Twój serwer może sam pobierać stąd, kto zagłosował: wiersz na głos „numer;czas;nick” z ostatniej doby. Dodaj &since=numer ostatnio obsłużonego głosu, aby dostawać tylko nowe. Adres powiadomień może wtedy zostać pusty.",
-      "urlOptional": "(niepotrzebny, jeśli serwer pobiera listę głosów)"
+      "urlOptional": "(niepotrzebny, jeśli serwer pobiera listę głosów)",
+      "exampleList": "Pobierz przykład dla listy głosów (PHP, według harmonogramu)"
     },
     "signin": {
       "code": "Kod z e-maila",
