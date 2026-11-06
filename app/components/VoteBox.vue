@@ -94,6 +94,25 @@ function when(iso: string) {
     : { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }).format(at)
 }
 
+/**
+ * A random mark this browser keeps, so one browser votes once per period
+ * even when its address changes (a VPN). Stored only hashed; without
+ * localStorage (a private window) the vote goes without it.
+ */
+function browserMark(): string | undefined {
+  try {
+    let mark = localStorage.getItem('mmotop-browser')
+    if (!mark) {
+      const bytes = crypto.getRandomValues(new Uint8Array(18))
+      mark = btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_')
+      localStorage.setItem('mmotop-browser', mark)
+    }
+    return mark
+  } catch {
+    return undefined
+  }
+}
+
 async function vote() {
   const nick = nickname.value.trim()
   if (nick && !NICK.test(nick)) {
@@ -110,9 +129,12 @@ async function vote() {
     const res = await fetch(`${FUNCTIONS_URL}/vote`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(needCaptcha.value
-        ? { server_id: props.server.id, nickname: nick || undefined, captcha: token.value }
-        : { server_id: props.server.id, nickname: nick || undefined, altcha: altcha.value })
+      body: JSON.stringify({
+        server_id: props.server.id,
+        nickname: nick || undefined,
+        browser: browserMark(),
+        ...(needCaptcha.value ? { captcha: token.value } : { altcha: altcha.value })
+      })
     })
     answer = await res.json().catch(() => ({}))
   } catch {

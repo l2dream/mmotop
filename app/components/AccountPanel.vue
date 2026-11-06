@@ -1242,6 +1242,7 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
           </details>
           <AdminModerators v-if="isAdmin && supabase" :supabase="supabase" :me="session?.user.id ?? ''" />
           <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
+          <AdminVotes v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>
 

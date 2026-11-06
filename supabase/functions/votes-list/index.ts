@@ -45,7 +45,7 @@ Deno.serve(async (req) => {
   if (!pb || !same(pb.secret, key)) return text(403, 'wrong server or key\n')
 
   let query = admin.from('votes').select('id, created_at, nickname')
-    .eq('server_id', serverId).not('nickname', 'is', null).order('id').limit(1000)
+    .eq('server_id', serverId).not('nickname', 'is', null).is('annulment_id', null).order('id').limit(1000)
   query = since !== null
     ? query.gt('id', since)
     : query.gte('created_at', new Date(Date.now() - 24 * 3600_000).toISOString())

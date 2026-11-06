@@ -2548,6 +2548,14 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .admin-queue { border-top-color: rgba(103, 104, 173, .16); }
 .theme-light .admin-url { color: #6d28d9; }
 .theme-light .admin-description { color: #3a3e58; }
+.admin-votes-suspects ul, .admin-votes-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.admin-votes-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 13px; }
+.admin-votes-hour { cursor: pointer; }
+.admin-votes-annulled { fill: #6b6f86; }
+.admin-votes-annul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; }
+.admin-votes-annul .admin-votes-reason { grid-column: 1 / -1; }
+.admin-votes-annul .account-button { grid-column: 1 / -1; justify-self: start; }
+@media (max-width: 520px) { .admin-votes-annul { grid-template-columns: 1fr; } }
 
 /* A server's page: its card, then more servers of its game. */
 .server-card { padding: 22px 24px 24px; }
