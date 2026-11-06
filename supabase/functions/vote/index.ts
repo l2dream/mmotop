@@ -103,6 +103,12 @@ Deno.serve(async (req) => {
   // for a suspicious vote the captcha is required on top.
   const hasCaptcha = !!input.captcha
   if (hasCaptcha && !(await captchaPasses(String(input.captcha), ip))) return json(req, { error: 'captcha' }, 403)
+  // Noted for the moderation page's count (vote_checks), a week at most.
+  const note = async (kind: 'need_captcha' | 'captcha_passed') => {
+    await admin.from('vote_checks').insert({ server_id: serverId, kind })
+    await admin.from('vote_checks').delete().lt('created_at', new Date(Date.now() - 7 * 86400_000).toISOString())
+  }
+  if (hasCaptcha) await note('captcha_passed')
   if (!hasCaptcha) {
     if (!(await altchaPasses(input.altcha))) return json(req, { error: 'altcha' }, 403)
     const tenMinutes = new Date(Date.now() - 10 * 60_000).toISOString()
@@ -112,7 +118,10 @@ Deno.serve(async (req) => {
       admin.from('votes').select('server_id').eq('ip_hash', ipHash).gte('created_at', hour).limit(50)
     ])
     const servers = new Set((spread ?? []).map((v) => v.server_id))
-    if ((burst ?? 0) >= BURST_VOTES || servers.size >= SPREAD_SERVERS) return json(req, { error: 'need_captcha' }, 403)
+    if ((burst ?? 0) >= BURST_VOTES || servers.size >= SPREAD_SERVERS) {
+      await note('need_captcha')
+      return json(req, { error: 'need_captcha' }, 403)
+    }
   }
 
   const since = new Date(Date.now() - VOTE_HOURS * 3600_000).toISOString()

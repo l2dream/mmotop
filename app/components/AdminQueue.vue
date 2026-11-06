@@ -88,7 +88,20 @@ watch(showAll, load)
 onMounted(() => {
   load()
   loadCatalog()
+  loadChecks()
 })
+
+/**
+ * Suspicious votes over the last day (admin_vote_checks): how many the vote
+ * function sent to Turnstile, and how many came back with it passed. Rising
+ * numbers mean someone is inflating votes; nought all along means the limits
+ * leave ordinary players alone.
+ */
+const checks = ref<{ need_captcha: number, captcha_passed: number } | null>(null)
+async function loadChecks() {
+  const { data } = await props.supabase.rpc('admin_vote_checks')
+  checks.value = data as typeof checks.value
+}
 
 /*
  * What an owner asked for that the site's lists do not have — a game, a
@@ -301,6 +314,9 @@ const ACTIONS: { status: Status, label: string }[] = [
       </button>
     </div>
 
+    <p v-if="checks" class="account-note">
+      Подозрительных голосов за сутки: <b>{{ checks.need_captcha }}</b> (прошли Turnstile: <b>{{ checks.captcha_passed }}</b>)
+    </p>
     <p v-if="loading && !rows.length" class="account-note" role="status">Загрузка…</p>
     <p v-else-if="!rows.length" class="account-note">{{ showAll ? 'Серверов пока нет.' : 'Ничего не ждёт проверки.' }}</p>
     <ul v-else class="account-servers">
