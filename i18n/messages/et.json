@@ -280,7 +280,9 @@
       "telegramTitle": "Logi sisse Telegramiga",
       "telegramHint": "Seo Telegram, et sellega igas arvutis sisse logida.",
       "telegramLinked": "Telegram on seotud — saad sellega sisse logida.",
-      "telegramTaken": "See Telegram on juba seotud teise kontoga."
+      "telegramTaken": "See Telegram on juba seotud teise kontoga.",
+      "google": "Logi sisse Google’iga",
+      "discord": "Logi sisse Discordiga"
     },
     "reason": "Põhjus: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Edetabelis nr {n}",
       "days": "Hääled päevade kaupa, viimased 30 päeva",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konto",
+      "changeEmail": "Muuda e-posti",
+      "newEmail": "Uus e-post",
+      "emailSent": "Saatsime kinnituskirjad vanale ja uuele aadressile. E-post muutub, kui oled mõlemad kinnitanud.",
+      "delete": "Kustuta konto",
+      "deleteConfirm": "Kustutada konto ja kõik sinu serverid ({n})? Ka nende hääled kaovad. Seda ei saa tagasi võtta.",
+      "deleteLastAdmin": "Ainust administraatorit ei saa kustutada: määra enne teine.",
+      "deleted": "Konto kustutatud."
     }
   },
   "vote": {

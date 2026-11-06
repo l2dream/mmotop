@@ -7,8 +7,8 @@ import type { SupabaseClient } from '@supabase/supabase-js'
  * and nothing more. What a visitor may read or write is decided by Row Level
  * Security in the database, not by keeping this key out of sight.
  */
-const SUPABASE_URL = 'https://xpfgjhyuompskzxsmwrc.supabase.co'
-const SUPABASE_KEY = 'sb_publishable_m0WmMLZtsVOpcn_pjJQLmA_0UFch4QJ'
+export const SUPABASE_URL = 'https://xpfgjhyuompskzxsmwrc.supabase.co'
+export const SUPABASE_KEY = 'sb_publishable_m0WmMLZtsVOpcn_pjJQLmA_0UFch4QJ'
 
 /**
  * Where the session is kept in localStorage. Named outright rather than left

@@ -280,7 +280,9 @@
       "telegramTitle": "Sign in with Telegram",
       "telegramHint": "Link Telegram to sign in with it on any computer.",
       "telegramLinked": "Telegram is linked — you can sign in with it.",
-      "telegramTaken": "This Telegram is already linked to another account."
+      "telegramTaken": "This Telegram is already linked to another account.",
+      "google": "Sign in with Google",
+      "discord": "Sign in with Discord"
     },
     "reason": "Reason: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "No. {n} in the ranking",
       "days": "Votes per day, last 30 days",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Account",
+      "changeEmail": "Change email",
+      "newEmail": "New email",
+      "emailSent": "We sent confirmation emails to your old and new addresses. The email changes once you confirm both.",
+      "delete": "Delete account",
+      "deleteConfirm": "Delete your account and all your servers ({n})? Their votes go too. This can’t be undone.",
+      "deleteLastAdmin": "The only admin can’t be deleted: appoint another one first.",
+      "deleted": "Account deleted."
     }
   },
   "vote": {

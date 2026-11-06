@@ -2302,6 +2302,10 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   color: #e6defc;
 }
 .theme-light .account-button.account-button-quiet { background: #f4efff; color: #4c1d95; box-shadow: none; }
+/* Google's and Discord's own buttons, in their own colours. */
+.account-button.account-oauth { display: inline-flex; align-items: center; gap: 10px; box-shadow: none; }
+.account-button.account-oauth.is-google { background: #fff; color: #1f1f1f; border-color: #dadce0; }
+.account-button.account-oauth.is-discord { background: #5865f2; color: #fff; border-color: #5865f2; }
 /* "or", with a line on either side. */
 .account-or { display: flex; align-items: center; gap: 12px; color: #8e93ad; font-size: 13px; }
 .account-or::before, .account-or::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, .1); }
@@ -2516,6 +2520,11 @@ a.account-address:hover { text-decoration: underline; }
 .admin-new-game { padding: 8px 10px; border-radius: 8px; background: rgba(255, 210, 63, .1); color: #ffd75e; }
 .theme-light .admin-new-game { background: #fff4cc; color: #8a5a00; }
 .admin-fix { display: grid; gap: 10px; }
+.admin-moderators { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .08); }
+.theme-light .admin-moderators { border-top-color: rgba(103, 104, 173, .16); }
+.admin-moderator-remove { margin-inline-start: auto; }
+.admin-moderators .admin-moderator-email { min-width: 0; padding: 9px 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .12); background: rgba(10, 12, 24, .5); color: inherit; font: inherit; }
+.theme-light .admin-moderators .admin-moderator-email { background: #fff; border-color: rgba(22, 24, 43, .15); }
 .admin-logo-pair { display: flex; align-items: center; gap: 12px; }
 .admin-logo-big { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
 .admin-logo-big.is-old { opacity: .6; }

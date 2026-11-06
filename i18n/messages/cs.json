@@ -280,7 +280,9 @@
       "telegramTitle": "Přihlásit přes Telegram",
       "telegramHint": "Propojte Telegram a přihlašujte se jím na libovolném počítači.",
       "telegramLinked": "Telegram je propojen — můžete se jím přihlašovat.",
-      "telegramTaken": "Tento Telegram je už propojen s jiným účtem."
+      "telegramTaken": "Tento Telegram je už propojen s jiným účtem.",
+      "google": "Přihlásit přes Google",
+      "discord": "Přihlásit přes Discord"
     },
     "reason": "Důvod: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Č. {n} v žebříčku",
       "days": "Hlasy po dnech, posledních 30 dní",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Účet",
+      "changeEmail": "Změnit e-mail",
+      "newEmail": "Nový e-mail",
+      "emailSent": "Poslali jsme potvrzovací e-maily na starou i novou adresu. E-mail se změní, až potvrdíte oba.",
+      "delete": "Smazat účet",
+      "deleteConfirm": "Smazat účet a všechny vaše servery ({n})? Jejich hlasy zmizí také. Nelze to vrátit.",
+      "deleteLastAdmin": "Jediného administrátora nelze smazat: nejdřív jmenujte jiného.",
+      "deleted": "Účet smazán."
     }
   },
   "vote": {

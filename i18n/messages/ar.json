@@ -280,7 +280,9 @@
       "telegramTitle": "الدخول عبر Telegram",
       "telegramHint": "اربط Telegram لتدخل به من أي حاسوب.",
       "telegramLinked": "تم ربط Telegram — يمكنك الدخول به.",
-      "telegramTaken": "حساب Telegram هذا مرتبط بحساب آخر بالفعل."
+      "telegramTaken": "حساب Telegram هذا مرتبط بحساب آخر بالفعل.",
+      "google": "الدخول عبر Google",
+      "discord": "الدخول عبر Discord"
     },
     "reason": "السبب: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "المركز {n} في الترتيب",
       "days": "الأصوات يوميًا، آخر 30 يومًا",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "الحساب",
+      "changeEmail": "تغيير البريد",
+      "newEmail": "البريد الجديد",
+      "emailSent": "أرسلنا رسائل تأكيد إلى العنوانين القديم والجديد. يتغير البريد بعد تأكيد الاثنين.",
+      "delete": "حذف الحساب",
+      "deleteConfirm": "حذف حسابك وجميع خوادمك ({n})؟ ستضيع أصواتها أيضًا. لا يمكن التراجع.",
+      "deleteLastAdmin": "لا يمكن حذف المشرف الوحيد: عيّن مشرفًا آخر أولًا.",
+      "deleted": "تم حذف الحساب."
     }
   },
   "vote": {

@@ -280,7 +280,9 @@
       "telegramTitle": "Log ind med Telegram",
       "telegramHint": "Tilknyt Telegram for at logge ind med det på enhver computer.",
       "telegramLinked": "Telegram er tilknyttet — du kan logge ind med det.",
-      "telegramTaken": "Denne Telegram er allerede tilknyttet en anden konto."
+      "telegramTaken": "Denne Telegram er allerede tilknyttet en anden konto.",
+      "google": "Log ind med Google",
+      "discord": "Log ind med Discord"
     },
     "reason": "Begrundelse: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr. {n} på ranglisten",
       "days": "Stemmer pr. dag, seneste 30 dage",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konto",
+      "changeEmail": "Skift e-mail",
+      "newEmail": "Ny e-mail",
+      "emailSent": "Vi har sendt bekræftelsesmails til den gamle og den nye adresse. E-mailen skifter, når du bekræfter begge.",
+      "delete": "Slet konto",
+      "deleteConfirm": "Slet din konto og alle dine servere ({n})? Deres stemmer forsvinder også. Det kan ikke fortrydes.",
+      "deleteLastAdmin": "Den eneste administrator kan ikke slettes: udnævn en anden først.",
+      "deleted": "Kontoen er slettet."
     }
   },
   "vote": {

@@ -280,7 +280,9 @@
       "telegramTitle": "כניסה עם Telegram",
       "telegramHint": "קשרו את Telegram כדי להיכנס דרכו מכל מחשב.",
       "telegramLinked": "Telegram מקושר — אפשר להיכנס דרכו.",
-      "telegramTaken": "ה-Telegram הזה כבר מקושר לחשבון אחר."
+      "telegramTaken": "ה-Telegram הזה כבר מקושר לחשבון אחר.",
+      "google": "כניסה עם Google",
+      "discord": "כניסה עם Discord"
     },
     "reason": "סיבה: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "מקום {n} בדירוג",
       "days": "הצבעות ליום, 30 הימים האחרונים",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "חשבון",
+      "changeEmail": "שינוי כתובת מייל",
+      "newEmail": "מייל חדש",
+      "emailSent": "שלחנו מיילים לאישור לכתובת הישנה ולחדשה. המייל ישתנה אחרי שתאשרו את שניהם.",
+      "delete": "מחיקת חשבון",
+      "deleteConfirm": "למחוק את החשבון ואת כל השרתים שלכם ({n})? גם ההצבעות שלהם יימחקו. אי אפשר לבטל.",
+      "deleteLastAdmin": "אי אפשר למחוק את המנהל היחיד: מנו קודם מנהל אחר.",
+      "deleted": "החשבון נמחק."
     }
   },
   "vote": {

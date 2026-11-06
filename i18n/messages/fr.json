@@ -280,7 +280,9 @@
       "telegramTitle": "Se connecter avec Telegram",
       "telegramHint": "Liez Telegram pour vous connecter avec sur n’importe quel ordinateur.",
       "telegramLinked": "Telegram est lié — vous pouvez vous connecter avec.",
-      "telegramTaken": "Ce Telegram est déjà lié à un autre compte."
+      "telegramTaken": "Ce Telegram est déjà lié à un autre compte.",
+      "google": "Se connecter avec Google",
+      "discord": "Se connecter avec Discord"
     },
     "reason": "Raison : {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "N° {n} du classement",
       "days": "Votes par jour, 30 derniers jours",
       "dayVotes": "{date} : {n}"
+    },
+    "settings": {
+      "title": "Compte",
+      "changeEmail": "Changer d’e-mail",
+      "newEmail": "Nouvel e-mail",
+      "emailSent": "Nous avons envoyé des e-mails de confirmation à l’ancienne et à la nouvelle adresse. L’e-mail change une fois les deux confirmées.",
+      "delete": "Supprimer le compte",
+      "deleteConfirm": "Supprimer votre compte et tous vos serveurs ({n}) ? Leurs votes disparaîtront aussi. C’est irréversible.",
+      "deleteLastAdmin": "Le seul administrateur ne peut pas être supprimé : nommez-en un autre d’abord.",
+      "deleted": "Compte supprimé."
     }
   },
   "vote": {

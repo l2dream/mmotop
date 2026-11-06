@@ -280,7 +280,9 @@
       "telegramTitle": "Logga in med Telegram",
       "telegramHint": "Koppla Telegram för att logga in med det på vilken dator som helst.",
       "telegramLinked": "Telegram är kopplat — du kan logga in med det.",
-      "telegramTaken": "Detta Telegram är redan kopplat till ett annat konto."
+      "telegramTaken": "Detta Telegram är redan kopplat till ett annat konto.",
+      "google": "Logga in med Google",
+      "discord": "Logga in med Discord"
     },
     "reason": "Anledning: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr {n} i rankningen",
       "days": "Röster per dag, senaste 30 dagarna",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konto",
+      "changeEmail": "Byt e-post",
+      "newEmail": "Ny e-post",
+      "emailSent": "Vi har skickat bekräftelsemejl till den gamla och den nya adressen. E-posten byts när du bekräftat båda.",
+      "delete": "Radera konto",
+      "deleteConfirm": "Radera ditt konto och alla dina servrar ({n})? Deras röster försvinner också. Det går inte att ångra.",
+      "deleteLastAdmin": "Den enda administratören kan inte raderas: utse en annan först.",
+      "deleted": "Kontot är raderat."
     }
   },
   "vote": {

@@ -280,7 +280,9 @@
       "telegramTitle": "Zaloguj przez Telegram",
       "telegramHint": "Połącz Telegram, aby logować się nim na każdym komputerze.",
       "telegramLinked": "Telegram połączony — możesz się nim logować.",
-      "telegramTaken": "Ten Telegram jest już połączony z innym kontem."
+      "telegramTaken": "Ten Telegram jest już połączony z innym kontem.",
+      "google": "Zaloguj przez Google",
+      "discord": "Zaloguj przez Discord"
     },
     "reason": "Powód: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "Nr {n} w rankingu",
       "days": "Głosy dziennie, ostatnie 30 dni",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Konto",
+      "changeEmail": "Zmień e-mail",
+      "newEmail": "Nowy e-mail",
+      "emailSent": "Wysłaliśmy e-maile z potwierdzeniem na stary i nowy adres. Adres zmieni się, gdy potwierdzisz oba.",
+      "delete": "Usuń konto",
+      "deleteConfirm": "Usunąć konto i wszystkie Twoje serwery ({n})? Ich głosy też przepadną. Tego nie można cofnąć.",
+      "deleteLastAdmin": "Nie można usunąć jedynego administratora: najpierw wyznacz innego.",
+      "deleted": "Konto usunięte."
     }
   },
   "vote": {

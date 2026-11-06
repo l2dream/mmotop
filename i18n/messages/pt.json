@@ -280,7 +280,9 @@
       "telegramTitle": "Entrar com Telegram",
       "telegramHint": "Associe o Telegram para entrar com ele em qualquer computador.",
       "telegramLinked": "Telegram associado — pode entrar com ele.",
-      "telegramTaken": "Este Telegram já está associado a outra conta."
+      "telegramTaken": "Este Telegram já está associado a outra conta.",
+      "google": "Entrar com Google",
+      "discord": "Entrar com Discord"
     },
     "reason": "Motivo: {note}",
     "stats": {
@@ -288,6 +290,16 @@
       "rank": "N.º {n} no ranking",
       "days": "Votos por dia, últimos 30 dias",
       "dayVotes": "{date}: {n}"
+    },
+    "settings": {
+      "title": "Conta",
+      "changeEmail": "Mudar e-mail",
+      "newEmail": "Novo e-mail",
+      "emailSent": "Enviámos e-mails de confirmação para o endereço antigo e o novo. O e-mail muda quando confirmar ambos.",
+      "delete": "Eliminar conta",
+      "deleteConfirm": "Eliminar a sua conta e todos os seus servidores ({n})? Os votos deles também desaparecem. Não é possível anular.",
+      "deleteLastAdmin": "O único administrador não pode ser eliminado: nomeie outro primeiro.",
+      "deleted": "Conta eliminada."
     }
   },
   "vote": {
