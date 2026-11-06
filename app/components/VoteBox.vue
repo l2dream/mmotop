@@ -155,12 +155,15 @@ async function vote() {
         <input v-model="nickname" type="text" maxlength="32" autocomplete="off" autocapitalize="off" spellcheck="false">
         <small>{{ $t('vote.nicknameHint') }}</small>
       </label>
-      <!-- Out of sight: solves its challenge by itself as the box opens. -->
+      <!-- Out of sight: solves its challenge by itself as the box opens. It
+           has nothing to show (no code challenges from our server); its logo
+           and "ALTCHA" link are off all the same, should it ever appear. -->
       <altcha-widget
         ref="widget"
         class="vote-altcha"
         display="invisible"
         auto="onload"
+        configuration='{"hideLogo":true,"hideFooter":true}'
         :challenge="`${FUNCTIONS_URL}/vote`"
         @statechange="onAltcha"
       />
