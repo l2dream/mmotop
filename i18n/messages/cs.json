@@ -251,7 +251,8 @@
       "logEmpty": "Zatím žádná oznámení.",
       "logTest": "test",
       "logNone": "bez odpovědi",
-      "logRetry": "opakování {n}"
+      "logRetry": "opakování {n}",
+      "example": "Stáhnout ukázkový přijímač (PHP)"
     },
     "signin": {
       "code": "Kód z e-mailu",

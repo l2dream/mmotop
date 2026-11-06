@@ -251,7 +251,8 @@
       "logEmpty": "Hələ bildiriş olmayıb.",
       "logTest": "test",
       "logNone": "cavab yoxdur",
-      "logRetry": "təkrar {n}"
+      "logRetry": "təkrar {n}",
+      "example": "Nümunə qəbuledicini yüklə (PHP)"
     },
     "signin": {
       "code": "Məktubdakı kod",

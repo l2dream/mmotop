@@ -251,7 +251,8 @@
       "logEmpty": "暂无通知。",
       "logTest": "测试",
       "logNone": "无响应",
-      "logRetry": "重试 {n}"
+      "logRetry": "重试 {n}",
+      "example": "下载接收脚本示例（PHP）"
     },
     "signin": {
       "code": "邮件中的验证码",

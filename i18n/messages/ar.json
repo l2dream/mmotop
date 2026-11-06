@@ -251,7 +251,8 @@
       "logEmpty": "لا إشعارات بعد.",
       "logTest": "تجربة",
       "logNone": "لا رد",
-      "logRetry": "إعادة {n}"
+      "logRetry": "إعادة {n}",
+      "example": "تنزيل مثال للمستقبِل (PHP)"
     },
     "signin": {
       "code": "الرمز من البريد",

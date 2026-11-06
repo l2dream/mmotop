@@ -251,7 +251,8 @@
       "logEmpty": "Noch keine Benachrichtigungen.",
       "logTest": "Test",
       "logNone": "keine Antwort",
-      "logRetry": "Wiederholung {n}"
+      "logRetry": "Wiederholung {n}",
+      "example": "Beispiel-Empfänger herunterladen (PHP)"
     },
     "signin": {
       "code": "Code aus der E-Mail",

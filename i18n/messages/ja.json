@@ -251,7 +251,8 @@
       "logEmpty": "まだ通知はありません。",
       "logTest": "テスト",
       "logNone": "応答なし",
-      "logRetry": "再送 {n}"
+      "logRetry": "再送 {n}",
+      "example": "受信スクリプトの例をダウンロード（PHP）"
     },
     "signin": {
       "code": "メールのコード",

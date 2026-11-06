@@ -251,7 +251,8 @@
       "logEmpty": "Teavitusi pole veel olnud.",
       "logTest": "test",
       "logNone": "vastust pole",
-      "logRetry": "kordus {n}"
+      "logRetry": "kordus {n}",
+      "example": "Laadi alla näidisvastuvõtja (PHP)"
     },
     "signin": {
       "code": "Kood e-kirjast",

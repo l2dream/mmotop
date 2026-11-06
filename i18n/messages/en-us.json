@@ -251,7 +251,8 @@
       "logEmpty": "No notifications yet.",
       "logTest": "test",
       "logNone": "no answer",
-      "logRetry": "retry {n}"
+      "logRetry": "retry {n}",
+      "example": "Download an example receiver (PHP)"
     },
     "signin": {
       "code": "Code from the email",

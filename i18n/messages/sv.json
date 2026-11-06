@@ -251,7 +251,8 @@
       "logEmpty": "Inga aviseringar ännu.",
       "logTest": "test",
       "logNone": "inget svar",
-      "logRetry": "nytt försök {n}"
+      "logRetry": "nytt försök {n}",
+      "example": "Ladda ner en exempelmottagare (PHP)"
     },
     "signin": {
       "code": "Kod från mejlet",

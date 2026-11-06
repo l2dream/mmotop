@@ -251,7 +251,8 @@
       "logEmpty": "Henüz bildirim yok.",
       "logTest": "test",
       "logNone": "yanıt yok",
-      "logRetry": "tekrar {n}"
+      "logRetry": "tekrar {n}",
+      "example": "Örnek alıcıyı indir (PHP)"
     },
     "signin": {
       "code": "E-postadaki kod",
