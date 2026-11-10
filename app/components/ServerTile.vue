@@ -36,8 +36,8 @@ const { to, remember } = useServerLink(() => props.server, () => props.origin)
         <HitText :text="chronicleShort(server.game, server.chronicle)" /><template v-if="rateLabel(server)"> · <HitText :text="rateLabel(server)" /></template>
       </span>
       <span v-if="end === 'votes'" class="server-tile-votes">
-        <svg class="vote-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-          <path d="M12 4 L20 12 H15.5 V19 H8.5 V12 H4 Z" fill="url(#voteGrad)" />
+        <svg class="vote-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path d="M7 10v12M15 5.88L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
         </svg>
         {{ server.votes }}
       </span>
