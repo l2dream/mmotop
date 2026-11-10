@@ -1607,95 +1607,60 @@ a.login-button { text-decoration: none; }
   margin-inline-start: -5px;
   position: relative;
   border-radius: 50%;
-  /* The glass: a tinted fill, lighter at the top-left. */
-  --rank-a: rgba(255, 255, 255, .06);
-  --rank-b: rgba(255, 255, 255, .02);
-  /* The hairline ring: bright where the light falls, nearly gone at the side,
-     picked up again at the lower edge. */
+  /* A whisper of a fill, from the upper left and gone before the middle. */
+  --rank-tint: rgba(255, 255, 255, .07);
+  /* The ring's colours: where the light falls, the dim side, the lower left,
+     and the spark at the brightest point. */
   --ring-a: rgba(255, 255, 255, .55);
-  --ring-b: rgba(255, 255, 255, .07);
-  --ring-c: rgba(255, 255, 255, .3);
-  background: linear-gradient(155deg, var(--rank-a), var(--rank-b));
+  --ring-b: rgba(255, 255, 255, .12);
+  --ring-c: rgba(255, 255, 255, .28);
+  --ring-spark: #fff;
+  background: linear-gradient(145deg, var(--rank-tint), transparent 62%);
   color: #d5d8ea;
   font-size: 14px;
   font-weight: 600;
 }
-/* The ring is a gradient of its own, one pixel wide: a gradient box with its
-   inside masked out. */
+/* Every place sits in a ring, a pixel and a half wide, drawn as an arc of
+   light: brightest at the upper left with a white spark, fading round the
+   sides, and open at the lower right, like a glint on a metal rim. A gradient
+   box with its inside masked out. */
 .rank::before {
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1px;
+  padding: 1.5px;
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--ring-a), var(--ring-b) 48%, var(--ring-c));
+  background: conic-gradient(from 200deg, var(--ring-b) 0deg, var(--ring-a) 85deg, var(--ring-spark) 110deg, var(--ring-a) 135deg, var(--ring-c) 200deg, transparent 290deg, var(--ring-b) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
 }
-/* The glare: a crescent of light across the upper left, as on a glass bead,
-   and a faint return of it low on the right. */
-.rank::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: 50%;
-  background:
-    linear-gradient(140deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 30%, transparent 44%),
-    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .13), transparent 42%);
-  pointer-events: none;
-}
-/* From the fourth place down the glare is fainter, so the medals keep the light. */
-.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .55; }
 /* Three digits in the same disc. */
 .rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
 
-/* Every place sits in a glass disc. The top three are the same glass tinted
-   gold, silver and bronze, with the ring and the digit in the metal's colour:
-   marked, but no louder than the row they sit in. No glow. */
-.rank-1, .rank-2, .rank-3 { font-weight: 700; }
-.rank-1 {
-  --rank-a: rgba(255, 198, 64, .36); --rank-b: rgba(255, 168, 28, .1);
-  --ring-a: rgba(255, 240, 190, 1); --ring-b: rgba(255, 190, 60, .3); --ring-c: rgba(255, 220, 135, .9);
-  color: #ffdd80;
+/* The top three: the same ring in gold, silver and bronze, the digit in the
+   metal's colour, and the fill a faint tint of it. No glow, no solid disc. */
+.rank-1, .rank-2, .rank-3 {
+  font-weight: 800;
+  --rank-tint: color-mix(in srgb, currentColor 17%, transparent);
 }
-.rank-2 {
-  --rank-a: rgba(220, 228, 248, .42); --rank-b: rgba(190, 200, 225, .12);
-  --ring-a: rgba(255, 255, 255, 1); --ring-b: rgba(200, 208, 228, .28); --ring-c: rgba(232, 238, 250, .85);
-  color: #e8ecf7;
-}
-.rank-3 {
-  --rank-a: rgba(228, 140, 78, .36); --rank-b: rgba(200, 110, 50, .1);
-  --ring-a: rgba(255, 218, 185, 1); --ring-b: rgba(214, 130, 70, .3); --ring-c: rgba(246, 178, 128, .9);
-  color: #f3b88a;
-}
+.rank-1 { --ring-a: #ffe9a8; --ring-b: #e0a52c; --ring-c: #ffd872; color: #ffdd80; }
+.rank-2 { --ring-a: #ffffff; --ring-b: #9aa3b8; --ring-c: #e3e8f4; color: #e8ecf7; }
+.rank-3 { --ring-a: #ffd9b8; --ring-b: #c07840; --ring-c: #f2b184; color: #f3b88a; }
 
+/* On white the arc is drawn in ink and deeper metal: the "spark" is the
+   darkest point rather than a white one, which white would swallow. */
 .theme-light .rank {
-  --rank-a: rgba(255, 255, 255, .9); --rank-b: rgba(22, 24, 43, .07);
-  --ring-a: rgba(22, 24, 43, .1); --ring-b: rgba(22, 24, 43, .16); --ring-c: rgba(22, 24, 43, .3);
+  --rank-tint: rgba(22, 24, 43, .05);
+  --ring-a: rgba(22, 24, 43, .42); --ring-b: rgba(22, 24, 43, .14); --ring-c: rgba(22, 24, 43, .26);
+  --ring-spark: rgba(22, 24, 43, .62);
   color: #363a52;
 }
-.theme-light .rank::after {
-  background:
-    linear-gradient(140deg, rgba(255, 255, 255, .85) 0%, rgba(255, 255, 255, .2) 30%, transparent 44%),
-    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .35), transparent 42%);
-}
-.theme-light .rank-1 {
-  --rank-a: rgba(255, 214, 110, .75); --rank-b: rgba(240, 168, 30, .38);
-  --ring-a: rgba(214, 140, 10, .35); --ring-b: rgba(200, 130, 10, .45); --ring-c: rgba(170, 105, 0, .7);
-  color: #6b4700;
-}
-.theme-light .rank-2 {
-  --rank-a: rgba(236, 240, 248, .95); --rank-b: rgba(150, 160, 184, .4);
-  --ring-a: rgba(110, 120, 145, .3); --ring-b: rgba(110, 120, 145, .4); --ring-c: rgba(84, 94, 120, .65);
-  color: #3a4152;
-}
-.theme-light .rank-3 {
-  --rank-a: rgba(246, 196, 156, .8); --rank-b: rgba(204, 124, 66, .4);
-  --ring-a: rgba(180, 104, 50, .35); --ring-b: rgba(176, 100, 46, .45); --ring-c: rgba(140, 74, 26, .7);
-  color: #6e3610;
-}
+.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 { --rank-tint: color-mix(in srgb, currentColor 14%, transparent); }
+.theme-light .rank-1 { --ring-a: #d99a14; --ring-b: #ecc978; --ring-c: #cf8f10; --ring-spark: #a56c00; color: #6b4700; }
+.theme-light .rank-2 { --ring-a: #7f8aa3; --ring-b: #c6ccda; --ring-c: #8e98ae; --ring-spark: #566080; color: #3a4152; }
+.theme-light .rank-3 { --ring-a: #c0773c; --ring-b: #e4b490; --ring-c: #b36c32; --ring-spark: #8c4c1a; color: #6e3610; }
 
 .game-logo {
   /* --line-1 + --line-gap + --line-2: the two lines beside it. */
