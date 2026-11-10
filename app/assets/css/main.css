@@ -1642,12 +1642,12 @@ a.login-button { text-decoration: none; }
   inset: 1px;
   border-radius: 50%;
   background:
-    linear-gradient(140deg, rgba(255, 255, 255, .48) 0%, rgba(255, 255, 255, .13) 30%, transparent 46%),
-    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .2), transparent 42%);
+    linear-gradient(140deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 30%, transparent 44%),
+    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .13), transparent 42%);
   pointer-events: none;
 }
 /* From the fourth place down the glare is fainter, so the medals keep the light. */
-.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .6; }
+.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .55; }
 /* Three digits in the same disc. */
 .rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
 
