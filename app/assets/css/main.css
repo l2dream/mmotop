@@ -1612,9 +1612,9 @@ a.login-button { text-decoration: none; }
   --rank-b: rgba(255, 255, 255, .02);
   /* The hairline ring: bright where the light falls, nearly gone at the side,
      picked up again at the lower edge. */
-  --ring-a: rgba(255, 255, 255, .3);
+  --ring-a: rgba(255, 255, 255, .55);
   --ring-b: rgba(255, 255, 255, .07);
-  --ring-c: rgba(255, 255, 255, .14);
+  --ring-c: rgba(255, 255, 255, .3);
   background: linear-gradient(155deg, var(--rank-a), var(--rank-b));
   color: #d5d8ea;
   font-size: 14px;
@@ -1642,12 +1642,12 @@ a.login-button { text-decoration: none; }
   inset: 1px;
   border-radius: 50%;
   background:
-    linear-gradient(140deg, rgba(255, 255, 255, .48) 0%, rgba(255, 255, 255, .13) 30%, transparent 46%),
-    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .2), transparent 42%);
+    linear-gradient(140deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 30%, transparent 44%),
+    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .13), transparent 42%);
   pointer-events: none;
 }
 /* From the fourth place down the glare is fainter, so the medals keep the light. */
-.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .6; }
+.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .55; }
 /* Three digits in the same disc. */
 .rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
 
@@ -1657,17 +1657,17 @@ a.login-button { text-decoration: none; }
 .rank-1, .rank-2, .rank-3 { font-weight: 700; }
 .rank-1 {
   --rank-a: rgba(255, 198, 64, .36); --rank-b: rgba(255, 168, 28, .1);
-  --ring-a: rgba(255, 228, 150, .95); --ring-b: rgba(255, 190, 60, .22); --ring-c: rgba(255, 214, 120, .6);
+  --ring-a: rgba(255, 240, 190, 1); --ring-b: rgba(255, 190, 60, .3); --ring-c: rgba(255, 220, 135, .9);
   color: #ffdd80;
 }
 .rank-2 {
   --rank-a: rgba(220, 228, 248, .42); --rank-b: rgba(190, 200, 225, .12);
-  --ring-a: rgba(244, 247, 255, .95); --ring-b: rgba(200, 208, 228, .2); --ring-c: rgba(226, 232, 246, .55);
+  --ring-a: rgba(255, 255, 255, 1); --ring-b: rgba(200, 208, 228, .28); --ring-c: rgba(232, 238, 250, .85);
   color: #e8ecf7;
 }
 .rank-3 {
   --rank-a: rgba(228, 140, 78, .36); --rank-b: rgba(200, 110, 50, .1);
-  --ring-a: rgba(255, 196, 150, .95); --ring-b: rgba(214, 130, 70, .22); --ring-c: rgba(240, 168, 116, .6);
+  --ring-a: rgba(255, 218, 185, 1); --ring-b: rgba(214, 130, 70, .3); --ring-c: rgba(246, 178, 128, .9);
   color: #f3b88a;
 }
 
