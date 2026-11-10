@@ -1630,7 +1630,7 @@ a.login-button { text-decoration: none; }
   font-size: 14px;
   font-weight: 600;
 }
-/* Every place sits in a ring, a pixel and a half wide, drawn as an arc of
+/* Every place sits in a ring, a pixel wide, drawn as an arc of
    light: brightest at the upper left with a white spark, fading round the
    sides, and open at the lower right, like a glint on a metal rim. A gradient
    box with its inside masked out. */
@@ -1638,7 +1638,7 @@ a.login-button { text-decoration: none; }
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1.5px;
+  padding: 1px;
   border-radius: 50%;
   background: conic-gradient(from 200deg, var(--ring-b) 0deg, var(--ring-a) 70deg, var(--ring-spark) 96deg, var(--ring-spark) 124deg, var(--ring-a) 150deg, var(--ring-c) 205deg, transparent 290deg, var(--ring-b) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
