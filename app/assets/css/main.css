@@ -1605,37 +1605,97 @@ a.login-button { text-decoration: none; }
   width: 26px;
   height: 26px;
   margin-inline-start: -5px;
-  border: 1px solid rgba(255, 255, 255, .14);
+  position: relative;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .05);
+  /* The glass: a tinted fill, lighter at the top-left. */
+  --rank-a: rgba(255, 255, 255, .06);
+  --rank-b: rgba(255, 255, 255, .02);
+  /* The hairline ring: bright where the light falls, nearly gone at the side,
+     picked up again at the lower edge. */
+  --ring-a: rgba(255, 255, 255, .3);
+  --ring-b: rgba(255, 255, 255, .07);
+  --ring-c: rgba(255, 255, 255, .14);
+  background: linear-gradient(155deg, var(--rank-a), var(--rank-b));
   color: #d5d8ea;
   font-size: 14px;
   font-weight: 600;
 }
+/* The ring is a gradient of its own, one pixel wide: a gradient box with its
+   inside masked out. */
+.rank::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--ring-a), var(--ring-b) 48%, var(--ring-c));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* The glare: a crescent of light across the upper left, as on a glass bead,
+   and a faint return of it low on the right. */
+.rank::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 30%, transparent 44%),
+    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .13), transparent 42%);
+  pointer-events: none;
+}
+/* From the fourth place down the glare is fainter, so the medals keep the light. */
+.rank:not(.rank-1, .rank-2, .rank-3)::after { opacity: .55; }
 /* Three digits in the same disc. */
 .rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
 
-/* Every place sits in a disc: a quiet glass one from the fourth down, and
-   for the top three a medal — a metal gradient lit from the top-left, a
-   bright upper edge and a darker lower one, the digit dark on the metal.
-   No glow: the shape and the metal mark them. */
-.rank-1, .rank-2, .rank-3 {
-  border-color: transparent;
-  font-weight: 800;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -1px 0 rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .4);
+/* Every place sits in a glass disc. The top three are the same glass tinted
+   gold, silver and bronze, with the ring and the digit in the metal's colour:
+   marked, but no louder than the row they sit in. No glow. */
+.rank-1, .rank-2, .rank-3 { font-weight: 700; }
+.rank-1 {
+  --rank-a: rgba(255, 198, 64, .36); --rank-b: rgba(255, 168, 28, .1);
+  --ring-a: rgba(255, 228, 150, .95); --ring-b: rgba(255, 190, 60, .22); --ring-c: rgba(255, 214, 120, .6);
+  color: #ffdd80;
 }
-.rank-1 { background: linear-gradient(145deg, #ffe89a, #f6bd3d 52%, #d48a14); color: #4a2e00; }
-.rank-2 { background: linear-gradient(145deg, #f7f9fd, #c5cbd8 52%, #949cae); color: #262b3a; }
-.rank-3 { background: linear-gradient(145deg, #f6c8a0, #d28c54 52%, #a55f2b); color: #3b1d06; }
+.rank-2 {
+  --rank-a: rgba(220, 228, 248, .42); --rank-b: rgba(190, 200, 225, .12);
+  --ring-a: rgba(244, 247, 255, .95); --ring-b: rgba(200, 208, 228, .2); --ring-c: rgba(226, 232, 246, .55);
+  color: #e8ecf7;
+}
+.rank-3 {
+  --rank-a: rgba(228, 140, 78, .36); --rank-b: rgba(200, 110, 50, .1);
+  --ring-a: rgba(255, 196, 150, .95); --ring-b: rgba(214, 130, 70, .22); --ring-c: rgba(240, 168, 116, .6);
+  color: #f3b88a;
+}
 
-.theme-light .rank { color: #363a52; border-color: rgba(22, 24, 43, .14); background: rgba(22, 24, 43, .04); }
-.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 {
-  border-color: transparent;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), inset 0 -1px 0 rgba(0, 0, 0, .18), 0 1px 3px rgba(31, 41, 102, .22);
+.theme-light .rank {
+  --rank-a: rgba(255, 255, 255, .9); --rank-b: rgba(22, 24, 43, .07);
+  --ring-a: rgba(22, 24, 43, .1); --ring-b: rgba(22, 24, 43, .16); --ring-c: rgba(22, 24, 43, .3);
+  color: #363a52;
 }
-.theme-light .rank-1 { background: linear-gradient(145deg, #ffe89a, #f6bd3d 52%, #d48a14); color: #4a2e00; }
-.theme-light .rank-2 { background: linear-gradient(145deg, #f7f9fd, #c5cbd8 52%, #949cae); color: #262b3a; }
-.theme-light .rank-3 { background: linear-gradient(145deg, #f6c8a0, #d28c54 52%, #a55f2b); color: #3b1d06; }
+.theme-light .rank::after {
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, .85) 0%, rgba(255, 255, 255, .2) 30%, transparent 44%),
+    radial-gradient(circle at 74% 80%, rgba(255, 255, 255, .35), transparent 42%);
+}
+.theme-light .rank-1 {
+  --rank-a: rgba(255, 214, 110, .75); --rank-b: rgba(240, 168, 30, .38);
+  --ring-a: rgba(214, 140, 10, .35); --ring-b: rgba(200, 130, 10, .45); --ring-c: rgba(170, 105, 0, .7);
+  color: #6b4700;
+}
+.theme-light .rank-2 {
+  --rank-a: rgba(236, 240, 248, .95); --rank-b: rgba(150, 160, 184, .4);
+  --ring-a: rgba(110, 120, 145, .3); --ring-b: rgba(110, 120, 145, .4); --ring-c: rgba(84, 94, 120, .65);
+  color: #3a4152;
+}
+.theme-light .rank-3 {
+  --rank-a: rgba(246, 196, 156, .8); --rank-b: rgba(204, 124, 66, .4);
+  --ring-a: rgba(180, 104, 50, .35); --ring-b: rgba(176, 100, 46, .45); --ring-c: rgba(140, 74, 26, .7);
+  color: #6e3610;
+}
 
 .game-logo {
   /* --line-1 + --line-gap + --line-2: the two lines beside it. */
