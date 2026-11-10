@@ -180,6 +180,22 @@ export function chronicleBadge(gameId: string, chronicle: string): string {
   return found?.badge ?? defaultBadge(chronicle)
 }
 
+/**
+ * The hue (0–359) a version's badge is tinted with: its own colour, the same
+ * wherever the version appears. Within a game the versions step round the
+ * colour wheel by the golden angle, so neighbours in the list never look
+ * alike; each game starts from its own point. A version the lists do not
+ * have gets its hue from its name.
+ */
+export function versionHue(gameId: string, chronicle: string): number {
+  const game = GAMES.findIndex((g) => g.id === gameId)
+  const index = game < 0 ? -1 : GAMES[game]!.chronicles.findIndex((c) => c.name === chronicle)
+  if (index >= 0) return Math.round((265 + game * 47 + index * 137.5) % 360)
+  let hash = 0
+  for (const ch of `${gameId}:${chronicle}`) hash = (hash * 31 + ch.charCodeAt(0)) % 360
+  return hash
+}
+
 /** "WotLK 3.3.5a" → "wotlk-3-3-5a". Hyphens only, no dots, so every host
  *  treats the segment as a directory. */
 export function chronicleSlug(name: string) {
