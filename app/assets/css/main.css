@@ -3203,8 +3203,11 @@ a.account-address:hover { text-decoration: underline; }
      the other. */
   .filter-popup { width: calc(100vw - 20px); }
   .panel-head { padding-inline: 15px; }
+  /* TOP GAMES ends with the votes: "↑ 2950" takes about 50px, so its column
+     is 52px, not the 64px a date needs; the 12px go to the name, which the
+     cards' margins had squeezed into "COLDHAR…". */
   .game-row {
-    grid-template-columns: 24px 34px minmax(0, 1fr) 64px 64px;
+    grid-template-columns: 24px 34px minmax(0, 1fr) 64px 52px;
     --line-1: 17px;
     --line-2: 15px;
     gap: 5px;
