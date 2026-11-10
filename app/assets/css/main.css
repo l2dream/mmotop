@@ -98,10 +98,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
   min-height: 100vh;
   color: #edf0ff;
   padding: 15px 62px 42px;
-  background-image:
-    linear-gradient(rgba(255,255,255,.008) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.008) 1px, transparent 1px);
-  background-size: 44px 44px;
 }
 
 .site-shell,
@@ -125,10 +121,7 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     radial-gradient(circle at 88% 10%, rgba(94, 194, 255, .05), transparent 30rem),
     radial-gradient(circle at 12% 0%, rgba(142, 76, 255, .08), transparent 30rem),
     radial-gradient(circle at 85% 90%, rgba(16, 185, 129, .045), transparent 28rem),
-    radial-gradient(circle at 100% 15%, rgba(94, 47, 180, .06), transparent 32rem),
-    linear-gradient(rgba(31, 41, 102, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(31, 41, 102, .035) 1px, transparent 1px);
-  background-size: auto, auto, auto, auto, auto, 44px 44px, 44px 44px;
+    radial-gradient(circle at 100% 15%, rgba(94, 47, 180, .06), transparent 32rem);
 }
 
 .topbar {
