@@ -1694,23 +1694,70 @@ a.login-button { text-decoration: none; }
   height: 36px;
   display: grid;
   place-items: center;
+  position: relative;
   border-radius: 6px;
+  /* The version's own colour (--vh, a hue set by ServerLogo.vue): in the
+     ring, in the lower half of the letters, and as a faint tint from the
+     upper left. The badge is glass like the place ring beside it, not the
+     dark block it used to be. */
+  --v-ring: hsl(var(--vh, 265) 75% 75% / .9);
+  --v-ring-dim: hsl(var(--vh, 265) 75% 60% / .25);
+  --v-ring-low: hsl(var(--vh, 265) 75% 65% / .5);
+  --v-spark: #fff;
+  --v-text-a: #fff;
+  --v-text-b: hsl(var(--vh, 265) 75% 70%);
+  --v-tint: hsl(var(--vh, 265) 75% 60% / .16);
   background:
-    linear-gradient(135deg, #222733, #0d1018);
-  border: 1px solid #343846;
+    linear-gradient(180deg, var(--v-text-a) 15%, var(--v-text-b) 90%),
+    linear-gradient(145deg, var(--v-tint), transparent 70%);
+  -webkit-background-clip: text, border-box;
+  background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
   color: #d5d9e3;
   font-size: 11px;
   font-weight: 800;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+/* The frame: the same arc of light as the place ring, in the version's
+   colour, on a rounded square. */
+.game-logo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--v-ring-dim) 0deg, var(--v-ring) 70deg, var(--v-spark) 96deg, var(--v-spark) 124deg, var(--v-ring) 150deg, var(--v-ring-low) 205deg, transparent 290deg, var(--v-ring-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
 }
 
-.game-logo.has-logo { overflow: hidden; padding: 0; }
+/* An uploaded logo fills the square; the frame over it stays neutral. */
+.game-logo.has-logo {
+  overflow: hidden;
+  padding: 0;
+  background: none;
+  --v-ring: rgba(255, 255, 255, .7);
+  --v-ring-dim: rgba(255, 255, 255, .12);
+  --v-ring-low: rgba(255, 255, 255, .28);
+}
 .game-logo.has-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* On white the colours go deeper and the spark is the darkest point. */
 .theme-light .game-logo {
-  background: linear-gradient(135deg, #f2f3fa, #e5e7f6);
-  border-color: rgba(103, 104, 173, .25);
+  --v-ring: hsl(var(--vh, 265) 60% 45% / .85);
+  --v-ring-dim: hsl(var(--vh, 265) 60% 50% / .25);
+  --v-ring-low: hsl(var(--vh, 265) 60% 45% / .5);
+  --v-spark: hsl(var(--vh, 265) 70% 30%);
+  --v-text-a: hsl(var(--vh, 265) 45% 42%);
+  --v-text-b: hsl(var(--vh, 265) 60% 24%);
+  --v-tint: hsl(var(--vh, 265) 70% 55% / .16);
   color: #4a4e68;
-  box-shadow: inset 0 0 0 1px #fff;
+}
+.theme-light .game-logo.has-logo {
+  --v-ring: rgba(22, 24, 43, .42);
+  --v-ring-dim: rgba(22, 24, 43, .14);
+  --v-ring-low: rgba(22, 24, 43, .26);
+  --v-spark: rgba(22, 24, 43, .62);
 }
 
 .game-name {
