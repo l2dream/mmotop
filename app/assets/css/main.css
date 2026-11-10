@@ -1813,11 +1813,30 @@ a.login-button { text-decoration: none; }
   line-height: var(--line-1);
 }
 
-.vote-icon { display: block; }
+/* The votes: a thumbs-up drawn as a line, and the number as a gradient, light
+   at the top and gold below, like the digits in the place rings. The colour
+   stays as the fallback. */
+.vote-icon { display: block; flex: none; }
+.vote-icon path {
+  fill: none;
+  stroke: url(#voteGrad);
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.rating-value,
+.server-tile-votes {
+  background: linear-gradient(180deg, #fff3c4 15%, #f2ad22 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* The gold gradient is drawn for a dark row; on white it all but vanished.
    The light theme swaps in its own gradient, the same sweep in deeper golds
-   (voteGradLight in index.vue). */
-.theme-light .vote-icon path { fill: url(#voteGradLight); }
+   (voteGradLight in Dashboard.vue). */
+.theme-light .vote-icon path { stroke: url(#voteGradLight); }
+.theme-light .rating-value,
+.theme-light .server-tile-votes { background-image: linear-gradient(180deg, #b07a08 15%, #5c3c00 90%); }
 
 .date {
   color: #dfe2ef;
