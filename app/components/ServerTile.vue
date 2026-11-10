@@ -24,7 +24,7 @@ const { to, remember } = useServerLink(() => props.server, () => props.origin)
   <NuxtLink class="server-tile" :to="to" @click="remember">
     <span class="server-tile-top">
       <ServerLogo :server="server" />
-      <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+      <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : rank && rank >= 100 ? 'rank-long' : undefined">{{ rank }}</span>
       <span v-else-if="end === 'date'" class="server-tile-date">
         {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>
       </span>

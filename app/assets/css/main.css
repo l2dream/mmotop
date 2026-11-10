@@ -1605,35 +1605,37 @@ a.login-button { text-decoration: none; }
   width: 26px;
   height: 26px;
   margin-inline-start: -5px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255, 255, 255, .14);
   border-radius: 50%;
-  color: #eef0f9;
+  background: rgba(255, 255, 255, .05);
+  color: #d5d8ea;
   font-size: 14px;
   font-weight: 600;
 }
+/* Three digits in the same disc. */
+.rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
 
-/* Only the top three are marked, in medal order. A ring rather than a fill:
-   the rows already carry zebra shading and an accent hover, and three filled
-   discs would compete with both. */
-.rank-1 { border-color: rgba(255, 203, 77, .55); color: #ffd76a; }
-.rank-2 { border-color: rgba(200, 205, 218, .5); color: #d9deea; }
-.rank-3 { border-color: rgba(201, 139, 84, .55); color: #e0a874; }
-
-/* The medals glow in the dark theme: a soft halo in each medal's own colour
-   around the ring, and a faint one on the digit. Large and bold enough that
-   the glow reads as light, not as blur. On white a glow only muddies, so the
-   light theme keeps plain rings. */
+/* Every place sits in a disc: a quiet glass one from the fourth down, and
+   for the top three a medal — a metal gradient lit from the top-left, a
+   bright upper edge and a darker lower one, the digit dark on the metal.
+   No glow: the shape and the metal mark them. */
 .rank-1, .rank-2, .rank-3 {
-  font-weight: 700;
-  box-shadow: 0 0 10px -2px currentColor, inset 0 0 6px -3px currentColor;
-  text-shadow: 0 0 8px color-mix(in srgb, currentColor 55%, transparent);
+  border-color: transparent;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -1px 0 rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .4);
 }
+.rank-1 { background: linear-gradient(145deg, #ffe89a, #f6bd3d 52%, #d48a14); color: #4a2e00; }
+.rank-2 { background: linear-gradient(145deg, #f7f9fd, #c5cbd8 52%, #949cae); color: #262b3a; }
+.rank-3 { background: linear-gradient(145deg, #f6c8a0, #d28c54 52%, #a55f2b); color: #3b1d06; }
 
-.theme-light .rank { color: #363a52; }
-.theme-light .rank-1 { border-color: rgba(214, 130, 10, .55); color: #6b4a00; }
-.theme-light .rank-2 { border-color: rgba(120, 128, 148, .5); color: #474d5c; }
-.theme-light .rank-3 { border-color: rgba(180, 110, 60, .55); color: #7a3f15; }
-.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 { box-shadow: none; text-shadow: none; }
+.theme-light .rank { color: #363a52; border-color: rgba(22, 24, 43, .14); background: rgba(22, 24, 43, .04); }
+.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 {
+  border-color: transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), inset 0 -1px 0 rgba(0, 0, 0, .18), 0 1px 3px rgba(31, 41, 102, .22);
+}
+.theme-light .rank-1 { background: linear-gradient(145deg, #ffe89a, #f6bd3d 52%, #d48a14); color: #4a2e00; }
+.theme-light .rank-2 { background: linear-gradient(145deg, #f7f9fd, #c5cbd8 52%, #949cae); color: #262b3a; }
+.theme-light .rank-3 { background: linear-gradient(145deg, #f6c8a0, #d28c54 52%, #a55f2b); color: #3b1d06; }
 
 .game-logo {
   /* --line-1 + --line-gap + --line-2: the two lines beside it. */
