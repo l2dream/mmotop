@@ -1640,12 +1640,26 @@ a.login-button { text-decoration: none; }
   inset: 0;
   border-radius: 50%;
   background: conic-gradient(from 200deg, var(--ring-b) 0deg, var(--ring-a) 70deg, var(--ring-spark) 96deg, var(--ring-spark) 124deg, var(--ring-a) 150deg, var(--ring-c) 205deg, transparent 290deg, var(--ring-b) 360deg);
-  /* The ring tapers like a brush stroke: a pixel at the spark, nothing at the
-     tail. The disc's inside is masked out by a circle half a pixel smaller,
-     set a third of a pixel towards the lower right. */
-  -webkit-mask: radial-gradient(circle closest-side at calc(50% + .35px) calc(50% + .35px), transparent calc(100% - .55px), #000 calc(100% - .05px));
-  mask: radial-gradient(circle closest-side at calc(50% + .35px) calc(50% + .35px), transparent calc(100% - .55px), #000 calc(100% - .05px));
+  /* The ring tapers like a brush stroke, wide at the spark and thin at the
+     tail: the disc's inside is masked out by a smaller circle set a little
+     towards the lower right. On an ordinary monitor, where a pixel is large,
+     it runs from two pixels to about half of one with a soft inner edge — a
+     line thinner than a pixel there breaks into steps. */
+  -webkit-mask: radial-gradient(circle closest-side at calc(50% + var(--ring-shift)) calc(50% + var(--ring-shift)), transparent var(--ring-in), #000 var(--ring-out));
+  mask: radial-gradient(circle closest-side at calc(50% + var(--ring-shift)) calc(50% + var(--ring-shift)), transparent var(--ring-in), #000 var(--ring-out));
+  --ring-shift: .5px;
+  --ring-in: calc(100% - 1.4px);
+  --ring-out: calc(100% - .3px);
   pointer-events: none;
+}
+/* Sharp screens (phones, retina) draw it finer: a pixel at the spark, nothing
+   at the tail. */
+@media (min-resolution: 2dppx) {
+  .rank::before {
+    --ring-shift: .35px;
+    --ring-in: calc(100% - .55px);
+    --ring-out: calc(100% - .05px);
+  }
 }
 /* Three digits in the same disc. */
 .rank.rank-long { font-size: 11px; letter-spacing: -.02em; }
