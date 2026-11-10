@@ -1608,14 +1608,24 @@ a.login-button { text-decoration: none; }
   position: relative;
   border-radius: 50%;
   /* A whisper of a fill, from the upper left and gone before the middle. */
-  --rank-tint: rgba(255, 255, 255, .07);
+  --rank-tint: rgba(255, 255, 255, .035);
   /* The ring's colours: where the light falls, the dim side, the lower left,
      and the spark at the brightest point. */
-  --ring-a: rgba(255, 255, 255, .55);
+  --ring-a: rgba(255, 255, 255, .7);
   --ring-b: rgba(255, 255, 255, .12);
   --ring-c: rgba(255, 255, 255, .28);
   --ring-spark: #fff;
-  background: linear-gradient(145deg, var(--rank-tint), transparent 62%);
+  /* The digit is a gradient too, light at the top and deeper below, like the
+     ring: the first background is clipped to the text, the second is the fill.
+     The colour stays as the fallback and as what the tint is mixed from. */
+  --num-a: #fff;
+  --num-b: #9da3bd;
+  background:
+    linear-gradient(180deg, var(--num-a) 20%, var(--num-b) 85%),
+    linear-gradient(145deg, var(--rank-tint), transparent 62%);
+  -webkit-background-clip: text, border-box;
+  background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
   color: #d5d8ea;
   font-size: 14px;
   font-weight: 600;
@@ -1630,7 +1640,7 @@ a.login-button { text-decoration: none; }
   inset: 0;
   padding: 1.5px;
   border-radius: 50%;
-  background: conic-gradient(from 200deg, var(--ring-b) 0deg, var(--ring-a) 85deg, var(--ring-spark) 110deg, var(--ring-a) 135deg, var(--ring-c) 200deg, transparent 290deg, var(--ring-b) 360deg);
+  background: conic-gradient(from 200deg, var(--ring-b) 0deg, var(--ring-a) 70deg, var(--ring-spark) 96deg, var(--ring-spark) 124deg, var(--ring-a) 150deg, var(--ring-c) 205deg, transparent 290deg, var(--ring-b) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
@@ -1643,24 +1653,25 @@ a.login-button { text-decoration: none; }
    metal's colour, and the fill a faint tint of it. No glow, no solid disc. */
 .rank-1, .rank-2, .rank-3 {
   font-weight: 800;
-  --rank-tint: color-mix(in srgb, currentColor 17%, transparent);
+  --rank-tint: color-mix(in srgb, currentColor 8%, transparent);
 }
-.rank-1 { --ring-a: #ffe9a8; --ring-b: #e0a52c; --ring-c: #ffd872; color: #ffdd80; }
-.rank-2 { --ring-a: #ffffff; --ring-b: #9aa3b8; --ring-c: #e3e8f4; color: #e8ecf7; }
-.rank-3 { --ring-a: #ffd9b8; --ring-b: #c07840; --ring-c: #f2b184; color: #f3b88a; }
+.rank-1 { --ring-a: #ffe9a8; --ring-b: #e0a52c; --ring-c: #ffd872; --num-a: #fff6d0; --num-b: #f0a81e; color: #ffdd80; }
+.rank-2 { --ring-a: #ffffff; --ring-b: #9aa3b8; --ring-c: #e3e8f4; --num-a: #fff; --num-b: #98a2b8; color: #e8ecf7; }
+.rank-3 { --ring-a: #ffd9b8; --ring-b: #c07840; --ring-c: #f2b184; --num-a: #ffe6d0; --num-b: #cf7c3c; color: #f3b88a; }
 
 /* On white the arc is drawn in ink and deeper metal: the "spark" is the
    darkest point rather than a white one, which white would swallow. */
 .theme-light .rank {
-  --rank-tint: rgba(22, 24, 43, .05);
+  --rank-tint: rgba(22, 24, 43, .03);
+  --num-a: #4a4f6c; --num-b: #1c1f33;
   --ring-a: rgba(22, 24, 43, .42); --ring-b: rgba(22, 24, 43, .14); --ring-c: rgba(22, 24, 43, .26);
   --ring-spark: rgba(22, 24, 43, .62);
   color: #363a52;
 }
-.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 { --rank-tint: color-mix(in srgb, currentColor 14%, transparent); }
-.theme-light .rank-1 { --ring-a: #d99a14; --ring-b: #ecc978; --ring-c: #cf8f10; --ring-spark: #a56c00; color: #6b4700; }
-.theme-light .rank-2 { --ring-a: #7f8aa3; --ring-b: #c6ccda; --ring-c: #8e98ae; --ring-spark: #566080; color: #3a4152; }
-.theme-light .rank-3 { --ring-a: #c0773c; --ring-b: #e4b490; --ring-c: #b36c32; --ring-spark: #8c4c1a; color: #6e3610; }
+.theme-light .rank-1, .theme-light .rank-2, .theme-light .rank-3 { --rank-tint: color-mix(in srgb, currentColor 8%, transparent); }
+.theme-light .rank-1 { --ring-a: #d99a14; --ring-b: #ecc978; --ring-c: #cf8f10; --ring-spark: #a56c00; --num-a: #b07a08; --num-b: #5c3c00; color: #6b4700; }
+.theme-light .rank-2 { --ring-a: #7f8aa3; --ring-b: #c6ccda; --ring-c: #8e98ae; --ring-spark: #566080; --num-a: #6a7590; --num-b: #2a3040; color: #3a4152; }
+.theme-light .rank-3 { --ring-a: #c0773c; --ring-b: #e4b490; --ring-c: #b36c32; --ring-spark: #8c4c1a; --num-a: #b5662c; --num-b: #5e2c0a; color: #6e3610; }
 
 .game-logo {
   /* --line-1 + --line-gap + --line-2: the two lines beside it. */
