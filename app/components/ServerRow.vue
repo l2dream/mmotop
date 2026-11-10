@@ -36,7 +36,7 @@ const rowClass = computed(() => ({
 
 <template>
   <NuxtLink class="game-row" :class="rowClass" :to="to" @click="remember">
-    <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : undefined">{{ rank }}</span>
+    <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : rank && rank >= 100 ? 'rank-long' : undefined">{{ rank }}</span>
     <ServerLogo :server="server" />
     <span class="game-name">
       <strong><HitText :text="server.name" /></strong>
