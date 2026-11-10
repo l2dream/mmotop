@@ -153,8 +153,8 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
         aria-controls="vote-box"
         @click="voting = !voting"
       >
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-          <path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17l-5.6 3 1.1-6.2L2.9 9.4l6.3-.9z" fill="url(#voteGrad)" />
+        <svg class="vote-icon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+          <path d="M7 10v12M15 5.88L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
         </svg>
         {{ $t('vote.open') }}
       </button>
