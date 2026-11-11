@@ -4091,3 +4091,24 @@ a.account-address:hover { text-decoration: underline; }
     linear-gradient(#6d28d9, #6d28d9) border-box;
 }
 
+/* Visit website is the page's main way onward: a step louder than the other
+   violet buttons, a denser tint and a brighter arc, white label. Its label
+   never breaks; with no room beside Vote it takes a line of its own. */
+.server-visit {
+  --arc-a: rgba(214, 180, 255, .95);
+  --arc-dim: rgba(164, 83, 255, .45);
+  --arc-low: rgba(180, 120, 255, .7);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .58), rgba(124, 58, 237, .26) 80%);
+  color: #fff;
+  white-space: nowrap;
+}
+.server-visit:hover,
+.server-visit:focus-visible { background: linear-gradient(145deg, rgba(164, 83, 255, .72), rgba(124, 58, 237, .36) 80%); }
+.theme-light .server-visit {
+  background: linear-gradient(145deg, rgba(124, 58, 237, .32), rgba(124, 58, 237, .1) 80%);
+  color: #4c1d95;
+}
+.theme-light .server-visit:hover { background: linear-gradient(145deg, rgba(124, 58, 237, .42), rgba(124, 58, 237, .16) 80%); }
+.server-vote,
+.server-community { white-space: nowrap; }
+
