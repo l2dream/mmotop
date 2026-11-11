@@ -183,16 +183,20 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 
 .theme-light .category { color: #464a60; }
 
+/* On white the arc is deep violet and the spark its darkest point. */
 .theme-light .category.active {
-  color: #fff;
-  background: linear-gradient(180deg, #9048ff, #7c3aed);
-  box-shadow: inset 0 -2px 0 #6d28d9;
+  color: #5b21c4;
+  --tab-ring: rgba(124, 58, 237, .85);
+  --tab-ring-dim: rgba(124, 58, 237, .22);
+  --tab-ring-low: rgba(124, 58, 237, .5);
+  --tab-spark: #4c1d95;
+  background-image:
+    linear-gradient(180deg, #7c3aed 20%, #4c1d95 95%),
+    linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%);
 }
 
 .theme-light .category.more .more-chevron { background: #7c3aed; color: #fff; }
 .theme-light .category.more:hover .more-chevron { background: #6d28d9; }
-/* On the filled purple of an active tab a purple disc would vanish. */
-.theme-light .category.more.active .more-chevron { background: rgba(255, 255, 255, .28); }
 
 .theme-button {
   width: 40px;
@@ -1125,10 +1129,39 @@ a.login-button { text-decoration: none; }
   border-radius: 10px;
 }
 
+/* The chosen tab, in the language of the place rings and version badges: a
+   frame drawn as an arc of violet light with a spark at the upper left, a
+   faint violet tint, and the name as a gradient. No filled block, no rule. */
 .category.active {
+  position: relative;
   color: #fff;
-  background: linear-gradient(180deg, rgba(94, 47, 180, .36), rgba(72, 35, 147, .18));
-  box-shadow: inset 0 -2px 0 #a453ff;
+  font-weight: 600;
+  --tab-ring: rgba(196, 150, 255, .9);
+  --tab-ring-dim: rgba(164, 83, 255, .25);
+  --tab-ring-low: rgba(164, 83, 255, .5);
+  --tab-spark: #fff;
+  background:
+    linear-gradient(180deg, #fff 20%, #c9a6ff 95%),
+    linear-gradient(145deg, rgba(164, 83, 255, .16), transparent 70%);
+  -webkit-background-clip: text, border-box;
+  background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+}
+.category.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* A pixel and a half and closed on an ordinary monitor, as the badges. */
+  padding: var(--tab-frame, 1.5px);
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--tab-ring-dim) 0deg, var(--tab-ring) 70deg, var(--tab-spark) 96deg, var(--tab-spark) 124deg, var(--tab-ring) 150deg, var(--tab-ring-low) 205deg, var(--tab-tail, var(--tab-ring-dim)) 290deg, var(--tab-ring-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .category.active::before { --tab-frame: 1px; --tab-tail: transparent; }
 }
 
 .category:focus-visible {
