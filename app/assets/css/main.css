@@ -196,8 +196,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
     linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%);
 }
 
-.theme-light .category.more .more-chevron { background: #7c3aed; color: #fff; }
-.theme-light .category.more:hover .more-chevron { background: #6d28d9; }
 
 .theme-button {
   width: 40px;
@@ -1190,11 +1188,8 @@ a.login-button { text-decoration: none; }
   height: 20px;
   margin-inline-start: 8px;
   border-radius: 50%;
-  background: rgba(156, 92, 255, .32);
-  color: #fff;
-  transition: background-color .18s ease;
+  transition: color .18s ease;
 }
-.category.more:hover .more-chevron { background: rgba(156, 92, 255, .55); }
 .category.more .more-chevron svg { display: block; width: 11px; height: 11px; transition: transform .18s ease; }
 .category.more .more-chevron.open svg { transform: rotate(180deg); }
 .category.more.active { color: #fff; }
@@ -1450,8 +1445,8 @@ a.login-button { text-decoration: none; }
   gap: 8px;
 }
 
-/* The arrow in a disc of the panel's accent, as on View more at the foot of
-   the panel: the two ways to the full list look alike. It nudges onward on
+/* The arrow in a ring of the panel's accent (.arc rules further down), as on
+   View more at the foot of the panel: the two ways to the full list look alike. It nudges onward on
    hover (`translate`, so the RTL mirror on the glyph is left alone). */
 .panel-arrow {
   display: grid;
@@ -1459,15 +1454,10 @@ a.login-button { text-decoration: none; }
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 30%, transparent);
-  color: #fff;
-  transition: background-color .18s ease, translate .18s ease;
+  transition: color .18s ease, translate .18s ease;
 }
 .panel-arrow svg { display: block; width: 14px; height: 14px; }
-.panel-arrow:hover {
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 50%, transparent);
-  translate: 2px 0;
-}
+.panel-arrow:hover { translate: 2px 0; }
 [dir="rtl"] .panel-arrow:hover { translate: -2px 0; }
 
 /* Quiet by default, picking up the panel's own accent on hover. The icon is
@@ -1496,7 +1486,6 @@ a.login-button { text-decoration: none; }
 
 .shuffle-icon { display: block; }
 
-.theme-light .panel-arrow { background: #7c3aed; color: #fff; }
 
 .panel-body { min-height: 0; }
 
@@ -1950,7 +1939,7 @@ a.login-button { text-decoration: none; }
 }
 .panel-footer:focus-visible { outline-offset: -3px; box-shadow: none; }
 
-/* The arrow sits in a disc of the accent: right for the full list, down for
+/* The arrow sits in a ring of the accent: right for the full list, down for
    more here. It nudges the way it points on hover. */
 .panel-footer-arrow {
   display: grid;
@@ -1958,15 +1947,10 @@ a.login-button { text-decoration: none; }
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 30%, transparent);
-  color: #fff;
-  transition: transform .18s ease, background-color .18s ease;
+  transition: transform .18s ease, color .18s ease;
 }
 .panel-footer-arrow svg { display: block; }
-.panel-footer:hover .panel-footer-arrow {
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 50%, transparent);
-  transform: translateX(3px);
-}
+.panel-footer:hover .panel-footer-arrow { transform: translateX(3px); }
 .panel-footer:hover .panel-footer-arrow.is-down { transform: translateY(2px); }
 [dir="rtl"] .panel-footer:hover .panel-footer-arrow:not(.is-down) { transform: translateX(-3px); }
 
@@ -1979,12 +1963,59 @@ a.login-button { text-decoration: none; }
   color: #2e1065;
   background: color-mix(in srgb, var(--panel-glow, #7c3aed) 15%, #ffffff);
 }
-.theme-light .panel-footer-arrow {
-  background: #7c3aed;
-  color: #fff;
+
+/* The round arrow buttons — in a panel's header, on View more, on the More
+   tab — are rings, not filled discs: the arc of light of the place rings in
+   the accent's colour, the arrow in the same colour. Brighter under the
+   pointer. */
+.panel-arrow,
+.panel-footer-arrow,
+.more-chevron {
+  position: relative;
+  --arc: var(--panel-glow, #9c5cff);
+  --arc-a: color-mix(in srgb, color-mix(in srgb, var(--arc) 70%, #fff) 95%, transparent);
+  --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
+  --arc-low: color-mix(in srgb, color-mix(in srgb, var(--arc) 85%, #fff) 55%, transparent);
+  --arc-spark: #fff;
+  color: color-mix(in srgb, var(--arc) 45%, #fff);
 }
-.theme-light .panel-footer:hover .panel-footer-arrow { background: #6d28d9; }
-.theme-light .panel-arrow:hover { background: #6d28d9; }
+.panel-arrow::before,
+.panel-footer-arrow::before,
+.more-chevron::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* A pixel and a half and closed on an ordinary monitor, as the badges. */
+  padding: var(--arc-frame, 1.5px);
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .panel-arrow::before,
+  .panel-footer-arrow::before,
+  .more-chevron::before { --arc-frame: 1px; --arc-tail: transparent; }
+}
+.panel-arrow:hover,
+.panel-footer:hover .panel-footer-arrow,
+.category.more:hover .more-chevron { color: #fff; }
+/* On white the ring and the arrow go deeper, and the spark is the darkest point. */
+.theme-light .panel-arrow,
+.theme-light .panel-footer-arrow,
+.theme-light .more-chevron {
+  --arc: var(--panel-glow, #7c3aed);
+  --arc-a: color-mix(in srgb, color-mix(in srgb, var(--arc) 80%, #000) 85%, transparent);
+  --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
+  --arc-low: color-mix(in srgb, var(--arc) 55%, transparent);
+  --arc-spark: color-mix(in srgb, var(--arc) 55%, #000);
+  color: color-mix(in srgb, var(--arc) 65%, #000);
+}
+.theme-light .panel-arrow:hover,
+.theme-light .panel-footer:hover .panel-footer-arrow,
+.theme-light .category.more:hover .more-chevron { color: color-mix(in srgb, var(--arc) 40%, #000); }
 
 /* ── A home panel as a carousel ─────────────────────────────────────────
    Each home panel can be switched from its list to a strip of cards (the
