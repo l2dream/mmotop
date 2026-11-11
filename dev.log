@@ -1,0 +1,25 @@
+
+ ERROR 
+Another Nuxt dev server is already running:
+
+  URL:     http://127.0.0.1:3000
+  PID:     5386
+  Dir:     /home/user/mmotop
+  Started: 11/11/2026, 6:02:09 PM
+
+Run kill 5386 to stop it, or connect to http://127.0.0.1:3000
+Set NUXT_IGNORE_LOCK=1 to bypass this check.
+
+
+
+ ERROR  Another Nuxt dev is already running (PID 5386).
+
+    at #acquireDevLock (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:580:10)
+    at NuxtDevServer.init (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:404:23)
+    at async initialize (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:753:2)
+    at async Object.run (node_modules/@nuxt/cli/dist/dev-Cbii5ek4.mjs:198:51)
+    at async runCommand (node_modules/citty/dist/index.mjs:228:47)
+    at async runCommand (node_modules/citty/dist/index.mjs:217:5)
+    at async runMain (node_modules/citty/dist/index.mjs:394:10) 
+
+
