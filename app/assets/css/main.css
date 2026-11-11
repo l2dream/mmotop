@@ -1490,6 +1490,9 @@ a.login-button { text-decoration: none; }
   transition: color .18s ease, background .18s ease, transform .35s ease;
 }
 .shuffle-icon { width: 14px; height: 14px; transition: transform .35s ease; }
+/* White inside its coloured ring, like the carousel switch's knob beside it
+   (the owner liked the white he saw when a tap left it "hovered"). */
+.panel-tools .shuffle-button { color: #fff; }
 
 .shuffle-icon { display: block; }
 
