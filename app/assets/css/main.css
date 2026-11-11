@@ -1716,13 +1716,21 @@ a.login-button { text-decoration: none; }
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1px;
+  /* On an ordinary monitor the frame is a pixel and a half and closed: its
+     tail stays faintly lit, or the square fell apart at the lower right. */
+  padding: var(--v-frame, 1.5px);
   border-radius: inherit;
-  background: conic-gradient(from 200deg, var(--v-ring-dim) 0deg, var(--v-ring) 70deg, var(--v-spark) 96deg, var(--v-spark) 124deg, var(--v-ring) 150deg, var(--v-ring-low) 205deg, transparent 290deg, var(--v-ring-dim) 360deg);
+  background: conic-gradient(from 200deg, var(--v-ring-dim) 0deg, var(--v-ring) 70deg, var(--v-spark) 96deg, var(--v-spark) 124deg, var(--v-ring) 150deg, var(--v-ring-low) 205deg, var(--v-tail, var(--v-ring-dim)) 290deg, var(--v-ring-dim) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
+}
+
+/* Sharp screens (phones, retina) draw it finer: a pixel wide, open at the
+   lower right like the place ring. */
+@media (min-resolution: 2dppx) {
+  .game-logo::before { --v-frame: 1px; --v-tail: transparent; }
 }
 
 /* An uploaded logo fills the square; the frame over it stays neutral. */
