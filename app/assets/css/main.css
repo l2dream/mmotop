@@ -2206,52 +2206,75 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .theme-light .carousel-nav:hover { background: #6d28d9; }
 
 /* The switch in the panel's head: a track with a knob, the knob at the
-   start for the list and at the end for the carousel, the track filled with
-   the panel's accent while on. */
+   start for the list and at the end for the carousel. Both are drawn as the
+   arc of light of the place rings, in the panel's accent; while on, the track
+   and the knob take a tint of it and the glyph turns white. */
 .carousel-toggle {
   position: relative;
   flex: 0 0 auto;
   width: 40px;
   height: 22px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--panel-glow, #9c5cff) 55%, transparent);
+  border: 0;
   border-radius: 999px;
-  background: rgba(8, 10, 24, .35);
+  background: none;
   cursor: pointer;
-  transition: background-color .2s ease, border-color .2s ease;
+  --arc: var(--panel-glow, #9c5cff);
+  --arc-a: color-mix(in srgb, var(--arc) 70%, #fff);
+  --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
+  --arc-low: color-mix(in srgb, var(--arc) 55%, transparent);
+  --arc-spark: #fff;
+  --arc-ring: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  transition: background-color .2s ease;
+}
+.carousel-toggle::before,
+.carousel-toggle-knob::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* A pixel and a half and closed on an ordinary monitor, as the badges. */
+  padding: var(--arc-frame, 1.5px);
+  border-radius: inherit;
+  background: var(--arc-ring);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .carousel-toggle { --arc-frame: 1px; --arc-tail: transparent; }
 }
 .carousel-toggle-knob {
   position: absolute;
-  top: 2px;
-  inset-inline-start: 2px;
+  top: 3px;
+  inset-inline-start: 3px;
   display: grid;
   place-items: center;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #c3c6d8;
-  color: #1b1e33;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  color: color-mix(in srgb, var(--arc) 45%, #fff);
   transition: translate .2s ease, background-color .2s ease, color .2s ease;
 }
 .carousel-toggle-knob svg { display: block; }
-.carousel-toggle:hover { border-color: color-mix(in srgb, var(--panel-glow, #9c5cff) 85%, transparent); }
-.carousel-toggle:hover .carousel-toggle-knob { background: #fff; }
-.carousel-toggle.pressed {
-  border-color: transparent;
-  background: color-mix(in srgb, var(--panel-glow, #9c5cff) 70%, #0b0e22);
-}
+.carousel-toggle:hover .carousel-toggle-knob { color: #fff; }
+.carousel-toggle.pressed { background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 30%, transparent), color-mix(in srgb, var(--arc) 8%, transparent)); }
 .carousel-toggle.pressed .carousel-toggle-knob {
   translate: 18px 0;
-  background: #fff;
-  color: color-mix(in srgb, var(--panel-glow, #9c5cff) 70%, #0b0e22);
+  background: color-mix(in srgb, var(--arc) 35%, transparent);
+  color: #fff;
 }
 [dir="rtl"] .carousel-toggle.pressed .carousel-toggle-knob { translate: -18px 0; }
-.theme-light .carousel-toggle { border-color: #9a6cf5; background: #fff; }
-.theme-light .carousel-toggle-knob { background: #ede9fe; color: #5b21b6; box-shadow: 0 1px 3px rgba(31, 41, 102, .25); }
-.theme-light .carousel-toggle:hover .carousel-toggle-knob { background: #ddd6fe; }
-.theme-light .carousel-toggle.pressed { border-color: transparent; background: #7c3aed; }
-.theme-light .carousel-toggle.pressed .carousel-toggle-knob { background: #fff; color: #7c3aed; }
+/* On white the arcs go deeper and the spark is the darkest point. */
+.theme-light .carousel-toggle {
+  --arc: var(--panel-glow, #7c3aed);
+  --arc-a: color-mix(in srgb, var(--arc) 80%, #000);
+  --arc-spark: color-mix(in srgb, var(--arc) 55%, #000);
+}
+.theme-light .carousel-toggle-knob { color: color-mix(in srgb, var(--arc) 65%, #000); }
+.theme-light .carousel-toggle:hover .carousel-toggle-knob { color: color-mix(in srgb, var(--arc) 40%, #000); }
+.theme-light .carousel-toggle.pressed { background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 28%, transparent), color-mix(in srgb, var(--arc) 10%, transparent)); }
+.theme-light .carousel-toggle.pressed .carousel-toggle-knob { background: color-mix(in srgb, var(--arc) 30%, transparent); color: color-mix(in srgb, var(--arc) 50%, #000); }
 
 /* With a mouse the arrows get gutters of their own beside the strip, so a
    card never slides under one and loses its first letters. */
