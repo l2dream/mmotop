@@ -1966,7 +1966,7 @@ a.login-button { text-decoration: none; }
 
 /* The round arrow buttons — in a panel's header, on View more, on the More
    tab — are rings, not filled discs: the arc of light of the place rings in
-   the accent's colour, the arrow in the same colour. Brighter under the
+   the accent's colour, a faint tint inside, the arrow in the same colour. Brighter under the
    pointer. */
 .panel-arrow,
 .panel-footer-arrow,
@@ -1977,6 +1977,8 @@ a.login-button { text-decoration: none; }
   --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
   --arc-low: color-mix(in srgb, color-mix(in srgb, var(--arc) 85%, #fff) 55%, transparent);
   --arc-spark: #fff;
+  /* A faint tint of the accent from the upper left, gone before the far edge. */
+  background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 22%, transparent), transparent 70%);
   color: color-mix(in srgb, var(--arc) 45%, #fff);
 }
 .panel-arrow::before,
@@ -2011,6 +2013,7 @@ a.login-button { text-decoration: none; }
   --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
   --arc-low: color-mix(in srgb, var(--arc) 55%, transparent);
   --arc-spark: color-mix(in srgb, var(--arc) 55%, #000);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 16%, transparent), transparent 70%);
   color: color-mix(in srgb, var(--arc) 65%, #000);
 }
 .theme-light .panel-arrow:hover,
