@@ -1298,7 +1298,9 @@ a.login-button { text-decoration: none; }
 .theme-light .footer-popular,
 .theme-light .footer-popular a,
 .theme-light .site-footer-copy { color: #464a60; }
-.site-footer-legal { display: flex; gap: 14px; justify-content: center; font-size: 13px; }
+/* Wraps: in Russian "Конфиденциальность · Условия · support@…" was wider than
+   a 360px phone and pushed the whole page 10px sideways. */
+.site-footer-legal { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: center; font-size: 13px; }
 .site-footer-legal a { color: #9a9fb8; text-decoration: none; }
 .site-footer-legal a:hover { text-decoration: underline; }
 .theme-light .site-footer-legal a { color: #464a60; }
@@ -4111,4 +4113,12 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .server-visit:hover { background: linear-gradient(145deg, rgba(124, 58, 237, .42), rgba(124, 58, 237, .16) 80%); }
 .server-vote,
 .server-community { white-space: nowrap; }
+
+/* The older hover rules of the way back drew a solid border and filled the
+   arrow's disc; the arc and the ring replace both. */
+.section-back:hover,
+.theme-light .section-back:hover { border-color: transparent; }
+.section-back:hover .section-back-arrow svg,
+.theme-light .section-back:hover .section-back-arrow svg,
+.theme-light .section-back .section-back-arrow svg { background: none; }
 
