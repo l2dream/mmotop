@@ -4122,3 +4122,56 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .section-back:hover .section-back-arrow svg,
 .theme-light .section-back .section-back-arrow svg { background: none; }
 
+/* The offer to switch language above the page: the bar is glass with a white
+   arc, its button a violet one, like the rest of the site. */
+.lang-hint,
+.lang-hint-action {
+  position: relative;
+  border-color: transparent;
+  --arc-a: rgba(255, 255, 255, .7);
+  --arc-dim: rgba(255, 255, 255, .12);
+  --arc-low: rgba(255, 255, 255, .28);
+  --arc-spark: #fff;
+}
+.lang-hint { background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%), rgba(20, 23, 50, .6); }
+.lang-hint-action {
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+}
+.lang-hint-action:hover { border-color: transparent; background: linear-gradient(145deg, rgba(164, 83, 255, .32), transparent 70%); }
+.lang-hint::before,
+.lang-hint-action::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--arc-frame, 1.5px);
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .lang-hint,
+  .lang-hint-action { --arc-frame: 1px; --arc-tail: transparent; }
+}
+.theme-light .lang-hint {
+  border-color: transparent;
+  --arc-a: rgba(22, 24, 43, .42);
+  --arc-dim: rgba(22, 24, 43, .14);
+  --arc-low: rgba(22, 24, 43, .26);
+  --arc-spark: rgba(22, 24, 43, .62);
+}
+.theme-light .lang-hint-action,
+.theme-light .lang-hint-action:hover {
+  border-color: transparent;
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .12), transparent 70%);
+}
+
