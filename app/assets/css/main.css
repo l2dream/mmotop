@@ -1922,6 +1922,21 @@ a.login-button { text-decoration: none; }
 
 .theme-light .date { color: #2f3348; }
 
+/* The day and month as a gradient, white at the top running into the panel's
+   own colour, like the votes in TOP GAMES; the year stays plain grey under
+   it. The carousel cards' date gets the same. */
+.date-day,
+.server-tile-date {
+  background: linear-gradient(180deg, #fff 15%, color-mix(in srgb, var(--panel-glow, #9c5cff) 60%, #fff) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.theme-light .date-day,
+.theme-light .server-tile-date {
+  background-image: linear-gradient(180deg, #2f3348 15%, color-mix(in srgb, var(--panel-glow, #7c3aed) 70%, #16182b) 90%);
+}
+
 .panel-footer {
   width: 100%;
   height: 46px;
