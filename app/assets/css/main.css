@@ -184,7 +184,8 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .category { color: #464a60; }
 
 /* On white the arc is deep violet and the spark its darkest point. */
-.theme-light .category.active {
+.theme-light .category.active,
+.theme-light .more-dropdown-item.active {
   color: #5b21c4;
   --tab-ring: rgba(124, 58, 237, .85);
   --tab-ring-dim: rgba(124, 58, 237, .22);
@@ -1131,8 +1132,10 @@ a.login-button { text-decoration: none; }
 
 /* The chosen tab, in the language of the place rings and version badges: a
    frame drawn as an arc of violet light with a spark at the upper left, a
-   faint violet tint, and the name as a gradient. No filled block, no rule. */
-.category.active {
+   faint violet tint, and the name as a gradient. No filled block, no rule.
+   The chosen game in the More menu is drawn the same way. */
+.category.active,
+.more-dropdown-item.active {
   position: relative;
   color: #fff;
   font-weight: 600;
@@ -1147,7 +1150,8 @@ a.login-button { text-decoration: none; }
   background-clip: text, border-box;
   -webkit-text-fill-color: transparent;
 }
-.category.active::before {
+.category.active::before,
+.more-dropdown-item.active::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1161,7 +1165,8 @@ a.login-button { text-decoration: none; }
   pointer-events: none;
 }
 @media (min-resolution: 2dppx) {
-  .category.active::before { --tab-frame: 1px; --tab-tail: transparent; }
+  .category.active::before,
+  .more-dropdown-item.active::before { --tab-frame: 1px; --tab-tail: transparent; }
 }
 
 .category:focus-visible {
@@ -1233,13 +1238,7 @@ a.login-button { text-decoration: none; }
   cursor: pointer;
 }
 
-.more-dropdown-item:hover { background: rgba(148, 92, 255, .14); color: #fff; }
-
-.more-dropdown-item.active {
-  color: #fff;
-  background: linear-gradient(180deg, rgba(94, 47, 180, .36), rgba(72, 35, 147, .18));
-  box-shadow: inset 0 -2px 0 #a453ff;
-}
+.more-dropdown-item:not(.active):hover { background: rgba(148, 92, 255, .14); color: #fff; }
 
 .theme-light .more-dropdown {
   background: #ffffff;
@@ -1251,13 +1250,7 @@ a.login-button { text-decoration: none; }
 .theme-light .more-dropdown::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, .5); }
 
 .theme-light .more-dropdown-item { color: #363a52; }
-.theme-light .more-dropdown-item:hover { background: rgba(124, 58, 237, .08); color: #16182b; }
-
-.theme-light .more-dropdown-item.active {
-  color: #fff;
-  background: linear-gradient(180deg, #9048ff, #7c3aed);
-  box-shadow: inset 0 -2px 0 #6d28d9;
-}
+.theme-light .more-dropdown-item:not(.active):hover { background: rgba(124, 58, 237, .08); color: #16182b; }
 
 .dashboard {
   max-width: 1480px;
