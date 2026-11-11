@@ -1378,13 +1378,14 @@ a.login-button { text-decoration: none; }
 }
 
 .panel-icon {
-  /* A slot wider than the 24px glyph, for the arc of light behind it; pulled
-     out at both ends so the glyph and the title stay where they were. */
+  /* A slot wider than the 24px glyph, for the arc of light behind it. The arc
+     starts at the head's inset, mirroring the arrow ring at the other end;
+     glyph and title sit 6px further in than they did without it. */
   position: relative;
   flex: none;
   width: 36px;
   height: 36px;
-  margin-inline: -6px -3px;
+  margin-inline: 0 -3px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2229,8 +2230,9 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .carousel-toggle {
   position: relative;
   flex: 0 0 auto;
-  width: 40px;
-  height: 22px;
+  /* As tall as the arrow ring beside it. */
+  width: 46px;
+  height: 26px;
   padding: 0;
   border: 0;
   border-radius: 999px;
@@ -2267,8 +2269,8 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   inset-inline-start: 3px;
   display: grid;
   place-items: center;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   color: color-mix(in srgb, var(--arc) 45%, #fff);
   transition: translate .2s ease, background-color .2s ease, color .2s ease;
@@ -2277,11 +2279,11 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .carousel-toggle:hover .carousel-toggle-knob { color: #fff; }
 .carousel-toggle.pressed { background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 30%, transparent), color-mix(in srgb, var(--arc) 8%, transparent)); }
 .carousel-toggle.pressed .carousel-toggle-knob {
-  translate: 18px 0;
+  translate: 20px 0;
   background: color-mix(in srgb, var(--arc) 35%, transparent);
   color: #fff;
 }
-[dir="rtl"] .carousel-toggle.pressed .carousel-toggle-knob { translate: -18px 0; }
+[dir="rtl"] .carousel-toggle.pressed .carousel-toggle-knob { translate: -20px 0; }
 /* On white the arcs go deeper and the spark is the darkest point. */
 .theme-light .carousel-toggle {
   --arc: var(--panel-glow, #7c3aed);
@@ -4174,4 +4176,44 @@ a.account-address:hover { text-decoration: underline; }
   --arc-spark: #4c1d95;
   background: linear-gradient(145deg, rgba(124, 58, 237, .12), transparent 70%);
 }
+
+/* Back to top: the glass disc of the site with a violet arc instead of a
+   solid violet border; it floats over the lists, so it keeps its blur and a
+   fairly dense fill underneath. */
+.scroll-top {
+  border-color: transparent;
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  --arc-spark: #fff;
+  background: linear-gradient(145deg, rgba(164, 83, 255, .24), rgba(164, 83, 255, .04) 70%), rgba(20, 23, 50, .88);
+  color: #efe4ff;
+}
+.scroll-top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--arc-frame, 1.5px);
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .scroll-top { --arc-frame: 1px; --arc-tail: transparent; }
+}
+.scroll-top:hover { background: linear-gradient(145deg, rgba(164, 83, 255, .4), rgba(164, 83, 255, .1) 70%), rgba(20, 23, 50, .9); color: #fff; }
+.theme-light .scroll-top,
+.theme-light .scroll-top:hover {
+  border-color: transparent;
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .16), rgba(255, 255, 255, .85) 70%), rgba(255, 255, 255, .9);
+  color: #5b21c4;
+}
+.theme-light .scroll-top:hover { background: linear-gradient(145deg, rgba(124, 58, 237, .26), rgba(255, 255, 255, .85) 70%), rgba(255, 255, 255, .9); }
 

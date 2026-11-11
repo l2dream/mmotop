@@ -26,7 +26,7 @@ const { to, remember } = useServerLink(() => props.server, () => props.origin)
       <ServerLogo :server="server" />
       <span v-if="end === 'votes'" class="rank" :class="rank && rank <= 3 ? `rank-${rank}` : rank && rank >= 100 ? 'rank-long' : undefined">{{ rank }}</span>
       <span v-else-if="end === 'date'" class="server-tile-date">
-        {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)"> {{ formatYear(server.openDate) }}</template>
+        {{ formatDayMonth(server.openDate) }}<template v-if="formatYear(server.openDate)">&nbsp;{{ formatYear(server.openDate) }}</template>
       </span>
     </span>
     <strong class="server-tile-name"><HitText :text="server.name" /></strong>
