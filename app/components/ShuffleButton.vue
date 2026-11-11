@@ -3,7 +3,7 @@
  * Draws a random list again: ALL GAMES, on the home panel and its own page,
  * and the more-servers panel on a server's page. `turns` counts deliberate
  * shuffles, so the half-turn answers a click and not every page load and
- * every language change.
+ * every language change. The glyph turns inside its ring.
  */
 defineProps<{ turns: number }>()
 defineEmits<{ shuffle: [] }>()
@@ -14,10 +14,10 @@ defineEmits<{ shuffle: [] }>()
     class="shuffle-button"
     type="button"
     :aria-label="$t('panels.shuffle')"
-    :style="{ transform: `rotate(${turns * 180}deg)` }"
     @click="$emit('shuffle')"
   >
-    <svg class="shuffle-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <!-- The glyph turns, not the button: the ring's glint stays at the upper left. -->
+    <svg class="shuffle-icon" :style="{ transform: `rotate(${turns * 180}deg)` }" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M16 3h5v5" />
       <path d="M4 20 21 3" />
       <path d="M21 16v5h-5" />
