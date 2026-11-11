@@ -1376,14 +1376,39 @@ a.login-button { text-decoration: none; }
 }
 
 .panel-icon {
-  width: 24px;
+  /* A slot wider than the 24px glyph, for the arc of light behind it; pulled
+     out at both ends so the glyph and the title stay where they were. */
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  margin-inline: -6px -3px;
   display: flex;
   align-items: center;
-  /* Start-aligned: see the icon offsets below. */
-  justify-content: flex-start;
+  justify-content: center;
+  border-radius: 50%;
+  /* A faint tint of the panel's accent from the upper left. */
+  background: linear-gradient(145deg, color-mix(in srgb, var(--panel-glow, #9c5cff) 14%, transparent), transparent 70%);
   color: #ae5cff;
   font-size: 20px;
   text-align: center;
+}
+/* Half a ring behind the glyph: only the glint at the upper left, in the
+   panel's colour with a white spark — the arc of the place rings, left open
+   so the glyph is not shut in a frame. It replaces the glow the icons had. */
+.panel-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: 50%;
+  --glint: color-mix(in srgb, var(--panel-glow, #9c5cff) 70%, #fff);
+  --glint-spark: #fff;
+  background: conic-gradient(from 200deg, transparent 0deg, var(--glint) 60deg, var(--glint-spark) 96deg, var(--glint-spark) 124deg, var(--glint) 160deg, transparent 215deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
 }
 
 .trophy-icon,
@@ -1393,26 +1418,15 @@ a.login-button { text-decoration: none; }
 .grid-icon,
 .thumb-icon {
   display: block;
-  filter: drop-shadow(0 0 7px var(--panel-glow, transparent));
+  position: relative;
 }
-
-/*
- * Each icon is drawn centred in its 24-unit box with its own empty margin —
- * 1 unit for the wide trophy, 4 for the small grid — so the visible glyph
- * began 19–22px from the panel edge while the arrow on the other side ends at
- * exactly 18. Pulled out by that margin, every icon starts at the head's inset
- * and mirrors the arrow. The 24px slot keeps its width (the
- * icon is start-aligned in it), so the titles stay where they are.
- */
-.trophy-icon { margin-inline-start: -1px; }
-.clock-icon,
-.bolt-icon { margin-inline-start: -3px; }
-.sparkle-icon { margin-inline-start: -2px; }
-.grid-icon { margin-inline-start: -4px; }
-.thumb-icon { margin-inline-start: -2px; }
 
 .theme-light .panel-head { border-bottom-color: rgba(103, 104, 173, .12); }
 .theme-light .panel-icon { color: #7c3aed; }
+.theme-light .panel-icon::before {
+  --glint: color-mix(in srgb, var(--panel-glow, #7c3aed) 75%, #000);
+  --glint-spark: color-mix(in srgb, var(--panel-glow, #7c3aed) 50%, #000);
+}
 
 /* Capitals set solid look cramped — "ALREADY STARTED", "CRIMSONVALE" — so
    every all-caps line gets a little tracking, scaled to its size. */
@@ -1421,19 +1435,16 @@ a.login-button { text-decoration: none; }
   font-size: 15px;
   letter-spacing: .04em;
   font-weight: 800;
-  /* White running into a pale tint of the panel's own accent, with a soft
-     glow of the same: the one place text gets an effect, because it is large
-     and heavy enough to stay crisp. Even the tinted end stays above 10:1. */
+  /* White running into a pale tint of the panel's own accent. Even the
+     tinted end stays above 10:1. No glow: nothing on the page glows now. */
   background: linear-gradient(90deg, #ffffff 30%, color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, #ffffff));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--panel-glow, #9c5cff) 45%, transparent));
 }
 
 .theme-light .panel h2 {
   background-image: linear-gradient(90deg, #131525 30%, color-mix(in srgb, var(--panel-glow, #7c3aed) 45%, #131525));
-  filter: none;
 }
 
 /* Holds the header's controls together at the trailing edge: any panel action
