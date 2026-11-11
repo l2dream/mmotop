@@ -3667,11 +3667,48 @@ a.account-address:hover { text-decoration: underline; }
   background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02)), rgba(14, 17, 38, .55);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
 }
+/* The two buttons at the end of the top bar are framed by the arc of light
+   of the place rings instead of a solid violet border. Sign-in, the bar's
+   main action, is violet with a violet tint; the language button is neutral
+   glass with a white arc, a step behind it. */
 .lang-button,
 .login-button {
-  background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02)), rgba(20, 23, 50, .55);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 14px rgba(0, 0, 0, .28);
+  position: relative;
+  border-color: transparent;
+  box-shadow: none;
+  --arc-a: rgba(255, 255, 255, .7);
+  --arc-dim: rgba(255, 255, 255, .12);
+  --arc-low: rgba(255, 255, 255, .28);
+  --arc-spark: #fff;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%);
 }
+.login-button {
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+  color: #e3d1ff;
+}
+.lang-button::before,
+.login-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* A pixel and a half and closed on an ordinary monitor, as the badges. */
+  padding: var(--arc-frame, 1.5px);
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  .lang-button,
+  .login-button { --arc-frame: 1px; --arc-tail: transparent; }
+}
+.lang-button:hover,
+.login-button:hover { border-color: transparent; color: #fff; }
 .category-bar {
   border: 1px solid rgba(255, 255, 255, .11);
   background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .72);
@@ -3695,9 +3732,24 @@ a.account-address:hover { text-decoration: underline; }
 }
 .theme-light .lang-button,
 .theme-light .login-button {
+  border-color: transparent;
   background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .7));
   box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
+  --arc-a: rgba(22, 24, 43, .42);
+  --arc-dim: rgba(22, 24, 43, .14);
+  --arc-low: rgba(22, 24, 43, .26);
+  --arc-spark: rgba(22, 24, 43, .62);
 }
+.theme-light .login-button {
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .14), rgba(255, 255, 255, .8) 70%);
+  color: #5b21c4;
+}
+.theme-light .lang-button:hover,
+.theme-light .login-button:hover { border-color: transparent; }
 .theme-light .filter-popup,
 .theme-light .lang-panel,
 .theme-light .more-dropdown {
