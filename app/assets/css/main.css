@@ -3837,3 +3837,257 @@ a.account-address:hover { text-decoration: underline; }
   .lang-panel,
   .more-dropdown { border-width: .5px; }
 }
+
+/* ── The arc of light, across the rest of the site (13 November) ─────────
+   The frame the place rings, version badges, tabs and buttons on the home
+   page are drawn with, now on the other pages too: the status pill and the
+   facts on a server's page, the way back, the big violet buttons, the
+   filter window, the language panel and the account form. Neutral (white)
+   by default; violet where it marks the action or the choice; the status
+   pill in its own colour. Each element sets the --arc-* colours, the ring
+   is a ::before masked to its edge. */
+.server-status,
+.section-back,
+.section-back-arrow,
+.server-visit,
+.server-vote,
+.server-community,
+.account-button:not(.account-oauth),
+.filter-apply,
+.not-found-home,
+.server-facts > div,
+.filter-chip,
+.lang-search,
+.lang-item.active {
+  position: relative;
+  --arc-a: rgba(255, 255, 255, .7);
+  --arc-dim: rgba(255, 255, 255, .12);
+  --arc-low: rgba(255, 255, 255, .28);
+  --arc-spark: #fff;
+  border-color: transparent;
+}
+:is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .server-facts > div, .filter-chip, .lang-search, .lang-item.active)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--arc-frame, 1.5px);
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) {
+  :is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .server-facts > div, .filter-chip, .lang-search, .lang-item.active) { --arc-frame: 1px; --arc-tail: transparent; }
+}
+
+/* Violet: the action to take, the thing chosen. A tint of violet inside,
+   the label in pale violet; brighter under the pointer. */
+.server-visit,
+.server-vote,
+.account-button:not(.account-oauth, .account-button-quiet),
+.filter-apply,
+.not-found-home,
+.filter-chip.active,
+.lang-item.active,
+.section-back-arrow {
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+}
+.server-visit,
+.account-button:not(.account-oauth, .account-button-quiet),
+.filter-apply,
+.not-found-home {
+  background: linear-gradient(145deg, rgba(164, 83, 255, .34), rgba(164, 83, 255, .08) 75%);
+  box-shadow: none;
+  color: #efe4ff;
+}
+.server-visit:hover,
+.server-visit:focus-visible,
+.account-button:not(.account-oauth, .account-button-quiet):hover,
+.filter-apply:hover,
+.not-found-home:hover,
+.not-found-home:focus-visible {
+  background: linear-gradient(145deg, rgba(164, 83, 255, .48), rgba(164, 83, 255, .14) 75%);
+  color: #fff;
+}
+.server-vote,
+.filter-chip.active,
+.lang-item.active {
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+  box-shadow: none;
+  color: #efe4ff;
+}
+
+/* Neutral: glass with a white arc. */
+.server-community,
+.account-button.account-button-quiet,
+.filter-chip:not(.active),
+.server-facts > div,
+.section-back {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%);
+  box-shadow: none;
+}
+.section-back:hover,
+.server-community:hover,
+.filter-chip:not(.active):hover { background: linear-gradient(145deg, rgba(255, 255, 255, .1), transparent 70%); }
+
+/* The arrow of the way back: in a small violet ring, like the arrows on the
+   home page, not a filled disc. */
+.section-back-arrow {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+  color: #e3d1ff;
+  transition: translate .18s ease, color .18s ease;
+}
+.section-back .section-back-arrow svg { width: auto; height: auto; padding: 0; background: none; border-radius: 0; color: inherit; translate: none; }
+.section-back:hover .section-back-arrow { translate: -2px 0; color: #fff; }
+[dir="rtl"] .section-back:hover .section-back-arrow { translate: 2px 0; }
+
+/* The status pill: its own colour, amber for started, blue for soon. */
+.server-status { background: linear-gradient(145deg, color-mix(in srgb, var(--status) 20%, transparent), transparent 75%); }
+.server-status.is-started { --status: #ffcb4d; }
+.server-status.is-soon { --status: #5ec2ff; }
+.server-status.is-started,
+.server-status.is-soon {
+  --arc-a: color-mix(in srgb, var(--status) 75%, #fff);
+  --arc-dim: color-mix(in srgb, var(--status) 25%, transparent);
+  --arc-low: color-mix(in srgb, var(--status) 55%, transparent);
+}
+
+/* Fields that cannot hold a ::before (inputs, selects): the same arc as a
+   gradient border, under an opaque fill. */
+.filter-select,
+.filter-custom-input,
+.account-field input:not([type="checkbox"]),
+.account-field select,
+.account-field textarea {
+  --field-fill: #161a33;
+  --field-arc: conic-gradient(from 200deg, rgba(255, 255, 255, .12) 0deg, rgba(255, 255, 255, .7) 70deg, #fff 96deg, #fff 124deg, rgba(255, 255, 255, .7) 150deg, rgba(255, 255, 255, .28) 205deg, rgba(255, 255, 255, .12) 290deg, rgba(255, 255, 255, .12) 360deg);
+  border: 1.5px solid transparent;
+  box-shadow: none;
+}
+.account-field input:not([type="checkbox"]),
+.account-field textarea,
+.filter-custom-input {
+  background: linear-gradient(145deg, #1d2140, var(--field-fill) 70%) padding-box, var(--field-arc) border-box;
+}
+.filter-select,
+.account-field select {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c3c6d8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 12px padding-box,
+    linear-gradient(145deg, #1d2140, var(--field-fill) 70%) padding-box,
+    var(--field-arc) border-box;
+}
+[dir="rtl"] .filter-select,
+[dir="rtl"] .account-field select { background-position: left 12px center, 0 0, 0 0; }
+@media (min-resolution: 2dppx) {
+  .filter-select,
+  .filter-custom-input,
+  .account-field input:not([type="checkbox"]),
+  .account-field select,
+  .account-field textarea { border-width: 1px; }
+}
+
+/* The language search field: its frame lights up violet while typing in it. */
+.lang-search { background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%), rgba(16, 20, 44, .72); }
+.lang-search:focus-within {
+  box-shadow: none;
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+}
+
+/* The account form's checkbox: a small glass square with the arc; ticked,
+   it takes the violet tint and a white tick. */
+.account-check input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid transparent;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #1d2140, #161a33 70%) padding-box, conic-gradient(from 200deg, rgba(255, 255, 255, .12) 0deg, rgba(255, 255, 255, .7) 70deg, #fff 110deg, rgba(255, 255, 255, .7) 150deg, rgba(255, 255, 255, .28) 205deg, rgba(255, 255, 255, .12) 360deg) border-box;
+}
+.account-check input:checked {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px 12px no-repeat padding-box,
+    linear-gradient(145deg, #6d3fc8, #3b2475 75%) padding-box,
+    conic-gradient(from 200deg, rgba(164, 83, 255, .4) 0deg, rgba(196, 150, 255, .95) 70deg, #fff 110deg, rgba(196, 150, 255, .95) 150deg, rgba(164, 83, 255, .6) 205deg, rgba(164, 83, 255, .4) 360deg) border-box;
+}
+
+/* Recommended's thumbs-up, a line like the votes' one. */
+.thumb-icon { overflow: visible; }
+
+/* The light theme: the same arcs in ink and deep violet. */
+.theme-light :is(.server-status, .section-back, .server-community, .account-button.account-button-quiet, .filter-chip:not(.active), .server-facts > div, .lang-search) {
+  --arc-a: rgba(22, 24, 43, .42);
+  --arc-dim: rgba(22, 24, 43, .14);
+  --arc-low: rgba(22, 24, 43, .26);
+  --arc-spark: rgba(22, 24, 43, .62);
+}
+.theme-light :is(.server-visit, .server-vote, .account-button:not(.account-oauth, .account-button-quiet), .filter-apply, .not-found-home, .filter-chip.active, .lang-item.active, .section-back-arrow, .lang-search:focus-within) {
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+}
+.theme-light :is(.server-visit, .account-button:not(.account-oauth, .account-button-quiet), .filter-apply, .not-found-home) {
+  border-color: transparent;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .2), rgba(255, 255, 255, .7) 75%);
+  color: #5b21c4;
+}
+.theme-light :is(.server-visit, .account-button:not(.account-oauth, .account-button-quiet), .filter-apply, .not-found-home):hover {
+  background: linear-gradient(145deg, rgba(124, 58, 237, .3), rgba(255, 255, 255, .7) 75%);
+  color: #4c1d95;
+}
+.theme-light :is(.server-vote, .filter-chip.active, .lang-item.active) {
+  border-color: transparent;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%);
+  color: #4c1d95;
+}
+.theme-light .section-back-arrow { background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%); color: #5b21c4; }
+.theme-light .section-back { border-color: transparent; }
+.theme-light .server-status.is-started { --status: #d97706; color: #854d0e; }
+.theme-light .server-status.is-soon { --status: #0284c7; color: #0369a1; }
+.theme-light .server-status.is-started,
+.theme-light .server-status.is-soon {
+  --arc-a: color-mix(in srgb, var(--status) 80%, #000);
+  --arc-dim: color-mix(in srgb, var(--status) 25%, transparent);
+  --arc-low: color-mix(in srgb, var(--status) 55%, transparent);
+  --arc-spark: color-mix(in srgb, var(--status) 55%, #000);
+}
+.theme-light :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea) {
+  --field-fill: #ffffff;
+  --field-arc: conic-gradient(from 200deg, rgba(22, 24, 43, .14) 0deg, rgba(22, 24, 43, .42) 70deg, rgba(22, 24, 43, .62) 96deg, rgba(22, 24, 43, .62) 124deg, rgba(22, 24, 43, .42) 150deg, rgba(22, 24, 43, .26) 205deg, rgba(22, 24, 43, .14) 290deg, rgba(22, 24, 43, .14) 360deg);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(31, 41, 102, .07);
+}
+.theme-light :is(.account-field input:not([type="checkbox"]), .account-field textarea, .filter-custom-input) {
+  background: linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box, var(--field-arc) border-box;
+}
+.theme-light :is(.filter-select, .account-field select) {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4e66' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 12px padding-box,
+    linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box,
+    var(--field-arc) border-box;
+}
+.theme-light .lang-search { background: #fff; }
+.theme-light .account-check input {
+  background: linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box, conic-gradient(from 200deg, rgba(22, 24, 43, .14) 0deg, rgba(22, 24, 43, .45) 70deg, rgba(22, 24, 43, .62) 110deg, rgba(22, 24, 43, .45) 150deg, rgba(22, 24, 43, .26) 205deg, rgba(22, 24, 43, .14) 360deg) border-box;
+}
+.theme-light .account-check input:checked {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px 12px no-repeat padding-box,
+    linear-gradient(145deg, #8b5cf6, #6d28d9) padding-box,
+    linear-gradient(#6d28d9, #6d28d9) border-box;
+}
+
