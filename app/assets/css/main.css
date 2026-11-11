@@ -2272,7 +2272,10 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  color: color-mix(in srgb, var(--arc) 45%, #fff);
+  /* Off: a white glyph in an empty ring. On (below): the ring takes a tint
+     of the panel's colour. The owner liked the white glyph he saw when a tap
+     left the switch "hovered", so it is the resting look now. */
+  color: #fff;
   transition: translate .2s ease, background-color .2s ease, color .2s ease;
 }
 .carousel-toggle-knob svg { display: block; }
