@@ -3295,8 +3295,8 @@ a.account-address:hover { text-decoration: underline; }
        16px and leaves it zoomed after. The placeholder truncates sooner at
        narrow widths; it did at 320px already. */
     font-size: 16px;
-    border-radius: 9px;
   }
+  .search-box { --search-r: 9px; }
   /* "Rechercher des jeux…" in the space left at phone width came out as
      "Recherc". Here the field shows one word instead, at 13px: the field
      itself has to stay 16px for iOS, but the placeholder does not. */
@@ -3340,7 +3340,7 @@ a.account-address:hover { text-decoration: underline; }
     height: 24px;
   }
   .filter-button {
-    inset-inline-end: 2px;
+    inset-inline-end: 4px;
     top: 4px;
     width: 24px;
     height: 24px;
@@ -3663,10 +3663,53 @@ a.account-address:hover { text-decoration: underline; }
    flat panel — and dozens of blurred cards halved the frame rate of a
    scroll on a slow phone. */
 .search-box input {
-  border-color: rgba(255, 255, 255, .13);
-  background: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .02)), rgba(14, 17, 38, .55);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 4px 14px rgba(0, 0, 0, .28);
+  border-color: transparent;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%), rgba(14, 17, 38, .35);
+  box-shadow: none;
 }
+/* The search field is framed by the neutral arc of light of the language
+   button beside it, and the icons inside it lose their dividers. The filter
+   button sits in its own small violet ring: it is an action of its own. */
+.search-box {
+  --search-r: 13px;
+  --arc-a: rgba(255, 255, 255, .7);
+  --arc-dim: rgba(255, 255, 255, .12);
+  --arc-low: rgba(255, 255, 255, .28);
+  --arc-spark: #fff;
+}
+.search-box input { border-radius: var(--search-r); }
+.search-box::before,
+.filter-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* A pixel and a half and closed on an ordinary monitor, as the badges. */
+  padding: var(--arc-frame, 1.5px);
+  border-radius: var(--search-r);
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.filter-button::before { border-radius: 50%; }
+@media (min-resolution: 2dppx) {
+  .search-box { --arc-frame: 1px; --arc-tail: transparent; }
+}
+.search-icon,
+.filter-button { border-inline: 0; }
+.filter-button {
+  inset-inline-end: 8px;
+  border-radius: 50%;
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+  color: #e3d1ff;
+}
+.filter-button:hover { color: #fff; }
+.filter-button .filter-badge { z-index: 2; }
 /* The two buttons at the end of the top bar are framed by the arc of light
    of the place rings instead of a solid violet border. Sign-in, the bar's
    main action, is violet with a violet tint; the language button is neutral
@@ -3724,12 +3767,27 @@ a.account-address:hover { text-decoration: underline; }
   backdrop-filter: blur(20px);
 }
 
+.theme-light .search-box {
+  --arc-a: rgba(22, 24, 43, .42);
+  --arc-dim: rgba(22, 24, 43, .14);
+  --arc-low: rgba(22, 24, 43, .26);
+  --arc-spark: rgba(22, 24, 43, .62);
+}
+.theme-light .filter-button {
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+  background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%);
+  color: #5b21c4;
+}
 .theme-light .search-box input,
 .theme-light .category-bar {
   border-color: rgba(255, 255, 255, .95);
   background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
   box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
 }
+.theme-light .search-box input { border-color: transparent; box-shadow: 0 4px 14px rgba(31, 41, 102, .09); }
 .theme-light .lang-button,
 .theme-light .login-button {
   border-color: transparent;
