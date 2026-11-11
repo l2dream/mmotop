@@ -80,6 +80,47 @@ useHead(() => ({
 const matchCount = computed(() => groups.value.reduce((n, g) => n + g.locales.length, 0))
 
 /**
+ * A group that runs on into the next column gets its heading again over the
+ * continuation, so the languages there are not left without one — on a phone
+ * TÜRKÇE stood alone at the top of the second column, under no heading at all.
+ *
+ * Where a column breaks depends on the width and on what is typed, so it is
+ * measured once the list is laid out: the first item of each group whose
+ * column differs from its group's first item. The repeated heading takes a
+ * row and can move the break, so the measurement runs again until it settles
+ * (twice is the most it has needed). Screen readers skip the repeat.
+ */
+const continueAt = ref<Record<string, string>>({})
+const columns = ref<HTMLElement | null>(null)
+
+function measureContinuations(): Record<string, string> {
+  const found: Record<string, string> = {}
+  if (!columns.value) return found
+  for (const group of columns.value.querySelectorAll<HTMLElement>('.lang-group')) {
+    const items = [...group.querySelectorAll<HTMLElement>('.lang-item')]
+    if (items.length < 2) continue
+    const firstLeft = items[0]!.getBoundingClientRect().left
+    const moved = items.find((item) => Math.abs(item.getBoundingClientRect().left - firstLeft) > 20)
+    if (moved?.dataset.code && group.dataset.script) found[group.dataset.script] = moved.dataset.code
+  }
+  return found
+}
+
+async function placeContinuations() {
+  continueAt.value = {}
+  for (let round = 0; round < 3; round++) {
+    await nextTick()
+    if (!open.value) return
+    const found = measureContinuations()
+    const same = JSON.stringify(found) === JSON.stringify(continueAt.value)
+    continueAt.value = found
+    if (same) return
+  }
+}
+
+watch([open, query], () => { if (open.value) placeContinuations() })
+
+/**
  * Remembers the choice so a later visit can offer it. Deliberately only
  * written on an actual click: a cookie set by merely looking at the page would
  * be a guess dressed up as a preference. See useLanguagePreference for what it
@@ -210,13 +251,19 @@ onMounted(() => {
   document.addEventListener('pointerdown', onPointerDown)
   document.addEventListener('keydown', onKeydown)
   window.addEventListener('resize', position)
+  window.addEventListener('resize', onResizeContinuations)
   window.addEventListener('scroll', position, true)
 })
+
+function onResizeContinuations() {
+  if (open.value) placeContinuations()
+}
 
 onBeforeUnmount(() => {
   document.removeEventListener('pointerdown', onPointerDown)
   document.removeEventListener('keydown', onKeydown)
   window.removeEventListener('resize', position)
+  window.removeEventListener('resize', onResizeContinuations)
   window.removeEventListener('scroll', position, true)
 })
 </script>
@@ -298,12 +345,13 @@ onBeforeUnmount(() => {
 
       <div v-if="empty" class="lang-empty">{{ t('language.nothing') }}</div>
 
-      <div v-else class="lang-columns">
-        <div v-for="group in groups" :key="group.script" class="lang-group">
+      <div v-else ref="columns" class="lang-columns">
+        <div v-for="group in groups" :key="group.script" class="lang-group" :data-script="group.script">
           <div class="lang-group-title">{{ t(group.labelKey) }}</div>
+          <template v-for="item in group.locales" :key="item.code">
+          <div v-if="continueAt[group.script] === item.code" class="lang-group-title" aria-hidden="true">{{ t(group.labelKey) }}</div>
           <NuxtLink
-            v-for="item in group.locales"
-            :key="item.code"
+            :data-code="item.code"
             class="lang-item"
             :class="{ active: item.code === locale }"
             :aria-current="item.code === locale ? 'true' : undefined"
@@ -319,6 +367,7 @@ onBeforeUnmount(() => {
                  around it, and without lang it is unusable by them. -->
             <span class="lang-item-name" :lang="bcp47(item.code)" :dir="item.dir">{{ item.endonym }}</span>
           </NuxtLink>
+          </template>
         </div>
       </div>
     </div>
