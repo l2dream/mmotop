@@ -64,9 +64,11 @@ function go(event: MouseEvent) {
 
 <template>
   <a class="section-back" :href="href" @click="go">
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M15 5l-7 7 7 7" />
-    </svg>
+    <span class="section-back-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 5l-7 7 7 7" />
+      </svg>
+    </span>
     <span class="section-back-label">{{ label }}</span>
   </a>
 </template>
