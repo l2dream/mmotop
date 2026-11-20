@@ -956,16 +956,6 @@ async function remove(s: OwnServer) {
                    ticked, the number gives way to the list of words. -->
               <span>{{ noRate ? $t('account.fields.rateText') : $t('account.fields.rate') }}</span>
               <div class="account-rate-box" :class="{ 'has-select': noRate, 'has-steps': !noRate }">
-                <!-- Up and down at the start of the field, clear of the
-                     "No rates" box at its end; on phones too, which show none. -->
-                <span v-if="!noRate" class="account-rate-steps">
-                  <button type="button" aria-label="+1" tabindex="-1" @click="stepRate(1)">
-                    <svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                  </button>
-                  <button type="button" aria-label="-1" tabindex="-1" @click="stepRate(-1)">
-                    <svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                  </button>
-                </span>
                 <input
                   v-if="!noRate"
                   v-model="draft.rate"
@@ -982,10 +972,24 @@ async function remove(s: OwnServer) {
                   <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
                   <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
                 </select>
-                <label class="account-check">
-                  <input v-model="noRate" type="checkbox">
-                  <span>{{ $t('filter.noRates') }}</span>
-                </label>
+                <!-- The end of the field: − and + (round, as buttons inside a
+                     field are), then the "No rates" box, side by side. -->
+                <span class="account-rate-end">
+                  <!-- − and + as round buttons at the end, just before the
+                       "No rates" box; on phones too, which show no arrows. -->
+                  <span v-if="!noRate" class="account-rate-pm">
+                    <button type="button" aria-label="-1" tabindex="-1" @click="stepRate(-1)">
+                      <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 6h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+                    </button>
+                    <button type="button" aria-label="+1" tabindex="-1" @click="stepRate(1)">
+                      <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 6h8M6 2v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+                    </button>
+                  </span>
+                  <label class="account-check">
+                    <input v-model="noRate" type="checkbox">
+                    <span>{{ $t('filter.noRates') }}</span>
+                  </label>
+                </span>
               </div>
               <input
                 v-if="noRate && ownRateWord"

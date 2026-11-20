@@ -20,3 +20,9 @@ Read `docs/notes.md` at the start of a session: it holds what was agreed with
 the owner, which services are connected, and what was started and put off.
 Long conversations are compressed and lose such details; the file does not.
 Update it whenever something is started, put off or finished.
+
+## Design rules
+
+Before any change to how the site looks, read `docs/design-system.md` and
+follow it. When a rule changes, update that file and add a line to its
+"Изменения" section (what, when, why).

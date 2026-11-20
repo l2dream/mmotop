@@ -4222,3 +4222,239 @@ a.account-address:hover { text-decoration: underline; }
 }
 .theme-light .scroll-top:hover { background: linear-gradient(145deg, rgba(124, 58, 237, .26), rgba(255, 255, 255, .85) 70%), rgba(255, 255, 255, .9); }
 
+
+/* ══ Design system, dark theme (20 November 2026) ═══════════════════════
+   The owner's rules ("MMOTOP — rules of shape and colour", reviewed point
+   by point; kept in docs/design-system.md). Later rules here win over the
+   older ones above. Colours and states are for the dark theme only for now
+   (the light theme is next), so they sit under :root:not(.theme-light);
+   shapes and radii hold for both. */
+
+/* ── Radii: a matryoshka. Only the outer layers are set; what sits inside
+   is the parent's radius less the gap between them, never below a floor. */
+:root {
+  --r-outer: 16px;   /* sections, the server's card, the filter and language panels */
+  --r-menu: 14px;    /* the More menu */
+  --r-min: 8px;      /* fields, buttons and list items inside them */
+  --r-icon: 6px;     /* game badges */
+}
+.panel,
+.filter-popup,
+.lang-panel { border-radius: var(--r-outer); }
+.more-dropdown { border-radius: var(--r-menu); }
+.more-dropdown-item { border-radius: max(calc(var(--r-menu) - 6px), var(--r-min)); }
+/* The category bar keeps its 12px; the chosen tab sits 3px inside it. */
+.category.active { border-radius: max(calc(12px - 3px), var(--r-min)); }
+.server-facts > div,
+.server-visit,
+.server-vote,
+.server-community,
+.account-field input:not([type="checkbox"]),
+.account-field select,
+.account-field textarea,
+.account-button,
+.lang-search { border-radius: max(calc(var(--r-outer) - 16px), var(--r-min)); }
+.lang-item { border-radius: var(--r-min); }
+
+/* ── Shape: the way back is a thing of its own, so a rounded square (it was
+   a pill); its arrow is a button inside it, so stays a circle. */
+.section-back { border-radius: 10px; }
+
+/* ── Buttons that are not a half-open door: their own coloured ring, nothing
+   inside, the glyph in the language button's soft white. They light up —
+   the look they used to have at rest — under the pointer, while they are
+   on or open, and for 0.3s after a tap (.is-lit, plugins/tap-glow). Hover
+   only where there is a real pointer, so a tap does not leave them lit. */
+:root:not(.theme-light) :is(.panel-head .panel-arrow, .shuffle-button, .more-chevron, .filter-button, .section-back-arrow) {
+  background: none;
+  color: #e6e8f8;
+}
+:root:not(.theme-light) .carousel-toggle:not(.pressed) .carousel-toggle-knob { color: #e6e8f8; }
+:root:not(.theme-light) :is(.panel-head .panel-arrow, .shuffle-button, .more-chevron, .section-back-arrow).is-lit,
+:root:not(.theme-light) .filter-button.is-lit,
+:root:not(.theme-light) .filter-button.active,
+:root:not(.theme-light) .category.more.active .more-chevron,
+:root:not(.theme-light) .more-chevron.open {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--arc, #9c5cff) 22%, transparent), transparent 70%);
+  color: color-mix(in srgb, var(--arc, #9c5cff) 45%, #fff);
+}
+:root:not(.theme-light) .filter-button.active,
+:root:not(.theme-light) .filter-button.is-lit { --arc: #a453ff; color: #e3d1ff; }
+@media (hover: hover) {
+  :root:not(.theme-light) :is(.panel-head .panel-arrow, .shuffle-button):hover,
+  :root:not(.theme-light) .category.more:hover .more-chevron,
+  :root:not(.theme-light) .section-back:hover .section-back-arrow,
+  :root:not(.theme-light) .filter-button:hover {
+    background: linear-gradient(145deg, color-mix(in srgb, var(--arc, #9c5cff) 22%, transparent), transparent 70%);
+    color: color-mix(in srgb, var(--arc, #9c5cff) 45%, #fff);
+  }
+  :root:not(.theme-light) .filter-button:hover { --arc: #a453ff; color: #e3d1ff; }
+}
+/* The shuffle glyph was set white on its own; it follows the rule now. */
+:root:not(.theme-light) .panel-tools .shuffle-button:not(:hover):not(.is-lit) { color: #e6e8f8; }
+
+/* The way back: neutral; violet under the pointer. */
+@media (hover: hover) {
+  :root:not(.theme-light) .section-back:hover {
+    --arc-a: rgba(196, 150, 255, .9);
+    --arc-dim: rgba(164, 83, 255, .25);
+    --arc-low: rgba(164, 83, 255, .5);
+    background: linear-gradient(145deg, rgba(164, 83, 255, .16), transparent 70%);
+    color: #fff;
+  }
+}
+
+/* The language button lights violet while its panel is open. */
+:root:not(.theme-light) .lang-button[aria-expanded="true"] {
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+  color: #efe4ff;
+}
+
+/* Back to top: grey like the language button, violet under the pointer. */
+:root:not(.theme-light) .scroll-top {
+  --arc-a: rgba(255, 255, 255, .7);
+  --arc-dim: rgba(255, 255, 255, .12);
+  --arc-low: rgba(255, 255, 255, .28);
+  --arc-spark: #fff;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%), rgba(20, 23, 50, .88);
+  color: #e6e8f8;
+}
+@media (hover: hover) {
+  :root:not(.theme-light) .scroll-top:hover {
+    --arc-a: rgba(196, 150, 255, .9);
+    --arc-dim: rgba(164, 83, 255, .25);
+    --arc-low: rgba(164, 83, 255, .5);
+    background: linear-gradient(145deg, rgba(164, 83, 255, .4), rgba(164, 83, 255, .1) 70%), rgba(20, 23, 50, .9);
+    color: #fff;
+  }
+}
+
+/* The moon: muted grey, white under the pointer; on a phone its tap area is
+   a header button's size, not just the glyph's. */
+:root:not(.theme-light) .theme-button { color: #9aa0b8; transition: color .18s ease; }
+@media (hover: hover) { :root:not(.theme-light) .theme-button:hover { color: #fff; } }
+@media (max-width: 700px) { .theme-button { width: 32px; height: 32px; } }
+
+/* Apply: a violet ring until something in the filter changed, then lit.
+   Reset: plain text, dim with nothing to reset, near white otherwise. */
+:root:not(.theme-light) .filter-apply:not(.is-ready) {
+  background: none;
+  color: #e6e8f8;
+}
+:root:not(.theme-light) .filter-reset { color: #7f849c; }
+:root:not(.theme-light) .filter-reset.has-something { color: #f0f1fa; }
+@media (hover: hover) { :root:not(.theme-light) .filter-reset.has-something:hover { color: #fff; } }
+
+/* ── Fields one types into or picks from (search, drop-downs, the account
+   form, the language search): the buttons' arc of light at half strength,
+   so a field reads quieter than a button. Rate chips are buttons and keep
+   theirs. Focus: a 2px violet line, no glow. */
+:root:not(.theme-light) :is(.search-box, .lang-search) {
+  --arc-a: rgba(255, 255, 255, .35);
+  --arc-dim: rgba(255, 255, 255, .06);
+  --arc-low: rgba(255, 255, 255, .14);
+  --arc-spark: rgba(255, 255, 255, .75);
+  --arc-tail: rgba(255, 255, 255, .06);
+}
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea) {
+  --field-arc: conic-gradient(from 200deg, rgba(255, 255, 255, .06) 0deg, rgba(255, 255, 255, .35) 70deg, rgba(255, 255, 255, .75) 96deg, rgba(255, 255, 255, .75) 124deg, rgba(255, 255, 255, .35) 150deg, rgba(255, 255, 255, .14) 205deg, rgba(255, 255, 255, .06) 290deg, rgba(255, 255, 255, .06) 360deg);
+  border-width: 1px;
+}
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea):focus-visible,
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea):focus {
+  outline: none;
+  --field-arc: linear-gradient(#a47bff, #a47bff);
+  box-shadow: inset 0 0 0 1px #a47bff;
+}
+:root:not(.theme-light) .search-box input:focus-visible,
+:root:not(.theme-light) .search-box input:focus { outline: none; box-shadow: none; }
+/* Only the typing field itself: the filter button inside the search box
+   must not light the box's frame when it is pressed. */
+:root:not(.theme-light) .search-box:has(> input:focus)::before,
+:root:not(.theme-light) .lang-search:focus-within::before { background: #a47bff; padding: 2px; }
+:root:not(.theme-light) .lang-search:focus-within { box-shadow: none; }
+
+/* ── Signs (numbers, badges, emblems): a coloured ring, no grey fill. */
+:root:not(.theme-light) .rank:not(.rank-1, .rank-2, .rank-3) { --rank-tint: transparent; }
+
+/* ── The account's folding blocks: a chevron at the end, as on the
+   drop-downs — down while closed, up while open — instead of ▶. */
+.account-reward > summary,
+.account-reward-how > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.account-reward > summary::-webkit-details-marker,
+.account-reward-how > summary::-webkit-details-marker { display: none; }
+.account-reward > summary::after,
+.account-reward-how > summary::after {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-inline-start: auto;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform .18s ease;
+}
+.account-reward[open] > summary::after,
+.account-reward-how[open] > summary::after { transform: rotate(180deg); }
+
+/* ── The rate field: − and + as round buttons at the end, before
+   "No rates", instead of the square arrows at its start. */
+.account-field .account-rate-box.has-steps > input { padding-inline-start: 14px; padding-inline-end: calc(9.5rem + 66px); }
+/* − / + and the "No rates" box sit together at the field's end. */
+.account-rate-end {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+}
+.account-rate-box.has-select > .account-rate-end { inset-inline-end: 38px; }
+.account-rate-end > .account-check { position: static; transform: none; align-self: center; }
+.account-rate-pm { display: flex; gap: 6px; }
+.account-rate-pm button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: #e6e8f8;
+  cursor: pointer;
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  --arc-spark: #fff;
+}
+.account-rate-pm button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--arc-frame, 1.5px);
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) { .account-rate-pm button::before { --arc-frame: 1px; --arc-tail: transparent; } }
+.account-rate-pm button:active,
+.account-rate-pm button.is-lit { background: linear-gradient(145deg, rgba(164, 83, 255, .45), rgba(164, 83, 255, .12)); color: #fff; }
+@media (hover: hover) { .account-rate-pm button:hover { background: linear-gradient(145deg, rgba(164, 83, 255, .3), transparent 75%); color: #fff; } }
+.theme-light .account-rate-pm button { color: #5b21c4; --arc-a: rgba(124, 58, 237, .85); --arc-dim: rgba(124, 58, 237, .22); --arc-low: rgba(124, 58, 237, .5); --arc-spark: #4c1d95; }
+@media (max-width: 380px) { .account-rate-pm { gap: 4px; } }
