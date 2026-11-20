@@ -238,6 +238,16 @@ const customRange = computed(() => {
 const rateFilterActive = computed(() => filters.value.rates.length > 0 || (customRateActive.value && customRateSet.value))
 
 const filterOpen = ref(false)
+
+/**
+ * Apply lights up once something in the popup differs from how it was when
+ * the popup opened (the filters apply as they change; Apply just closes it,
+ * so lit means "there is something to apply").
+ */
+const filterSnapshot = ref('')
+const filterState = () => JSON.stringify([activeCategory.value, filters.value, customRateActive.value, customRateMin.value, customRateMax.value])
+const filtersChanged = computed(() => filterOpen.value && filterState() !== filterSnapshot.value)
+watch(filterOpen, (open) => { if (open) filterSnapshot.value = filterState() })
 const filterButtonEl = ref<HTMLElement | null>(null)
 const filterPopupEl = ref<HTMLElement | null>(null)
 const filterPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 600 })
@@ -1512,8 +1522,8 @@ function clearSearch() {
         </div>
 
         <div class="filter-popup-actions">
-          <button type="button" class="filter-reset" @click="resetFilters">{{ $t('filter.reset') }}</button>
-          <button type="button" class="filter-apply" @click="closeFilter">{{ $t('filter.apply') }}</button>
+          <button type="button" class="filter-reset" :class="{ 'has-something': activeFilterCount > 0 }" @click="resetFilters">{{ $t('filter.reset') }}</button>
+          <button type="button" class="filter-apply" :class="{ 'is-ready': filtersChanged }" @click="closeFilter">{{ $t('filter.apply') }}</button>
         </div>
       </div>
 
