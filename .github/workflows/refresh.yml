@@ -1,0 +1,47 @@
+name: Refresh from the database
+
+# Servers approved in the account page, and the month's votes, live in the
+# database; the site is static. Every half hour this looks for a change there
+# and, if it finds one, starts the deploy workflow.
+#
+# Its own file because the schedule that used to sit in deploy.yml never ran
+# (GitHub never picked it up: 0 scheduled runs, found 24 November 2026), while
+# the daily schedule in indexnow.yml always has. A dispatch made with the
+# workflow's own token does start another workflow (workflow_dispatch is the
+# exception to the rule that it cannot).
+on:
+  schedule:
+    - cron: "13,43 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+# One check at a time; a slow one is not worth two.
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Compares the database with what the live site was built from.
+      - name: Anything new?
+        id: check
+        run: node scripts/fetch-servers.mjs --check
+
+      - name: Deploy
+        if: steps.check.outputs.changed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
