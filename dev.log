@@ -6,9 +6,9 @@
 
   ➜ DevTools: press Shift + Alt + D in the browser (v3.4.2)
 
-√ Vite client built in 60ms
-√ Vite server built in 34ms
-[nitro] √ Nuxt Nitro server built in 4569ms
-i Vite server warmed up in 34ms
-i Vite client warmed up in 47ms
-[nitro] √ Nuxt Nitro server built in 3398ms
+√ Vite client built in 63ms
+√ Vite server built in 25ms
+[nitro] √ Nuxt Nitro server built in 4040ms
+i Vite server warmed up in 50ms
+i Vite client warmed up in 74ms
+[nitro] √ Nuxt Nitro server built in 3075ms

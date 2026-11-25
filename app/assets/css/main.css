@@ -2447,7 +2447,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-rate-box > input[type="number"]::-webkit-inner-spin-button,
 .account-rate-box > input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .account-rate-box > input,
-.account-rate-box > select { padding-inline-end: 9.5rem; }
+.account-rate-box > :is(select, .pick-select) { padding-inline-end: 9.5rem; }
 .account-rate-box > .account-check {
   position: absolute;
   inset-inline-end: 12px;
@@ -2471,7 +2471,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .account-field input:not([type="checkbox"]),
-.account-field select,
+.account-field :is(select, .pick-select),
 .account-field textarea {
   /* The header's search field, the same glass in both themes (see
      .search-box input), so the form reads as part of the same site. */
@@ -2496,7 +2496,7 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 .account-field input:disabled { opacity: .6; }
 /* The browser's own arrow drawn over the glass looked pasted on; a chevron
    like the More menu's instead, as a second background layer. */
-.account-field select {
+.account-field :is(select, .pick-select) {
   -webkit-appearance: none;
   appearance: none;
   padding-inline-end: 38px;
@@ -2508,24 +2508,24 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
   background-size: 14px, auto;
   cursor: pointer;
 }
-[dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
-.account-field select option { color: #16182b; }
+[dir="rtl"] .account-field :is(select, .pick-select) { background-position: left 14px center, 0 0; }
+.account-field :is(select, .pick-select) option { color: #16182b; }
 /* The site's own focus ring, which inputs get already (see the top of this
    file); select and textarea are not covered by that rule. */
-.account-field select:focus-visible,
+.account-field :is(select, .pick-select):focus-visible,
 .account-field textarea:focus-visible {
   outline: 3px solid #c4a1ff;
   outline-offset: 2px;
   box-shadow: 0 0 0 6px rgba(156, 92, 255, .22);
 }
-.theme-light .account-field select:focus-visible,
+.theme-light .account-field :is(select, .pick-select):focus-visible,
 .theme-light .account-field textarea:focus-visible {
   outline-color: #5b21b6;
   box-shadow: 0 0 0 6px rgba(124, 58, 237, .18);
 }
 @media (min-resolution: 2dppx) {
   .account-field input:not([type="checkbox"]),
-  .account-field select,
+  .account-field :is(select, .pick-select),
   .account-field textarea { border-width: .5px; }
 }
 
@@ -2678,14 +2678,14 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .account-field > span { color: #3a3e58; }
 .theme-light .account-field small { color: #62677f; }
 .theme-light .account-field input:not([type="checkbox"]),
-.theme-light .account-field select,
+.theme-light .account-field :is(select, .pick-select),
 .theme-light .account-field textarea {
   border-color: rgba(255, 255, 255, .95);
   background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
   box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
   color: #1c1e33;
 }
-.theme-light .account-field select {
+.theme-light .account-field :is(select, .pick-select) {
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a3e58' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"),
     linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
@@ -2694,8 +2694,8 @@ a.account-address:hover { text-decoration: underline; }
   background-position: right 14px center, 0 0;
   background-size: 14px, auto;
 }
-[dir="rtl"] .theme-light .account-field select,
-.theme-light [dir="rtl"] .account-field select { background-position: left 14px center, 0 0; }
+[dir="rtl"] .theme-light .account-field :is(select, .pick-select),
+.theme-light [dir="rtl"] .account-field :is(select, .pick-select) { background-position: left 14px center, 0 0; }
 .theme-light .account-field input::placeholder,
 .theme-light .account-field textarea::placeholder { color: #555a70; }
 /* A network row in the account form: its kind, its address, a cross. */
@@ -2726,7 +2726,7 @@ a.account-address:hover { text-decoration: underline; }
 @media (max-width: 430px) {
   /* The network over its address, the cross beside the address. */
   .account-link-row { grid-template-columns: minmax(0, 1fr) 42px; }
-  .account-link-row select { grid-column: 1 / -1; }
+  .account-link-row :is(select, .pick-select) { grid-column: 1 / -1; }
 }
 
 /* "+ Add a picture" under the description, and what went wrong with it. */
@@ -2749,7 +2749,7 @@ a.account-address:hover { text-decoration: underline; }
   .legal-body { padding: 16px 15px 20px; }
   /* 16px keeps a phone from zooming into the field on focus. */
   .account-field input:not([type="checkbox"]),
-  .account-field select,
+  .account-field :is(select, .pick-select),
   .account-field textarea { font-size: 16px; }
 }
 @media (max-width: 430px) {
@@ -3982,7 +3982,7 @@ a.account-address:hover { text-decoration: underline; }
 .filter-select,
 .filter-custom-input,
 .account-field input:not([type="checkbox"]),
-.account-field select,
+.account-field :is(select, .pick-select),
 .account-field textarea {
   --field-fill: #161a33;
   --field-arc: conic-gradient(from 200deg, rgba(255, 255, 255, .12) 0deg, rgba(255, 255, 255, .7) 70deg, #fff 96deg, #fff 124deg, rgba(255, 255, 255, .7) 150deg, rgba(255, 255, 255, .28) 205deg, rgba(255, 255, 255, .12) 290deg, rgba(255, 255, 255, .12) 360deg);
@@ -3995,19 +3995,19 @@ a.account-address:hover { text-decoration: underline; }
   background: linear-gradient(145deg, #1d2140, var(--field-fill) 70%) padding-box, var(--field-arc) border-box;
 }
 .filter-select,
-.account-field select {
+.account-field :is(select, .pick-select) {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c3c6d8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 12px padding-box,
     linear-gradient(145deg, #1d2140, var(--field-fill) 70%) padding-box,
     var(--field-arc) border-box;
 }
 [dir="rtl"] .filter-select,
-[dir="rtl"] .account-field select { background-position: left 12px center, 0 0, 0 0; }
+[dir="rtl"] .account-field :is(select, .pick-select) { background-position: left 12px center, 0 0, 0 0; }
 @media (min-resolution: 2dppx) {
   .filter-select,
   .filter-custom-input,
   .account-field input:not([type="checkbox"]),
-  .account-field select,
+  .account-field :is(select, .pick-select),
   .account-field textarea { border-width: 1px; }
 }
 
@@ -4080,7 +4080,7 @@ a.account-address:hover { text-decoration: underline; }
   --arc-low: color-mix(in srgb, var(--status) 55%, transparent);
   --arc-spark: color-mix(in srgb, var(--status) 55%, #000);
 }
-.theme-light :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea) {
+.theme-light :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field :is(select, .pick-select), .account-field textarea) {
   --field-fill: #ffffff;
   --field-arc: conic-gradient(from 200deg, rgba(22, 24, 43, .14) 0deg, rgba(22, 24, 43, .42) 70deg, rgba(22, 24, 43, .62) 96deg, rgba(22, 24, 43, .62) 124deg, rgba(22, 24, 43, .42) 150deg, rgba(22, 24, 43, .26) 205deg, rgba(22, 24, 43, .14) 290deg, rgba(22, 24, 43, .14) 360deg);
   border-color: transparent;
@@ -4089,7 +4089,7 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light :is(.account-field input:not([type="checkbox"]), .account-field textarea, .filter-custom-input) {
   background: linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box, var(--field-arc) border-box;
 }
-.theme-light :is(.filter-select, .account-field select) {
+.theme-light :is(.filter-select, .account-field :is(select, .pick-select)) {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4e66' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 12px padding-box,
     linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box,
@@ -4256,7 +4256,7 @@ a.account-address:hover { text-decoration: underline; }
 .server-vote,
 .server-community,
 .account-field input:not([type="checkbox"]),
-.account-field select,
+.account-field :is(select, .pick-select),
 .account-field textarea,
 .account-button,
 .lang-search { border-radius: max(calc(var(--r-outer) - 16px), var(--r-min)); }
@@ -4365,12 +4365,12 @@ a.account-address:hover { text-decoration: underline; }
   --arc-spark: rgba(255, 255, 255, .75);
   --arc-tail: rgba(255, 255, 255, .06);
 }
-:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea) {
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field :is(select, .pick-select), .account-field textarea) {
   --field-arc: conic-gradient(from 200deg, rgba(255, 255, 255, .06) 0deg, rgba(255, 255, 255, .35) 70deg, rgba(255, 255, 255, .75) 96deg, rgba(255, 255, 255, .75) 124deg, rgba(255, 255, 255, .35) 150deg, rgba(255, 255, 255, .14) 205deg, rgba(255, 255, 255, .06) 290deg, rgba(255, 255, 255, .06) 360deg);
   border-width: 1px;
 }
-:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea):focus-visible,
-:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field select, .account-field textarea):focus {
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field :is(select, .pick-select), .account-field textarea):focus-visible,
+:root:not(.theme-light) :is(.filter-select, .filter-custom-input, .account-field input:not([type="checkbox"]), .account-field :is(select, .pick-select), .account-field textarea):focus {
   outline: none;
   --field-arc: linear-gradient(#a47bff, #a47bff);
   box-shadow: inset 0 0 0 1px #a47bff;
@@ -4472,7 +4472,8 @@ a.account-address:hover { text-decoration: underline; }
    line on top; the chosen line violet with a tick, like the More menu's. */
 .pick-field { display: flex; align-items: center; text-align: start; cursor: pointer; }
 .pick-field-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-:root:not(.theme-light) .pick-field[aria-expanded="true"] {
+:root:not(.theme-light) .pick-field[aria-expanded="true"],
+:root:not(.theme-light) .account-field .pick-select[aria-expanded="true"] {
   --field-arc: linear-gradient(#a47bff, #a47bff);
   box-shadow: inset 0 0 0 1px #a47bff;
 }
@@ -4680,3 +4681,24 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .pick-option.is-chosen { color: #4c1d95; background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%); }
 .theme-light .pick-option.is-chosen::before { background: conic-gradient(from 200deg, rgba(124, 58, 237, .22) 0deg, rgba(124, 58, 237, .85) 70deg, #4c1d95 96deg, #4c1d95 124deg, rgba(124, 58, 237, .85) 150deg, rgba(124, 58, 237, .5) 205deg, rgba(124, 58, 237, .22) 290deg, rgba(124, 58, 237, .22) 360deg); }
 .theme-light .pick-tick { color: #7c3aed; }
+
+/* The same pickers in the account's form: its fields' look (every
+   ".account-field select" rule covers .pick-select too). */
+.pick-select { display: flex; align-items: center; text-align: start; }
+.pick-placeholder { color: #a3a8c0; }
+.theme-light .pick-placeholder { color: #6b6f88; }
+/* A select's "required", kept for the form to check: an input the size of a
+   dot under the field, where the browser points its "choose one" note. */
+.account-field:has(> .pick-required) { position: relative; }
+.account-field input.pick-required {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
