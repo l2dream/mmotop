@@ -236,7 +236,10 @@ const panelStyle = computed(() => sheet.value
   </button>
   <Teleport to="body">
     <div v-if="open" class="pick-layer" :class="{ 'is-sheet': sheet }">
-      <div class="pick-dim" @pointerdown.prevent="hide()" />
+      <!-- On click, not on pointerdown: closed at the touch, the dim was gone
+           before the tap ended, and the tap went on to the field beneath it
+           (Game opened its own list). -->
+      <div class="pick-dim" @pointerdown.prevent @click="hide()" />
       <div
         ref="panelEl"
         class="pick-panel"
