@@ -1657,10 +1657,12 @@ function clearSearch() {
       </div>
 
       <div v-else-if="account" class="section-view account-view">
+        <BackLink :to="homeLocation()" home />
         <AccountPanel />
       </div>
 
       <div v-else-if="legal" class="section-view account-view">
+        <BackLink :to="homeLocation()" home />
         <LegalPage :kind="legal" />
       </div>
 
