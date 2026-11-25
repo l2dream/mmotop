@@ -152,9 +152,29 @@ function updateBarFade() {
   const max = bar.scrollWidth - bar.clientWidth
   barFade.value = { start: pos > 1, end: pos < max - 1 }
 }
+/**
+ * Brings the chosen game into view in the bar. On a phone the bar shows two
+ * or three names; a game picked from More, or opened by its address (/pw/),
+ * sat off the end of the strip — chosen, lit, but nowhere to be seen. The
+ * strip scrolls just far enough to show it, with a little room beside it;
+ * smoothly after a pick, at once on arrival. Only the strip moves, never the
+ * page (scrollIntoView would).
+ */
+function revealActiveCategory(smooth: boolean) {
+  const bar = categoryBar.value
+  const active = bar?.querySelector<HTMLElement>('.category.active')
+  if (!bar || !active) return
+  const b = bar.getBoundingClientRect()
+  const a = active.getBoundingClientRect()
+  const room = 24
+  let by = 0
+  if (a.left < b.left + room) by = a.left - b.left - room
+  else if (a.right > b.right - room) by = a.right - b.right + room
+  if (by) bar.scrollBy({ left: by, behavior: smooth ? 'smooth' : 'instant' })
+}
 // Picking a game from More writes its name on the button, which changes the
 // bar's width.
-watch(activeCategory, () => nextTick(updateBarFade))
+watch(activeCategory, () => nextTick(() => { updateBarFade(); revealActiveCategory(true) }))
 const moreButton = ref<HTMLButtonElement | null>(null)
 const moreDropdownEl = ref<HTMLElement | null>(null)
 const dropdownPos = ref<PopupPlacement>({ top: 0, left: 0, maxHeight: 360 })
@@ -1232,10 +1252,11 @@ onMounted(() => {
   // while the page — and the button they belong to — scrolled away under them.
   window.addEventListener('scroll', repositionOpenPanels, true)
   window.addEventListener('resize', updateBarFade)
+  revealActiveCategory(false)
   updateBarFade()
   // Measured again once Inter arrives: the fallback face sets the names at a
   // different width.
-  document.fonts?.ready.then(updateBarFade)
+  document.fonts?.ready.then(() => { revealActiveCategory(false); updateBarFade() })
   takeEarlyFilterTap()
 })
 
