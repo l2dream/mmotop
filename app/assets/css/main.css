@@ -4465,3 +4465,163 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .account-rate-pm button { color: #5b21c4; --arc-a: rgba(124, 58, 237, .85); --arc-dim: rgba(124, 58, 237, .22); --arc-low: rgba(124, 58, 237, .5); --arc-spark: #4c1d95; }
 @media (max-width: 380px) { .account-rate-pm { gap: 4px; } }
 .admin-edit .account-field > span { color: inherit; }
+
+/* ── The filter's own pickers (PickField.vue), 25 November 2026: the
+   phone's grey system list replaced by one in the site's look. A sheet from
+   the bottom on a phone, a panel under the field on a computer; a search
+   line on top; the chosen line violet with a tick, like the More menu's. */
+.pick-field { display: flex; align-items: center; text-align: start; cursor: pointer; }
+.pick-field-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+:root:not(.theme-light) .pick-field[aria-expanded="true"] {
+  --field-arc: linear-gradient(#a47bff, #a47bff);
+  box-shadow: inset 0 0 0 1px #a47bff;
+}
+
+.pick-layer { position: fixed; inset: 0; z-index: 90; }
+.pick-dim { position: absolute; inset: 0; }
+.pick-layer.is-sheet .pick-dim { background: rgba(5, 6, 16, .55); animation: pick-fade .18s ease; }
+.pick-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border: 1px solid rgba(103, 104, 173, .25);
+  border-radius: var(--r-menu, 14px);
+  background: linear-gradient(180deg, #161934, #0f132a);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .5);
+  outline: none;
+}
+.pick-layer.is-sheet .pick-panel {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* A fixed height, so the sheet does not jump as the search narrows it. */
+  height: min(78vh, 560px);
+  padding: 8px 10px calc(14px + env(safe-area-inset-bottom));
+  border-width: 1px 0 0;
+  border-radius: var(--r-outer, 16px) var(--r-outer, 16px) 0 0;
+  animation: pick-rise .22s cubic-bezier(.2, .8, .2, 1);
+}
+@keyframes pick-rise { from { transform: translateY(100%); } }
+@keyframes pick-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .pick-layer.is-sheet .pick-panel, .pick-layer.is-sheet .pick-dim { animation: none; }
+}
+.pick-grab { flex: none; width: 36px; height: 4px; margin: 2px auto 6px; border-radius: 2px; background: rgba(255, 255, 255, .25); }
+.pick-head {
+  flex: none;
+  padding: 6px 12px 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(104, 105, 161, .16);
+  color: #f4f5ff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pick-search {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  margin: 0 0 6px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: var(--r-min, 8px);
+  background: rgba(16, 20, 44, .72);
+  color: #9aa0bd;
+}
+.pick-search:focus-within { border-color: #a47bff; box-shadow: inset 0 0 0 1px #a47bff; }
+.pick-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  color: #edf0ff;
+  font: inherit;
+  font-size: 13px;
+}
+.pick-search input::-webkit-search-cancel-button { display: none; }
+/* The frame around the search line shows the focus; the field inside
+   draws none of its own. */
+.pick-search input:focus-visible,
+.theme-light .pick-search input:focus-visible { outline: none; box-shadow: none; }
+@media (pointer: coarse), (max-width: 700px) { .pick-search input { font-size: 16px; } }
+
+.pick-list {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 92, 255, .45) transparent;
+}
+.pick-group {
+  padding: 10px 12px 4px;
+  color: #8f94b0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.pick-option {
+  flex: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: max(calc(var(--r-menu, 14px) - 6px), var(--r-min, 8px));
+  background: transparent;
+  color: #d3d6e6;
+  font: inherit;
+  font-size: 14px;
+  text-align: start;
+  cursor: pointer;
+}
+.pick-layer.is-sheet .pick-option { min-height: 46px; font-size: 15px; }
+.pick-option.is-active:not(.is-chosen) { background: rgba(148, 92, 255, .14); color: #fff; }
+@media (hover: hover) { .pick-option:not(.is-chosen):hover { background: rgba(148, 92, 255, .14); color: #fff; } }
+.pick-option.is-chosen {
+  color: #fff;
+  font-weight: 600;
+  background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
+}
+/* The arc of light, violet, as on the chosen game in the More menu. */
+.pick-option.is-chosen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, rgba(164, 83, 255, .25) 0deg, rgba(196, 150, 255, .9) 70deg, #fff 96deg, #fff 124deg, rgba(196, 150, 255, .9) 150deg, rgba(164, 83, 255, .5) 205deg, rgba(164, 83, 255, .25) 290deg, rgba(164, 83, 255, .25) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.pick-tick { flex: none; color: #c9a6ff; }
+.pick-empty { margin: 0; padding: 12px; color: #9aa0bd; font-size: 13px; }
+
+.theme-light .pick-panel {
+  border-color: rgba(103, 104, 173, .2);
+  background: linear-gradient(180deg, #fff, #f5f3ff);
+  box-shadow: 0 18px 50px rgba(31, 41, 102, .22);
+}
+.theme-light .pick-head { color: #16182b; border-bottom-color: rgba(103, 104, 173, .14); }
+.theme-light .pick-grab { background: rgba(22, 24, 43, .2); }
+.theme-light .pick-search { border-color: #b9bcd6; background: #fff; color: #6b6f88; }
+.theme-light .pick-search:focus-within { border-color: #7c3aed; box-shadow: inset 0 0 0 1px #7c3aed; }
+.theme-light .pick-search input { color: #16182b; }
+.theme-light .pick-group { color: #6b6f88; }
+.theme-light .pick-option { color: #363a52; }
+.theme-light .pick-option.is-active:not(.is-chosen) { background: rgba(124, 58, 237, .1); color: #16182b; }
+@media (hover: hover) { .theme-light .pick-option:not(.is-chosen):hover { background: rgba(124, 58, 237, .1); color: #16182b; } }
+.theme-light .pick-option.is-chosen { color: #4c1d95; background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%); }
+.theme-light .pick-option.is-chosen::before { background: conic-gradient(from 200deg, rgba(124, 58, 237, .22) 0deg, rgba(124, 58, 237, .85) 70deg, #4c1d95 96deg, #4c1d95 124deg, rgba(124, 58, 237, .85) 150deg, rgba(124, 58, 237, .5) 205deg, rgba(124, 58, 237, .22) 290deg, rgba(124, 58, 237, .22) 360deg); }
+.theme-light .pick-tick { color: #7c3aed; }
