@@ -191,6 +191,11 @@ const versionGroups = computed(() =>
 function versionKey(gameId: string, chronicle: string) {
   return `${gameId}:${chronicle}`
 }
+// The same lists in the shape of the filter's own pickers (PickField).
+const versionPickGroups = computed(() => versionGroups.value.map((g) => ({
+  label: g.name,
+  options: g.chronicles.map((c) => ({ value: versionKey(g.id, c), label: c }))
+})))
 
 // Game and Version stay in step both ways. A version belongs to one game, so
 // choosing it first sets the game to match; the game used to stay on "All
@@ -290,6 +295,14 @@ const languageOptions = computed(() => {
   const own = locale.value.split('-')[0]
   return [...SERVER_LANGUAGES].sort((a, b) => Number(b.code === own) - Number(a.code === own))
 })
+const languagePickOptions = computed(() => [
+  { value: '', label: t('filter.allLanguages') },
+  ...languageOptions.value.map((l) => ({ value: l.code, label: l.name, lang: l.code }))
+])
+const gamePickOptions = computed(() => [
+  { value: 'all', label: t('filter.allGames') },
+  ...GAMES.map((g) => ({ value: g.id, label: g.name }))
+])
 
 function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
@@ -1177,7 +1190,9 @@ function onDocumentPointer(event: PointerEvent) {
 
   if (filterOpen.value) {
     const inButton = filterButtonEl.value?.contains(target)
-    const inPopup = filterPopupEl.value?.contains(target)
+    // A list opened from a field of the filter is teleported to the body,
+    // but is still part of the filter.
+    const inPopup = filterPopupEl.value?.contains(target) || !!(target as Element).closest?.('.pick-layer')
     if (!inButton && !inPopup) filterOpen.value = false
   }
 }
@@ -1458,32 +1473,17 @@ function clearSearch() {
           <label class="filter-popup-label" for="filter-game">{{ $t('filter.game') }}</label>
           <!-- The same choice as the category bar, not a second one that
                could contradict it: both edit activeCategory. -->
-          <select id="filter-game" class="filter-select" v-model="activeCategory">
-            <option value="all">{{ $t('filter.allGames') }}</option>
-            <option v-for="game in GAMES" :key="game.id" :value="game.id">{{ game.name }}</option>
-          </select>
+          <PickField id="filter-game" v-model="activeCategory" :title="$t('filter.game')" :options="gamePickOptions" />
         </div>
 
         <div class="filter-popup-section">
           <label class="filter-popup-label" for="filter-version">{{ $t('filter.version') }}</label>
-          <select id="filter-version" class="filter-select" v-model="filters.version">
-            <option value="">{{ $t('filter.allVersions') }}</option>
-            <optgroup v-for="group in versionGroups" :key="group.id" :label="group.name">
-              <option
-                v-for="chronicle in group.chronicles"
-                :key="chronicle"
-                :value="versionKey(group.id, chronicle)"
-              >{{ chronicle }}</option>
-            </optgroup>
-          </select>
+          <PickField id="filter-version" v-model="filters.version" :title="$t('filter.version')" :options="[{ value: '', label: $t('filter.allVersions') }]" :groups="versionPickGroups" />
         </div>
 
         <div class="filter-popup-section">
           <label class="filter-popup-label" for="filter-language">{{ $t('filter.language') }}</label>
-          <select id="filter-language" class="filter-select" v-model="filters.language">
-            <option value="">{{ $t('filter.allLanguages') }}</option>
-            <option v-for="l in languageOptions" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
-          </select>
+          <PickField id="filter-language" v-model="filters.language" :title="$t('filter.language')" :options="languagePickOptions" />
         </div>
 
         <div class="filter-popup-section">
