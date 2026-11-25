@@ -6,60 +6,9 @@
 
   ➜ DevTools: press Shift + Alt + D in the browser (v3.4.2)
 
-√ Vite client built in 53ms
-√ Vite server built in 25ms
-[nitro] √ Nuxt Nitro server built in 3680ms
-i Vite server warmed up in 22ms
-i Vite client warmed up in 38ms
-[nitro] √ Nuxt Nitro server built in 2977ms
-i hmr update /components/Dashboard.vue
-i page reload virtual:nuxt:.nuxt%2Froute-rules.mjs
-√ Vite server hmr 129 files in 1.154ms
-√ Vite server hmr 95 files in 0.843ms
-i hmr update /components/Dashboard.vue
-√ Vite server hmr 95 files in 1.032ms
-√ Vite server hmr 95 files in 122.526ms
-i hmr update /components/Dashboard.vue (x2)
-√ Vite server hmr 95 files in 1.203ms
-√ Vite server hmr 95 files in 132.719ms
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /aion/4-8/skyhaven/_payload.json?_b=1795646757902.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /metin2/old-school/redshrine/_payload.json?_b=1795646757902.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/essence/moonspire/_payload.json?_b=1795646757902.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /tibia/7-4/oldspire/_payload.json?_b=1795646757902.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /wow/cataclysm-4-3-4/runegate/_payload.json?_b=1795646757902.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-i hmr update /components/Dashboard.vue
-√ Vite server hmr 95 files in 0.901ms
-√ Vite server hmr 95 files in 126.501ms
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /tibia/7-4/oldspire/_payload.json?_b=1795646870128.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/essence/moonspire/_payload.json?_b=1795646870128.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-
- WARN  [console.warn] [NUXT_E7002] Cannot load payload /wow/cataclysm-4-3-4/runegate/_payload.json?_b=1795646870128.
-╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
-
-i hmr update /components/Dashboard.vue
-√ Vite server hmr 95 files in 0.711ms
-√ Vite server hmr 95 files in 194.644ms
-i hmr update /components/Dashboard.vue (x2)
-√ Vite server hmr 95 files in 0.982ms
-√ Vite server hmr 95 files in 150.079ms
+√ Vite client built in 65ms
+√ Vite server built in 27ms
+[nitro] √ Nuxt Nitro server built in 4296ms
+i Vite server warmed up in 38ms
+i Vite client warmed up in 56ms
+[nitro] √ Nuxt Nitro server built in 3125ms
