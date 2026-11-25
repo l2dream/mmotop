@@ -1471,7 +1471,7 @@ function clearSearch() {
       <button class="theme-button" type="button" :aria-label="$t('nav.theme')" @click="toggleTheme">
         <svg
           v-if="dark"
-          class="theme-icon"
+          class="theme-icon theme-icon-moon"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -1483,7 +1483,7 @@ function clearSearch() {
         </svg>
         <svg
           v-else
-          class="theme-icon"
+          class="theme-icon theme-icon-sun"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
