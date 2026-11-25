@@ -58,7 +58,8 @@
     "reset": "Վերականգնել",
     "apply": "Կիրառել",
     "custom": "Այլ",
-    "noRates": "Առանց Rate"
+    "noRates": "Առանց Rate",
+    "close": "Փակել"
   },
   "months": {
     "jan": "հնվ",

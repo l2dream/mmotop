@@ -58,7 +58,8 @@
     "reset": "リセット",
     "apply": "適用",
     "custom": "カスタム",
-    "noRates": "Rateなし"
+    "noRates": "Rateなし",
+    "close": "閉じる"
   },
   "months": {
     "jan": "1月",

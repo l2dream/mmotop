@@ -58,7 +58,8 @@
     "reset": "Sıfırla",
     "apply": "Uygula",
     "custom": "Özel",
-    "noRates": "Rate yok"
+    "noRates": "Rate yok",
+    "close": "Kapat"
   },
   "months": {
     "jan": "Oca",

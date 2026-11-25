@@ -58,7 +58,8 @@
     "reset": "إعادة تعيين",
     "apply": "تطبيق",
     "custom": "مخصص",
-    "noRates": "بدون Rate"
+    "noRates": "بدون Rate",
+    "close": "إغلاق"
   },
   "months": {
     "jan": "يناير",

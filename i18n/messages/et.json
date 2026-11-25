@@ -58,7 +58,8 @@
     "reset": "Lähtesta",
     "apply": "Rakenda",
     "custom": "Kohandatud",
-    "noRates": "Ilma rate’ita"
+    "noRates": "Ilma rate’ita",
+    "close": "Sulge"
   },
   "months": {
     "jan": "jaan",

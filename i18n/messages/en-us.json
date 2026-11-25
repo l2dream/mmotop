@@ -58,7 +58,8 @@
     "reset": "Reset",
     "apply": "Apply",
     "custom": "Custom",
-    "noRates": "No rate"
+    "noRates": "No rate",
+    "close": "Close"
   },
   "months": {
     "jan": "Jan",

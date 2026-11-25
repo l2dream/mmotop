@@ -58,7 +58,8 @@
     "reset": "Επαναφορά",
     "apply": "Εφαρμογή",
     "custom": "Προσαρμοσμένο",
-    "noRates": "Χωρίς rate"
+    "noRates": "Χωρίς rate",
+    "close": "Κλείσιμο"
   },
   "months": {
     "jan": "Ιαν",

@@ -58,7 +58,8 @@
     "reset": "Återställ",
     "apply": "Tillämpa",
     "custom": "Anpassad",
-    "noRates": "Utan rate"
+    "noRates": "Utan rate",
+    "close": "Stäng"
   },
   "months": {
     "jan": "jan",

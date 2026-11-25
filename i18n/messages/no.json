@@ -58,7 +58,8 @@
     "reset": "Nullstill",
     "apply": "Bruk",
     "custom": "Egendefinert",
-    "noRates": "Uten rate"
+    "noRates": "Uten rate",
+    "close": "Lukk"
   },
   "months": {
     "jan": "jan.",

@@ -58,7 +58,8 @@
     "reset": "重置",
     "apply": "应用",
     "custom": "自定义",
-    "noRates": "无 Rate"
+    "noRates": "无 Rate",
+    "close": "关闭"
   },
   "months": {
     "jan": "1月",

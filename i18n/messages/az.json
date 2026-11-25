@@ -58,7 +58,8 @@
     "reset": "Sıfırla",
     "apply": "Tətbiq et",
     "custom": "Fərdi",
-    "noRates": "Rate yoxdur"
+    "noRates": "Rate yoxdur",
+    "close": "Bağla"
   },
   "months": {
     "jan": "yan",
