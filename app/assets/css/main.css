@@ -2632,7 +2632,7 @@ a.account-address:hover { text-decoration: underline; }
 }
 .account-server-main { display: flex; flex-direction: column; min-width: 0; }
 .account-server-main > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.account-server-tools { grid-column: 1 / -1; display: flex; gap: 18px; }
+.account-server-tools { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .account-reason, .account-server-stats { grid-column: 1 / -1; }
 /* A listed server's month: the count, the place, then the bars by day. */
 .server-stats { display: grid; gap: 8px; }
@@ -4458,3 +4458,4 @@ a.account-address:hover { text-decoration: underline; }
 @media (hover: hover) { .account-rate-pm button:hover { background: linear-gradient(145deg, rgba(164, 83, 255, .3), transparent 75%); color: #fff; } }
 .theme-light .account-rate-pm button { color: #5b21c4; --arc-a: rgba(124, 58, 237, .85); --arc-dim: rgba(124, 58, 237, .22); --arc-low: rgba(124, 58, 237, .5); --arc-spark: #4c1d95; }
 @media (max-width: 380px) { .account-rate-pm { gap: 4px; } }
+.admin-edit .account-field > span { color: inherit; }
