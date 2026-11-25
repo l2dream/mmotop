@@ -131,10 +131,7 @@ async function restore(a: Annulment) {
 
     <label class="account-field">
       <span>Сервер</span>
-      <select v-model="serverId">
-        <option value="">— выберите —</option>
-        <option v-for="s in servers" :key="s.id" :value="s.id">{{ s.name }}</option>
-      </select>
+      <PickField v-model="serverId" variant="form" title="Сервер" placeholder="— выберите —" :options="servers.map((s) => ({ value: s.id, label: s.name }))" />
     </label>
 
     <template v-if="serverId">

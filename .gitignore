@@ -11,3 +11,4 @@ dist
 public/live-servers.json
 public/live-moves.json
 public/live-catalog.json
+dev.log
