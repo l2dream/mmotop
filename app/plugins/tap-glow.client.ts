@@ -6,7 +6,7 @@
  * finger is down and 0.3s after, then takes it off (see main.css, "Design
  * system").
  */
-const LIT = '.panel-head .panel-arrow, .shuffle-button, .section-back, .filter-button, .category.more, .account-rate-pm button'
+const LIT = '.panel-head .panel-arrow, .shuffle-button, .section-back, .filter-button, .category.more, .account-rate-pm button, .pick-close'
 const HOLD = 300
 
 export default defineNuxtPlugin(() => {
