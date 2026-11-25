@@ -259,6 +259,18 @@ export function matchesQuery(locale: Locale, query: string): boolean {
 const OWN_NAME: Record<string, string> = { el: 'Ελληνικά', zh: '中文' }
 
 /**
+ * A site language's own name in sentence case, for lists that are not set
+ * in capitals: "Русский", "English (US)". The site's 简体中文 stays as it is
+ * (the page is in simplified Chinese; a server's language is plain 中文).
+ */
+const SITE_NAME: Record<string, string> = { el: 'Ελληνικά', 'en-us': 'English (US)', 'pt-br': 'Português (Brasil)' }
+export function localeName(l: Locale): string {
+  if (SITE_NAME[l.code]) return SITE_NAME[l.code]!
+  const lower = l.endonym.toLocaleLowerCase(l.code)
+  return lower.charAt(0).toLocaleUpperCase(l.code) + lower.slice(1)
+}
+
+/**
  * The languages a server's players can speak, for the owner's form and the
  * server's page: one per language — English and Portuguese once, not again
  * as their US and Brazilian variants — each named in itself, as in the
