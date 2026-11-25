@@ -1310,7 +1310,9 @@ html { overflow-anchor: none; }
 .site-footer-legal a:hover { text-decoration: underline; }
 .theme-light .site-footer-legal a { color: #464a60; }
 /* The privacy and terms pages: plain reading text. */
-.legal-body { display: grid; gap: 18px; padding: 4px 2px 8px; line-height: 1.6; max-width: 46rem; }
+/* In line with the panel's title: 23px + the 1px border, 15px on phones
+   (see .panel-head), and the account page's room above and below. */
+.legal-body { display: grid; gap: 18px; padding: 20px 23px 24px; line-height: 1.6; max-width: 46rem; }
 .legal-body h2 { margin: 0 0 6px; font-size: 16px; }
 .legal-body p { margin: 0 0 8px; color: #c9cce0; }
 .theme-light .legal-body p { color: #3a3e58; }
@@ -2744,6 +2746,7 @@ a.account-address:hover { text-decoration: underline; }
 
 @media (max-width: 700px) {
   .account-body { padding: 16px 14px 20px; }
+  .legal-body { padding: 16px 15px 20px; }
   /* 16px keeps a phone from zooming into the field on focus. */
   .account-field input:not([type="checkbox"]),
   .account-field select,
