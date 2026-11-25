@@ -4524,23 +4524,55 @@ a.account-address:hover { text-decoration: underline; }
   font-weight: 700;
 }
 
-/* Not a door: an empty ring with a white glyph, lit only while pressed. */
+/* A button inside the sheet, so a button-circle; not a door, so by the
+   design rules: the arc of light in the filter's violet, empty inside, the
+   glyph in the language button's soft white. Lit — a violet tint, the glyph
+   pale violet — under the pointer and for 0.3s after a tap (.is-lit). */
 .pick-close {
   flex: none;
+  position: relative;
   display: grid;
   place-items: center;
   width: 32px;
   height: 32px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, .22);
+  border: 0;
   border-radius: 50%;
   background: none;
   color: #e6e8f8;
   cursor: pointer;
+  --arc: #a453ff;
+  --arc-a: color-mix(in srgb, color-mix(in srgb, var(--arc) 70%, #fff) 95%, transparent);
+  --arc-dim: color-mix(in srgb, var(--arc) 25%, transparent);
+  --arc-low: color-mix(in srgb, color-mix(in srgb, var(--arc) 85%, #fff) 55%, transparent);
+  --arc-spark: #fff;
 }
-.pick-close:active { border-color: #a47bff; background: rgba(164, 83, 255, .18); }
-.theme-light .pick-close { border-color: rgba(22, 24, 43, .22); color: #363a52; }
-.theme-light .pick-close:active { border-color: #7c3aed; background: rgba(124, 58, 237, .12); }
+.pick-close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--arc-frame, 1.5px);
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (min-resolution: 2dppx) { .pick-close::before { --arc-frame: 1px; --arc-tail: transparent; } }
+.pick-close.is-lit { background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 22%, transparent), transparent 70%); color: #e3d1ff; }
+@media (hover: hover) {
+  .pick-close:hover { background: linear-gradient(145deg, color-mix(in srgb, var(--arc) 22%, transparent), transparent 70%); color: #e3d1ff; }
+}
+.theme-light .pick-close {
+  --arc: #7c3aed;
+  --arc-a: color-mix(in srgb, color-mix(in srgb, var(--arc) 80%, #000) 85%, transparent);
+  --arc-low: color-mix(in srgb, var(--arc) 55%, transparent);
+  --arc-spark: color-mix(in srgb, var(--arc) 55%, #000);
+  color: #363a52;
+}
+.theme-light .pick-close.is-lit { background: linear-gradient(145deg, rgba(124, 58, 237, .16), transparent 70%); color: #4c1d95; }
+@media (hover: hover) { .theme-light .pick-close:hover { background: linear-gradient(145deg, rgba(124, 58, 237, .16), transparent 70%); color: #4c1d95; } }
 .pick-search {
   flex: none;
   display: flex;
