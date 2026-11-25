@@ -3869,7 +3869,6 @@ a.account-address:hover { text-decoration: underline; }
 .account-button:not(.account-oauth),
 .filter-apply,
 .not-found-home,
-.server-facts > div,
 .filter-chip,
 .lang-search,
 .lang-item.active {
@@ -3880,7 +3879,7 @@ a.account-address:hover { text-decoration: underline; }
   --arc-spark: #fff;
   border-color: transparent;
 }
-:is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .server-facts > div, .filter-chip, .lang-search, .lang-item.active)::before {
+:is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip, .lang-search, .lang-item.active)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -3893,7 +3892,7 @@ a.account-address:hover { text-decoration: underline; }
   pointer-events: none;
 }
 @media (min-resolution: 2dppx) {
-  :is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .server-facts > div, .filter-chip, .lang-search, .lang-item.active) { --arc-frame: 1px; --arc-tail: transparent; }
+  :is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip, .lang-search, .lang-item.active) { --arc-frame: 1px; --arc-tail: transparent; }
 }
 
 /* Violet: the action to take, the thing chosen. A tint of violet inside,
@@ -3939,7 +3938,6 @@ a.account-address:hover { text-decoration: underline; }
 .server-community,
 .account-button.account-button-quiet,
 .filter-chip:not(.active),
-.server-facts > div,
 .section-back {
   background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%);
   box-shadow: none;
@@ -4042,7 +4040,7 @@ a.account-address:hover { text-decoration: underline; }
 .thumb-icon { overflow: visible; }
 
 /* The light theme: the same arcs in ink and deep violet. */
-.theme-light :is(.server-status, .section-back, .server-community, .account-button.account-button-quiet, .filter-chip:not(.active), .server-facts > div, .lang-search) {
+.theme-light :is(.server-status, .section-back, .server-community, .account-button.account-button-quiet, .filter-chip:not(.active), .lang-search) {
   --arc-a: rgba(22, 24, 43, .42);
   --arc-dim: rgba(22, 24, 43, .14);
   --arc-low: rgba(22, 24, 43, .26);
