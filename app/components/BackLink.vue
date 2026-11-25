@@ -19,7 +19,10 @@ import { landingAt } from '~/data/landing'
  * changes on mount. A plain <a> rather than NuxtLink: RouterLink's own click
  * handler would navigate before this one could choose to go back instead.
  */
-const props = defineProps<{ to: RouteLocationRaw }>()
+/** `home`: always the home page, whatever came before — on the account
+ *  page, where people looked for the way back to the lists and the trip in
+ *  may have run through a sign-in elsewhere. */
+const props = defineProps<{ to: RouteLocationRaw, home?: boolean }>()
 
 const router = useRouter()
 const { t } = useI18n()
@@ -30,6 +33,7 @@ const href = computed(() => router.resolve(props.to).href.replace(/^([^?#]*?)\/?
 /** Where history would take the visitor, if it is a page of this site. */
 const backTo = ref<string | null>(null)
 onMounted(() => {
+  if (props.home) return
   const back = (window.history.state as { back?: unknown } | null)?.back
   backTo.value = typeof back === 'string' ? back : null
 })
