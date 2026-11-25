@@ -274,6 +274,14 @@ async function setStatus(row: QueueServer, status: Status, reason?: string) {
 interface Edit { name: string, url: string, chronicle: string, rate: string, rateText: string, language: string, languageText: string, openDate: string, description: string }
 const editing = ref<string | null>(null)
 const edit = reactive<Edit>({ name: '', url: '', chronicle: '', rate: '', rateText: '', language: '', languageText: '', openDate: '', description: '' })
+const editLanguageOptions = [
+  { value: '', label: 'не указан' },
+  { value: 'multi', label: 'несколько языков' },
+  { value: 'intl', label: 'интернациональный' },
+  ...SERVER_LANGUAGES.map((l) => ({ value: l.code, label: l.name, lang: l.code })),
+  { value: 'other', label: 'другой…' }
+]
+
 function startEdit(row: QueueServer) {
   editing.value = row.id
   asking.value = null
@@ -413,10 +421,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           <template v-if="needsGame(s)">
             <label class="account-field">
               <span>Игра</span>
-              <select v-model="fixes[s.id]!.game">
-                <option value="">Новая игра</option>
-                <option v-for="g in gameList" :key="g.id" :value="g.id">{{ g.name }}</option>
-              </select>
+              <PickField v-model="fixes[s.id]!.game" variant="form" title="Игра" :options="[{ value: '', label: 'Новая игра' }, ...gameList.map((g) => ({ value: g.id, label: g.name }))]" />
             </label>
             <template v-if="!fixes[s.id]!.game">
               <label class="account-field">
@@ -459,10 +464,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           <template v-for="l in ownLinks(s)" :key="l.i">
             <label class="account-field">
               <span>Сеть «{{ l.name }}» ({{ l.url }})</span>
-              <select v-model="fixes[s.id]!.networks[l.i]!.choice">
-                <option value="">Новая сеть</option>
-                <option v-for="n in networkList" :key="n.kind" :value="n.kind">{{ n.name }}</option>
-              </select>
+              <PickField v-model="fixes[s.id]!.networks[l.i]!.choice" variant="form" :title="`Сеть «${l.name}»`" :options="[{ value: '', label: 'Новая сеть' }, ...networkList.map((n) => ({ value: n.kind, label: n.name }))]" />
             </label>
             <template v-if="!fixes[s.id]!.networks[l.i]!.choice">
               <label class="account-field">
@@ -560,13 +562,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           <div class="account-pair">
             <label class="account-field">
               <span>Язык сервера</span>
-              <select v-model="edit.language">
-                <option value="">не указан</option>
-                <option value="multi">несколько языков</option>
-                <option value="intl">интернациональный</option>
-                <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code">{{ l.name }}</option>
-                <option value="other">другой…</option>
-              </select>
+              <PickField v-model="edit.language" variant="form" title="Язык сервера" :options="editLanguageOptions" />
             </label>
             <label v-if="edit.language === 'other'" class="account-field">
               <span>Название языка</span>
