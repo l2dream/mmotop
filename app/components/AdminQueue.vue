@@ -263,6 +263,75 @@ async function setStatus(row: QueueServer, status: Status, reason?: string) {
   else load()
 }
 
+/**
+ * The moderator fixes a submission before deciding on it — a name stuffed
+ * with keywords, a rate that does not match the server's site, a language
+ * left out — instead of rejecting it and waiting for the owner. The
+ * database lets an admin change any field (servers_guard leaves the status
+ * alone for an admin, so a listed server stays listed). The version is
+ * typed freely; one the site does not know then shows under "fix" above.
+ */
+interface Edit { name: string, url: string, chronicle: string, rate: string, rateText: string, language: string, languageText: string, openDate: string, description: string }
+const editing = ref<string | null>(null)
+const edit = reactive<Edit>({ name: '', url: '', chronicle: '', rate: '', rateText: '', language: '', languageText: '', openDate: '', description: '' })
+function startEdit(row: QueueServer) {
+  editing.value = row.id
+  asking.value = null
+  Object.assign(edit, {
+    name: row.name,
+    url: row.url,
+    chronicle: row.chronicle,
+    rate: row.rate != null ? String(row.rate) : '',
+    rateText: row.rate_text ?? '',
+    language: row.language ?? '',
+    languageText: row.language_text ?? '',
+    openDate: row.open_date,
+    description: row.description ?? ''
+  })
+}
+const NAME_OK = /^[^\s!-,./:-@[-`{-~]+(?:-[^\s!-,./:-@[-`{-~]+)*$/u
+const editError = ref('')
+async function saveEdit(row: QueueServer) {
+  editError.value = ''
+  const name = edit.name.trim()
+  if (name.length < 2 || name.length > 24 || !NAME_OK.test(name)) {
+    editError.value = 'Название: 2–24 знака, без пробелов и знаков препинания (дефис между словами можно).'
+    return
+  }
+  if (!/^https?:\/\//.test(edit.url.trim())) {
+    editError.value = 'Сайт должен начинаться с https:// или http://'
+    return
+  }
+  const rate = edit.rate.trim() ? Number(edit.rate.replace(',', '.')) : null
+  if (rate != null && !(rate > 0 && rate <= 100000)) {
+    editError.value = 'Рейт — число больше нуля (или оставьте пустым и впишите слово).'
+    return
+  }
+  if (edit.language === 'other' && edit.languageText.trim().length < 2) {
+    editError.value = 'Для «другого» языка впишите его название.'
+    return
+  }
+  busyId.value = row.id
+  const { error: failed } = await props.supabase.from('servers').update({
+    name,
+    url: edit.url.trim(),
+    chronicle: edit.chronicle.trim() || row.chronicle,
+    rate,
+    rate_text: rate == null ? edit.rateText.trim() || null : null,
+    language: edit.language || null,
+    language_text: edit.language === 'other' ? edit.languageText.trim() : null,
+    open_date: edit.openDate || row.open_date,
+    description: edit.description.trim() || null
+  }).eq('id', row.id)
+  busyId.value = null
+  if (failed) {
+    editError.value = `Не удалось сохранить: ${failed.message}`
+    return
+  }
+  editing.value = null
+  load()
+}
+
 /** A listed server's new logo: into place, or dropped (the old one stays). */
 async function decideLogo(row: QueueServer, accept: boolean) {
   busyId.value = row.id
@@ -441,6 +510,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           </ul>
         </div>
         <div class="account-server-tools">
+          <button type="button" class="account-link" @click="editing === s.id ? editing = null : startEdit(s)">{{ editing === s.id ? 'Закрыть правку' : 'Изменить' }}</button>
           <button type="button" class="account-link" @click="toggleLog(s)">{{ openLog === s.id ? 'Скрыть журнал' : 'Журнал наград' }}</button>
           <button
             v-for="a in ACTIONS.filter((a) => a.status !== s.status && !(a.status === 'approved' && s.game === 'other'))"
@@ -453,6 +523,66 @@ const ACTIONS: { status: Status, label: string }[] = [
           >
             {{ a.label }}
           </button>
+        </div>
+        <!-- The moderator's own corrections, before deciding. -->
+        <div v-if="editing === s.id" class="admin-description admin-fix admin-edit">
+          <label class="account-field">
+            <span>Название</span>
+            <input v-model="edit.name" type="text" maxlength="24">
+          </label>
+          <label class="account-field">
+            <span>Сайт</span>
+            <input v-model="edit.url" type="url" dir="ltr">
+          </label>
+          <div class="account-pair">
+            <label class="account-field">
+              <span>Версия</span>
+              <input v-model="edit.chronicle" type="text" maxlength="40" :list="`admin-edit-versions-${s.id}`">
+              <datalist :id="`admin-edit-versions-${s.id}`">
+                <option v-for="v in versionsOf(s.game)" :key="v" :value="v" />
+              </datalist>
+            </label>
+            <label class="account-field">
+              <span>Дата открытия</span>
+              <input v-model="edit.openDate" type="date">
+            </label>
+          </div>
+          <div class="account-pair">
+            <label class="account-field">
+              <span>Рейт (число)</span>
+              <input v-model="edit.rate" type="text" inputmode="decimal" placeholder="например 30">
+            </label>
+            <label class="account-field">
+              <span>…или слово вместо рейта</span>
+              <input v-model="edit.rateText" type="text" maxlength="20" :disabled="!!edit.rate.trim()" placeholder="например Dynamic">
+            </label>
+          </div>
+          <div class="account-pair">
+            <label class="account-field">
+              <span>Язык сервера</span>
+              <select v-model="edit.language">
+                <option value="">не указан</option>
+                <option value="multi">несколько языков</option>
+                <option value="intl">интернациональный</option>
+                <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code">{{ l.name }}</option>
+                <option value="other">другой…</option>
+              </select>
+            </label>
+            <label v-if="edit.language === 'other'" class="account-field">
+              <span>Название языка</span>
+              <input v-model="edit.languageText" type="text" maxlength="30">
+            </label>
+          </div>
+          <label class="account-field">
+            <span>Описание</span>
+            <textarea v-model="edit.description" rows="5" maxlength="2000" />
+          </label>
+          <p v-if="editError" class="account-error" role="alert">{{ editError }}</p>
+          <div class="account-server-tools">
+            <button type="button" class="account-button" :disabled="busyId === s.id" @click="saveEdit(s)">Сохранить</button>
+            <button type="button" class="account-link" @click="editing = null">Отмена</button>
+          </div>
+          <p class="account-note">Статус не меняется: сохранённое остаётся на проверке, одобрите отдельно.</p>
         </div>
         <!-- The reason, before rejecting or hiding. -->
         <div v-if="asking?.id === s.id" class="admin-description admin-fix">
