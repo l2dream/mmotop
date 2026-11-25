@@ -18,17 +18,25 @@ export interface PickOption { value: string, label: string, lang?: string }
 export interface PickGroup { label: string, options: PickOption[] }
 
 const props = defineProps<{
-  id: string
+  id?: string
   modelValue: string
   /** The sheet's heading, and the list's name for screen readers. */
   title: string
   /** The lines before any group, such as "All languages". */
   options?: PickOption[]
   groups?: PickGroup[]
+  /** Shown, dimmed, while nothing in the list is chosen ("Choose…"). */
+  placeholder?: string
+  /** `form`: in the account's form, looking like its fields. */
+  variant?: 'filter' | 'form'
+  /** In a form: nothing chosen stops it being sent, as a select would. */
+  required?: boolean
 }>()
 const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 
 const { t } = useI18n()
+const autoId = useId()
+const uid = computed(() => props.id ?? `pick-${autoId}`)
 const open = ref(false)
 const query = ref('')
 const active = ref(-1)
@@ -40,7 +48,8 @@ const sheet = ref(false)
 const pos = ref({ top: 0, left: 0, width: 0, maxHeight: 360 })
 
 const allOptions = computed(() => [...(props.options ?? []), ...(props.groups ?? []).flatMap((g) => g.options)])
-const current = computed(() => allOptions.value.find((o) => o.value === props.modelValue) ?? allOptions.value[0])
+const current = computed(() => allOptions.value.find((o) => o.value === props.modelValue)
+  ?? (props.placeholder === undefined ? allOptions.value[0] : undefined))
 
 const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
 
@@ -60,7 +69,7 @@ const sections = computed(() => {
 const flat = computed(() => sections.value.flatMap((s) => s.options))
 watch(query, () => { active.value = flat.value.length ? 0 : -1 })
 
-const optionId = (i: number) => `${props.id}-opt-${i}`
+const optionId = (i: number) => `${uid.value}-opt-${i}`
 const indexOf = (o: PickOption) => flat.value.indexOf(o)
 
 function place() {
@@ -223,17 +232,29 @@ const panelStyle = computed(() => sheet.value
 
 <template>
   <button
-    :id="id"
+    :id="uid"
     ref="fieldEl"
     type="button"
-    class="filter-select pick-field"
+    class="pick-field"
+    :class="variant === 'form' ? 'pick-select' : 'filter-select'"
     aria-haspopup="listbox"
     :aria-expanded="open"
     @click="open ? hide() : show()"
     @keydown="onFieldKey"
   >
-    <span class="pick-field-text" :lang="current?.lang">{{ current?.label }}</span>
+    <span v-if="current" class="pick-field-text" :lang="current.lang">{{ current.label }}</span>
+    <span v-else class="pick-field-text pick-placeholder">{{ placeholder }}</span>
   </button>
+  <!-- A select's "required", for a button: an input the form checks. -->
+  <input
+    v-if="required"
+    class="pick-required"
+    tabindex="-1"
+    aria-hidden="true"
+    :value="current ? modelValue : ''"
+    required
+    @invalid="fieldEl?.focus()"
+  >
   <Teleport to="body">
     <div v-if="open" class="pick-layer" :class="{ 'is-sheet': sheet }">
       <!-- On click, not on pointerdown: closed at the touch, the dim was gone
@@ -273,14 +294,14 @@ const panelStyle = computed(() => sheet.value
             :aria-label="t('search.short')"
             role="combobox"
             aria-autocomplete="list"
-            :aria-controls="`${id}-list`"
+            :aria-controls="`${uid}-list`"
             aria-expanded="true"
             :aria-activedescendant="active >= 0 ? optionId(active) : undefined"
             autocomplete="off"
             spellcheck="false"
           >
         </label>
-        <div :id="`${id}-list`" ref="listEl" class="pick-list" role="listbox" :aria-label="title">
+        <div :id="`${uid}-list`" ref="listEl" class="pick-list" role="listbox" :aria-label="title">
           <template v-for="(s, si) in sections" :key="si">
             <div v-if="s.label" class="pick-group" role="presentation">{{ s.label }}</div>
             <button

@@ -512,6 +512,33 @@ const aboutPreview = computed(() => {
 })
 
 /** A different game has different versions: the choice starts again. */
+// The form's lists in the shape of its pickers (PickField), the phone's
+// grey system list replaced as in the filter.
+const gameOptions = computed(() => [
+  ...GAMES.map((g) => ({ value: g.id, label: g.name })),
+  { value: 'other', label: t('account.fields.otherGame') }
+])
+const chronicleOptions = computed(() => [
+  ...chronicles.value.map((c) => ({ value: c, label: c })),
+  { value: OWN, label: t('account.fields.otherChronicle') }
+])
+const rateWordOptions = computed(() => [
+  { value: '', label: t('account.fields.notSpecified') },
+  ...RATE_WORDS.map((w) => ({ value: w, label: w })),
+  { value: OWN, label: t('account.fields.rateOwn') }
+])
+const languageOptions = computed(() => [
+  { value: '', label: t('account.fields.notSpecified') },
+  { value: 'intl', label: t('server.international') },
+  ...SERVER_LANGUAGES.map((l) => ({ value: l.code, label: l.name, lang: l.code })),
+  { value: 'multi', label: t('server.multilingual') },
+  { value: 'other', label: t('account.fields.otherLanguage') }
+])
+const networkOptions = computed(() => [
+  ...NETWORKS.map((n) => ({ value: n.kind, label: n.name ?? t(n.kind === 'forum' ? 'server.forum' : 'server.community') })),
+  { value: OWN, label: t('account.fields.ownNetwork') }
+])
+
 function pickGame() {
   draft.value!.chronicle = ''
   ownChronicle.value = draft.value!.game === 'other'
@@ -928,18 +955,11 @@ async function remove(s: OwnServer) {
           <div class="account-pair">
             <label class="account-field">
               <span>{{ $t('account.fields.game') }}</span>
-              <select v-model="draft.game" required @change="pickGame">
-                <option v-for="g in GAMES" :key="g.id" :value="g.id">{{ g.name }}</option>
-                <option value="other">{{ $t('account.fields.otherGame') }}</option>
-              </select>
+              <PickField v-model="draft.game" variant="form" required :title="$t('account.fields.game')" :options="gameOptions" @update:model-value="pickGame" />
             </label>
             <label v-if="draft.game !== 'other'" class="account-field">
               <span>{{ $t('account.fields.chronicle') }}</span>
-              <select v-model="chronicleChoice" required>
-                <option value="" disabled>{{ $t('account.fields.choose') }}</option>
-                <option v-for="c in chronicles" :key="c" :value="c">{{ c }}</option>
-                <option :value="OWN">{{ $t('account.fields.otherChronicle') }}</option>
-              </select>
+              <PickField v-model="chronicleChoice" variant="form" required :title="$t('account.fields.chronicle')" :placeholder="$t('account.fields.choose')" :options="chronicleOptions" />
             </label>
           </div>
           <label v-if="draft.game === 'other'" class="account-field">
@@ -967,11 +987,7 @@ async function remove(s: OwnServer) {
                   :aria-label="$t('account.fields.rate')"
                   :placeholder="$t('account.fields.rateHint')"
                 >
-                <select v-else v-model="rateWordChoice" :aria-label="$t('account.fields.rateText')">
-                  <option value="">{{ $t('account.fields.notSpecified') }}</option>
-                  <option v-for="w in RATE_WORDS" :key="w" :value="w">{{ w }}</option>
-                  <option :value="OWN">{{ $t('account.fields.rateOwn') }}</option>
-                </select>
+                <PickField v-else v-model="rateWordChoice" variant="form" :title="$t('account.fields.rateText')" :options="rateWordOptions" />
                 <!-- The end of the field: − and + (round, as buttons inside a
                      field are), then the "No rates" box, side by side. -->
                 <span class="account-rate-end">
@@ -1010,13 +1026,7 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.language') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <!-- Optional: "Not specified" stores no language. A new server
                  starts as international. -->
-            <select v-model="draft.language">
-              <option value="">{{ $t('account.fields.notSpecified') }}</option>
-              <option value="intl">{{ $t('server.international') }}</option>
-              <option v-for="l in SERVER_LANGUAGES" :key="l.code" :value="l.code" :lang="l.code">{{ l.name }}</option>
-              <option value="multi">{{ $t('server.multilingual') }}</option>
-              <option value="other">{{ $t('account.fields.otherLanguage') }}</option>
-            </select>
+            <PickField v-model="draft.language" variant="form" :title="$t('account.fields.language')" :options="languageOptions" />
           </label>
           <label v-if="draft.language === 'other'" class="account-field">
             <span>{{ $t('account.fields.languageName') }}</span>
@@ -1032,10 +1042,7 @@ async function remove(s: OwnServer) {
             <span v-if="draft.links.length">{{ $t('account.fields.links') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <div v-for="(link, i) in draft.links" :key="i" class="account-link-row">
               <!-- "Other network…" last: one the list lacks, named below. -->
-              <select :value="link.name === undefined ? link.kind : OWN" :aria-label="$t('account.fields.network')" @change="pickNetwork(link, ($event.target as HTMLSelectElement).value)">
-                <option v-for="n in NETWORKS" :key="n.kind" :value="n.kind">{{ n.name ?? $t(n.kind === 'forum' ? 'server.forum' : 'server.community') }}</option>
-                <option :value="OWN">{{ $t('account.fields.ownNetwork') }}</option>
-              </select>
+              <PickField :model-value="link.name === undefined ? link.kind : OWN" variant="form" :title="$t('account.fields.network')" :options="networkOptions" @update:model-value="pickNetwork(link, $event)" />
               <input
                 v-model="link.url"
                 type="url"
