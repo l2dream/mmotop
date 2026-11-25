@@ -532,9 +532,78 @@ function writeFiltersToUrl(initial = false) {
 // remounts this page — left one more behind, all writing the same address.
 watch(filterOpen, (open) => {
   if (open || !leaveWhenFilterCloses) return
+  // The filter's history step is still to be taken back (this watcher runs
+  // before the one that does it); afterFilterStep leaves once it is gone.
+  if (filterStep || filterStepClosing) return
   leaveWhenFilterCloses = false
   writeFiltersToUrl()
 })
+
+/**
+ * The phone's Back button closes the filter instead of leaving the page, as
+ * it closes the lists opened from it (PickField). Opening the filter on a
+ * phone adds a step to the history, a copy of the router's own entry marked
+ * as the filter's; Back takes it away and the filter closes. Closed any other
+ * way — Apply, a tap outside, the button — the step is taken back by hand.
+ *
+ * The filters change the address while the filter is open, and those
+ * changes land on the step; taking it back returns the address to what it
+ * was before. So once it is gone the address is put back to the latest one
+ * (or, where the filter leads to the home page, that is done now).
+ */
+let filterStep = false
+let filterStepClosing = false
+let filterStepPath = ''
+watch(filterOpen, (open) => {
+  if (open && !filterStep && window.innerWidth <= 700) {
+    window.history.pushState({ ...(window.history.state ?? {}), filterSheet: true }, '')
+    filterStep = true
+    filterStepPath = route.fullPath
+  } else if (!open && filterStep) {
+    filterStep = false
+    filterStepClosing = true
+    window.history.back()
+  }
+})
+watch(() => route.fullPath, (path) => { if (filterStep) filterStepPath = path })
+function onFilterPopState(event: PopStateEvent) {
+  // A list opened from the filter closing: the filter's own step is still
+  // the one standing.
+  if ((event.state as { filterSheet?: boolean } | null)?.filterSheet) return
+  if (filterStepClosing) {
+    filterStepClosing = false
+    afterFilterStep()
+  } else if (filterStep) {
+    filterStep = false
+    filterOpen.value = false
+    afterFilterStep()
+  }
+}
+function afterFilterStep() {
+  // Once the router has settled the step back — its route matches the
+  // address bar again (or after a third of a second at most). A navigation
+  // started before that was dropped in favour of the step's.
+  let tries = 0
+  const settled = () => decodeURI(route.fullPath) === decodeURI(location.pathname + location.search)
+  const wait = (fn: () => void) => (settled() || tries++ > 20 ? fn() : setTimeout(() => wait(fn), 16))
+  setTimeout(() => wait(() => {
+    if (unmounted) return
+    if (leaveWhenFilterCloses) {
+      leaveWhenFilterCloses = false
+      writeFiltersToUrl()
+    } else if (filterStepPath && decodeURI(location.pathname + location.search) !== decodeURI(filterStepPath)) {
+      // The address bar, not route: the router may not have caught up with
+      // the step back yet, and so takes the latest address for the current
+      // one — hence force, or it would call the replace a repeat and skip it.
+      const to = router.resolve(filterStepPath)
+      router.replace({ path: to.path, query: to.query, hash: to.hash, force: true })
+    }
+  }), 0)
+}
+onMounted(() => window.addEventListener('popstate', onFilterPopState))
+// Not taken back on unmount: by then a new page is standing, and Back from
+// it would leave that page instead.
+onBeforeUnmount(() => window.removeEventListener('popstate', onFilterPopState))
 
 const urlReady = ref(false)
 let leaving = false

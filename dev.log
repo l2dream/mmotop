@@ -6,37 +6,60 @@
 
   ➜ DevTools: press Shift + Alt + D in the browser (v3.4.2)
 
-√ Vite client built in 75ms
-√ Vite server built in 19ms
-[nitro] √ Nuxt Nitro server built in 3888ms
-i Vite server warmed up in 45ms
-i Vite client warmed up in 58ms
-[nitro] √ Nuxt Nitro server built in 3337ms
-i hmr update /components/LanguageSwitcher.vue
+√ Vite client built in 53ms
+√ Vite server built in 25ms
+[nitro] √ Nuxt Nitro server built in 3680ms
+i Vite server warmed up in 22ms
+i Vite client warmed up in 38ms
+[nitro] √ Nuxt Nitro server built in 2977ms
+i hmr update /components/Dashboard.vue
 i page reload virtual:nuxt:.nuxt%2Froute-rules.mjs
-√ Vite server hmr 126 files in 1.257ms
-√ Vite server hmr 92 files in 12.604ms
-i hmr update /components/LanguageSwitcher.vue
-√ Vite server hmr 92 files in 0.955ms
-√ Vite server hmr 92 files in 222.18ms
-i hmr update /components/LanguageSwitcher.vue (x2)
-√ Vite server hmr 92 files in 0.753ms
-√ Vite server hmr 92 files in 117.218ms
-i hmr update /components/LanguageSwitcher.vue (x3)
-√ Vite server hmr 92 files in 1.007ms
-√ Vite server hmr 92 files in 123.922ms
-i hmr update /components/LanguageSwitcher.vue (x4)
-√ Vite server hmr 92 files in 1.014ms
-√ Vite server hmr 92 files in 162.631ms
-i hmr update /components/LanguageSwitcher.vue (x5)
-√ Vite server hmr 92 files in 1.32ms
-√ Vite server hmr 92 files in 111.558ms
-i hmr update /components/LanguageSwitcher.vue (x6)
-√ Vite server hmr 92 files in 0.87ms
-√ Vite server hmr 92 files in 150.622ms
-i hmr update /components/LanguageSwitcher.vue (x7)
-i hmr update /app.vue, /error.vue, /components/Dashboard.vue, /components/LanguageSwitcher.vue, /components/LanguageSuggestion.vue, /components/AccountPanel.vue, /components/ServerDetail.vue, /components/AdminQueue.vue
-i hmr update /components/LanguageSwitcher.vue
-√ Vite server hmr 94 files in 1.508ms
-√ Vite server hmr 94 files in 172.316ms
-√ Vite server hmr 24 files in 210.934ms
+√ Vite server hmr 129 files in 1.154ms
+√ Vite server hmr 95 files in 0.843ms
+i hmr update /components/Dashboard.vue
+√ Vite server hmr 95 files in 1.032ms
+√ Vite server hmr 95 files in 122.526ms
+i hmr update /components/Dashboard.vue (x2)
+√ Vite server hmr 95 files in 1.203ms
+√ Vite server hmr 95 files in 132.719ms
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /aion/4-8/skyhaven/_payload.json?_b=1795646757902.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /metin2/old-school/redshrine/_payload.json?_b=1795646757902.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/essence/moonspire/_payload.json?_b=1795646757902.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /tibia/7-4/oldspire/_payload.json?_b=1795646757902.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /wow/cataclysm-4-3-4/runegate/_payload.json?_b=1795646757902.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+i hmr update /components/Dashboard.vue
+√ Vite server hmr 95 files in 0.901ms
+√ Vite server hmr 95 files in 126.501ms
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /tibia/7-4/oldspire/_payload.json?_b=1795646870128.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/essence/moonspire/_payload.json?_b=1795646870128.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /wow/cataclysm-4-3-4/runegate/_payload.json?_b=1795646870128.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+i hmr update /components/Dashboard.vue
+√ Vite server hmr 95 files in 0.711ms
+√ Vite server hmr 95 files in 194.644ms
+i hmr update /components/Dashboard.vue (x2)
+√ Vite server hmr 95 files in 0.982ms
+√ Vite server hmr 95 files in 150.079ms
