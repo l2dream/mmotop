@@ -14,7 +14,14 @@
  * Searching ignores case and accents ("cestina" finds "Čeština"), and a
  * group's name finds all of its lines ("lineage" lists every chronicle).
  */
-export interface PickOption { value: string, label: string, lang?: string }
+export interface PickOption {
+  value: string
+  label: string
+  lang?: string
+  dir?: 'ltr' | 'rtl'
+  /** Other words the search finds it by (a language's English name, its code). */
+  keywords?: string
+}
 export interface PickGroup { label: string, options: PickOption[] }
 
 const props = defineProps<{
@@ -27,12 +34,22 @@ const props = defineProps<{
   groups?: PickGroup[]
   /** Shown, dimmed, while nothing in the list is chosen ("Choose…"). */
   placeholder?: string
-  /** `form`: in the account's form, looking like its fields. */
-  variant?: 'filter' | 'form'
+  /** `form`: in the account's form, looking like its fields. `bare`: a
+   *  button of its own (the language globe), drawn by the slot. */
+  variant?: 'filter' | 'form' | 'bare'
+  /** With `bare`: the button's class and its name for screen readers. */
+  buttonClass?: string
+  buttonLabel?: string
+  /** The search line's placeholder, when "Search" says too little. */
+  searchLabel?: string
   /** In a form: nothing chosen stops it being sent, as a select would. */
   required?: boolean
 }>()
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+  /** The pointer on the button or focus on it: about to be opened. */
+  intent: []
+}>()
 
 const { t } = useI18n()
 const autoId = useId()
@@ -56,7 +73,7 @@ const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCas
 /** What the search leaves, in sections: the loose lines, then each group. */
 const sections = computed(() => {
   const q = fold(query.value.trim())
-  const hit = (o: PickOption) => !q || fold(o.label).includes(q)
+  const hit = (o: PickOption) => !q || fold(o.label).includes(q) || (!!o.keywords && fold(o.keywords).includes(q))
   const out: { label?: string, options: PickOption[] }[] = []
   const loose = (props.options ?? []).filter(hit)
   if (loose.length) out.push({ options: loose })
@@ -78,7 +95,11 @@ function place() {
   sheet.value = window.innerWidth <= 700
   if (sheet.value) return
   const room = window.innerHeight - r.bottom - 16
-  pos.value = { top: r.bottom + 6, left: r.left, width: Math.max(r.width, 240), maxHeight: Math.max(220, Math.min(380, room)) }
+  const width = Math.max(r.width, props.variant === 'bare' ? 280 : 240)
+  // Kept on the screen: a small button near the edge (the globe) would hang
+  // its panel off it; then it ends at the button's far edge instead.
+  const left = Math.max(10, r.left + width > window.innerWidth - 10 ? r.right - width : r.left)
+  pos.value = { top: r.bottom + 6, left, width, maxHeight: Math.max(220, Math.min(420, room)) }
 }
 
 /**
@@ -235,15 +256,20 @@ const panelStyle = computed(() => sheet.value
     :id="uid"
     ref="fieldEl"
     type="button"
-    class="pick-field"
-    :class="variant === 'form' ? 'pick-select' : 'filter-select'"
+    :class="variant === 'bare' ? buttonClass : ['pick-field', variant === 'form' ? 'pick-select' : 'filter-select']"
     aria-haspopup="listbox"
     :aria-expanded="open"
+    :aria-label="variant === 'bare' ? buttonLabel : undefined"
     @click="open ? hide() : show()"
     @keydown="onFieldKey"
+    @pointerenter="emit('intent')"
+    @focus="emit('intent')"
   >
-    <span v-if="current" class="pick-field-text" :lang="current.lang">{{ current.label }}</span>
-    <span v-else class="pick-field-text pick-placeholder">{{ placeholder }}</span>
+    <slot v-if="variant === 'bare'" />
+    <template v-else>
+      <span v-if="current" class="pick-field-text" :lang="current.lang">{{ current.label }}</span>
+      <span v-else class="pick-field-text pick-placeholder">{{ placeholder }}</span>
+    </template>
   </button>
   <!-- A select's "required", for a button: an input the form checks. -->
   <input
@@ -288,16 +314,17 @@ const panelStyle = computed(() => sheet.value
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
           <input
             ref="searchEl"
-            v-model="query"
+            :value="query"
             type="search"
-            :placeholder="t('search.short')"
-            :aria-label="t('search.short')"
+            :placeholder="searchLabel ?? t('search.short')"
+            :aria-label="searchLabel ?? t('search.short')"
             role="combobox"
             aria-autocomplete="list"
             :aria-controls="`${uid}-list`"
             aria-expanded="true"
             :aria-activedescendant="active >= 0 ? optionId(active) : undefined"
             autocomplete="off"
+            @input="query = ($event.target as HTMLInputElement).value"
             spellcheck="false"
           >
         </label>
@@ -317,7 +344,7 @@ const panelStyle = computed(() => sheet.value
               :lang="o.lang"
               @click="pick(o)"
             >
-              <span>{{ o.label }}</span>
+              <span :dir="o.dir">{{ o.label }}</span>
               <svg v-if="o.value === modelValue" class="pick-tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
             </button>
           </template>
