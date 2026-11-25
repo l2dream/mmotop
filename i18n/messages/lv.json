@@ -58,7 +58,8 @@
     "reset": "Atiestatīt",
     "apply": "Lietot",
     "custom": "Pielāgots",
-    "noRates": "Bez rate"
+    "noRates": "Bez rate",
+    "close": "Aizvērt"
   },
   "months": {
     "jan": "janv.",

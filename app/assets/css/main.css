@@ -4508,9 +4508,15 @@ a.account-address:hover { text-decoration: underline; }
   .pick-layer.is-sheet .pick-panel, .pick-layer.is-sheet .pick-dim { animation: none; }
 }
 .pick-grab { flex: none; width: 36px; height: 4px; margin: 2px auto 6px; border-radius: 2px; background: rgba(255, 255, 255, .25); }
+.pick-layer.is-sheet .pick-panel { transition: transform .18s ease; }
+.pick-layer.is-sheet .pick-panel.is-dragging { transition: none; }
 .pick-head {
   flex: none;
-  padding: 6px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px 10px 12px;
   margin-bottom: 8px;
   border-bottom: 1px solid rgba(104, 105, 161, .16);
   color: #f4f5ff;
@@ -4518,6 +4524,23 @@ a.account-address:hover { text-decoration: underline; }
   font-weight: 700;
 }
 
+/* Not a door: an empty ring with a white glyph, lit only while pressed. */
+.pick-close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 50%;
+  background: none;
+  color: #e6e8f8;
+  cursor: pointer;
+}
+.pick-close:active { border-color: #a47bff; background: rgba(164, 83, 255, .18); }
+.theme-light .pick-close { border-color: rgba(22, 24, 43, .22); color: #363a52; }
+.theme-light .pick-close:active { border-color: #7c3aed; background: rgba(124, 58, 237, .12); }
 .pick-search {
   flex: none;
   display: flex;

@@ -58,7 +58,8 @@
     "reset": "Restablecer",
     "apply": "Aplicar",
     "custom": "Personalizado",
-    "noRates": "Sin rate"
+    "noRates": "Sin rate",
+    "close": "Cerrar"
   },
   "months": {
     "jan": "ene",

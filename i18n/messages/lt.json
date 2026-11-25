@@ -58,7 +58,8 @@
     "reset": "Atstatyti",
     "apply": "Taikyti",
     "custom": "Pasirinktinis",
-    "noRates": "Be rate"
+    "noRates": "Be rate",
+    "close": "Uždaryti"
   },
   "months": {
     "jan": "saus.",

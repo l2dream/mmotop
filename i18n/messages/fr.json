@@ -58,7 +58,8 @@
     "reset": "Réinitialiser",
     "apply": "Appliquer",
     "custom": "Personnalisé",
-    "noRates": "Sans rate"
+    "noRates": "Sans rate",
+    "close": "Fermer"
   },
   "months": {
     "jan": "janv.",

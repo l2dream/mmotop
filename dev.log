@@ -1,25 +1,14 @@
+|
+•  Nuxt 4.5.2 (with Nitro 2.13.4, Vite 8.2.2 and Vue 3.5.42)
 
- ERROR 
-Another Nuxt dev server is already running:
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  use --host to expose
 
-  URL:     http://127.0.0.1:3000
-  PID:     5386
-  Dir:     /home/user/mmotop
-  Started: 11/11/2026, 6:02:09 PM
+  ➜ DevTools: press Shift + Alt + D in the browser (v3.4.2)
 
-Run kill 5386 to stop it, or connect to http://127.0.0.1:3000
-Set NUXT_IGNORE_LOCK=1 to bypass this check.
-
-
-
- ERROR  Another Nuxt dev is already running (PID 5386).
-
-    at #acquireDevLock (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:580:10)
-    at NuxtDevServer.init (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:404:23)
-    at async initialize (node_modules/@nuxt/cli/dist/dev-DHhrJk9w.mjs:753:2)
-    at async Object.run (node_modules/@nuxt/cli/dist/dev-Cbii5ek4.mjs:198:51)
-    at async runCommand (node_modules/citty/dist/index.mjs:228:47)
-    at async runCommand (node_modules/citty/dist/index.mjs:217:5)
-    at async runMain (node_modules/citty/dist/index.mjs:394:10) 
-
-
+√ Vite client built in 43ms
+√ Vite server built in 24ms
+[nitro] √ Nuxt Nitro server built in 5647ms
+i Vite server warmed up in 46ms
+i Vite client warmed up in 74ms
+[nitro] √ Nuxt Nitro server built in 3958ms

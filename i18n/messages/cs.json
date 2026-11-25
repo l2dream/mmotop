@@ -58,7 +58,8 @@
     "reset": "Resetovat",
     "apply": "Použít",
     "custom": "Vlastní",
-    "noRates": "Bez rate"
+    "noRates": "Bez rate",
+    "close": "Zavřít"
   },
   "months": {
     "jan": "led",

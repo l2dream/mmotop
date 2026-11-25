@@ -58,7 +58,8 @@
     "reset": "Redefinir",
     "apply": "Aplicar",
     "custom": "Personalizado",
-    "noRates": "Sem rate"
+    "noRates": "Sem rate",
+    "close": "Fechar"
   },
   "months": {
     "jan": "jan",

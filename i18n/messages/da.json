@@ -58,7 +58,8 @@
     "reset": "Nulstil",
     "apply": "Anvend",
     "custom": "Tilpasset",
-    "noRates": "Uden rate"
+    "noRates": "Uden rate",
+    "close": "Luk"
   },
   "months": {
     "jan": "jan.",

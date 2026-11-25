@@ -58,7 +58,8 @@
     "reset": "איפוס",
     "apply": "החל",
     "custom": "מותאם",
-    "noRates": "ללא Rate"
+    "noRates": "ללא Rate",
+    "close": "סגירה"
   },
   "months": {
     "jan": "ינו׳",
