@@ -501,7 +501,9 @@ function writeFiltersToUrl(initial = false) {
   const home = homeLocation()
   const leaves = standalone.value || (homeLike && withSlash(route.path) !== home.path)
   if (leaves) {
-    if (filterOpen.value) {
+    // With the filter or the More menu open, or its history step still
+    // being taken back: leaving now would be undone by the step back.
+    if (filterOpen.value || filterStep || filterStepClosing) {
       leaveWhenFilterCloses = true
       return
     }
@@ -540,11 +542,12 @@ watch(filterOpen, (open) => {
 })
 
 /**
- * The phone's Back button closes the filter instead of leaving the page, as
- * it closes the lists opened from it (PickField). Opening the filter on a
- * phone adds a step to the history, a copy of the router's own entry marked
- * as the filter's; Back takes it away and the filter closes. Closed any other
- * way — Apply, a tap outside, the button — the step is taken back by hand.
+ * The phone's Back button closes the filter or the More menu instead of
+ * leaving the page, as it closes the lists opened from the filter
+ * (PickField). Opening either on a phone adds a step to the history, a copy
+ * of the router's own entry marked as theirs; Back takes it away and they
+ * close. Closed any other way — Apply, a game chosen, a tap outside, the
+ * button — the step is taken back by hand.
  *
  * The filters change the address while the filter is open, and those
  * changes land on the step; taking it back returns the address to what it
@@ -554,7 +557,8 @@ watch(filterOpen, (open) => {
 let filterStep = false
 let filterStepClosing = false
 let filterStepPath = ''
-watch(filterOpen, (open) => {
+const overlayOpen = computed(() => filterOpen.value || showMore.value)
+watch(overlayOpen, (open) => {
   if (open && !filterStep && window.innerWidth <= 700) {
     window.history.pushState({ ...(window.history.state ?? {}), filterSheet: true }, '')
     filterStep = true
@@ -576,6 +580,7 @@ function onFilterPopState(event: PopStateEvent) {
   } else if (filterStep) {
     filterStep = false
     filterOpen.value = false
+    showMore.value = false
     afterFilterStep()
   }
 }

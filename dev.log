@@ -6,9 +6,29 @@
 
   ➜ DevTools: press Shift + Alt + D in the browser (v3.4.2)
 
-√ Vite client built in 65ms
-√ Vite server built in 27ms
-[nitro] √ Nuxt Nitro server built in 4296ms
-i Vite server warmed up in 38ms
-i Vite client warmed up in 56ms
-[nitro] √ Nuxt Nitro server built in 3125ms
+√ Vite client built in 58ms
+√ Vite server built in 31ms
+[nitro] √ Nuxt Nitro server built in 4288ms
+i Vite server warmed up in 98ms
+i Vite client warmed up in 124ms
+[nitro] √ Nuxt Nitro server built in 3266ms
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /top/_payload.json?_b=1795648009702.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/interlude/ironhale/_payload.json?_b=1795648009702.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /wow/wotlk-3-3-5a/coldharbor/_payload.json?_b=1795648009702.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/classic/emberline/_payload.json?_b=1795648009702.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
+
+ WARN  [console.warn] [NUXT_E7002] Cannot load payload /lineage2/interlude/la2dream/_payload.json?_b=1795648009702.
+╰▶ fix: Ensure the payload file is generated and accessible; this may stem from a prerendering issue, server misconfiguration, or a network error.
+
