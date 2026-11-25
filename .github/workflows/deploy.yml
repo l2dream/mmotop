@@ -3,12 +3,9 @@ name: Deploy Nuxt to GitHub Pages
 on:
   push:
     branches: ["main"]
+  # Also started by refresh.yml when the database has something new
+  # (approved servers, the month's votes); the half-hourly check lives there.
   workflow_dispatch:
-  # Servers approved in the account page, and the month's votes, live in the
-  # database; the site is static. Every half hour the build looks for a
-  # change there and deploys only if it finds one (see "Anything new?").
-  schedule:
-    - cron: "17,47 * * * *"
 
 permissions:
   contents: read
@@ -35,15 +32,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          # Not on the half-hourly check, which mostly stops before npm ci
-          # and would leave the cache step nothing to save.
-          cache: ${{ github.event_name != 'schedule' && 'npm' || '' }}
+          cache: npm
 
-      # A scheduled run compares the database with what the live site was
-      # built from, and stops here if they are the same. Pushes always build.
+      # Every run builds: refresh.yml only starts this one when the database
+      # changed. (The step stays, never run, so the conditions below that
+      # read it need no change.)
       - name: Anything new?
         id: check
-        if: github.event_name == 'schedule'
+        if: false
         run: node scripts/fetch-servers.mjs --check
 
       - name: Install dependencies
