@@ -1257,11 +1257,31 @@ function toggleFilterFrom(event: MouseEvent) {
   focusFilterOnOpen = filterOpen.value && event.detail === 0
 }
 
+/**
+ * On a phone a tap outside an open filter or More menu only closes it, as
+ * Back does: the tap used to go on to whatever lay beneath and open it (a
+ * server, a tab), which nobody meant. The click that follows the tap is
+ * swallowed; a mouse click still goes through, as on any computer menu.
+ */
+function swallowNextClick() {
+  const swallow = (e: Event) => { e.preventDefault(); e.stopPropagation(); done() }
+  const done = () => {
+    document.removeEventListener('click', swallow, true)
+    clearTimeout(timer)
+  }
+  document.addEventListener('click', swallow, true)
+  // No click comes when the tap turns into a scroll; don't eat a later one.
+  const timer = setTimeout(done, 700)
+}
+
 function onDocumentPointer(event: PointerEvent) {
   const target = event.target as Node
+  const touch = event.pointerType !== 'mouse'
+  let closed = false
 
   if (showMore.value && !moreWrap.value?.contains(target) && !moreDropdownEl.value?.contains(target)) {
     showMore.value = false
+    closed = true
   }
 
   if (filterOpen.value) {
@@ -1269,8 +1289,13 @@ function onDocumentPointer(event: PointerEvent) {
     // A list opened from a field of the filter is teleported to the body,
     // but is still part of the filter.
     const inPopup = filterPopupEl.value?.contains(target) || !!(target as Element).closest?.('.pick-layer')
-    if (!inButton && !inPopup) filterOpen.value = false
+    if (!inButton && !inPopup) {
+      filterOpen.value = false
+      closed = true
+    }
   }
+
+  if (closed && touch) swallowNextClick()
 }
 
 /**
