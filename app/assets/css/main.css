@@ -4860,3 +4860,19 @@ a.account-address:hover { text-decoration: underline; }
 }
 .theme-light .bottom-nav-item.on,
 .theme-light .bottom-nav-item.is-lit { background: linear-gradient(145deg, rgba(124, 58, 237, .16), transparent 75%); color: #4c1d95; }
+
+/* The offer to switch language is a message, content not a button, so the
+   game bar's glass without the arc (26 November 2026); its button keeps the
+   violet arc. Overrides the 11 November rules above. */
+.lang-hint::before { display: none; }
+.lang-hint {
+  border: 1px solid rgba(255, 255, 255, .11);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .11), 0 4px 14px rgba(0, 0, 0, .28);
+}
+.theme-light .lang-hint {
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .65));
+  box-shadow: inset 0 1px 0 #fff, 0 4px 14px rgba(31, 41, 102, .09);
+}
+@media (min-resolution: 2dppx) { .lang-hint { border-width: .5px; } }
