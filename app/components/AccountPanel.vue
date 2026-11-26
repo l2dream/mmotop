@@ -1251,9 +1251,9 @@ GET …/votes-list?server={{ editing || '…' }}&key=…[&since=N][&format=json]
               <small v-if="deleteNote" class="account-error" role="alert">{{ deleteNote }}</small>
             </div>
           </details>
-          <AdminModerators v-if="isAdmin && supabase" :supabase="supabase" :me="session?.user.id ?? ''" />
-          <AdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
-          <AdminVotes v-if="isAdmin && supabase" :supabase="supabase" />
+          <LazyAdminModerators v-if="isAdmin && supabase" :supabase="supabase" :me="session?.user.id ?? ''" />
+          <LazyAdminQueue v-if="isAdmin && supabase" :supabase="supabase" />
+          <LazyAdminVotes v-if="isAdmin && supabase" :supabase="supabase" />
         </template>
       </template>
 

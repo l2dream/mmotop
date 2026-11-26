@@ -527,7 +527,6 @@ html.theme-light::-webkit-scrollbar-thumb:hover {
 .theme-light .filter-reset,
 .theme-light .empty-state { color: #464a60; }
 .theme-light .filter-reset:hover { color: #5b21c4; }
-.theme-light .lang-item-code { color: #464a60; }
 
 .filter-apply {
   border: 0;
@@ -757,113 +756,16 @@ a.login-button { text-decoration: none; }
 
 .theme-light .lang-button:hover { color: #5b21c4; border-color: #6d28d9; }
 
-.lang-panel {
-  position: fixed;
-  z-index: 70;
-  width: min(640px, calc(100vw - 20px));
-  max-height: min(60vh, 460px);
-  overflow-y: auto;
-  padding: 12px;
-  border: 1px solid rgba(103, 104, 173, .25);
-  border-radius: 13px;
-  background: linear-gradient(180deg, rgba(22, 25, 52, .98), rgba(15, 19, 42, .97));
-  box-shadow: 0 18px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.02);
-  scrollbar-width: thin;
-  scrollbar-color: rgba(156, 92, 255, .45) transparent;
-}
-
-.theme-light .lang-panel {
-  border-color: rgba(103, 104, 173, .18);
-  background: linear-gradient(180deg, #ffffff, #f8f8fd);
-  box-shadow: 0 18px 50px rgba(31, 41, 102, .14);
-}
-
-.lang-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 34px;
-  padding-inline: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #6f73a8;
-  border-radius: 9px;
-  background: rgba(16, 20, 44, .72);
-  color: #c3c6d8;
-}
-
-.theme-light .lang-search {
-  background: #fff;
-  border-color: #9295b5;
-  color: #4a4e66;
-}
-.theme-light .lang-empty { color: #464a60; }
-
-.lang-search-input {
-  flex: 1 1 auto;
-  min-width: 0;
-  border: 0;
-  background: transparent;
-  color: #e8e9f8;
-  font-family: inherit;
-  font-size: 13px;
-  outline: none;
-}
-
-.theme-light .lang-search-input { color: #23263d; }
-
 /* The same clear button as the main search field, at this field's size. */
-.lang-search-clear {
-  flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
-  margin-inline-end: -4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: #c3c6d8;
-  cursor: pointer;
-  transition: color .2s ease, background-color .2s ease;
-}
-
-.lang-search-clear:hover,
-.lang-search-clear:focus-visible {
-  color: #cfd2ff;
-  background: rgba(255, 255, 255, .06);
-}
-
-.theme-light .lang-search-clear { color: #8b8fa3; }
-.theme-light .lang-search-clear:hover,
-.theme-light .lang-search-clear:focus-visible {
-  color: #5b21c4;
-  background: rgba(31, 41, 102, .06);
-}
-.lang-search-input::placeholder { color: #a3a8c0; }
-.theme-light .lang-search-input::placeholder { color: #555a70; }
 
 /* The field takes focus the moment the panel opens, so the global focus ring
    would be lit every single time and shout louder than the list it sits above.
    The frame lights up instead — same signal, quieter. */
-.lang-search:focus-within {
-  border-color: rgba(156, 92, 255, .55);
-  box-shadow: 0 0 0 3px rgba(156, 92, 255, .12);
-}
-.lang-search-input:focus-visible,
-.theme-light .lang-search-input:focus-visible {
-  /* The field around it shows the focus; the light theme's ring rule is
-     the more specific, so it is named here too. */
-  outline: none;
-  box-shadow: none;
-}
 
 /* Three columns rather than one long list: twenty-six names in a single
    column is a scroll, and the whole point of grouping was to let someone find
    their script without reading. Rows are kept whole, and a heading never ends
    up stranded at the foot of a column away from its group. */
-.lang-columns { column-count: 3; column-gap: 14px; --lang-row: 28px; }
 
 /*
  * Everything in the list sits on one grid of --lang-row slots: each language
@@ -885,85 +787,13 @@ a.login-button { text-decoration: none; }
  * gives that space straight back, and `break-inside: avoid` means the box, and
  * so the heading, only goes where a row fits after it. Laid out, nothing moves.
  */
-.lang-group-title {
-  break-after: avoid;
-  break-inside: avoid;
-  display: flex;
-  align-items: flex-end;
-  height: calc(var(--lang-row) * 2);
-  padding-bottom: calc(var(--lang-row) + 6px);
-  margin-bottom: calc(var(--lang-row) * -1);
-  pointer-events: none;
-  padding-inline-start: 8px;
-  color: #b9bdd0;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.theme-light .lang-group-title { color: #464a60; }
-
-.lang-item {
-  break-inside: avoid;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  height: var(--lang-row);
-  padding: 0 8px;
-  border-radius: 8px;
-  color: #d3d6e6;
-  font-size: 13px;
-  text-decoration: none;
-}
-
-.lang-item:hover { background: rgba(148, 92, 255, .14); color: #fff; }
-.lang-item.active { background: rgba(148, 92, 255, .2); color: #fff; }
-
-.theme-light .lang-item { color: #4a4e66; }
 /* Hover and the current language were 10% and 14% of the same violet, which on
    white reads as one colour: pointing at DEUTSCH looked like choosing it. A
    lighter hover and a firmer current row keep the two apart, as in dark. */
-.theme-light .lang-item:hover { background: rgba(124, 58, 237, .07); color: #2a1a52; }
-.theme-light .lang-item.active { background: rgba(124, 58, 237, .2); color: #2a1a52; }
 
 /* Fixed width, so the names start on one line down the column. This is the
    slot a flag would have occupied, doing the same job of giving the eye
    something to aim at — without standing for a country. */
-.lang-item-code {
-  flex: 0 0 auto;
-  width: 26px;
-  text-align: center;
-  color: #b9bdd0;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-}
-
-.lang-item.active .lang-item-code,
-.lang-item:hover .lang-item-code { color: #c4a6ff; }
-.theme-light .lang-item.active .lang-item-code,
-.theme-light .lang-item:hover .lang-item-code { color: #5b21b6; }
-
-.lang-item-name {
-  font-family: Inter, 'Noto Sans Armenian', 'Noto Sans Arabic', 'Noto Sans Hebrew',
-    'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
-  min-width: 0;
-  /* One slot tall, whatever the script: the Noto faces' own line heights are
-     what made those rows taller, and overflow: hidden clips to this box. */
-  line-height: var(--lang-row);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.lang-empty {
-  padding: 14px 8px;
-  color: #b9bdd0;
-  font-size: 13px;
-  text-align: center;
-}
 
 /* The suggestion strip. Sits between the header and the categories, where it
    pushes the page down a little rather than covering any of it — a bar that
@@ -2419,30 +2249,6 @@ html[data-carousel~="all"] .panel-all .panel-carousel { display: block; }
 /* The browser's own arrows sat on top of the "No rates" box: they give way
    to ours, at the start of the field. */
 .account-field .account-rate-box.has-steps > input { padding-inline-start: 42px; }
-.account-rate-steps {
-  position: absolute;
-  inset-inline-start: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  z-index: 1;
-}
-.account-rate-steps button {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 18px;
-  padding: 0;
-  border: 0;
-  border-radius: 5px;
-  background: rgba(138, 92, 240, .16);
-  color: #cbb8ff;
-  cursor: pointer;
-}
-.account-rate-steps button:hover { background: rgba(138, 92, 240, .3); color: #fff; }
-.theme-light .account-rate-steps button { background: #efe8ff; color: #6d28d9; }
 .account-rate-box > input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .account-rate-box > input[type="number"]::-webkit-inner-spin-button,
 .account-rate-box > input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -3289,14 +3095,6 @@ a.account-address:hover { text-decoration: underline; }
   /* 100vw minus the 10px edge placePopup keeps on each side (app/utils/
      popup.ts), so the panel sits centred: at 16px it was 10 on one side and 6
      on the other. */
-  .lang-panel {
-    width: calc(100vw - 20px);
-    max-height: min(70vh, 460px);
-    padding: 10px;
-  }
-  .lang-columns { column-count: 2; column-gap: 10px; --lang-row: 30px; }
-  .lang-item { padding: 0 6px; gap: 7px; }
-  .lang-item-code { width: 22px; }
   .topbar {
     display: flex;
     align-items: center;
@@ -3351,8 +3149,7 @@ a.account-address:hover { text-decoration: underline; }
   .theme-light .search-hint { color: #555a70; }
   .search-box input:not(:placeholder-shown) + .search-hint { display: none; }
   .filter-select,
-  .filter-custom-input,
-  .lang-search-input { font-size: 16px; }
+  .filter-custom-input { font-size: 16px; }
   /* 24px, WCAG 2.2's minimum target, centred in the 32px field. */
   .search-icon {
     inset-inline-start: 4px;
@@ -3501,11 +3298,6 @@ a.account-address:hover { text-decoration: underline; }
 /* The narrowest phones: AZƏRBAYCANCA needs 106px and a column had 93 at
    320. Tighter padding and gaps hand each column back 14px — enough for every
    name but PORTUGUÊS (BRASIL), which has its BR chip to lean on. */
-@media (max-width: 360px) {
-  .lang-panel { padding: 6px; }
-  .lang-columns { column-gap: 6px; }
-  .lang-item { padding: 0 3px; gap: 5px; }
-}
 
 /*
  * iOS zooms the page into any focused field set under 16px, then keeps
@@ -3518,8 +3310,7 @@ a.account-address:hover { text-decoration: underline; }
 @media (pointer: coarse) {
   .search-box input,
   .filter-select,
-  .filter-custom-input,
-  .lang-search-input { font-size: 16px; }
+  .filter-custom-input { font-size: 16px; }
 }
 
 /* Icons only for language and login on every phone, up to 430px. The search
@@ -3790,7 +3581,6 @@ a.account-address:hover { text-decoration: underline; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .11), 0 4px 14px rgba(0, 0, 0, .28);
 }
 .filter-popup,
-.lang-panel,
 .more-dropdown {
   border-color: rgba(255, 255, 255, .14);
   background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .025)), rgba(16, 19, 42, .84);
@@ -3841,7 +3631,6 @@ a.account-address:hover { text-decoration: underline; }
 .theme-light .lang-button:hover,
 .theme-light .login-button:hover { border-color: transparent; }
 .theme-light .filter-popup,
-.theme-light .lang-panel,
 .theme-light .more-dropdown {
   border-color: rgba(255, 255, 255, .95);
   background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .84));
@@ -3851,7 +3640,6 @@ a.account-address:hover { text-decoration: underline; }
   .search-box input,
   .category-bar,
   .filter-popup,
-  .lang-panel,
   .more-dropdown { border-width: .5px; }
 }
 
@@ -3872,9 +3660,7 @@ a.account-address:hover { text-decoration: underline; }
 .account-button:not(.account-oauth),
 .filter-apply,
 .not-found-home,
-.filter-chip,
-.lang-search,
-.lang-item.active {
+.filter-chip {
   position: relative;
   --arc-a: rgba(255, 255, 255, .7);
   --arc-dim: rgba(255, 255, 255, .12);
@@ -3882,7 +3668,7 @@ a.account-address:hover { text-decoration: underline; }
   --arc-spark: #fff;
   border-color: transparent;
 }
-:is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip, .lang-search, .lang-item.active)::before {
+:is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -3895,7 +3681,7 @@ a.account-address:hover { text-decoration: underline; }
   pointer-events: none;
 }
 @media (min-resolution: 2dppx) {
-  :is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip, .lang-search, .lang-item.active) { --arc-frame: 1px; --arc-tail: transparent; }
+  :is(.server-status, .section-back, .section-back-arrow, .server-visit, .server-vote, .server-community, .account-button:not(.account-oauth), .filter-apply, .not-found-home, .filter-chip) { --arc-frame: 1px; --arc-tail: transparent; }
 }
 
 /* Violet: the action to take, the thing chosen. A tint of violet inside,
@@ -3906,7 +3692,6 @@ a.account-address:hover { text-decoration: underline; }
 .filter-apply,
 .not-found-home,
 .filter-chip.active,
-.lang-item.active,
 .section-back-arrow {
   --arc-a: rgba(196, 150, 255, .9);
   --arc-dim: rgba(164, 83, 255, .25);
@@ -3930,8 +3715,7 @@ a.account-address:hover { text-decoration: underline; }
   color: #fff;
 }
 .server-vote,
-.filter-chip.active,
-.lang-item.active {
+.filter-chip.active {
   background: linear-gradient(145deg, rgba(164, 83, 255, .2), transparent 70%);
   box-shadow: none;
   color: #efe4ff;
@@ -4012,13 +3796,6 @@ a.account-address:hover { text-decoration: underline; }
 }
 
 /* The language search field: its frame lights up violet while typing in it. */
-.lang-search { background: linear-gradient(145deg, rgba(255, 255, 255, .06), transparent 70%), rgba(16, 20, 44, .72); }
-.lang-search:focus-within {
-  box-shadow: none;
-  --arc-a: rgba(196, 150, 255, .9);
-  --arc-dim: rgba(164, 83, 255, .25);
-  --arc-low: rgba(164, 83, 255, .5);
-}
 
 /* The account form's checkbox: a small glass square with the arc; ticked,
    it takes the violet tint and a white tick. */
@@ -4043,13 +3820,13 @@ a.account-address:hover { text-decoration: underline; }
 .thumb-icon { overflow: visible; }
 
 /* The light theme: the same arcs in ink and deep violet. */
-.theme-light :is(.server-status, .section-back, .server-community, .account-button.account-button-quiet, .filter-chip:not(.active), .lang-search) {
+.theme-light :is(.server-status, .section-back, .server-community, .account-button.account-button-quiet, .filter-chip:not(.active)) {
   --arc-a: rgba(22, 24, 43, .42);
   --arc-dim: rgba(22, 24, 43, .14);
   --arc-low: rgba(22, 24, 43, .26);
   --arc-spark: rgba(22, 24, 43, .62);
 }
-.theme-light :is(.server-visit, .server-vote, .account-button:not(.account-oauth, .account-button-quiet), .filter-apply, .not-found-home, .filter-chip.active, .lang-item.active, .section-back-arrow, .lang-search:focus-within) {
+.theme-light :is(.server-visit, .server-vote, .account-button:not(.account-oauth, .account-button-quiet), .filter-apply, .not-found-home, .filter-chip.active, .section-back-arrow) {
   --arc-a: rgba(124, 58, 237, .85);
   --arc-dim: rgba(124, 58, 237, .22);
   --arc-low: rgba(124, 58, 237, .5);
@@ -4064,7 +3841,7 @@ a.account-address:hover { text-decoration: underline; }
   background: linear-gradient(145deg, rgba(124, 58, 237, .3), rgba(255, 255, 255, .7) 75%);
   color: #4c1d95;
 }
-.theme-light :is(.server-vote, .filter-chip.active, .lang-item.active) {
+.theme-light :is(.server-vote, .filter-chip.active) {
   border-color: transparent;
   background: linear-gradient(145deg, rgba(124, 58, 237, .14), transparent 70%);
   color: #4c1d95;
@@ -4095,7 +3872,6 @@ a.account-address:hover { text-decoration: underline; }
     linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box,
     var(--field-arc) border-box;
 }
-.theme-light .lang-search { background: #fff; }
 .theme-light .account-check input {
   background: linear-gradient(145deg, #fff, #f8f8fd 70%) padding-box, conic-gradient(from 200deg, rgba(22, 24, 43, .14) 0deg, rgba(22, 24, 43, .45) 70deg, rgba(22, 24, 43, .62) 110deg, rgba(22, 24, 43, .45) 150deg, rgba(22, 24, 43, .26) 205deg, rgba(22, 24, 43, .14) 360deg) border-box;
 }
@@ -4245,8 +4021,7 @@ a.account-address:hover { text-decoration: underline; }
   --r-icon: 6px;     /* game badges */
 }
 .panel,
-.filter-popup,
-.lang-panel { border-radius: var(--r-outer); }
+.filter-popup { border-radius: var(--r-outer); }
 .more-dropdown { border-radius: var(--r-menu); }
 .more-dropdown-item { border-radius: max(calc(var(--r-menu) - 6px), var(--r-min)); }
 /* The category bar keeps its 12px; the chosen tab sits 3px inside it. */
@@ -4258,9 +4033,7 @@ a.account-address:hover { text-decoration: underline; }
 .account-field input:not([type="checkbox"]),
 .account-field :is(select, .pick-select),
 .account-field textarea,
-.account-button,
-.lang-search { border-radius: max(calc(var(--r-outer) - 16px), var(--r-min)); }
-.lang-item { border-radius: var(--r-min); }
+.account-button { border-radius: max(calc(var(--r-outer) - 16px), var(--r-min)); }
 
 /* ── Shape: the way back is a thing of its own, so a rounded square (it was
    a pill); its arrow is a button inside it, so stays a circle. */
@@ -4378,7 +4151,7 @@ a.account-address:hover { text-decoration: underline; }
    form, the language search): the buttons' arc of light at half strength,
    so a field reads quieter than a button. Rate chips are buttons and keep
    theirs. Focus: a 2px violet line, no glow. */
-:root:not(.theme-light) :is(.search-box, .lang-search) {
+:root:not(.theme-light) :is(.search-box) {
   --arc-a: rgba(255, 255, 255, .35);
   --arc-dim: rgba(255, 255, 255, .06);
   --arc-low: rgba(255, 255, 255, .14);
@@ -4399,9 +4172,7 @@ a.account-address:hover { text-decoration: underline; }
 :root:not(.theme-light) .search-box input:focus { outline: none; box-shadow: none; }
 /* Only the typing field itself: the filter button inside the search box
    must not light the box's frame when it is pressed. */
-:root:not(.theme-light) .search-box:has(> input:focus)::before,
-:root:not(.theme-light) .lang-search:focus-within::before { background: #a47bff; padding: 2px; }
-:root:not(.theme-light) .lang-search:focus-within { box-shadow: none; }
+:root:not(.theme-light) .search-box:has(> input:focus)::before { background: #a47bff; padding: 2px; }
 
 /* ── Signs (numbers, badges, emblems): a coloured ring, no grey fill. */
 :root:not(.theme-light) .rank:not(.rank-1, .rank-2, .rank-3) { --rank-tint: transparent; }

@@ -1789,12 +1789,12 @@ function clearSearch() {
 
       <div v-else-if="account" class="section-view account-view">
         <BackLink :to="homeLocation()" home />
-        <AccountPanel />
+        <LazyAccountPanel />
       </div>
 
       <div v-else-if="legal" class="section-view account-view">
         <BackLink :to="homeLocation()" home />
-        <LegalPage :kind="legal" />
+        <LazyLegalPage :kind="legal" />
       </div>
 
       <div v-else-if="server" class="section-view">
@@ -1860,7 +1860,7 @@ function clearSearch() {
     <!-- The phone's menu at the bottom of the screen, within reach of a
          thumb: a floating bar of four buttons with their names (the owner's
          design 3 with the buttons of 1, the current one as in B). The header keeps its own; these are the same actions. -->
-    <nav ref="bottomNavEl" class="bottom-nav" :aria-label="$t('nav.home')">
+    <nav ref="bottomNavEl" class="bottom-nav" :aria-label="$t('nav.menu')">
       <NuxtLink
         :to="localePath('/')"
         class="bottom-nav-item"
