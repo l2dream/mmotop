@@ -4735,22 +4735,21 @@ a.account-address:hover { text-decoration: underline; }
     left: 16px;
     right: 16px;
     bottom: calc(14px + env(safe-area-inset-bottom));
-    /* Matryoshka: the bar's corners are the buttons' plus the 6px between. */
-    --nav-gap: 6px;
-    --r-nav-item: 16px;
+    /* The game bar's material and shape: 12px corners, the chosen one 3px
+       inside with 9px (matryoshka), as the chosen game sits in that bar. */
+    --nav-gap: 3px;
+    --r-nav-item: 9px;
     padding: var(--nav-gap);
     display: flex;
     align-items: stretch;
     gap: var(--nav-gap);
     border-radius: calc(var(--r-nav-item) + var(--nav-gap));
-    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .88);
+    border: 1px solid rgba(255, 255, 255, .11);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .9);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, .5);
-    --arc-a: rgba(255, 255, 255, .7);
-    --arc-dim: rgba(255, 255, 255, .12);
-    --arc-low: rgba(255, 255, 255, .28);
-    --arc-spark: #fff;
+    /* The game bar's top highlight; a deeper shadow, as it floats. */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .11), 0 12px 32px rgba(0, 0, 0, .45);
   }
   body:has(input:focus, textarea:focus) .bottom-nav { display: none; }
   /* Room under the footer, so the pill never hides its last line. */
@@ -4758,19 +4757,19 @@ a.account-address:hover { text-decoration: underline; }
   /* Back to top sits above the bar. */
   .scroll-top { bottom: calc(96px + env(safe-area-inset-bottom)); }
 }
-.bottom-nav::before,
 .bottom-nav-item::before {
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1px;
+  padding: var(--arc-frame, 1.5px);
   border-radius: inherit;
-  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-dim) 290deg, var(--arc-dim) 360deg);
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-tail, var(--arc-dim)) 290deg, var(--arc-dim) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
 }
+@media (min-resolution: 2dppx) { .bottom-nav-item::before { --arc-frame: 1px; --arc-tail: transparent; } }
 .bottom-nav-item {
   position: relative;
   flex: 1 1 0;
@@ -4797,7 +4796,8 @@ a.account-address:hover { text-decoration: underline; }
 .bottom-nav-item::before { opacity: 0; transition: opacity .18s ease; }
 .bottom-nav-item.on,
 .bottom-nav-item.is-lit {
-  background: linear-gradient(145deg, rgba(164, 83, 255, .3), transparent 75%);
+  /* As the chosen game in the bar above. */
+  background: linear-gradient(145deg, rgba(164, 83, 255, .16), transparent 70%);
   color: #efe4ff;
 }
 .bottom-nav-item.on::before,
@@ -4819,10 +4819,16 @@ a.account-address:hover { text-decoration: underline; }
 }
 .bottom-nav-label::first-letter { text-transform: uppercase; }
 .bottom-nav-item.on .bottom-nav-label,
-.bottom-nav-item.is-lit .bottom-nav-label { color: #efe4ff; }
+.bottom-nav-item.is-lit .bottom-nav-label {
+  /* The chosen game's lettering: white into pale violet. */
+  background: linear-gradient(180deg, #fff 20%, #c9a6ff 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .theme-light .bottom-nav-label { color: #4a4e66; }
 .theme-light .bottom-nav-item.on .bottom-nav-label,
-.theme-light .bottom-nav-item.is-lit .bottom-nav-label { color: #4c1d95; }
+.theme-light .bottom-nav-item.is-lit .bottom-nav-label { background-image: linear-gradient(180deg, #7c3aed 20%, #4c1d95 95%); }
 .bottom-nav-badge {
   position: absolute;
   top: 4px;
@@ -4840,13 +4846,11 @@ a.account-address:hover { text-decoration: underline; }
 }
 
 .theme-light .bottom-nav {
-  background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .78));
-  box-shadow: 0 12px 36px rgba(31, 41, 102, .18);
-  --arc-a: rgba(22, 24, 43, .42);
-  --arc-dim: rgba(22, 24, 43, .14);
-  --arc-low: rgba(22, 24, 43, .26);
-  --arc-spark: rgba(22, 24, 43, .62);
+  border-color: rgba(255, 255, 255, .95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .8));
+  box-shadow: inset 0 1px 0 #fff, 0 12px 32px rgba(31, 41, 102, .16);
 }
+@media (min-resolution: 2dppx) { .bottom-nav { border-width: .5px; } }
 .theme-light .bottom-nav-item {
   color: #363a52;
   --arc-a: rgba(124, 58, 237, .85);
