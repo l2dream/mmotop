@@ -11,7 +11,8 @@
     "login": "ВОЙТИ",
     "account": "КАБИНЕТ",
     "categories": "Категории игр",
-    "toTop": "Наверх"
+    "toTop": "Наверх",
+    "homeShort": "Главная"
   },
   "language": {
     "search": "Поиск языка",

@@ -11,7 +11,8 @@
     "login": "登录",
     "account": "我的账户",
     "categories": "游戏分类",
-    "toTop": "回到顶部"
+    "toTop": "回到顶部",
+    "homeShort": "首页"
   },
   "language": {
     "search": "搜索语言",

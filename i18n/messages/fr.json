@@ -11,7 +11,8 @@
     "login": "CONNEXION",
     "account": "COMPTE",
     "categories": "Catégories de jeux",
-    "toTop": "Haut de page"
+    "toTop": "Haut de page",
+    "homeShort": "Accueil"
   },
   "language": {
     "search": "Rechercher une langue",

@@ -11,7 +11,8 @@
     "login": "SIGN IN",
     "account": "ACCOUNT",
     "categories": "Game categories",
-    "toTop": "Back to top"
+    "toTop": "Back to top",
+    "homeShort": "Home"
   },
   "language": {
     "search": "Search language",
