@@ -12,7 +12,8 @@
     "account": "ACCOUNT",
     "categories": "Game categories",
     "toTop": "Back to top",
-    "homeShort": "Home"
+    "homeShort": "Home",
+    "menu": "Menu"
   },
   "language": {
     "search": "Search language",

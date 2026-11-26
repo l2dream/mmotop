@@ -185,7 +185,7 @@ const keepEnds = (text: string) => keepTail(text).replace(/^(\S{1,3}) /, '$1\u00
         {{ linkLabel(link) }}
       </a>
     </div>
-    <VoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />
+    <LazyVoteBox v-if="voting" id="vote-box" :server="server" @voted="justVoted = 1" />
   </article>
 
   <GamePanel v-if="others.rows.length" class="server-others accent-violet" :title="$t('server.recommended')">
