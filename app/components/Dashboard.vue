@@ -1258,6 +1258,7 @@ function closeFilter() {
  */
 let focusFilterOnOpen = false
 function toggleFilterFrom(event: MouseEvent) {
+  filterFromNav = false
   filterOpen.value = !filterOpen.value
   focusFilterOnOpen = filterOpen.value && event.detail === 0
 }
@@ -1279,6 +1280,20 @@ function swallowNextClick() {
   const timer = setTimeout(done, 700)
 }
 
+/** The bottom menu (phones): the same actions as the header's. */
+const bottomNavEl = ref<HTMLElement | null>(null)
+let filterFromNav = false
+function filterFromNavToggle() {
+  filterFromNav = true
+  filterOpen.value = !filterOpen.value
+}
+function searchFromNav() {
+  filterOpen.value = false
+  showMore.value = false
+  window.scrollTo({ top: 0 })
+  searchInput.value?.focus()
+}
+
 function onDocumentPointer(event: PointerEvent) {
   const target = event.target as Node
   const touch = event.pointerType !== 'mouse'
@@ -1290,7 +1305,7 @@ function onDocumentPointer(event: PointerEvent) {
   }
 
   if (filterOpen.value) {
-    const inButton = filterButtonEl.value?.contains(target)
+    const inButton = filterButtonEl.value?.contains(target) || !!(target as Element).closest?.('.bottom-nav-filter')
     // A list opened from a field of the filter is teleported to the body,
     // but is still part of the filter.
     const inPopup = filterPopupEl.value?.contains(target) || !!(target as Element).closest?.('.pick-layer')
@@ -1336,6 +1351,16 @@ function positionDropdown() {
 }
 
 function positionFilterPopup() {
+  // Opened from the bottom menu: above it, in the middle of the screen —
+  // the header's button may be scrolled far out of sight.
+  if (filterFromNav && bottomNavEl.value) {
+    const nav = bottomNavEl.value.getBoundingClientRect()
+    const width = filterPopupEl.value?.offsetWidth ?? 270
+    const room = Math.max(200, nav.top - 20)
+    const height = Math.min(filterPopupEl.value?.scrollHeight ?? 430, room)
+    filterPos.value = { top: nav.top - 10 - height, left: Math.round((document.documentElement.clientWidth - width) / 2), maxHeight: room }
+    return
+  }
   const rect = filterButtonEl.value?.getBoundingClientRect()
   if (!rect) return
   filterPos.value = placePopup(rect, filterPopupEl.value?.offsetWidth ?? 270, 'end', 10)
@@ -1831,5 +1856,46 @@ function clearSearch() {
     <ScrollTop />
 
     <SiteFooter :year="currentYear" />
+
+    <!-- The phone's menu at the bottom of the screen, within reach of a
+         thumb: a floating pill of four buttons (the owner's design 3 with the
+         buttons of 1). The header keeps its own; these are the same actions. -->
+    <nav ref="bottomNavEl" class="bottom-nav" :aria-label="$t('nav.home')">
+      <NuxtLink
+        :to="localePath('/')"
+        class="bottom-nav-item"
+        :class="{ on: homeLike && !filterOpen }"
+        :aria-label="$t('nav.home')"
+        :aria-current="homeLike ? 'page' : undefined"
+        @click="goHome"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" /></svg>
+      </NuxtLink>
+      <button type="button" class="bottom-nav-item" :aria-label="$t('search.label')" @click="searchFromNav">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+      </button>
+      <button
+        type="button"
+        class="bottom-nav-item bottom-nav-filter"
+        :class="{ on: filterOpen }"
+        :aria-label="activeFilterCount ? `${$t('filter.open')} (${activeFilterCount})` : $t('filter.open')"
+        aria-haspopup="dialog"
+        aria-controls="filter-popup"
+        :aria-expanded="filterOpen"
+        @click="filterFromNavToggle"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2" /><circle cx="10" cy="17" r="2" /></svg>
+        <span v-if="activeFilterCount > 0" class="bottom-nav-badge" aria-hidden="true">{{ activeFilterCount }}</span>
+      </button>
+      <NuxtLink
+        :to="localePath('/account')"
+        class="bottom-nav-item"
+        :class="{ on: account && !filterOpen }"
+        :aria-label="signedIn ? $t('nav.account') : $t('nav.login')"
+        :aria-current="account ? 'page' : undefined"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" /></svg>
+      </NuxtLink>
+    </nav>
   </div>
 </template>

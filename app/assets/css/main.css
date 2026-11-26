@@ -4722,3 +4722,111 @@ a.account-address:hover { text-decoration: underline; }
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* ── The phone's bottom menu (26 November 2026): a floating glass pill with
+   the white arc of light, four buttons; the current one in a violet ring
+   with the arc, as a button-circle. Phones only; hidden while typing, when
+   the keyboard would carry it up the screen. */
+.bottom-nav { display: none; }
+@media (max-width: 700px) {
+  .bottom-nav {
+    position: fixed;
+    z-index: 55;
+    left: 16px;
+    right: 16px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    height: 60px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 30px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .88);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .5);
+    --arc-a: rgba(255, 255, 255, .7);
+    --arc-dim: rgba(255, 255, 255, .12);
+    --arc-low: rgba(255, 255, 255, .28);
+    --arc-spark: #fff;
+  }
+  body:has(input:focus, textarea:focus) .bottom-nav { display: none; }
+  /* Room under the footer, so the pill never hides its last line. */
+  .site-footer { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  /* Back to top sits above the pill. */
+  .scroll-top { bottom: calc(88px + env(safe-area-inset-bottom)); }
+}
+.bottom-nav::before,
+.bottom-nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from 200deg, var(--arc-dim) 0deg, var(--arc-a) 70deg, var(--arc-spark) 96deg, var(--arc-spark) 124deg, var(--arc-a) 150deg, var(--arc-low) 205deg, var(--arc-dim) 290deg, var(--arc-dim) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.bottom-nav-item {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: #e6e8f8;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  --arc-a: rgba(196, 150, 255, .9);
+  --arc-dim: rgba(164, 83, 255, .25);
+  --arc-low: rgba(164, 83, 255, .5);
+  --arc-spark: #fff;
+}
+.bottom-nav-item::before { opacity: 0; transition: opacity .18s ease; }
+.bottom-nav-item.on,
+.bottom-nav-item.is-lit {
+  background: linear-gradient(145deg, rgba(164, 83, 255, .3), transparent 75%);
+  color: #efe4ff;
+}
+.bottom-nav-item.on::before,
+.bottom-nav-item.is-lit::before { opacity: 1; }
+.bottom-nav-item svg { display: block; }
+.bottom-nav-badge {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: #a453ff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+}
+
+.theme-light .bottom-nav {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .78));
+  box-shadow: 0 12px 36px rgba(31, 41, 102, .18);
+  --arc-a: rgba(22, 24, 43, .42);
+  --arc-dim: rgba(22, 24, 43, .14);
+  --arc-low: rgba(22, 24, 43, .26);
+  --arc-spark: rgba(22, 24, 43, .62);
+}
+.theme-light .bottom-nav-item {
+  color: #363a52;
+  --arc-a: rgba(124, 58, 237, .85);
+  --arc-dim: rgba(124, 58, 237, .22);
+  --arc-low: rgba(124, 58, 237, .5);
+  --arc-spark: #4c1d95;
+}
+.theme-light .bottom-nav-item.on,
+.theme-light .bottom-nav-item.is-lit { background: linear-gradient(145deg, rgba(124, 58, 237, .16), transparent 75%); color: #4c1d95; }
