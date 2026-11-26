@@ -11,7 +11,10 @@
     "login": "ΣΥΝΔΕΣΗ",
     "account": "ΛΟΓΑΡΙΑΣΜΟΣ",
     "categories": "Κατηγορίες παιχνιδιών",
-    "toTop": "Στην κορυφή"
+    "toTop": "Στην κορυφή",
+    "homeShort": "Αρχική",
+    "accountShort": "Λογαριασμός",
+    "loginShort": "Σύνδεση"
   },
   "language": {
     "search": "Αναζήτηση γλώσσας",

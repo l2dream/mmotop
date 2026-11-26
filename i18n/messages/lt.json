@@ -11,7 +11,8 @@
     "login": "PRISIJUNGTI",
     "account": "PASKYRA",
     "categories": "Žaidimų kategorijos",
-    "toTop": "Į viršų"
+    "toTop": "Į viršų",
+    "homeShort": "Pradžia"
   },
   "language": {
     "search": "Ieškoti kalbos",

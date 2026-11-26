@@ -11,7 +11,8 @@
     "login": "LOGG INN",
     "account": "KONTO",
     "categories": "Spillkategorier",
-    "toTop": "Til toppen"
+    "toTop": "Til toppen",
+    "homeShort": "Hjem"
   },
   "language": {
     "search": "Søk språk",

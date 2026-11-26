@@ -4735,12 +4735,14 @@ a.account-address:hover { text-decoration: underline; }
     left: 16px;
     right: 16px;
     bottom: calc(14px + env(safe-area-inset-bottom));
-    height: 60px;
-    padding: 0 8px;
+    /* Matryoshka: the bar's corners are the buttons' plus the 6px between. */
+    --nav-gap: 6px;
+    --r-nav-item: 16px;
+    padding: var(--nav-gap);
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 30px;
+    align-items: stretch;
+    gap: var(--nav-gap);
+    border-radius: calc(var(--r-nav-item) + var(--nav-gap));
     background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02)), rgba(15, 19, 42, .88);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
@@ -4752,9 +4754,9 @@ a.account-address:hover { text-decoration: underline; }
   }
   body:has(input:focus, textarea:focus) .bottom-nav { display: none; }
   /* Room under the footer, so the pill never hides its last line. */
-  .site-footer { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
-  /* Back to top sits above the pill. */
-  .scroll-top { bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .site-footer { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  /* Back to top sits above the bar. */
+  .scroll-top { bottom: calc(96px + env(safe-area-inset-bottom)); }
 }
 .bottom-nav::before,
 .bottom-nav-item::before {
@@ -4771,13 +4773,17 @@ a.account-address:hover { text-decoration: underline; }
 }
 .bottom-nav-item {
   position: relative;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 4px;
   border: 0;
-  border-radius: 50%;
+  border-radius: var(--r-nav-item, 16px);
   background: none;
   color: #e6e8f8;
   text-decoration: none;
@@ -4796,11 +4802,31 @@ a.account-address:hover { text-decoration: underline; }
 }
 .bottom-nav-item.on::before,
 .bottom-nav-item.is-lit::before { opacity: 1; }
-.bottom-nav-item svg { display: block; }
+.bottom-nav-item svg { display: block; flex: none; }
+/* The names in sentence case: the header's account and login words are
+   kept in capitals for its button. */
+.bottom-nav-label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: lowercase;
+  color: #b9bdd3;
+}
+.bottom-nav-label::first-letter { text-transform: uppercase; }
+.bottom-nav-item.on .bottom-nav-label,
+.bottom-nav-item.is-lit .bottom-nav-label { color: #efe4ff; }
+.theme-light .bottom-nav-label { color: #4a4e66; }
+.theme-light .bottom-nav-item.on .bottom-nav-label,
+.theme-light .bottom-nav-item.is-lit .bottom-nav-label { color: #4c1d95; }
 .bottom-nav-badge {
   position: absolute;
   top: 4px;
-  inset-inline-end: 2px;
+  inset-inline-start: calc(50% + 6px);
   min-width: 16px;
   height: 16px;
   padding: 0 4px;

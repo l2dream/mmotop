@@ -11,7 +11,8 @@
     "login": "ログイン",
     "account": "マイページ",
     "categories": "ゲームカテゴリ",
-    "toTop": "トップへ戻る"
+    "toTop": "トップへ戻る",
+    "homeShort": "ホーム"
   },
   "language": {
     "search": "言語を検索",

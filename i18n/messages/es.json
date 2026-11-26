@@ -11,7 +11,8 @@
     "login": "ENTRAR",
     "account": "CUENTA",
     "categories": "Categorías de juegos",
-    "toTop": "Volver arriba"
+    "toTop": "Volver arriba",
+    "homeShort": "Inicio"
   },
   "language": {
     "search": "Buscar idioma",
