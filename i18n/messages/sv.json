@@ -224,7 +224,8 @@
       "logo": "Logotyp",
       "addLogo": "Ladda upp logotyp",
       "changeLogo": "Byt",
-      "logoReview": "Den nya logotypen visas på sidan efter granskning."
+      "logoReview": "Den nya logotypen visas på sidan efter granskning.",
+      "noChronicle": "Ingen krönika"
     },
     "status": {
       "pending": "Granskas",

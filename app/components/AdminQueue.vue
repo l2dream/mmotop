@@ -407,7 +407,7 @@ const ACTIONS: { status: Status, label: string }[] = [
         <div class="account-server-main">
           <span class="account-strong"><img v-if="s.logo" class="admin-logo" :src="s.logo" alt="" width="24" height="24">{{ s.name }}</span>
           <span class="account-note">
-            {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle }}<template v-if="s.rate != null"> · x{{ s.rate }}</template><template v-else-if="s.rate_text"> · {{ s.rate_text }}</template> · {{ s.open_date }}
+            {{ gameById(s.game)?.name ?? s.requested_game ?? s.game }} · {{ s.chronicle || 'без хроники — впишите при одобрении' }}<template v-if="s.rate != null"> · x{{ s.rate }}</template><template v-else-if="s.rate_text"> · {{ s.rate_text }}</template> · {{ s.open_date }}
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
           <a v-for="l in s.links ?? []" :key="l.url" class="account-note admin-url" :href="l.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ l.kind }}: {{ l.url }}</a>

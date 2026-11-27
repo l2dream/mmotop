@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Enviar logo",
       "changeLogo": "Substituir",
-      "logoReview": "O novo logo aparecerá no site após a análise."
+      "logoReview": "O novo logo aparecerá no site após a análise.",
+      "noChronicle": "Sem crônica"
     },
     "status": {
       "pending": "Em análise",

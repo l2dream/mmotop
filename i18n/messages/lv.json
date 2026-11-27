@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Augšupielādēt logo",
       "changeLogo": "Aizstāt",
-      "logoReview": "Jaunais logo parādīsies vietnē pēc pārbaudes."
+      "logoReview": "Jaunais logo parādīsies vietnē pēc pārbaudes.",
+      "noChronicle": "Bez hronikas"
     },
     "status": {
       "pending": "Pārbaudē",

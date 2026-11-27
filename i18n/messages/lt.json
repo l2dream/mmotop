@@ -224,7 +224,8 @@
       "logo": "Logotipas",
       "addLogo": "Įkelti logotipą",
       "changeLogo": "Pakeisti",
-      "logoReview": "Naujas logotipas atsiras svetainėje po patikrinimo."
+      "logoReview": "Naujas logotipas atsiras svetainėje po patikrinimo.",
+      "noChronicle": "Be kronikos"
     },
     "status": {
       "pending": "Tikrinamas",

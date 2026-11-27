@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Nahrát logo",
       "changeLogo": "Nahradit",
-      "logoReview": "Nové logo se na webu objeví po kontrole."
+      "logoReview": "Nové logo se na webu objeví po kontrole.",
+      "noChronicle": "Bez kroniky"
     },
     "status": {
       "pending": "Ve schvalování",

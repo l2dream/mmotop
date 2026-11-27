@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Upload a logo",
       "changeLogo": "Replace",
-      "logoReview": "The new logo will appear on the site after review."
+      "logoReview": "The new logo will appear on the site after review.",
+      "noChronicle": "No chronicle"
     },
     "status": {
       "pending": "Under review",

@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Last opp logo",
       "changeLogo": "Bytt",
-      "logoReview": "Den nye logoen vises på siden etter gjennomgang."
+      "logoReview": "Den nye logoen vises på siden etter gjennomgang.",
+      "noChronicle": "Ingen krønike"
     },
     "status": {
       "pending": "Til godkjenning",

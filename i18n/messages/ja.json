@@ -224,7 +224,8 @@
       "logo": "ロゴ",
       "addLogo": "ロゴをアップロード",
       "changeLogo": "差し替え",
-      "logoReview": "新しいロゴは審査後にサイトに表示されます。"
+      "logoReview": "新しいロゴは審査後にサイトに表示されます。",
+      "noChronicle": "クロニクルなし"
     },
     "status": {
       "pending": "審査中",

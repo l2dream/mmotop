@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Upload et logo",
       "changeLogo": "Erstat",
-      "logoReview": "Det nye logo vises på siden efter gennemgang."
+      "logoReview": "Det nye logo vises på siden efter gennemgang.",
+      "noChronicle": "Ingen krønike"
     },
     "status": {
       "pending": "Til godkendelse",
