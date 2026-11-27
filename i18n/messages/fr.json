@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Importer un logo",
       "changeLogo": "Remplacer",
-      "logoReview": "Le nouveau logo apparaîtra sur le site après vérification."
+      "logoReview": "Le nouveau logo apparaîtra sur le site après vérification.",
+      "noChronicle": "Pas de chronique"
     },
     "status": {
       "pending": "En vérification",

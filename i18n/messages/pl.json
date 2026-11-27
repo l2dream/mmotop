@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Prześlij logo",
       "changeLogo": "Zmień",
-      "logoReview": "Nowe logo pojawi się na stronie po weryfikacji."
+      "logoReview": "Nowe logo pojawi się na stronie po weryfikacji.",
+      "noChronicle": "Brak kroniki"
     },
     "status": {
       "pending": "W weryfikacji",

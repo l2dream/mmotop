@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Laadi logo üles",
       "changeLogo": "Asenda",
-      "logoReview": "Uus logo ilmub saidile pärast ülevaatust."
+      "logoReview": "Uus logo ilmub saidile pärast ülevaatust.",
+      "noChronicle": "Kroonikat pole"
     },
     "status": {
       "pending": "Ülevaatusel",

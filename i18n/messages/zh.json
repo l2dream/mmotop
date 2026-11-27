@@ -224,7 +224,8 @@
       "logo": "标志",
       "addLogo": "上传标志",
       "changeLogo": "更换",
-      "logoReview": "新标志将在审核通过后显示在网站上。"
+      "logoReview": "新标志将在审核通过后显示在网站上。",
+      "noChronicle": "无版本"
     },
     "status": {
       "pending": "审核中",

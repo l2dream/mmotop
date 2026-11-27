@@ -224,7 +224,8 @@
       "logo": "Logo",
       "addLogo": "Logo yükle",
       "changeLogo": "Değiştir",
-      "logoReview": "Yeni logo, incelemeden sonra sitede görünecek."
+      "logoReview": "Yeni logo, incelemeden sonra sitede görünecek.",
+      "noChronicle": "Kronik yok"
     },
     "status": {
       "pending": "İncelemede",

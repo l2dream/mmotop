@@ -224,7 +224,8 @@
       "logo": "Logótipo",
       "addLogo": "Carregar logótipo",
       "changeLogo": "Substituir",
-      "logoReview": "O novo logótipo aparecerá no site após a revisão."
+      "logoReview": "O novo logótipo aparecerá no site após a revisão.",
+      "noChronicle": "Sem crónica"
     },
     "status": {
       "pending": "Em análise",

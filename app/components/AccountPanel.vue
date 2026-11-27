@@ -350,6 +350,7 @@ function addServer() {
   editing.value = null
   ownChronicle.value = false
   noRate.value = false
+  noChronicle.value = false
   customId.value = false
   idOpen.value = false
   ownRateWord.value = false
@@ -383,6 +384,7 @@ function editServer(s: OwnServer) {
   const { logo_pending: _pending, status: _status, moderation_note: _note, ...own } = s
   draft.value = { ...own, logo: s.logo_pending ?? s.logo, rate: s.rate == null ? '' : String(s.rate), rate_text: s.rate_text ?? '', requested_game: s.requested_game ?? '', description: s.description ?? '', language: s.language ?? '', language_text: s.language_text ?? '', links: (s.links ?? []).map((l) => ({ ...l })) }
   noRate.value = s.rate == null
+  noChronicle.value = s.game === 'other' && !s.chronicle
   ownRateWord.value = !!s.rate_text && !RATE_WORDS.includes(s.rate_text)
   ownChronicle.value = !chronicles.value.includes(s.chronicle)
   customId.value = false
@@ -459,6 +461,9 @@ const chronicleChoice = computed({
  * with "Your own…" opening a field for one the list lacks.
  */
 const noRate = ref(false)
+/** A new game's "No chronicle": the field emptied and not required. */
+const noChronicle = ref(false)
+watch(noChronicle, (on) => { if (on && draft.value) draft.value.chronicle = '' })
 const ownRateWord = ref(false)
 const rateWordChoice = computed({
   get: () => (ownRateWord.value ? OWN : draft.value?.rate_text ?? ''),
@@ -622,7 +627,7 @@ async function save() {
     name: serverName(d.name).replace(/-+$/, ''),
     game: d.game,
     requested_game: d.game === 'other' ? d.requested_game.trim() : null,
-    chronicle: d.chronicle.trim(),
+    chronicle: d.game === 'other' && noChronicle.value ? '' : d.chronicle.trim(),
     rate: noRate.value ? null : rateNumber(d),
     rate_text: noRate.value ? d.rate_text.trim() || null : null,
     url: d.url.trim(),
@@ -969,8 +974,23 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.gameName') }}</span>
             <input v-model="draft.requested_game" type="text" required minlength="2" maxlength="40">
           </label>
-          <label v-if="ownChronicle" class="account-field">
-            <span>{{ draft.game === 'other' ? $t('account.fields.chronicle') : $t('account.fields.chronicleName') }}</span>
+          <!-- A new game may have no chronicles at all: "No chronicle" sits in
+               the field, as "No rate" does in the rates'. The moderator gives
+               it one when approving the game (the page address needs one). -->
+          <div v-if="ownChronicle && draft.game === 'other'" class="account-field">
+            <span>{{ $t('account.fields.chronicle') }}</span>
+            <div class="account-rate-box">
+              <input v-model="draft.chronicle" type="text" :required="!noChronicle" :disabled="noChronicle" maxlength="40" :aria-label="$t('account.fields.chronicle')">
+              <span class="account-rate-end">
+                <label class="account-check">
+                  <input v-model="noChronicle" type="checkbox">
+                  <span>{{ $t('account.fields.noChronicle') }}</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <label v-else-if="ownChronicle" class="account-field">
+            <span>{{ $t('account.fields.chronicleName') }}</span>
             <input v-model="draft.chronicle" type="text" required maxlength="40">
           </label>
           <div class="account-pair">
