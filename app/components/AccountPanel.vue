@@ -485,8 +485,9 @@ function rateNumber(d: Draft) {
 
 /**
  * What the server's page says of it whatever the owner writes — the made
- * text (useServerAbout), shown above the description field as the form is
- * filled in. With no description of their own, this is all the page has.
+ * text (useServerAbout), shown greyed in the empty description field as the
+ * form is filled in. With no description of their own, this is all the page
+ * has.
  */
 const { aboutText } = useServerAbout()
 const today = new Date().toISOString().slice(0, 10)
@@ -1079,16 +1080,11 @@ async function remove(s: OwnServer) {
           </div>
           <label class="account-field">
             <span>{{ $t('account.fields.description') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
-            <!-- The made paragraph is not a draft of this one (27 November 2026):
-                 the page always shows it, above the owner's words, in every
-                 language. Shown here as it will read, the field below is
-                 for what only the owner can tell. -->
-            <span v-if="aboutPreview" class="account-about-auto">
-              <small>{{ $t('account.fields.aboutAuto') }}</small>
-              <span>{{ aboutPreview }}</span>
-            </span>
-            <!-- Three lines to start with, growing with what is written. -->
-            <textarea v-model="draft.description" class="account-description" rows="3" maxlength="2000" :placeholder="$t('account.fields.descriptionHint')" @input="grow" />
+            <!-- The made text sits in the field itself, greyed, until the
+                 owner writes their own: what the page says either way. -->
+            <!-- Three lines to start with, growing with what is written (or with
+                 the greyed made text), so an empty field takes little room. -->
+            <textarea v-model="draft.description" class="account-description" rows="3" maxlength="2000" :placeholder="aboutPreview" @input="grow" />
           </label>
           <div class="account-image-row">
             <input ref="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden @change="addImage">

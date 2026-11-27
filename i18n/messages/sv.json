@@ -107,6 +107,7 @@
       "noRate": "{name} är en {game}-server med versionen {chronicle}.",
       "opened": "Öppnade {date}.",
       "opens": "Öppnar {date}.",
+      "votes": "Röster denna månad: {votes}, plats {rank} i MMOTOP-rankingen.",
       "rateLow": "Låga rates: lugn levling, värdefulla saker och ett långt spel.",
       "rateMid": "Medelhöga rates: snabbare än officiellt, men spelet är inte över på en vecka.",
       "rateHigh": "Höga rates: snabb levling och strider snart.",
@@ -223,9 +224,7 @@
       "logo": "Logotyp",
       "addLogo": "Ladda upp logotyp",
       "changeLogo": "Byt",
-      "logoReview": "Den nya logotypen visas på sidan efter granskning.",
-      "descriptionHint": "Berätta om servern: särdrag, evenemang, bonusar…",
-      "aboutAuto": "Sidan visar detta automatiskt, ovanför din text:"
+      "logoReview": "Den nya logotypen visas på sidan efter granskning."
     },
     "status": {
       "pending": "Granskas",

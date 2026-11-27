@@ -107,6 +107,7 @@
       "noRate": "{name} je server {game} ve verzi {chronicle}.",
       "opened": "Spuštěn {date}.",
       "opens": "Spuštění {date}.",
+      "votes": "Hlasy tento měsíc: {votes}, {rank}. místo v žebříčku MMOTOP.",
       "rateLow": "Nízké rate: klidné levelování, cenné předměty a dlouhá hra.",
       "rateMid": "Střední rate: rychlejší než oficiální, ale hra neuteče za týden.",
       "rateHigh": "Vysoké rate: rychlé levelování a brzký začátek bojů.",
@@ -223,9 +224,7 @@
       "logo": "Logo",
       "addLogo": "Nahrát logo",
       "changeLogo": "Nahradit",
-      "logoReview": "Nové logo se na webu objeví po kontrole.",
-      "descriptionHint": "Napište o serveru: zvláštnosti, události, bonusy…",
-      "aboutAuto": "Stránka toto ukazuje automaticky nad vaším textem:"
+      "logoReview": "Nové logo se na webu objeví po kontrole."
     },
     "status": {
       "pending": "Ve schvalování",
