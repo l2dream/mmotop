@@ -22,7 +22,7 @@ interface OwnServer {
   game: string
   /** The name of a game the site does not list yet, when game is 'other'. */
   requested_game: string | null
-  /** Two letters (SERVER_LANGUAGES), "multi", or "other" with its name in language_text. */
+  /** Two-letter codes, comma-separated ("en,ru"); or "intl", or "other" with its name in language_text. */
   language: string | null
   language_text: string | null
   /** Its Discord, and its other networks (Telegram, VK, YouTube…); https only. */
@@ -527,11 +527,12 @@ const rateWordOptions = computed(() => [
   ...RATE_WORDS.map((w) => ({ value: w, label: w })),
   { value: OWN, label: t('account.fields.rateOwn') }
 ])
+// Several languages may be ticked (27 November 2026: "several languages"
+// became the languages themselves); International and Other stand alone.
+// Nothing ticked is "Not specified".
 const languageOptions = computed(() => [
-  { value: '', label: t('account.fields.notSpecified') },
   { value: 'intl', label: t('server.international') },
   ...SERVER_LANGUAGES.map((l) => ({ value: l.code, label: l.name, lang: l.code })),
-  { value: 'multi', label: t('server.multilingual') },
   { value: 'other', label: t('account.fields.otherLanguage') }
 ])
 const networkOptions = computed(() => [
@@ -1026,7 +1027,7 @@ async function remove(s: OwnServer) {
             <span>{{ $t('account.fields.language') }} <small class="account-optional">{{ $t('account.fields.optional') }}</small></span>
             <!-- Optional: "Not specified" stores no language. A new server
                  starts as international. -->
-            <PickField v-model="draft.language" variant="form" :title="$t('account.fields.language')" :options="languageOptions" />
+            <PickField v-model="draft.language" variant="form" multiple :exclusive="['intl', 'other']" :title="$t('account.fields.language')" :placeholder="$t('account.fields.notSpecified')" :options="languageOptions" />
           </label>
           <label v-if="draft.language === 'other'" class="account-field">
             <span>{{ $t('account.fields.languageName') }}</span>

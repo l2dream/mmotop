@@ -275,12 +275,18 @@ interface Edit { name: string, url: string, chronicle: string, rate: string, rat
 const editing = ref<string | null>(null)
 const edit = reactive<Edit>({ name: '', url: '', chronicle: '', rate: '', rateText: '', language: '', languageText: '', openDate: '', description: '' })
 const editLanguageOptions = [
-  { value: '', label: 'не указан' },
-  { value: 'multi', label: 'несколько языков' },
   { value: 'intl', label: 'интернациональный' },
   ...SERVER_LANGUAGES.map((l) => ({ value: l.code, label: l.name, lang: l.code })),
   { value: 'other', label: 'другой…' }
 ]
+/** "en,ru" → "English, Русский"; old "multi" still read. */
+function languagesLabel(s: QueueServer) {
+  if (!s.language) return ''
+  if (s.language === 'multi') return 'несколько'
+  if (s.language === 'intl') return 'интернациональный'
+  if (s.language === 'other') return `${s.language_text} (свой)`
+  return s.language.split(',').map((c) => serverLanguageName(c) ?? c).join(', ')
+}
 
 function startEdit(row: QueueServer) {
   editing.value = row.id
@@ -405,7 +411,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           </span>
           <a class="account-note admin-url" :href="s.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ s.url }}</a>
           <a v-for="l in s.links ?? []" :key="l.url" class="account-note admin-url" :href="l.url" target="_blank" rel="noopener nofollow" dir="ltr">{{ l.kind }}: {{ l.url }}</a>
-          <span v-if="s.language" class="account-note">Язык: {{ s.language === 'multi' ? 'несколько' : s.language === 'intl' ? 'интернациональный' : s.language === 'other' ? `${s.language_text} (свой)` : serverLanguageName(s.language) ?? s.language }}</span>
+          <span v-if="s.language" class="account-note">Язык: {{ languagesLabel(s) }}</span>
           <span v-if="s.game !== 'other'" class="account-note" dir="ltr">{{ serverPath(s) }}/</span>
           <span class="account-note">Награда за голос: {{ s.reward ? 'включена' : 'выключена' }}</span>
         </div>
@@ -562,7 +568,7 @@ const ACTIONS: { status: Status, label: string }[] = [
           <div class="account-pair">
             <label class="account-field">
               <span>Язык сервера</span>
-              <PickField v-model="edit.language" variant="form" title="Язык сервера" :options="editLanguageOptions" />
+              <PickField v-model="edit.language" variant="form" multiple :exclusive="['intl', 'other']" title="Язык сервера" placeholder="не указан" :options="editLanguageOptions" />
             </label>
             <label v-if="edit.language === 'other'" class="account-field">
               <span>Название языка</span>

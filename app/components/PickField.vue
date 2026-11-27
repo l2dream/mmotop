@@ -11,6 +11,11 @@
  * On a phone the sheet closes as apps' do: swiped down, by the phone's Back
  * button (which would otherwise leave the page), or by its ×.
  *
+ * With `multiple` several lines can be chosen (a server's languages): the
+ * value is their comma list, "en,ru"; a tap ticks or unticks a line and the
+ * list stays open until Done. Lines named in `exclusive` ("International")
+ * stand alone: choosing one clears the rest, and choosing any other clears it.
+ *
  * Searching ignores case and accents ("cestina" finds "Čeština"), and a
  * group's name finds all of its lines ("lineage" lists every chronicle).
  */
@@ -44,6 +49,10 @@ const props = defineProps<{
   searchLabel?: string
   /** In a form: nothing chosen stops it being sent, as a select would. */
   required?: boolean
+  /** Several lines may be chosen; the value is their comma list. */
+  multiple?: boolean
+  /** With `multiple`: lines that can only be chosen alone. */
+  exclusive?: string[]
 }>()
 const emit = defineEmits<{
   'update:modelValue': [value: string]
@@ -65,8 +74,16 @@ const sheet = ref(false)
 const pos = ref({ top: 0, left: 0, width: 0, maxHeight: 360 })
 
 const allOptions = computed(() => [...(props.options ?? []), ...(props.groups ?? []).flatMap((g) => g.options)])
-const current = computed(() => allOptions.value.find((o) => o.value === props.modelValue)
-  ?? (props.placeholder === undefined ? allOptions.value[0] : undefined))
+const chosenSet = computed(() => new Set(props.multiple ? props.modelValue.split(',').filter(Boolean) : [props.modelValue]))
+const isChosen = (o: PickOption) => chosenSet.value.has(o.value)
+const current = computed(() => {
+  if (props.multiple) {
+    const chosen = allOptions.value.filter(isChosen)
+    return chosen.length ? { value: props.modelValue, label: chosen.map((o) => o.label).join(', '), lang: chosen.length === 1 ? chosen[0]!.lang : undefined } : undefined
+  }
+  return allOptions.value.find((o) => o.value === props.modelValue)
+    ?? (props.placeholder === undefined ? allOptions.value[0] : undefined)
+})
 
 const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
 
@@ -125,7 +142,7 @@ async function show() {
     window.history.pushState({ ...(window.history.state ?? {}), pickSheet: true }, '')
     historyStep = true
   }
-  active.value = flat.value.findIndex((o) => o.value === props.modelValue)
+  active.value = flat.value.findIndex(isChosen)
   await nextTick()
   listEl.value?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'center' })
   // On a phone the keyboard would cover half the sheet before anyone asked
@@ -154,6 +171,18 @@ function hide(refocus = true) {
 }
 
 function pick(o: PickOption) {
+  if (props.multiple) {
+    const alone = props.exclusive ?? []
+    let next: string[]
+    if (isChosen(o)) next = [...chosenSet.value].filter((v) => v !== o.value)
+    else if (alone.includes(o.value)) next = [o.value]
+    else next = [...[...chosenSet.value].filter((v) => !alone.includes(v)), o.value]
+    // In the list's order, not the order of the taps.
+    const order = allOptions.value.map((x) => x.value)
+    next.sort((a, b) => order.indexOf(a) - order.indexOf(b))
+    emit('update:modelValue', next.join(','))
+    return
+  }
   pending = o
   hide()
 }
@@ -301,15 +330,15 @@ const panelStyle = computed(() => sheet.value
         @touchend="onTouchEnd"
         @touchcancel="onTouchEnd"
       >
-        <template v-if="sheet">
-          <div class="pick-grab" aria-hidden="true" />
-          <div class="pick-head">
-            <span>{{ title }}</span>
-            <button type="button" class="pick-close" :aria-label="t('filter.close')" @click="hide()">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
-            </button>
-          </div>
-        </template>
+        <div v-if="sheet" class="pick-grab" aria-hidden="true" />
+        <div v-if="sheet || multiple" class="pick-head">
+          <span>{{ title }}</span>
+          <!-- Several to choose: the list stays open, Done closes it. -->
+          <button v-if="multiple" type="button" class="pick-done" @click="hide()">{{ t('filter.done') }}</button>
+          <button v-else type="button" class="pick-close" :aria-label="t('filter.close')" @click="hide()">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+        </div>
         <label class="pick-search">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
           <input
@@ -328,7 +357,7 @@ const panelStyle = computed(() => sheet.value
             spellcheck="false"
           >
         </label>
-        <div :id="`${uid}-list`" ref="listEl" class="pick-list" role="listbox" :aria-label="title">
+        <div :id="`${uid}-list`" ref="listEl" class="pick-list" role="listbox" :aria-label="title" :aria-multiselectable="multiple || undefined">
           <template v-for="(s, si) in sections" :key="si">
             <div v-if="s.label" class="pick-group" role="presentation">{{ s.label }}</div>
             <button
@@ -339,13 +368,13 @@ const panelStyle = computed(() => sheet.value
               tabindex="-1"
               role="option"
               class="pick-option"
-              :class="{ 'is-chosen': o.value === modelValue, 'is-active': indexOf(o) === active }"
-              :aria-selected="o.value === modelValue"
+              :class="{ 'is-chosen': isChosen(o), 'is-active': indexOf(o) === active }"
+              :aria-selected="isChosen(o)"
               :lang="o.lang"
               @click="pick(o)"
             >
               <span :dir="o.dir">{{ o.label }}</span>
-              <svg v-if="o.value === modelValue" class="pick-tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+              <svg v-if="isChosen(o)" class="pick-tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
             </button>
           </template>
           <p v-if="!flat.length" class="pick-empty">{{ t('search.nothing', { query }) }}</p>

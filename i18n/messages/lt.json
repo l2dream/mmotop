@@ -61,7 +61,8 @@
     "apply": "Taikyti",
     "custom": "Pasirinktinis",
     "noRates": "Be rate",
-    "close": "Uždaryti"
+    "close": "Uždaryti",
+    "done": "Baigta"
   },
   "months": {
     "jan": "saus.",

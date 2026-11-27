@@ -61,7 +61,8 @@
     "apply": "Tillämpa",
     "custom": "Anpassad",
     "noRates": "Utan rate",
-    "close": "Stäng"
+    "close": "Stäng",
+    "done": "Klar"
   },
   "months": {
     "jan": "jan",

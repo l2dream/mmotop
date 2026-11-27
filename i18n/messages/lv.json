@@ -61,7 +61,8 @@
     "apply": "Lietot",
     "custom": "Pielāgots",
     "noRates": "Bez rate",
-    "close": "Aizvērt"
+    "close": "Aizvērt",
+    "done": "Gatavs"
   },
   "months": {
     "jan": "janv.",

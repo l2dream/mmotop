@@ -61,7 +61,8 @@
     "apply": "適用",
     "custom": "カスタム",
     "noRates": "Rateなし",
-    "close": "閉じる"
+    "close": "閉じる",
+    "done": "完了"
   },
   "months": {
     "jan": "1月",

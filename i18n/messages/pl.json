@@ -61,7 +61,8 @@
     "apply": "Zastosuj",
     "custom": "Własne",
     "noRates": "Bez rate",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "done": "Gotowe"
   },
   "months": {
     "jan": "sty",

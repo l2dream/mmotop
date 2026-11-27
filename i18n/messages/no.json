@@ -61,7 +61,8 @@
     "apply": "Bruk",
     "custom": "Egendefinert",
     "noRates": "Uten rate",
-    "close": "Lukk"
+    "close": "Lukk",
+    "done": "Ferdig"
   },
   "months": {
     "jan": "jan.",

@@ -61,7 +61,8 @@
     "apply": "Rakenda",
     "custom": "Kohandatud",
     "noRates": "Ilma rate’ita",
-    "close": "Sulge"
+    "close": "Sulge",
+    "done": "Valmis"
   },
   "months": {
     "jan": "jaan",
