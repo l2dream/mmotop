@@ -107,7 +107,6 @@
       "noRate": "{name} ist ein {game}-Server mit der Version {chronicle}.",
       "opened": "Eröffnet am {date}.",
       "opens": "Eröffnung am {date}.",
-      "votes": "Stimmen diesen Monat: {votes}, Platz {rank} im MMOTOP-Ranking.",
       "rateLow": "Niedrige Rates: gemächliches Leveln, wertvolle Ausrüstung und ein langes Spiel.",
       "rateMid": "Mittlere Rates: schneller als offiziell, aber das Spiel ist nicht in einer Woche vorbei.",
       "rateHigh": "Hohe Rates: schnelles Leveln und bald die ersten Kämpfe.",
@@ -224,7 +223,9 @@
       "logo": "Logo",
       "addLogo": "Logo hochladen",
       "changeLogo": "Ersetzen",
-      "logoReview": "Das neue Logo erscheint nach der Prüfung auf der Website."
+      "logoReview": "Das neue Logo erscheint nach der Prüfung auf der Website.",
+      "descriptionHint": "Erzähl von deinem Server: Besonderheiten, Events, Boni…",
+      "aboutAuto": "Die Seite zeigt das automatisch über deinem Text:"
     },
     "status": {
       "pending": "In Prüfung",

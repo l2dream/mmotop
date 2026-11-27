@@ -107,7 +107,6 @@
       "noRate": "{name} is a {game} server running {chronicle}.",
       "opened": "It opened on {date}.",
       "opens": "It opens on {date}.",
-      "votes": "Votes this month: {votes}, #{rank} in the MMOTOP ranking.",
       "rateLow": "Low rates: unhurried levelling, valuable gear and a long game.",
       "rateMid": "Medium rates: faster than official, but the game does not fly by in a week.",
       "rateHigh": "High rates: quick levelling and battles that start soon.",
@@ -224,7 +223,9 @@
       "logo": "Logo",
       "addLogo": "Upload a logo",
       "changeLogo": "Replace",
-      "logoReview": "The new logo will appear on the site after review."
+      "logoReview": "The new logo will appear on the site after review.",
+      "descriptionHint": "Tell players about your server: features, events, bonuses…",
+      "aboutAuto": "The page shows this automatically, above your text:"
     },
     "status": {
       "pending": "Under review",

@@ -63,7 +63,7 @@ function linkLabel(link: ServerLink) {
 
 /** The server in a few plain sentences (see useServerAbout). */
 const { fullDate, aboutText } = useServerAbout()
-const about = computed(() => aboutText(props.server, props.today, { rank: props.rank }))
+const about = computed(() => aboutText(props.server, props.today))
 
 // The chronicle and the rate lead to their own pages — every server on
 // /lineage2/interlude/ or /lineage2/x50/ — which is also how a crawler finds
