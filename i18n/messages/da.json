@@ -61,7 +61,8 @@
     "apply": "Anvend",
     "custom": "Tilpasset",
     "noRates": "Uden rate",
-    "close": "Luk"
+    "close": "Luk",
+    "done": "Færdig"
   },
   "months": {
     "jan": "jan.",

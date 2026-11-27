@@ -61,7 +61,8 @@
     "apply": "Apply",
     "custom": "Custom",
     "noRates": "No rate",
-    "close": "Close"
+    "close": "Close",
+    "done": "Done"
   },
   "months": {
     "jan": "Jan",

@@ -61,7 +61,8 @@
     "apply": "Anwenden",
     "custom": "Eigene",
     "noRates": "Ohne Rate",
-    "close": "Schließen"
+    "close": "Schließen",
+    "done": "Fertig"
   },
   "months": {
     "jan": "Jan.",

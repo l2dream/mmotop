@@ -61,7 +61,8 @@
     "apply": "Použít",
     "custom": "Vlastní",
     "noRates": "Bez rate",
-    "close": "Zavřít"
+    "close": "Zavřít",
+    "done": "Hotovo"
   },
   "months": {
     "jan": "led",

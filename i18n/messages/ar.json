@@ -61,7 +61,8 @@
     "apply": "تطبيق",
     "custom": "مخصص",
     "noRates": "بدون Rate",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "done": "تم"
   },
   "months": {
     "jan": "يناير",

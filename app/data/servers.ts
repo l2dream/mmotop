@@ -37,7 +37,7 @@ export interface Server {
   votes: number
   /** The owner's own words, shown on the server's page below the made one. */
   description?: string
-  /** The language its players speak, as in SERVER_LANGUAGES, "multi", "intl" (international), or "other". */
+  /** The languages its players speak: codes as in SERVER_LANGUAGES, comma-separated ("en,ru"); or "intl" (international), or "other". "multi" (several, unnamed) is from before 27 November 2026. */
   language?: string
   /** The name of an "other" language, as the owner wrote it. */
   languageText?: string

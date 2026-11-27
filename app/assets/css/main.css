@@ -4652,3 +4652,24 @@ a.account-address:hover { text-decoration: underline; }
    button below does not jump. */
 .account-captcha { min-height: 65px; max-width: 100%; overflow: hidden; }
 .account-captcha:empty { min-height: 65px; }
+
+/* Done, in a list where several lines can be ticked (a server's languages):
+   the action that ends the choice, so violet like Apply. */
+.pick-done {
+  flex: none;
+  position: relative;
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--r-min, 8px);
+  background: linear-gradient(145deg, rgba(164, 83, 255, .34), rgba(164, 83, 255, .08) 75%);
+  color: #efe4ff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(196, 150, 255, .8);
+}
+.theme-light .pick-done { background: linear-gradient(145deg, rgba(124, 58, 237, .2), rgba(255, 255, 255, .7) 75%); color: #5b21c4; box-shadow: inset 0 0 0 1px rgba(124, 58, 237, .7); }
+/* On a computer the head shows only for a list with Done. */
+.pick-layer:not(.is-sheet) .pick-head { padding: 4px 4px 8px 8px; font-size: 14px; }

@@ -298,7 +298,6 @@ const languageOptions = computed(() => {
 const languagePickOptions = computed(() => [
   { value: '', label: t('filter.allLanguages') },
   { value: 'intl', label: t('server.international') },
-  { value: 'multi', label: t('server.multilingual') },
   ...languageOptions.value.map((l) => ({ value: l.code, label: l.name, lang: l.code }))
 ])
 const gamePickOptions = computed(() => [
@@ -308,13 +307,15 @@ const gamePickOptions = computed(() => [
 
 function matchesFilters(server: Server) {
   if (filters.value.version && versionKey(server.game, server.chronicle) !== filters.value.version) return false
-  // A server in several languages, or an international one, is one in each.
-  // Chosen themselves, "International" and "Several languages" find only
-  // those servers, as in the account's form.
+  // A server's languages are a comma list ("en,ru"): it is found by each.
+  // An international one, or one from before languages were named
+  // ("multi"), counts as one in every language. Chosen itself,
+  // "International" finds only those servers.
   const lang = filters.value.language
-  if (lang === 'intl' || lang === 'multi') {
-    if (server.language !== lang) return false
-  } else if (lang && server.language !== lang
+  const spoken = (server.language ?? '').split(',')
+  if (lang === 'intl') {
+    if (server.language !== 'intl') return false
+  } else if (lang && !spoken.includes(lang)
     && server.language !== 'multi' && server.language !== 'intl') return false
   if (rateFilterActive.value) {
     const rate = server.rate

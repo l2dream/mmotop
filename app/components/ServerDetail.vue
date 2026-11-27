@@ -46,13 +46,15 @@ const justVoted = ref(0)
 const votes = computed(() => props.server.votes + justVoted.value)
 
 /** The language its players speak, in that language's own name. */
-const languageName = computed(() => props.server.language === 'multi'
-  ? t('server.multilingual')
-  : props.server.language === 'intl'
-    ? t('server.international')
-    : props.server.language === 'other'
-    ? props.server.languageText
-    : serverLanguageName(props.server.language))
+const languageName = computed(() => {
+  const l = props.server.language
+  if (!l) return undefined
+  if (l === 'multi') return t('server.multilingual')
+  if (l === 'intl') return t('server.international')
+  if (l === 'other') return props.server.languageText
+  // Several, named: "English, Русский".
+  return l.split(',').map((c) => serverLanguageName(c) ?? c).join(', ')
+})
 
 /** A network's name on its button: the brand's own, or the page's word for a forum or anything else. */
 function linkLabel(link: ServerLink) {

@@ -61,7 +61,8 @@
     "apply": "Uygula",
     "custom": "Özel",
     "noRates": "Rate yok",
-    "close": "Kapat"
+    "close": "Kapat",
+    "done": "Tamam"
   },
   "months": {
     "jan": "Oca",
