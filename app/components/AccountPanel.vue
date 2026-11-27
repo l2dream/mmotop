@@ -90,7 +90,7 @@ const draftAddress = computed(() => {
   const d = draft.value
   if (!d) return ''
   // decodeURI: the path comes back encoded, and "…" for what is not chosen yet would read %E2%80%A6.
-  return `mmotop.com${decodeURI(localePath(`/${d.game === 'other' ? '…' : d.game}/${d.chronicle ? versionSlug(d.chronicle) : '…'}/${d.id || '…'}`)).replace(/\/?$/, '/')}`
+  return `mmotop.com${decodeURI(localePath(`/${!d.game || d.game === 'other' ? '…' : d.game}/${d.chronicle ? versionSlug(d.chronicle) : '…'}/${d.id || '…'}`)).replace(/\/?$/, '/')}`
 })
 
 let unsubscribe: (() => void) | undefined
@@ -356,7 +356,9 @@ function addServer() {
   draft.value = {
     id: '',
     name: '',
-    game: GAMES[0]!.id,
+    // Nothing chosen: "Choose…", as the chronicle beside it, so a server of
+    // another game is not sent as Lineage II by an oversight.
+    game: '',
     requested_game: '',
     // "Not specified" by default, as the owner chose; a language is a pick away.
     language: '',
@@ -956,9 +958,9 @@ async function remove(s: OwnServer) {
           <div class="account-pair">
             <label class="account-field">
               <span>{{ $t('account.fields.game') }}</span>
-              <PickField v-model="draft.game" variant="form" required :title="$t('account.fields.game')" :options="gameOptions" @update:model-value="pickGame" />
+              <PickField v-model="draft.game" variant="form" required :title="$t('account.fields.game')" :placeholder="$t('account.fields.choose')" :options="gameOptions" @update:model-value="pickGame" />
             </label>
-            <label v-if="draft.game !== 'other'" class="account-field">
+            <label v-if="draft.game !== 'other'" class="account-field" :class="{ 'is-waiting': !draft.game }">
               <span>{{ $t('account.fields.chronicle') }}</span>
               <PickField v-model="chronicleChoice" variant="form" required :title="$t('account.fields.chronicle')" :placeholder="$t('account.fields.choose')" :options="chronicleOptions" />
             </label>
