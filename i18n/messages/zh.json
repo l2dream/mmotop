@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram 已绑定，可以用它登录。",
       "telegramTaken": "此 Telegram 已绑定到其他账户。",
       "google": "用 Google 登录",
-      "discord": "用 Discord 登录"
+      "discord": "用 Discord 登录",
+      "needCaptcha": "请确认你不是机器人。"
     },
     "reason": "原因：{note}",
     "stats": {

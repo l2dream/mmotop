@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram är kopplat — du kan logga in med det.",
       "telegramTaken": "Detta Telegram är redan kopplat till ett annat konto.",
       "google": "Logga in med Google",
-      "discord": "Logga in med Discord"
+      "discord": "Logga in med Discord",
+      "needCaptcha": "Bekräfta att du inte är en robot."
     },
     "reason": "Anledning: {note}",
     "stats": {

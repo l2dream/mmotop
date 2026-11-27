@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram ist verknüpft – Sie können sich damit anmelden.",
       "telegramTaken": "Dieses Telegram ist bereits mit einem anderen Konto verknüpft.",
       "google": "Mit Google anmelden",
-      "discord": "Mit Discord anmelden"
+      "discord": "Mit Discord anmelden",
+      "needCaptcha": "Bitte bestätige, dass du kein Roboter bist."
     },
     "reason": "Grund: {note}",
     "stats": {

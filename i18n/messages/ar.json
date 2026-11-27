@@ -287,7 +287,8 @@
       "telegramLinked": "تم ربط Telegram — يمكنك الدخول به.",
       "telegramTaken": "حساب Telegram هذا مرتبط بحساب آخر بالفعل.",
       "google": "الدخول عبر Google",
-      "discord": "الدخول عبر Discord"
+      "discord": "الدخول عبر Discord",
+      "needCaptcha": "يرجى التأكيد أنك لست روبوتًا."
     },
     "reason": "السبب: {note}",
     "stats": {

@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram połączony — możesz się nim logować.",
       "telegramTaken": "Ten Telegram jest już połączony z innym kontem.",
       "google": "Zaloguj przez Google",
-      "discord": "Zaloguj przez Discord"
+      "discord": "Zaloguj przez Discord",
+      "needCaptcha": "Potwierdź, że nie jesteś robotem."
     },
     "reason": "Powód: {note}",
     "stats": {

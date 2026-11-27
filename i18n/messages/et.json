@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram on seotud — saad sellega sisse logida.",
       "telegramTaken": "See Telegram on juba seotud teise kontoga.",
       "google": "Logi sisse Google’iga",
-      "discord": "Logi sisse Discordiga"
+      "discord": "Logi sisse Discordiga",
+      "needCaptcha": "Palun kinnita, et sa pole robot."
     },
     "reason": "Põhjus: {note}",
     "stats": {

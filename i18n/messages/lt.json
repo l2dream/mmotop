@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram susietas — galite juo prisijungti.",
       "telegramTaken": "Šis Telegram jau susietas su kita paskyra.",
       "google": "Prisijungti per Google",
-      "discord": "Prisijungti per Discord"
+      "discord": "Prisijungti per Discord",
+      "needCaptcha": "Patvirtinkite, kad nesate robotas."
     },
     "reason": "Priežastis: {note}",
     "stats": {

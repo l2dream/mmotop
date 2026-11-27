@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram מקושר — אפשר להיכנס דרכו.",
       "telegramTaken": "ה-Telegram הזה כבר מקושר לחשבון אחר.",
       "google": "כניסה עם Google",
-      "discord": "כניסה עם Discord"
+      "discord": "כניסה עם Discord",
+      "needCaptcha": "נא לאשר שאינך רובוט."
     },
     "reason": "סיבה: {note}",
     "stats": {

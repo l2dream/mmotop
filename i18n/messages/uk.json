@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram прив’язано — можна входити через нього.",
       "telegramTaken": "Цей Telegram уже прив’язано до іншого кабінету.",
       "google": "Увійти через Google",
-      "discord": "Увійти через Discord"
+      "discord": "Увійти через Discord",
+      "needCaptcha": "Підтвердьте, що ви не робот."
     },
     "reason": "Причина: {note}",
     "stats": {

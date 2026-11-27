@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram er koblet til — du kan logge inn med det.",
       "telegramTaken": "Denne Telegram-kontoen er allerede koblet til en annen konto.",
       "google": "Logg inn med Google",
-      "discord": "Logg inn med Discord"
+      "discord": "Logg inn med Discord",
+      "needCaptcha": "Bekreft at du ikke er en robot."
     },
     "reason": "Begrunnelse: {note}",
     "stats": {

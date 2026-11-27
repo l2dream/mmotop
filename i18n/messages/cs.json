@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram je propojen — můžete se jím přihlašovat.",
       "telegramTaken": "Tento Telegram je už propojen s jiným účtem.",
       "google": "Přihlásit přes Google",
-      "discord": "Přihlásit přes Discord"
+      "discord": "Přihlásit přes Discord",
+      "needCaptcha": "Potvrďte prosím, že nejste robot."
     },
     "reason": "Důvod: {note}",
     "stats": {
