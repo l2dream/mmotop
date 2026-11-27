@@ -35,13 +35,43 @@ function returnAddress() {
   return `${window.location.origin}${useRuntimeConfig().app.baseURL.replace(/\/$/, '')}${localePath('/account').replace(/\/?$/, '/')}${approve}`
 }
 
+/**
+ * Cloudflare Turnstile before a sign-in letter is sent (27 November 2026):
+ * from 19 November a bot typed strangers' addresses into this form, twenty
+ * or thirty a day, and the site mailed each of them. Supabase checks the
+ * token once its captcha protection is on (Auth → Attack Protection, the
+ * Turnstile secret); until then the token is simply ignored, so the form
+ * could go out first. The same widget as the vote's (useTurnstile). A token
+ * is good for one letter: the widget is reset after each.
+ */
+const captchaEl = ref<HTMLElement | null>(null)
+const captchaToken = ref<string | null>(null)
+const captchaFailed = ref(false)
+let captcha: { reset: () => void, remove: () => void } | null = null
+watch(captchaEl, async (el) => {
+  captcha?.remove()
+  captcha = null
+  captchaToken.value = null
+  if (!el) return
+  try {
+    captcha = await mountTurnstile(el, (value) => { captchaToken.value = value })
+  } catch {
+    captchaFailed.value = true
+  }
+})
+onUnmounted(() => captcha?.remove())
+
 async function sendLink() {
-  if (busy.value) return
+  if (busy.value || !captchaToken.value) return
   busy.value = true
   error.value = ''
   const address = email.value.trim()
-  const { error: failed } = await props.supabase.auth.signInWithOtp({ email: address, options: { emailRedirectTo: returnAddress() } })
+  const { error: failed } = await props.supabase.auth.signInWithOtp({
+    email: address,
+    options: { emailRedirectTo: returnAddress(), captchaToken: captchaToken.value }
+  })
   busy.value = false
+  captcha?.reset()
   if (failed) {
     error.value = failed.status === 429 ? t('account.tooMany') : t('account.failed')
     return
@@ -193,7 +223,9 @@ onUnmounted(stopQr)
           <span>{{ $t('account.email') }}</span>
           <input v-model="email" type="email" autocomplete="email" inputmode="email" required>
         </label>
-        <button type="submit" class="account-button" :disabled="busy">{{ $t('account.sendLink') }}</button>
+        <div ref="captchaEl" class="account-captcha" />
+        <p v-if="captchaFailed" class="account-error" role="alert">{{ $t('vote.captchaLoad') }}</p>
+        <button type="submit" class="account-button" :disabled="busy || !captchaToken">{{ $t('account.sendLink') }}</button>
       </form>
 
       <label class="account-check">
