@@ -107,7 +107,6 @@
       "noRate": "{name} ir {game} serveris ar versiju {chronicle}.",
       "opened": "Atvērts {date}.",
       "opens": "Atvēršana {date}.",
-      "votes": "Balsis šomēnes: {votes}, {rank}. vieta MMOTOP reitingā.",
       "rateLow": "Zemi rates: nesteidzīga attīstība, vērtīgas lietas un ilga spēle.",
       "rateMid": "Vidēji rates: ātrāk nekā oficiālajā, bet spēle nepaskrien nedēļā.",
       "rateHigh": "Augsti rates: ātra attīstība un drīzas kaujas.",
@@ -224,7 +223,9 @@
       "logo": "Logo",
       "addLogo": "Augšupielādēt logo",
       "changeLogo": "Aizstāt",
-      "logoReview": "Jaunais logo parādīsies vietnē pēc pārbaudes."
+      "logoReview": "Jaunais logo parādīsies vietnē pēc pārbaudes.",
+      "descriptionHint": "Pastāstiet par serveri: īpatnības, pasākumi, bonusi…",
+      "aboutAuto": "Lapa to rāda automātiski, virs jūsu teksta:"
     },
     "status": {
       "pending": "Pārbaudē",

@@ -107,7 +107,6 @@
       "noRate": "{name} on {game} server versiooniga {chronicle}.",
       "opened": "Avati {date}.",
       "opens": "Avamine {date}.",
-      "votes": "Hääli sel kuul: {votes}, MMOTOP edetabelis {rank}. koht.",
       "rateLow": "Madalad rate’id: rahulik arenemine, väärtuslikud esemed ja pikk mäng.",
       "rateMid": "Keskmised rate’id: kiirem kui ametlikus, aga mäng ei möödu nädalaga.",
       "rateHigh": "Kõrged rate’id: kiire arenemine ja peatsed lahingud.",
@@ -224,7 +223,9 @@
       "logo": "Logo",
       "addLogo": "Laadi logo üles",
       "changeLogo": "Asenda",
-      "logoReview": "Uus logo ilmub saidile pärast ülevaatust."
+      "logoReview": "Uus logo ilmub saidile pärast ülevaatust.",
+      "descriptionHint": "Räägi serverist: eripärad, sündmused, boonused…",
+      "aboutAuto": "Leht näitab seda automaatselt sinu teksti kohal:"
     },
     "status": {
       "pending": "Ülevaatusel",
