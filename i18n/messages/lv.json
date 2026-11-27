@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram piesaistīts — varat ar to pieteikties.",
       "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam.",
       "google": "Pieteikties ar Google",
-      "discord": "Pieteikties ar Discord"
+      "discord": "Pieteikties ar Discord",
+      "needCaptcha": "Lūdzu, apstipriniet, ka neesat robots."
     },
     "reason": "Iemesls: {note}",
     "stats": {

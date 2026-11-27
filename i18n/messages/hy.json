@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram-ը կապված է․ կարող եք դրանով մուտք գործել։",
       "telegramTaken": "Այս Telegram-ն արդեն կապված է այլ հաշվի։",
       "google": "Մուտք Google-ով",
-      "discord": "Մուտք Discord-ով"
+      "discord": "Մուտք Discord-ով",
+      "needCaptcha": "Հաստատեք, որ ռոբոտ չեք։"
     },
     "reason": "Պատճառ՝ {note}",
     "stats": {

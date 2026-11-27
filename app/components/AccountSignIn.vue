@@ -36,17 +36,34 @@ function returnAddress() {
 }
 
 /**
- * Cloudflare Turnstile before a sign-in letter is sent (27 November 2026):
- * from 19 November a bot typed strangers' addresses into this form, twenty
- * or thirty a day, and the site mailed each of them. Supabase checks the
- * token once its captcha protection is on (Auth → Attack Protection, the
- * Turnstile secret); until then the token is simply ignored, so the form
- * could go out first. The same widget as the vote's (useTurnstile). A token
- * is good for one letter: the widget is reset after each.
+ * The sign-in letter goes out through our email-login function, after a
+ * check (27 November 2026): from 19 November a bot typed strangers'
+ * addresses into this form, twenty or thirty a day. As for votes: ALTCHA,
+ * which the browser solves by itself and our own function serves, so it
+ * works in every country; Cloudflare's Turnstile on top only when the
+ * function finds the request suspicious (need_captcha). Supabase's own
+ * captcha stays on, closing the way around the function.
  */
+const altcha = ref<string | null>(null)
+const altchaWidget = ref<(HTMLElement & { reset?: () => void, verify?: () => void }) | null>(null)
+const checkFailed = ref(false)
+onMounted(async () => {
+  try { await import('altcha') } catch { checkFailed.value = true }
+})
+function onAltcha(event: Event) {
+  const detail = (event as CustomEvent<{ state: string, payload?: string }>).detail
+  altcha.value = detail.state === 'verified' ? detail.payload ?? null : null
+  if (detail.state === 'error') checkFailed.value = true
+}
+function freshAltcha() {
+  altcha.value = null
+  altchaWidget.value?.reset?.()
+  altchaWidget.value?.verify?.()
+}
+
+const needCaptcha = ref(false)
 const captchaEl = ref<HTMLElement | null>(null)
 const captchaToken = ref<string | null>(null)
-const captchaFailed = ref(false)
 let captcha: { reset: () => void, remove: () => void } | null = null
 watch(captchaEl, async (el) => {
   captcha?.remove()
@@ -56,24 +73,45 @@ watch(captchaEl, async (el) => {
   try {
     captcha = await mountTurnstile(el, (value) => { captchaToken.value = value })
   } catch {
-    captchaFailed.value = true
+    checkFailed.value = true
   }
 })
 onUnmounted(() => captcha?.remove())
+const canSend = computed(() => needCaptcha.value ? !!captchaToken.value : !!altcha.value)
 
 async function sendLink() {
-  if (busy.value || !captchaToken.value) return
+  if (busy.value || !canSend.value) return
   busy.value = true
   error.value = ''
   const address = email.value.trim()
-  const { error: failed } = await props.supabase.auth.signInWithOtp({
-    email: address,
-    options: { emailRedirectTo: returnAddress(), captchaToken: captchaToken.value }
-  })
+  let answer: { ok?: boolean, error?: string } = {}
+  try {
+    const res = await fetch(`${FUNCTIONS_URL}/email-login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY },
+      body: JSON.stringify({
+        email: address,
+        redirect: returnAddress(),
+        ...(needCaptcha.value ? { captcha: captchaToken.value } : { altcha: altcha.value })
+      })
+    })
+    answer = await res.json().catch(() => ({ error: 'failed' }))
+  } catch {
+    answer = { error: 'failed' }
+  }
   busy.value = false
-  captcha?.reset()
-  if (failed) {
-    error.value = failed.status === 429 ? t('account.tooMany') : t('account.failed')
+  // Each check is good once.
+  if (needCaptcha.value) captcha?.reset()
+  else freshAltcha()
+  if (!answer.ok) {
+    if (answer.error === 'need_captcha') {
+      needCaptcha.value = true
+      error.value = t('account.signin.needCaptcha')
+    } else {
+      error.value = answer.error === 'too_many' ? t('account.tooMany')
+        : answer.error === 'altcha' || answer.error === 'captcha' ? t('vote.altchaFailed')
+        : t('account.failed')
+    }
     return
   }
   sentTo.value = address
@@ -223,9 +261,19 @@ onUnmounted(stopQr)
           <span>{{ $t('account.email') }}</span>
           <input v-model="email" type="email" autocomplete="email" inputmode="email" required>
         </label>
-        <div ref="captchaEl" class="account-captcha" />
-        <p v-if="captchaFailed" class="account-error" role="alert">{{ $t('vote.captchaLoad') }}</p>
-        <button type="submit" class="account-button" :disabled="busy || !captchaToken">{{ $t('account.sendLink') }}</button>
+        <!-- Out of sight: solves its challenge by itself (see sendLink). -->
+        <altcha-widget
+          ref="altchaWidget"
+          class="vote-altcha"
+          display="invisible"
+          auto="onload"
+          configuration='{"hideLogo":true,"hideFooter":true}'
+          :challenge="`${FUNCTIONS_URL}/email-login`"
+          @statechange="onAltcha"
+        />
+        <div v-if="needCaptcha" ref="captchaEl" class="account-captcha" />
+        <p v-if="checkFailed" class="account-error" role="alert">{{ $t('vote.captchaLoad') }}</p>
+        <button type="submit" class="account-button" :disabled="busy || !canSend">{{ $t('account.sendLink') }}</button>
       </form>
 
       <label class="account-check">

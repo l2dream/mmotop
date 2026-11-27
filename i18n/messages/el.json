@@ -289,7 +289,8 @@
       "telegramLinked": "Το Telegram συνδέθηκε — μπορείτε να μπαίνετε με αυτό.",
       "telegramTaken": "Αυτό το Telegram είναι ήδη συνδεδεμένο με άλλον λογαριασμό.",
       "google": "Σύνδεση με Google",
-      "discord": "Σύνδεση με Discord"
+      "discord": "Σύνδεση με Discord",
+      "needCaptcha": "Επιβεβαιώστε ότι δεν είστε ρομπότ."
     },
     "reason": "Αιτία: {note}",
     "stats": {

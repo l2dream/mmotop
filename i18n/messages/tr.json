@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram bağlı — onunla giriş yapabilirsiniz.",
       "telegramTaken": "Bu Telegram zaten başka bir hesaba bağlı.",
       "google": "Google ile giriş",
-      "discord": "Discord ile giriş"
+      "discord": "Discord ile giriş",
+      "needCaptcha": "Lütfen robot olmadığınızı doğrulayın."
     },
     "reason": "Neden: {note}",
     "stats": {

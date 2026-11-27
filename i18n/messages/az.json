@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram bağlanıb — onunla daxil ola bilərsiniz.",
       "telegramTaken": "Bu Telegram artıq başqa kabinetə bağlanıb.",
       "google": "Google ilə daxil ol",
-      "discord": "Discord ilə daxil ol"
+      "discord": "Discord ilə daxil ol",
+      "needCaptcha": "Robot olmadığınızı təsdiqləyin."
     },
     "reason": "Səbəb: {note}",
     "stats": {

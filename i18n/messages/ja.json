@@ -287,7 +287,8 @@
       "telegramLinked": "Telegramを連携済みです。Telegramでログインできます。",
       "telegramTaken": "このTelegramはすでに別のアカウントに連携されています。",
       "google": "Googleでログイン",
-      "discord": "Discordでログイン"
+      "discord": "Discordでログイン",
+      "needCaptcha": "ロボットではないことを確認してください。"
     },
     "reason": "理由：{note}",
     "stats": {

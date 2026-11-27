@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram vinculado: puedes entrar con él.",
       "telegramTaken": "Este Telegram ya está vinculado a otra cuenta.",
       "google": "Entrar con Google",
-      "discord": "Entrar con Discord"
+      "discord": "Entrar con Discord",
+      "needCaptcha": "Confirma que no eres un robot."
     },
     "reason": "Motivo: {note}",
     "stats": {

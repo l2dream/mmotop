@@ -287,7 +287,8 @@
       "telegramLinked": "Telegram is linked — you can sign in with it.",
       "telegramTaken": "This Telegram is already linked to another account.",
       "google": "Sign in with Google",
-      "discord": "Sign in with Discord"
+      "discord": "Sign in with Discord",
+      "needCaptcha": "Please confirm you’re not a robot."
     },
     "reason": "Reason: {note}",
     "stats": {
