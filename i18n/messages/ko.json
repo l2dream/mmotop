@@ -107,6 +107,7 @@
       "noRate": "{name}은(는) {chronicle} 버전의 {game} 서버입니다.",
       "opened": "{date}에 오픈했습니다.",
       "opens": "{date}에 오픈 예정입니다.",
+      "votes": "이번 달 투표: {votes}, MMOTOP 랭킹 {rank}위.",
       "rateLow": "낮은 레이트: 느긋한 성장, 귀한 아이템, 긴 게임.",
       "rateMid": "중간 레이트: 공식 서버보다 빠르지만 일주일 만에 끝나지는 않습니다.",
       "rateHigh": "높은 레이트: 빠른 성장과 곧 시작되는 전투.",
@@ -223,9 +224,7 @@
       "logo": "로고",
       "addLogo": "로고 업로드",
       "changeLogo": "교체",
-      "logoReview": "새 로고는 검토 후 사이트에 표시됩니다.",
-      "descriptionHint": "서버를 소개해 주세요: 특징, 이벤트, 보너스…",
-      "aboutAuto": "페이지에는 이 문장이 자동으로 내 글 위에 표시됩니다:"
+      "logoReview": "새 로고는 검토 후 사이트에 표시됩니다."
     },
     "status": {
       "pending": "검토 중",

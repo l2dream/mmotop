@@ -107,6 +107,7 @@
       "noRate": "{name} er en {game}-server med versionen {chronicle}.",
       "opened": "Åbnede {date}.",
       "opens": "Åbner {date}.",
+      "votes": "Stemmer denne måned: {votes}, plads {rank} på MMOTOP-ranglisten.",
       "rateLow": "Lave rates: rolig leveling, værdifulde ting og et langt spil.",
       "rateMid": "Mellem rates: hurtigere end officielt, men spillet er ikke overstået på en uge.",
       "rateHigh": "Høje rates: hurtig leveling og kampe snart.",
@@ -223,9 +224,7 @@
       "logo": "Logo",
       "addLogo": "Upload et logo",
       "changeLogo": "Erstat",
-      "logoReview": "Det nye logo vises på siden efter gennemgang.",
-      "descriptionHint": "Fortæl om serveren: særlige træk, events, bonusser…",
-      "aboutAuto": "Siden viser dette automatisk over din tekst:"
+      "logoReview": "Det nye logo vises på siden efter gennemgang."
     },
     "status": {
       "pending": "Til godkendelse",

@@ -107,6 +107,7 @@
       "noRate": "{name} — {chronicle} versiyasında {game} serveridir.",
       "opened": "Açılış tarixi: {date}.",
       "opens": "Açılış tarixi: {date}.",
+      "votes": "Bu ay səslər: {votes}, MMOTOP reytinqində {rank}-ci yer.",
       "rateLow": "Aşağı reyt: tələsmədən inkişaf, dəyərli əşyalar və uzun oyun.",
       "rateMid": "Orta reyt: rəsmidən sürətli, amma oyun bir həftəyə bitmir.",
       "rateHigh": "Yüksək reyt: sürətli inkişaf və tezliklə döyüşlər.",
@@ -223,9 +224,7 @@
       "logo": "Loqo",
       "addLogo": "Loqo yüklə",
       "changeLogo": "Dəyişdir",
-      "logoReview": "Yeni loqo yoxlamadan sonra saytda görünəcək.",
-      "descriptionHint": "Server haqqında danışın: xüsusiyyətlər, tədbirlər, bonuslar…",
-      "aboutAuto": "Səhifə bunu avtomatik olaraq mətninizin üstündə göstərir:"
+      "logoReview": "Yeni loqo yoxlamadan sonra saytda görünəcək."
     },
     "status": {
       "pending": "Yoxlamada",

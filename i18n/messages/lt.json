@@ -107,6 +107,7 @@
       "noRate": "{name} – {game} serveris su versija {chronicle}.",
       "opened": "Atidarytas {date}.",
       "opens": "Atidarymas {date}.",
+      "votes": "Balsai šį mėnesį: {votes}, {rank} vieta MMOTOP reitinge.",
       "rateLow": "Žemi rate: neskubus lygių kėlimas, vertingi daiktai ir ilgas žaidimas.",
       "rateMid": "Vidutiniai rate: greičiau nei oficialiame, bet žaidimas neprabėga per savaitę.",
       "rateHigh": "Aukšti rate: greitas lygių kėlimas ir greitai prasidedantys mūšiai.",
@@ -223,9 +224,7 @@
       "logo": "Logotipas",
       "addLogo": "Įkelti logotipą",
       "changeLogo": "Pakeisti",
-      "logoReview": "Naujas logotipas atsiras svetainėje po patikrinimo.",
-      "descriptionHint": "Papasakokite apie serverį: ypatybės, renginiai, premijos…",
-      "aboutAuto": "Puslapis tai rodo automatiškai, virš jūsų teksto:"
+      "logoReview": "Naujas logotipas atsiras svetainėje po patikrinimo."
     },
     "status": {
       "pending": "Tikrinamas",
